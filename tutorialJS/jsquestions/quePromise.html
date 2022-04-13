@@ -1,0 +1,26 @@
+<script>
+  function fetchAllFeatures() {
+    console.log('fetchAllFeatures called');
+    // in reality, this would have been a `fetch` call:
+    // `fetch("/api/features/all")`
+    return new Promise((resolve) => {
+      const sampleFeatures = {
+        'extended-summary': true,
+        'feedback-dialog': false,
+        'dashboard-key': true,
+      };
+      setTimeout(resolve, 100, sampleFeatures);
+    });
+  }
+
+  function getFeatureState(featureName) {
+    console.log('getFeatureState called');
+    return fetchAllFeatures().then((features) => {
+      return features[featureName];
+    });
+  }
+
+  getFeatureState('dashboard-key').then((isEnabled) => {
+    console.log(isEnabled);
+  });
+</script>

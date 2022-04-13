@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <title>Event Click Loop</title>
+    <body>
+      <h1>This is my heading</h1>
+      <button type="button" id="btn" onclick="toggleHide()">Toggle</button>
+      <div class="container">
+        <p id="para">
+          A paragraph is a series of related sentences developing a central
+          idea, called the topic. Try to think about paragraphs in terms of
+          thematic unity: a paragraph is a sentence or a group of sentences that
+          supports one central, unified idea. Paragraphs add one idea at a time
+          to your broader argument.A paragraph is a series of related sentences
+          developing a central idea, called the topic. Try to think about
+          paragraphs in terms of thematic unity: a paragraph is a sentence or a
+          group of sentences that supports one central, unified idea. Paragraphs
+          add one idea at a time to your broader argument.A paragraph is a
+          series of related sentences developing a central idea, called the
+          topic. Try to think about paragraphs in terms of thematic unity: a
+          paragraph is a sentence or a group of sentences that supports one
+          central, unified idea. Paragraphs add one idea at a time to your
+          broader argument. A paragraph is a series of related sentences
+          developing a central idea, called the topic. Try to think about
+          paragraphs in terms of thematic unity: a paragraph is a sentence or a
+          group of sentences that supports one central, unified idea. Paragraphs
+          add one idea at a time to your broader argument.A paragraph is a
+          series of related sentences developing a central idea, called the
+          topic. Try to think about paragraphs in terms of thematic unity: a
+          paragraph is a sentence or a group of sentences that supports one
+          central, unified idea. Paragraphs add one idea at a time to your
+          broader argument.
+        </p>
+      </div>
+    </body>
+    <script>
+      let para = document.getElementById('para');
+      para.addEventListener('mouseover', function run() {
+        console.log('mouse over called');
+      });
+      para.addEventListener('mouseout', function run() {
+        console.log('mouse out side called');
+      });
+
+      function toggleHide() {
+        let btn = document.getElementById('btn');
+        let para = document.getElementById('para'); // good practice
+        if (para.style.display != 'none') {
+          para.style.display = 'none';
+        } else {
+          para.style.display = 'block';
+        }
+      }
+    </script>
+    <style>
+      #btn {
+        padding: 10px, 14px;
+        color: rgb(8, 8, 7);
+        border: 2px, solid, black;
+        border-radius: 2px;
+        font-weight: bold;
+        background-color: aqua;
+      }
+    </style>
+  </head>
+</html>
