@@ -2,12 +2,12 @@ let name = "Nisha";
 
 function reverseElement(name) {
   let reverseTerm = "";
-  for (let i = 1; i < name.length; i++) {
+  for (let i = 1; i <= name.length; i++) {
     if (i <= name.length) {
       reverseTerm = reverseTerm + name[name.length - i];
     }
-    console.log("reverseTerm called", reverseTerm);
   }
+  console.log("reverseTerm called", reverseTerm);
 }
 reverseElement(name);
 
