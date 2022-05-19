@@ -1,0 +1,22 @@
+h3 {
+    text-align: center;
+    font-weight: bold;
+    color: rgb(202, 22, 73);
+}
+
+body {
+    background-color: rgb(246, 240, 240);
+}
+
+a {
+    text-decoration: none;
+    color: green;
+}
+
+ul li {
+    /* list-style: none; */
+}
+
+.questionComplete {
+    color: green !important;
+}
