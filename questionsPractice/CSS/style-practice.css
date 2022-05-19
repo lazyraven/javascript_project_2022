@@ -1,0 +1,12 @@
+body {
+  background-color: rgb(241, 248, 244);
+}
+h3 {
+  text-align: center;
+  font-weight: bold;
+  color: rgb(202, 22, 73);
+}
+
+.header {
+  border: 2px solid black;
+}
