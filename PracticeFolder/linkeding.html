@@ -1,0 +1,116 @@
+<html>
+<h1>Linkedin HTML Script</h1>
+
+<head>
+    <script src="./linkedin.js"></script>
+</head>
+
+<body>
+    <div id="A">
+        <div id="B">
+            <div id="C">Click here</div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+
+
+    // Question 11
+    const dessert = { type: 'pie' }
+    dessert.type = 'pudding';
+    const second = dessert;
+    second.type = 'fruit';
+    console.log(dessert.type) //fruit
+    console.log(second.type) //fruit
+
+    // Question 10
+    let a2 = 10
+    console.log(a2);
+    function test1() {
+        if (true) {
+            var a2;
+            console.log(a2);
+            a2 = 20
+        }
+        console.log(a2);
+    }
+    test1();
+
+    // Question 9 access the irish flag
+    var flagJSON = '{ "countries": [' +
+        '{"country": "Ireland", "flag": "IE"},' +
+        '{"country": "Serbia", "flag": "RS"},' +
+        '{"country": "Peru", "flag": "PE"} ]}';
+
+    var flagDatabase = JSON.parse(flagJSON);
+
+    console.log(flagDatabase.countries[0].flag) // o/p IE
+    // console.log(flagJSON.countries[0].flag) // throw error
+    // console.log(flagDatabase.[1].flag) // throw error
+    console.log(flagDatabase.countries[1].flag) // o/p - RS
+
+    // Question 8
+    let vowels = "aeiou"
+    //o/p - in different line 
+    // a
+    // e
+    // i
+    // o
+    // u
+    // let vowels = "aeiou".toArray();// error throw not hai function
+    // let vowels = Array.of("aeiou") // aeiou inline
+    // let vowels = { "a", "e", "i", "o", "u"} // syntax error
+
+    for (var i = 0; i < vowels.length; i++) {
+        console.log(vowels[i]);
+    }
+    // Question 7
+    document.querySelectorAll("div").forEach(e => {
+        e.onclick = e => console.log(e.currentTarget.id); // o/p - C, B, A (IN DIFFERNT LINE )
+    });
+
+    // Question 6
+    var thing;
+    let func = (str = 'no arg') => {
+        console.log(str); // o/p - no arg , null
+    }
+    func(thing)
+    func(null)
+
+    // Question 5
+    const myFunc = () => {
+        const a1 = 2;
+        return () => console.log("a1 is" + a1); //o/p a is 2
+    }
+    const a1 = 1;
+    const test = myFunc();
+    test();
+
+
+    // Question 3 How check "pot" in this "potato" ?
+    // console.log("potato".contains("pot")) // contains is not a function
+    console.log("potato".includes("pot")) // True
+    console.log("potato".includes("Pot")) // False
+    console.log("pot".indexOf("potato") !== -1) // False
+
+    // Question 2
+    const foo = [1, 2, 3];
+    const [n] = foo;
+    console.log("foo", n); // o/p - foo 1
+
+    // Question 1
+    class Animal {
+        static belly = [];
+        eat() { Animal.belly.push("food"); }
+    }
+    let a = new Animal();
+    a.eat();
+    // print food
+    console.log(Animal.belly[0]) // o/p - food
+    // console.log(a.belly[0])
+    // console.log(a.prototype.belly[0])
+    // console.log(Object.getPrototypeOf(a).belly[0])
+
+</script>r
