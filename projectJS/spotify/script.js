@@ -3,7 +3,7 @@ console.log('welcome to spotify');
 //Intialize the variable
 
 let songIndex = 0;
-let audioElement = new Audio('1.mp3');
+let audioElement = new Audio('songs/1.mp3');
 let masterPlay = document.getElementById('masterPlay');
 let myProgressBar = document.getElementById('myProgressBar');
 let gif = document.getElementById('gif');
@@ -49,7 +49,6 @@ const songs = [
 ];
 
 songItems.forEach((element, i) => {
-  console.log(element, i);
   element.getElementsByTagName('img')[0].src = songs[i].coverPath;
   element.getElementsByClassName('songName')[0].innerText = songs[i].songName;
 });
@@ -94,14 +93,18 @@ const makeAllPlays = () => {
 
 Array.from(document.getElementsByClassName('songItemPlay')).forEach(
   (element) => {
-    console.log('songitem called');
     element.addEventListener('click', (e) => {
       makeAllPlays();
       songIndex = parseInt(e.target.id); // for song list play -> current songindex update index = parseInt(e.target.id)
       e.target.classList.remove('fa-circle-play');
       e.target.classList.add('fa-circle-pause');
-      audioElement.src = `songs/${songIndex + 1}.mp3`; // song audioelement change dynamically
-      masterSongName.innerText = songs[songIndex].songName;
+      //   audioElement.src = `songs/${songIndex + 1}.mp3`; // song audioelement change dynamically
+      //   masterSongName.innerText = songs[songIndex].songName;
+      audioElement.src = `songs/${songIndex}.mp3`; // song audioelement change dynamically
+      masterSongName.innerText = songs[songIndex - 1].songName;
+
+      console.log('masterSongName called', songIndex);
+
       audioElement.currentTime = 0;
       audioElement.play();
       gif.style.opacity = 1;
