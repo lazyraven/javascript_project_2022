@@ -50,7 +50,7 @@ arrayQuestionList.forEach((list) => {
     //   `/questionsPractice/questionPractice.html/${list.id}`
     // );
     if (list.id == 1) {
-      window.location.href = 'js1.js';
+      window.location.href = 'reverseEle.js';
     } else if (list.id == 2) {
       window.location.href = 'js2.js';
     } else if (list.id == 3) {

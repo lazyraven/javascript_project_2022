@@ -8,12 +8,35 @@
     <link rel="stylesheet" href="./style.css" />
 
     <script src="./question-practice.js" defer></script>
-    <!-- <script src="./js1.js" defer></script> -->
+    <script src="./reverseEle.js" defer></script>
+    <script src="./duplicateEle.js" defer></script>
   </head>
 
   <body>
     <h3>Javascript Question Practice</h3>
 
     <ul id="questionList"></ul>
+
+    <div class="divClass">
+      <button type="button" class="btn" onclick="reverseElement()">
+        Reverse Element
+      </button>
+      <pre>
+        OriginalElement : <span id="originalRevElement"></span>
+        ReverseElement : <span id="reverseRevElement"></span>
+        ReverseSpaceNotInclude : <span id="reverseWithOutSpaceEle"></span>
+      </pre>
+    </div>
+
+    <div class="divClass">
+      <button type="button" class="btn" onclick="duplicateElement()">
+        Duplicate Element
+      </button>
+      <pre>
+        OriginalElement : <span id="originalDupElement"></span>
+        ReverseElement : <span id="reverseDupElement"></span>
+        SortElement : <span id="sortDupEle"></span>
+      </pre>
+    </div>
   </body>
 </html>

@@ -10,7 +10,24 @@ body {
 
 a {
   text-decoration: none;
-  color: green;
+  color: rgb(66, 174, 247);
+}
+span {
+  color: rgb(30, 119, 3);
+  font-size: larger;
+  font-weight: bold;
+}
+
+.btn {
+  background-color: #6565f2;
+  color: aliceblue;
+  padding: 4px;
+  border-radius: 8px;
+}
+.divClass {
+  border: 2px solid black;
+  padding: 4px;
+  display: inline-block;
 }
 
 .questionComplete {
