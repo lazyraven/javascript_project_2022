@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-color: rgb(241, 248, 244);
+}
+h3 {
+  text-align: center;
+  font-weight: bold;
+  color: rgb(202, 22, 73);
+}
+
+.container {
+  border: 2px solid black;
+  background-color: antiquewhite;
+  padding: 34px 19px;
+  margin: 14px 19px;
+  border-radius: 23px;
+  width: 533px;
+  /* box-sizing: border-box; */
+}
