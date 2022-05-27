@@ -6,7 +6,9 @@
 
 body {
   background-color: rgb(241, 248, 244);
+
 }
+
 h3 {
   text-align: center;
   font-weight: bold;
@@ -20,5 +22,7 @@ h3 {
   margin: 14px 19px;
   border-radius: 23px;
   width: 533px;
+  display: inline-block;
+  padding: 4px;
   /* box-sizing: border-box; */
 }

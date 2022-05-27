@@ -1,0 +1,9 @@
+.container {
+    display: grid;
+}
+
+.item {
+    padding: 3px;
+    margin: 8px;
+    grid-template-columns: 300px 100px 100px;
+}
