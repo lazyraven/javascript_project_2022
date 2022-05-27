@@ -1,0 +1,14 @@
+.grid {
+  display: grid;
+  grid-template-rows: 1fr 1fr 4fr;
+  /* grid-template-columns: 1fr 4fr 1fr; */
+  grid-template-columns: repeat(9, 2fr);
+  grid-auto-rows: 2fr;
+}
+
+.box {
+  border: 2px solid yellowgreen;
+  background-color: aqua;
+  margin: 2px;
+  gap: 1rem;
+}
