@@ -9,8 +9,8 @@
 
     /* By default value of flex-direction is row */
     /* flex-direction: row; */
-    /* flex-direction: column;
-    flex-direction: row-reverse;
+    flex-direction: column;
+    /* flex-direction: row-reverse;
     flex-direction: column-reverse; */
 
     /* check in responsive design */
@@ -59,7 +59,7 @@
     /* order: 40; */
     /* flex-grow: 3;
     flex-shrink: 3; */
-    flex-basis: 160px;
+    flex-basis: 200px;
     /* when flex-direction is set to row flex-basis: will control width */
     /* when flex-direction is set to column flex-basis: will control height */
 

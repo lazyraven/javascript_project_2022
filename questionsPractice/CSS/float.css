@@ -30,16 +30,15 @@ body {
 }
 
 #computer {
-    float: right;
+    float: left;
     width: 48%;
 
 }
 
 #stationary {
     /* float: left; */
-    /* clear: left; */
-
-    clear: both;
+    clear: left;
+    /* clear: right; */
     width: 100%;
 
 }

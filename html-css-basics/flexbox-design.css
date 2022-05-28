@@ -1,0 +1,83 @@
+/* xs sm md lg xl */
+
+.box {
+    padding: 1rem;
+    background-color: aliceblue;
+    border: 1px solid #e5e5e5;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.text-md {
+    font-size: 1rem;
+}
+
+.text-lg {
+    font-size: 1.125rem;
+}
+
+.text-xl {
+    font-size: 1.25rem;
+}
+
+.p-1 {
+    padding: 1rem;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.flex {
+    display: flex;
+}
+
+.grow-1 {
+    flex-grow: 1;
+}
+
+.grow-2 {
+    flex-grow: 2;
+}
+
+.grow-3 {
+    flex-grow: 3;
+}
+
+.shrink-0 {
+    flex-shrink: 0;
+}
+
+.shrink-1 {
+    flex-shrink: 1;
+}
+
+.shrink-2 {
+    flex-shrink: 2;
+}
+
+.shrink-3 {
+    flex-shrink: 3;
+}
+
+.basis-4 {
+    flex-basis: 33.33%;
+}
+
+.basis-500 {
+    flex-basis: 500px;
+}
+
+.w-50pc {
+    width: 50%;
+}
+
+.w-4 {
+    width: 4rem;
+}
+
+.w-16 {
+    width: 16rem;
+}
