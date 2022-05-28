@@ -1,0 +1,8 @@
+.navbar {
+  background-color: black;
+}
+
+.navbar ul li {
+  float: left;
+  list-style: none;
+}
