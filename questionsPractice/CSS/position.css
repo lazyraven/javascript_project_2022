@@ -1,0 +1,36 @@
+.container {
+    border: 2px solid black;
+    background-color: antiquewhite;
+
+    /* height added for sticky position */
+    /* height: 3449px; */
+}
+
+.box {
+    border: 2px solid red;
+    width: 150px;
+    height: 150px;
+    margin: 3px;
+    padding: 10px;
+    text-align: center;
+    font-size: 24px;
+    display: inline-block;
+}
+
+
+#box3 {
+    /* I type absolute or relative */
+    /* position: absolute; */
+    position: relative;
+    top: 34px;
+    left: 34px;
+
+    /* II type fixed */
+    /* position: fixed;
+    right: 4px;
+    bottom: 2px */
+
+    /* IIi type sticky -> height added for sticky position into thie container class height: 3449px*/
+    /* position: sticky;
+    top: 3px; */
+}

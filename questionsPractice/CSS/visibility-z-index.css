@@ -1,0 +1,35 @@
+.box {
+    border: 2px solid black;
+    width: 150px;
+    height: 150px;
+}
+
+#box1 {
+    background-color: red;
+
+    /* for z-index */
+    position: relative;
+    top: 49px;
+    z-index: -165;
+
+}
+
+#box2 {
+    background-color: green;
+
+    /* visibility: hidden; */
+    /* display: none; */
+
+    /* for z-index */
+    position: relative;
+    top: 16px;
+    z-index: -135;
+}
+
+#box3 {
+    background-color: blue;
+}
+
+#box4 {
+    background-color: yellow;
+}
