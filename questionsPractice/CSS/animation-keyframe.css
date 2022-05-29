@@ -1,0 +1,64 @@
+.container {
+  background-color: aqua;
+}
+.box {
+  width: 150px;
+  height: 150px;
+  margin: 3px;
+  background-color: blueviolet;
+  position: relative;
+  animation-name: nisha;
+  /* animation-name: nisha1; */
+
+  animation-duration: 2s;
+  animation-iteration-count: 2;
+  animation-timing-function: ease-in-out;
+  animation-direction: reverse;
+  animation-delay: 3s;
+  /* animation-fill-mode: forwards; */
+
+  /* animation-duration: 0.8s; */
+  /* animation-iteration-count: infinite; */
+  /* animation-fill-mode: alternate ; */
+
+  /* These properties can be set using this shorthand */
+  /* animation: animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-fill-mode; */
+  /* animation: harry 5s ease-in 1s 12 backwards; */
+}
+.box1 {
+  width: 150px;
+  height: 150px;
+  background-color: blueviolet;
+  position: relative;
+  animation-name: nisha1;
+  animation-duration: 2s;
+  animation-iteration-count: 4;
+}
+
+@keyframes nisha1 {
+  0% {
+    top: 0;
+    left: 0;
+  }
+  25% {
+    top: 250px;
+    left: 0px;
+  }
+  75% {
+    top: 250px;
+    left: 250px;
+  }
+  100% {
+    top: 0;
+    left: 250px;
+  }
+}
+
+@keyframes nisha {
+  from {
+    width: 200px;
+  }
+  to {
+    width: 1400px;
+  }
+}

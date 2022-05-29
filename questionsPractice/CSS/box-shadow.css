@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+}
+.card {
+  border: 2px solid black;
+  margin: 3px 4px;
+  padding: 10px 24px;
+  background-color: antiquewhite;
+
+  /* box-shadow: offset-x offset-y color; */
+  /* box-shadow: offset-x offset-y blur-radius color; */
+  /* box-shadow: offset-x offset-y blur-radius spread-radius color; */
+
+  /* box-shadow: 5px 5px 5px red; */
+
+  /* box-shadow: 3px 5px green, 4px 6px red; */
+  /* box-shadow: 6px 10px green, 14px 20px red; */
+  /* box-shadow: 5px 5px 7px rgba(1, 59, 40, 0.4); */
+  /* box-shadow: inset 8px 3px rgba(1, 59, 40, 0.4); */
+  /* box-shadow: 4px 4px green; */
+  /* box-shadow: -4px -4px green; */
+}
+
+h2 {
+  text-shadow: -4px -4px rgb(197, 248, 192);
+  /* text-shadow: 4px 4px rgb(197, 248, 192); */
+}

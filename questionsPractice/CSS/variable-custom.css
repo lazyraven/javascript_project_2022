@@ -1,0 +1,29 @@
+:root {
+  --primary-color: blue;
+  --success-color: green;
+  --danger-color: red;
+  --maxw: 300px;
+}
+
+.container {
+  width: var(--maxw);
+  margin: auto;
+  background-color: var(--danger-color);
+  display: flex;
+  /*align-items, justify-content-> use for box element center */
+  align-items: center;
+  justify-content: center;
+  /* width: 477px; */
+}
+
+.box {
+  /* --box-color only for this block working  */
+  --box-color: cyan;
+  /* border: 2px solid red; */
+  border: 2px solid var(--danger-color);
+  width: 150px;
+  height: 150px;
+  margin: 3px;
+  background-color: var(--box-color);
+  /* box-shadow: 4px 4px var(--primary-color); */
+}
