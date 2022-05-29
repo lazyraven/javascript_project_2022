@@ -1,0 +1,37 @@
+/* height and width  vh,vw*/
+
+.container {
+    border: 2px solid red;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* for rem unit */
+/* html {
+    font-size: 25px;
+}
+
+#second {
+    font-size: 3rem;
+    padding: 3rem;
+}
+
+h1 {
+    text-align: center;
+} */
+
+
+/* for em unit */
+/* .container {
+    font-size: 10px;
+}
+
+#first {
+    font-size: 3em;
+    padding: 3em;
+} 
+
+h1 {
+    text-align: center;
+}
+*/

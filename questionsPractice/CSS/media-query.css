@@ -1,0 +1,36 @@
+.box {
+    color: white;
+    background-color: red;
+    text-align: center;
+    font-size: 50px;
+    display: none;
+}
+
+@media only screen and (max-width: 300px) {
+    #box1 {
+        display: block;
+        background-color: cyan;
+    }
+}
+
+@media only screen and (min-width:300px) and (max-width: 500px) {
+    #box2 {
+        display: block;
+        background-color: blue;
+    }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 800px) {
+    #box3 {
+        display: block;
+        background-color: green;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    #box4 {
+        display: block;
+        background-color: rgb(242, 242, 22);
+    }
+
+}

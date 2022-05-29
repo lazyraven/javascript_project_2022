@@ -1,0 +1,28 @@
+.container {
+    text-align: center;
+}
+
+/* all p element in to the div */
+div p {
+    background-color: cyan;
+    font-weight: bold;
+}
+
+div li p {
+    background-color: green;
+    font-weight: bold;
+    color: yellow;
+}
+
+/* just p element after div element */
+div>p {
+    background-color: aquamarine;
+    font-weight: bold;
+    color: blue;
+
+}
+
+/* sibling div, p element */
+div+p {
+    background-color: rgb(90, 152, 253);
+}
