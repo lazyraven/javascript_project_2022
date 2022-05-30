@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    background-color: bisque;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+}
+
+
+#box {
+    display: flex;
+    background-color: aqua;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    font-weight: 23px;
+    height: 200px;
+    width: 200px;
+    transition: all 1s ease-in-out 1s;
+}
+
+#box:hover {
+    box-shadow: inset 5px 5px rgb(161, 239, 161);
+    border-radius: 45px;
+
+    /* transform: rotate(360deg); */
+    transform: skew(40deg);
+    /* transform: scale(2); */
+    /* transform: translateX(123px); */
+    /* transform: translateY(123px); */
+    /* transform: translate(50px, 100px); */
+    /* transform: scale3d(3); */
+    /* transform: rotate(-20deg); */
+
+}
