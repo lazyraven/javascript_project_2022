@@ -58,7 +58,7 @@ console.log("etr", st, etr.next().value, etr);
 //     {id:5, role: 'manager'},
 // ]
 
-var sortOrder = ["tester", "developer", "manager"];
+// var sortOrder = ["tester", "developer", "manager"];
 
 let students = [
   { id: 5, role: "manager" },
@@ -67,3 +67,8 @@ let students = [
   { id: 1, role: "tester" },
   { id: 4, role: "developer" },
 ];
+
+let resultArray = students.sort((a, b) => {
+  return b.role - a.role;
+});
+console.log("resultArray called", students, resultArray);
