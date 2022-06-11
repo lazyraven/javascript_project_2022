@@ -11,6 +11,7 @@ function reverseArrProperty(data) {
     document.getElementById("reverseArrElement").innerText = resultArr;
   }
   // return resultArr;
+  console.log(resultArr)
 }
 function reverseArrayElement() {
   reverseArrProperty(arr1);

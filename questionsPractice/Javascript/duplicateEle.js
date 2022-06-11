@@ -26,3 +26,10 @@ function duplicateElement() {
   let resultArr = new Set(arrayList);
   console.log('new Set', resultArr);
 }
+
+//Question 2 “javascript delete second last element of array”
+
+// let spliceArr = [1, 2, 3, 4, 5];
+// spliceArr.splice(spliceArr.length - 2);
+// delete spliceArr[3];
+// console.log(spliceArr);

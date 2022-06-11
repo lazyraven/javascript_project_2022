@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    function findFirstUnique(baseArray) {
+        const obj = {}
+        let answer = "";
+        for (let i = 0; i < baseArray.length; i++) {
+            if (obj[baseArray[i]]) {
+                obj[baseArray[i]] = obj[baseArray[i]] + 1;
+            } else {
+                obj[baseArray[i]] = 1;
+            }
+        }
+
+
+
+        for (let i = 0; i < baseArray.length; i++) {
+            if (obj[baseArray[i]] === 1) {
+                answer = baseArray[i]
+                break;
+            }
+        }
+
+        return answer;
+
+    }
+    const A = [6, 4, 1, 4, 6, 2, 2]
+
+    console.log(findFirstUnique(A));
+    console.log(findFirstUnique([8, 8, 5, 3, 3, 5, 7]));
+    console.log(findFirstUnique([17, 3, 3, 16, 17, 8]));
+
+</script>
+
+</html>

@@ -12,6 +12,7 @@ function reverseProperty(data) {
       document.getElementById('reverseRevElement').innerText = reverseTerm;
     }
   }
+  console.log(reverseTerm)
 
   // space not include
   let reverseWithOutSpace = reverseTerm.split(' ').reverse().join(' ');
