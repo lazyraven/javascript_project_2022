@@ -45,3 +45,25 @@ function palindromeProperty(data) {
 function palindromeElement() {
   palindromeProperty(num);
 }
+
+let number = 1231;
+//   let number = 12321;
+
+//negative
+function showData(data) {
+  let num = data.toString();
+  console.log(num);
+
+  for (let i = 0; i < num.length; i++) {
+    console.log(num[i], num[num.length - (i + 1)]);
+
+    if (num[i] != num[num.length - (i + 1)]) {
+      console.log('no');
+      return false;
+    }
+  }
+  console.log('yes');
+  return true;
+}
+
+showData(number);

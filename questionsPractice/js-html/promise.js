@@ -44,3 +44,9 @@ async function execute() {
 }
 
 execute();
+
+// for (let i = 0; i < 5; i++) {
+//     // console.log(i)
+//     setTimeout(console.log(i), i * 1000)
+
+// }
