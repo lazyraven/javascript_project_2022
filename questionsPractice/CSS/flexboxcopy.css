@@ -1,0 +1,56 @@
+.container {
+    width: 100%;
+    height: 500px;
+    border: 2px solid purple;
+    display: flex;
+    /* flex-direction: column; */
+
+}
+
+.item {
+    width: 150px;
+    height: 150px;
+    background-color: tomato;
+    border: 2px solid green;
+    margin: 10px;
+    padding: 3px;
+}
+
+#item-1 {}
+
+#item-2 {
+    /* order: 40; */
+    /* flex-grow: 3;
+    flex-shrink: 3; */
+    /* flex-basis: 200px; */
+    /* when flex-direction is set to row flex-basis: will control width */
+    /* when flex-direction is set to column flex-basis: will control height */
+
+
+}
+
+#item-3 {
+    /* align-self: flex-start;
+    align-self: flex-end;
+    align-self: center; */
+
+}
+
+
+.containerbox {
+    width: 100%;
+    height: 60px;
+    background-color: grey;
+    border: 2px solid black;
+    /* display: inline-block; */
+    display: flex;
+    justify-content: center
+}
+
+.itembox {
+    width: 100px;
+    height: 300px;
+    margin: 4px;
+    background-color: rgb(189, 29, 29);
+    border: 2px solid black
+}
