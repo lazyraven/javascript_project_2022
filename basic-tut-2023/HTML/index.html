@@ -46,10 +46,29 @@
             color: yellow;
             background-color: transparent;
         }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 5px;
+            text-align: left;
+        }
+
+        #t01 {
+            background-color: #f2f2d1;
+        }
     </style>
 </head>
 
-<body>
+<body style="background-image: url (
+    'https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190710102234/download3.png' 
+    );">
 
     <!-- HTML TEXT FORMATTING -->
     <em>emphasize text</em>
@@ -299,7 +318,53 @@
         <p>A text link of a pdf, doc or zip file can be created to make it downloadable.</p>
         <a href="GeeksforGeeks | A computer science portal for geeks.pdf">Download PDF File</a>
 
+        <p>inserted image using <img> tag:</p>
+        <img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190710102234/download3.png"
+            alt="This is GeeksforGeeks logo" align="right" />
 
+        <!-- Adding animated Image: in gif format -->
+        <h3>Adding a gif file on a webpage</h3>
+        <img src="smiley.gif" alt="smiley" style="width: 200px; height: 200px" />
+
+        <!-- Using Image as a background: use the background-image property of CSS -->
+        <!-- Adding Collapsed Borders in an HTML Table: -->
+        <!-- table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        } -->
+
+        <!-- colspan attribute -->
+        <h2>Cell that spans two columns:</h2>
+        <table id="t01" style="width:100%">
+            <!-- table caption -->
+            <caption>DETAILS</caption>
+            <tr>
+                <th>Name</th>
+                <th colspan="2">Telephone</th>
+            </tr>
+            <tr>
+                <td>Vikas Rawat</td>
+                <td>9125577854</td>
+                <td>8565557785</td>
+            </tr>
+        </table>
+        <br>
+        <!-- rowspan attribute  -->
+        <table style="width:100%">
+            <tr>
+                <th>Name:</th>
+                <td>Vikas Rawat</td>
+            </tr>
+            <tr>
+                <th rowspan="2">Telephone:</th>
+                <td>9125577854</td>
+            </tr>
+            <tr>
+                <td>8565557785</td>
+            </tr>
+        </table>
     </body>
 
     </html>
