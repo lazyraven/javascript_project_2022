@@ -6,9 +6,303 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        h1 {
+            color: #0000FF;
+        }
+
+        h2 {
+            color: rgb(0, 255, 0);
+        }
+
+        h3 {
+            color: hsl(0, 100%, 50%);
+        }
+
+        h4 {
+            color: hsla(9, 100%, 64%, 0.8);
+        }
+
+        h5 {
+            color: rgba(11, 99, 150, 1);
+        }
+
+        a:link {
+            color: red;
+            background-color: transparent;
+        }
+
+        a:visited {
+            color: green;
+            background-color: transparent;
+        }
+
+        a:hover {
+            color: blue;
+            background-color: transparent;
+        }
+
+        a:active {
+            color: yellow;
+            background-color: transparent;
+        }
+    </style>
 </head>
 
 <body>
+
+    <!-- HTML TEXT FORMATTING -->
+    <em>emphasize text</em>
+    <br>
+    <i>italic text</i>
+
+    <!-- The sub and sup elements -->
+    <p>This text contains <sub>subscript</sub> text.</p>
+    <p>This text contains <sup>superscript</sup> text.</p>
+
+    <!-- The small tag -->
+    <small>Hello GeeksforGeeks</small>
+
+    <!-- Striking through the text: del tag use-->
+    <p> <del>striking through text</del></p>
+
+    <!-- Adding a text:  <ins> element is used to underline -->
+    <p><ins>adding block of inserted text.</ins></p>
+
+    <!-- HTML | Quotations -->
+    <!-- <q> element -->
+    <p><q> a set of text inside the quotation marks.</q></p>
+
+    <!-- <blockquote> element:  -->
+    <p>
+    <blockquote>blockquote adds space before the start of the sentence</blockquote>
+    </p>
+
+    <!-- <address> element -->
+    <p>
+    <address>content inside this tag is generally renders in italic format.(will be emphasized.)</address>
+    </p>
+
+    <!-- <abbr> element: -->
+    <p><abbr title="GeeksforGeeks">the full version of the abbreviation/acronym when you hover the mouse over the <abbr>
+                element</abbr></p>
+
+    <!-- <bdo> element : bidirectional override -->
+    <p>text written from right to left or left to right, takes an attribute “rtl” to display the text
+        from.</p>
+    <p><bdo dir="rtl">text written from right to left or left to right, takes an attribute “rtl” to display the text
+            from.</bdo></p>
+
+    <!-- <cite> element -->
+    <p><cite>define a title of a work</cite></p>
+
+    <!-- HTML | Color Styles and HSL => Colors are used to make the page more attractive-->
+    <!-- Definition : In this style, we define the color in 6 digit hexadecimal number (from 0 to F). It is denoted by ‘#’. The first two digits indicate red color, the next two green color, and the last two blue color -->
+
+    <h1>hexadecimal : [In this style, we define the color in 6 digit hexadecimal number (from 0 to F). It is denoted by
+        <q>#</q>
+        . The first two digits indicate red color, the next two green color, and the last two blue color]
+    </h1>
+
+    <!-- RGB Style [Red Green Blue]: -->
+    <h5> the amount of red, green, and blue colors and the range of each color is from 0 to 255.
+        Note: rgba(0, 0, 0) is Black color and rgb(255, 255, 255) is White color. </h2>
+        <!-- RGBA Style [Red Green Blue Alpha]:  -->
+        <h2>
+            Alpha indicates the degree of transparency. alpha is from 0 to 1.
+    </h5>
+
+    <!-- HSL colors:  hsl(hue, saturation, lightness) -->
+    <h3> HSL colors: hsl(hue, saturation, lightness)color: hsl(0, 100%, 50%); red color</h3>
+    <p>Hue : Its range is from 0 to 360. 0 is for red, 120 is for green and 240 is for blue.</p>
+    <p>Saturation: 0% is for a shade of gray, and 100% is for the full color. </p>
+    <p>Lightness is the color space's brightness. 0% is for black, and 100% is for white. </p>
+
+    <!-- HSLA Color Values: with alpha hsla(hue, saturation, lightness, alpha) -->
+    <h4>hsla(hue, saturation, lightness, alpha) Alpha denotes the Opacity of a color.=> color:hsla(9, 100%, 64%, 0.8);
+        dark orange color</h4>
+
+    <!-- HTML Link target="_blank", target="_self", "_top", "_parent"-->
+    <p>Changing the default colors of links</p>
+    <p>Visited Link</p>
+    <a href="https://www.geeksforgeeks.org">GeeksforGeeks</a>
+    <p>Link</p>
+    <a href="https://facebook.com">facebook</a>
+    <p>hovering effect</p>
+    <a href="https://www.geeksforgeeks.org">GeeksforGeeks</a>
+    <p>The Target Attribute in Links :target="_blank", target="_self", "_top", "_parent"</p>
+
+    <!-- Using Image as a Link in HTML -->
+    <a href="https://www.geeksforgeeks.org">
+        <img src="gfg_200X200.jpeg" alt="GeeksforGeeks" style="width:80px;height:80px;border:0">
+    </a>
+
+    <!-- Creating a Bookmark Link for a Webpage  -->
+    <p>Creating a Bookmark Link for a Webpage : Using the id attribute,create a bookmark. Add the specified portion of
+        the webpage to the bookmark.</p>
+    <!DOCTYPE html>
+    <html>
+
+    <body>
+
+
+
+        <p><a href="#T11">Jump to Topic 11</a></p>
+
+
+
+
+        <p><a href="#T17">Jump to Topic 17</a></p>
+
+
+
+
+        <p><a href="#T20">Jump to Topic 20</a></p>
+
+
+        <h2>Topic 1</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 2</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 3</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 4</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 5</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 6</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 7</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 8</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 9</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 10</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2 id="T11">Topic 11</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 12</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 13</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 14</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 15</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 16</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2 id="T17">Topic 17</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 18</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+
+
+        <h2>Topic 19</h2>
+
+
+        <p>paragraph 1
+            .....</p>
+        <h2 id="T20">Topic 20</h2>
+        <p>paragraph 1
+            .....</p>
+
+        <!-- Creating a download link in HTML  -->
+        <p>A text link of a pdf, doc or zip file can be created to make it downloadable.</p>
+        <a href="GeeksforGeeks | A computer science portal for geeks.pdf">Download PDF File</a>
+
+
+    </body>
+
+    </html>
 
 </body>
 
