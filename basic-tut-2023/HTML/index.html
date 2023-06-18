@@ -81,6 +81,20 @@
             text-align: justify;
         }
     </style>
+    <script>
+
+        // HTML Canvas Basics for canvas create
+        var g = document.getElementById("gfg");
+        var geeks = g.getContext("2d");
+        var gradient = geeks.createLinearGradient(1, 4, g.width, 2);
+        gradient.addColorStop("0", "green");
+        gradient.addColorStop("0.4", "yellow");
+        gradient.addColorStop("1.0", "aqua");
+        geeks.font = "40px sans-serif";
+        geeks.fillStyle = "red";
+        geeks.strokeStyle = gradient;
+        geeks.strokeText("GeeksforGeeks", 10, 60);
+    </script>
 </head>
 
 <body style="background-image: url (
@@ -479,6 +493,18 @@
             <source src="test.ogg" type="audio/ogg">
         </audio>
 
+        <!-- Drawing A SVG Circle in HTML -->
+        <svg width="200" height="200">
+            <circle cx="80" cy="80" r="50" stroke="black" stroke-width="2" fill="grey" />
+        </svg>
+
+        <svg width="300" height="200">
+            <polygon points="100,10 40,198 190,78 10,78 160,198" style="fill: grey; stroke: orange;
+                             stroke-width: 5; fill-rule: evenodd" />
+        </svg>
+
+        <canvas id="gfg" width="300px" height="100px" style="border:1px solid #d3d3d3;">
+        </canvas>
     </body>
 
     </html>

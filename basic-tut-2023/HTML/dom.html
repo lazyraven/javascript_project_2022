@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- script is not working here that's why create into the body section -->
+    <!-- <script>
+        const element = document.getElementById("intro");
+        document.getElementById("demo").innerHTML = "This is a paragraph" + element.innerHTML;
+    </script> -->
+</head>
+
+<body>
+    <!-- Finding the HTML Elements by their Id in DOM -->
+    <p id="intro">A Computer Science portal for geeks.</p>
+    <p>This example illustrates the <b>getElementById</b> method.</p>
+    <p id="demo"></p>
+
+    <script>
+        const element = document.getElementById("intro");
+        document.getElementById("demo").innerHTML = "This is a paragraph" + element.innerHTML;
+    </script>
+
+    <!-- sum of numbers  -->
+    <label>Enter Value 1: </label>
+    <input type="text" id="val1" />
+    <br />
+    <br />
+    <label>Enter Value 2: </label>
+    <input type=".text" id="val2" />
+    <br />
+    <button onclick="getAdd()">Click To Add</button>
+    <p id="result"></p>
+
+    <script>
+
+        function getAdd() {
+
+            // need to use Number if you're not using Number then result 2+2 = '22'
+            const num1 = Number(document.getElementById("val1").value);
+            const num2 = Number(document.getElementById("val2").value);
+
+            const add = num1 + num2;
+            document.getElementById("result").innerHTML = 'Addition = ' + add;
+            document.getElementById("result").style.color = "red";
+        }
+    </script>
+
+    <!-- document.activeElement -->
+</body>
+
+</html>
