@@ -1,0 +1,25 @@
+* {
+    background-color: rgb(158, 158, 158);
+}
+
+
+/* .table-border {
+    border: 1px solid blue;
+} */
+
+table,
+th,
+td {
+    border: 1px solid blueviolet;
+    border-collapse: separate;
+}
+
+table.one {
+    border: 1px solid blueviolet;
+    border-collapse: collapse;
+}
+
+table.two {
+    border: 1px solid blueviolet;
+    border-collapse: separate;
+}
