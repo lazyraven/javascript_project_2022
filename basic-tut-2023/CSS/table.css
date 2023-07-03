@@ -1,5 +1,5 @@
 * {
-    background-color: rgb(158, 158, 158);
+    background-color: whitesmoke
 }
 
 
@@ -17,9 +17,21 @@ td {
 table.one {
     border: 1px solid blueviolet;
     border-collapse: collapse;
+    caption-side: top;
+    /* Display empty cells border */
+    empty-cells: show;
 }
 
 table.two {
     border: 1px solid blueviolet;
     border-collapse: separate;
+    border-spacing: 5px 10px;
+    caption-side: bottom;
+
+    /* Hiding empty cells border */
+    empty-cells: hide;
+}
+
+table.ex1 {
+    empty-cells: show;
 }
