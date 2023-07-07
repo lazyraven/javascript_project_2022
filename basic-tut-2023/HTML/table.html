@@ -10,7 +10,7 @@
 
 <body>
 
-    <h3> Table One border-collapse: collapse; caption-side: top; empty-cells:show;</h3>
+    <h3> Table One border-collapse: collapse; caption-side: top; table-layout:auto/fixed;</h3>
     <table class="one">
         <caption>Caption at the top of the table.</caption>
         <tr>
@@ -23,12 +23,13 @@
             <td>Yadav</td>
         </tr>
         <tr>
-            <td>1</td>
-            <td>2</td>
+            <!-- for empty cell -->
+            <td></td>
+            <td>A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P</td>
         </tr>
     </table>
 
-    <h3> Table two border-collapse: separate; border-spacing:5px 10px; caption-side: bottom; empty-cells:hide;</h3>
+    <h3> Table two border-collapse: separate; border-spacing:5px 10px; caption-side: bottom; table-layout:auto/fixed;</h3>
     <table class="two">
         <caption> Caption at the bottom of the table </caption>
         <tr>
@@ -41,11 +42,13 @@
             <td>Yadav</td>
         </tr>
         <tr>
-            <td>1</td>
-            <td>2</td>
+            <!-- <td>1</td> -->
+            <td></td>
+            <td>A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P</td>
         </tr>
     </table>
 
+    <h3> empty-cells:show/hide;</h3>
     <table class="ex1">
         <tr>
             <td>Peter</td>

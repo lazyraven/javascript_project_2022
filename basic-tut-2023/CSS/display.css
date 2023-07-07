@@ -1,0 +1,21 @@
+.main-block {
+    text-align: center;
+    margin: 10px;
+}
+
+.whb-div {
+    height: 100px;
+    width: 200px;
+    display: block;
+}
+
+.bg1 {
+    background-color: aqua;
+}
+
+.bg2 { 
+    background-color: green;
+}
+.bg3 {
+    background-color: hotpink;
+}
