@@ -1,0 +1,92 @@
+<!-- [
+    {
+        "taskId": 46257,
+        "component": "TEXTBOX",
+        "labelName": "Task One",
+        "isActive": true,
+        "isMstr": true,
+        "createdDate": "2023-07-07 11:48:38.711",
+        "updatedDate": null,
+        "isImported": null,
+        "productLineName": "LM2500",
+        "productConfigName": "BASE SAC",
+        "moduleName": "CFF",
+        "contractType": "CSA/Fixed price",
+        "roleSeqId": "1",
+        "roleName": "Technician",
+        "checked": true
+    },
+    {
+        "taskId": 46279,
+        "component": "INFORMATION",
+        "labelName": "task 123",
+        "isActive": true,
+        "isMstr": true,
+        "createdDate": "2023-07-07 15:48:15.711",
+        "updatedDate": null,
+        "isImported": null,
+        "productLineName": "LM2500, LM6000",
+        "productConfigName": "BASE DLE, BASE SAC",
+        "moduleName": "CFF, ENG",
+        "contractType": "Transactional",
+        "roleSeqId": "1",
+        "roleName": "Technician",
+        "checked": true
+    }
+] -->
+
+<!-- adding four new field in this  -->
+<!-- initially groupdata is 
+{
+    "groupId": null,
+    "groupName": "group",
+    "status": "COMPLETED",
+    "tasks": [],
+    "groupOrder": 2,
+    "assignedRole": 200
+} -->
+<!-- taskByGrpObj.assignedRole = elem.seqRoleNumber ? elem.seqRoleNumber : parseInt(this.sequenceSelected); -->
+
+<!-- if(val){
+    for(var tdata in val){
+      val[tdata]['groupName'] = groupData['groupName'];
+      val[tdata]['groupId'] = groupData['groupId'];
+      val[tdata]['seqRoleNumber'] = groupData['assignedRole']
+      groupData['tasks'].push(val[tdata]);  
+      console.log("groupData tdata", groupData)
+    }
+    this.enableSubmitRouterBtn();
+    this.reorderGroupId();
+  } -->
+
+
+  <!-- Answer: 
+  {
+    "groupId": null,
+    "groupName": "group",
+    "status": "COMPLETED",
+    "tasks": [
+        {
+            "taskId": 46257,
+            "component": "TEXTBOX",
+            "labelName": "Task One",
+            "isActive": true,
+            "isMstr": true,
+            "createdDate": "2023-07-07 11:48:38.711",
+            "updatedDate": null,
+            "isImported": null,
+            "productLineName": "LM2500",
+            "productConfigName": "BASE SAC",
+            "moduleName": "CFF",
+            "contractType": "CSA/Fixed price",
+            "roleSeqId": "1",
+            "roleName": "Technician",
+            "checked": true,
+            "groupName": "group",
+            "groupId": null,
+            "seqRoleNumber": 200
+        }
+    ],
+    "groupOrder": 2,
+    "assignedRole": 200
+} -->
