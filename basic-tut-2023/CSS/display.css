@@ -1,21 +1,42 @@
 .main-block {
-    text-align: center;
-    margin: 10px;
-}
-
-.whb-div {
-    height: 100px;
-    width: 200px;
-    display: block;
+  text-align: center;
+  margin: 10px;
 }
 
 .bg1 {
-    background-color: aqua;
+  background-color: aqua;
 }
 
-.bg2 { 
-    background-color: green;
+.bg2 {
+  background-color: green;
 }
 .bg3 {
-    background-color: hotpink;
+  background-color: hotpink;
+}
+
+.wh {
+  height: 100px;
+  width: 200px;
+}
+
+.dblock {
+  display: block;
+}
+
+.dInline {
+  display: inline;
+}
+
+.dInlineBlock {
+  display: inline-block;
+}
+
+.dNone {
+  display: none;
+}
+.dContents {
+  display: contents;
+}
+.dFlex {
+  display: flex;
 }

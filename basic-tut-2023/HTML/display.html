@@ -1,26 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../CSS/display.css">
 </head>
+
 <body>
     <h3>CSS Display property</h3>
 
     <h3>Display Block Property</h3>
     <div class="main-block">
-        <div class="block1 whd-div">Display Block 1</div>
-        <div class="block2 whd-div">Display Block 2</div>
-        <div class="block3 whd-div">Display Block 3</div>
+        <div class="bg1 wh dblock">Display Block 1</div>
+        <div class="bg2 wh dblock">Display Block 2</div>
+        <div class="bg3 wh dblock">Display Block 3</div>
     </div>
 
     <h3>Display Inline Property</h3>
     <div class="main-block">
-        <div class="bg1 whd-div">Display Inline 1</div>
-        <div class="bg2 whd-div">Display Inline 2</div>
-        <div class="bg3 whd-div">Display Inline 3</div>
+        <!-- it's Not taking width-height after given width/height-->
+        <div class="bg1 wh dInline">Display Inline 1</div>
+        <div class="bg2 wh dInline">Display Inline 2</div>
+        <div class="bg3 wh dInline">Display Inline 3</div>
     </div>
+
+    <h3>Display Inline Block Property</h3>
+    <!-- it's taking width-height after given width/height-->
+    <div class="main-block">
+        <div class="bg1 wh dInlineBlock">Display Inline Block 1</div>
+        <div class="bg2 wh dInlineBlock">Display Inline Block 2</div>
+        <div class="bg3 wh dInlineBlock">Display Inline Block 3</div>
+        <!-- here i didn't give width-height with display inline block -->
+        <div class="bg3 dInlineBlock">Display Inline Block 4 (without width/height)</div>
+    </div>
+
+    <h3>Display None Property</h3>
+    <div class="bg1 wh dInlineBlock">Display None 1</div>
+    <div class="bg1 wh dNone">Display None 2</div>
+    <div class="bg3 wh dInlineBlock">Display None 3</div>
+
+    <h3>Display Contents Property</h3>
+    <!-- It is used to disappear the container. -->
+    <div class="bg1 wh dContents">Display Contents 1</div>
+    <div class="bg2 wh dContents">Display Contents 2</div>
+    <div class="bg3 wh dContents">Display Contents 3</div>
+
+    <h3>Display Flex Property</h3>
+    <!-- It is used to disappear the container. -->
+    <div class="bg1 wh dFlex">Display Flex 1</div>
+    <div class="bg2 wh dFlex">Display Flex 2</div>
+    <div class="bg3 wh dFlex">Display Flex 3</div>
+    <div class="bg1 dFlex">Display Flex 4</div>
+
 </body>
+
 </html>
