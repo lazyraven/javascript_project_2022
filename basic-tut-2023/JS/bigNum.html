@@ -11,17 +11,27 @@
     <h3>Find Big number from array values</h3>
     <script>
 
-        const marks = [90, 83, 97, 86, 98, 101, 67];
+        const marks = [90, 83, 97, 86, 98, 101, 67, 105, 112];
 
         let maxNum = marks[0]
+        // for (let i = 1; i < marks.length; i++) {
+        //     if (marks[i] > maxNum) {
+        //         maxNum = marks[i]
+        //     }
+        // }
+        let secondBigNum;
         for (let i = 1; i < marks.length; i++) {
             if (marks[i] > maxNum) {
-                maxNum = marks[i]
+                // console.log("marks", marks, marks[i], maxNum, i);
+                secondBigNum = maxNum
+                maxNum = marks[i];
             }
         }
 
         console.log(`maxNum`);
         console.log(maxNum);
+        console.log("secondBigNum", secondBigNum);
+
     </script>
 </body>
 
