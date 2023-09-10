@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Find Big number from array values</h3>
+    <script>
+
+        const marks = [90, 83, 97, 86, 98, 101, 67];
+
+        let maxNum = marks[0]
+        for (let i = 1; i < marks.length; i++) {
+            if (marks[i] > maxNum) {
+                maxNum = marks[i]
+            }
+        }
+
+        console.log(`maxNum`);
+        console.log(maxNum);
+    </script>
+</body>
+
+</html>
