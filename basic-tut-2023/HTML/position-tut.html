@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position</title>
+</head>
+<style>
+    .container{
+        background-color: aqua;
+        width: 2400px;
+        height: 2400px;
+
+        /* position: relative; */
+    }
+    .box {
+        width: 200px;
+        height: 200px;
+        border: 2px solid gray;
+        display: inline-block;
+        margin: 2px;
+        /* position: absolute; */
+    }
+
+    .box3 {
+        /* position: relative; */
+        position: fixed;
+        /* position: fixed; */
+        top: 34px;
+
+    }
+    .box-name {
+        position: relative;
+        background-color: bisque;
+    }
+
+</style>
+<body>
+    <!-- div.box${Box${}}*4 -->
+
+    <div class="container">
+        <div class="box box1">Box 1</div>
+        <div class="box box2">Box 2</div>
+        <div class="box-name">
+            <div class="box box3">Box 3</div>
+            <div class="box box3copy">
+                     Box 3 Copy
+            </div>
+        </div>
+        <div class="box box4">Box 4</div>
+
+    </div>
+</body>
+</html>

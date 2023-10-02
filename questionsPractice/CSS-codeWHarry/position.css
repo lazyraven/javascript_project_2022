@@ -3,7 +3,7 @@
     background-color: antiquewhite;
 
     /* height added for sticky position */
-    /* height: 3449px; */
+    height: 3449px;
 }
 
 .box {
@@ -21,9 +21,9 @@
 #box3 {
     /* I type absolute or relative */
     /* position: absolute; */
-    position: relative;
+    /* position: relative;
     top: 34px;
-    left: 34px;
+    left: 34px; */
 
     /* II type fixed */
     /* position: fixed;
@@ -31,6 +31,6 @@
     bottom: 2px */
 
     /* IIi type sticky -> height added for sticky position into thie container class height: 3449px*/
-    /* position: sticky;
-    top: 3px; */
+    position: sticky;
+    top: 3px;
 }
