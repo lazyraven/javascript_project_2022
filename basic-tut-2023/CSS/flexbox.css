@@ -1,0 +1,40 @@
+ /* flexbox */
+.flexbox-parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-parent {
+    display: grid;
+    place-content: center;
+}
+
+.position-parent {
+    position: relative;
+}
+
+.position-child {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.flex-margin-parent {
+    display: flex;
+}
+.flex-margin-child {
+    margin: auto;
+}
+
+.grid-margin-parent {
+    display: flex;
+}
+.grid-margin-child {
+    margin: auto;
+}
+
+.mar-10 {
+    margin: 10px 0 10px 0;
+}
