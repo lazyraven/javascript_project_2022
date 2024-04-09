@@ -1,0 +1,39 @@
+<html>
+<title>HI JS</title>
+
+<head>
+  <h1>Javascript practice solution check output in console</h1>
+</head>
+
+<body></body>
+
+</html>
+
+<script>
+  let name = "Nisha";
+
+  function reverseElement(ele) {
+    let reverseTerm = "";
+    for (let i = 1; i <= ele.length; i++) {
+      reverseTerm = reverseTerm + ele[ele.length - i];
+    }
+    console.log("reverseTerm called", reverseTerm);
+  }
+  reverseElement(name);
+
+  //   function reverse(str){
+  //   let reversed = "";
+  //    for (var i = str.length - 1; i >= 0; i--){
+  //      reversed += str[i];
+  //    }
+  //   return reversed;
+  // }
+  // // New For loop available after ES2015
+  // function reverse(str){
+  // 	let reversed = '';
+  //     for (let character of str){
+  //     	reversed = character + reversed;
+  //     }
+  // 	return reversed;
+  // }
+</script>
