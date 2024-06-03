@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../Javascript/promises.js"></script>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <title>Promises</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h3>Promise Definition :</h3>
+            <p>
+            </p>
+            <ul>
+                <li>Promises are javascript objects that represent an eventual completion or failure of an asynchronous operation.</li>
+                <li>A promise has two possible outcomes: it will either be kept when the time comes or it won't.</li>
+                <li>A promise is a returned object where you attach callbacks, instead of passing callbacks into a funtion.</li>
+            </ul>
+            <pre>
+            // callback function
+                const greet = (name) => {
+                console.log("Hi " + name);
+                };
+
+            //function
+                const callMe = () => {
+                return new Promise((resolve, reject) => {
+                    let name = prompt("Enter your name");
+                    if (name) resolve(name);
+                    reject(false);
+                });
+                };
+
+            //start call
+                callMe().then((result) => greet(result));
+            </pre>
+        </section>
+    </main>
+</body>
+</html>

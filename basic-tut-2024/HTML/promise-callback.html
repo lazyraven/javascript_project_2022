@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../Javascript/promise-callback.js"></script>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <title>Promises Vs Callbacks </title>
+</head>
+<style>
+    table tr td.vl {
+        /* vertical-align: ; */
+    }
+</style>
+
+<body>
+    <table>
+        <tr>
+            <th>Promises</th>
+            <th>Callbacks</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>In Promise: However you attached callbacks on the returned promise object.</li>
+                    <li>-----</li>
+                    <li>The syntax is user-friendly and easy to read</li>
+                    <li>Error handling is easier to manage.</li>
+            <pre>
+                api()
+                .then(function (result) {
+                    return api2();
+                })
+                .then(function (result) {
+                    return api3();
+                })
+                .then(function (result) {
+                    // do work
+                })
+                .catch(function (error) {
+                    // handle error
+                });   
+            </pre>
+                </ul>
+            </td>
+            <td class="vl">
+                <ul>
+                    <li>When using the callback approach we'd normally just paas a callback into a function.</li>
+                    <li>Making callbacks async can cause issues such as callback hell , so to avoid this we can use
+                        promises. </li>
+                    <li>The syntax is difficult to understand. </li>
+                    <li>Error handling may be hard to manage.</li>
+                        <pre>
+                        api(function (result) {
+                            api2(function (result2) {
+                            api3(function (result3) {
+                                // do work
+                                if (error) {
+                                //do something
+                                } else {
+                                //do something
+                                }
+                            });
+                            });
+                        });
+                        </pre>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

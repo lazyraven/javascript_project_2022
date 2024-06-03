@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <script src="../Javascript/closure.js"></script>
+    <title>Closure</title>
+</head>
+
+<body>
+    <main>
+        <section>
+            <p>Imagine you have a function within another function and the inner function can access variables from the outer function
+                even the outer function has finished executing. That's a closure!
+            </p>
+           
+            <h3>Where are Closures Applied ?</h3>
+            <p><strong>Private Variables :</strong> encapsulating data within functions and preventing direct access from outside.</p>
+                <pre>
+                    function counter() {
+                        let count = 0;
+                        return function () {
+                        // return count++;
+                        return ++count;
+                        };
+                    }
+                    const increment = counter();
+                    console.log(increment()); // o/p => 1
+                    console.log(increment()); // o/p => 2
+                </pre>
+
+            <p><strong> Iterators :</strong> Closure can be used to create iterators that maintain their state between calls, 
+                facilitating efficient and memory-friendly iteration over data structures.</p>
+            <pre>
+                function createIterators(items) {
+                    let index = 0;
+                    return function () {
+                      return items[index++];
+                    };
+                  }
+                  
+                  const fruitsIterator = createIterators(["apple", "banana", "orange"]);
+                  console.log(fruitsIterator());
+                  console.log(fruitsIterator());
+            </pre>
+        </section>
+    </main>
+</body>
+</html>
