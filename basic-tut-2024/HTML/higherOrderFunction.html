@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../Javascript/higherOrderFunction.js"></script>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <title>Higher Order Function</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h3>Higher Order Function</h3>
+            <p class="output">To view the output, you need to access the console tab of your browser's developer tools. - right click inspect mode</p>
+
+            <p>Function can be assigned to variables in the same way that strings or arrays can.
+                They can be passed into other functions as parameters or returned from them as well.
+            </p>
+
+            <h4>Simple Words</h4>
+            <p>It is a function that accepts functions as parameters and/or return function</p>
+            <p>Eg: map, filter, reduce, some, every, forEach, sort etc.</p>
+            <pre>
+            // Higher Order Function with Arrray.map() and Array.filter()
+
+                const numbers = [23, 15, 67, 28, 33, 98];
+
+                const doubleNumbers = numbers.map((num) => num * 2);
+                console.log(doubleNumbers);
+
+                console.log(numbers);
+
+                const numberLessThan33 = numbers.filter((num) => num < 33);
+                console.log(numberLessThan33);
+            </pre>
+        </section>
+    </main>
+</body>
+</html>

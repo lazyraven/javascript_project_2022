@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../Javascript/arrayMethod.js"></script>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <title>Array Methods |  Array Clonning</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h3>Array Methods |  Array Clonning</h3>
+            <p class="output">To view the output, you need to access the console tab of your browser's developer tools. - right click inspect mode</p>
+
+            <ul>
+                <li>
+                <pre>// Value Vs References
+                    const numbers = [1, 2, 3, 4];
+                    
+                    const anotherNumbers = numbers;
+                    anotherNumbers.push(5);
+                    console.log(numbers, anotherNumbers);
+                    console.log(anotherNumbers == numbers);</pre>
+                </li>
+                <li>
+                <pre>//Clonning Array One level Deep
+                    
+                    const original = [1, 2, 3, 4];
+
+                    const newOg = [...original];
+                    anotherNumbers.push(5);
+                    console.log("NumbersCopy", original, newOg);
+                    console.log(newOg == original);
+                </pre>
+                </li>
+                <li>
+                    <pre>//Clonning Array Two level Deep
+
+                    const products = [
+                    { productname: "Nokia", productCount: 24 },
+                    { productname: "Samsung", productCount: 12 },
+                    ];
+
+                    const newProducts = JSON.parse(JSON.stringify(products));
+                    console.log("Product Details", products, newProducts);
+                    console.log(products == newProducts);
+                    </pre>
+                </li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

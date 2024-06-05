@@ -16,3 +16,29 @@ const callMe = () => {
 
 //start call
 callMe().then((result) => greet(result));
+
+// Definition: 2
+
+let fruits = ["Apple", "Banana", "Kiwi"];
+
+const animate = (fruitName) => {
+  console.log(fruitName);
+};
+
+const animateOne = (fruitName, animate) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      animate(fruitName);
+      resolve(true);
+    }, 1000);
+  });
+};
+
+const animateAll = (animate) => {
+  animateOne(fruits[0], animate)
+    .then(() => animateOne(fruits[1], animate))
+    .then(() => animateOne(fruits[2], animate))
+    .catch((err) => console.log("some error occured", err));
+};
+
+animateAll(animate);

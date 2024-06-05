@@ -11,31 +11,39 @@
     <main>
         <section>
             <h3>Promise Definition :</h3>
+            <p class="output">To view the output, you need to access the console tab of your browser's developer tools. - right click inspect mode</p>
+
             <p>
             </p>
             <ul>
                 <li>Promises are javascript objects that represent an eventual completion or failure of an asynchronous operation.</li>
                 <li>A promise has two possible outcomes: it will either be kept when the time comes or it won't.</li>
                 <li>A promise is a returned object where you attach callbacks, instead of passing callbacks into a funtion.</li>
+                <pre>
+                    // callback function
+                        const greet = (name) => {
+                        console.log("Hi " + name);
+                        };
+        
+                    //function
+                        const callMe = () => {
+                        return new Promise((resolve, reject) => {
+                            let name = prompt("Enter your name");
+                            if (name) resolve(name);
+                            reject(false);
+                        });
+                        };
+        
+                    //start call
+                        callMe().then((result) => greet(result));
+                    </pre>
+                    <h4>Promise Definition 2:</h4>
+                    <li>A Promise is an Object that will produce a single value sometime in the future. if the promise is successful, it'll produce a resolved value
+                        but if something goes wrong then it will produce a reason why the promise failed.
+                        Similar Said : It behaves very much similar to real life promises.
+                    </li>
             </ul>
-            <pre>
-            // callback function
-                const greet = (name) => {
-                console.log("Hi " + name);
-                };
-
-            //function
-                const callMe = () => {
-                return new Promise((resolve, reject) => {
-                    let name = prompt("Enter your name");
-                    if (name) resolve(name);
-                    reject(false);
-                });
-                };
-
-            //start call
-                callMe().then((result) => greet(result));
-            </pre>
+           
         </section>
     </main>
 </body>

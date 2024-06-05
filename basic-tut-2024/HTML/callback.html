@@ -11,20 +11,52 @@
     <main>
         <section>
             <h3>Callback Definition :</h3>
-            <p>A callback function is a function passed into another function as an argument, which is called inside the outerFunction.
-            </p>
-            <pre>
-               // callback function
-                    const greet = (name)=> {console.log('Hi '+ name)}
+            <p class="output">To view the output, you need to access the console tab of your browser's developer tools.  - right click inspect mode</p>
+            <ul>
+                <li>
+                    <p>A Callback function is a function passed into another function as an argument, which is called inside the outerFunction.
+                    </p>
+                    <pre>
+                       // callback function
+                            const greet = (name)=> {console.log('Hi '+ name)}
+        
+                      //function
+                            const callMe = (callback)=>{
+                            let name = prompt('Enter your name');
+                            callback(name);
+                            }
+                      // passing function as parameter
+                            callMe(greet);
+                    </pre>
+                </li>
 
-              //function
-                    const callMe = (callback)=>{
-                    let name = prompt('Enter your name');
-                    callback(name);
-                    }
-              // passing function as parameter
-                    callMe(greet);
-            </pre>
+                <h4>Callback Definition 2:</h4>
+                <li>
+                <p>A Javascript callback is a function which is to be executed after another function has finished execution.</p>
+                    <pre>
+                    //callback and callback hell
+
+                    let fruits = ["Apple", "Banana", "Kiwi"];
+
+                    const animate = (fruitName) => {
+                    console.log("animating", fruitName);
+                    };
+
+                    const animateAll = (animate) => {
+                     setTimeout(() => {
+                        animate(fruits[0]);
+                          setTimeout(() => {
+                            animate(fruits[1]);
+                              setTimeout(() => {
+                                animate(fruits[2]);
+                              }, 1000);
+                          }, 1000);
+                     }, 1000);
+                    };
+                    animateAll(animate);
+                    </pre>
+                </li>
+            </ul>
         </section>
     </main>
 </body>

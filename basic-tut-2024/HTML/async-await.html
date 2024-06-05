@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../Javascript//async-await.js"></script>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <title>ASYNC/AWAIT</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h3>ASYNC/AWAIT</h3>
+            <p class="output">To view the output, you need to access the console tab of your browser's developer tools. - right click inspect mode</p>
+
+            <ul>
+                <li>ASYNC/AWAIT makes it easier to write promises.
+                    The Keyword 'async' before function make the function return a promise always,
+                    And the keyword 'await' is used inside async funcion, which makes the program wait until the promise resolves.
+                </li>
+                <pre>
+                    let fruits = ["Apple", "Banana", "Kiwi"];
+
+                        const animateOne = (fruit, animate) => {
+                        return new Promise((resolve, reject) => {
+                            setTimeout(() => {
+                            animate(fruit);
+                            resolve(true);
+                            }, 1000);
+                        });
+                        };
+
+                        const animateAll = async (animate) => {
+                        await animateOne(fruits[0], animate);
+                        await animateOne(fruits[1], animate);
+                        await animateOne(fruits[2], animate);
+                        };
+
+                        const animate = (fruit) => {
+                        console.log("animating", fruit);
+                        };
+                        animateAll(animate);
+                </pre>
+            </ul>
+        </section>
+    </main>
+    
+</body>
+</html>
