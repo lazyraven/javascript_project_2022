@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../Javascript/hoisting.js"></script>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <title>Hoisting</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h3>Hoisting</h3>
+            <p class="output">To view the output, you need to access the console tab of your browser's developer tools. - right click inspect mode</p>
+
+
+             <ul>
+                <li>
+                    A Javascript mechanism where variables with var and function declarations are moved
+                    to the top of their scope before code execution.
+                </li>
+                <li>Function declarations are properly hoisted(not arrow functions)</li>
+                <li>var is hoisted.</li>
+                <pre>
+                    //hoisting
+                        myPlace = "Rajasthan"; // var is hoisted
+                        console.log(myPlace);
+                        var myPlace;
+
+                        let myName = "Nisha";
+
+                        sayHi(); // valid
+                        function sayHi() {
+                        let greet = "Hi";
+                        console.log(greet, myName);
+                        }
+
+                        sayHello(); //error
+                        let sayHello = function () {
+                        console.log(myName);
+                        };
+
+                </pre>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

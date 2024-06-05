@@ -35,3 +35,15 @@ function createIterators(items) {
 const fruitsIterator = createIterators(["apple", "banana", "orange"]);
 console.log(fruitsIterator());
 console.log(fruitsIterator());
+
+// Definition 2
+function createHustler(name) {
+  let greetHi = "Hi ";
+  function greet() {
+    return greetHi + name + ", welcome to hustler group";
+  }
+  return greet;
+}
+
+let greetFn = createHustler("Nisha");
+console.log(greetFn());

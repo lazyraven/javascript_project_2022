@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../Javascript/scope.js"></script>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <title>Scope</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h2>SCOPE</h2>
+             <p class="output">To view the output, you need to access the console tab of your browser's developer tools. - right click inspect mode</p>
+
+             <p>The scope is the current context of execution in which values and expressions are "visible".</p>
+             <p>Javscript variables have 3 types of scope:</p>
+             <ul>
+                <li>
+                    <strong>Block Scope:</strong>  Variables declared inside a {} block cannot be accessed from outside the block.
+                    let and const have block scope.
+                </li>
+                
+                <li>
+                    <strong>Function Scope:</strong>  Variables defined inside a function are not accesssible(visible) from outside the function.
+                    let, const and var have function scope.
+                    
+                </li>
+                <li>
+                    <strong>Global Scope:</strong>  Variables declared Globally (outside any function) have global scope.
+                    let, const and var have global scope.
+              
+                </li>
+                <pre>
+                    // let with different scope 
+                    // * let creates a block scope
+                    // * Redeclaration is not allowed(in same scope)
+                    // * Reassignment is allowed
+
+                    {
+                        // block scope
+                        let x = 0;
+                        console.log(x);
+                        // let x= 1; // Error
+                      }
+                      
+                      {
+                        let x = 2;
+                        x = 3;
+                        console.log(x); //3
+                      }
+                      
+                      console.log(x); // Error in global scope
+                </pre>
+                <hr>
+                <pre>
+                    // var with different scopes
+
+                    // * No blcok scope and can, be re-declared
+                    // * Only had function scope
+                    // * var are hoisted, so they can be used before the declaration
+
+                        var x = 1;
+                        var x = 2; // valid
+
+                        console.log(y); //valid
+                        var y = 3;
+
+                        z = 4;
+                        console.log(z); //valid
+                        var z;
+                </pre>
+                <hr>
+                <pre>
+                    / const with different scope
+    
+                    // * const creates a block scope
+                    // * Re-declaration is not allowed
+                    // * Re-assignment is not allowed
+                    // * Must be assigned at declaration time.
+    
+                        {
+                        // block scope
+                        // const a; //Error
+                        const b = 0;
+                        b = 3;
+                        }
+                        // console.log(a); // Error in global scope
+    
+                    </pre>
+             </ul>
+        </section>
+    </main>
+</body>
+</html>

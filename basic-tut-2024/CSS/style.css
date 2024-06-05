@@ -6,3 +6,7 @@ body {
 .output {
   color: rgb(8 231 229);
 }
+
+h2 {
+  text-align: center;
+}
