@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../Javascript/throttling.js"></script>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <title>Throttling</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h3>Throttling</h3>
+            <p class="output">To view the output, you need to access the console tab of your browser's developer tools. - right click inspect mode</p>
+        <p>Throttling is a mechanism that allows a function execution for a limited number of times after that it will block its execution.</p>
+        <h4>Simple words:</h4>
+        <p>It limits the execution of your code to once in every specified time interval. It is a practice used to improve browser performance.</p>
+
+        <pre>
+            // throttling => for the output in console sroll up-down
+            let count = 0;
+
+            function printScroll() {
+            count += 1;
+            console.log("scroll called", count);
+            }
+
+            function throttle(fx, delay) {
+            let timeoutId = null;
+            return function () {
+                if (!timeoutId) {
+                timeoutId = setTimeout(() => {
+                    fx();
+                    clearTimeout(timeoutId);
+                    timeoutId = null;
+                }, delay);
+                }
+            };
+            }
+
+            const throttleFn = throttle(printScroll, 2000);
+
+            document.addEventListener("scroll", (e) => {
+            throttleFn();
+            });
+        </pre>
+    </section>
+
+    <section>
+        <div class="div-element-aqua"></div>
+        <div class="div-element-lime"></div>
+
+
+    </section>
+    </main>
+</body>
+</html>

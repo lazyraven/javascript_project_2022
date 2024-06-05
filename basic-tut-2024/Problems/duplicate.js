@@ -54,3 +54,20 @@ let myArray = [
 let indexes = new Set();
 myArray.forEach((a) => indexes.add(a.id));
 console.log("indexes list", indexes, indexes.size);
+
+// Eg:3
+let myArray1 = [
+  { id: 10, other: "bla" },
+  { id: 15, other: "meh" },
+  { id: 10, other: "bla" },
+];
+var set = new Set();
+var result = [];
+myArray1.forEach((item) => {
+  if (!set.has(item.id)) {
+    set.add(item.id);
+    result.push(item);
+  }
+});
+
+console.log("result", result);

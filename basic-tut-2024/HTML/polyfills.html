@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../Javascript/polyfills.js"></script>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <title>Polyfills</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h3>Polyfills</h3>
+            <p class="output">To view the output, you need to access the console tab of your browser's developer tools. - right click inspect mode</p>
+        
+            <p>Polyfills</p>
+            <h4>Simple words:</h4>
+            <ul>
+                <li>Polyfill is a way of providing futuristic API not available in browser.</li>
+                <li>we might need to do the native prototype modifications, so that we can get a feature/API.</li>
+                <li>There might be situations when we have a method not supported for specific browsers, in such cases we can use polyfills.</li>
+            <pre>
+            // polyfills
+
+                if (!Array.prototype.contains) {
+                Array.prototype.contains = function () {
+                    return this.indexOf(searchElement) >= 0 ? true : false;
+                };
+                }
+            </pre>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

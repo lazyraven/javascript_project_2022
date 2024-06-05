@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../Javascript/currying.js"></script>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <title>Currying</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h3>Currying</h3>
+            <p class="output">To view the output, you need to access the console tab of your browser's developer tools. - right click inspect mode</p>
+        
+            <p>It involves breaking down a function that takes muliplt arguments into a series of functions that take one argument each.</p>
+            <h4>Simple words:</h4>
+            <p>This creates a chain of functions, where each function return another function until the final result is achieved.</p>
+        <pre>
+            //currying
+            // basic use case
+                function sum(a) {
+                return function (b) {
+                    return function (c) {
+                    return a + b + c;
+                    };
+                };
+                }
+                console.log(sum(3)(4)(5));
+
+                // real life use case of event logger with time, type, message
+
+                const logger = (time) => (type) => (message) =>
+                `At ${time}, an event of type: ${type} occurred full details as: ${message}`;
+
+                const eventsNow = logger("5am");
+                const errorEvent = eventsNow("error");
+                console.log(errorEvent("cannot set properties of null"));
+        </pre>
+        </section>
+    </main>
+</body>
+</html>

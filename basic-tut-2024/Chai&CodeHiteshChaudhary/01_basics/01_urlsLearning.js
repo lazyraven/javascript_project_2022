@@ -6,10 +6,8 @@
 // JSON API url
 // https://randomuser.me/
 
-
 // shortcut for selecting same Element/duplicate element
 // click two time and press ctrl+d and move forward button
-
 
 // shortcut
 // div.day*4
@@ -18,5 +16,6 @@
 // https://randomuser.me/
 // https://randomuser.me/api/
 
-
 // https://jsonplaceholder.typicode.com/users
+
+// node basic-tut-2024/Chai&CodeHiteshChaudhary/01_basics/consoleTable.js
