@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./duplicate.js"></script>
+    <title>Javascript Questions</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h3>Duplicate Values remove from Array</h3>
+            <pre>
+            // By Array Numbers
+                const numbers = [1, 3, 5, 6, 3, 8, 4, 2, 6];
+
+                const removeDuplicate = new Set(numbers);
+                console.log("numbers", numbers);
+                console.log("removeDuplicate", removeDuplicate);
+            </pre>
+
+            <pre>
+            // By Array String
+                const fruits = [
+                    "banana",
+                    "apple",
+                    "orange",
+                    "lemon",
+                    "orange",
+                    "banana",
+                    "pear",
+                    ];
+                    const removeDupFruits = new Set(fruits);
+                    console.log("fruits:-", fruits);
+                    console.log("removeDupFruits:-", removeDupFruits);
+            </pre>
+
+            <h3>Duplicate Values remove from Array of Object</h3>
+            <pre>
+                const seen = new Set();
+                    const arr = [
+                    { id: 1, name: "test1" },
+                    { id: 2, name: "test2" },
+                    { id: 2, name: "test3" },
+                    { id: 3, name: "test4" },
+                    { id: 4, name: "test5" },
+                    { id: 5, name: "test6" },
+                    { id: 5, name: "test7" },
+                    { id: 6, name: "test8" },
+                    ];
+
+                    const filteredArr = arr.filter((el) => {
+                    const duplicate = seen.has(el.id);
+                    console.log("duplicate", duplicate);
+                    seen.add(el.id);
+                    return !duplicate;
+                    });
+
+                    console.log("filteredArr", filteredArr);
+            </pre>
+            <pre>
+                // Eg: 2
+
+                    let myArray = [
+                    { id: 10, other: "bla" },
+                    { id: 15, other: "meh" },
+                    { id: 10, other: "bla" },
+                  ];
+
+                    let indexes = new Set();
+                    myArray.forEach((a) => indexes.add(a.id));
+                    console.log("indexes list", indexes, indexes.size);
+        </pre>
+        <pre>
+            // Eg:3
+                let myArray1 = [
+                { id: 10, other: "bla" },
+                { id: 15, other: "meh" },
+                { id: 10, other: "bla" },
+                ];
+                var set = new Set();
+                var result = [];
+                myArray1.forEach((item) => {
+                if (!set.has(item.id)) {
+                    set.add(item.id);
+                    result.push(item);
+                }
+                });
+
+                console.log("result", result);
+        </pre>
+        </section>
+    </main>
+</body>
+</html>
