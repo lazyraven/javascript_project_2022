@@ -38,7 +38,9 @@ var st = new Set("JavaScript");
 if (st.has("a")) st.delete("a");
 var etr = st.entries();
 etr.next().value;
-console.log("etr", st, etr.next().value, etr);
+console.log("st", st);
+console.log("etr.next().value", etr.next().value)
+console.log("etr", etr);
 
 // Question 5
 // Input: aabbc;
