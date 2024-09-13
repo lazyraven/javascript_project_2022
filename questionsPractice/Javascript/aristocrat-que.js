@@ -39,7 +39,7 @@ if (st.has("a")) st.delete("a");
 var etr = st.entries();
 etr.next().value;
 console.log("st", st);
-console.log("etr.next().value", etr.next().value)
+console.log("etr.next().value", etr.next().value);
 console.log("etr", etr);
 
 // Question 5
@@ -70,7 +70,21 @@ let students = [
   { id: 4, role: "developer" },
 ];
 
-let resultArray = students.sort((a, b) => {
-  return b.role - a.role;
-});
-console.log("resultArray called", students, resultArray);
+// let resultArray = students.sort((a, b) => {
+//   return b.role - a.role;
+// });
+// console.log("resultArray called", students, resultArray);
+
+const roleComparer = (a, b) => {
+  if (a.role.includes("tester") && !b.role.includes("tester")) {
+    return -1;
+  } else if (b.role.includes("tester") && !a.role.includes("tester")) {
+    return 1;
+  } else {
+    return 0;
+  }
+};
+
+let users = students.sort(roleComparer);
+
+console.log("users", users);
