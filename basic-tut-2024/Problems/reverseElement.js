@@ -66,9 +66,26 @@ function handleName(name, cb) {
 handleName("nisha", makeUppercase);
 handleName("nisha", reverseString);
 
+// Reverse an array using Map
+
+let numbers = [1, 2, 3, 4, 5, 6];
+function reverseArrayUsingMap(array) {
+  const lastIndex = array.length - 1;
+
+  const result = array.map((item, i, arr) => {
+    return arr[lastIndex - i];
+  });
+  console.log("result", result);
+}
+reverseArrayUsingMap(numbers);
+
 // Method 2
 
-// let result = name.split("").reverse().join("");
+// console.log(name.split(""));
+// console.log(name.split("").reverse());
+// console.log(name.split("").reverse().join(""));
+// console.log(name.split("").reverse().join(""));
+
 // console.log("result", result); //Output : vadaY ahsiN
 
 // // Note : Different case without consider space
