@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Powerful ES6 features</title>
+    <script src="./es6PowerFulScenario.js"></script>
+    <link rel="stylesheet" href="./es6PowerFulScenario.css">
+</head>
+
+<body>
+    <div>
+        <h2>Two Powerful ES6 features</h2>
+        <p>two powerful ES6 features—destructuring and async/await (Promises)—with real-world scenarios and clean code snippets.
+        </p>
+
+<h3>Destructuring Assignment</h3>
+        <ul>
+            <li>
+                1. Object Destructuring with Defaults & Renaming <small>Useful for API responses where some fields might be
+                    missing:</small>
+                <pre class="language-javascript">
+                            const article = {
+                                id: '001',
+                                writer: { name: 'Chameera' }
+                                };
+        
+                                const {
+                                id: articleId = 'N/A',
+                                title = 'Untitled',
+                                writer: { name: writerName }
+                                } = article;
+        
+                                console.log(articleId, title, writerName);
+                                // 001 'Untitled' 'Chameera'
+        
+                            Here, title defaults to 'Untitled' if absent, and id is renamed to articleId
+                        </pre>
+            </li>
+            <li>
+                2. Nested Array & Object Destructuring <small>Ideal for parsing complex data:</small>
+                <pre class="language-javascript">
+                            const response = {
+                            user: {
+                                details: { name: 'Sam', age: 28 },
+                                roles: ['admin', 'editor']
+                            }
+                            };
+        
+                            const {
+                            user: {
+                                details: { name, age },
+                                roles: [primaryRole, ...otherRoles]
+                            }
+                            } = response;
+        
+                            console.log(name, age, primaryRole, otherRoles);
+                            // Sam 28 'admin' ['editor']
+                        </pre>
+            </li>
+            <li>
+                3. Function Parameters <small>Great for cleaner function signatures:</small>
+                <pre class="language-javascript">
+                            function display({ title, writer: { name = 'Guest' } }) {
+                            console.log(`"${title}" by ${name}`);
+                            }
+        
+                            display({ title: 'ES6 Magic', writer: {} });
+                            // "ES6 Magic" by Guest
+                        </pre>
+            </li>
+        </ul>
+
+<h3>Promises & async/await</h3>
+        <ul>
+            <li>
+                1. Fetching Data with Promises  <small>Using Promises to handle asynchronous operations:</small>
+                Back-end fetch example with error handling: 
+                <pre class="language-javascript">
+                    function fetchUsers() {
+                        return fetch('https://jsonplaceholder.typicode.com/users')
+                            .then(res => {
+                            if (!res.ok) throw new Error(res.status);
+                            return res.json();
+                            });
+                        }
+                        fetchUsers()
+                    .then(users => console.log(users.length + ' users loaded'))
+                    .catch(err => console.error('Error fetching users:', err));
+                </pre>
+            </li>
+            <li>
+                2. Cleaner with async/await <small>Using async/await for more readable asynchronous code:</small>
+                Same logic, but more readable:
+                <pre class="language-javascript">
+                    async function loadUsers() {
+                    try {
+                        const res = await fetch('https://jsonplaceholder.typicode.com/users');
+                        if (!res.ok) throw new Error(res.status);
+                        const users = await res.json();
+                        console.log(users.length + ' users loaded');
+                    } catch (err) {
+                        console.error('Error loading users:', err);
+                    }
+                    }
+                    loadUsers();
+            </pre>
+            </li>
+            <li>
+                3. Parallel Requests with Promise.any <small>Handling multiple asynchronous operations:</small>
+                <pre class="language-javascript">   
+                        Promise.any([
+                        fetch('/api/server1'),
+                        fetch('/api/server2'),
+                        fetch('/api/server3')
+                        ])
+                            .then(res => res.json())
+                            .then(data => console.log('First successful:', data))
+                            .catch(err => console.error('All servers failed:', err));
+                </pre>
+            </li>
+        </ul>
+<h3>4. Real-world Use Case Summary</h3>
+        <ul>
+            Consider an app that:
+            <li>fetches user-data,</li>
+            <li>extracts nested settings,</li>
+            <li>handles missing fields,</li>
+            <li>runs multiple requests concurrently,</li>
+            <li>and uses async/await with try/catch for clear flow.</li>
+        </ul>
+
+        <ol>
+            Components you’d likely use:    
+            <li>Destructuring to pull settings from user data.</li>
+            <li>async/await to stay readable.</li>
+            <li>Promise.all or Promise.any to manage parallel API calls.</li>
+        </ol>
+
+        <table style="width:100%">
+            <tr>
+                <th>Feature</th>
+                <th>Why It Helps</th>
+            </tr>
+            <tr>
+                <td>Destructuring</td>
+                <td>Makes extracting nested data clean, enables defaults & renaming</td>
+            </tr>
+            <tr>
+                <td>async/await</td>
+                <td>Turns promise chains into readable, synchronous-like logic</td>
+            </tr>
+            <tr>
+                <td>Promise.any/all</td>
+                <td>Handles multiple async tasks efficiently (race or all-completed)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        Question : How would you use destructuring and async/await in a real-world scenario?
+        <p class="p-font-size">Answer: In a real-world scenario, I would use destructuring to extract
+        specific properties from complex objects, such as user data or API responses, making the code cleaner and more readable. For example, I could destructure a user object to get the user's name and email directly.
+         Async/await would be used to handle asynchronous operations like fetching data from an API, allowing me to write code that looks synchronous while managing promises effectively. 
+         This combination improves code clarity and reduces the chances of errors in handling nested data and asynchronous flows.</p>  
+         
+
+            <p>Example combining ES6+ features—destructuring, async/await, and parallel API calls—in a clean, maintainable way.</>
+
+         <h3>Scenario: Aggregating Data from Multiple APIs</h3>
+         <ul>
+            Imagine building a dashboard that fetches:
+            <li>A user profile</li>
+            <li>The user's posts</li>
+            <li>Each post’s comments</li>
+        </ul>
+        <ol>
+            We’ll:
+            <li>Fetch profile and posts in parallel</li>
+            <li>Extract needed fields via destructuring</li>
+            <li>Fetch comments for each post in parallel</li>
+            <li>Combine everything into a single result</li>
+        </ol>
+
+        <pre class="language-javascript">
+            async function fetchJson(url) {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`HTTP ${res.status} at ${url}`);
+            return res.json();
+            }
+
+            async function loadUserDashboard(userId) {
+            try {
+                // Parallel requests: profile & posts
+                const [profile, posts] = await Promise.all([
+                fetchJson(`https://api.example.com/users/${userId}`),
+                fetchJson(`https://api.example.com/users/${userId}/posts`)
+                ]);
+
+                // Destructure essential fields from profile
+                const { id, name, settings: { theme = 'light', language = 'en' } = {} } = profile;
+
+                // Fetch comments for each post in parallel
+                const postWithComments = await Promise.all(
+                posts.map(async ({ id: postId, title, body }) => {
+                    const comments = await fetchJson(`https://api.example.com/posts/${postId}/comments`);
+                    return { postId, title, body, commentsCount: comments.length, comments };
+                })
+                );
+
+                return { id, name, theme, language, posts: postWithComments };
+
+            } catch (err) {
+                console.error('Failed to load dashboard:', err);
+                throw err;
+            }
+            }
+
+            // Usage:
+            loadUserDashboard(42)
+            .then(data => console.log('Dashboard data:', data))
+            .catch(err => console.error(err));
+        </pre>
+<h3>Benefits</h3>
+<pre>
+             <strong>Performance: </strong>concurrent API calls for faster load.
+             <strong>Clarity: </strong>clean code structure—no “callback hell.”
+             <strong>Safety: </strong>defaults prevent undefined settings.
+             <strong>Scalable: </strong>Scalable: easy to add more APIs (e.g. notifications, follow list).
+</pre>
+        
+
+    </div>
+</body>
+</html>

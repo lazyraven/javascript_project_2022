@@ -1,13 +1,12 @@
-console.log('palindrome file js');
+console.log("palindrome file js");
 
-
-let paldNum = 23432
+let paldNum = 23432;
 // let paldNum = 23431
 
 // let strNum = String(paldNum)
-let strNum = paldNum.toString()
+let strNum = paldNum.toString();
 
-console.log("steNum called", strNum)
+console.log("steNum called", strNum);
 
 function paldFun(ele) {
   for (let i = 0; i < ele.length; i++) {
@@ -15,14 +14,14 @@ function paldFun(ele) {
       // 2(0)    2(4) (5-(0+1))
       // 2(1)    2(3) (5-(1+1))
       // 2(2)    2(2) (5-(2+1))
-      console.log("no")
-      return false
+      console.log("no");
+      return false;
     }
   }
-  console.log("palyes", "yes")
-  return true
+  console.log("palyes", "yes");
+  return true;
 }
-paldFun(strNum)
+paldFun(strNum);
 
 // let number = 1231;
 let number = 12321;
@@ -35,32 +34,31 @@ function showData(data) {
     console.log(num[i], num[num.length - (i + 1)]);
 
     if (num[i] != num[num.length - (i + 1)]) {
-      console.log('no');
+      console.log("no");
       return false;
     }
   }
-  console.log('yes');
+  console.log("yes");
   return true;
 }
 
 showData(number);
 
-
 // let num = 123;
 let num = 122;
 function palindromeProperty(data) {
-  document.getElementById('originalPaldElement').innerText = data;
+  document.getElementById("originalPaldElement").innerText = data;
   let resultNum = toString(data);
 
   if (resultNum) {
     for (let i = 0; i < resultNum.length; i++) {
       if (!Number(resultNum[resultNum.length - i]) == Number(resultNum[i])) {
-        document.getElementById('reversePalElement').innerText = true;
+        document.getElementById("reversePalElement").innerText = true;
       } else {
-        document.getElementById('reversePalElement').innerText = false;
+        document.getElementById("reversePalElement").innerText = false;
       }
-      console.log('resultNum');
-      document.getElementById('reversePalElement').innerText = true;
+      console.log("resultNum");
+      document.getElementById("reversePalElement").innerText = true;
 
       return false;
     }
@@ -70,15 +68,9 @@ function palindromeProperty(data) {
   // return false;
 }
 
-
 function palindromeElement() {
   palindromeProperty(num);
 }
-
-
-
-
-
 
 // function palindrome(str) {
 
@@ -94,5 +86,3 @@ function palindromeElement() {
 //   return true;
 // }
 // palindrome(num)
-
-

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GithubQueLink</title>
+</head>
+<body>
+    <h3>Github Questions Link</h3>
+</body>
+</html>
+
+<script>
+    
+// https://github.com/sudheerj/datastructures-algorithms/blob/master/src/javascript/sorting/1.bubbleSort/bubbleSort.js
+function bubbleSort(array){
+    const len = array.length;
+    let i, j;
+    let swapped;
+    for (i=0; i < len - 1; i++) {
+        swapped = false; // Track if any swaps occur in this iteration
+        for (j=0; j < len-i-1; j++) {
+            if (array[j] > array[j+1]){
+                swap(array, j, j+1);
+                swapped = true; // Mark when there is a swap
+            }
+        }
+        
+        //Early exit if there were no swaps made. That means, the array is already sorted if this condition satisfies
+        if(!swapped) {
+            break;
+        }
+    }
+    return array;
+}
+
+function swap(array, firstIndex, secondIndex){
+    const temp = array[firstIndex];
+    array[firstIndex] = array[secondIndex];
+    array[secondIndex] = temp;
+}
+
+console.log(bubbleSort([40, 50, 20, 0, -10, 30, 10, -20]));
+
+// https://github.com/sudheerj/datastructures-algorithms/tree/master/src/javascript/algorithms/array/31.thirdLargestElement
+function thirdLargestElement1(arr){
+    let first = -Infinity, second = -Infinity, third = -Infinity;
+
+    for (const num of arr) {
+        if(num === first || num === second || num === third) {
+            continue;
+        }
+
+        if(num > first) {
+            [first, second, third] = [num, first, second];
+        } else if(num > second && num < first) {
+            [second, third] = [num, second];
+        } else if(num > third && num < second) {
+            third = num;
+        }
+    }
+
+    return third === -Infinity ? "There are no 3 unique elements in an array" : third;
+}
+
+function thirdLargestElement2(arr) {
+    let uniqueArr = [...new Set(arr)];
+
+    if(uniqueArr.length < 3) {
+        return "There are no 3 unique elements in an array";
+    }
+
+    uniqueArr.sort((a, b) => b-a);
+
+    return uniqueArr[2];
+}
+
+console.log(thirdLargestElement1([33, 90, 10, 50, 33, 77, 90, 4]));
+console.log(thirdLargestElement2([33, 90, 10, 50, 33, 77, 90, 4]));
+console.log(thirdLargestElement2([90, 80, 50, 20, 10, 30, 70]));
+
+</script>
