@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Storage</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <script src="../Javascript/webStorage.js"></script>
+</head>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #1e1e1e;
+        color: #fff;
+        font-family: Arial, sans-serif;
+    }
+
+    th,
+    td {
+        border: 1px solid #444;
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #2a2a2a;
+    }
+
+    caption {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        color: #00bcd4;
+    }
+</style>
+
+<body>
+    <div>
+        <h2>Web Storage</h2>
+        <p class="output">To view the output, you need to access the console tab of your browser's developer tools. -
+            right click inspect mode</p>
+        <ul>
+            <li>
+                Web Storage is a mechanism for storing data in the browser.
+                Data is stored in key-value pairs as strings.
+            </li>
+            <li>
+                It provides two types of storage: localStorage and sessionStorage.
+            </li>
+            <br>
+            <strong>localStorage</strong>
+            <li>
+                Stores data with no expiration.
+                Data remains after browser/tab is closed.
+            </li>
+            <br>
+            <strong>sessionStorage</strong>
+            <li>
+                Stores data per session.
+                Data is lost when the tab/browser is closed.
+            </li>
+            <br>
+            <strong>Common Methods</strong>
+            <li>
+                <strong>setItem(key, value)</strong>: Adds a key-value pair to storage.
+            </li>
+            <li>
+                <strong>getItem(key)</strong>: Retrieves the value associated with a key.
+            </li>
+            <li>
+                <strong>removeItem(key)</strong>: Removes a key-value pair from storage.
+            </li>
+            <li>
+                <strong>clear()</strong>: Clears all data from storage.
+            </li>
+            <li>
+                <strong>length</strong>: Returns the number of key-value pairs in storage.
+            </li>
+            <br>
+            <strong>Example</strong>
+            <li>
+                <pre>
+                    // Storing data
+                    localStorage.setItem('name', 'John Doe');
+                    sessionStorage.setItem('sessionName', 'Jane Doe');
+
+                    // Retrieving data
+                    console.log(localStorage.getItem('name')); // John Doe
+                    console.log(sessionStorage.getItem('sessionName')); // Jane Doe
+
+                    // Removing data
+                    localStorage.removeItem('name');
+                    sessionStorage.removeItem('sessionName');
+
+                    // Clearing all data
+                    localStorage.clear();
+                    sessionStorage.clear();
+                </pre>
+
+                <pre>
+                    // Session Storage example
+                    sessionStorage.setItem("token", "abc123");
+                    let token = sessionStorage.getItem("token");
+                    console.log(token); // "abc123"
+
+                </pre>
+            </li>
+            <br>
+            <strong>🔹 Important Notes </strong>
+            <li>Data is always stored as string.</li>
+            <li>For objects or arrays, use JSON.stringify() and JSON.parse().</li>
+            <li>
+                <pre>
+                    let user = { name: "Nisha", age: 25 };
+
+                    // localStorage and sessionStorage can only store strings
+                    // To store objects, we need to convert them to strings using JSON.stringify()
+                    // Storing the object as a string
+                    // JSON.stringify() converts the object to a string 
+                    // so that it can be stored in localStorage
+                    // JSON.parse() converts the string back to an object
+                    // so that it can be used as an object
+
+                    localStorage.setItem("user", JSON.stringify(user));
+
+                    // Retrieving and parsing the object
+
+                    let data = JSON.parse(localStorage.getItem("user"));
+                    console.log(data.name); // "Nisha"
+                </pre>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <ul>
+            <strong> When to Use | Comparison between Cookies, localStorage, and sessionStorage:</strong>
+            <li>
+                Cookies: When you need to send data to the server (e.g., auth tokens).
+            </li>
+            <li>
+                localStorage: For long-term data like user preferences, themes.
+            </li>
+            <li>
+                sessionStorage: For short-term data like form input during a session.
+            </li>
+        </ul>
+    </div>
+
+    <h2>In Deep Knowledge</h2>
+    <div>
+        <strong>Use Cases :</strong>
+        <ul>
+            <strong>🔹 1. Cookies</strong>
+            <li>Use Case: Store an auth token that needs to be sent to the server.
+                <pre>
+                    // Storing auth token in cookies
+                    document.cookie = "authToken=abc123; path=/; secure; SameSite=Strict";
+
+                    Sent automatically on every HTTP request:
+                    GET /dashboard HTTP/1.1
+                    Cookie: authToken=abc123
+
+                </pre>
+            </li>
+            <li>✅ Good for: Login sessions, tracking user across pages, server-side needs.</li>
+            <br>
+
+            <strong>🔹 2. localStorage</strong>
+            <li>Use Case: Store user's theme preference (dark/light mode).
+                <pre>
+                    // Save preference
+                localStorage.setItem("theme", "dark");
+
+                // Retrieve on page load
+                const userTheme = localStorage.getItem("theme");
+                document.body.className = userTheme;
+                </pre>
+            </li>
+            <li>
+                ✅ Good for: Saving UI settings, preferences, carts (in e-commerce), offline data.
+            </li>
+            <br>
+            <strong>🔹 3. sessionStorage</strong>
+            <li>Use Case: Store form input temporarily during a session.</li>
+            <pre>
+                    // Save user input
+                        sessionStorage.setItem("draftMessage", "Hello! This is a draft.");
+
+                        // Restore when user comes back to the form
+                        const draft = sessionStorage.getItem("draftMessage");
+                        if (draft) {
+                        document.getElementById("messageBox").value = draft;
+                </pre>
+            <li>✅ Good for: Form drafts, tab-specific data, temp login states.</li>
+        </ul>
+    </div>
+
+    <div>
+        <table border="1" cellpadding="8" cellspacing="0">
+            <caption><strong>🔹 Basic Methods (Same for both - localstorage/sessionstorage)</strong></caption>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>setItem(key, value)</code></td>
+                    <td>Store data</td>
+                </tr>
+                <tr>
+                    <td><code>getItem(key)</code></td>
+                    <td>Retrieve data</td>
+                </tr>
+                <tr>
+                    <td><code>removeItem(key)</code></td>
+                    <td>Delete a specific item</td>
+                </tr>
+                <tr>
+                    <td><code>clear()</code></td>
+                    <td>Remove all items</td>
+                </tr>
+                <tr>
+                    <td><code>key(index)</code></td>
+                    <td>Get key name by index</td>
+                </tr>
+                <tr>
+                    <td><code>length</code></td>
+                    <td>Get number of stored items</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div>
+        <table border="1" cellpadding="8" cellspacing="0">
+            <caption><strong>🔹 Comparison Table</strong></caption>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Cookies</th>
+                    <th>localStorage</th>
+                    <th>sessionStorage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Storage Limit</td>
+                    <td>~4 KB</td>
+                    <td>~5–10 MB</td>
+                    <td>~5–10 MB</td>
+                </tr>
+                <tr>
+                    <td>Expiration</td>
+                    <td>Set manually</td>
+                    <td>Never (until manually cleared)</td>
+                    <td>On tab/browser close</td>
+                </tr>
+                <tr>
+                    <td>Accessible From</td>
+                    <td>Server &amp; Client (via HTTP)</td>
+                    <td>Client-side only</td>
+                    <td>Client-side only</td>
+                </tr>
+                <tr>
+                    <td>Data Type</td>
+                    <td>String only</td>
+                    <td>String only (can use JSON)</td>
+                    <td>String only (can use JSON)</td>
+                </tr>
+                <tr>
+                    <td>Automatic Send to Server</td>
+                    <td>✅ Yes (on every HTTP request)</td>
+                    <td>❌ No</td>
+                    <td>❌ No</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Auth/session ID, user tracking</td>
+                    <td>Long-term client data</td>
+                    <td>Temporary/tab-specific data</td>
+                </tr>
+                <tr>
+                    <td>Security</td>
+                    <td>Less secure (sent over network)</td>
+                    <td>More secure (stored locally)</td>
+                    <td>More secure (stored locally)</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    
+    <div>
+        <h3>Comparison of Web Storage and Cookies</h3>
+        <p class="output">To view the output, you need to access the console tab of your browser's developer tools. -
+            right click inspect mode</p>
+        <ul>
+            <li>
+                Web Storage is generally preferred over cookies for client-side storage due to its larger capacity and
+                simpler API.
+            </li>
+            <li>
+                Cookies are still used for server-side communication, such as session management and authentication.
+            </li>
+            <li>
+                Web Storage is more suitable for storing large amounts of data on the client side, while cookies are
+                better for small pieces of data that need to be sent to the server.
+            </li>
+        </ul>
+        <p>
+            Web Storage is a powerful feature for client-side data storage, providing a simple and efficient way to
+            manage data in web applications.
+            It is widely supported in modern browsers and is a key part of the HTML5 specification.
+        </p>
+    </div>
+</body>
+
+</html>
