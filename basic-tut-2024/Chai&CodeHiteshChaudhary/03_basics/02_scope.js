@@ -51,7 +51,7 @@ function addone(num){
 }
 
 
-// Expression 
+//Function Expression 
 
 addTwo(5); // we can't initialize function before declaration // not valid before function create, please call that function after the declaration o/p => it'll throw error 
 // it is hoisting type example

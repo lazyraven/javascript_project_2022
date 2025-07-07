@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    color: #333;
+    background-color: #e5e3e3;
+}
+
+.definition {
+    background-color: yellow;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+span {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.language-javascript {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    background-color: #000000;
+    color: rgb(96 241 219);
+}
+
+.key-center {
+    padding: 0 20px 0 20px;
+}
+
+.p-key-points {
+    display: list-item;
+    list-style-type: disc;
+    font-size: medium;
+}
+
+.key-points {
+    background-color: rgb(113, 130, 243);
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 5px;
+}

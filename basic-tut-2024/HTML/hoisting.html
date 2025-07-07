@@ -42,6 +42,22 @@
 
                 </pre>
             </ul>
+
+            <h2>Hoisting Definition 2</h2>
+            <p>
+                Hoisting in javascript is a behaviour in which a function or a variable can be used before declaration.
+                <br>
+                before declaration means that we can call a function before it is defined in the code.
+            </p>
+            <p>we can't initialize function before declaration > not valid before function create, please call that function after
+                the declaration o/p => it'll throw error
+                // it is hoisting type example</p>
+            <pre>
+                  addTwo(5);
+                    const addTwo = function(num){
+                        return num + 2
+                    }
+                    </pre>
         </section>
     </main>
 </body>

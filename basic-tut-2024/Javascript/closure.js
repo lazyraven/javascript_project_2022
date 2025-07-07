@@ -4,9 +4,12 @@ function outerFunction() {
     console.log("Hello " + name);
   };
 }
+console.log("outerFunction CALLED", outerFunction());
 
 const greet = outerFunction();
 greet();
+console.log("greet CALLED", greet());
+
 
 // Important Notes
 
