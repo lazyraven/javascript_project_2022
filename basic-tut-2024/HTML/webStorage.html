@@ -81,7 +81,7 @@
             <br>
             <strong>Example</strong>
             <li>
-                <pre>
+                 <pre class="language-javascript">
                     // Storing data
                     localStorage.setItem('name', 'John Doe');
                     sessionStorage.setItem('sessionName', 'Jane Doe');
@@ -99,7 +99,7 @@
                     sessionStorage.clear();
                 </pre>
 
-                <pre>
+                 <pre class="language-javascript">
                     // Session Storage example
                     sessionStorage.setItem("token", "abc123");
                     let token = sessionStorage.getItem("token");
@@ -112,7 +112,7 @@
             <li>Data is always stored as string.</li>
             <li>For objects or arrays, use JSON.stringify() and JSON.parse().</li>
             <li>
-                <pre>
+                 <pre class="language-javascript">
                     let user = { name: "Nisha", age: 25 };
 
                     // localStorage and sessionStorage can only store strings
@@ -155,7 +155,7 @@
         <ul>
             <strong>🔹 1. Cookies</strong>
             <li>Use Case: Store an auth token that needs to be sent to the server.
-                <pre>
+                 <pre class="language-javascript">
                     // Storing auth token in cookies
                     document.cookie = "authToken=abc123; path=/; secure; SameSite=Strict";
 
@@ -170,7 +170,7 @@
 
             <strong>🔹 2. localStorage</strong>
             <li>Use Case: Store user's theme preference (dark/light mode).
-                <pre>
+                 <pre class="language-javascript">
                     // Save preference
                 localStorage.setItem("theme", "dark");
 
@@ -185,7 +185,7 @@
             <br>
             <strong>🔹 3. sessionStorage</strong>
             <li>Use Case: Store form input temporarily during a session.</li>
-            <pre>
+             <pre class="language-javascript">
                     // Save user input
                         sessionStorage.setItem("draftMessage", "Hello! This is a draft.");
 
