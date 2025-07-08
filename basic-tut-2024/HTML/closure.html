@@ -21,7 +21,7 @@
             
             <h4>Where are Closures Applied ?</h4>
             <p><strong>Private Variables :</strong> encapsulating data within functions and preventing direct access from outside.</p>
-                <pre>
+                <pre class="language-javascript">
                     function counter() {
                         let count = 0;
                         return function () {
@@ -36,7 +36,7 @@
 
             <p><strong> Iterators :</strong> Closure can be used to create iterators that maintain their state between calls, 
                 facilitating efficient and memory-friendly iteration over data structures.</p>
-            <pre>
+                <pre class="language-javascript">
                 function createIterators(items) {
                     let index = 0;
                     return function () {

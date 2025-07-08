@@ -1,6 +1,14 @@
-body {
+/* body {
   background-color: #555;
   color: white;
+} */
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    color: #333;
+    background-color: #e5e3e3;
 }
 
 .output {
@@ -10,3 +18,13 @@ body {
 h2 {
   text-align: center;
 }
+
+
+ .language-javascript {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        font-family: monospace;
+        background-color: #000000;
+        color: rgb(96 241 219);
+    }
