@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +8,122 @@
     <link rel="stylesheet" href="../CSS/style.css">
     <title>Promises</title>
 </head>
+
 <body>
     <main>
         <section>
             <h2>Promise Definition :</h2>
-            <p class="output">To view the output, you need to access the console tab of your browser's developer tools. - right click inspect mode</p>
+            <p class="output">To view the output, you need to access the console tab of your browser's developer tools.
+                - right click inspect mode</p>
 
             <p>
+                A Promise is a way to handle something in the future—like when you order food and wait for it to be
+                delivered.
+                In JavaScript, a Promise is used to handle asynchronous operations (things that take time, like fetching
+                data from a server).
             </p>
+
             <ul>
-                <li>Promises are javascript objects that represent an eventual completion or failure of an asynchronous operation.</li>
+                A Promise has three states:
+                <li>Pending – It’s still waiting to finish.</li>
+                <li>Resolved (Fulfilled) – It finished successfully.</li>
+                <li> Rejected – It failed</li>
+            </ul>
+            <pre class="language-javascript">
+               // syntax promise : 
+                let promise = new Promise(function (resolve, reject) {
+            // some async work
+            let success = true;
+
+            if (success) {
+                resolve("It worked!");   // fulfilled
+            } else {
+                reject("It failed!");    // rejected
+            }
+            });
+                promise
+                    .then(function (result) {
+                        console.log(result); // "It worked!"
+                    })
+                    .catch(function (error) {
+                        console.error(error); // "It failed!"
+                    });
+            </pre>
+            <p>Real Life Example :</p>
+            <pre class="language-javascript">
+                function orderPizza() {
+                    return new Promise((resolve, reject) => {
+                        let isDelivered = true;
+
+                        if (isDelivered) {
+                        resolve("Pizza is here! 🍕");
+                        } else {
+                        reject("No pizza today 😢");
+                        }
+                    });
+                    }
+
+                    orderPizza()
+                    .then((message) => console.log(message))
+                    .catch((error) => console.log(error));
+
+            </pre>
+
+            <p> ✅ Why Use Promises?</p>
+            <ul>
+                <li>Makes async code easier to read.</li>
+                <li>Helps avoid callback hell.</li>
+                <li>Works well with modern async/await.</li>
+            </ul>
+
+            <h2>In Deep Knowledge</h2>
+
+            <p>In summary, a Promise is like a promise in real life: it’s a way to handle things that will happen later,
+                making your code cleaner and easier to manage.</p>
+        </section>
+
+        <section>
+            <h3>Promise Chaining</h3>
+            <p>Promise chaining allows you to perform a series of asynchronous operations in a sequence,
+                where each operation waits for the previous one to complete before starting.</p>
+            <p>Here's how it works:</p>
+            <ul>
+                <li>Each `.then()` method returns a new Promise, allowing you to chain multiple operations together.
+                </li>
+                <li>If one operation fails, the error can be caught in a single `.catch()` at the end of the chain.</li>
+                <li>It helps keep your code organized and readable, avoiding deeply nested callbacks.</li>
+            </ul>
+            <pre class="language-javascript">
+                function fetchData() {
+                    return new Promise((resolve) => {
+                        setTimeout(() => {
+                            resolve("Data fetched!");
+                        }, 1000);
+                    });
+                }
+
+                function processData(data) {
+                    return new Promise((resolve) => {
+                        setTimeout(() => {
+                            resolve(data + " Processed!");
+                        }, 1000);
+                    });
+                }
+
+                fetchData()
+                    .then((data) => processData(data))
+                    .then((result) => console.log(result)) // "Data fetched! Processed!"
+                    .catch((error) => console.error(error));   
+            </pre>
+
+            // 2024 Reading
+            <ul>
+                <li>Promises are javascript objects that represent an eventual completion or failure of an asynchronous
+                    operation.</li>
                 <li>A promise has two possible outcomes: it will either be kept when the time comes or it won't.</li>
-                <li>A promise is a returned object where you attach callbacks, instead of passing callbacks into a funtion.</li>
-                 <pre class="language-javascript">
+                <li>A promise is a returned object where you attach callbacks, instead of passing callbacks into a
+                    funtion.</li>
+                <pre class="language-javascript">
                     // callback function
                         const greet = (name) => {
                         console.log("Hi " + name);
@@ -37,14 +141,16 @@
                     //start call
                         callMe().then((result) => greet(result));
                     </pre>
-                    <h4>Promise Definition 2:</h4>
-                    <li>A Promise is an Object that will produce a single value sometime in the future. if the promise is successful, it'll produce a resolved value
-                        but if something goes wrong then it will produce a reason why the promise failed.
-                        Similar Said : It behaves very much similar to real life promises.
-                    </li>
+                <h4>Promise Definition 2:</h4>
+                <li>A Promise is an Object that will produce a single value sometime in the future. if the promise is
+                    successful, it'll produce a resolved value
+                    but if something goes wrong then it will produce a reason why the promise failed.
+                    Similar Said : It behaves very much similar to real life promises.
+                </li>
             </ul>
-           
+
         </section>
     </main>
 </body>
+
 </html>
