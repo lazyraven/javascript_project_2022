@@ -21,7 +21,21 @@
             
             <h4>Where are Closures Applied ?</h4>
             <p><strong>Private Variables :</strong> encapsulating data within functions and preventing direct access from outside.</p>
-                <pre class="language-javascript">
+            <pre class="language-javascript">
+                function outerFunction() {
+                const name = " Nisha";
+                return function innerFuntion() {
+                    console.log("Hello " + name);
+                };
+                }
+                console.log("outerFunction CALLED", outerFunction());
+
+                const greet = outerFunction();
+                greet();
+                console.log("greet CALLED", greet());
+            </pre>    
+            <br>
+            <pre class="language-javascript">
                     function counter() {
                         let count = 0;
                         return function () {
