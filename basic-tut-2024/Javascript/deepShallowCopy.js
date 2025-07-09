@@ -1,3 +1,10 @@
+const originalArray = [1, 2, 3, 4];
+
+const copyArray = [...originalArray];
+copyArray.push(5);
+console.log("NumbersCopy", originalArray, copyArray);
+console.log(copyArray == originalArray);
+
 // SWhallow Copy
 const original = { name: "Nisha", skills: ["JS", "React"] };
 const shallowCopy = { ...original };

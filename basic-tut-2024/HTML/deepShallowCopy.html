@@ -15,6 +15,35 @@
             <p>Shallow Copy  => it'll change existing array/object when you'll modify copied array</p>
             
             <pre class="language-javascript">
+                <table>
+                <tr>
+                    <th>Array</th>
+                    <th>Object</th>
+                </tr>
+                <tr>
+                    <td>
+                    const originalArray = [1, 2, 3, 4];
+
+                    const copyArray = [...originalArray];
+                    copyArray.push(5);
+                    console.log("NumbersCopy", originalArray, copyArray);
+                    //Output: NumbersCopy  [1, 2, 3, 4]  [1, 2, 3, 4, 5]
+                    console.log(copyArray == originalArray); // false
+                    </td>
+                     <td>
+                        const original = { name: "Nisha", skills: ["JS", "React"] };
+                        const shallowCopy = { ...original };
+
+                        shallowCopy.name = "Updated";           // Only updates the copy
+                        shallowCopy.skills.push("Node.js");     // Also affects the original
+
+                        console.log(original.skills); // ['JS', 'React', 'Node.js']
+                    </td>
+                </tr>
+                </table>
+            </pre>
+
+            <pre class="language-javascript">
                 const original = { name: "Nisha", skills: ["JS", "React"] };
                 const shallowCopy = { ...original };
 

@@ -4,11 +4,11 @@
 } */
 
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 20px;
-    color: #333;
-    background-color: #e5e3e3;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 20px;
+  color: #333;
+  background-color: #e5e3e3;
 }
 
 .output {
@@ -20,11 +20,24 @@ h2 {
 }
 
 
- .language-javascript {
-        background-color: #f4f4f4;
-        padding: 10px;
-        border-radius: 5px;
-        font-family: monospace;
-        background-color: #000000;
-        color: rgb(96 241 219);
-    }
+.language-javascript {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: monospace;
+  background-color: #000000;
+  color: rgb(96 241 219);
+}
+
+
+td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+ th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
