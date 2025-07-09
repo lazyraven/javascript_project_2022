@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Shallow Copy</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <script src="../Javascript/deepShallowCopy.js"></script>
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Deep Shallow Copy</h2>
+            <p>In JavaScript (and most programming languages), deep copy and shallow copy refer to how objects or arrays are duplicated in memory. </p>
+            <p>Shallow Copy  => it'll change existing array when you'll modify copied array</p>
+            <pre class="language-javascript">
+                const original = { name: "Nisha", skills: ["JS", "React"] };
+                const shallowCopy = { ...original };
+
+                shallowCopy.name = "Updated";           // Only updates the copy
+                shallowCopy.skills.push("Node.js");     // Also affects the original
+
+                console.log(original.skills); // ['JS', 'React', 'Node.js']
+            </pre>
+            <br
+            <p>Deep Copy  => it'll not change into the existing array when you'll modify copied array.</p>
+            <pre class="language-javascript">
+                const original = { name: "Nisha", skills: ["JS", "React"] };
+                const deepCopy = JSON.parse(JSON.stringify(original));
+
+                deepCopy.skills.push("Node.js");
+
+                console.log(original.skills); // ['JS', 'React']
+                console.log(deepCopy.skills); // ['JS', 'React', 'Node.js']
+            </pre>
+        </section>
+
+
+        <section>
+            <h2>In Deep Knowledge :</h2>
+            <p>In JavaScript (and most programming languages), deep copy and shallow copy refer to how objects or arrays are duplicated in memory. </p>
+            
+            <p class="output">To view the output, you need to access the console tab of your browser's developer tools. - right click inspect mode</p>
+            <p>In JavaScript, when you copy an object or an array, you can either create a shallow copy or a deep copy.</p>
+            
+            <h3>Shallow Copy</h3>   
+            <p>A shallow copy creates a new object or array, but it only copies the references to the nested objects or arrays. 
+                If you modify a nested object in the copied version, it will also affect the original object.</p>
+            <pre class="language-javascript">
+                const original = { a: 1, b: { c: 2 } };
+                const shallowCopy = { ...original }; // Shallow copy using spread operator
+                shallowCopy.b.c = 3; // Modifying nested object
+                console.log(original.b.c); // Output: 3 (affected original object)
+            </pre>
+            <h3>Deep Copy</h3>
+            <p>A deep copy creates a new object or array and recursively copies all nested objects or arrays. 
+                Modifying a nested object in the copied version will not affect the original object.</p>
+            <pre class="language-javascript">
+                const original = { a: 1, b: { c: 2 } };
+                const deepCopy = JSON.parse(JSON.stringify(original)); // Deep copy using JSON methods
+                deepCopy.b.c = 3; // Modifying nested object
+                console.log(original.b.c); // Output: 2 (original object remains unchanged) 
+            </pre>
+            <p>In summary, a shallow copy only copies references to nested objects, while a deep copy creates a completely independent copy of the entire object structure.</p>
+
+        </section>
+    </main>
+</body>
+</html>
