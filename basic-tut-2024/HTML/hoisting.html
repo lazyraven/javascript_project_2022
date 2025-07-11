@@ -13,7 +13,33 @@
             <h3>Hoisting</h3>
             <p class="output">To view the output, you need to access the console tab of your browser's developer tools. - right click inspect mode</p>
 
+                <p>
+                Hoisting in javascript is a behaviour in which a function or a variable can be used before declaration.
+                <br>
+                before declaration means that we can call a function before it is defined in the code.
+            </p>
+            <p>we can't initialize function before declaration > not valid before function create, please call that function after
+                the declaration o/p => it'll throw error
+                // it is hoisting type example</p>
 
+
+                <pre class="language-javascript">
+                                console.log(place); // undefined
+                                let place = "Delhi"; // let is not hoisted
+                                console.log(place); 
+                            </pre>
+
+            <pre class="language-javascript">
+                        addTwo(5);
+                        const addTwo = function(num){
+                            return num + 2
+                        }
+            </pre>
+
+            
+
+            <h2>Hoisting Definition 2</h2>
+          
              <ul>
                 <li>
                     A Javascript mechanism where variables with var and function declarations are moved
@@ -42,22 +68,6 @@
 
                 </pre>
             </ul>
-
-            <h2>Hoisting Definition 2</h2>
-            <p>
-                Hoisting in javascript is a behaviour in which a function or a variable can be used before declaration.
-                <br>
-                before declaration means that we can call a function before it is defined in the code.
-            </p>
-            <p>we can't initialize function before declaration > not valid before function create, please call that function after
-                the declaration o/p => it'll throw error
-                // it is hoisting type example</p>
-             <pre class="language-javascript">
-                  addTwo(5);
-                    const addTwo = function(num){
-                        return num + 2
-                    }
-                    </pre>
         </section>
     </main>
 </body>

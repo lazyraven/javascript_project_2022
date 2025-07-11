@@ -1,4 +1,11 @@
 //hoisting
+console.log(name);
+var name = "Tanu";
+
+// console.log(place); // undefined
+// let place = "Delhi"; // let is not hoisted
+// console.log(place); // error: Cannot access 'place' before initialization
+
 myPlace = "Rajasthan"; // var is hoisted
 console.log(myPlace);
 var myPlace;
@@ -18,13 +25,13 @@ let sayHello = function () {
 
 addTwo(5); // errror
 // addTwo is not hoisted because it is a function expression
-const addTwo = function(num){
+const addTwo = function (num) {
   console.log("addTwo called");
-    return num + 2
-}
+  return num + 2;
+};
 
-console.log(addone(5)) // valid
+console.log(addone(5)); // valid
 
-function addone(num){
-    return num + 1
+function addone(num) {
+  return num + 1;
 }
