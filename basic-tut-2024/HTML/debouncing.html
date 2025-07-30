@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +8,103 @@
     <link rel="stylesheet" href="../CSS/style.css">
     <title>Debouncing</title>
 </head>
+
 <body>
     <main>
         <section>
+        </section>
+           
+        <section>
             <h3>Debouncing</h3>
-            <p class="output">To view the output, you need to access the console tab of your browser's developer tools. - right click inspect mode</p>
-       <p>Debouncing is a strategy used to improve the performance of a feature by controlling the time at which a function should be executesd</p>
-       <h4>Simple words:</h4>
-       <p>It delays the execution of your code until the user stops performing a certain action for a specified amount of time.
-         It is a practice used to improve browser performance</p>
+            <p class="output">To view the output, you need to access the console tab of your browser's developer tools.
+                - right click inspect mode</p>
+            <p>Debouncing is a strategy used to improve the performance of a feature by controlling the time at which a
+                function should be executesd</p>
+            <h4>Simple words:</h4>
+            <p>It delays the execution of your code until the user stops performing a certain action for a specified
+                amount of time.
+                It is a practice used to improve browser performance</p>
         </section>
 
         <section>
-            <label for="fruits">Enter your favourite fruits</label>
-            <input type="text" id="fruits" name="fruits">
+            <h4>Use cases of Debouncing:</h4>
+            <p>Debouncing is commonly used in scenarios where you want to limit the rate at which a function is executed
+                in response to user input or events. This can help prevent performance issues and improve user
+                experience.</p>
+            <p>For example, if you have a search input field that triggers an API call on every keystroke, debouncing
+                can be used to wait until the user has stopped typing for a certain period before making the API call.
+                This reduces the number of requests sent to the server and improves performance.</p>
+            <p>Here are some common use cases for debouncing:</p>
+            <ul>
+                <li>Search input fields: Wait until typing stops before sending API requests to prevent unnecessary
+                    calls.</li>
+                <li>Window resize: Trigger resize-related logic only once after resizing stops.</li>
+                <li>Scroll events: Respond to scrolling only after the user stops scrolling for better performance.</li>
+                <li>Real-time form validation or live feedback: Avoid validating on every keystroke.</li>
+            </ul>
         </section>
+
+        <section>
+            <h4>⚡ Why Use Debounce?:</h4>
+            <ul>
+                <li>Reduces unnecessary function calls and conserves resources.</li>
+                <li>WImproves performance and responsiveness.</li>
+                <li>Prevents redundant network/API calls. </li>
+            </ul>
+        </section>
+
+        <section>
+            <h4>⚡Quick Summary</h4>
+            <ul>
+                <li>Define a debounce wrapper that clears and resets a timer.</li>
+                <li>Use closures to retain the timer variable across calls.</li>
+                <li>Pass arguments via ...args and func.apply(this, args).</li>
+                <li>Choose delay based on your UX needs (commonly 200–500 ms).</li>
+                <li>Consider immediate execution when needed.</li>
+
+            </ul>
+        </section>
+
+        <section>
+            <h4>Example:</h4>
+            <p>In this example, we will create a simple input field that logs the input value to the console after a
+                delay of 500 milliseconds when the user stops typing.</p>
+            <pre class="language-javascript">
+                let timeoutId;
+                const inputField = document.getElementById('inputField');
+
+                inputField.addEventListener('input', function() {
+                    clearTimeout(timeoutId);
+                    timeoutId = setTimeout(() => {
+                        console.log(inputField.value);
+                    }, 500);
+                });
+            </pre>
+            <pre>In this example, we use a timeout to delay the execution of the console log function.
+                   When the user types in the input field, we clear any existing timeout using clearTimeout.
+                    We then set a new timeout that will log the input value after 500 milliseconds.
+            </pre>
+        </section>
+
+        
+
+        <section>
+            <h4>⚡ Debounce vs Throttle:</h4>
+            <p>Debounce and throttle are both techniques used to control the rate at which a function is executed in
+                response to events, but they serve different purposes:</p>
+            <ul>
+                <li><strong>Debounce:</strong> Delays the execution of a function until a specified time has passed
+                    since the last event. It ensures that the function is called only once after the user stops
+                    triggering the event for a certain period.</li>
+                <li><strong>Throttle:</strong> Limits the execution of a function to a fixed interval, ensuring that it
+                    is called at most once every specified time period, regardless of how many times the event occurs.
+                </li>
+            </ul>
+            <section>
+                <label for="fruits">Enter your favourite fruits</label>
+                <input type="text" id="fruits" name="fruits">
+            </section>
     </main>
 </body>
+
 </html>

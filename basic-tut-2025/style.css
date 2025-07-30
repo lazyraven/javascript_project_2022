@@ -1,17 +1,25 @@
-body {
+/* body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 20px;
     color: #333;
     background-color: #e5e3e3;
+} */
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 20px;
+  color: #333;
+  background-color: #e5e3e3;
 }
 
-.definition {
+/* .definition {
     background-color: yellow;
     display: inline-block;
     padding: 5px 10px;
     border-radius: 5px;
-}
+} */
 
 span {
     display: inline-block;
@@ -47,4 +55,9 @@ span {
     margin-top: 10px;
     padding: 5px;
     border-radius: 5px;
+}
+
+
+h2 {
+  text-align: center;
 }

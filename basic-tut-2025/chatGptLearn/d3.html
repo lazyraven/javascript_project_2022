@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    .bar { fill: steelblue; }
+    .bar:hover { fill: orange; }
+    .axis text { font-size: 12px; }
+  </style>
+</head>
+<body>
+    <!-- Important Note : we can't link d3 script into the head section, it'll throw error -->
+   <h3>Important Note : we can't link d3 script into the head section, it'll throw error</h3>
+   <pre>
+    . Always ensure the element you're selecting exists in the DOM before you call D3 on it.
+    . Use DOMContentLoaded or place script after the HTML elements.
+    . Check for typos in id, class, or tag names used in d3.select(...).
+   </pre>
+
+  <svg id="mySvg" width="600" height="400"></svg>
+  <script src="./d3.js"></script>
+</body>
+</html>
