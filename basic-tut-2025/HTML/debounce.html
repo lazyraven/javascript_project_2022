@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Debounce Demo</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        input {
+            width: 300px;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        .output {
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+
+</head>
+
+<body>
+    <label for="search">Search:</label><br />
+    <input type="text" id="search" placeholder="Type something..." />
+    <div class="output" id="result"></div>
+
+    <div>
+        
+
+        <!-- Button double-click block -->
+        <div class="section">
+            <h3>Button – Prevent Double Clicks</h3>
+            <button id="btn">Submit</button>
+            <div id="btnOutput" class="output"></div>
+        </div>
+        
+        <!-- Window resize or scroll -->
+        <div class="section">
+            <h3>Window Resize / Scroll</h3>
+            <div id="resizeOutput" class="output">Resize the window…</div>
+            <div id="scrollOutput" class="output">Scroll the page…</div>
+            <div style="height:1200px; background: linear-gradient(#eee, #ddd)"></div>
+        </div>
+
+         <!-- Form validation or autosave -->
+        <div class="section">
+            <h3>Form Validation / Auto‑save</h3>
+            <input type="text" id="formInput" placeholder="Type username…" />
+            <div id="formOutput" class="output"></div>
+        </div>
+
+    </div>
+
+    <script src="../JavaScript//debounce.js"></script>
+</body>
+
+</html>
