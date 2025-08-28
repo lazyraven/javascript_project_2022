@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question Checklist</title>
+  <style>
+    table {
+      width: 50%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    .blue {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+
+  <h3 class="blue">Questions :</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Done</th>
+        <th>Question</th>
+      </tr>
+    </thead>
+    <tbody id="questionTable">
+      <tr>
+        <td><input type="checkbox" data-id="reverseString"></td>
+        <td>Reverse String</td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" data-id="findMax"></td>
+        <td>Find max in array</td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" data-id="palindrome"></td>
+        <td>Palindrome checker</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+    // Load saved state from localStorage
+    checkboxes.forEach(checkbox => {
+      const id = checkbox.getAttribute("data-id");
+      const saved = localStorage.getItem(id);
+      if (saved === "true") {
+        checkbox.checked = true;
+      }
+
+      // Save state on change
+      checkbox.addEventListener("change", () => {
+        localStorage.setItem(id, checkbox.checked);
+      });
+    });
+  </script>
+
+</body>
+</html>
