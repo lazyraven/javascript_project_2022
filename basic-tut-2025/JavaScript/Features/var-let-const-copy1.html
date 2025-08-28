@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Variable Comparison</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .table-container {
+      width: 100%;
+      max-width: 950px;
+      overflow-x: auto;
+      margin: 0 auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background: #fff;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 750px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      text-align: center;
+      padding: 12px;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    th {
+      background: #333;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    tr:nth-child(even) {
+      background: #f2f2f2;
+    }
+
+    code {
+      background: #f4f4f4;
+      padding: 3px 6px;
+      border-radius: 5px;
+      font-size: 13px;
+    }
+
+    .yes { color: green; font-weight: bold; }
+    .no { color: red; font-weight: bold; }
+
+    tr.active {
+      background: #ffe680 !important;
+      font-weight: bold;
+    }
+
+    /* Blink effect */
+    .blink {
+      animation: blink 0.6s ease;
+    }
+    @keyframes blink {
+      0%   { background-color: #ffe680; }
+      50%  { background-color: #fff; }
+      100% { background-color: #ffe680; }
+    }
+
+    .copy-btn {
+      margin-left: 8px;
+      padding: 4px 8px;
+      font-size: 12px;
+      border: none;
+      border-radius: 5px;
+      background: #333;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .copy-btn:hover { background: #555; }
+
+    /* Tooltip styling */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: help;
+      margin-left: 5px;
+      color: #0077cc;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .tooltip:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      font-size: 13px;
+      opacity: 0;
+      animation: fadeIn 0.3s forwards;
+      z-index: 10;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -10px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    /* Dark Mode */
+    body.dark { background: #1e1e1e; color: #eee; }
+    body.dark .table-container { background: #2b2b2b; box-shadow: 0 4px 10px rgba(255,255,255,0.1); }
+    body.dark table { color: #eee; border: 1px solid #555; }
+    body.dark th { background: #111; color: #eee; }
+    body.dark tr:nth-child(even) { background: #333; }
+    body.dark code { background: #444; color: #fff; }
+    body.dark tr.active { background: #6c5f00 !important; color: #ffeb3b; }
+    body.dark .copy-btn { background: #666; }
+    body.dark .copy-btn:hover { background: #888; }
+    body.dark .tooltip:hover::after { background: #eee; color: #111; }
+
+    /* Toggle Button */
+    .toggle-btn {
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #333;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .toggle-btn:hover { background: #555; transform: scale(1.05); }
+
+    /* Toast container */
+    .toast-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    /* Toast Base */
+    .toast {
+      min-width: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      animation: slideIn 0.5s ease, fadeOut 0.5s ease 2.5s forwards;
+      position: relative;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(100%); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(100%); }
+    }
+
+    .toast-icon { font-size: 18px; animation: pulse 1.2s infinite; }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.8; }
+    }
+
+    .toast.success { background: #28a745; color: #fff; }
+    .toast.error   { background: #dc3545; color: #fff; }
+    .toast.warning { background: #ffc107; color: #111; }
+    .toast.info    { background: #17a2b8; color: #fff; }
+
+    body.dark .toast.success { background: #218838; color: #e0ffe0; }
+    body.dark .toast.error   { background: #c82333; color: #ffe0e0; }
+    body.dark .toast.warning { background: #d39e00; color: #fff8e0; }
+    body.dark .toast.info    { background: #117a8b; color: #e0faff; }
+
+    .toast .close-btn {
+      background: none;
+      border: none;
+      color: inherit;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" onclick="toggleMode()">🌙 Dark Mode</button>
+
+  <div class="table-container">
+    <table id="comparisonTable">
+      <tr>
+        <th>Keyword</th>
+        <th>Scope</th>
+        <th>Re-declare</th>
+        <th>Re-assign</th>
+        <th>Hoisted</th>
+        <th>Example</th>
+      </tr>
+      <tr>
+        <td>
+          <b>var</b>
+          <span class="tooltip" data-tooltip="var → function/global scope, can re-declare & re-assign, hoisted.">ℹ️</span>
+        </td>
+        <td>Function / Global</td>
+        <td class="yes">✅ Yes</td>
+        <td class="yes">✅ Yes</td>
+        <td class="yes">✅ Hoisted (undefined)</td>
+        <td>
+          <code id="code1">var x = 10; var x = 20;</code>
+          <button class="copy-btn" onclick="copyCode('code1')">📋 Copy</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>let</b>
+          <span class="tooltip" data-tooltip="let → block scope, cannot re-declare, can re-assign, not hoisted.">ℹ️</span>
+        </td>
+        <td>Block</td>
+        <td class="no">❌ No</td>
+        <td class="yes">✅ Yes</td>
+        <td class="no">❌ Not hoisted (TDZ*)</td>
+        <td>
+          <code id="code2">let y = 10; y = 20;</code>
+          <button class="copy-btn" onclick="copyCode('code2')">📋 Copy</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>const</b>
+          <span class="tooltip" data-tooltip="const → block scope, cannot re-declare, cannot re-assign, not hoisted.">ℹ️</span>
+        </td>
+        <td>Block</td>
+        <td class="no">❌ No</td>
+        <td class="no">❌ No</td>
+        <td class="no">❌ Not hoisted (TDZ*)</td>
+        <td>
+          <code id="code3">const z = 10; // z = 20 ❌</code>
+          <button class="copy-btn" onclick="copyCode('code3')">📋 Copy</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle('dark');
+      const btn = document.querySelector('.toggle-btn');
+      btn.textContent = document.body.classList.contains('dark')
+        ? "☀️ Light Mode"
+        : "🌙 Dark Mode";
+    }
+
+    const rows = document.querySelectorAll("#comparisonTable tr");
+    rows.forEach((row, index) => {
+      if (index === 0) return;
+      row.addEventListener("click", () => {
+        rows.forEach(r => r.classList.remove("active", "blink"));
+        row.classList.add("active", "blink");
+        setTimeout(() => row.classList.remove("blink"), 600);
+      });
+    });
+
+    function copyCode(id) {
+      const code = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast("✅ Code copied: " + code, "success");
+      }).catch(() => {
+        showToast("❌ Failed to copy!", "error");
+      });
+    }
+
+    function showToast(message, type = "info") {
+      const container = document.getElementById("toastContainer");
+      const toast = document.createElement("div");
+      toast.className = "toast " + type;
+
+      const icon = document.createElement("span");
+      icon.className = "toast-icon";
+      const icons = { success: "✅", error: "❌", warning: "⚠️", info: "ℹ️" };
+      icon.textContent = icons[type] || "ℹ️";
+
+      const msg = document.createElement("span");
+      msg.textContent = message;
+
+      const closeBtn = document.createElement("button");
+      closeBtn.className = "close-btn";
+      closeBtn.textContent = "✖";
+      closeBtn.onclick = () => toast.remove();
+
+      toast.appendChild(icon);
+      toast.appendChild(msg);
+      toast.appendChild(closeBtn);
+      container.appendChild(toast);
+
+      setTimeout(() => { if (toast.parentNode) toast.remove(); }, 3000);
+    }
+  </script>
+</body>
+</html>

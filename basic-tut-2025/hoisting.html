@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoisting</title>
+</head>
+<style>
+    .blue{
+        color: blue;
+    }
+</style>
+
+<body>
+    <div>
+        <h3 class="blue">Question 2: What is hoisting? </h3>
+        <p>Definition : Hoisting in JavaScript means variable and function declarations are moved to the top of their scope before code execution.</p>
+        <pre>👉 Explanation:
+                    var → hoisted with default value undefined.
+        
+                    let → hoisted but in temporal dead zone, gives ReferenceError.
+        
+                    const → same as let, but must be initialized at declaration.
+                </pre>
+        <pre>
+            example covering var, let, and const hoisting in one go:
+        <code>
+            // var example
+            console.log(a); // undefined
+            var a = 10;
+
+            // let example
+            console.log(b); // ReferenceError
+            let b = 20;
+
+            // const example
+            console.log(c); // ReferenceError
+            const c = 30;
+        </code>
+        </pre>
+    </div>
+</body>
+</html>
