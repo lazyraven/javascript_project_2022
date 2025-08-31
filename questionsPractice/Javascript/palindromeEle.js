@@ -1,7 +1,10 @@
 console.log("palindrome file js");
 
-let paldNum = 23432;
-// let paldNum = 23431
+// let paldNum = 23432;
+// let paldNum = 23431;
+// let paldNum = 134231;
+let paldNum = 1348231;
+// let paldNum = "NavecaN";
 
 // let strNum = String(paldNum)
 let strNum = paldNum.toString();
@@ -14,7 +17,7 @@ function paldFun(ele) {
       // 2(0)    2(4) (5-(0+1))
       // 2(1)    2(3) (5-(1+1))
       // 2(2)    2(2) (5-(2+1))
-      console.log("no");
+      console.log("palyes", "no");
       return false;
     }
   }
@@ -48,7 +51,8 @@ showData(number);
 let num = 122;
 function palindromeProperty(data) {
   document.getElementById("originalPaldElement").innerText = data;
-  let resultNum = toString(data);
+  // let resultNum = toString(data);
+  let resultNum = data.toString();
 
   if (resultNum) {
     for (let i = 0; i < resultNum.length; i++) {

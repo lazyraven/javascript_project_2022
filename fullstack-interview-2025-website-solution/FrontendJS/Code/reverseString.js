@@ -1,3 +1,6 @@
+console.log(
+  "------------------------- REVERSE STRING RESULT ------------------------"
+);
 const skillName = "Javascript";
 
 function reverseString(value) {
@@ -10,4 +13,4 @@ function reverseString(value) {
   console.log("reverseValue", reverseValue);
   return reverseValue;
 }
-console.log(reverseString(skillName));
+console.log(skillName, "=>", reverseString(skillName));

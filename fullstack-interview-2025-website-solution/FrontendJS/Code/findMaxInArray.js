@@ -1,3 +1,6 @@
+console.log(
+  "------------------------- FIND MAXIN ARRAY STRING RESULT ------------------------"
+);
 const numberList = [12, 34, 24, 22, 18, 88, 45, 98, 10, 7];
 
 function maxNumberFind(value) {
@@ -12,4 +15,4 @@ function maxNumberFind(value) {
   console.log(maxValue);
   return maxValue;
 }
-console.log(maxNumberFind(numberList));
+console.log(numberList, "=>", maxNumberFind(numberList));
