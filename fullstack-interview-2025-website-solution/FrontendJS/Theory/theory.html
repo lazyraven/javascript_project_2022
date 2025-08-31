@@ -52,6 +52,35 @@
         </pre>
 
     </div>
+
+      <div>
+        <h3 class="blue">Question 3: What is closure? </h3>
+        <pre>Definition : In JavaScript, a closure is created when a function is defined inside another function and 
+                    the inner function "closes over" (remembers) the variables of the outer function.
+                    It allows the inner function to access and manipulate those outer variables even after the outer function has returned.</pre>
+        <h3 class="blue">Question 3.1: When is it(closure) useful? </h3>
+                    <pre>
+                      1. Data Privacy / Encapsulation => You can hide variables from the outside world and expose only what’s necessary.
+                      2. Maintaining State => Closures let functions "remember" past values even after their outer function has executed.
+                      3. Callbacks & Event Handlers => Useful when passing functions around; they can access the outer scope variables they were created with.
+                      4. Functional Programming => Helpful in currying, memoization, and creating higher-order functions.
+
+                      ✨ In short: Closures are most useful when you need private variables, state persistence, or context preservation.
+                      
+                      Example :
+                      function counter() {
+                            let count = 0;
+                            return function () {
+                                count++;
+                                return count;
+                            };
+                        }
+                        const increment = counter();
+                        console.log(increment()); // 1
+                        console.log(increment()); // 2
+
+                    </pre>
+    </div>
     
 </body>
 

@@ -4,12 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Question Checklist</title>
+  <script src="./hoisting.js"></script>
   <script src="./reverseString.js"></script>
   <script src="./findMaxInArray.js"></script>
   <script src="./palindrome.js"></script>
-
-
+  <!-- <script src="./closure.js"></script> -->
+  <script src="./factorial.js"></script>
+<script src="./fibonacciSequence.js"></script>
   <style>
+    body{
+      background: #1e1e1c;
+      color: whitesmoke;
+    }
     table {
       width: 60%;
       border-collapse: collapse;
@@ -67,7 +73,11 @@
     let questions = JSON.parse(localStorage.getItem("questions")) || [
       { id: "reverseString", text: "Reverse String", done: false },
       { id: "findMax", text: "Find max in array", done: false },
-      { id: "palindrome", text: "Palindrome checker", done: false }
+      { id: "palindrome", text: "Palindrome checker", done: false },
+      { id: "factorial", text: "Factorial", done: false },
+      { id: "factorial", text: "Factorial", done: false },
+      { id: "fibonacciSequence", text: "Fibonacci sequence", done: false },
+
     ];
 
     // Render table
@@ -77,7 +87,7 @@
         const row = document.createElement("tr");
 
         // Checkbox
-        const tdCheckbox = document.createElement("td");
+        const tdCheckbox = document.createElement("td");  
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.checked = q.done;
