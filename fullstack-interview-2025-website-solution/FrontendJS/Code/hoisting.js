@@ -1,3 +1,7 @@
+console.log(
+  "------------------------- HOISTING RESULT ------------------------"
+);
+
 // var example
 console.log(a); // undefined
 var a = 10;
