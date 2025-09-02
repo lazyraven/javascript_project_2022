@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>30‑Day Interview Preparation Roadmap (JS • React • Vue • Node)</title>
+    <style>
+        :root {
+            --bg: #0b1020;
+            /* deep navy */
+            --card: #121935;
+            /* darker card */
+            --muted: #8ea0ff;
+            /* accent */
+            --muted-2: #b9c2ff;
+            /* lighter accent */
+            --text: #eef1ff;
+            /* primary text */
+            --subtext: #b6bde3;
+            /* secondary text */
+            --ok: #35d186;
+            /* success */
+            --warn: #ffd166;
+            /* warning */
+            --danger: #ef476f;
+            /* danger */
+            --ring: rgba(142, 160, 255, .35);
+            --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background: radial-gradient(1200px 600px at 20% -10%, #17204a 0%, transparent 60%),
+                radial-gradient(1200px 600px at 90% 0%, #1a2558 0%, transparent 60%),
+                var(--bg);
+            color: var(--text);
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: saturate(1.3) blur(10px);
+            background: linear-gradient(180deg, rgba(11, 16, 32, .85), rgba(11, 16, 32, .55));
+            border-bottom: 1px solid rgba(185, 194, 255, .15);
+            box-shadow: var(--shadow);
+        }
+
+        .wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 18px 20px
+        }
+
+        .title {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .title h1 {
+            margin: 0;
+            font-size: clamp(18px, 2.5vw, 28px);
+            letter-spacing: .3px
+        }
+
+        .subtitle {
+            margin: 6px 0 0;
+            color: var(--subtext);
+            font-size: 14px
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px
+        }
+
+        .search {
+            flex: 1 1 260px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(185, 194, 255, .18);
+            padding: 10px 12px;
+            border-radius: 12px
+        }
+
+        .search input {
+            all: unset;
+            flex: 1;
+            color: var(--text)
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(185, 194, 255, .2);
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .04)
+        }
+
+        .btn {
+            cursor: pointer;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-weight: 600;
+            color: var(--text);
+            background: linear-gradient(180deg, #273377, #1f2a61);
+            border: 1px solid rgba(185, 194, 255, .25);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06)
+        }
+
+        .btn.alt {
+            background: linear-gradient(180deg, #244a34, #193b29);
+            border-color: rgba(53, 209, 134, .4)
+        }
+
+        .btn.warn {
+            background: linear-gradient(180deg, #5a2a2a, #4a2020);
+            border-color: rgba(239, 71, 111, .45)
+        }
+
+        /* Progress */
+        .progress-wrap {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-top: 14px
+        }
+
+        .progress {
+            position: relative;
+            height: 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(185, 194, 255, .18);
+            overflow: hidden
+        }
+
+        .bar {
+            position: absolute;
+            inset: 0;
+            width: 0%;
+            background: linear-gradient(90deg, var(--muted), var(--ok));
+            box-shadow: 0 0 18px rgba(53, 209, 134, .35) inset
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--subtext)
+        }
+
+        /* Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 18px;
+            margin-top: 18px
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 78px;
+            align-self: start;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(185, 194, 255, .18);
+            border-radius: var(--radius);
+            padding: 14px;
+            box-shadow: var(--shadow)
+        }
+
+        .sidebar h3 {
+            margin: 6px 6px 10px;
+            font-size: 14px;
+            color: var(--muted-2)
+        }
+
+        .toc {
+            display: grid;
+            gap: 6px;
+            max-height: 68vh;
+            overflow: auto;
+            padding-right: 6px
+        }
+
+        .toc a {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text);
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid transparent
+        }
+
+        .toc a small {
+            color: var(--subtext)
+        }
+
+        .toc a:hover {
+            background: rgba(185, 194, 255, .08);
+            border-color: rgba(185, 194, 255, .25)
+        }
+
+        /* Week & Day cards */
+        section.week {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(185, 194, 255, .18);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow)
+        }
+
+        .week-head {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px;
+            border-bottom: 1px solid rgba(185, 194, 255, .15)
+        }
+
+        .week-head h2 {
+            margin: 0;
+            font-size: 18px
+        }
+
+        details {
+            border-top: 1px dashed rgba(185, 194, 255, .16)
+        }
+
+        details[open] {
+            background: linear-gradient(180deg, rgba(185, 194, 255, .04), rgba(185, 194, 255, .02))
+        }
+
+        summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        summary::-webkit-details-marker {
+            display: none
+        }
+
+        .chev {
+            transition: transform .25s ease
+        }
+
+        details[open] .chev {
+            transform: rotate(90deg)
+        }
+
+        .days {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
+            padding: 0 16px 16px
+        }
+
+        .day {
+            background: linear-gradient(180deg, #0f1733, #0e142b);
+            border: 1px solid rgba(185, 194, 255, .18);
+            border-radius: 16px;
+            padding: 14px;
+            display: grid;
+            gap: 10px
+        }
+
+        .day h4 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 16px
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px
+        }
+
+        .badge {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(185, 194, 255, .25);
+            color: var(--muted-2);
+            background: rgba(185, 194, 255, .06)
+        }
+
+        .block {
+            display: grid;
+            gap: 6px
+        }
+
+        .block b {
+            color: var(--muted-2)
+        }
+
+        .tasks {
+            display: grid;
+            gap: 6px
+        }
+
+        .task {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .task input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #35d186
+        }
+
+        .note {
+            width: 100%;
+            min-height: 70px;
+            resize: vertical;
+            border-radius: 10px;
+            border: 1px solid rgba(185, 194, 255, .2);
+            background: rgba(255, 255, 255, .04);
+            color: var(--text);
+            padding: 10px
+        }
+
+        .foot {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--subtext);
+            font-size: 12px
+        }
+
+        .split {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 16px
+        }
+
+        @media (max-width: 900px) {
+            .split {
+                grid-template-columns: 1fr
+            }
+        }
+
+        /* Print */
+        @media print {
+
+            header,
+            .sidebar,
+            .controls {
+                display: none !important
+            }
+
+            body {
+                background: #fff;
+                color: #000
+            }
+
+            section.week {
+                page-break-inside: avoid
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="wrapper">
+            <div class="title">
+                <div>
+                    <h1>30‑Day Interview Preparation Roadmap</h1>
+                    <p class="subtitle">JavaScript • React • Vue • Node.js — track your progress daily ✅</p>
+                </div>
+                <div class="controls">
+                    <div class="search" title="Filter by keyword (e.g., 'closures', 'Redux', 'JWT')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"
+                                stroke="currentColor" stroke-width="1.6" opacity=".6" />
+                        </svg>
+                        <input id="search" placeholder="Search topics, tasks, days…" />
+                    </div>
+                    <button id="expandAll" class="btn" title="Expand all weeks">Expand all</button>
+                    <button id="collapseAll" class="btn" title="Collapse all weeks">Collapse all</button>
+                    <button id="reset" class="btn warn" title="Clear saved progress">Reset progress</button>
+                </div>
+                <div class="progress-wrap">
+                    <div class="progress-label"><span>Overall Progress</span><span id="overallLabel">0%</span></div>
+                    <div class="progress" aria-label="Overall progress">
+                        <div class="bar" id="overallBar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="wrapper grid">
+        <aside class="sidebar">
+            <h3>Weeks Overview</h3>
+            <nav class="toc" id="toc"></nav>
+            <div style="margin-top:10px; font-size:12px; color:var(--subtext)">Progress persists locally in your
+                browser.</div>
+        </aside>
+
+        <div class="content">
+
+            <!-- Week templates -->
+            <section class="week" id="week1">
+                <div class="week-head split">
+                    <div>
+                        <h2>✅ Week 1 – Core JavaScript</h2>
+                        <div class="progress-label"><span>Week 1 Progress</span><span id="w1Label">0%</span></div>
+                        <div class="progress">
+                            <div class="bar" id="w1Bar"></div>
+                        </div>
+                    </div>
+                    <div style="align-self:end; color:var(--subtext)">Focus: fundamentals, async, event loop</div>
+                </div>
+                <div class="days" id="days-week1"></div>
+            </section>
+
+            <section class="week" id="week2" style="margin-top:18px">
+                <div class="week-head split">
+                    <div>
+                        <h2>✅ Week 2 – React + Vue Basics</h2>
+                        <div class="progress-label"><span>Week 2 Progress</span><span id="w2Label">0%</span></div>
+                        <div class="progress">
+                            <div class="bar" id="w2Bar"></div>
+                        </div>
+                    </div>
+                    <div style="align-self:end; color:var(--subtext)">Focus: components, state, routing, store</div>
+                </div>
+                <div class="days" id="days-week2"></div>
+            </section>
+
+            <section class="week" id="week3" style="margin-top:18px">
+                <div class="week-head split">
+                    <div>
+                        <h2>✅ Week 3 – Node.js + Backend</h2>
+                        <div class="progress-label"><span>Week 3 Progress</span><span id="w3Label">0%</span></div>
+                        <div class="progress">
+                            <div class="bar" id="w3Bar"></div>
+                        </div>
+                    </div>
+                    <div style="align-self:end; color:var(--subtext)">Focus: Express, DB, auth, validation</div>
+                </div>
+                <div class="days" id="days-week3"></div>
+            </section>
+
+            <section class="week" id="week4" style="margin-top:18px; margin-bottom:28px">
+                <div class="week-head split">
+                    <div>
+                        <h2>✅ Week 4 – Advanced + System Design + Mock</h2>
+                        <div class="progress-label"><span>Week 4 Progress</span><span id="w4Label">0%</span></div>
+                        <div class="progress">
+                            <div class="bar" id="w4Bar"></div>
+                        </div>
+                    </div>
+                    <div style="align-self:end; color:var(--subtext)">Focus: perf, streams, security, design</div>
+                </div>
+                <div class="days" id="days-week4"></div>
+            </section>
+
+        </div>
+    </main>
+
+    <template id="day-template">
+        <div class="day" data-day="">
+            <h4>
+                <span class="day-title"></span>
+                <span class="badges"></span>
+            </h4>
+            <div class="block">
+                <b>Coding</b>
+                <div class="tasks coding"></div>
+            </div>
+            <div class="block">
+                <b>Theory</b>
+                <div class="tasks theory"></div>
+            </div>
+            <div class="block">
+                <b>Mini‑Task</b>
+                <div class="tasks mini"></div>
+            </div>
+            <details>
+                <summary><span class="chev">▶</span> Notes</summary>
+                <textarea class="note" placeholder="Key takeaways, pitfalls, and links…"></textarea>
+            </details>
+            <div class="foot">
+                <span class="status"></span>
+                <span class="counts"></span>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        // ---- Data --------------------------------------------------------------
+        const PLAN = [
+            // Week 1
+            {
+                week: 1, day: 1, title: "Day 1 – var/let/const, scope, hoisting",
+                coding: ["Reverse string", "Find max in array"],
+                theory: ["var vs let vs const", "What is hoisting?"],
+                mini: ["Palindrome checker"],
+                tags: ["JS", "Scope", "Hoisting"]
+            },
+            {
+                week: 1, day: 2, title: "Day 2 – Functions, closures, IIFE",
+                coding: ["Fibonacci sequence", "Factorial"],
+                theory: ["What is closure?", "When is it useful?"],
+                mini: ["Counter using closure"],
+                tags: ["Functions", "Closures", "IIFE"]
+            },
+            {
+                week: 1, day: 3, title: "Day 3 – Prototypes, this, call/apply/bind",
+                coding: ["Flatten nested array", "Deep clone object"],
+                theory: ["Difference between == and ===", "Explain this"],
+                mini: ["Custom bind implementation"],
+                tags: ["Prototypes", "this", "bind"]
+            },
+            {
+                week: 1, day: 4, title: "Day 4 – Classes & inheritance",
+                coding: ["Merge two sorted arrays", "Remove duplicates"],
+                theory: ["Class vs prototype inheritance"],
+                mini: ["Shape → Circle & Rectangle"],
+                tags: ["Classes", "Inheritance"]
+            },
+            {
+                week: 1, day: 5, title: "Day 5 – Promises, async/await",
+                coding: ["Retry async function", "Sequential vs parallel promises"],
+                theory: ["Explain the event loop"],
+                mini: ["Implement delay(ms) with promise"],
+                tags: ["Promises", "Async/Await"]
+            },
+            {
+                week: 1, day: 6, title: "Day 6 – Event loop, microtask vs macrotask",
+                coding: ["Debounce", "Throttle"],
+                theory: ["Difference between process.nextTick and setImmediate"],
+                mini: ["Debounced search input"],
+                tags: ["Event loop", "Performance"]
+            },
+            {
+                week: 1, day: 7, title: "Day 7 – Review + Mock",
+                coding: ["Solve 5–6 JS problems"],
+                theory: ["Revise closures, async/await, inheritance", "Mock Q&A"],
+                mini: ["—"],
+                tags: ["Review", "Mock"]
+            },
+
+            // Week 2
+            {
+                week: 2, day: 8, title: "Day 8 (React) – JSX, components, props/state",
+                coding: ["Counter app", "Dynamic list rendering"],
+                theory: ["Functional vs class components"],
+                mini: ["Todo app with props"],
+                tags: ["React", "JSX", "State"]
+            },
+            {
+                week: 2, day: 9, title: "Day 9 (React) – useEffect, useState, lifecycle",
+                coding: ["Timer app", "API fetch"],
+                theory: ["How does React’s virtual DOM work?"],
+                mini: ["Weather app with API"],
+                tags: ["React", "Hooks"]
+            },
+            {
+                week: 2, day: 10, title: "Day 10 (Vue) – Directives (v-if, v-for, v-model)",
+                coding: ["Render list with v-for", "Two-way binding"],
+                theory: ["Vue reactivity system"],
+                mini: ["Form validation"],
+                tags: ["Vue", "Directives"]
+            },
+            {
+                week: 2, day: 11, title: "Day 11 (Vue) – Components, props, events",
+                coding: ["Parent-child data flow", "Emit event handling"],
+                theory: ["Computed vs watchers"],
+                mini: ["Shopping cart"],
+                tags: ["Vue", "Components"]
+            },
+            {
+                week: 2, day: 12, title: "Day 12 – Routing (React Router, Vue Router)",
+                coding: ["Navigation between pages", "Protected route"],
+                theory: ["SPA vs MPA"],
+                mini: ["Blog app with routes"],
+                tags: ["Routing", "SPA"]
+            },
+            {
+                week: 2, day: 13, title: "Day 13 – State management (Redux, Vuex/Pinia)",
+                coding: ["Counter with Redux", "Global state for todo"],
+                theory: ["Context API vs Redux"],
+                mini: ["Todo app with Redux/Vuex"],
+                tags: ["Redux", "Pinia", "Vuex"]
+            },
+            {
+                week: 2, day: 14, title: "Day 14 – Project Day",
+                coding: ["Build same CRUD app in React & Vue"],
+                theory: ["—"], mini: ["—"],
+                tags: ["Project", "CRUD"]
+            },
+
+            // Week 3
+            {
+                week: 3, day: 15, title: "Day 15 – Node basics (fs, path, modules)",
+                coding: ["Read/write JSON", "Word count CLI"],
+                theory: ["CommonJS vs ES modules"],
+                mini: ["CLI word counter"],
+                tags: ["Node", "Modules"]
+            },
+            {
+                week: 3, day: 16, title: "Day 16 – Express basics, middleware",
+                coding: ["Simple API", "Middleware logging"],
+                theory: ["Types of middleware"],
+                mini: ["Custom logger"],
+                tags: ["Express", "Middleware"]
+            },
+            {
+                week: 3, day: 17, title: "Day 17 – REST APIs with Express",
+                coding: ["CRUD API", "Error handling"],
+                theory: ["REST vs GraphQL"],
+                mini: ["Build CRUD API with Express"],
+                tags: ["REST", "GraphQL"]
+            },
+            {
+                week: 3, day: 18, title: "Day 18 – MongoDB + Mongoose",
+                coding: ["User schema", "CRUD ops"],
+                theory: ["SQL vs NoSQL"],
+                mini: ["User registration API"],
+                tags: ["MongoDB", "Mongoose"]
+            },
+            {
+                week: 3, day: 19, title: "Day 19 – Auth (JWT, bcrypt)",
+                coding: ["Password hashing", "Token generation"],
+                theory: ["Session vs JWT authentication"],
+                mini: ["Secure API with JWT"],
+                tags: ["Auth", "JWT", "bcrypt"]
+            },
+            {
+                week: 3, day: 20, title: "Day 20 – Error handling + validation",
+                coding: ["Central error handler", "Input validation"],
+                theory: ["try/catch vs middleware"],
+                mini: ["Express validation middleware"],
+                tags: ["Validation", "Errors"]
+            },
+            {
+                week: 3, day: 21, title: "Day 21 – Project Day",
+                coding: ["Build Task Manager API (CRUD + Auth + MongoDB)"],
+                theory: ["—"], mini: ["—"],
+                tags: ["Project", "API"]
+            },
+
+            // Week 4
+            {
+                week: 4, day: 22, title: "Day 22 (React) – Performance optimization",
+                coding: ["Memoized component", "Expensive calc optimization"],
+                theory: ["React Fiber"],
+                mini: ["Large list rendering optimization"],
+                tags: ["React", "Performance"]
+            },
+            {
+                week: 4, day: 23, title: "Day 23 (Vue) – Performance optimization",
+                coding: ["Lazy load component", "Optimize list rendering"],
+                theory: ["Vue vs React virtual DOM"],
+                mini: ["Image gallery optimization"],
+                tags: ["Vue", "Performance"]
+            },
+            {
+                week: 4, day: 24, title: "Day 24 (Node) – Streams & clustering",
+                coding: ["File streaming", "Log reader"],
+                theory: ["Process vs thread in Node"],
+                mini: ["Stream a log file"],
+                tags: ["Node", "Streams", "Cluster"]
+            },
+            {
+                week: 4, day: 25, title: "Day 25 – Caching & scaling APIs",
+                coding: ["Cache API response", "Rate limiting"],
+                theory: ["CAP theorem basics"],
+                mini: ["Redis caching demo"],
+                tags: ["Caching", "Scaling", "Redis"]
+            },
+            {
+                week: 4, day: 26, title: "Day 26 – Security (CORS, CSRF, XSS)",
+                coding: ["Validate user input", "Secure headers"],
+                theory: ["Explain CORS flow"],
+                mini: ["Prevent XSS in input"],
+                tags: ["Security", "CORS", "XSS"]
+            },
+            {
+                week: 4, day: 27, title: "Day 27 – System design basics",
+                coding: ["—"],
+                theory: ["Design Instagram feed API"],
+                mini: ["Sketch high-level architecture"],
+                tags: ["System Design"]
+            },
+            {
+                week: 4, day: 28, title: "Day 28 – React Mock Interview",
+                coding: ["2 React coding tasks"],
+                theory: ["React hooks + optimization"],
+                mini: ["Mock session"],
+                tags: ["Mock", "React"]
+            },
+            {
+                week: 4, day: 29, title: "Day 29 – Vue + Node Mock Interview",
+                coding: ["2 Vue/Node problems"],
+                theory: ["Backend scaling, Vue internals"],
+                mini: ["Mock session"],
+                tags: ["Mock", "Vue", "Node"]
+            },
+            {
+                week: 4, day: 30, title: "Day 30 – Final Full Mock (90 min)",
+                coding: ["2 JS + 1 React/Vue + 1 Node problem"],
+                theory: ["System design, async, performance"],
+                mini: ["Simulated real interview"],
+                tags: ["Final", "Mock"]
+            },
+        ];
+
+        // ---- Helpers -----------------------------------------------------------
+        const $ = (sel, root = document) => root.querySelector(sel);
+        const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+
+        const KEY = 'roadmap.progress.v1';
+        const STATE = JSON.parse(localStorage.getItem(KEY) || '{}');
+
+        function save() { localStorage.setItem(KEY, JSON.stringify(STATE)); }
+
+        function makeId(week, day, type, idx) { return `w${week}-d${day}-${type}-${idx}`; }
+
+        function percent(done, total) { return total ? Math.round((done / total) * 100) : 0; }
+
+        function setBar(idPctLabel, pct) {
+            const [barId, labelId] = idPctLabel; // [bar,label]
+            $(barId).style.width = pct + '%';
+            $(labelId).textContent = pct + '%';
+        }
+
+        function updateAllProgress() {
+            // per week
+            for (let w = 1; w <= 4; w++) {
+                const dayCards = $$(`.day[data-week='${w}']`);
+                let done = 0, total = 0;
+                dayCards.forEach(card => {
+                    const checks = $$('input[type=checkbox]', card);
+                    total += checks.length;
+                    done += checks.filter(c => c.checked).length;
+                });
+                const pct = percent(done, total);
+                setBar([`#w${w}Bar`, `#w${w}Label`], pct);
+            }
+            // overall
+            const allChecks = $$('input[type=checkbox]');
+            const overallPct = percent(allChecks.filter(c => c.checked).length, allChecks.length);
+            setBar(['#overallBar', '#overallLabel'], overallPct);
+            // sidebar toc
+            updateTOC();
+        }
+
+        function updateTOC() {
+            const toc = $('#toc');
+            toc.innerHTML = '';
+            for (let w = 1; w <= 4; w++) {
+                const pct = $(`#w${w}Label`).textContent;
+                const a = document.createElement('a');
+                a.href = `#week${w}`;
+                a.innerHTML = `<strong>Week ${w}</strong> <small>${pct}</small>`;
+                toc.appendChild(a);
+            }
+        }
+
+        function render() {
+            PLAN.forEach(item => {
+                const container = $(`#days-week${item.week}`);
+                const tpl = $('#day-template').content.cloneNode(true);
+                const card = tpl.querySelector('.day');
+                card.dataset.week = item.week;
+                card.dataset.day = item.day;
+                card.id = `day-${item.day}`;
+
+                tpl.querySelector('.day-title').textContent = `${item.title}`;
+                const badges = tpl.querySelector('.badges');
+                item.tags.forEach(t => { const b = document.createElement('span'); b.className = 'badge'; b.textContent = t; badges.appendChild(b); });
+
+                // Build tasks
+                const sections = [['coding', 'coding'], ['theory', 'theory'], ['mini', 'mini']];
+                sections.forEach(([key, cls]) => {
+                    const wrap = tpl.querySelector(`.${cls}`);
+                    item[key].forEach((label, idx) => {
+                        const id = makeId(item.week, item.day, key, idx);
+                        const div = document.createElement('label');
+                        div.className = 'task';
+                        div.innerHTML = `<input type="checkbox" id="${id}"><span>${label}</span>`;
+                        wrap.appendChild(div);
+                    });
+                });
+
+                // Status
+                tpl.querySelector('.status').textContent = `Week ${item.week} • Day ${item.day}`;
+                tpl.querySelector('.counts').textContent = `3 sections`;
+
+                container.appendChild(tpl);
+            });
+
+            // Restore state
+            Object.entries(STATE).forEach(([id, val]) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                if (el.type === 'checkbox') el.checked = !!val;
+                if (el.classList && el.classList.contains('note')) el.value = String(val || '');
+            });
+
+            // Wire events
+            $$('input[type=checkbox]').forEach(cb => {
+                cb.addEventListener('change', e => { STATE[cb.id] = cb.checked; save(); updateAllProgress(); });
+            });
+            $$('.note').forEach(n => {
+                const id = `note-${n.closest('.day').dataset.week}-${n.closest('.day').dataset.day}`;
+                n.id = id;
+                n.addEventListener('input', () => { STATE[id] = n.value; save(); });
+                if (STATE[id]) n.value = STATE[id];
+            });
+
+            updateAllProgress();
+        }
+
+        // Search filter
+        function setupSearch() {
+            const input = $('#search');
+            input.addEventListener('input', () => {
+                const q = input.value.trim().toLowerCase();
+                $$('.day').forEach(card => {
+                    const text = card.innerText.toLowerCase();
+                    card.style.display = text.includes(q) ? '' : 'none';
+                });
+            });
+        }
+
+        // Expand/Collapse Weeks
+        function setupExpanders() {
+            $('#expandAll').addEventListener('click', () => {
+                $$('details').forEach(d => d.open = true);
+            });
+            $('#collapseAll').addEventListener('click', () => {
+                $$('details').forEach(d => d.open = false);
+            });
+        }
+
+        // Reset
+        function setupReset() {
+            $('#reset').addEventListener('click', () => {
+                if (!confirm('This will clear all saved progress and notes. Continue?')) return;
+                localStorage.removeItem(KEY);
+                location.reload();
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            render();
+            setupSearch();
+            setupExpanders();
+            setupReset();
+        });
+    </script>
+</body>
+
+</html>
