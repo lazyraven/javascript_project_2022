@@ -10,31 +10,86 @@
     body {
         /* background: #333; */
         /* color: #fff; */
+        font-family: Verdana, Geneva, Tahoma, sans-serif
+            /* font-family: 'Brush Script MT', cursive; */
     }
-    .blue{
-        color: blue;
+
+    .blue {
+        color: blueviolet;
+        font-weight: bold;
+        display: inline;
+    }
+
+    p,
+    pre {
+        font-size: 16px;
+    }
+
+    #customlist {
+        /* delete default counter */
+        list-style-type: none;
+        /* create custom counter and set it to 0 */
+        counter-reset: elementcounter;
+    }
+
+    #customlist>li:before {
+        /* print out "Element " followed by the current counter value */
+        content: "Question " counter(elementcounter) ": ";
+        /* increment counter */
+        counter-increment: elementcounter;
+        font-weight: bold;
+        color: blueviolet;
     }
 </style>
 
 <body>
-    <div>
-        <h3 class="blue">Question 1: var vs let vs const </h3>
-    <pre>Definition : In JavaScript, var is function-scoped and allows redeclaration,
+    <ol id="customlist">
+        <li>
+            <h4 class="blue">What is Javasecript ?</h4>
+            <pre>
+            JavaScript (JS) is a high-level, interpreted programming language mainly used to make web pages interactive, dynamic, and functional.
+            It runs in the browser as well as on servers (using Node.js).
+
+                👉 With JS, you can:
+                • Manipulate the DOM (change HTML/CSS dynamically).
+                • Handle user events (clicks, forms, etc.).
+                • Communicate with servers (API calls).
+                • Build full-stack applications.
+
+            In short: HTML gives structure, CSS gives style, and JavaScript gives behavior to web applications.
+            </pre>
+        </li>
+        <li>
+            <h4 class="blue">var vs let vs const </h4>
+            <div>
+                <pre>Definition : In JavaScript, var is function-scoped and allows redeclaration,
                             while let is block-scoped and can only be reassigned, not redeclared.
                             const is also block-scoped but values can’t be reassigned.</pre>
-    </div>
+            </div>
+        </li>
+        <li>
+            <h4 class="blue">What is Scope ? </h4>
+            <div>
+                <pre>Definition : In JavaScript, scope defines the accessibility or visibility of variables, functions, and objects in different parts of the code.</pre>
+                <pre>There are mainly three types of scope:
 
-    <div>
-        <h3 class="blue">Question 2: What is hoisting? </h3>
-        <p>Definition : Hoisting in JavaScript means variable and function declarations are moved to the top of their scope before code execution.</p>
-        <pre>👉 Explanation:
-                    var → hoisted with default value undefined.
-        
-                    let → hoisted but in temporal dead zone, gives ReferenceError.
-        
-                    const → same as let, but must be initialized at declaration.
+                    1. Global Scope – variables accessible everywhere in the code.
+                    2. Function Scope – variables declared inside a function are accessible only within that function.
+                    3. Global Scope – variables accessible everywhere in the code.</pre>
+            </div>
+        </li>
+        <li>
+            <h4 class="blue">What is hoisting? </h4>
+            <div>
+                <p>Definition : Hoisting in JavaScript means variable and function declarations are moved to the top of
+                    their
+                    scope before code execution.</p>
+                <pre>👉 Explanation:
+                   var → hoisted with default value undefined.
+                   let → hoisted but in temporal dead zone, gives ReferenceError.
+                   const → same as let, but must be initialized at declaration.
                 </pre>
-        <pre>
+                <pre>
             example covering var, let, and const hoisting in one go:
         <code>
             // var example
@@ -50,16 +105,31 @@
             const c = 30;
         </code>
         </pre>
-
-    </div>
-
-      <div>
-        <h3 class="blue">Question 3: What is closure? </h3>
-        <pre>Definition : In JavaScript, a closure is created when a function is defined inside another function and 
+            </div>
+        </li>
+        <li>
+            <h4 class="blue">What is functions ? </h4>
+            <div>
+                <pre>Definition : A function in JavaScript is a reusable block of code designed to perform a specific task when called.
+                They help in:
+                    • Organizing code into smaller parts.
+                    • Reusing logic without rewriting.
+                    • Improving readability and maintainability.</pre>
+            </div>
+        </li>
+        <li>
+            <h4 class="blue">What is closure? </h4>
+            <div>
+                <pre>Definition : In JavaScript, a closure is created when a function is defined inside another function and 
                     the inner function "closes over" (remembers) the variables of the outer function.
                     It allows the inner function to access and manipulate those outer variables even after the outer function has returned.</pre>
-        <h3 class="blue">Question 3.1: When is it(closure) useful? </h3>
-                    <pre>
+                OR
+                <pre>
+            Closures : A closure is formed when a function “remembers” its lexical scope even after the outer function has finished.
+                       lexical scope means => inner function is lexical scope.
+                    </pre>
+                <h4 class="blue">Question 6.1: When is it(closure) useful? </h4>
+                <pre>
                       1. Data Privacy / Encapsulation => You can hide variables from the outside world and expose only what’s necessary.
                       2. Maintaining State => Closures let functions "remember" past values even after their outer function has executed.
                       3. Callbacks & Event Handlers => Useful when passing functions around; they can access the outer scope variables they were created with.
@@ -79,9 +149,27 @@
                         console.log(increment()); // 1
                         console.log(increment()); // 2
 
-                    </pre>
-    </div>
-    
+          </pre>
+                <h4 class="blue">Question 6.2: What is Lexical Scope? </h4>
+                <pre>Definition : Lexical scope means a function’s scope is determined by where it is written in the code (not where it is called).
+                Inner functions can access variables from their outer functions, but the reverse isn’t true.
+          </pre>
+            </div>
+        </li>
+
+        <li>
+            <h4 class="blue">What is IIFE (Immediately Invoked Function Expression) ? </h4>
+            <div>
+                <pre>Definition : An IIFE (Immediately Invoked Function Expression) is a JavaScript function that executes immediately after it is defined.
+            
+            <code>(function () {
+            console.log("IIFE runs immediately!");
+            })();
+            </code>
+        </pre>
+            </div>
+        </li>
+    </ol>
 </body>
 
 </html>
