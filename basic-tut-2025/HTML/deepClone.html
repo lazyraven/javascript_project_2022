@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depp Clone</title>
+    <script  src="../JavaScript/deepClone.js"></script>
+
+</head>
+<body>
+    <div>
+        <h4>Here are the common one-liners for deep cloning in JavaScript:</h4>
+        <a href="https://chatgpt.com/c/68ba59b0-66cc-8326-8c33-b8faef83c3ae">https://chatgpt.com/c/68ba59b0-66cc-8326-8c33-b8faef83c3ae</a>
+        <ol>
+            <li>Modern & Recommended (works in most modern browsers / Node.js ≥17):</li>
+            <pre>const clone = structuredClone(obj);</pre>
+            <li>JSON method (simple, but loses functions, undefined, Date, Map, Set):</li>
+            <pre>const clone = JSON.parse(JSON.stringify(obj));</pre>
+            <li>Lodash (robust, handles most edge cases):</li>
+            <pre>const clone = _.cloneDeep(obj);</pre>
+
+            <p>Use structuredClone when available, lodash for older environments or complex data, and JSON only for plain data.</p>
+        </ol>
+
+        <h4>ES6 VERSION > enhanced deep clone function that supports Object, Array, Date, RegExp, Map, and Set:</h4>
+
+        <pre>
+            when we are getting this type of error ?
+
+            Uncaught SyntaxError: Cannot use import statement outside a modules
+            
+            ANSWER : If running in Browser (frontend)
+            In your HTML, declare the script as a module:type="module"
+            <code>
+            &lt;script type="module" src="app.js"&gt;&lt;/script&gt;
+            </code>
+
+        </pre>
+        <pre>// Works with ES modules (import/export)
+
+            CommonJS version (require instead of import) for Node.js projects that don’t use ES modules?
+            module.exports = deepClone;
+            const deepClone = require("./deepClone.cjs");
+
+            ✅ Works in Node.js (CommonJS) projects without "type": "module" in package.json.
+        </pre>
+    </div>
+</body>
+</html>
