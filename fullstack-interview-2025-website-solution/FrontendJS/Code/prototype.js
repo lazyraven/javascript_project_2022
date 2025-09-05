@@ -22,17 +22,18 @@ console.log(JSON.stringify(obj)); // {}
 
 // Using a Class (modern & clean way)
 
-// class Person {
-//   constructor(id, name) {
-//     this.id = id;
-//     this.name = name;
-//   }
+class PersonTwo {
+  constructor(id, name) {
+    this.id = id;
+    this.name = name;
+  }
 
-//   toString() {
-//     return `Id: ${this.id}, Name: ${this.name}`;
-//   }
-// }
-// const p1 = new Person(101, "Nisha");
-// const p2 = new Person(101, "Deepa");
+  toString() {
+    return `Id: ${this.id}, Name: ${this.name}`;
+  }
+}
+const p1 = new PersonTwo(101, "Nisha");
+const p2 = new PersonTwo(102, "Deepa");
 
-// console.log();
+console.log(p1.toString());
+console.log(p2.toString());

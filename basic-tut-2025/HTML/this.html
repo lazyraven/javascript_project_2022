@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JavaScript/this.js"></script>
+</head>
+<body>
+    <div>
+         <li>
+            <h4 class="blue">Explain this keyword in JS ? </h4>
+            <div>
+                <pre>Definition : In JavaScript, the this keyword is a special reference that points to the object that is currently executing the function. Its value depends on how the function is called, not where it is defined.
+                        •  this depends on how a function is called.
+                        • Arrow functions do not bind their own this.
+
+                 <strong>1. Inside an Object Method :</strong> When this is used inside an object method, it refers to that object.
+                
+                <strong>2. In a Regular Function (Global Scope) :</strong> If you use this in a normal function (not inside an object), it depends:
+                     • In strict mode → this is undefined.
+                     • In non-strict mode → this refers to the global object (window in browsers, global in Node.js).
+
+                 <strong>3. Inside a Constructor Function : </strong> When using a constructor (with new), this refers to the newly created object.
+
+                 <strong>4. In a Class :</strong> In classes, this works like in constructor functions — it refers to the instance of the class.
+
+                 <strong>5. Arrow Functions :</strong> Arrow functions don’t have their own this. They inherit this from the surrounding scope.
+                Arrow functions are often used when you want to preserve the this value from the outer scope.
+                </pre>
+            </div>
+        </li>
+    </div>
+</body>
+</html>

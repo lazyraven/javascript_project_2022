@@ -9,7 +9,7 @@
 <style>
     body {
         /* background: #333; */
-        /* color: #fff; */
+        /* color: whitesmoke; */
         font-family: Verdana, Geneva, Tahoma, sans-serif
             /* font-family: 'Brush Script MT', cursive; */
     }
@@ -171,7 +171,7 @@
         </li>
 
         <li>
-            <h4 class="blue">What is Prototypes  ? </h4>
+            <h4 class="blue">What is Prototypes ? </h4>
             <div>
                 <pre>Definition : A prototype in JavaScript is an object from which other objects inherit properties and methods.
                                 
@@ -183,10 +183,9 @@
                 console.log(obj.toString());
                 // Not found in obj → found in Object.prototype → returns "[object Object]"
                 </pre>
-    </div>
+            </div>
         </li>
-
-            <li>
+        <li>
             <h4 class="blue">Deep clone object ? </h4>
             <div>
                 <pre>const clone = structuredClone(obj);
@@ -196,6 +195,52 @@
                 </pre>
             </div>
         </li>
+
+        <li>
+            <h4 class="blue">Difference between == and === </h4>
+            <div>
+                <pre>Definition :  == checks only for value equality with type conversion, while === checks for both value and type without conversion.
+                    == → compares only value.
+                    === → compares value + type.
+
+                    5 == "5"   // true
+                    5 === "5"  // false
+                </pre>
+            </div>
+        </li>
+
+        
+        <li>
+            <h4 class="blue">Explain this keyword in JS ? </h4>
+            <div>
+                <pre>Definition : In JavaScript, the this keyword is a special reference that points to the object that is currently executing the function. Its value depends on how the function is called, not where it is defined.
+                        •  this depends on how a function is called.
+                        • Arrow functions do not bind their own this.
+
+                 1. Inside an Object Method : 
+                 2. In a Regular Function (Global Scope) :   
+                 3. Inside a Constructor Function :  
+                 4. In a Class :   
+                 5. Arrow Functions :  
+                </pre>
+            </div>
+        </li>
+
+        <li>
+            <h4 class="blue">What is call/apply/bind ?</h4>
+            <div>
+                <pre>Definition : 
+                    • call → Immediately invokes a function with a given this and arguments passed individually.
+
+                    • apply → Immediately invokes a function with a given this and arguments passed as an array.
+
+                    • bind → Returns a new function with a fixed this (and optional preset arguments), without calling it immediately.
+               
+               ⚡ Key difference: call/apply = immediate execution, bind = future execution.
+                </pre>
+            </div>
+        </li>
+
     </ol>
 </body>
 
