@@ -8,8 +8,8 @@
 </head>
 <style>
     body {
-        /* background: #333; */
-        /* color: whitesmoke; */
+         /* background: #333;
+        color: whitesmoke; */
         font-family: Verdana, Geneva, Tahoma, sans-serif
             /* font-family: 'Brush Script MT', cursive; */
     }
@@ -241,7 +241,56 @@
             </div>
         </li>
 
+         <li>
+            <h4 class="blue"> Classes & inheritance ?</h4>
+            <div>
+                <pre>Definition : 1. What is a Class in JavaScript?
+                    • A class is a blueprint for creating objects.
+                    • It bundles properties (data) and methods(functions) together.
+                    • Behind the scenes, classes use prototypes.
+
+                    🔹 2. Inheritance
+                    • Inheritance means one class can extend another.
+                    • The child class inherits the parent's properties/methods and can also add its own.
+                    • Achieved with the extend keyword.
+                     OR 
+                     Inheritance allows a class (child) to use properties and methods of another class (parent).
+
+                    🔹 3. Key Points
+                    • constructor() runs when you create a new object.
+                    • super() is used in the child class to call the parent’s constructor.
+                    • Child classes can override methods.
+                    • Classes are syntactic sugar over prototypes.
+                </pre>
+            </div>
+        </li>
+
+         <li>
+            <h4 class="blue"> Promises & async/await ?</h4>
+            <div>
+                <pre>Definition : 1. What is Promises, async/await ?
+                    • Promise: An object that represent a value that may be available now, later or never (handles asynchronous operations)
+                    • async/await: A cleaner syntax built on Promise that makes asynchronous code look and behave like synchronous code.
+                
+                    Here are one-line differences between Promise and async/await:
+                    • Promise : Uses .then() and .catch() for handling async results, which can lead to callback chains.
+                    • async/await: Uses await inside an async function, making async code look synchronous and easier to read.
+
+                    👉 Promise = chaining
+                    👉 async/await = clean, synchronous-like
+                </pre>
+            </div>
+        </li>
+
+         <li>
+            <h4 class="blue"> Explain the event loop ?</h4>
+            <div>
+                <pre>Definition : The event loop is a mechanism in JavaScript that continuously checks the call stack and callback queue to execute asynchronous code without blocking the main thread.
+                </pre>
+            </div>
+        </li>
+
     </ol>
-</body>
+</body> 
 
 </html>
