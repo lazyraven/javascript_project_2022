@@ -1,13 +1,198 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promise-Async-Await-SetTimeout</title>
-    <!-- <script src="./asynAwait.js"></script> -->
     <script src="../Code/promises.js"></script>
 </head>
 <body>
     <h3>Promise-Async-Await-SetTimeout</h3>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sequential vs Parallel</title>
+  <style>
+    :root {
+      --bg: #0f172a;          /* slate-900 */
+      --panel: #111827;       /* gray-900 */
+      --text: #e5e7eb;        /* gray-200 */
+      --muted: #9ca3af;       /* gray-400 */
+      --border: #1f2937;      /* gray-800 */
+      --accent: #22d3ee;      /* cyan-400 */
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 20% -10%, #0b1226, transparent),
+                  radial-gradient(1200px 600px at 120% 110%, #0b1226, transparent),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 32px;
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 16px;
+      letter-spacing: 0.2px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      overflow: hidden;
+    }
+
+    .caption {
+      padding: 16px 20px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.98rem;
+    }
+
+    thead th {
+      text-align: left;
+      background: rgba(255,255,255,0.02);
+      font-weight: 600;
+      padding: 14px 20px;
+    }
+
+    tbody td, tbody th[scope="row"] {
+      padding: 14px 20px;
+      border-top: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tbody tr:hover td,
+    tbody tr:hover th[scope="row"] {
+      background: rgba(255,255,255,0.02);
+    }
+
+    thead th:first-child, tbody th[scope="row"] {
+      width: 22%;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    thead th:not(:first-child) {
+      color: var(--accent);
+    }
+
+    /* Responsive: stack columns on small screens */
+    @media (max-width: 640px) {
+      table, thead, tbody, th, td, tr { display: block; }
+      thead { display: none; }
+      .caption { border-bottom: 0; }
+      .row {
+        border-top: 1px solid var(--border);
+      }
+      .row:first-of-type { border-top: 0; }
+      .row .hdr {
+        padding: 14px 20px 6px;
+        color: var(--muted);
+        font-weight: 700;
+      }
+      .row .cell {
+        padding: 8px 20px 14px;
+      }
+      /* badges for column labels */
+      .badge {
+        display: inline-block;
+        font-size: 0.75rem;
+        padding: 2px 8px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        margin-right: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Sequential vs Parallel Promises</h1>
+
+    <!-- Desktop/Tablet Table -->
+    <div class="card" aria-hidden="false">
+      <div class="caption">Quick comparison of execution styles and when to use each.</div>
+      <table role="table" aria-label="Sequential vs Parallel comparison table">
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>Sequential</th>
+            <th>Parallel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Execution</th>
+            <td>One after another</td>
+            <td>All at once</td>
+          </tr>
+          <tr>
+            <th scope="row">Performance</th>
+            <td>Slower (waits for each step)</td>
+            <td>Faster (runs concurrently)</td>
+          </tr>
+          <tr>
+            <th scope="row">When to use</th>
+            <td>When tasks depend on each other</td>
+            <td>When tasks are independent</td>
+          </tr>
+          <tr>
+            <th scope="row">Example Use Case</th>
+            <td>Fetch user → then fetch posts</td>
+            <td>Fetch user, posts, comments at once</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile Stack (shown via CSS on small screens) -->
+    <div class="card" style="margin-top:16px;">
+      <div class="caption">Mobile view</div>
+      <div class="row">
+        <div class="hdr">Execution</div>
+        <div class="cell"><span class="badge">Sequential</span> One after another</div>
+        <div class="cell"><span class="badge">Parallel</span> All at once</div>
+      </div>
+      <div class="row">
+        <div class="hdr">Performance</div>
+        <div class="cell"><span class="badge">Sequential</span> Slower (waits for each step)</div>
+        <div class="cell"><span class="badge">Parallel</span> Faster (runs concurrently)</div>
+      </div>
+      <div class="row">
+        <div class="hdr">When to use</div>
+        <div class="cell"><span class="badge">Sequential</span> When tasks depend on each other</div>
+        <div class="cell"><span class="badge">Parallel</span> When tasks are independent</div>
+      </div>
+      <div class="row">
+        <div class="hdr">Example Use Case</div>
+        <div class="cell"><span class="badge">Sequential</span> Fetch user → then fetch posts</div>
+        <div class="cell"><span class="badge">Parallel</span> Fetch user, posts, comments at once</div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Loop</title>
+</head>
+<style>
+    div p, pre{
+        font-size:16px ;
+        /* font-family: Georgia, 'Times New Roman', Times, serif; */
+    }
+</style>
+<body>
+    <h3>Event Loop</h3>
+    <div>
+        <p>The event loop is one of the most important concepts in JavaScript.</p>
+        <pre> •  
+            1.  Javascript Execution Model
+
+                    • Javascript is a single-threaded -> It executes one piece of code at a time.
+                    • To handle multiple tasks (like fetching data, timers, user events), it uses the event loop with the help of the browser’s or Node.js’s runtime.
+                
+            2.  Key Components 
+
+                    1. Call Stack
+                        • Where JavaScript runs functions one by one.
+                        • Functions are pushed onto the stack when called and popped when finished.
+
+                    2. Web APIs (Browser APIs / Node APIs)
+                        • Handle asynchronous tasks (e.g., setTimeout, HTTP requests, DOM events).
+                        • Once done, they pass the result to a queue.
+
+                    3. Callback Queues
+                        • Task Queue / Macro-task queue: Holds callbacks from setTimeout, setInterval, events, etc.
+                        • Micro-task queue: Holds promises (.then, catch, finally), MutationObserver.
+
+                    4. Event Loop
+                        • The "manager."
+                        • It constantly checks:
+                                • If the call stack is empty,
+                                • Then pushes callbacks from the micro-task queue first,
+                                • Then from the macro-task queue.
+
+            3. How it Works (Step by Step)
+                    1. JS executes synchronous code first (call stack).
+                    2. Async tasks go to Web APIs.
+                    3. Once completed, their callbacks go into queues.
+                    4. Event loop checks the call stack:
+                            • If empty, process all micro-tasks first (Promises, async/await).
+                            • Then move one task from the macro-task queue (like setTimeout).
+                    5. Repeat forever.
+
+            4. Example
+                       console.log("Start");
+                        setTimeout(() => {
+                        console.log("Timeout");
+                        }, 0);
+
+                        Promise.resolve().then(() => {
+                        console.log("Promise");
+                        });
+
+                        console.log("End");
+
+        Execution Order :
+                    "Start" (synchronous → stack)
+
+                    "End" (synchronous → stack)
+
+                    "Promise" (micro-task queue → before timeout)
+
+                    "Timeout" (macro-task queue → after micro-tasks)
+        Output :
+                        Start
+                        End
+                        Promise
+                        Timeout
+
+        </pre>
+    </div>
+</body>
+</html>

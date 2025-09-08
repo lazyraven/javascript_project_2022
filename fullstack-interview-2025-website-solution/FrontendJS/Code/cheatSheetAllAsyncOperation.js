@@ -1,11 +1,12 @@
 console.log("🚀 JavaScript Async Cheat Sheet");
 
 // 1. Promise Basics
-const p = new Promise((resolve, reject) => {
+const promiseTest1 = new Promise((resolve, reject) => {
   resolve("Success");
 });
 
-p.then((res) => console.log(res)) // Success
+promiseTest1
+  .then((res) => console.log(res)) // Success
   .catch((err) => console.log(err));
 
 // 2. Async / Await

@@ -38,3 +38,25 @@ async function test(params) {
 }
 test();
 console.log("End");
+
+// Implement delay(ms) with promise
+// ou can implement a simple delay(ms) function using Promise and setTimeout.
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// Usage:
+async function example() {
+  console.log("Start");
+  await delay(2000); // waits 2 seconds
+  console.log("End after 2 seconds");
+}
+
+example();
+
+// 🔑 Explanation
+
+// delay(ms) returns a Promise.
+// setTimeout calls resolve after ms milliseconds.
+// When you use await delay(ms), JavaScript pauses until the Promise resolves.
