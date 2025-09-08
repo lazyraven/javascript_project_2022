@@ -371,6 +371,82 @@
                     </pre>
             </div>
         </li>
+
+         <li>
+            <h4 class="blue"> Explain Debounce & Throttle ?</h4>
+            <div>
+                <pre> Definition (Debounce) :  Debounce is a technique that delays a function’s execution until after a certain period of no repeated 
+                    calls, mainly used to improve performance, like handling search input or resize events.
+            
+                   Definition (Throttle) :  Executes the function at fixed intervals, no matter how many times the event occurs.
+               </pre>
+                   <h4>What’s the difference between debounce and throttle?</h4>
+                    <pre>
+                        • Debounce waits until the user stops triggering the event, while throttle runs the function at fixed intervals during the event.
+                        • Debounce waits for silence, throttle runs on a schedule.
+
+                    Example:
+                    Debounce: Typing in a search box → API call happens only after user stops typing.
+                    Throttle: Scrolling or window resize → Function runs every 200ms while user keeps scrolling.
+                </pre>
+                <pre> In code language
+                    •  Debounce (search box):
+                    const handleSearch = debounce((text) => console.log(text), 500);
+
+                    •  Throttle (scrolling):
+                    const handleScroll = throttle(() => console.log("scroll"), 1000);
+
+
+    Analogy (memorable) :
+                👉 “Debounce is like replying only after someone stops talking. 
+                    Throttle is like nodding every few seconds while they talk continuously.”
+                </pre>
+            </div>
+        </li>
+           <li>
+            <h4 class="blue"> Difference between process.nextTick and setImmediate [Node-specific features (process)]?</h4>
+            <div>
+                <pre>Definition : 
+                    🔹 One-Line Comparison
+                        • process.nextTick → Runs immediately after the current function, before the event loop continues.
+                        • setImmediate → Runs on the next cycle of the event loop, after I/O tasks are done.
+            
+            🔹 Real-Time Scenarios
+
+                1. process.nextTick (urgent micro task)
+                
+                    Example: You’re parsing a request and must validate it before doing anything else.
+                    👉 Here, the error is thrown right after the current stack, before event loop picks other tasks.
+
+                2. setImmediate (defer heavy task) | macrotask
+                    Example: You finished serving a client response, but want to log analytics without delaying I/O.
+                    👉 Logs happen after I/O is done, not blocking the response.
+
+To use Node-specific features (process) inside the browser, which doesn’t have them.
+
+                //1. process.nextTick (urgent micro task)
+
+                    function handleRequest(data) {
+                    if (!data.valid) {
+                        process.nextTick(() => {
+                        throw new Error("Invalid request");
+                        });
+                    }
+                    console.log("Processing data...");
+                    }
+                    handleRequest({ valid: false });
+
+                //2. setImmediate (defer heavy task)
+
+                    server.on("request", (req, res) => {
+                    res.end("Response sent!");
+                    setImmediate(() => console.log("Log analytics for:", req.url));
+                    });
+
+</pre>
+
+                    </div>
+        </li>
     </ol>
 </body> 
 
