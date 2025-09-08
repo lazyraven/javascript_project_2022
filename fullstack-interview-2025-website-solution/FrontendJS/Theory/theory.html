@@ -8,8 +8,8 @@
 </head>
 <style>
     body {
-         /* background: #333;
-        color: whitesmoke; */
+         background: #333;
+        color: whitesmoke;
         font-family: Verdana, Geneva, Tahoma, sans-serif
             /* font-family: 'Brush Script MT', cursive; */
     }
@@ -266,30 +266,96 @@
         </li>
 
          <li>
-            <h4 class="blue"> Promises & async/await ?</h4>
+            <h4 class="blue">What is Promises ?</h4>
             <div>
-                <pre>Definition : 1. What is Promises, async/await ?
-                    • Promise: An object that represent a value that may be available now, later or never (handles asynchronous operations)
-                    • async/await: A cleaner syntax built on Promise that makes asynchronous code look and behave like synchronous code.
-                
-                    Here are one-line differences between Promise and async/await:
-                    • Promise : Uses .then() and .catch() for handling async results, which can lead to callback chains.
-                    • async/await: Uses await inside an async function, making async code look synchronous and easier to read.
+             <pre>Definition : 1. Promise: A Promise is an object that represents the eventual completion (or failure) of an asynchronous operation.
 
-                    👉 Promise = chaining
-                    👉 async/await = clean, synchronous-like
+                    • It has 3 states:
+                            • Pending → initial state.
+                            • Fulfilled → operation completed successfully (resolved).
+                            • Rejected → operation failed (error).
+
+                    • We use .then() for handling success and .catch() for handling errors, with .finally() for cleanup.
                 </pre>
             </div>
         </li>
 
          <li>
-            <h4 class="blue"> Explain the event loop ?</h4>
+            <h4 class="blue"> Explain Async/Await ?</h4>
             <div>
-                <pre>Definition : The event loop is a mechanism in JavaScript that continuously checks the call stack and callback queue to execute asynchronous code without blocking the main thread.
-                </pre>
+                <pre>Definition : 2. Async/Await: Introduced in ES2017, built on top of Promises.
+
+                    • async makes a function return a Promise.
+                    • await pauses execution until a Promise is resolved/rejected, making async code look synchronous.
+                    • Helps avoid callback hell and makes code cleaner.
+
+                    👉 Promise = chaining
+                    👉 async/await = clean, synchronous-like</pre>
             </div>
         </li>
 
+         <li>
+            <h4 class="blue">Explain Promises, async/await ? </h4>
+            <div>
+                <pre> 
+                    Expected Answer
+                Step-by-step reasoning:
+
+                1. Synchronous execution first:
+                    • Logs "Start".
+                    • Schedules setTimeout callback in the macrotask queue.
+                    • Creates a resolved Promise → schedules "Promise then" in the microtask queue.
+                    • Calls test():
+                    • Logs "Inside async".
+                    • Hits await Promise.resolve(), which pauses execution and schedules "After await" in the microtask queue.
+                    • Logs "End".
+
+                2. Microtasks run before macrotasks:
+                    • "Promise then" logs.
+                    • "After await" logs.
+                    • The await pauses execution until the Promise resolves.
+
+                3. Finally, macrotasks run:
+                    • "setTimeout" logs.
+
+                    👉 Output:
+                                Start   
+                                Inside async
+                                End
+                                Promise then
+                                After await
+                                setTimeout
+
+
+                        • Synchronous code runs first.
+                        • Microtasks (Promises, async/await) run next.
+                        • Macrotasks (setTimeout, setInterval, I/O) run last.
+
+                        console.log("Check Other practice => C:workspace-nisha\x01_github\x02_Javascriptjavascript_project_2022\basic-tut-2025JavaScript");
+                    
+                    
+                    Spoken Answer : 
+                    *"In JavaScript, execution follows the event loop model. First, synchronous code runs top to bottom. After
+                     that, microtasks like Promise.then() and await callbacks run before macrotasks like setTimeout.
+
+                    Promises are objects representing the result of an async operation, and we handle them with .then() or
+                     .catch(). Async/await is built on top of Promises and makes async code look synchronous, improving readability.
+
+                    For example, if I combine setTimeout, Promises, and async/await, the order is always: sync code first, 
+                    then microtasks from Promises or await, and finally macrotasks like setTimeout. This is why understanding the 
+                    event loop is crucial when debugging async behavior."*
+                     Chcek => "js_async_cheatsheet.pdf"
+                    
+                    </pre>
+            </div>
+        </li>
+        <li>
+            <h4 class="blue"> Explain the event loop ?</h4>
+            <div>
+                <pre>Definition : The event loop is a mechanism in JavaScript that continuously checks the call stack and callback queue to execute asynchronous code without blocking the main thread.
+                        </pre>
+            </div>
+        </li>
     </ol>
 </body> 
 

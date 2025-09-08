@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise Async Await</title>
+    <script src="../JavaScript/promiseAsyncAwait.js"></script>
+</head>
+<body>
+    <h3>Promise Async Await</h3>
+    <ol>
+        <li>
+            <h4 class="blue">Explain Promises, async/await ? </h4>
+            <strong>Prepare a tricky interview question (like mixing promises with async/await)</strong>
+            <div>
+                <pre>Expected Answer
+                Step-by-step reasoning:
+
+                1. Synchronous code runs first
+                    • "Start" is logged.
+                    • Inside the Promise constructor executes immediately → logs "Inside Promise".
+                    • "End" logs next (still synchronous).
+
+                2. Microtasks (Promises/await) run after sync code
+                    • The then() callback is queued in the microtask queue.
+                    • The async function is called → logs "Inside async function".
+                    • The await pauses execution until the Promise resolves.
+
+                3. Then microtasks are executed
+                    • First, .then() runs → logs "Resolved Value".
+                    • Then, the paused async function continues → logs "Await result: Resolved Value".
+
+                    👉 This type of question tests your understanding of:
+
+                        • Event loop
+                        • Synchronous vs asynchronous execution
+                        • Microtask queue (Promises, async/await) vs macrotask queue (setTimeout)
+
+                        output :
+                        Start
+                        Inside Promise
+                        Inside async function
+                        End
+                        Resolved Value
+                        Await result: Resolved Value
+
+                </pre>
+            </div>
+        </li>
+    </ol>
+</body>
+</html>
