@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question (code-basic-tut-2025) Checklist</title>
+  <script src="../JavaScript/includes.js"></script>
+  <script src="../JavaScript/sorting.js"></script>
+
+  <style>
+    body{
+      /* background: #1e1e1c;
+      color: whitesmoke; */
+    }
+    table {
+      width: 60%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    .blue {
+      color: blue;
+    }
+    .form-container {
+      margin: 15px 0;
+    }
+    input[type="text"] {
+      padding: 5px;
+      width: 250px;
+    }
+    button {
+      padding: 6px 12px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h3 class="blue">Questions Checklist :</h3>
+
+  <!-- Add Question Form -->
+  <div class="form-container">
+    <input type="text" id="newQuestion" placeholder="Enter new question">
+    <button id="addBtn">Add</button>
+  </div>
+
+  <!-- Questions Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Done</th>
+        <th>Question</th>
+      </tr>
+    </thead>
+    <tbody id="questionTable"></tbody>
+  </table>
+
+  <script>
+    const tableBody = document.getElementById("questionTable");
+    const addBtn = document.getElementById("addBtn");
+    const newQuestionInput = document.getElementById("newQuestion");
+
+    // Load questions from localStorage or use default
+    let questions = JSON.parse(localStorage.getItem("questions")) || [
+      { id: "includes", text: "JS Method Includes", done: false },
+    ];
+
+    // Render table
+    function renderTable() {
+      tableBody.innerHTML = "";
+      questions.forEach(q => {
+        const row = document.createElement("tr");
+
+        // Checkbox
+        const tdCheckbox = document.createElement("td");  
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = q.done;
+        checkbox.addEventListener("change", () => {
+          q.done = checkbox.checked;
+          saveData();
+        });
+        tdCheckbox.appendChild(checkbox);
+
+        // Question text
+        const tdText = document.createElement("td");
+        tdText.textContent = q.text;
+
+        row.appendChild(tdCheckbox);
+        row.appendChild(tdText);
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Save to localStorage
+    function saveData() {
+      localStorage.setItem("questions", JSON.stringify(questions));
+    }
+
+    // Add new question
+    addBtn.addEventListener("click", () => {
+      const text = newQuestionInput.value.trim();
+      if (text) {
+        const newQuestion = {
+          id: Date.now().toString(),
+          text,
+          done: false
+        };
+        questions.push(newQuestion);
+        saveData();
+        renderTable();
+        newQuestionInput.value = "";
+      }
+    });
+
+    // Initial render
+    renderTable();
+  </script>
+
+</body>
+</html>

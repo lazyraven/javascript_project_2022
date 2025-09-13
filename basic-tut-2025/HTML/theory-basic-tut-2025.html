@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theory (basic-tut-2025) Javascript</title>
+</head>
+<style>
+    body {
+        /* background: #333;
+        color: whitesmoke; */
+        font-family: Verdana, Geneva, Tahoma, sans-serif
+            /* font-family: 'Brush Script MT', cursive; */
+    }
+
+    .blue {
+        color: blueviolet;
+        font-weight: bold;
+        display: inline;
+    }
+
+    p,
+    pre {
+        font-size: 16px;
+    }
+
+    #customlist {
+        /* delete default counter */
+        list-style-type: none;
+        /* create custom counter and set it to 0 */
+        counter-reset: elementcounter;
+    }
+
+    #customlist>li:before {
+        /* print out "Element " followed by the current counter value */
+        content: "Question " counter(elementcounter) ": ";
+        /* increment counter */
+        counter-increment: elementcounter;
+        font-weight: bold;
+        color: blueviolet;
+    }
+</style>
+
+<body>
+    <ol id="customlist">
+        <li>
+            <h4 class="blue">What is includes method in JS ?</h4>
+            <pre>Definition :  The <strong>includes()</strong> method in JavaScript is a powerful tool for checking the presence of a specific value within either an array or a string.
+             It returns a boolean value (true or false) indicating whether the value is found. 
+            </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is sort method in JS ?</h4>
+            <div>
+                <pre>
+                1. String sorted , <strong>sort() : </strong>For basic alphabetical sorting where case doesn't matter or is consistent.
+                      fruits.sort();
+
+                2. Case-Insensitive Sort:,  <strong>localeCompare() :</strong> For robust, language-aware sorting, especially when dealing with mixed cases, special characters, or international languages.
+                      fruits.sort((a, b) => a.localeCompare(b));
+
+                3. Sorting Without Modifying the Original Array (ES2023): <strong>toSorted : </strong> To create a new, sorted array without modifying the original (ES2023 and newer).
+                       let newArray = fruits.toSorted();
+
+                4. <strong>sort() + reverse() : </strong>A quick way to get descending order with basic alphabetical sorting.	
+                       fruits.sort().reverse();
+            </pre>
+            </div>
+        </li>
+    </ol>
+</body>
+
+</html>
