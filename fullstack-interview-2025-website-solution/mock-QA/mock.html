@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Mock Q&A</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f2f5;
+    }
+    .quiz-container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 { text-align: center; color: #333; }
+    .question { font-weight: bold; margin-top: 20px; }
+    textarea { width: 100%; height: 80px; margin-top: 10px; padding: 10px; font-size: 16px; }
+    button { margin-top: 15px; padding: 10px 20px; font-size: 16px; border: none; background: #007bff; color: white; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .solution { margin-top: 15px; background: #e9f7ef; padding: 10px; border-left: 5px solid #28a745; display: none; white-space: pre-wrap; }
+    .score { margin-top: 20px; font-weight: bold; text-align: center; font-size: 18px; color: #28a745; }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>JavaScript Mock Q&A</h1>
+    <p style="background-color: yellowgreen; padding: 2px;">Chcek answer in same file or you can click on submit button</p>
+    <div class="question" id="question"></div>
+    <textarea id="answer" placeholder="Type your answer here..."></textarea>
+    <button id="submitBtn">Submit</button>
+    <div class="solution" id="solution"></div>
+    <div class="score" id="score"></div>
+  </div>
+
+  <script>
+    const questions = [
+      { q: "1. Differences between var, let, and const?", a: "var: function-scoped, can be redeclared.\nlet: block-scoped, cannot be redeclared in the same scope.\nconst: block-scoped, cannot be reassigned." },
+      { q: "2. Difference between == and ===?", a: "== checks value after type coercion; === checks value and type strictly." },
+      { q: "3. How to check if a variable is an array?", a: "Use Array.isArray(variable)." },
+      { q: "4. What is a closure? Example?", a: "A closure is a function that remembers its outer scope.\nExample:\nfunction outer(){ let x=5; return function(){ console.log(x); } }" },
+      { q: "5. Difference between null and undefined?", a: "null is assigned value meaning 'no value'; undefined means a variable is declared but not assigned." },
+      { q: "6. Difference between call, apply, and bind?", a: "call: immediately invokes function with given this and args.\napply: same as call, but args in array.\nbind: returns a new function with bound this and args, not invoked immediately." },
+      { q: "7. Synchronous vs Asynchronous code?", a: "Synchronous: code runs line by line.\nAsynchronous: code can run later while other code continues (e.g., setTimeout, fetch, Promises)." },
+      { q: "8. What is event bubbling and capturing?", a: "Event bubbling: event propagates from target up to root.\nEvent capturing: event propagates from root down to target." },
+      { q: "9. Explain 'this' keyword in JavaScript.", a: "'this' refers to the context of the function call:\n- In global scope: window (browser), global (Node).\n- In object method: the object.\n- In constructor: the instance.\n- In arrow function: inherits from parent scope." },
+      { q: "10. What is a Promise and how to use async/await?", a: "Promise: object representing future completion/failure.\nExample:\nasync function fetchData(){ try{ const res = await fetch(url); } catch(e){ console.error(e); } }" },
+      { q: "11. Difference between prototype and class?", a: "Prototype: older way to add methods to objects.\nClass: syntactic sugar over prototype-based inheritance." },
+      { q: "12. What is a module? CommonJS vs ES6 modules?", a: "Module: reusable code unit.\nCommonJS: Node.js, uses require/exports.\nES6: uses import/export." },
+      { q: "13. How does the event loop work?", a: "JS is single-threaded. Event loop handles callbacks from the task queue after current call stack is empty." },
+      { q: "14. What are Generators? Example?", a: "Generators are functions that can pause and resume using yield.\nExample:\nfunction* gen(){ yield 1; yield 2; }\nconst g=gen(); console.log(g.next().value);" },
+      { q: "15. Explain memory leaks in JS and prevention.", a: "Memory leaks occur when memory is not released.\nPrevent: remove unused references, avoid global vars, clear timers, detach DOM listeners." }
+    ];
+
+    let index = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById("question");
+    const answerEl = document.getElementById("answer");
+    const solutionEl = document.getElementById("solution");
+    const submitBtn = document.getElementById("submitBtn");
+    const scoreEl = document.getElementById("score");
+
+    function showQuestion() {
+      if(index < questions.length){
+        questionEl.textContent = questions[index].q;
+        answerEl.value = "";
+        solutionEl.style.display = "none";
+      } else {
+        questionEl.style.display = "none";
+        answerEl.style.display = "none";
+        submitBtn.style.display = "none";
+        solutionEl.style.display = "none";
+        scoreEl.textContent = `🎉 Quiz Complete! You went through ${questions.length} questions.`;
+      }
+    }
+
+    submitBtn.addEventListener("click", () => {
+      solutionEl.style.display = "block";
+      solutionEl.textContent = "Solution:\n" + questions[index].a;
+      index++;
+      setTimeout(showQuestion, 3000); // Move to next question after 3 seconds
+    });
+
+    showQuestion();
+  </script>
+</body>
+</html>

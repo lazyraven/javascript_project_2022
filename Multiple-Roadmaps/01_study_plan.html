@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JavaScript & Frontend Study Plan</title>
+  <style>
+    :root{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color:#111}
+    body{max-width:900px;margin:32px auto;padding:24px;background:#fff;line-height:1.6}
+    h1{font-size:28px;margin-bottom:6px}
+    h2{font-size:20px;margin-top:24px}
+    h3{font-size:16px;margin-top:18px}
+    p{margin:8px 0}
+    ul{margin:6px 0 12px 20px}
+    .pill{display:inline-block;background:#eef2ff;padding:4px 8px;border-radius:999px;font-size:13px;margin-right:6px}
+    .tip{background:#fff8e6;border-left:4px solid #ffd966;padding:10px;margin:12px 0}
+    pre{background:#0f1724;color:#f8fafc;padding:12px;border-radius:6px;overflow:auto}
+    footer{margin-top:28px;color:#555;font-size:13px}
+    a{color:#2563eb;text-decoration:none}
+    a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <h1>JavaScript & Frontend — Consolidated Study Plan</h1>
+  <p>A compact, structured HTML version of your study topics. Use this as a checklist or reference while preparing. Included links to recommended resources.</p>
+
+  <h2>Core JavaScript</h2>
+  <ul>
+    <li>Event loop (browser vs Node): tasks, microtasks, rendering frames — <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop" target="_blank">MDN Event Loop</a></li>
+    <li>Async/await, Promises, callbacks — <a href="https://javascript.info/async" target="_blank">The Modern JavaScript Tutorial</a></li>
+    <li>Closures — <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank">MDN Closures</a></li>
+    <li>Prototypes & prototype chain — <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes" target="_blank">MDN Prototypes</a></li>
+    <li>Deep vs shallow copy — <a href="https://lodash.com/docs/4.17.15#cloneDeep" target="_blank">Lodash cloneDeep</a></li>
+  </ul>
+
+  <h2>Performance Optimizations</h2>
+  <ul>
+    <li>Rendering performance: minimize reflows/repaints — <a href="https://developers.google.com/web/fundamentals/performance/rendering" target="_blank">Google Web Fundamentals</a></li>
+    <li>Memoization & pure components</li>
+    <li>Lazy loading: dynamic import, intersection observer — <a href="https://web.dev/lazy-loading/" target="_blank">Web.dev Lazy Loading</a></li>
+    <li>Network optimizations: caching, compression, CDN, HTTP2/3</li>
+    <li>Profiling: browser devtools, Lighthouse, flamecharts — <a href="https://developer.chrome.com/docs/lighthouse/" target="_blank">Lighthouse Guide</a></li>
+  </ul>
+
+  <h2>ES6+ Features</h2>
+  <ul>
+    <li>let/const, arrow functions, template strings</li>
+    <li>Destructuring, default params, rest/spread</li>
+    <li>Modules (import/export), classes, generators</li>
+    <li>Optional chaining, nullish coalescing, top-level await</li>
+  </ul>
+
+  <h2>Frontend Frameworks (React / Angular / Vue)</h2>
+  <ul>
+    <li>Component lifecycle (mount, update, unmount) — <a href="https://react.dev/reference/react" target="_blank">React Docs</a></li>
+    <li>State management: Redux (<a href="https://redux.js.org/" target="_blank">redux.js.org</a>), Vuex, RxJS</li>
+    <li>Rendering performance: virtual DOM diffing, keys, avoid inline objects</li>
+    <li>Memoization primitives: React.memo, useMemo, computed props</li>
+  </ul>
+
+  <h2>Advanced Frontend Topics</h2>
+  <ul>
+    <li>Micro-frontends — <a href="https://martinfowler.com/articles/micro-frontends.html" target="_blank">Martin Fowler</a></li>
+    <li>SSR & hydration — <a href="https://nextjs.org/docs" target="_blank">Next.js Docs</a></li>
+    <li>Progressive enhancement, accessibility & SEO</li>
+  </ul>
+
+  <h2>System Design for Frontend</h2>
+  <ul>
+    <li>Scalable dashboard</li>
+    <li>Infinite-scrolling feed</li>
+    <li>Chat app with real-time updates</li>
+  </ul>
+
+  <h2>Data Structures & Algorithms</h2>
+  <ul>
+    <li>Arrays & strings: sliding window, two pointers</li>
+    <li>Hashing patterns: frequency maps, sets</li>
+    <li>Binary search variations: rotated arrays, bounds</li>
+    <li>Basic trees & graphs: DFS, BFS, level-order</li>
+    <li>Practice: LeetCode Top 100 & Grokking Patterns — 3–5 problems daily</li>
+    <li><a href="https://leetcode.com/top-interview-questions/" target="_blank">LeetCode Top 100</a></li>
+    <li><a href="https://www.educative.io/courses/grokking-the-coding-interview" target="_blank">Grokking Patterns</a></li>
+  </ul>
+
+  <h2>Backend (Node.js + MongoDB)</h2>
+  <h3>Node.js</h3>
+  <ul>
+    <li>Event loop in Node vs browser</li>
+    <li>Build scalable APIs: Express, NestJS</li>
+    <li>Middleware, error handling, authentication (JWT, OAuth)</li>
+    <li>Streams, clustering, worker threads</li>
+  </ul>
+  <h3>MongoDB</h3>
+  <ul>
+    <li>Schema design: embedding vs referencing, denormalization</li>
+    <li>Aggregation pipelines & performance patterns</li>
+    <li>Indexes & query tuning</li>
+    <li>Transactions, replication basics</li>
+  </ul>
+
+  <h2>System Design (Full-stack)</h2>
+  <ul>
+    <li>Twitter-like feed</li>
+    <li>Scalable chat app</li>
+    <li>Real-time notifications</li>
+    <li>E-commerce cart system</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Study & Practice Tips</strong>
+    <ul>
+      <li>Daily: 3–5 DSA problems + 1 system design sketch + 1 implementation</li>
+      <li>Profile regularly; measure before optimizing</li>
+      <li>Small projects: dashboard, chat, feed</li>
+    </ul>
+  </div>
+
+  <footer>
+    Generated HTML study checklist with resource links for easy reference and learning.
+  </footer>
+</body>
+</html>

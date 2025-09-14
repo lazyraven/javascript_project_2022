@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Full-Stack System Design Problems — Cheatsheet</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--muted:#94a3b8;--accent:#60a5fa;--glass:rgba(255,255,255,0.03)}
+    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;color:#e6eef8;background:linear-gradient(180deg,#071024 0%, #08111b 100%);}
+    .wrap{max-width:1000px;margin:36px auto;padding:28px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,23,0.6);}
+    header{display:flex;gap:16px;align-items:center;margin-bottom:20px}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:0;color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:18px}
+    .card{background:var(--card);padding:16px;border-radius:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02);}
+    .card h3{margin:0 0 8px 0;font-size:15px}
+    .small{font-size:13px;color:var(--muted);margin:6px 0}
+    .pill{display:inline-block;padding:6px 8px;border-radius:999px;font-size:12px;margin-right:6px;background:var(--glass);color:var(--muted)}
+    .section{margin-top:18px}
+    pre{white-space:pre-wrap;background:#071825;padding:10px;border-radius:8px;color:#dbeafe;font-size:13px;overflow:auto}
+    code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;font-size:13px}
+    footer{margin-top:20px;color:var(--muted);font-size:13px}
+    @media (max-width:420px){.wrap{padding:16px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Full‑Stack System Design Problems — Interview Cheatsheet</h1>
+        <p class="lead">10 common interview systems with front/back/DB and key concepts. Ready to print or copy into notes.</p>
+      </div>
+    </header>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>1. Scalable URL Shortener (Bitly)</h3>
+        <div class="small">Frontend: Simple form to shorten &amp; redirect.</div>
+        <div class="small">Backend: Node.js API for shorten + redirect.</div>
+        <div class="small">Database: MongoDB { shortId → longURL }.</div>
+        <div class="small">Concepts: Hashing, DB indexing, caching (Redis).</div>
+      </div>
+
+      <div class="card">
+        <h3>2. Real‑Time Chat (WhatsApp / WebSocket)</h3>
+        <div class="small">Frontend: React chat UI (real‑time updates).</div>
+        <div class="small">Backend: Node.js + WebSockets / Socket.io.</div>
+        <div class="small">Database: MongoDB (messages collection).</div>
+        <div class="small">Concepts: Pub/Sub, scaling WS servers, sharding messages.</div>
+      </div>
+
+      <div class="card">
+        <h3>3. News Feed / Social Timeline</h3>
+        <div class="small">Frontend: Infinite scroll feed.</div>
+        <div class="small">Backend: Node.js APIs for posting &amp; retrieving feeds.</div>
+        <div class="small">Database: MongoDB (posts, users, followers).</div>
+        <div class="small">Concepts: Fan‑out on write vs read, caching hot feeds, pagination.</div>
+      </div>
+
+      <div class="card">
+        <h3>4. E‑Commerce (Mini Amazon)</h3>
+        <div class="small">Frontend: Product listing + cart + checkout.</div>
+        <div class="small">Backend: REST APIs (Node.js).</div>
+        <div class="small">Database: MongoDB (products, orders, users).</div>
+        <div class="small">Concepts: Cart design, order consistency, inventory, payment flows.</div>
+      </div>
+
+      <div class="card">
+        <h3>5. Scalable Auth &amp; Authorization</h3>
+        <div class="small">Frontend: Login / Signup UI.</div>
+        <div class="small">Backend: Node.js with JWT / OAuth.</div>
+        <div class="small">Database: MongoDB (users, sessions).</div>
+        <div class="small">Concepts: Session vs JWT, refresh tokens, bcrypt password storage.</div>
+      </div>
+
+      <div class="card">
+        <h3>6. File Upload &amp; Sharing (Drive Lite)</h3>
+        <div class="small">Frontend: Upload UI with progress.</div>
+        <div class="small">Backend: Node.js + S3/GCP storage.</div>
+        <div class="small">Database: MongoDB for metadata.</div>
+        <div class="small">Concepts: File sharding, CDN, large uploads, signed URLs.</div>
+      </div>
+
+      <div class="card">
+        <h3>7. Scalable Notification Service</h3>
+        <div class="small">Frontend: Notification dropdown.</div>
+        <div class="small">Backend: Queue‑based Node.js workers.</div>
+        <div class="small">Database: MongoDB (notifications collection).</div>
+        <div class="small">Concepts: Kafka/RabbitMQ, retries, rate limiting.</div>
+      </div>
+
+      <div class="card">
+        <h3>8. Collaborative Document Editing</h3>
+        <div class="small">Frontend: Rich text editor (React + Quill).</div>
+        <div class="small">Backend: Node.js with WebSockets.</div>
+        <div class="small">Database: MongoDB (doc states &amp; versions).</div>
+        <div class="small">Concepts: Conflict resolution, OT/CRDT, versioning.</div>
+      </div>
+
+      <div class="card">
+        <h3>9. Ride‑Hailing (Uber/Ola Simplified)</h3>
+        <div class="small">Frontend: Map UI (Google Maps).</div>
+        <div class="small">Backend: Node.js booking + tracking APIs.</div>
+        <div class="small">Database: MongoDB (drivers, riders, trips).</div>
+        <div class="small">Concepts: Matching algorithms, geo‑indexing, real‑time location.</div>
+      </div>
+
+      <div class="card">
+        <h3>10. Video Streaming Platform (YouTube Lite)</h3>
+        <div class="small">Frontend: Video player UI.</div>
+        <div class="small">Backend: Node.js APIs for upload &amp; playback.</div>
+        <div class="small">Database: MongoDB (video metadata).</div>
+        <div class="small">Concepts: Video chunking, CDN, adaptive streaming, recommender basics.</div>
+      </div>
+
+    </div>
+
+    <div class="section card">
+      <h3>How to prepare (quick checklist)</h3>
+      <div class="small">Sketch architecture: Frontend, API layer, DB schema.</div>
+      <div class="small">Discuss trade‑offs: SQL vs NoSQL, caching, consistency vs availability.</div>
+      <div class="small">Write pseudo API contracts in Node.js and explain endpoints.</div>
+      <div class="small">Think scaling: sharding, load balancing, queues, caching.</div>
+      <p class="small" style="margin-top:10px">Practice explaining one system in 30–40 mins — interviewers evaluate clarity, trade‑offs, and scaling decisions.</p>
+
+      <pre><code>// Example pseudo-API (Node.js / Express)
+// POST /api/shorten { url }
+// GET  /r/:shortId  -> redirect
+
+app.post('/api/shorten', async (req,res)=>{
+  const {url}=req.body; // validate
+  const shortId = generateShortId(url);
+  await db.collection('urls').updateOne({shortId},{ $set: {longUrl:url, createdAt: new Date()}}, {upsert:true});
+  return res.json({short: `https://short.ly/${shortId}`});
+});
+
+app.get('/r/:shortId', async (req,res)=>{
+  const doc = await db.collection('urls').findOne({shortId:req.params.shortId});
+  if(!doc) return res.status(404).send('not found');
+  res.redirect(doc.longUrl);
+});
+</code></pre>
+
+    </div>
+
+    <footer>
+      Need this in a different format (PDF, Markdown, or React component)? Tell me which and I will generate it.
+    </footer>
+  </div>
+</body>
+</html>

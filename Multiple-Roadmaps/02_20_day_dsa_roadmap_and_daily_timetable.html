@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>20-Day Job Prep Roadmap — DSA + Daily Timetable</title>
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#94a3b8; --accent:#06b6d4; --glass: rgba(255,255,255,0.03);
+      --card-pad:18px; --radius:12px; --max-w:1100px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071022 0%, #071623 60%);color:#e6eef6}
+    .container{max-width:var(--max-w);margin:28px auto;padding:20px}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:0;color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:1fr 420px;gap:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);padding:var(--card-pad);border-radius:var(--radius);box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    .section-title{font-weight:600;color:#fff;margin-bottom:8px}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    thead th{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--muted);font-weight:600}
+    tbody td{padding:10px;border-bottom:1px dashed rgba(255,255,255,0.03)}
+    tbody tr:nth-child(odd) td{background:rgba(255,255,255,0.01)}
+    .small{font-size:12px;color:var(--muted)}
+
+    /* timetable styles */
+    .timetable{display:grid;grid-template-columns:120px 1fr 260px;gap:8px;align-items:start}
+    .time{font-weight:600;color:var(--accent);padding-top:6px}
+    .task{padding:8px;background:var(--glass);border-radius:8px}
+    .task .title{font-weight:600}
+    .task .desc{font-size:13px;color:var(--muted);margin-top:6px}
+
+    /* responsive */
+    @media (max-width:980px){
+      .grid{grid-template-columns:1fr}
+      .timetable{grid-template-columns:90px 1fr}
+    }
+
+    /* footer */
+    footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* print-friendly */
+    @media print{body{background:white;color:black} .container{max-width:900px} .card{box-shadow:none;border:none}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>20-Day Job Prep Roadmap — DSA &amp; Daily Timetable</h1>
+        <p class="lead">Strict, hour-by-hour plan combining problem practice, project work, system design, and applications.</p>
+      </div>
+      <div class="small">Prepared for: <strong>Nisha</strong></div>
+    </header>
+
+    <div class="grid">
+      <!-- left column: DSA roadmap table -->
+      <div class="card">
+        <div class="section-title">📌 20-Day DSA Topic Roadmap (Day-wise)</div>
+        <table>
+          <thead>
+            <tr><th style="width:64px">Day</th><th style="width:220px">Topic / Pattern</th><th>Example Problems</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Arrays basics</td><td>Two Sum; Best Time to Buy &amp; Sell Stock; Contains Duplicate</td></tr>
+            <tr><td>2</td><td>Sliding Window</td><td>Longest Substring Without Repeating Characters; Maximum Subarray</td></tr>
+            <tr><td>3</td><td>Prefix Sum / Kadane's</td><td>Subarray Sum Equals K; Product of Array Except Self</td></tr>
+            <tr><td>4</td><td>Hashing</td><td>Group Anagrams; Top K Frequent Elements</td></tr>
+            <tr><td>5</td><td>Binary Search on Arrays</td><td>Search in Rotated Sorted Array; Search Insert Position</td></tr>
+            <tr><td>6</td><td>Matrix Problems</td><td>Rotate Image; Spiral Matrix; Set Matrix Zeroes</td></tr>
+            <tr><td>7</td><td>Weekly Review</td><td>Mix of 5–6 problems from Days 1–6 (timed)</td></tr>
+
+            <tr><td>8</td><td>Strings basics</td><td>Valid Palindrome; Valid Anagram; Longest Common Prefix</td></tr>
+            <tr><td>9</td><td>Advanced Strings</td><td>Implement strStr (KMP/Rabin-Karp); Longest Palindromic Substring</td></tr>
+            <tr><td>10</td><td>Linked List basics</td><td>Reverse Linked List; Detect Cycle; Merge Two Sorted Lists</td></tr>
+            <tr><td>11</td><td>Linked List advanced</td><td>Add Two Numbers; Reorder List; LRU Cache</td></tr>
+            <tr><td>12</td><td>Stack / Queue</td><td>Valid Parentheses; Min Stack; Implement Queue using Stacks</td></tr>
+            <tr><td>13</td><td>Monotonic Stack</td><td>Daily Temperatures; Largest Rectangle in Histogram</td></tr>
+            <tr><td>14</td><td>Weekly Review</td><td>6–7 mixed string + linked list problems</td></tr>
+
+            <tr><td>15</td><td>Binary Tree Basics</td><td>Inorder/Preorder/Postorder Traversal</td></tr>
+            <tr><td>16</td><td>Binary Search Tree</td><td>Validate BST; Lowest Common Ancestor</td></tr>
+            <tr><td>17</td><td>DFS / BFS on Graphs</td><td>Number of Islands; Rotten Oranges; Word Ladder</td></tr>
+            <tr><td>18</td><td>Graph Algorithms</td><td>Course Schedule (Topological Sort); Detect Cycle; Clone Graph</td></tr>
+            <tr><td>19</td><td>Advanced Trees / Graphs</td><td>Trie (Insert/Search); Dijkstra's basics</td></tr>
+            <tr><td>20</td><td>Final Mock</td><td>2 array/string, 1 linked list, 2 tree/graph, + 1 system design</td></tr>
+          </tbody>
+        </table>
+
+        <div style="margin-top:12px" class="small">Tip: Morning slot (7–9) — solve 2–3 problems. Evening (7:30–8:30) — review solutions and variations.</div>
+      </div>
+
+      <!-- right column: daily timetable summary -->
+      <div class="card">
+        <div class="section-title">📅 Daily Hour-by-Hour Timetable (Sample)</div>
+
+        <div class="timetable" style="margin-top:8px">
+          <div class="time">6:00–7:00</div>
+          <div class="task"><div class="title">Exercise / meditation</div><div class="desc">Light warm-up to clear the mind.</div></div>
+          <div class="small">Start day focused</div>
+
+          <div class="time">7:00–9:00</div>
+          <div class="task"><div class="title">DSA practice (core slot)</div><div class="desc">Solve 2–3 problems from the day’s topic listed in the DSA table.</div></div>
+          <div class="small">Use timed mode when possible</div>
+
+          <div class="time">9:00–9:30</div>
+          <div class="task"><div class="title">Short break</div><div class="desc">Review notes, quick walk.</div></div>
+          <div class="small">Keep notes concise</div>
+
+          <div class="time">9:30–11:30</div>
+          <div class="task"><div class="title">System design / Backend</div><div class="desc">Node.js + MongoDB focus: API design, auth, schema modelling.</div></div>
+          <div class="small">Alternate with architecture diagrams</div>
+
+          <div class="time">12:00–13:00</div>
+          <div class="task"><div class="title">Lunch / relax</div><div class="desc">Recharge — avoid screens if possible.</div></div>
+          <div class="small">30–60 min</div>
+
+          <div class="time">13:00–15:00</div>
+          <div class="task"><div class="title">Project work</div><div class="desc">Build/extend full-stack projects: Job Tracker / E‑commerce / Chat app.</div></div>
+          <div class="small">Focus on deliverables</div>
+
+          <div class="time">15:00–16:30</div>
+          <div class="task"><div class="title">Refactor &amp; README</div><div class="desc">Clean code, document, add screenshots for GitHub.</div></div>
+          <div class="small">Small commits show progress</div>
+
+          <div class="time">16:30–17:00</div>
+          <div class="task"><div class="title">Break</div><div class="desc">Coffee, short walk.</div></div>
+          <div class="small">Reset focus</div>
+
+          <div class="time">17:00–18:30</div>
+          <div class="task"><div class="title">Mock interviews</div><div class="desc">Pair with peer or use platforms: system design + DSA Q&A.</div></div>
+          <div class="small">Record sessions when possible</div>
+
+          <div class="time">18:30–19:30</div>
+          <div class="task"><div class="title">Job applications</div><div class="desc">Apply to 10–15 targeted roles daily; tailor resume and cover note.</div></div>
+          <div class="small">Track with Job Tracker app</div>
+
+          <div class="time">19:30–20:30</div>
+          <div class="task"><div class="title">DSA review</div><div class="desc">Revise morning problems; do variations and optimizations.</div></div>
+          <div class="small">Focus on correctness & complexity</div>
+
+          <div class="time">20:30–21:30</div>
+          <div class="task"><div class="title">Dinner + relax</div><div class="desc">Unplug, light walk.</div></div>
+          <div class="small">Recover energy</div>
+
+          <div class="time">21:30–22:30</div>
+          <div class="task"><div class="title">Behavioral prep</div><div class="desc">STAR answers, project stories, resume talking points.</div></div>
+          <div class="small">Prepare 6–8 concise stories</div>
+
+          <div class="time">22:30–23:00</div>
+          <div class="task"><div class="title">Plan next day</div><div class="desc">Note key goals, tasks, and problems to solve.</div></div>
+          <div class="small">Sleep well</div>
+        </div>
+
+        <div style="margin-top:12px" class="small">Note: Use Day 7, 14, 20 for timed mocks and full-day reviews. Adjust times to your local timezone and personal energy peaks.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px" class="card">
+      <div class="section-title">Quick Usage</div>
+      <div class="small">• Copy this single HTML file and open in your browser. Print or save as PDF for offline use.<br>• Customize topics or project names directly in the markup.<br>• Want a downloadable ZIP or code packaged for GitHub pages? Request "export" and I will prepare it.</div>
+    </div>
+
+    <footer>Good luck — follow the plan strictly and iterate based on feedback. Ask me to personalize the timetable or export files.</footer>
+  </div>
+</body>
+</html>
