@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theory React JS</title>
+</head>
+<style>
+    body {
+        /* background: #333;
+        color: whitesmoke; */
+        font-family: Verdana, Geneva, Tahoma, sans-serif
+            /* font-family: 'Brush Script MT', cursive; */
+    }
+
+    .blue {
+        color: blueviolet;
+        font-weight: bold;
+        display: inline;
+    }
+
+    p,
+    pre {
+        font-size: 16px;
+    }
+
+    #customlist {
+        /* delete default counter */
+        list-style-type: none;
+        /* create custom counter and set it to 0 */
+        counter-reset: elementcounter;
+    }
+
+    #customlist>li:before {
+        /* print out "Element " followed by the current counter value */
+        content: "Question " counter(elementcounter) ": ";
+        /* increment counter */
+        counter-increment: elementcounter;
+        font-weight: bold;
+        color: blueviolet;
+    }
+</style>
+
+<body>
+
+    <p>PROMPT EXAMPLE :Functional vs class components in react js , how to reply to interviewer for this question ?
+        prepare a short 2–3 line version (quick reply) in case the interviewer asks this as a rapid-fire question?
+        prepare a code snippet comparison (class vs functional) that you can mention if the interviewer asks for an
+        example?
+    </p>
+    <ol id="customlist">
+        <li>
+            <h4 class="blue">What is (React) – JSX(JavaScript XML) ?</h4>
+            <pre>Definition :  In-short : JSX → whenever writing UI structure.
+
+                • A syntax extension for JavaScript that lets you write HTML-like code inside JavaScript.
+                • JSX is not required, but it makes UI easier to write and read.
+                • Under the hood, JSX compiles into React.createElement(...).
+
+                👉 Where to use it:
+                • Whenever you want to define UI structure in React.
+
+                Use JSX in all React components unless you want to work only with raw JavaScript.
+            </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is Components ?</h4>
+            <pre> Definition :  In-short :JSX → To break UI into small, reusable pieces.
+
+                • Reusable building blocks of a React app.
+                • Two types:
+                    • Functional components (modern standard, simpler)
+                    • Class components (older, rarely needed now).
+
+                👉 Where to use it:
+                • Every piece of UI should ideally be a component.
+                • Helps you split big UI into small, reusable, independent pieces.
+
+                💡 Use components for modularity, reusability, and maintainability.
+            </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is Props ?</h4>
+            <pre>Definition :  In-short : To pass data into components (read-only, like parameters).
+
+                • Short for properties.
+                • Data passed from parent to child (read-only).
+                • Think of them like function parameters.
+
+                👉 Where to use it:
+                • When you want to customize a component with external data.
+            </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is State ?</h4>
+            <pre>Definition :  In-short : To manage data inside a component (can change, triggers re-render).
+
+                • A built-in object that stores data inside a component.
+                • Unlike props, state is managed within the component and can change over time.
+                • When state changes → React re-renders the UI.
+               
+                👉 Where to use it:
+                • For data that changes within the component (user input, API results, toggle, counters, etc.).
+            </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is Class Component ?</h4>
+            <pre>Definition :  In-short : Class components are ES6 classes that extend React.Component using this.state and lifecycle methods.
+
+                ES6 class
+                • this.state and setState()
+                • Methods like componentDidMount, componentDidUpdate
+                • Must handle this binding.
+                • Slightly heavier, older approach
+                </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is Functional Component ?</h4>
+            <pre>Definition :  In-short : While functional components are plain functions that use hooks like useState and useEffect.
+                 Functional components are now preferred because they’re simpler, cleaner, and the modern React standard.
+
+                 Plain JS function
+                • useState, useReducer 
+                • Hooks like useEffect. 
+                • No this, simpler
+                • Lighter, often preferred, Cleaner, concise
+               
+               * Class components are mainly for older React codebases, 
+                while functional components with hooks are the modern standard for new projects because they’re simpler and more efficient.
+            </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is ( React) – useEffect, useState, lifecycle. ? Example in functional and class component jsx flickering</h4>
+            <pre>Definition :  In React, useState lets us add and manage state in functional components. 
+                useEffect is used to handle side effects such as data fetching, subscriptions, or DOM updates, and it runs after render.
+
+                It can be configured to run once (like componentDidMount), on every render (componentDidUpdate), or for cleanup (componentWillUnmount). 
+                In class components, these behaviors are split across lifecycle methods, but
+
+                With hooks, we manage them inside a single functional component in a cleaner, more readable way.
+               
+            </pre>
+        </li>
+        <li>
+            <h4 class="blue">How does React’s virtual DOM work ?</h4>
+            <pre>Definition :  In React’s Virtual DOM is a lightweight copy of the real DOM. When the state changes, React updates the Virtual DOM first, 
+                compares it with the previous version (diffing), and then updates only the changed parts in the real DOM for efficiency.
+
+               👉 Quick reply: “React uses a Virtual DOM to track changes. 
+               It compares new and old states (diffing) and updates only the necessary parts in the real DOM for faster performance.”
+            </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is  Routing - React Router ?</h4>
+            <pre>Definition :  React Router enables navigation in a React app without reloading the page. 
+                It maps URLs to components, making single-page apps feel like multi-page apps.
+
+                * React Router lets you navigate between views in a React app without refreshing the page.
+            </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is SPA (Single Page Application) vs MPA (Multi Page Application) ?</h4>
+            <pre>Definition :  SPA (Single Page Application) loads one HTML file and updates content dynamically without full reloads, giving a smoother, faster experience. 
+                MPA (Multi Page Application) loads a new HTML page for every request, which is heavier but better for SEO and complex apps.”
+
+                * One-liner fallback:
+                “SPA updates content dynamically on one page, while MPA reloads new pages for each request.”
+
+            👉 Quick memory hook:
+
+                SPA = Speedy & smooth (but SEO issues).
+                MPA = SEO-friendly (but slower UX).
+            </pre>
+
+            <pre>
+                SPA (Single Page Application)
+
+                ✅ Pros:
+
+                 • Faster, smoother user experience (no full page reloads)
+                 • Efficient data fetching (API-driven)
+                 • Great for dynamic, interactive apps (e.g., Gmail, Twitter)
+
+                ❌ Cons:
+
+                 • SEO challenges (requires SSR or pre-rendering)
+                 • Larger initial load time
+                 • Can be complex for very large apps
+                 • MPA (Multi Page Application)
+
+                ✅ Pros:
+
+                 • Better SEO by default (separate pages with metadata)
+                 • Easier to manage very large, content-heavy apps
+                 • Built-in security (less exposed frontend code)
+
+                ❌ Cons:
+
+                 • Slower (full reload on every navigation)
+                 • Heavier server load
+                 • More repetitive frontend code
+            </pre>
+        </li>
+         <li>
+            <h4 class="blue">What is state management Redux ?</h4>
+            <pre>Definition :  Redux is a state management library for JavaScript apps. 
+                 It uses a single centralized store where state is managed through actions and reducers, making data flow predictable and easier to debug.
+            </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is Context API vs Redux? ?</h4>
+            <pre>Definition :  Context API is built into React for passing state through the component tree, ideal for simple or medium state needs.
+                 Redux is a standalone library with a single global store, better for large, complex apps needing predictable state and advanced debugging.
+                 
+                 One-liner fallback:
+                “Context API is for simple state sharing in React, Redux is for complex global state with predictable updates.”
+            </pre>
+
+        </li>
+        
+    </ol>
+</body>
+
+</html>
