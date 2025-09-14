@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theory React JS</title>
+</head>
+<style>
+    body {
+        /* background: #333;
+        color: whitesmoke; */
+        font-family: Verdana, Geneva, Tahoma, sans-serif
+            /* font-family: 'Brush Script MT', cursive; */
+    }
+
+    .blue {
+        color: blueviolet;
+        font-weight: bold;
+        display: inline;
+    }
+
+    p,
+    pre {
+        font-size: 16px;
+    }
+
+    #customlist {
+        /* delete default counter */
+        list-style-type: none;
+        /* create custom counter and set it to 0 */
+        counter-reset: elementcounter;
+    }
+
+    #customlist>li:before {
+        /* print out "Element " followed by the current counter value */
+        content: "Question " counter(elementcounter) ": ";
+        /* increment counter */
+        counter-increment: elementcounter;
+        font-weight: bold;
+        color: blueviolet;
+    }
+</style>
+
+<body>
+    <ol id="customlist">
+        <li>
+            <h4 class="blue">What is Node basics (fs, path, modules) ?</h4>
+            <pre>Definition :  INode.js basics include fs for file operations, path for handling file paths, and modules for code organization and reuse. 
+                They allow us to read/write files, resolve paths safely, and export/import functionality across files.
+            </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is CommonJS vs ES modules in node js ?</h4>
+            <pre>Definition :  CommonJS (require/module.exports) is Node’s original module system, synchronous and server-focused. 
+                ES Modules (import/export) are modern, support static analysis, and work natively in Node with .mjs or "type": "module" in package.json.
+            </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is Express basics, middleware ?</h4>
+            <pre>Definition :  Express is a minimal Node.js web framework for building APIs and web apps. 
+            Middleware are functions that process requests/responses, like logging, authentication, or parsing data, before reaching the route handler. 
+
+            *1-liner explanation:
+            Express is a Node.js web framework; middleware are functions that run during request/response processing.
+            app.use((req, res, next) => { console.log(req.url); next(); });
+        </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is Types of middleware ?</h4>
+            <pre>Definition :  Express middleware can be application-level (used across the app), router-level (used for specific routes), 
+                built-in (like express.json()), or error-handling (handles errors passed via next(err)).
+        </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is REST APIs with Express ?</h4>
+            <pre>Definition : REST APIs in Express let you handle HTTP requests (GET, POST, PUT, DELETE) to perform CRUD operations.
+                 Express routes map URLs to functions that process data and return responses in JSON or other formats.
+            </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is REST vs GraphQL ?</h4>
+            <pre>Definition : REST APIs expose multiple endpoints and return fixed data structures, 
+                while GraphQL uses a single endpoint and lets clients request exactly the data they need. 
+                GraphQL reduces over-fetching and under-fetching compared to REST.
+OR 
+                REST APIs use multiple endpoints, each returning fixed data, so you often over-fetch or under-fetch. 
+                GraphQL uses a single endpoint and lets clients request exactly the data they need. 
+                For example, in REST you’d use GET /users to fetch all users, while in GraphQL you’d write a query like { user(id: "1") { id, name } }.
+            </pre>
+        </li>
+        <li>
+            <h4 class="blue">What is MongoDB + Mongoose ?</h4>
+            <pre>Definition : MongoDB is a NoSQL database for storing JSON-like documents. 
+                 Mongoose is an ODM (Object Data Modeling) library for Node.js that helps define schemas and interact with MongoDB in an organized way.
+
+                 * MongoDB is a NoSQL database, and Mongoose is a Node.js library to define schemas and interact with it easily.
+
+                 OR
+
+                 MongoDB is a NoSQL database that stores data as JSON-like documents, making it flexible and scalable.
+                 Mongoose is a Node.js library that adds structure by defining schemas, validation, and easy methods to create, read, update, and delete data.
+            </pre>
+        </li>
+    </ol>
+</body>
+
+</html>
