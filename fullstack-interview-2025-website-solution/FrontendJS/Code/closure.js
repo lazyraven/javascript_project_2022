@@ -10,6 +10,8 @@ const increment = counter();
 
 document.getElementById("btn").addEventListener("click", function () {
   const newCount = increment();
+  console.log("newCount", newCount);
+
   document.getElementById("output").textContent = "Count: " + newCount;
 });
 

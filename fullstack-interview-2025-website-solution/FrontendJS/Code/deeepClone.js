@@ -83,3 +83,14 @@ copyOne.settings.set("theme", "light");
 
 console.log("originalOne:", originalOne);
 console.log("Clone:", copy);
+
+// other modern way
+// deep shaloow copy
+const original1 = { name: "Nisha", skills: ["JS", "React"] };
+
+const clone = structuredClone(original1);
+console.log("clone", clone);
+
+clone.name = "Yadav";
+console.log("clone", clone);
+console.log("original1", original1);

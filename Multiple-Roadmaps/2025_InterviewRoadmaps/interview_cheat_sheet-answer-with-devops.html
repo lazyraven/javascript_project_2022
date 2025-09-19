@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Interview Cheat Sheet — React · Vue · Node · DevOps · AWS · CI/CD</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;--text:#e6eef6}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; background:linear-gradient(180deg,#071124 0%, #0a1726 100%);color:var(--text)}
+    .wrap{max-width:1040px;margin:28px auto;padding:28px}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    h1{font-size:20px;margin:0}
+    .meta{color:var(--muted);font-size:13px}
+    .controls{margin-left:auto;display:flex;gap:8px}
+    button{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);padding:8px 12px;border-radius:8px;cursor:pointer}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:14px;border-radius:12px}
+    h2{margin:0 0 8px 0;font-size:16px}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    thead th{position:sticky;top:0;background:rgba(10,14,20,0.6);backdrop-filter:blur(6px);text-align:left;padding:8px;color:var(--accent)}
+    td,th{padding:8px;border-bottom:1px dashed rgba(255,255,255,0.03)}
+    .q{font-weight:600;color:#dbeafe}
+    .a{color:var(--muted)}
+    footer{margin-top:18px;color:var(--muted);font-size:13px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+    .search{display:flex;gap:8px;margin-bottom:12px}
+    input[type=search]{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)}
+    .tag{display:inline-block;font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+    .small{font-size:12px}
+    .print-note{color:var(--muted);font-size:12px;margin-top:8px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Interview Cheat Sheet — React · Vue · Node · DevOps · AWS · CI/CD</h1>
+        <div class="meta">Flashcard-style Q + short answers — organized basic → intermediate → advanced</div>
+      </div>
+      <div class="controls">
+        <button onclick="window.print()">Print / Save PDF</button>
+        <button id="expandAll">Expand All</button>
+      </div>
+    </header>
+
+    <div class="search">
+      <input type="search" id="filter" placeholder="Search question or keyword (e.g., 'hooks', 'Lambda')" />
+      <div class="tag">Flashcards</div>
+    </div>
+
+    <main class="grid" id="cards">
+
+      <!-- React -->
+      <section class="card" data-topic="react">
+        <h2>React.js</h2>
+        <table>
+          <thead><tr><th style="width:46%">Question</th><th>Short Answer</th></tr></thead>
+          <tbody>
+<tr><td class="q">What is React?</td><td class="a">A JavaScript library for building user interfaces using components.</td></tr>
+<tr><td class="q">Difference between React and other frameworks?</td><td class="a">React focuses only on UI; Angular/Vue are full frameworks.</td></tr>
+<tr><td class="q">What are components?</td><td class="a">Independent UI pieces, functional or class-based.</td></tr>
+<tr><td class="q">What are props and state?</td><td class="a">Props → external input (read-only). State → internal data that changes over time.</td></tr>
+<tr><td class="q">What is JSX?</td><td class="a">Syntax to write HTML-like code within JavaScript.</td></tr>
+<tr><td class="q">What are hooks?</td><td class="a">Functions (e.g., useState, useEffect) that add state and lifecycle to functional components.</td></tr>
+<tr><td class="q">What is Virtual DOM?</td><td class="a">In-memory DOM representation that updates UI efficiently by diffing.</td></tr>
+<tr><td class="q">Controlled vs Uncontrolled components?</td><td class="a">Controlled: React manages the form state. Uncontrolled: the DOM manages state, accessed via refs.</td></tr>
+<tr><td class="q">What is React.memo?</td><td class="a">HOC to memoize a component and avoid re-renders when props are unchanged.</td></tr>
+<tr><td class="q">Difference between useCallback and useMemo?</td><td class="a">useCallback memoizes functions; useMemo memoizes computed values.</td></tr>
+<tr><td class="q">What is Context API?</td><td class="a">API for sharing state globally across component tree without prop drilling.</td></tr>
+<tr><td class="q">Redux vs Context API?</td><td class="a">Redux: centralized state management with middleware. Context: simpler, built-in, suited for small-scale state.</td></tr>
+<tr><td class="q">What is SSR (Server-Side Rendering)?</td><td class="a">Rendering UI on the server (e.g., Next.js) for faster first paint and SEO benefits.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Vue -->
+      <section class="card" data-topic="vue">
+        <h2>Vue.js</h2>
+        <table>
+          <thead><tr><th>Question</th><th>Short Answer</th></tr></thead>
+          <tbody>
+<tr><td class="q">What is Vue.js?</td><td class="a">A progressive framework for building user interfaces.</td></tr>
+<tr><td class="q">Vue vs React?</td><td class="a">Vue uses templates and offers two-way binding; React uses JSX and one-way data flow.</td></tr>
+<tr><td class="q">What are directives?</td><td class="a">Template markers like v-if, v-for, v-bind that add behavior to DOM elements.</td></tr>
+<tr><td class="q">What is a Vue instance?</td><td class="a">Root object that manages data, methods, and lifecycle of a Vue app or component.</td></tr>
+<tr><td class="q">What are lifecycle hooks?</td><td class="a">Methods fired at stages like created, mounted, updated, destroyed.</td></tr>
+<tr><td class="q">Computed vs Watchers?</td><td class="a">Computed: cached calculations. Watchers: run code in response to data changes.</td></tr>
+<tr><td class="q">What is Vue CLI?</td><td class="a">Tool to scaffold, develop, and build Vue projects.</td></tr>
+<tr><td class="q">What is Vuex?</td><td class="a">Centralized state management library for Vue apps (similar to Redux).</td></tr>
+<tr><td class="q">Vue 2 vs Vue 3?</td><td class="a">Vue 3 introduces Composition API, improved reactivity, and performance improvements.</td></tr>
+<tr><td class="q">What is reactivity system?</td><td class="a">Mechanism that tracks dependencies and updates only affected parts of the UI.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Node -->
+      <section class="card" data-topic="node">
+        <h2>Node.js</h2>
+        <table>
+          <thead><tr><th>Question</th><th>Short Answer</th></tr></thead>
+          <tbody>
+<tr><td class="q">What is Node.js?</td><td class="a">JavaScript runtime built on Chrome's V8 engine for server-side code.</td></tr>
+<tr><td class="q">Node vs Browser JS?</td><td class="a">Node runs server-side with access to OS APIs (fs, net), browser JS runs in the browser sandbox.</td></tr>
+<tr><td class="q">What is npm?</td><td class="a">Package manager for JavaScript and Node.js packages.</td></tr>
+<tr><td class="q">Event-driven architecture?</td><td class="a">Design where events and callbacks drive flow, improving concurrency without threads.</td></tr>
+<tr><td class="q">Non-blocking I/O?</td><td class="a">I/O operations run asynchronously so the main thread isn't blocked waiting for completion.</td></tr>
+<tr><td class="q">What is Express.js?</td><td class="a">Lightweight web framework for building APIs and web servers in Node.</td></tr>
+<tr><td class="q">What is middleware?</td><td class="a">Functions that process requests/responses in an Express app pipeline.</td></tr>
+<tr><td class="q">What are streams?</td><td class="a">Interfaces for reading/writing data in chunks (efficient for large data).</td></tr>
+<tr><td class="q">What is cluster module?</td><td class="a">Module to spawn worker processes to utilize multiple CPU cores.</td></tr>
+<tr><td class="q">CommonJS vs ES Modules?</td><td class="a">CommonJS uses require/exports; ES Modules use import/export and are the modern standard.</td></tr>
+<tr><td class="q">How does event loop work?</td><td class="a">Processes async callbacks in phases: timers, pending callbacks, idle, poll, check, close, etc.</td></tr>
+<tr><td class="q">What is JWT authentication?</td><td class="a">JSON Web Tokens used for stateless authentication: header.payload.signature.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- DevOps -->
+      <section class="card" data-topic="devops">
+        <h2>DevOps</h2>
+        <table>
+          <thead><tr><th>Question</th><th>Short Answer</th></tr></thead>
+          <tbody>
+<tr><td class="q">What is DevOps?</td><td class="a">Culture and practices that combine development and operations for faster, reliable delivery.</td></tr>
+<tr><td class="q">DevOps vs Agile?</td><td class="a">Agile: software development process. DevOps: extends Agile with ops, automation, and delivery.
+</td></tr>
+<tr><td class="q">What is CI/CD?</td><td class="a">CI: automated tests on merges. CD: automated delivery/deployment to environments.</td></tr>
+<tr><td class="q">What is Git?</td><td class="a">Distributed version control system for tracking code changes.</td></tr>
+<tr><td class="q">What is Docker?</td><td class="a">Container runtime to package apps with their dependencies.</td></tr>
+<tr><td class="q">What is Kubernetes?</td><td class="a">Container orchestration platform for deploying, scaling, and managing containers.</td></tr>
+<tr><td class="q">What are monitoring tools?</td><td class="a">Prometheus (metrics), Grafana (visualization), ELK stack for logs.</td></tr>
+<tr><td class="q">What is IaC?</td><td class="a">Infrastructure as Code — provisioning infra using code/tools like Terraform or Ansible.</td></tr>
+<tr><td class="q">Blue-Green vs Rolling deployment?</td><td class="a">Blue-Green: switch between two environments. Rolling: update instances gradually.
+</td></tr>
+<tr><td class="q">What is zero-downtime deployment?</td><td class="a">Deploy without interrupting the service—via load balancers, routing, or replication.
+</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- AWS -->
+      <section class="card" data-topic="aws">
+        <h2>AWS</h2>
+        <table>
+          <thead><tr><th>Question</th><th>Short Answer</th></tr></thead>
+          <tbody>
+<tr><td class="q">What is AWS?</td><td class="a">Amazon Web Services — cloud platform offering compute, storage, databases and more.</td></tr>
+<tr><td class="q">What is EC2?</td><td class="a">Elastic Compute Cloud — virtual machines in AWS.</td></tr>
+<tr><td class="q">What is S3?</td><td class="a">Simple Storage Service — scalable object storage.</td></tr>
+<tr><td class="q">What is RDS?</td><td class="a">Managed relational database service (MySQL, Postgres, etc.).</td></tr>
+<tr><td class="q">What is IAM?</td><td class="a">Identity and Access Management for users, roles, and permissions.</td></tr>
+<tr><td class="q">Regions vs Availability Zones?</td><td class="a">Region: geographic area. AZ: isolated datacenters within a region.</td></tr>
+<tr><td class="q">What is VPC?</td><td class="a">Virtual Private Cloud — isolated virtual network in AWS.</td></tr>
+<tr><td class="q">What is ELB/ALB?</td><td class="a">Elastic Load Balancer / Application Load Balancer — distribute incoming traffic.
+</td></tr>
+<tr><td class="q">RDS vs DynamoDB?</td><td class="a">RDS: relational SQL databases. DynamoDB: fully managed NoSQL key-value/document DB.
+</td></tr>
+<tr><td class="q">What is Lambda?</td><td class="a">Serverless compute for running code on events without provisioning servers.
+</td></tr>
+<tr><td class="q">What is Auto-scaling?</td><td class="a">Automatically add/remove instances based on demand or metrics.</td></tr>
+<tr><td class="q">What is CloudFormation?</td><td class="a">AWS service to model and provision resources using templates (IaC).</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- CI/CD -->
+      <section class="card" data-topic="cicd">
+        <h2>CI/CD</h2>
+        <table>
+          <thead><tr><th>Question</th><th>Short Answer</th></tr></thead>
+          <tbody>
+<tr><td class="q">What is CI?</td><td class="a">Continuous Integration — frequently merging code and running automated tests.</td></tr>
+<tr><td class="q">What is CD?</td><td class="a">Continuous Delivery/Deployment — automating release of changes to environments or production.</td></tr>
+<tr><td class="q">CI vs CD?</td><td class="a">CI focuses on building/testing; CD focuses on releasing and deploying.
+</td></tr>
+<tr><td class="q">Why CI/CD?</td><td class="a">Enables faster, safer, repeatable releases and reduces integration issues.</td></tr>
+<tr><td class="q">Jenkins vs GitHub Actions?</td><td class="a">Jenkins: self-hosted, highly customizable. GitHub Actions: integrated with GitHub, easier setup.
+</td></tr>
+<tr><td class="q">What are build pipelines?</td><td class="a">Automated sequences: build → test → package → deploy.
+</td></tr>
+<tr><td class="q">How to add tests in CI/CD?</td><td class="a">Run unit/integration tests as pipeline steps; fail pipeline on test failures.</td></tr>
+<tr><td class="q">What is Canary deployment?</td><td class="a">Release to a small subset of users first, then progressively increase exposure.
+</td></tr>
+<tr><td class="q">How to manage secrets in CI/CD?</td><td class="a">Use secret stores/vaults or encrypted pipeline variables; avoid plaintext secrets.
+</td></tr>
+<tr><td class="q">Artifact management?</td><td class="a">Store build artifacts (binaries, images) in repositories like Artifactory or Nexus.
+</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="small">Tip: Use the search box to filter by keyword. Click "Print / Save PDF" to export this cheat sheet.</div>
+    </footer>
+  </div>
+
+  <script>
+    const filter = document.getElementById('filter');
+    filter.addEventListener('input', e => {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll('tbody tr').forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = q ? (text.includes(q) ? '' : 'none') : '';
+      });
+    });
+
+    document.getElementById('expandAll').addEventListener('click', ()=>{
+      // simple visual feedback — scroll to top
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  </script>
+</body>
+</html>

@@ -15,9 +15,9 @@ const handleSearch = debounce((text) => {
   console.log("Searching for:", text);
 }, 500);
 
-handleSearch("a");
-handleSearch("ab");
-handleSearch("abc");
+handleSearch("debounce", "a");
+handleSearch("debounce", "ab");
+handleSearch("debounce", "abc");
 // Only "abc" will run after 500ms of no more calls
 
 // Explanation :

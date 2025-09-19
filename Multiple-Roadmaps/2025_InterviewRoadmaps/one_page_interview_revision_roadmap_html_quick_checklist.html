@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>One‑Page Interview Revision Roadmap — React / Vue / Node / DevOps / AWS</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#7c3aed;--muted:#94a3b8;--white:#e6eef8}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;color:var(--white);background:linear-gradient(180deg,#071020 0%, #071728 60%);}
+    .wrap{max-width:900px;margin:28px auto;padding:22px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:14px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+    header{display:flex;gap:12px;align-items:center;justify-content:space-between}
+    h1{font-size:1.15rem;margin:0}
+    p.lead{margin:6px 0 0;color:var(--muted);font-size:0.92rem}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}
+    .card{background:var(--card);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    .card h2{font-size:0.95rem;margin:0 0 8px}
+    ul.checklist{list-style:none;padding:0;margin:0}
+    ul.checklist li{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,0.02)}
+    ul.checklist li:last-child{border-bottom:none}
+    label.item{display:flex;flex-direction:column;font-size:0.9rem}
+    small.hint{color:var(--muted);font-size:0.78rem}
+    .full-width{grid-column:1/-1}
+    .actions{display:flex;gap:8px;margin-top:12px}
+    button{background:var(--accent);border:none;color:white;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+    button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+    footer{margin-top:14px;color:var(--muted);font-size:0.82rem}
+    @media (max-width:800px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>One‑Page Interview Revision Roadmap — Quick Checklist</h1>
+        <p class="lead">Focus on keywords + 1–2 real examples. Clear, applied knowledge wins.</p>
+      </div>
+      <div class="actions">
+        <button id="downloadBtn">Download HTML</button>
+        <button id="printBtn" class="ghost">Print</button>
+      </div>
+    </header>
+
+    <section class="grid" aria-label="topics">
+
+      <article class="card">
+        <h2>React.js</h2>
+        <ul class="checklist">
+          <li>
+            <input type="checkbox" id="r1"><label for="r1" class="item">Virtual DOM → know purpose & reconciliation (example: list diffing)</label>
+          </li>
+          <li><input type="checkbox" id="r2"><label for="r2" class="item">Hooks → useState, useEffect, useContext (example: fetch in useEffect)</label></li>
+          <li><input type="checkbox" id="r3"><label for="r3" class="item">Lifecycle (class) → componentDidMount/update/willUnmount</label></li>
+          <li><input type="checkbox" id="r4"><label for="r4" class="item">State Mgmt → Redux vs Context API (when to use each)</label></li>
+          <li><input type="checkbox" id="r5"><label for="r5" class="item">Controlled vs Uncontrolled components → controlled uses state, uncontrolled uses refs</label></li>
+          <li><input type="checkbox" id="r6"><label for="r6" class="item">Keys → unique identifiers for lists; help reconciliation</label></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Vue.js</h2>
+        <ul class="checklist">
+          <li><input type="checkbox" id="v1"><label for="v1" class="item">Directives → v-if, v-for, v-model</label></li>
+          <li><input type="checkbox" id="v2"><label for="v2" class="item">Lifecycle Hooks → created, mounted, updated, beforeDestroy</label></li>
+          <li><input type="checkbox" id="v3"><label for="v3" class="item">State Mgmt → Vuex</label></li>
+          <li><input type="checkbox" id="v4"><label for="v4" class="item">Composition API vs Options API → composition for reusable logic</label></li>
+          <li><input type="checkbox" id="v5"><label for="v5" class="item">Watchers vs Computed → watchers run on change; computed are cached</label></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Node.js</h2>
+        <ul class="checklist">
+          <li><input type="checkbox" id="n1"><label for="n1" class="item">Event Loop → phases (Timers, Pending, Poll, Check). Example: setTimeout vs setImmediate</label></li>
+          <li><input type="checkbox" id="n2"><label for="n2" class="item">CommonJS vs ES Modules → require vs import</label></li>
+          <li><input type="checkbox" id="n3"><label for="n3" class="item">Middleware → express middleware flow (req, res, next)</label></li>
+          <li><input type="checkbox" id="n4"><label for="n4" class="item">Error Handling → try/catch and error middleware</label></li>
+          <li><input type="checkbox" id="n5"><label for="n5" class="item">process.nextTick() vs setImmediate()</label></li>
+          <li><input type="checkbox" id="n6"><label for="n6" class="item">Clustering → child processes to use multiple CPU cores</label></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>DevOps</h2>
+        <ul class="checklist">
+          <li><input type="checkbox" id="d1"><label for="d1" class="item">CI/CD → CI = frequent tests; CD = automated deploys</label></li>
+          <li><input type="checkbox" id="d2"><label for="d2" class="item">IaC → Terraform / CloudFormation</label></li>
+          <li><input type="checkbox" id="d3"><label for="d3" class="item">Docker vs VM → containers share kernel, VMs heavier</label></li>
+          <li><input type="checkbox" id="d4"><label for="d4" class="item">Kubernetes → orchestration: scaling, self‑healing</label></li>
+          <li><input type="checkbox" id="d5"><label for="d5" class="item">Deployment strategies → Blue‑Green, Canary</label></li>
+          <li><input type="checkbox" id="d6"><label for="d6" class="item">Monitoring → Prometheus, ELK, Grafana</label></li>
+        </ul>
+      </article>
+
+      <article class="card full-width">
+        <h2>CI/CD Pipeline</h2>
+        <ul class="checklist">
+          <li><input type="checkbox" id="c1"><label for="c1" class="item">Stages → Build → Test → Deploy → Monitor</label></li>
+          <li><input type="checkbox" id="c2"><label for="c2" class="item">Rollback → revert to last stable version</label></li>
+          <li><input type="checkbox" id="c3"><label for="c3" class="item">Artifacts → build outputs (Docker image, .zip, etc.)</label></li>
+          <li><input type="checkbox" id="c4"><label for="c4" class="item">Automated tests → unit, integration, smoke</label></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>AWS (Essentials)</h2>
+        <ul class="checklist">
+          <li><input type="checkbox" id="a1"><label for="a1" class="item">Compute → EC2 (VMs), Lambda (serverless), ECS (containers)</label></li>
+          <li><input type="checkbox" id="a2"><label for="a2" class="item">Storage → S3, EBS, Glacier</label></li>
+          <li><input type="checkbox" id="a3"><label for="a3" class="item">Database → RDS (SQL), DynamoDB (NoSQL)</label></li>
+          <li><input type="checkbox" id="a4"><label for="a4" class="item">IAM → users, roles, policies</label></li>
+          <li><input type="checkbox" id="a5"><label for="a5" class="item">Security Group vs NACL → instance vs subnet rules</label></li>
+          <li><input type="checkbox" id="a6"><label for="a6" class="item">Auto Scaling + ELB → scale and load balance</label></li>
+          <li><input type="checkbox" id="a7"><label for="a7" class="item">VPC basics → subnets, gateways, routing</label></li>
+          <li><input type="checkbox" id="a8"><label for="a8" class="item">Monitoring → CloudWatch metrics & logs</label></li>
+        </ul>
+      </article>
+
+      <article class="card full-width">
+        <h2>⚡ Last‑Minute Tip</h2>
+        <p class="lead" style="margin:6px 0 10px;color:var(--muted)">Focus on keywords + 1–2 concrete examples. Interviewers value clarity and applied knowledge.</p>
+        <ul class="checklist">
+          <li><input type="checkbox" id="t1"><label for="t1" class="item">Prepare 1 small real example per major topic (e.g., useEffect fetch example, Express error middleware)</label></li>
+          <li><input type="checkbox" id="t2"><label for="t2" class="item">Practice explaining tradeoffs (Redux vs Context, Docker vs VM)</label></li>
+          <li><input type="checkbox" id="t3"><label for="t3" class="item">Speak clearly about when you'd choose a solution, not just what it is</label></li>
+        </ul>
+      </article>
+      <article class="card full-width">
+        ✅ How to Use This Checklist:
+
+Mark ✅ once you can confidently answer/explain with examples.
+
+Practice basic + scenario-based questions (e.g., "How would you scale a Node.js app in AWS with CI/CD?").
+
+Keep answers short but deep enough to show real-world knowledge.
+      </article>
+
+    </section>
+
+    <footer>
+      Missing anything? Consider adding quick links to 2–3 code snippets you can open during interviews (eg. fetch in React, basic Express route, Terraform snippet).
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('printBtn').addEventListener('click', () => window.print());
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const blob = new Blob([document.documentElement.outerHTML], {type: 'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'one-page-interview-revision-roadmap.html';
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>

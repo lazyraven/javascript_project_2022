@@ -12,13 +12,13 @@ studentAges.set("Jane", 18);
 console.log(".get", studentAges.get("Jane"));
 
 // Update value
-studentAges.set("Bob");
+studentAges.set("Alice", 30);
 
 // Check if key exists
 console.log(".has", studentAges.has("Alice"));
 
 // Delete a key
-studentAges.delete("Bob");
+studentAges.delete("Jane");
 
 // Check size of the map
 console.log("Map Size", studentAges.size);

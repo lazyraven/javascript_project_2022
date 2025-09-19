@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=p">
+    <title>Practice 2025</title>
+    <script src="./practice-2025.js"></script>
+</head>
+<body>
+    <h3>Practice code</h3>
+    <h2>Make it one folder only for interview answer. 2025 with questions</h2>
+    <h2>go through fair register</h2>
+    <div>
+        <h3>higher-order function (HOF)</h3>
+        A higher-order function either accepts functions as arguments or returns a function, making them powerful for abstraction and reusability.  
+
+        <pre> Common built-in higher-order functions in JS:
+            map()
+            filter()
+            reduce()
+            forEach()
+            sort()
+
+     </pre>
+
+     <h3>Virtual dom & react dom ?</h3>
+     <p>Real DOM updates the whole UI directly, but Virtual DOM updates only the changed parts first in memory and then reflects them efficiently.</p>
+    OR 
+    <p>The Real DOM updates directly in the browser and is slower, 
+        while the Virtual DOM is a lightweight in-memory representation that makes updates faster by batching changes</p>
+    </div>
+
+    <h4>VUE QUESTIONS </h4>
+    <pre>
+            Creation Phase
+
+            beforeCreate → Instance is initialized, data/events not yet available.
+
+            created → Data, events, and reactivity are set up (but template not mounted).
+
+            Mounting Phase
+
+            beforeMount → Template is compiled, but not added to DOM yet.
+
+            mounted → Component is mounted to Real DOM (good for DOM-dependent work).
+
+            Updating Phase
+
+            beforeUpdate → Called before re-render when reactive data changes.
+
+            updated → DOM re-rendered with latest data.
+
+            Unmounting/Destruction Phase
+
+            beforeUnmount / beforeDestroy → Cleanup before component removal.
+
+            unmounted / destroyed → Component fully removed from DOM.
+    </pre>
+    <h3> What are Vue directives (v-if, v-for, v-model)? one line answer in spoke language to interviewer?
+    </h3>
+       <p>Vue directives are special attributes with a v- prefix, like v-if, v-for, and v-model, used to add dynamic behavior directly in the template.”</p>
+       <pre>
+        Here’s a concise way to explain each in one line:
+
+            v-if → “Shows or hides an element based on a condition.”
+
+            v-for → “Loops over a list to render elements dynamically.”
+
+            v-model → “Creates two-way binding between input fields and data.”
+
+          In short* :  “v-if conditionally shows elements, v-for loops over data, and v-model binds inputs to data.”
+       </pre>
+       <h3>“Authentication |Authorization </h3>
+       👉 One-liner:
+“Authentication checks who you are, and authorization checks what you’re allowed to do.”
+
+Follow-up explanation:
+
+Authentication → Verifying identity (like login with username/password, OTP, or social login).
+
+Authorization → Controlling access to resources based on permissions or roles (like admin vs user access).
+</body>
+<h3>what works of mixin /</h3>
+<p>Mixins let you reuse code across multiple components by sharing methods, data, or lifecycle hooks.</p>
+Follow-up explanation:
+            You can put common functionality (methods, computed properties, data) in a mixin.
+
+            When a component uses the mixin, it merges that code into itself.
+
+            Useful for avoiding repetition in large apps.
+
+
+
+            *********
+
+            :
+
+👉 “ref creates a reactive single value, while reactivity (reactive) makes an entire object reactive.”
+
+You can also add a tiny clarification:
+
+ref → For primitives or single values.
+
+reactive → For objects or arrays.
+</html>

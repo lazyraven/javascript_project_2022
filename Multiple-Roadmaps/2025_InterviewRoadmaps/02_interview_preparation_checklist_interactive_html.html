@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Interview Preparation Checklist</title>
+  <style>
+    :root{--bg:#0f1724;--card:#071126;--accent:#06b6d4;--muted:#94a3b8;--white:#e6eef8}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#041026 0%, #071022 100%);color:var(--white);padding:24px}
+    .container{max-width:1000px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    h1{font-size:1.1rem;margin:0}
+    p.lead{margin:4px 0 0;color:var(--muted);font-size:0.9rem}
+    .controls{display:flex;gap:8px}
+    button{background:var(--accent);border:none;color:#032024;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+    button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--white)}
+    .panel{display:grid;grid-template-columns:1fr 320px;gap:16px;margin-top:16px}
+    @media (max-width:880px){.panel{grid-template-columns:1fr}}
+    .card{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .topic{margin-bottom:12px}
+    .topic h2{font-size:0.95rem;margin:0 0 8px}
+    ul.checklist{list-style:none;padding:0;margin:0}
+    ul.checklist li{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,0.02)}
+    ul.checklist li:last-child{border-bottom:none}
+    label.item{display:flex;flex-direction:column;font-size:0.92rem}
+    small.hint{color:var(--muted);font-size:0.82rem}
+
+    /* progress */
+    .progressWrap{margin-bottom:12px}
+    .progressBar{width:100%;height:14px;background:rgba(255,255,255,0.06);border-radius:10px;overflow:hidden}
+    .progressFill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),#7c3aed);transition:width .2s}
+    .stats{display:flex;justify-content:space-between;color:var(--muted);font-size:0.85rem;margin-top:6px}
+
+    .sideInfo h3{margin:0 0 8px;font-size:0.95rem}
+    .sideInfo p{color:var(--muted);font-size:0.9rem;margin:0}
+    .small{font-size:0.82rem;color:var(--muted);margin-top:8px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Interview Preparation Checklist</h1>
+        <p class="lead">Interactive checklist — progress saved to localStorage. Use during last-minute revision.</p>
+      </div>
+      <div class="controls">
+        <button id="downloadBtn">Download HTML</button>
+        <button id="printBtn" class="ghost">Print</button>
+        <button id="resetBtn" class="ghost">Reset</button>
+      </div>
+    </header>
+
+    <div class="panel">
+      <main class="card" id="checklistCard">
+
+        <!-- React -->
+        <section class="topic" data-topic="React">
+          <h2>React.js</h2>
+          <ul class="checklist">
+            <li><input type="checkbox" id="react-q1" data-topic="React"><label for="react-q1" class="item">What are React’s key features?</label></li>
+            <li><input type="checkbox" id="react-q2" data-topic="React"><label for="react-q2" class="item">Difference between functional & class components?</label></li>
+            <li><input type="checkbox" id="react-q3" data-topic="React"><label for="react-q3" class="item">What are hooks? Explain useState, useEffect, useContext.</label></li>
+            <li><input type="checkbox" id="react-q4" data-topic="React"><label for="react-q4" class="item">What is Virtual DOM & how does React use it?</label></li>
+            <li><input type="checkbox" id="react-q5" data-topic="React"><label for="react-q5" class="item">Explain React lifecycle methods.</label></li>
+            <li><input type="checkbox" id="react-q6" data-topic="React"><label for="react-q6" class="item">Difference between controlled & uncontrolled components?</label></li>
+            <li><input type="checkbox" id="react-q7" data-topic="React"><label for="react-q7" class="item">What is Redux? When to use it?</label></li>
+            <li><input type="checkbox" id="react-q8" data-topic="React"><label for="react-q8" class="item">What is React Router & how it works?</label></li>
+            <li><input type="checkbox" id="react-q9" data-topic="React"><label for="react-q9" class="item">How do you optimize React performance?</label></li>
+            <li><input type="checkbox" id="react-q10" data-topic="React"><label for="react-q10" class="item">What are React keys & why important?</label></li>
+          </ul>
+        </section>
+
+        <!-- Vue -->
+        <section class="topic" data-topic="Vue">
+          <h2>Vue.js</h2>
+          <ul class="checklist">
+            <li><input type="checkbox" id="vue-q1" data-topic="Vue"><label for="vue-q1" class="item">Difference between Vue 2 and Vue 3?</label></li>
+            <li><input type="checkbox" id="vue-q2" data-topic="Vue"><label for="vue-q2" class="item">What are Vue directives (v-if, v-for, v-model)?</label></li>
+            <li><input type="checkbox" id="vue-q3" data-topic="Vue"><label for="vue-q3" class="item">What is Vuex and when to use it?</label></li>
+            <li><input type="checkbox" id="vue-q4" data-topic="Vue"><label for="vue-q4" class="item">Explain the Vue lifecycle hooks.</label></li>
+            <li><input type="checkbox" id="vue-q5" data-topic="Vue"><label for="vue-q5" class="item">What is Composition API vs Options API?</label></li>
+            <li><input type="checkbox" id="vue-q6" data-topic="Vue"><label for="vue-q6" class="item">How does Vue handle two-way binding?</label></li>
+            <li><input type="checkbox" id="vue-q7" data-topic="Vue"><label for="vue-q7" class="item">What is a watcher & computed property?</label></li>
+            <li><input type="checkbox" id="vue-q8" data-topic="Vue"><label for="vue-q8" class="item">How do you optimize Vue performance?</label></li>
+            <li><input type="checkbox" id="vue-q9" data-topic="Vue"><label for="vue-q9" class="item">Explain Vue Router basics.</label></li>
+            <li><input type="checkbox" id="vue-q10" data-topic="Vue"><label for="vue-q10" class="item">Difference between mixins & composables?</label></li>
+          </ul>
+        </section>
+
+        <!-- Node -->
+        <section class="topic" data-topic="Node">
+          <h2>Node.js</h2>
+          <ul class="checklist">
+            <li><input type="checkbox" id="node-q1" data-topic="Node"><label for="node-q1" class="item">What is Node.js & why use it?</label></li>
+            <li><input type="checkbox" id="node-q2" data-topic="Node"><label for="node-q2" class="item">Event-driven architecture in Node?</label></li>
+            <li><input type="checkbox" id="node-q3" data-topic="Node"><label for="node-q3" class="item">What are streams in Node?</label></li>
+            <li><input type="checkbox" id="node-q4" data-topic="Node"><label for="node-q4" class="item">Explain Event Loop in detail.</label></li>
+            <li><input type="checkbox" id="node-q5" data-topic="Node"><label for="node-q5" class="item">Difference between CommonJS & ES modules?</label></li>
+            <li><input type="checkbox" id="node-q6" data-topic="Node"><label for="node-q6" class="item">What are middleware in Express.js?</label></li>
+            <li><input type="checkbox" id="node-q7" data-topic="Node"><label for="node-q7" class="item">How does async/await work in Node?</label></li>
+            <li><input type="checkbox" id="node-q8" data-topic="Node"><label for="node-q8" class="item">Difference between process.nextTick() & setImmediate()?</label></li>
+            <li><input type="checkbox" id="node-q9" data-topic="Node"><label for="node-q9" class="item">How do you handle errors in Node?</label></li>
+            <li><input type="checkbox" id="node-q10" data-topic="Node"><label for="node-q10" class="item">What are clusters in Node.js?</label></li>
+          </ul>
+        </section>
+
+        <!-- DevOps -->
+        <section class="topic" data-topic="DevOps">
+          <h2>DevOps</h2>
+          <ul class="checklist">
+            <li><input type="checkbox" id="devops-q1" data-topic="DevOps"><label for="devops-q1" class="item">What is DevOps & its benefits?</label></li>
+            <li><input type="checkbox" id="devops-q2" data-topic="DevOps"><label for="devops-q2" class="item">Difference between CI, CD & Continuous Deployment?</label></li>
+            <li><input type="checkbox" id="devops-q3" data-topic="DevOps"><label for="devops-q3" class="item">Explain Infrastructure as Code (IaC).</label></li>
+            <li><input type="checkbox" id="devops-q4" data-topic="DevOps"><label for="devops-q4" class="item">What is configuration management (Ansible, Puppet, Chef)?</label></li>
+            <li><input type="checkbox" id="devops-q5" data-topic="DevOps"><label for="devops-q5" class="item">Difference between Docker & VM?</label></li>
+            <li><input type="checkbox" id="devops-q6" data-topic="DevOps"><label for="devops-q6" class="item">What is Kubernetes & why use it?</label></li>
+            <li><input type="checkbox" id="devops-q7" data-topic="DevOps"><label for="devops-q7" class="item">What are microservices & how DevOps supports them?</label></li>
+            <li><input type="checkbox" id="devops-q8" data-topic="DevOps"><label for="devops-q8" class="item">Explain Blue-Green deployment vs Canary deployment.</label></li>
+            <li><input type="checkbox" id="devops-q9" data-topic="DevOps"><label for="devops-q9" class="item">What is monitoring & logging in DevOps?</label></li>
+            <li><input type="checkbox" id="devops-q10" data-topic="DevOps"><label for="devops-q10" class="item">What are secrets management tools (Vault, KMS)?</label></li>
+          </ul>
+        </section>
+
+        <!-- CI/CD Pipeline -->
+        <section class="topic" data-topic="CI/CD">
+          <h2>CI/CD Pipeline</h2>
+          <ul class="checklist">
+            <li><input type="checkbox" id="cicd-q1" data-topic="CI/CD"><label for="cicd-q1" class="item">What is CI/CD pipeline?</label></li>
+            <li><input type="checkbox" id="cicd-q2" data-topic="CI/CD"><label for="cicd-q2" class="item">Stages of a CI/CD pipeline?</label></li>
+            <li><input type="checkbox" id="cicd-q3" data-topic="CI/CD"><label for="cicd-q3" class="item">Tools for CI/CD (Jenkins, GitHub Actions...)?</label></li>
+            <li><input type="checkbox" id="cicd-q4" data-topic="CI/CD"><label for="cicd-q4" class="item">How do you set up a basic pipeline?</label></li>
+            <li><input type="checkbox" id="cicd-q5" data-topic="CI/CD"><label for="cicd-q5" class="item">What are build artifacts?</label></li>
+            <li><input type="checkbox" id="cicd-q6" data-topic="CI/CD"><label for="cicd-q6" class="item">Difference between pipeline & workflow?</label></li>
+            <li><input type="checkbox" id="cicd-q7" data-topic="CI/CD"><label for="cicd-q7" class="item">What is rollback in CI/CD?</label></li>
+            <li><input type="checkbox" id="cicd-q8" data-topic="CI/CD"><label for="cicd-q8" class="item">How do you handle failed deployments?</label></li>
+            <li><input type="checkbox" id="cicd-q9" data-topic="CI/CD"><label for="cicd-q9" class="item">What are unit, integration, smoke tests?</label></li>
+            <li><input type="checkbox" id="cicd-q10" data-topic="CI/CD"><label for="cicd-q10" class="item">Explain automated testing in CI/CD.</label></li>
+          </ul>
+        </section>
+
+        <!-- AWS -->
+        <section class="topic" data-topic="AWS">
+          <h2>AWS</h2>
+          <ul class="checklist">
+            <li><input type="checkbox" id="aws-q1" data-topic="AWS"><label for="aws-q1" class="item">What is AWS & its core services?</label></li>
+            <li><input type="checkbox" id="aws-q2" data-topic="AWS"><label for="aws-q2" class="item">Difference between EC2, Lambda & ECS?</label></li>
+            <li><input type="checkbox" id="aws-q3" data-topic="AWS"><label for="aws-q3" class="item">What is S3 & its storage classes?</label></li>
+            <li><input type="checkbox" id="aws-q4" data-topic="AWS"><label for="aws-q4" class="item">What is IAM & how do you secure it?</label></li>
+            <li><input type="checkbox" id="aws-q5" data-topic="AWS"><label for="aws-q5" class="item">Difference between Security Groups & NACLs?</label></li>
+            <li><input type="checkbox" id="aws-q6" data-topic="AWS"><label for="aws-q6" class="item">What is Auto Scaling & Load Balancer?</label></li>
+            <li><input type="checkbox" id="aws-q7" data-topic="AWS"><label for="aws-q7" class="item">Explain VPC & its components.</label></li>
+            <li><input type="checkbox" id="aws-q8" data-topic="AWS"><label for="aws-q8" class="item">Difference between RDS, DynamoDB & Aurora?</label></li>
+            <li><input type="checkbox" id="aws-q9" data-topic="AWS"><label for="aws-q9" class="item">What is CloudFormation?</label></li>
+            <li><input type="checkbox" id="aws-q10" data-topic="AWS"><label for="aws-q10" class="item">How to monitor AWS resources (CloudWatch)?</label></li>
+          </ul>
+        </section>
+  <article class="card full-width">
+        ✅ How to Use This Checklist:
+
+        Mark ✅ once you can confidently answer/explain with examples.
+
+        Practice basic + scenario-based questions (e.g., "How would you scale a Node.js app in AWS with CI/CD?").
+
+        Keep answers short but deep enough to show real-world knowledge.
+      </article>
+      </main>
+        
+
+      <aside class="card sideInfo">
+        <div class="progressWrap">
+          <h3>Progress</h3>
+          <div class="progressBar"><div id="progressFill" class="progressFill"></div></div>
+          <div class="stats"><span id="completedCount">0</span><span id="percent">0%</span></div>
+        </div>
+
+        <div>
+          <h3>Quick Tips</h3>
+          <p class="small">Focus on 1–2 concrete examples per topic. Prepare to explain tradeoffs. Use this checklist daily before interviews.</p>
+        </div>
+
+        <div style="margin-top:12px">
+          <h3>Actions</h3>
+          <p class="small">Your progress is stored locally in your browser. Use download to save the HTML file for offline use.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const storageKey = 'interviewChecklist_v1';
+    const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"][data-topic]'));
+
+    function saveState(){
+      const data = checkboxes.map(cb => ({id: cb.id, checked: cb.checked}));
+      try{ localStorage.setItem(storageKey, JSON.stringify(data)); } catch(e){ console.warn('Could not save to localStorage', e); }
+    }
+
+    function loadState(){
+      try{
+        const raw = localStorage.getItem(storageKey);
+        if(!raw) return;
+        const data = JSON.parse(raw);
+        const map = new Map(data.map(item => [item.id, item.checked]));
+        checkboxes.forEach(cb => { cb.checked = !!map.get(cb.id); });
+      } catch(e){ console.warn('Failed to load state', e); }
+    }
+
+    function updateProgress(){
+      const total = checkboxes.length;
+      const done = checkboxes.filter(cb => cb.checked).length;
+      const pct = total === 0 ? 0 : Math.round((done/total)*100);
+      document.getElementById('completedCount').textContent = done + ' / ' + total;
+      document.getElementById('percent').textContent = pct + '%';
+      document.getElementById('progressFill').style.width = pct + '%';
+    }
+
+    // attach events
+    checkboxes.forEach(cb => cb.addEventListener('change', () => { saveState(); updateProgress(); }));
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if(!confirm('Reset all progress?')) return;
+      checkboxes.forEach(cb => cb.checked = false);
+      saveState(); updateProgress();
+    });
+
+    document.getElementById('printBtn').addEventListener('click', () => window.print());
+
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const blob = new Blob([document.documentElement.outerHTML], {type: 'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'interview-preparation-checklist.html'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    // init
+    loadState(); updateProgress();
+  </script>
+</body>
+</html>

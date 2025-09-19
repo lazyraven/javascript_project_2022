@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>React · Vue · Node Interview Checklist</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--muted:#94a3b8;--accent:#7c3aed;--glass:rgba(255,255,255,0.03)}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    body{background:linear-gradient(180deg,#071024 0%, #081229 60%);color:#e6eef8;padding:28px}
+    .container{max-width:1100px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    h1{font-size:20px;margin:0}
+    p.lead{color:var(--muted);margin:6px 0 0;font-size:13px}
+    .controls{display:flex;gap:8px}
+    button{background:var(--accent);border:0;padding:8px 12px;border-radius:8px;color:white;font-weight:600;cursor:pointer}
+    button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:top}
+    th{color:var(--muted);text-align:left;font-weight:600;font-size:12px}
+    td.questions{width:58%}
+    td.check{width:12%;text-align:center}
+    .checkbox{width:18px;height:18px}
+    details{background:var(--glass);padding:10px;border-radius:8px;margin-top:8px}
+    summary{cursor:pointer;font-weight:600}
+    .right-col{position:sticky;top:28px;height:fit-content}
+    .section-title{font-size:13px;color:var(--muted);margin-bottom:8px}
+    ul{margin:6px 0 0 18px;color:var(--muted)}
+    footer{color:var(--muted);font-size:13px;margin-top:14px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}.right-col{position:static}}
+    .print-hidden{display:inline-block}
+    @media print{body{background:white;color:black}button,.print-hidden{display:none}header p.lead{display:none}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Interview Checklist — React · Vue · Node</h1>
+        <p class="lead">Compact Q&A + checklist (basic → intermediate). Use checkboxes to track readiness. Expand items for short answers.</p>
+      </div>
+      <div class="controls print-hidden">
+        <button onclick="window.print()">Print / Save PDF</button>
+        <button class="ghost" onclick="downloadHtml()">Download .html</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>Topic</th>
+              <th class="questions">Questions (click to expand short answer)</th>
+              <th class="check">Done</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- React Basics -->
+            <tr>
+              <td><strong>React — Basics</strong><br><span style="color:var(--muted);font-size:12px">Core concepts</span></td>
+              <td class="questions">
+                <details>
+                  <summary>What is React?</summary>
+                  <div style="margin-top:8px;color:var(--muted)">A JavaScript library for building component-based UIs that uses a Virtual DOM for efficient updates.</div>
+                </details>
+                <details>
+                  <summary>Props vs State?</summary>
+                  <div style="margin-top:8px;color:var(--muted)"><strong>Props:</strong> immutable, passed from parent. <strong>State:</strong> local, mutable inside component.</div>
+                </details>
+                <details>
+                  <summary>Virtual DOM?</summary>
+                  <div style="margin-top:8px;color:var(--muted)">A lightweight in-memory representation of the real DOM. React diffs it and updates minimal real DOM nodes.</div>
+                </details>
+                <details>
+                  <summary>Hooks (useState, useEffect)?</summary>
+                  <div style="margin-top:8px;color:var(--muted)">Functions to use state and lifecycle in functional components — e.g., <code>useState</code> for state, <code>useEffect</code> for side-effects.</div>
+                </details>
+                <details>
+                  <summary>Controlled vs Uncontrolled components?</summary>
+                  <div style="margin-top:8px;color:var(--muted)">Controlled: React owns input state. Uncontrolled: DOM holds value; use refs to read values.</div>
+                </details>
+                <details>
+                  <summary>Keys in lists?</summary>
+                  <div style="margin-top:8px;color:var(--muted)">Unique identifiers that help React reconcile lists efficiently.</div>
+                </details>
+              </td>
+              <td class="check"><input class="checkbox" type="checkbox" /></td>
+            </tr>
+
+            <!-- React Advanced -->
+            <tr>
+              <td><strong>React — Advanced</strong><br><span style="color:var(--muted);font-size:12px">State mgmt, optimisations, SSR</span></td>
+              <td class="questions">
+                <details><summary>Context API?</summary><div style="margin-top:8px;color:var(--muted)">Provides global-ish state to avoid props drilling.</div></details>
+                <details><summary>Redux vs Context API?</summary><div style="margin-top:8px;color:var(--muted)">Redux is a full state management library (store, reducers, middleware). Context is simpler and built-in.</div></details>
+                <details><summary>Memoization (React.memo, useMemo, useCallback)?</summary><div style="margin-top:8px;color:var(--muted)">Tools to avoid unnecessary re-renders: <code>React.memo</code> caches components; <code>useMemo</code> caches values; <code>useCallback</code> caches functions.</div></details>
+                <details><summary>Lifecycle methods?</summary><div style="margin-top:8px;color:var(--muted)">Class lifecycles: <code>componentDidMount</code>, <code>componentDidUpdate</code>, <code>componentWillUnmount</code>.</div></details>
+                <details><summary>SSR vs CSR?</summary><div style="margin-top:8px;color:var(--muted)">SSR (server-side rendering — Next.js) vs CSR (client-side rendering — default React).</div></details>
+              </td>
+              <td class="check"><input class="checkbox" type="checkbox" /></td>
+            </tr>
+
+            <!-- Vue Basics -->
+            <tr>
+              <td><strong>Vue — Basics</strong><br><span style="color:var(--muted);font-size:12px">Core concepts</span></td>
+              <td class="questions">
+                <details><summary>What is Vue?</summary><div style="margin-top:8px;color:var(--muted)">Progressive JS framework for building UIs with reactive data binding.</div></details>
+                <details><summary>Vue 2 vs Vue 3?</summary><div style="margin-top:8px;color:var(--muted)">Vue 3 adds Composition API and uses Proxy-based reactivity for better performance.</div></details>
+                <details><summary>Directives (v-if, v-for, v-model)?</summary><div style="margin-top:8px;color:var(--muted)">Built-in directives to control rendering, lists, and binding.</div></details>
+                <details><summary>Computed vs Methods?</summary><div style="margin-top:8px;color:var(--muted)">Computed: cached based on deps. Methods: executed every call.</div></details>
+                <details><summary>Props?</summary><div style="margin-top:8px;color:var(--muted)">Pass data from parent to child; validated in component options.</div></details>
+                <details><summary>One-way vs Two-way binding?</summary><div style="margin-top:8px;color:var(--muted)">One-way flows parent→child; two-way (v-model) syncs both ways.</div></details>
+              </td>
+              <td class="check"><input class="checkbox" type="checkbox" /></td>
+            </tr>
+
+            <!-- Vue Advanced -->
+            <tr>
+              <td><strong>Vue — Advanced</strong><br><span style="color:var(--muted);font-size:12px">State mgmt & architecture</span></td>
+              <td class="questions">
+                <details><summary>What is Vuex?</summary><div style="margin-top:8px;color:var(--muted)">Centralized store for Vue apps with state, getters, mutations, actions.</div></details>
+                <details><summary>Mixins?</summary><div style="margin-top:8px;color:var(--muted)">Reusable blocks of logic to share between components (use Composition API for modern code).</div></details>
+                <details><summary>Composition API vs Options API?</summary><div style="margin-top:8px;color:var(--muted)">Composition: functions that group logic. Options: object-based (data, methods, computed).</div></details>
+                <details><summary>Vue 3 reactivity?</summary><div style="margin-top:8px;color:var(--muted)">Proxy-based, more complete reactivity and better performance than Object.defineProperty.</div></details>
+              </td>
+              <td class="check"><input class="checkbox" type="checkbox" /></td>
+            </tr>
+
+            <!-- Node Basics -->
+            <tr>
+              <td><strong>Node — Basics</strong><br><span style="color:var(--muted);font-size:12px">Server-side JS</span></td>
+              <td class="questions">
+                <details><summary>What is Node.js?</summary><div style="margin-top:8px;color:var(--muted)">JS runtime built on V8 for server-side apps and tooling.</div></details>
+                <details><summary>Sync vs Async?</summary><div style="margin-top:8px;color:var(--muted)">Sync blocks, async is non-blocking — use callbacks/promises/async-await.</div></details>
+                <details><summary>Event Loop?</summary><div style="margin-top:8px;color:var(--muted)">Core mechanism handling async operations in phases and queues.</div></details>
+                <details><summary>Callbacks vs Promises vs Async/Await?</summary><div style="margin-top:8px;color:var(--muted)">Callbacks: nesting; Promises: chainable; Async/Await: clearer async code using promises.</div></details>
+                <details><summary>npm & package.json?</summary><div style="margin-top:8px;color:var(--muted)">npm is package manager. package.json lists dependencies, scripts and metadata.</div></details>
+                <details><summary>Express middleware?</summary><div style="margin-top:8px;color:var(--muted)">Functions that process requests before response handlers (logging, auth, validation).</div></details>
+              </td>
+              <td class="check"><input class="checkbox" type="checkbox" /></td>
+            </tr>
+
+            <!-- Node Advanced -->
+            <tr>
+              <td><strong>Node — Advanced</strong><br><span style="color:var(--muted);font-size:12px">Performance & architecture</span></td>
+              <td class="questions">
+                <details><summary>Clustering?</summary><div style="margin-top:8px;color:var(--muted)">Run multiple worker processes to use all CPU cores and improve throughput.</div></details>
+                <details><summary>Streams?</summary><div style="margin-top:8px;color:var(--muted)">Handle data in chunks (readable, writable, transform), efficient for large IO.</div></details>
+                <details><summary>process.nextTick() vs setImmediate()?</summary><div style="margin-top:8px;color:var(--muted)">nextTick runs before the next event loop phase; setImmediate runs in the check phase after I/O.</div></details>
+                <details><summary>JWT Authentication?</summary><div style="margin-top:8px;color:var(--muted)">Stateless tokens (signed) used for authentication; store minimal data, verify signature on each request.</div></details>
+                <details><summary>Child Processes?</summary><div style="margin-top:8px;color:var(--muted)">Use <code>child_process</code> to run OS commands or spawn other processes.</div></details>
+                <details><summary>REST vs GraphQL?</summary><div style="margin-top:8px;color:var(--muted)">REST: multiple endpoints. GraphQL: single endpoint with flexible queries and precise data fetching.</div></details>
+                <details><summary>Securing Node apps?</summary><div style="margin-top:8px;color:var(--muted)">Use Helmet, input validation, rate limiting, HTTPS, secure headers, and proper token handling.</div></details>
+              </td>
+              <td class="check"><input class="checkbox" type="checkbox" /></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </main>
+
+      <aside class="right-col">
+        <div class="card">
+          <div class="section-title">How to use this file</div>
+          <ul>
+            <li>Click each question to expand the short answer — use these as flashcards.</li>
+            <li>Tick the checkbox when you feel confident with that topic.</li>
+            <li>Use <strong>Print / Save PDF</strong> to export a printable checklist.</li>
+          </ul>
+          <div style="height:10px"></div>
+          <div class="section-title">Suggested study order</div>
+          <ol style="margin:6px 0 0 18px;color:var(--muted)">
+            <li>React basics → Hooks → advanced optimizations</li>
+            <li>Vue basics → Composition API → Vuex</li>
+            <li>Node basics → async patterns → security & scaling</li>
+          </ol>
+          <footer>
+            Tip: create a study plan (daily topics) and record one mock answer per day.
+          </footer>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    function downloadHtml(){
+      const blob = new Blob([document.documentElement.outerHTML],{type:'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'Interview-Checklist-React-Vue-Node.html';
+      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
