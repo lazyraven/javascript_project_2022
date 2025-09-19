@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS New Topics 2024</title>
+    <!-- <script src="https://d3js.org/d3.v4.js"></script> -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- <script src="./newLearning2024.js"></script> -->
+</head>
+<body>
+    <h3>New Topics of JS </h3>
+    <h3>Example of D3.js</h3>
+    <div id="result"></div>
+    <script
+        type="text/javascript"
+        charset="utf-8"
+    >
+        d3.select("body").style(
+            "text-align",
+            "center"
+        );
+    
+        d3.select("h3").style(
+            "color",
+            "blue"
+        );
+
+        let gfg = d3.greatest([
+            5, 4, 3, 2, 1,
+        ]);
+        let resultDiv =
+            document.getElementById("result");
+        resultDiv.innerText =
+            "The greatest number is: " + gfg;
+    </script>
+</body>
+</html>
