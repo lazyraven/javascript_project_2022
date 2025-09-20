@@ -10,6 +10,11 @@ It helps me track my learning, revisit concepts, and build small projects.
 
 ---
 
+## 📂 Folder Structure
+
+
+---
+
 ## 📘 Topics Covered
 
 ### 🔹 Basics
@@ -45,6 +50,12 @@ It helps me track my learning, revisit concepts, and build small projects.
 All summaries and important concepts are inside the `notes/` folder in markdown format.
 
 ---
+
+## 🚀 How to Use
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/<your-username>/javascript-practice.git
+
 
 ## 🚀 How to Use
 1. Clone the repository:
