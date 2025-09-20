@@ -1,8 +1,0 @@
-<h3>Run the application with this command (npx serve . )</h3>
-
-for creart package file run this command > npm init -y
-
-added in package file type = "module"
-create index.js file
-
-https://chatgpt.com/c/68b021b5-6730-8323-a36a-f9a5260d02b6
