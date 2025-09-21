@@ -62,13 +62,6 @@ All summaries and important concepts are inside the `notes/` folder in markdown 
    git clone https://github.com/<your-username>/javascript-practice.git
    ```
 
-## 🚀 How to Use
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/<your-username>/javascript-practice.git
-   ```
-
 [chatGPT](https://chatgpt.com/c/68a86599-4c3c-8328-bb3c-3f3aacc735a4)
 
 ## 🚀 Features - All set! I’ve put a polished, single-file HTML progress tracker in the canvas. It includes:
