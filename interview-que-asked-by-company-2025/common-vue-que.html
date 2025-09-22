@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue-TCS</title>
+    <title>Common Vue Questions</title>
 </head>
 
 <style>
@@ -41,15 +41,18 @@
         font-weight: bold;
         color: blueviolet;
     }
+    h4 p {
+        font-size: 13px;
+    }
+
 </style>
 
 <body>
     <div>
-        <h3>Vue Js </h3>
-        <h3>TCS - Questions on Vue JS</h3>
+        <h3>Common Vue Js Questions</h3>
         <ol>
             <li>Life cycle hooks ?</li>
-            <li>composition API ?</li>
+            <li>What is Composition API (definition) ?</li>
             <li> when we login the page what will be happen to go home page about lifecycle, how it works ?</li>
             <li>watch & computed ?</li>
             <li>v-if and v-show ? who will remove dom element </li>
@@ -84,13 +87,38 @@
                 unmounted / destroyed → Component fully removed from DOM.
             </pre>
             </li>
+            
             <li>
-                <h4 class="blue">v-if & v-show ? who will remove dom element ?</h4>
+                <h4 class="blue">What is Composition API (definition) in Vue 3 ? 
+                          <p>How to use it in code ? | How to explain it in spoken language for an interview ?</p>
+                </h4>
                 <pre>
-                    Vue directives are special attributes with a v- prefix, like v-if, v-for, and v-model, used to add dynamic behavior directly in the template.
-                        v-if → Shows or hides an element based on a condition.
-                        v-for → Loops over a list to render elements dynamically.
-                        v-model → Creates two-way binding between input fields and data.
+                    The <strong>Composition API</strong> in Vue.js is a way of writing components introduced in Vue 3.
+
+                   • It gives you more flexibility, reusability, and better organization of logic compared to the traditional 
+                     <strong>Options API</strong>(where we use data, methods, computed, etc. in separate blocks).
+
+                   • With Composition API, you use functions like ref, reactive, computed, and watch inside a setup() function.
+                     This keeps related logic grouped together and makes components easier to scale.
+
+                   •  The setup() (or &lt;script setup>) is the entry point for Composition API.
+                </pre>
+
+                <pre>
+                    ** Spoken Language : 🔹 How to Speak in Interview
+                    The Composition API in Vue 3 is a new way to write components using functions instead of the Options API structure. 
+                    Instead of splitting logic into data, methods, and computed, we can organize related code together inside the setup() function. 
+                    This makes the code cleaner, more reusable, and easier to maintain, especially in larger projects. For example, 
+                    I can define a ref for a counter and increment it directly inside setup. It’s similar to React hooks in concept, providing better logic reuse and scalability."
+                </pre>
+            </li>
+
+            <li>
+                <h4 class="blue">v-if & v-show ? 
+                    <p>who will remove dom element | Give me the difference | How to use it in code | How to explain it in spoken language for an interview ?</p>
+
+                </h4>
+                <pre>
                 </pre>
             </li>
             <li>
