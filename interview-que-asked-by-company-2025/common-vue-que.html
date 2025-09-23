@@ -53,9 +53,9 @@
         <ol>
             <li>Life cycle hooks ?</li>
             <li>What is Composition API (definition) ?</li>
-            <li> when we login the page what will be happen to go home page about lifecycle, how it works ?</li>
-            <li>watch & computed ?</li>
             <li>v-if and v-show ? who will remove dom element </li>
+            <li>watch & computed ?</li>
+            <li> when we login the page what will be happen to go home page about lifecycle, how it works ?</li>
             <li>what role of key in vue v-for ?</li>
             <li>slot ? slot scoped, slot name ?</li>
             <li>vuex ? pinia ?</li>
@@ -114,13 +114,48 @@
             </li>
 
             <li>
-                <h4 class="blue">v-if & v-show ? 
-                    <p>who will remove dom element | Give me the difference | How to use it in code | How to explain it in spoken language for an interview ?</p>
-
+                <h4 class="blue">Explain v-if & v-show ?
+                    <p>who will remove dom element | Give me the difference | How to use it in code | How to explain it in spoken
+                        language for an interview ?</p>
                 </h4>
-                <pre>
-                </pre>
+                <pre>1. v-if vs v-show in Vue.js
+
+                    • v-if
+                            • Completely adds/removes the element from the DOM based on the condition.
+                            • If the condition is false → element is not in DOM at all.
+                            • Has higher performance cost if toggled frequently because it destroys and recreates DOM nodes.
+                    • v-show
+                            • Keeps the element in the DOM always.
+                            • Just toggles the CSS property display: none when the condition is false.
+                            • Faster when toggling often, but the element always exists in DOM.</pre>
+
+                <pre>2. Who removes the DOM element?
+
+                    • ✅ v-if removes/creates DOM nodes.
+                    • ❌ v-show only hides/shows with CSS (does not remove).
+               </pre>
+
+               <pre>3. How to explain in an interview **(spoken version)
+
+                    "v-if and v-show both handle conditional rendering in Vue, but they work differently.
+                    v-if creates or removes elements from the DOM based on the condition, which is good when the condition changes rarely.
+                    On the other hand, v-show keeps the element in the DOM and just toggles its visibility with CSS display: none, which is better when toggling frequently.
+                    So, I choose v-if for conditions that change rarely and v-show for things like dropdowns or modals that toggle often."
+
+
+                    ✅ Summary in one line for interview:
+                        Use v-if when rendering is expensive or condition is rare.
+                        Use v-show when toggling visibility often but want to keep DOM intact.
+               </pre>
             </li>
+
+            <li>
+                <h4 class="blue">Explain watch & computed ?
+                    <p>Give me the difference | How to use it in code | How to explain it in spoken language for an interview ?</p>
+                </h4>
+                <pre></pre>
+            </li>
+
             <li>
                 <h4 class="blue">what works of mixin ?</h4>
                 <pre>Mixins let you reuse code across multiple components by sharing methods, data, or lifecycle hooks.</p>
