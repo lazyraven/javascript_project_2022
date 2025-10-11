@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6-Week Java Backend Developer Roadmap</title>
+  <style>
+    /* ---------- GENERAL STYLES ---------- */
+    :root {
+      --bg-color: #f9fafb;
+      --text-color: #333;
+      --section-bg: #fff;
+      --highlight-color: #0d6efd;
+      --goal-bg: #e7f3ff;
+      --mini-bg: #fff9e6;
+      --project-bg: #e6ffed;
+      --table-header-bg: #0d6efd;
+      --table-header-color: #fff;
+      --nav-bg: #0d6efd;
+      --nav-color: #fff;
+      --progress-color: #0d6efd;
+    }
+
+    body.dark {
+      --bg-color: #121212;
+      --text-color: #ddd;
+      --section-bg: #1e1e1e;
+      --highlight-color: #22c55e;
+      --goal-bg: #2a2a2a;
+      --mini-bg: #333333;
+      --project-bg: #263b2f;
+      --table-header-bg: #22c55e;
+      --table-header-color: #000;
+      --nav-bg: #222;
+      --nav-color: #fff;
+      --progress-color: #22c55e;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3 { color: var(--highlight-color); }
+
+    h1 { text-align: center; margin: 100px 0 30px; }
+
+    section {
+      background: var(--section-bg);
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin: 40px 20px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    ul { list-style: disc; margin-left: 20px; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    code { color: #d63384; font-weight: bold; }
+
+    .goal { background: var(--goal-bg); border-left: 4px solid var(--highlight-color); padding: 10px; margin-bottom: 10px; font-style: italic; }
+    .mini { background: var(--mini-bg); border-left: 4px solid #fbbc04; padding: 10px; margin-top: 10px; }
+    .project { background: var(--project-bg); border-left: 4px solid #22c55e; padding: 10px; margin-top: 10px; }
+
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+    th { background: var(--table-header-bg); color: var(--table-header-color); }
+
+    /* ---------- NAVBAR ---------- */
+    nav {
+      position: fixed; top: 0; width: 100%; background: var(--nav-bg);
+      color: var(--nav-color); padding: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 999;
+    }
+    nav ul { display: flex; justify-content: center; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; align-items: center;}
+    nav li { margin: 5px 15px; }
+    nav a { color: var(--nav-color); text-decoration: none; font-weight: 500; transition: 0.3s; }
+    nav a:hover { text-decoration: underline; }
+    #themeToggle { cursor: pointer; background: #fff; color: #0d6efd; border: none; padding: 5px 10px; border-radius: 5px; font-weight: bold; }
+
+    /* ---------- PROGRESS BAR ---------- */
+    .progress-container { position: fixed; top: 50px; left: 0; width: 100%; height: 8px; background: #e0e0e0; z-index: 998; }
+    .progress-bar { height: 8px; background: var(--progress-color); width: 0%; }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 768px) {
+      h1 { font-size: 1.6rem; }
+      section { margin: 20px 10px; padding: 15px; }
+      nav ul { flex-direction: column; }
+      nav li { margin: 5px 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVIGATION -->
+  <nav>
+    <ul>
+      <li><a href="#week1">Week 1</a></li>
+      <li><a href="#week2">Week 2</a></li>
+      <li><a href="#week3">Week 3</a></li>
+      <li><a href="#week4">Week 4</a></li>
+      <li><a href="#week5">Week 5</a></li>
+      <li><a href="#week6">Week 6</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><button id="themeToggle">Toggle Dark/Light</button></li>
+    </ul>
+  </nav>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+<h1><a href="https://chatgpt.com/share/68e9e630-8684-8013-a344-6684898bca7d">Chat Gpt</a></h1>
+  <!-- PAGE CONTENT -->
+  <h1>🗓️ 6-Week Java Backend Developer Roadmap</h1>
+
+  <!-- Sections (Week 1 to 6 + Resources) -->
+  <section id="week1">
+    <h2>🧩 WEEK 1 — Core Java Foundation</h2>
+    <div class="goal">Goal: Strong understanding of Java syntax, OOP, and basic data handling.</div>
+    <ul>
+      <li>Java Basics: Variables, Loops, Conditions, Arrays</li>
+      <li>OOP Concepts: Class, Object, Encapsulation, Inheritance, Polymorphism, Abstraction</li>
+      <li>Access Modifiers</li>
+      <li>Exception Handling (try-catch-finally, throw, throws)</li>
+      <li>Java 8 Features: Lambda, Stream API, Functional Interfaces</li>
+    </ul>
+    <h3>Practice Tasks:</h3>
+    <ul>
+      <li>Reverse a string</li>
+      <li>Find factorial / Fibonacci</li>
+      <li>Sort an array without built-in methods</li>
+      <li>Count frequency of characters in a string</li>
+      <li>Filter even numbers using Stream API</li>
+    </ul>
+    <div class="mini"><strong>Mini Assignment:</strong> Create a Student Management CLI App — Add, remove, update, display students (store in a List)</div>
+  </section>
+
+  <section id="week2">
+    <h2>⚙️ WEEK 2 — Collections, Generics & File Handling</h2>
+    <div class="goal">Goal: Learn efficient data storage and manipulation.</div>
+    <ul>
+      <li>Collections → List, Set, Map, Queue</li>
+      <li>Generics → Type safety</li>
+      <li>Comparator & Comparable</li>
+      <li>File I/O → Read/Write text files</li>
+    </ul>
+    <pre><code>// Example: Find duplicate elements
+int[] arr = {1,2,3,2,4,1,5};
+Set&lt;Integer&gt; seen = new HashSet&lt;&gt;();
+for(int num: arr){
+  if(!seen.add(num)) System.out.println("Duplicate: "+num);
+}</code></pre>
+  </section>
+
+  <section id="week3">
+    <h2>🧠 WEEK 3 — JDBC + SQL + Layered Logic</h2>
+    <div class="goal">Goal: Learn to connect Java to a database.</div>
+    <ul>
+      <li>MySQL setup</li>
+      <li>CRUD using JDBC</li>
+      <li>Connection, PreparedStatement, ResultSet</li>
+      <li>SQL Queries (SELECT, INSERT, UPDATE, DELETE, JOINS)</li>
+    </ul>
+    <div class="project">Mini Project: Build a BookStore app — Add, update, list books. Understand DAO separation.</div>
+  </section>
+
+  <section id="week4">
+    <h2>🚀 WEEK 4 — Spring & Spring Boot</h2>
+    <div class="goal">Goal: Master dependency injection and REST API creation.</div>
+    <ul>
+      <li>Spring Core → Beans, DI, IoC</li>
+      <li>Spring Boot setup</li>
+      <li>REST Controllers (@RestController, @RequestMapping)</li>
+      <li>application.properties, project structure</li>
+      <li>@Autowired, @Service, @Repository</li>
+    </ul>
+    <div class="project">
+      Practice Project: User Management REST API
+      <pre><code>@RestController
+@RequestMapping("/api/users")
+public class UserController {
+  private List&lt;String&gt; users = new ArrayList&lt;&gt;();
+
+  @PostMapping
+  public String addUser(@RequestBody String name){
+    users.add(name);
+    return "User added: "+name;
+  }
+
+  @GetMapping
+  public List&lt;String&gt; getUsers(){ return users; }
+}</code></pre>
+    </div>
+  </section>
+
+  <section id="week5">
+    <h2>🧱 WEEK 5 — JPA + Database Integration</h2>
+    <div class="goal">Goal: Integrate Spring Boot with MySQL for real CRUD.</div>
+    <ul>
+      <li>Spring Data JPA</li>
+      <li>Entities, Repositories</li>
+      <li>CRUD with MySQL</li>
+      <li>Exception handling (@ControllerAdvice)</li>
+      <li>DTOs and Model mapping</li>
+    </ul>
+    <div class="project">
+      Employee Management System (REST + DB)
+      <pre><code>@PostMapping
+public ResponseEntity&lt;Employee&gt; createEmployee(@RequestBody Employee emp){
+  Employee saved = service.addEmployee(emp);
+  return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+}</code></pre>
+    </div>
+  </section>
+
+  <section id="week6">
+    <h2>🧰 WEEK 6 — Advanced Topics + Final Project</h2>
+    <div class="goal">Goal: Build a complete backend-ready app.</div>
+    <ul>
+      <li>Spring Security (JWT)</li>
+      <li>Exception Handling</li>
+      <li>Pagination & Sorting</li>
+      <li>Postman API Testing</li>
+      <li>Docker (optional)</li>
+      <li>Git/GitHub version control</li>
+    </ul>
+    <div class="project">
+      Final Project: Inventory Management API
+      <ul>
+        <li>Login (JWT)</li>
+        <li>Add / Update / Delete products</li>
+        <li>Fetch products by category</li>
+        <li>Integrated MySQL database</li>
+        <li>Exception handling, validations, layered architecture</li>
+      </ul>
+      <p>Stack: Spring Boot, JPA, Spring Security, MySQL, Postman</p>
+    </div>
+  </section>
+
+  <section id="resources">
+    <h2>📘 Recommended Learning Order</h2>
+    <table>
+      <tr><th>Stage</th><th>Focus</th><th>Tools</th></tr>
+      <tr><td>1</td><td>Core Java</td><td>JDK, IntelliJ / VS Code</td></tr>
+      <tr><td>2</td><td>Collections + JDBC</td><td>MySQL, JDBC</td></tr>
+      <tr><td>3</td><td>Spring Boot</td><td>Spring Initializr</td></tr>
+      <tr><td>4</td><td>JPA + REST APIs</td><td>Postman</td></tr>
+      <tr><td>5</td><td>Security + Deployment</td><td>Git, Docker</td></tr>
+    </table>
+    <h3>🧠 Daily Practice</h3>
+    <ul>
+      <li>Strings, Arrays, Collections</li>
+      <li>OOP patterns</li>
+      <li>Algorithmic problems (LeetCode / HackerRank)</li>
+      <li>Java Streams & Optional</li>
+      <li>REST API creation</li>
+    </ul>
+  </section>
+
+  <script>
+    // Progress bar
+    window.onscroll = function() {
+      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      let scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      let scrolled = (scrollTop / scrollHeight) * 100;
+      document.getElementById("progressBar").style.width = scrolled + "%";
+    };
+
+    // Theme toggle
+    const toggleBtn = document.getElementById("themeToggle");
+    const currentTheme = localStorage.getItem("theme") || "light";
+    if(currentTheme === "dark") document.body.classList.add("dark");
+
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      let theme = document.body.classList.contains("dark") ? "dark" : "light";
+      localStorage.setItem("theme", theme);
+    });
+  </script>
+</body>
+</html>

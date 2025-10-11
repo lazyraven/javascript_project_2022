@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Java Backend Developer Roadmap — 2025</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#4f46e5;--glass:rgba(255,255,255,0.03)}
+    body{font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(180deg,#071028 0%, #081122 100%);color:#e6eef6;margin:0;padding:32px}
+    .wrap{max-width:960px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+    h1{font-size:20px;margin:0}
+    .sub{color:var(--muted);font-size:13px}
+    .card{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);margin-bottom:16px}
+    h2{margin:0 0 8px 0}
+    p{color:var(--muted);margin:0 0 12px 0}
+    ul{margin:8px 0 12px 20px;color:#dfe9f9}
+    pre{background:var(--glass);padding:12px;border-radius:8px;overflow:auto;color:#dfe9f9}
+    code{font-family:source-code-pro,Menlo,Monaco,Consolas,"Courier New",monospace}
+    .grid{display:grid;grid-template-columns:1fr 280px;gap:16px}
+    table{width:100%;border-collapse:collapse;margin-top:8px}
+    th,td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left}
+    .btn{display:inline-block;padding:8px 12px;border-radius:8px;background:linear-gradient(90deg,var(--accent),#7c3aed);color:#fff;text-decoration:none;font-weight:600}
+    footer{color:var(--muted);font-size:13px;margin-top:18px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr} .card{padding:16px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Java Backend Developer Roadmap — 2025</h1>
+        <div class="sub">Concise learning path, practice items, example code and mini-project structure</div>
+      </div>
+      <div>
+        <a class="btn" id="downloadBtn">Download HTML</a>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section>
+        <article class="card">
+          <h2>1. Core Java (Foundation)</h2>
+          <p>Focus on fundamentals and small CLI practice programs to build logic and confidence.</p>
+          <ul>
+            <li>Data types, loops, operators</li>
+            <li>OOP: Encapsulation, Inheritance, Polymorphism, Abstraction</li>
+            <li>Exception handling</li>
+            <li>Collections Framework — List, Set, Map, Queue</li>
+            <li>Generics</li>
+            <li>Multithreading &amp; Concurrency</li>
+            <li>File I/O (FileReader, BufferedReader, FileWriter)</li>
+            <li>Java 8+ features: Stream API, Lambdas, Optional, Functional Interfaces</li>
+          </ul>
+          <p><strong>Practice:</strong> reverse strings, find duplicates, sorting, map counting — write small CLI programs.</p>
+        </article>
+
+        <article class="card">
+          <h2>2. Advanced Java</h2>
+          <ul>
+            <li>JDBC (database connectivity)</li>
+            <li>Servlets and JSP (understand web flow)</li>
+            <li>HTTP Request/Response cycle, Filters, Listeners, Sessions</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>3. Frameworks — Spring &amp; Spring Boot (Most Important)</h2>
+          <ul>
+            <li>Spring Core — IoC, Beans, Dependency Injection</li>
+            <li>Spring Boot — Auto-configuration, Starters, application.properties</li>
+            <li>Spring MVC — Controllers, RestControllers, @RequestMapping</li>
+            <li>Spring Data JPA — Repository pattern, CRUD</li>
+            <li>Spring Security — JWT, Authentication &amp; Authorization</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>4. Database</h2>
+          <ul>
+            <li>SQL basics: Joins, Indexes, Stored Procedures</li>
+            <li>ORM: Hibernate or JPA</li>
+            <li>Practice CRUD with MySQL / PostgreSQL</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>5. REST API Development</h2>
+          <ul>
+            <li>Build RESTful APIs with Spring Boot</li>
+            <li>Use @GetMapping, @PostMapping, @PutMapping, @DeleteMapping</li>
+            <li>Understand JSON, DTOs, ResponseEntity</li>
+            <li>Global exception handling with @ControllerAdvice</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>6. Tools &amp; DevOps Basics</h2>
+          <ul>
+            <li>Maven / Gradle</li>
+            <li>Postman for API testing</li>
+            <li>Git / GitHub</li>
+            <li>Docker basics (optional but recommended)</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>7. Project Layering</h2>
+          <p>Follow a clean architecture for maintainability:</p>
+          <ul>
+            <li><code>controller &rarr; service &rarr; repository &rarr; model &rarr; dto</code></li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>Java Coding Practice (Interview Example)</h2>
+          <p><strong>Problem:</strong> Find the first non-repeated character in a string.</p>
+          <pre><code>// FirstNonRepeatedChar.java
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class FirstNonRepeatedChar {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine();
+
+        char result = findFirstNonRepeated(input);
+        if (result != '\0') {
+            System.out.println("First non-repeated character: " + result);
+        } else {
+            System.out.println("No unique character found.");
+        }
+    }
+
+    public static char findFirstNonRepeated(String str) {
+        Map<Character, Integer> map = new LinkedHashMap<>();
+        for (char ch : str.toCharArray()) {
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        }
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            if (entry.getValue() == 1) {
+                return entry.getKey();
+            }
+        }
+        return '\0';
+    }
+}
+</code></pre>
+        </article>
+
+        <article class="card">
+          <h2>Mini Project Example — Employee Management REST API</h2>
+          <p>Stack: Spring Boot, MySQL, JPA</p>
+
+          <pre><code>// Employee.java
+@Entity
+public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String role;
+    private Double salary;
+
+    // Getters and Setters
+}
+
+// EmployeeRepository.java
+public interface EmployeeRepository extends JpaRepository<Employee, Long> { }
+
+// EmployeeService.java
+@Service
+public class EmployeeService {
+    @Autowired
+    private EmployeeRepository repo;
+
+    public List<Employee> getAllEmployees() { return repo.findAll(); }
+    public Employee addEmployee(Employee emp) { return repo.save(emp); }
+    public Employee updateEmployee(Long id, Employee emp) { emp.setId(id); return repo.save(emp); }
+    public void deleteEmployee(Long id) { repo.deleteById(id); }
+}
+
+// EmployeeController.java
+@RestController
+@RequestMapping("/api/employees")
+public class EmployeeController {
+    @Autowired
+    private EmployeeService service;
+
+    @GetMapping
+    public List<Employee> getAll() { return service.getAllEmployees(); }
+
+    @PostMapping
+    public Employee add(@RequestBody Employee emp) { return service.addEmployee(emp); }
+
+    @PutMapping("/{id}")
+    public Employee update(@PathVariable Long id, @RequestBody Employee emp) { return service.updateEmployee(id, emp); }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) { service.deleteEmployee(id); return "Employee deleted with ID: " + id; }
+}
+</code></pre>
+        </article>
+
+        <article class="card">
+          <h2>Summary — What to Master First</h2>
+          <table>
+            <thead>
+              <tr><th>Level</th><th>Focus</th><th>Priority</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Beginner</td><td>Core Java (OOP, Collections, Exceptions)</td><td>⭐⭐⭐⭐</td></tr>
+              <tr><td>Intermediate</td><td>Spring Boot + JPA + REST API</td><td>⭐⭐⭐⭐⭐</td></tr>
+              <tr><td>Advanced</td><td>Security, Microservices, Docker</td><td>⭐⭐⭐</td></tr>
+              <tr><td>Practice</td><td>Coding problems + Mini projects</td><td>⭐⭐⭐⭐⭐</td></tr>
+            </tbody>
+          </table>
+        </article>
+
+      </section>
+
+      <aside>
+        <div class="card">
+          <h2>Quick Tips</h2>
+          <ul>
+            <li>Practice small programs daily — consistency beats intensity.</li>
+            <li>Build one full CRUD project end-to-end (local DB &amp; Postman tests).</li>
+            <li>Write unit tests (JUnit) and add simple integration tests.</li>
+            <li>Learn to read Spring Boot logs and common debugging patterns.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Commands &amp; Tools</h2>
+          <ul>
+            <li><code>mvn spring-boot:run</code> — run app</li>
+            <li><code>docker build -t myapp .</code> — build image</li>
+            <li>Use Postman or curl for endpoint testing</li>
+            <li>Commit often with clear messages</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Printable / Download</h2>
+          <p class="sub">Click <em>Download HTML</em> to save this roadmap as a file.</p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      Generated for: <strong>Nisha</strong> — Java Backend Developer Roadmap (2025). Keep practicing and build projects.
+    </footer>
+  </div>
+
+  <script>
+    // download the current document as an HTML file
+    const downloadBtn = document.getElementById('downloadBtn');
+    downloadBtn.addEventListener('click', () => {
+      const content = `<!doctype html>${document.documentElement.outerHTML}`;
+      const blob = new Blob([content], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'java-backend-roadmap-2025.html';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Java Backend Roadmap — 6‑Week (42‑Day) Plan</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+            line-height: 1.5;
+            margin: 24px;
+            color: #0f172a
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #0b3b53
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 24px
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e6eef2;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 6px 18px rgba(10, 30, 40, 0.04)
+        }
+
+        pre {
+            background: #0b1220;
+            color: #dbeafe;
+            padding: 12px;
+            border-radius: 6px;
+            overflow: auto
+        }
+
+        ul {
+            margin: 8px 0 12px 20px
+        }
+
+        .checklist {
+            max-height: 72vh;
+            overflow: auto;
+            padding-right: 8px
+        }
+
+        .day {
+            margin-bottom: 10px
+        }
+
+        .mini {
+            font-size: 0.95rem;
+            color: #334155
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .code-title {
+            font-weight: 600;
+            margin: 8px 0
+        }
+
+        .note {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 10px;
+            border-radius: 6px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Java Backend Roadmap — 6‑Week (42‑Day) Plan</h1>
+        <p>Concise &amp; actionable — coding + theory + daily exercises + mini‑project milestones. Use this page as your
+            daily checklist.</p>
+
+        <div class="grid">
+            <div class="card">
+                <h2>What to cover (high level)</h2>
+                <ol>
+                    <li>Core Java &amp; OOP (language fundamentals, data types, exceptions)</li>
+                    <li>Collections, Generics, Streams, Lambdas</li>
+                    <li>Concurrency &amp; Multithreading</li>
+                    <li>JDBC, SQL &amp; Data Modeling</li>
+                    <li>Spring ecosystem: Spring Core, Spring Boot, Spring Data JPA, Spring MVC, Spring Security</li>
+                    <li>REST API design, DTOs, validation, error handling</li>
+                    <li>Testing: JUnit, Mockito, integration tests</li>
+                    <li>Build &amp; CI: Maven/Gradle, Docker, Git, GitHub Actions</li>
+                    <li>Performance, caching (Redis), messaging (Kafka/RabbitMQ)</li>
+                    <li>Design patterns &amp; system design basics</li>
+                </ol>
+
+                <h3>Typical tech used in Java backend projects</h3>
+                <ul>
+                    <li>Language: Java 11/17</li>
+                    <li>Framework: Spring Boot</li>
+                    <li>DB: PostgreSQL / MySQL + Redis cache</li>
+                    <li>ORM: Hibernate / JPA</li>
+                    <li>Build: Maven or Gradle</li>
+                    <li>Container: Docker</li>
+                    <li>Testing: JUnit, Mockito</li>
+                    <li>Messaging: Kafka / RabbitMQ (optional)</li>
+                </ul>
+
+                <h3>Interview‑style coding focus</h3>
+                <p class="mini">Practice: algorithmic questions (arrays, maps, two pointers), data structures (hashmap,
+                    heap, trees), concurrency problems, and design small services (CRUD + pagination + auth).</p>
+
+                <div class="code-title">Example Interview Question &amp; Java solution (short)</div>
+                <p><strong>Question:</strong> Implement an LRU Cache with get and put in O(1).</p>
+                <pre><code>// Java LRU Cache using LinkedHashMap
+import java.util.*;
+
+public class LRUCache<K,V> extends LinkedHashMap<K,V> {
+    private final int capacity;
+    public LRUCache(int capacity){
+        super(capacity, 0.75f, true);
+        this.capacity = capacity;
+    }
+    @Override
+    protected boolean removeEldestEntry(Map.Entry<K,V> eldest){
+        return size() > capacity;
+    }
+
+    public static void main(String[] args){
+        LRUCache<Integer,Integer> cache = new LRUCache<>(2);
+        cache.put(1,1);
+        cache.put(2,2);
+        System.out.println(cache.get(1)); // 1
+        cache.put(3,3); // evicts key 2
+        System.out.println(cache.containsKey(2)); // false
+    }
+}
+</code></pre>
+
+                <p class="note"><strong>Tip:</strong> Practice translating these into a whiteboard explanation: explain
+                    time/space complexity, and edge cases (null keys, concurrency).</p>
+
+                <h3>Project idea (mini project — deliverable)</h3>
+                <p>Create a <em>User Management &amp; Todo</em> microservice:</p>
+                <ul>
+                    <li>Spring Boot, REST API, PostgreSQL, JPA</li>
+                    <li>Features: user signup/login (JWT), CRUD todos, pagination, search, caching with Redis</li>
+                    <li>Deliverables: README, Dockerfile, tests, CI workflow</li>
+                </ul>
+
+            </div>
+
+            <aside class="card checklist">
+                <h2>42‑Day Checklist</h2>
+                <!-- Days 1-42 checkboxes -->
+                <form>
+                    <div class="day"><label><input type="checkbox" /> Day 1 — Java setup + basics</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 2 — Java types, control flow,
+                            exercises</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 3 — OOP: classes, inheritance,
+                            polymorphism</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 4 — Encapsulation, interfaces, enums</label>
+                    </div>
+                    <div class="day"><label><input type="checkbox" /> Day 5 — Exceptions, try-with-resources</label>
+                    </div>
+                    <div class="day"><label><input type="checkbox" /> Day 6 — Collections overview (List, Set,
+                            Map)</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 7 — Deep dive: ArrayList, LinkedList,
+                            HashMap</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 8 — Generics &amp; Type safety; practice
+                            problems</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 9 — Streams &amp; Lambdas basics</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 10 — Functional operations &amp;
+                            collectors</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 11 — Concurrency: threads, Runnable,
+                            Callable</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 12 — Synchronization, volatile, atomic
+                            types</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 13 — Executors, ThreadPool,
+                            CompletableFuture</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 14 — Concurrency exercises + interview
+                            Qs</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 15 — JDBC, SQL basics, schema design</label>
+                    </div>
+                    <div class="day"><label><input type="checkbox" /> Day 16 — SQL queries: joins, group, window
+                            functions</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 17 — Introduction to Spring &amp; DI
+                            concepts</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 18 — Spring Boot project setup,
+                            properties</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 19 — Spring MVC: controllers, request
+                            mapping</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 20 — Spring Data JPA: entities,
+                            repositories</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 21 — DTOs, ModelMapper, validation (Bean
+                            Validation)</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 22 — REST design: status codes, pagination,
+                            filtering</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 23 — Exception handling, global
+                            handlers</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 24 — Spring Security basics, JWT</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 25 — Testing with JUnit &amp; Mockito (unit
+                            tests)</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 26 — Integration tests (SpringBootTest),
+                            Testcontainers</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 27 — Caching (Redis) basics &amp; use in
+                            Spring</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 28 — Messaging intro (Kafka/RabbitMQ) and
+                            patterns</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 29 — Build tools: Maven/Gradle, dependency
+                            management</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 30 — Docker basics: Dockerfile, image,
+                            container</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 31 — CI: GitHub Actions basic pipeline for
+                            build/test</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 32 — Observability: logging, metrics
+                            (Micrometer)</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 33 — Performance tuning: JVM flags, profiling
+                            basics</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 34 — Security: OWASP basics, input
+                            validation</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 35 — Design patterns commonly used in
+                            backend</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 36 — System design fundamentals: scaling,
+                            caching, DB sharding</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 37 — Start mini‑project: initialize repo and
+                            basic endpoints</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 38 — Implement persistence and DTOs; add
+                            tests</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 39 — Add auth (JWT) and caching; write
+                            integration tests</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 40 — Dockerize service, add CI
+                            workflow</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 41 — Performance and security checklist;
+                            polish README</label></div>
+                    <div class="day"><label><input type="checkbox" /> Day 42 — Final review, demo, interview prep &amp;
+                            mock interview</label></div>
+                </form>
+                <h3>Daily plan (detailed highlights)</h3>
+                <p class="mini">Full Day‑by‑Day plan is below in <strong>"Detailed Day Plan"</strong> section. Each day
+                    lists theory, coding exercises, and a short deliverable.</p>
+
+                <h3>Shortcuts &amp; commands</h3>
+                <ul>
+                    <li>Java setup: install JDK 17, IDE (IntelliJ), Maven/Gradle.</li>
+                    <li>Create Spring Boot app quickly:
+                        <code>curl https://start.spring.io/starter.zip -d dependencies=web,data-jpa,security -d javaVersion=17 -o app.zip</code>
+                    </li>
+                    <li>Run tests: <code>mvn test</code> or <code>./gradlew test</code></li>
+                </ul>
+            </aside>
+
+        </div>
+
+        <div class="card">
+            <h2>Detailed Day Plan (Day 1 → Day 42)</h2>
+            <ol>
+                <li><strong>Day 1</strong> — Setup: install JDK 17, IntelliJ, Maven, Git. Hello world, compile/run.
+                    Deliverable: Git repo with README.
+                </li>
+                <li><strong>Day 2</strong> — Java primitives, control flow, arrays; exercises: reverse array, find max.
+                    Deliverable: 5 small programs on repo.</li>
+                <li><strong>Day 3</strong> — OOP: classes, constructors, encapsulation. Exercise: implement a simple
+                    BankAccount class with deposit/withdraw.</li>
+                <li><strong>Day 4</strong> — Inheritance, interfaces, polymorphism. Exercise: shape hierarchy, method
+                    overriding.</li>
+                <li><strong>Day 5</strong> — Exceptions, try-with-resources, custom exceptions. Exercise: file parsing
+                    with resource management.</li>
+                <li><strong>Day 6</strong> — Collections overview. Practice: iterate, remove from collections safely.
+                </li>
+                <li><strong>Day 7</strong> — ArrayList vs LinkedList vs HashMap internals. Exercise: implement simple
+                    frequency counter.</li>
+                <li><strong>Day 8</strong> — Generics and type bounds. Exercise: generic Pair class, generic repository
+                    pattern.</li>
+                <li><strong>Day 9</strong> — Lambdas, functional interfaces. Exercise: custom comparator with lambda;
+                    use Streams for filtering.
+                </li>
+                <li><strong>Day 10</strong> — Stream API advanced: map, flatMap, collectors, grouping. Exercise: group
+                    transactions by user.
+                </li>
+                <li><strong>Day 11</strong> — Threads, Runnable, start/join. Exercise: implement a counter with multiple
+                    threads updating it.
+                </li>
+                <li><strong>Day 12</strong> — Synchronization, locks, volatile, ConcurrentHashMap. Exercise: convert
+                    previous counter to be thread‑safe.
+                </li>
+                <li><strong>Day 13</strong> — Executors, Callable, Future, CompletableFuture. Exercise: parallel data
+                    fetch simulation using CompletableFuture.
+                </li>
+                <li><strong>Day 14</strong> — Concurrency interview questions. Exercise: producer/consumer with blocking
+                    queue.
+                </li>
+                <li><strong>Day 15</strong> — SQL basics &amp; JDBC: CRUD, connections, prepared statements. Exercise:
+                    create sample schema and insert data via JDBC.
+                </li>
+                <li><strong>Day 16</strong> — Advanced SQL: joins, group by, window functions. Exercise: write queries
+                    for common analytics.
+                </li>
+                <li><strong>Day 17</strong> — Spring Core concepts: IoC / DI. Exercise: simple Spring app demonstrating
+                    @Component and @Autowired.
+                </li>
+                <li><strong>Day 18</strong> — Spring Boot: project structure, application.properties, starters.
+                    Deliverable: base Spring Boot project.
+                </li>
+                <li><strong>Day 19</strong> — Spring MVC: controllers, request mapping, path params. Exercise: create
+                    /hello and /users endpoints.
+                </li>
+                <li><strong>Day 20</strong> — Spring Data JPA: entities, repositories, basic queries. Exercise: User
+                    entity + UserRepository + sample data.
+                </li>
+                <li><strong>Day 21</strong> — DTOs, ModelMapper, validation (javax.validation). Exercise: add DTO +
+                    @Valid to user create endpoint.
+                </li>
+                <li><strong>Day 22</strong> — REST best practices: status codes, HATEOAS (optional), pagination.
+                    Exercise: add paged list endpoint.
+                </li>
+                <li><strong>Day 23</strong> — Global exception handling with @ControllerAdvice. Exercise: centralize API
+                    error responses.
+                </li>
+                <li><strong>Day 24</strong> — Spring Security basics: configure JWT auth. Exercise: secure endpoints
+                    with roles.
+                </li>
+                <li><strong>Day 25</strong> — Unit testing with JUnit 5 &amp; Mockito. Exercise: write unit tests for
+                    service layer.
+                </li>
+                <li><strong>Day 26</strong> — Integration tests with SpringBootTest; Testcontainers for DB. Exercise:
+                    integration test hitting real DB.
+                </li>
+                <li><strong>Day 27</strong> — Caching with Redis &amp; Spring Cache abstraction. Exercise: cache heavy
+                    query result.
+                </li>
+                <li><strong>Day 28</strong> — Messaging intro (Kafka/RabbitMQ), publish/subscribe basics. Exercise:
+                    send/receive simple message (local simulation if infra missing).
+                </li>
+                <li><strong>Day 29</strong> — Build tools: Maven or Gradle advanced features, dependency scopes.
+                    Exercise: multi‑module project skeleton.
+                </li>
+                <li><strong>Day 30</strong> — Dockerize app: Dockerfile, docker-compose with Postgres + Redis.
+                    Deliverable: docker-compose up runs whole stack.
+                </li>
+                <li><strong>Day 31</strong> — CI basics: GitHub Actions workflow to build/test and publish image.
+                    Exercise: add simple pipeline.
+                </li>
+                <li><strong>Day 32</strong> — Logging &amp; metrics (Micrometer + Prometheus), structured logs.
+                    Exercise: add basic metrics endpoint.
+                </li>
+                <li><strong>Day 33</strong> — JVM tuning basics, GC flags, profiling tools. Exercise: analyze simple
+                    heap dump (guided steps).</li>
+                <li><strong>Day 34</strong> — Security hardening: input validation, CORS, secrets management.
+                </li>
+                <li><strong>Day 35</strong> — Design patterns: Singleton, Factory, Repository, Strategy. Exercise:
+                    refactor code to apply a pattern.
+                </li>
+                <li><strong>Day 36</strong> — System design basics: caching strategies, load balancing, CAP theorem.
+                </li>
+                <li><strong>Day 37</strong> — Start mini‑project: initialize repo, entity models, DB schema, basic
+                    endpoints.
+                </li>
+                <li><strong>Day 38</strong> — Implement persistence, JPA mappings, basic CRUD + service tests.
+                </li>
+                <li><strong>Day 39</strong> — JWT auth + roles, add caching for list endpoints, write integration tests.
+                </li>
+                <li><strong>Day 40</strong> — Containerize service, add CI workflow, prepare deployment scripts.
+                </li>
+                <li><strong>Day 41</strong> — Security &amp; performance checklist; add monitoring. Deliverable: final
+                    test report.
+                </li>
+                <li><strong>Day 42</strong> — Final review, create demo video or README demo, run mock interview
+                    (explain design choices).
+                </li>
+            </ol>
+
+            <h3>Mini‑project milestones</h3>
+            <ul>
+                <li>Week 1–2: Language mastery + small algorithm practice.</li>
+                <li>Week 3: Spring Boot basics + DB integration.</li>
+                <li>Week 4: Security + testing + caching.</li>
+                <li>Week 5: Docker + CI + performance checks.</li>
+                <li>Week 6: Finalize project, documentation, mock interview.</li>
+            </ul>
+
+            <h3>Example REST controller snippet (Spring Boot)</h3>
+            <pre><code> // UserController.java (snippet)
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+
+    private final UserService userService;
+    public UserController(UserService userService){this.userService = userService;}
+
+    @PostMapping
+    public ResponseEntity<UserDto> create(@Valid @RequestBody CreateUserDto dto){
+        UserDto result = userService.create(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+    }
+
+    @GetMapping
+    public Page<UserDto> list(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="10") int size){
+        return userService.list(PageRequest.of(page,size));
+    }
+}
+</code></pre>
+
+            <h3>Resources (concise)</h3>
+            <ul>
+                <li>Official Spring Guides (start.spring.io)</li>
+                <li>Baeldung articles for Spring and Java topics</li>
+                <li>LeetCode / HackerRank for algorithm practice</li>
+                <li>Testcontainers docs for integration testing</li>
+            </ul>
+
+            <h3>How to use this roadmap</h3>
+            <ol>
+                <li>Follow daily checklist and commit small deliverables every day.</li>
+                <li>Spend 60–90 minutes on theory, 60 minutes coding, 30–60 minutes on project/tests when specified.
+                </li>
+                <li>After Day 14 &amp; Day 28, run a mock interview with a peer or record yourself explaining solutions.
+                </li>
+            </ol>
+
+            <h3>Final notes</h3>
+            <p>If you want, I can:</p>
+            <ul>
+                <li>Convert this HTML into a downloadable file (zip with starter code).</li>
+                <li>Generate a week‑by‑week calendar (Google Calendar events).</li>
+                <li>Provide extended interview questions with solutions (concurrency, DB design).</li>
+            </ul>
+
+        </div>
+    </div>
+</body>
+
+</html>
+</aside>

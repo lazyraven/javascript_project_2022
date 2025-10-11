@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>42-Day Java Backend Developer Roadmap</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #2c3e50;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    .week-section {
+      margin-bottom: 40px;
+    }
+    .mini-project, .final-project, .goal, .after-goal {
+      background-color: #ecf0f1;
+      padding: 15px;
+      border-left: 5px solid #2c3e50;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🗓️ 42-Day Java Backend Developer Roadmap</h1>
+
+  <p>Each day includes: <strong>📘 Learn → 🧠 Practice → 💻 Code Challenge / Project Task</strong></p>
+
+  <!-- WEEK 1 -->
+  <div class="week-section">
+    <h2>🧩 WEEK 1 — Core Java Foundations (Days 1–7)</h2>
+    <div class="goal"><strong>Goal:</strong> Master Java syntax, OOP, and problem-solving.</div>
+    <table>
+      <tr>
+        <th>Day</th>
+        <th>Learn</th>
+        <th>Practice</th>
+        <th>Code Challenge</th>
+      </tr>
+      <tr><td>1</td><td>Java setup, Datatypes, Loops, Conditional statements</td><td>Print patterns, simple loops</td><td>Print a triangle pattern</td></tr>
+      <tr><td>2</td><td>Methods, static vs instance</td><td>Create calculator using methods</td><td>Build a simple menu-based calculator</td></tr>
+      <tr><td>3</td><td>OOP Concepts (Class, Object, Encapsulation)</td><td>Create Student class</td><td>Add getter/setter, print details</td></tr>
+      <tr><td>4</td><td>Inheritance, Polymorphism</td><td>Parent-child classes</td><td>Create Animal → Dog → Cat hierarchy</td></tr>
+      <tr><td>5</td><td>Abstraction, Interfaces</td><td>Abstract class example</td><td>Payment method interface example</td></tr>
+      <tr><td>6</td><td>Exception Handling</td><td>try-catch, throw, throws</td><td>Divide two numbers safely</td></tr>
+      <tr><td>7</td><td>Java 8: Lambda, Stream API, Optional</td><td>Filter list using streams</td><td>Find even numbers using Stream API</td></tr>
+    </table>
+    <div class="mini-project"><strong>Mini Project (Weekend):</strong> Student Management CLI App → Add, update, delete students (ArrayList)</div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="week-section">
+    <h2>⚙️ WEEK 2 — Collections, Generics & File Handling (Days 8–14)</h2>
+    <div class="goal"><strong>Goal:</strong> Efficient data handling and understanding internal structures.</div>
+    <table>
+      <tr>
+        <th>Day</th>
+        <th>Learn</th>
+        <th>Practice</th>
+        <th>Code Challenge</th>
+      </tr>
+      <tr><td>8</td><td>Collections overview</td><td>Use ArrayList, HashSet</td><td>Store unique names</td></tr>
+      <tr><td>9</td><td>HashMap, TreeMap</td><td>Key-value pairs</td><td>Word frequency counter</td></tr>
+      <tr><td>10</td><td>Iterator, Comparator</td><td>Sort employees by salary</td><td>Implement Comparable interface</td></tr>
+      <tr><td>11</td><td>Generics in Java</td><td>Type-safe collections</td><td>Create a generic Box&lt;T&gt; class</td></tr>
+      <tr><td>12</td><td>File I/O (Reader, Writer)</td><td>Read/write text files</td><td>Read and reverse text file content</td></tr>
+      <tr><td>13</td><td>Serialization</td><td>Save/load objects</td><td>Serialize Employee list</td></tr>
+      <tr><td>14</td><td>Recap and problem-solving</td><td>Practice previous topics</td><td>Duplicates in array / map usage</td></tr>
+    </table>
+    <div class="mini-project"><strong>Mini Project:</strong> File-Based Contact Manager (store contacts in file, list all contacts)</div>
+  </div>
+
+  <!-- WEEK 3 -->
+  <div class="week-section">
+    <h2>🧠 WEEK 3 — JDBC + SQL Integration (Days 15–21)</h2>
+    <div class="goal"><strong>Goal:</strong> Learn database interaction with Java.</div>
+    <table>
+      <tr>
+        <th>Day</th>
+        <th>Learn</th>
+        <th>Practice</th>
+        <th>Code Challenge</th>
+      </tr>
+      <tr><td>15</td><td>JDBC Basics</td><td>Setup MySQL & JDBC</td><td>Test DB connection</td></tr>
+      <tr><td>16</td><td>CRUD with JDBC</td><td>Insert / Retrieve users</td><td>Simple user insert program</td></tr>
+      <tr><td>17</td><td>PreparedStatement</td><td>Prevent SQL Injection</td><td>Insert using parameters</td></tr>
+      <tr><td>18</td><td>Select with ResultSet</td><td>Fetch data</td><td>Print all records</td></tr>
+      <tr><td>19</td><td>Update/Delete data</td><td>Modify records</td><td>Update employee salary</td></tr>
+      <tr><td>20</td><td>Exception + Connection pooling</td><td>Try-with-resources</td><td>Connection cleanup</td></tr>
+      <tr><td>21</td><td>Review & Debugging</td><td>Integrate CRUD operations</td><td>Combine CRUD into single menu app</td></tr>
+    </table>
+    <div class="mini-project"><strong>Mini Project:</strong> Bookstore App with JDBC — Add, View, Update, Delete books in MySQL</div>
+  </div>
+
+  <!-- WEEK 4 -->
+  <div class="week-section">
+    <h2>🚀 WEEK 4 — Spring Boot Fundamentals (Days 22–28)</h2>
+    <div class="goal"><strong>Goal:</strong> Build REST APIs with Spring Boot.</div>
+    <table>
+      <tr>
+        <th>Day</th>
+        <th>Learn</th>
+        <th>Practice</th>
+        <th>Code Challenge</th>
+      </tr>
+      <tr><td>22</td><td>Spring Boot Intro</td><td>Create project via Spring Initializr</td><td>Hello World REST API</td></tr>
+      <tr><td>23</td><td>Beans, @Autowired, @Component</td><td>Inject services</td><td>Print message via service</td></tr>
+      <tr><td>24</td><td>REST Controllers</td><td>@GetMapping, @PostMapping</td><td>Return list of users</td></tr>
+      <tr><td>25</td><td>RequestBody & PathVariable</td><td>API input/output</td><td>Add and fetch employee by ID</td></tr>
+      <tr><td>26</td><td>Service & Repository Layers</td><td>Separate logic layers</td><td>Move logic into service</td></tr>
+      <tr><td>27</td><td>Exception Handling</td><td>@ControllerAdvice</td><td>Handle invalid inputs</td></tr>
+      <tr><td>28</td><td>Application Properties</td><td>Configure port, DB</td><td>Set custom properties</td></tr>
+    </table>
+    <div class="mini-project"><strong>Mini Project:</strong> User Management API (No DB) — CRUD with in-memory ArrayList</div>
+  </div>
+
+  <!-- WEEK 5 -->
+  <div class="week-section">
+    <h2>🧱 WEEK 5 — Spring Data JPA + MySQL Integration (Days 29–35)</h2>
+    <div class="goal"><strong>Goal:</strong> Real database CRUD operations with Spring Boot.</div>
+    <table>
+      <tr>
+        <th>Day</th>
+        <th>Learn</th>
+        <th>Practice</th>
+        <th>Code Challenge</th>
+      </tr>
+      <tr><td>29</td><td>Spring Data JPA setup</td><td>Create Entity, Repository</td><td>Map Employee entity</td></tr>
+      <tr><td>30</td><td>CRUD methods</td><td>save(), findAll(), deleteById()</td><td>Implement Employee CRUD</td></tr>
+      <tr><td>31</td><td>DTOs, Validation</td><td>@Valid, @NotNull</td><td>Validate input data</td></tr>
+      <tr><td>32</td><td>Exception Handling (Custom)</td><td>@ResponseStatus</td><td>Custom error response</td></tr>
+      <tr><td>33</td><td>Query Methods</td><td>findByName, findByEmail</td><td>Derived query example</td></tr>
+      <tr><td>34</td><td>ResponseEntity</td><td>Return custom responses</td><td>Send 201 Created response</td></tr>
+      <tr><td>35</td><td>Review + Postman testing</td><td>Test all endpoints</td><td>API Documentation (Swagger optional)</td></tr>
+    </table>
+    <div class="mini-project"><strong>Mini Project:</strong> Employee Management REST API (Spring Boot + MySQL + JPA)</div>
+  </div>
+
+  <!-- WEEK 6 -->
+  <div class="week-section">
+    <h2>🧰 WEEK 6 — Advanced Topics + Final Project (Days 36–42)</h2>
+    <div class="goal"><strong>Goal:</strong> Full backend-ready project with authentication & clean architecture.</div>
+    <table>
+      <tr>
+        <th>Day</th>
+        <th>Learn</th>
+        <th>Practice</th>
+        <th>Code Challenge</th>
+      </tr>
+      <tr><td>36</td><td>Spring Security Basics</td><td>Authentication Flow</td><td>Setup login endpoint</td></tr>
+      <tr><td>37</td><td>JWT Authentication</td><td>Token generation</td><td>Create & verify JWT</td></tr>
+      <tr><td>38</td><td>Pagination & Sorting</td><td>Pageable interface</td><td>Fetch paginated employees</td></tr>
+      <tr><td>39</td><td>Exception Logging</td><td>Logback / SLF4J</td><td>Add error logging</td></tr>
+      <tr><td>40</td><td>Docker Basics</td><td>Containerize Spring Boot</td><td>Build simple image</td></tr>
+      <tr><td>41</td><td>Git & Deployment</td><td>Push to GitHub</td><td>Commit project</td></tr>
+      <tr><td>42</td><td>Review & Final Demo</td><td>Test full app</td><td>Deploy locally (or cloud)</td></tr>
+    </table>
+    <div class="final-project"><strong>Final Project:</strong> Inventory Management System (Full Stack Backend)<br>
+      Authentication (JWT)<br>
+      CRUD APIs (Product, Category)<br>
+      Validations + Pagination<br>
+      MySQL Integration<br>
+      Clean architecture (Controller → Service → Repository)<br>
+      Tested via Postman
+    </div>
+  </div>
+
+  <div class="after-goal">
+    <h2>🎯 After 6 Weeks — You Will Have:</h2>
+    <ul>
+      <li>✅ 1 strong portfolio project (REST API with DB + JWT)</li>
+      <li>✅ 2–3 mini projects</li>
+      <li>✅ 40+ coding exercises</li>
+      <li>✅ Clear understanding of backend architecture</li>
+      <li>✅ Interview-level confidence</li>
+    </ul>
+  </div>
+
+</body>
+</html>
