@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Way Learning Javascript</title>
+</head>
+<style>
+    body {
+         /* background: #333;
+        color: whitesmoke; */
+        font-family: Verdana, Geneva, Tahoma, sans-serif
+            /* font-family: 'Brush Script MT', cursive; */
+    }
+
+    .blue {
+        color: blueviolet;
+        font-weight: bold;
+        display: inline;
+    }
+
+    p,
+    pre {
+        font-size: 16px;
+    }
+
+    #customlist {
+        /* delete default counter */
+        list-style-type: none;
+        /* create custom counter and set it to 0 */
+        counter-reset: elementcounter;
+    }
+
+    #customlist>li:before {
+        /* print out "Element " followed by the current counter value */
+        content: "Question " counter(elementcounter) ": ";
+        /* increment counter */
+        counter-increment: elementcounter;
+        font-weight: bold;
+        color: blueviolet;
+    }
+</style>
+
+<body>
+    </h4>
+    <ol id="customlist">
+        <li> 
+             <h4 class="blue"> What do you know about JavaScript?</h4>
+            <pre>
+            1. Core Concepts
+
+                 • Data types (primitive & reference)
+                 • Variables (var, let, const) and scope
+                 • Hoisting
+                 • Closures and lexical scope
+                 • Prototype and inheritance
+                 • The this keyword and its behavior in different contexts
+                 • ES6+ features: destructuring, template literals, arrow functions, modules, spread/rest, etc.
+
+            2. Asynchronous JavaScript
+
+                 • Callbacks, Promises, async/await
+                 • Event loop and microtasks/macrotasks
+                 • APIs like fetch(), setTimeout(), and setInterval()
+                 • Error handling in async functions
+
+            3. DOM & Browser APIs
+
+                 • Document Object Model manipulation
+                 • Event bubbling and capturing
+                 • Local storage, session storage, and cookies
+                 • Working with Fetch API and AJAX
+
+            4. Advanced Topics
+
+                 • Closures, currying, memoization
+                 • Higher-order functions (map, filter, reduce)
+                 • Debouncing and throttling
+                 • Module bundlers (Webpack, Vite)
+                 • Understanding of runtime environments (Browser vs Node.js)
+
+            5. JavaScript Ecosystem
+
+               • Node.js and npm
+                 • Frameworks/libraries: React, Angular, Vue
+                 • TypeScript (optional but good to mention)
+                 • Testing (Jest, Mocha, etc.)
+
+            ⚡ Bonus Tip for Interviews:
+
+            At the end of your answer, you can say something like:
+
+            “I also stay updated with new ECMAScript features and best practices to write clean, efficient, and maintainable JavaScript code.”
+            </pre>
+        </li>
+        <li> 
+             <h4 class="blue"> ES6 ?</h4>
+            <pre>
+                ES6, also called ECMAScript 2015, is a major update to JavaScript that introduced features to make code cleaner and more powerful. 
+                It added let and const for better variable scope, arrow functions for shorter syntax, template literals for string formatting, destructuring, 
+                classes, modules, and promises for handling asynchronous code.These features made JavaScript more modern and developer-friendly
+            </pre>
+        </li>
+       
+    </ol>
+
+</body> 
+
+</html>
