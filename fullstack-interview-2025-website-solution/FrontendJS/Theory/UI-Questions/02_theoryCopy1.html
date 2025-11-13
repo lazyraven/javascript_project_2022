@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Interview Questions</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #111827;
+      color: #f3f4f6;
+      padding: 30px 20px;
+      line-height: 1.5;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #a78bfa;
+    }
+
+    .question-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      max-width: 1300px;
+      margin: 0 auto 40px auto;
+    }
+
+    .question-card {
+      background: #1f2937;
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      min-height: 45px;
+    }
+
+    .question-card:hover {
+      background: #374151;
+      border-color: #6d28d9;
+      transform: translateY(-2px);
+    }
+
+    .question-id {
+      background: #6d28d9;
+      color: #fff;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .question-text {
+      font-size: 0.95rem;
+      flex: 1;
+    }
+
+    .definition-box {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #1f2937;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      display: none;
+      border-left: 4px solid #a78bfa;
+    }
+
+    .definition-box.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .definition-box h2 {
+      color: #c084fc;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .definition-box p {
+      color: #e5e7eb;
+      white-space: pre-line;
+      font-size: 0.95rem;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Interview Questions</h1>
+
+  <div class="question-grid" id="questionGrid"></div>
+  <div id="definitionBox" class="definition-box">
+    <h2 id="defTitle"></h2>
+    <p id="defContent"></p>
+  </div>
+
+  <script>
+    const PLAN = [
+      { questionId: 1, question: "What is JavaScript?", definition: "JavaScript (JS) is a high-level, interpreted programming language used to make web pages interactive, dynamic, and functional. It runs both in the browser and on servers (Node.js)." },
+      { questionId: 2, question: "var vs let vs const?", definition: "In JavaScript:\n• var → Function-scoped, allows redeclaration.\n• let → Block-scoped, allows reassignment but not redeclaration.\n• const → Block-scoped, cannot be reassigned or redeclared." },
+      { questionId: 3, question: "What is Scope?", definition: "Scope defines the accessibility of variables, functions, and objects.\nTypes:\n1. Global Scope – Accessible anywhere.\n2. Function Scope – Accessible only within the function.\n3. Block Scope – Accessible within the block (let, const)." },
+      { questionId: 4, question: "What is hoisting?", definition: "Hoisting is JavaScript’s behavior of moving declarations (not initializations) to the top of their scope before execution." },
+      { questionId: 5, question: "What is a function?", definition: "A function is a reusable block of code that performs a specific task when invoked." },
+      { questionId: 6, question: "What is a closure? When is it useful? What is Lexical Scope?", definition: "A closure is formed when an inner function remembers variables from its outer scope even after the outer function has executed.\nUseful for data privacy and creating function factories." },
+      { questionId: 7, question: "What is IIFE (Immediately Invoked Function Expression)?", definition: "An IIFE is a function that runs immediately after being defined.\nSyntax:\n(function() { ... })();" },
+      { questionId: 8, question: "What are Prototypes?", definition: "Prototypes are objects from which other objects inherit properties and methods in JavaScript’s prototype chain." },
+      { questionId: 9, question: "How to deep clone an object?", definition: "You can deep clone using:\n• structuredClone(obj)\n• JSON.parse(JSON.stringify(obj))\n• Libraries like Lodash (cloneDeep)." },
+      { questionId: 10, question: "Difference between == and ===?", definition: "== compares values with type conversion.\n=== compares values and types (strict equality)." },
+      { questionId: 11, question: "Explain 'this' keyword in JS?", definition: "'this' refers to the object that owns the function being executed, and its value depends on the call context." }
+    ];
+
+    const grid = document.getElementById("questionGrid");
+    const definitionBox = document.getElementById("definitionBox");
+    const defTitle = document.getElementById("defTitle");
+    const defContent = document.getElementById("defContent");
+
+    PLAN.forEach((item) => {
+      const card = document.createElement("div");
+      card.classList.add("question-card");
+      card.innerHTML = `
+        <div class="question-id">#${item.questionId}</div>
+        <div class="question-text">${item.question}</div>
+      `;
+      card.addEventListener("click", () => {
+        defTitle.textContent = `Question ${item.questionId}: ${item.question}`;
+        defContent.textContent = item.definition;
+        definitionBox.classList.add("active");
+        definitionBox.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>

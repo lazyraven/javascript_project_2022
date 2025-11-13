@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Interview Questions</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #f9fafb;
+      color: #222;
+      padding: 30px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .question-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .question-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 10px 14px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      min-height: 50px;
+    }
+
+    .question-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .question-id {
+      background: #2563eb;
+      color: #fff;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .question-text {
+      font-size: 0.95rem;
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    @media (max-width: 900px) {
+      .question-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .question-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Interview Questions</h1>
+
+  <div class="question-grid" id="questionGrid"></div>
+
+  <script>
+    const PLAN = [
+      { questionId: 1, question: "What is JavaScript?", definition : "Test 123" },
+      { questionId: 2, question: "var vs let vs const?", definition : "Test 123" },
+      { questionId: 3, question: "What is Scope?", definition : "Test 123" },
+      { questionId: 4, question: "What is hoisting?", definition : "Test 123" },
+      { questionId: 5, question: "What is a function?", definition : "Test 123" },
+      { questionId: 6, question: "What is a closure? When is it useful? What is Lexical Scope?", definition : "Test 123" },
+      { questionId: 7, question: "What is IIFE (Immediately Invoked Function Expression)?", definition : "Test 123" },
+      { questionId: 8, question: "What are Prototypes?", definition : "Test 123" },
+      { questionId: 9, question: "How to deep clone an object?", definition : "Test 123" },
+      { questionId: 10, question: "Difference between == and ===?", definition : "Test 123" },
+      { questionId: 11, question: "Explain 'this' keyword in JS?", definition : "Test 123" },
+      { questionId: 12, question: "What is call/apply/bind?", definition : "Test 123" },
+      { questionId: 13, question: "Explain classes and inheritance?", definition : "Test 123" },
+      { questionId: 14, question: "What are Promises?", definition : "Test 123" },
+      { questionId: 15, question: "Explain Async/Await?", definition : "Test 123" },
+      { questionId: 16, question: "Explain Promises and async/await together?", definition : "Test 123" },
+      { questionId: 17, question: "What are sequential promises?", definition : "Test 123" },
+      { questionId: 18, question: "Explain the event loop?", definition : "Test 123" },
+      { questionId: 19, question: "Explain Debounce & Throttle?", definition : "Test 123" },
+      { questionId: 20, question: "Difference between process.nextTick and setImmediate (Node-specific)?", definition : "Test 123" },
+      { questionId: 21, question: "How many things do you know about JS?", definition : "Test 123" },
+      { questionId: 22, question: "What is ES6?", definition : "Test 123" },
+      { questionId: 23, question: "What is the difference between Real DOM and Virtual DOM?", definition : "Test 123" },
+      { questionId: 24, question: "What are Web Selectors?", definition : "Test 123" },
+      { questionId: 25, question: "Explain Web Storage, Cookies, Session Storage, Local Storage?", definition : "Test 123" },
+      { questionId: 26, question: "Client-side vs Server-side rendering?", definition : "Test 123" },
+      { questionId: 27, question: "Is JavaScript multithreaded or single-threaded?", definition : "Test 123" },
+      { questionId: 28, question: "Difference between one-way and two-way binding?", definition : "Test 123" },
+      { questionId: 29, question: "How to validate String, Object, and Array?", definition : "Test 123" },
+      { questionId: 30, question: "Explain Array methods?", definition : "Test 123" },
+      { questionId: 31, question: "Explain map, filter, and reduce?", definition : "Test 123" },
+      { questionId: 32, question: "What are Higher-Order Functions?", definition : "Test 123" },
+      { questionId: 33, question: "Difference between splice, slice, and reduce?", definition : "Test 123" },
+      { questionId: 34, question: "Difference between includes() and find()?", definition : "Test 123" },
+      { questionId: 35, question: "What is the spread operator?", definition : "Test 123" },
+      { questionId: 36, question: "Difference between deep and shallow copy?", definition : "Test 123" },
+      { questionId: 37, question: "What is a key?", definition : "Test 123" },
+      { questionId: 38, question: "How many loops are used in JS?", definition : "Test 123" },
+      { questionId: 39, question: "Difference between for loop and forEach loop?", definition : "Test 123" },
+      { questionId: 40, question: "Difference between vanilla JS and JS frameworks?", definition : "Test 123" },
+      { questionId: 41, question: "What is an anonymous function?", definition : "Test 123" },
+      { questionId: 42, question: "Explain isNaN() function?", definition : "Test 123" },
+      { questionId: 43, question: "How to handle exceptions in JS?", definition : "Test 123" },
+      { questionId: 44, question: "What is event bubbling?", definition : "Test 123" },
+      { questionId: 45, question: "What is event propagation?", definition : "Test 123" },
+      { questionId: 46, question: "How to fix a 404 error?", definition : "Test 123" },
+      { questionId: 47, question: "What is a CORS issue and what is a proxy?", definition : "Test 123" },
+      { questionId: 48, question: "Explain HTTP request methods?", definition : "Test 123" },
+      { questionId: 49, question: "Explain HTTP status codes (400, 401, 404, 500, 502)?", definition : "Test 123" },
+      { questionId: 50, question: "What is a recursive function?", definition : "Test 123" },
+      { questionId: 51, question: "Explain JWT?", definition : "Test 123" }
+
+    ];
+
+    const grid = document.getElementById("questionGrid");
+
+    PLAN.forEach((item) => {
+      const card = document.createElement("div");
+      card.classList.add("question-card");
+      card.innerHTML = `
+        <div class="question-id">#${item.questionId}</div>
+        <div class="question-text">${item.question}</div>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>
