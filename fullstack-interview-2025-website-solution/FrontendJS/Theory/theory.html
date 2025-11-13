@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://img.icons8.com/?size=100&id=108784&format=png&color=000000">
     <title>Theory Javascript</title>
+    <link rel="stylesheet" href="./theory.css">
 </head>
 <style>
     body {
@@ -41,11 +42,57 @@
         font-weight: bold;
         color: blueviolet;
     }
+
+    #content {
+      display: none; /* hidden by default */
+      padding: 15px;
+      margin-top: 10px;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 8px 15px;
+      cursor: pointer;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
 </style>
 
 <body>
-    <h4><a href="https://fullstack-interview-roadmap.netlify.app/">fullstack-interview-roadmap solution | ✅ Week 1 – Core JavaScript (1-20 Que)and | ✅ Week 5 – JS And Other Topics (Start from Que 21)</a>
+    <div>
+    <h4><a class="blue" href="https://fullstack-interview-roadmap.netlify.app/">fullstack-interview-roadmap solution | ✅ Week 1 – Core JavaScript (1-20 Que)and | ✅ Week 5 – JS And Other Topics (Start from Que 21)</a>
     </h4>
+    </div>
+    <div class="gridContainer">
+        <div class="box">hi</div>
+        <div class="box">There</div>
+         <div class="box">hi</div>
+        <div class="box">There</div> 
+        <div class="box">hi</div>
+        <div class="box">There</div> 
+        <div class="box">hi</div>
+        <div class="box">There</div> 
+        <div class="box">hi</div>
+        <div class="box">There</div> 
+        <div class="box">hi</div>
+        <div class="box">There</div>
+         <div class="box">hi</div>
+        <div class="box">There</div>
+         <div class="box">hi</div>
+        <div class="box">There</div> 
+        <div class="box">hi</div>
+        <div class="box">There</div>
+         <div class="box">hi</div>
+        <div class="box">There</div> 
+        <div class="box">hi</div>
+        <div class="box">There</div> 
+        <div class="box">hi</div>
+        <div class="box">There</div>
+    </div>
+    
     <ol id="customlist">
         <li>
             <h4 class="blue">What is Javasecript ?</h4>
@@ -452,7 +499,7 @@ To use Node-specific features (process) inside the browser, which doesn’t have
                     </div>
         </li>
 
-        <h4><a href="https://fullstack-interview-roadmap.netlify.app/">fullstack-interview-roadmap solution| ✅ Week 5 – JS And Other Topics</a></h4>
+        <h4><a class="blue" href="https://fullstack-interview-roadmap.netlify.app/">fullstack-interview-roadmap solution| ✅ Week 5 – JS And Other Topics</a></h4>
          <li>
              <h4 class="blue"> How many things you know about JS ?</h4>
             <div>
@@ -492,133 +539,264 @@ To use Node-specific features (process) inside the browser, which doesn’t have
         
         <li>
             <h4 class="blue">Web Selector ?</h4>
-            <pre></pre>
-        </li>
+            <pre>Definition : A web selector (also called as CSS selector) is a pattern used in web development to sleect and target specific HTML elements on a webpage,
+                so you can apply style (using css) or manipulate them (using javascript). 
+               In short- selectors tell the browser “which element(s) this rule applies to.”
+            </pre>
+            🔹 Common Types of Web Selectors:
+            <button onclick="toggleDiv()">Toggle Content (Web Selector Types)</button>
+            <!-- <div id="content">Test Render</div> -->
+            <div id="content">
+               <ol>
+                <li>Universal Selector (*) - Selects all elements on the page.</li>
+                <pre>
+                    * {
+                        margin: 0;
+                        padding: 0;
+                      }
+                </pre>
+                <li>Element Selector (div, p, h1, etc.) - Selects all elements of a given type.</li>
+                <pre>
+                    p {
+                      color: blue;
+                    }
+                </pre>
+                <li>Class Selector (.classname) - Targets elements with a specific class attribute.</li>
+                <pre>
+                    .highlight {
+                      background-color: yellow;
+                    }
+                </pre>
+                <li>ID Selector (#idname) - Targets an element with a specific ID (should be unique).</li>
+                <pre>
+                    #header {
+                      font-size: 20px;
+                    }
+                </pre>
+                <li>Attribute Selector ([attr=value]) - Targets elements with a specific attribute or value.</li>
+                <pre>
+                    input[type="text"] {
+                      border: 1px solid gray;
+                    }
+                </pre>
+                <li>Descendant Selector (parent child) - Targets elements nested inside another.</li>
+                <pre>
+                    div p {
+                       color: green;
+                    }
+                </pre>
+                <li>Pseudo-class Selector (:hover, :nth-child(), etc.)- Targets elements based on state or position.</li>
+                <pre>
+                    a:hover {
+                      color: red;
+                    }
+                </pre>
+                <li>Pseudo-element Selector (::before, ::after) - Used to style parts of elements.</li>
+                <pre>
+                    p::first-letter {
+                      font-size: 24px;
+                    }
+                </pre>
+                <li>🔹 In JavaScript: - Selectors are also used with methods like:</li>
+                <pre>
+                    document.querySelector(".btn");      // Selects the first element with class "btn"
+                    document.querySelectorAll("p");      // Selects all &lt;p&gt; elements
+                    document.getElementById("header");   // Selects element with ID "header"
+                </pre>
+               </ol>
+            </div>
 
+        </li>
+    <br/>
          <li>
             <h4 class="blue">Web Storage, Cookies, Session Storage, Local Storage?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
 
          <li>
             <h4 class="blue">Real Dom and Virtual Dom. ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
 
          <li>
             <h4 class="blue">Client side and Server side rendering</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
         
          <li>
             <h4 class="blue">Multithread or Single threaded ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
          <li>
             <h4 class="blue">Difference One way and Two way binding ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
          <li>
             <h4 class="blue">Validate String, Object and Array ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
 
          <li>
             <h4 class="blue">Array Methods</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
          <li>
             <h4 class="blue">Explain map, filter reduce ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
          <li>
             <h4 class="blue">Higher-Order Functions ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
            <li>
             <h4 class="blue">splice, reduce and slice ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
 
         </li>
            <li>
             <h4 class="blue"> Difference b/w includes and find?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
         </li>
            <li>
             <h4 class="blue">Spread operator ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
         </li>
            <li>
             <h4 class="blue">sDeep Shallow Copy ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
         </li>
         <li>
             <h4 class="blue">What is key ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
 
         <li>
             <h4 class="blue">How many loops we're using in JS ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
         <li>
             <h4 class="blue">Difference b/w for loop and foreach loop ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
         <li>
             <h4 class="blue">Difference b/w vanilla js and js ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
         <li>
             <h4 class="blue">Anonymus function?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
         <li>
             <h4 class="blue">isNan() function ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
         <li>
             <h4 class="blue">ihow to handle exception in JS ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li> 
         <li>
             <h4 class="blue">Event bubbling?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>        
         <li>
             <h4 class="blue">Event propagation ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>        
         <li>
             <h4 class="blue">How to fix 404 error? </h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>         
         <li>
             <h4 class="blue">Cors issue and what is proxy ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>        
         <li>
             <h4 class="blue">Http request method ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
          <li>
             <h4 class="blue"> Http status message (400 bad request, 401 unauthorization, 404 not found, 500 internatl server error , 502 bad gateway)?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
          <li>
             <h4 class="blue">  Recursive function ?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
          <li>
             <h4 class="blue">Explain jwt?</h4>
-            <pre></pre>
+             <pre>Definition : 
+
+            </pre>
         </li>
     </ol>
 
+<script>
+ function toggleDiv(){
+      const div = document.getElementById('content');
+      div.style.display = (div.style.display === 'none' || div.style.display  === '') ? 'block' : 'none'
+ }
+
+
+</script>
 </body> 
 
 </html>
+

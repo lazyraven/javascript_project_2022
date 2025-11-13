@@ -1,0 +1,14 @@
+.gridContainer {
+    display: grid;
+    grid-template-rows: 1fr 2fr 2fr;
+    grid-template-columns: repeat(3, 2fr);
+    grid-auto-rows: 2fr;
+}
+
+.box {
+  border: 2px solid yellowgreen;
+  /* background-color: rgb(126, 248, 162); */
+  color: blueviolet;
+  margin: 2px;
+  gap: 1rem;
+}

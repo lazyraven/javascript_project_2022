@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle Div Example</title>
+  <style>
+    #content {
+      display: none; /* hidden by default */
+      background: #f2f2f2;
+      padding: 15px;
+      margin-top: 10px;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 8px 15px;
+      cursor: pointer;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="toggleDiv()">Toggle Content</button>
+
+  <div id="content">
+    <p>This is the content inside the div. You can toggle me on and off!</p>
+  </div>
+
+  <script>
+    function toggleDiv() {
+      const div = document.getElementById('content');
+      div.style.display = (div.style.display === 'none' || div.style.display === '') 
+        ? 'block' 
+        : 'none';
+    }
+  </script>
+</body>
+</html>
