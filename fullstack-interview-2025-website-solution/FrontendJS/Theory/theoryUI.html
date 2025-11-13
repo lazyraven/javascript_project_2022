@@ -59,12 +59,40 @@
     html {
       scroll-behavior: smooth;
     }
+
+     /* === Back to Top Button Styling === */
+    #backToTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #b366ff;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #b366ff80;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    #backToTopBtn:hover {
+      background-color: #9933ff;
+      box-shadow: 0 0 20px #b366ff;
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body>
 
   <div class="question-grid" id="questionGrid"></div>
   <div id="definitionContainer"></div>
+
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" title="Go to top">↑</button>
 
   <script>
     const PLAN = [
@@ -126,7 +154,7 @@
     ];
 
     
-    const jsInterviewQuestions = [
+const jsInterviewQuestions = [
   {
     questionId: 1,
     question: "What is JavaScript?",
@@ -456,16 +484,14 @@ To use Node-specific features (process) inside the browser, which doesn’t have
     questionId: 21,
     question: "How many things do you know about JS?",
     definition: `<pre>
-JavaScript is a high-level, versatile language for building dynamic web applications. 
-I have a strong grasp of its fundamentals, including ES6 features, async programming, and frameworks like React, Angular, Vue, and Node.js for full-stack development.
+JavaScript is a high-level, versatile language for building dynamic web applications.\nI have a strong grasp of its fundamentals, including ES6 features, async programming, and frameworks like React, Angular, Vue, and Node.js for full-stack development.
 </pre>`
   },
   { 
         questionId: 22, 
         question: "What is ES6?", 
         definition : `<pre>
-ES6 is the 2015 update to JavaScript that introduced modern features 
-like let, const, arrow functions, classes, modules, and promises — making code cleaner, easier, and more efficient.
+ES6 is the 2015 update to JavaScript that introduced modern features\n like let, const, arrow functions, classes, modules, and promises — making code cleaner, easier, and more efficient.
 </pre>` 
   },
   {
@@ -477,8 +503,8 @@ Real DOM:
     • When a change occurs, the entire page or large sections re-render — making it slower.
 
 Virtual DOM:
-    • A lightweight copy of the Real DOM used by frameworks like React.
-    • It updates only the modified parts by comparing (diffing) the Virtual DOM with the Real DOM — making it faster and more efficient.
+    \n• A lightweight copy of the Real DOM used by frameworks like React.
+    \n• It updates only the modified parts by comparing (diffing) the Virtual DOM with the Real DOM — making it faster and more efficient.
 
 In Short:
     • Real DOM: Updates the whole UI directly — slower.
@@ -550,7 +576,6 @@ In short- selectors tell the browser “which element(s) this rule applies to.
 </pre>`
   },
       
-      { questionId: 24, question: "What are Web Selectors?", definition : "Test 123" },
       { questionId: 25, question: "Explain Web Storage, Cookies, Session Storage, Local Storage?", definition : "Test 123" },
       { questionId: 26, question: "Client-side vs Server-side rendering?", definition : "Test 123" },
       { questionId: 27, question: "Is JavaScript multithreaded or single-threaded?", definition : "Test 123" },
@@ -577,7 +602,8 @@ In short- selectors tell the browser “which element(s) this rule applies to.
       { questionId: 48, question: "Explain HTTP request methods?", definition : "Test 123" },
       { questionId: 49, question: "Explain HTTP status codes (400, 401, 404, 500, 502)?", definition : "Test 123" },
       { questionId: 50, question: "What is a recursive function?", definition : "Test 123" },
-      { questionId: 51, question: "Explain JWT?", definition : "Test 123" }
+      { questionId: 51, question: "Explain JWT?", definition : "Test 123" },
+      { questionId: 52, question: "Currying, memoization?", definition : "Test" }
 ];
 
     const questionGrid = document.getElementById("questionGrid");
@@ -610,6 +636,22 @@ In short- selectors tell the browser “which element(s) this rule applies to.
         setTimeout(() => target.classList.remove("highlight"), 1500);
       }
     }
+
+    
+    // === Back to Top Button Logic ===
+    const backToTopBtn = document.getElementById("backToTopBtn");
+
+    window.addEventListener("scroll", () => {
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   </script>
 </body>
 </html>
