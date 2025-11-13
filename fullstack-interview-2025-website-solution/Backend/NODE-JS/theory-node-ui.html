@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Q&A Plan</title>
+<style>
+    body {
+        background-color: #111;
+        color: #fff;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .question-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .question-card {
+        background: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 6px;
+        padding: 10px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-align: center;
+        line-height: 1.3;
+    }
+
+    .question-card:hover {
+        background-color: #272727;
+    }
+
+    .definition-section {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 25px;
+        transition: all 0.4s ease;
+    }
+
+    .definition-section.highlight {
+        border: 2px solid #b366ff;
+        box-shadow: 0 0 15px #b366ff66;
+        background: #2a1a3a;
+    }
+
+    .definition-section h3 {
+        color: #b366ff;
+        margin-bottom: 8px;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* === Back to Top Button Styling === */
+    #backToTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background-color: #b366ff;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+        cursor: pointer;
+        box-shadow: 0 0 10px #b366ff80;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    #backToTopBtn:hover {
+        background-color: #9933ff;
+        box-shadow: 0 0 20px #b366ff;
+        transform: scale(1.1);
+    }
+    /* === Floating Theme Toggle Button === */
+    #themeToggle {
+        position: fixed;
+        top: 20px;
+        right: 25px;
+        z-index: 1100;
+        cursor: pointer;
+        background: #fff;
+        color: #0d6efd;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 30px;
+        font-weight: bold;
+        font-size: 14px;
+        box-shadow: 0 0 10px #b366ff60;
+        transition: all 0.3s ease;
+    }
+
+    #themeToggle:hover {
+        transform: scale(1.1);
+        background: #0d6efd;
+        color: #fff;
+        box-shadow: 0 0 15px #b366ff90;
+    }
+
+    /* === Smooth Fade Animation for Theme Switch === */
+    body {
+        transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    .definition-section,
+    .question-card,
+    #backToTopBtn {
+        transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    /* === Light Mode === */
+    body.light-mode {
+        background-color: #f5f5f5;
+        color: #111;
+    }
+
+    body.light-mode .question-card {
+        background: #fff;
+        border: 1px solid #ccc;
+        color: #000;
+    }
+
+    body.light-mode .question-card:hover {
+        background-color: #f0f0f0;
+    }
+
+    body.light-mode .definition-section {
+        background: #fff;
+        border: 1px solid #ddd;
+        color: #000;
+    }
+
+    body.light-mode .definition-section h3 {
+        color: #7a3fff;
+    }
+
+    body.light-mode #backToTopBtn {
+        background-color: #7a3fff;
+    }
+
+    body.light-mode #themeToggle {
+        background: #0d6efd;
+        color: #fff;
+    }
+
+    /* === Responsive Adjustments === */
+    @media (max-width: 600px) {
+        #themeToggle {
+            top: 15px;
+            right: 15px;
+            padding: 8px 14px;
+            font-size: 13px;
+        }
+    }
+    pre{
+        font-size: 16px;
+    }
+</style>
+</head>
+<body> ✅ Week 1 and ✅ Week 5 – JS And Other Topics
+<button id="themeToggle">☀️ Light</button>
+<div>
+    <h4><a target="_target"
+            href="https://fullstack-interview-roadmap.netlify.app/">fullstack-interview-roadmap solution | ✅ Week 3 – Node.js + Backend</a>
+    </h4>
+</div>
+  <div class="question-grid" id="questionGrid"></div>
+  <div id="definitionContainer"></div>
+
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" title="Go to top">↑</button>
+
+  <script>
+
+const nodeQuestions = [
+  {
+    questionId: 1,
+    question: "What is Node basics (fs, path, modules) ?",
+    definition: `<pre>Definition : Node.js basics include fs for file operations, path for handling file paths, and modules for code organization and reuse. 
+They allow us to read/write files, resolve paths safely, and export/import functionality across files.</pre>`
+  },
+  {
+    questionId: 2,
+    question: "What is CommonJS vs ES modules in node js ?",
+    definition: `<pre>Definition : CommonJS (require/module.exports) is Node’s original module system, synchronous and server-focused. 
+ES Modules (import/export) are modern, support static analysis, and work natively in Node with .mjs or "type": "module" in package.json.</pre>`
+  },
+  {
+    questionId: 3,
+    question: "What is Express basics, middleware ?",
+    definition: `<pre>Definition : Express is a minimal Node.js web framework for building APIs and web apps. 
+Middleware are functions that process requests/responses, like logging, authentication, or parsing data, before reaching the route handler. 
+
+*1-liner explanation:
+Express is a Node.js web framework; middleware are functions that run during request/response processing.
+app.use((req, res, next) => { console.log(req.url); next(); });</pre>`
+  },
+  {
+    questionId: 4,
+    question: "What is Types of middleware ?",
+    definition: `<pre>Definition : Express middleware can be application-level (used across the app), router-level (used for specific routes), 
+built-in (like express.json()), or error-handling (handles errors passed via next(err)).</pre>`
+  },
+  {
+    questionId: 5,
+    question: "What is REST APIs with Express ?",
+    definition: `<pre>Definition : REST APIs in Express let you handle HTTP requests (GET, POST, PUT, DELETE) to perform CRUD operations.
+Express routes map URLs to functions that process data and return responses in JSON or other formats.</pre>`
+  },
+  {
+    questionId: 6,
+    question: "What is REST vs GraphQL ?",
+    definition: `<pre>Definition : REST APIs expose multiple endpoints and return fixed data structures, 
+while GraphQL uses a single endpoint and lets clients request exactly the data they need. 
+GraphQL reduces over-fetching and under-fetching compared to REST.
+
+OR 
+
+REST APIs use multiple endpoints, each returning fixed data, so you often over-fetch or under-fetch. 
+GraphQL uses a single endpoint and lets clients request exactly the data they need. 
+For example, in REST you’d use GET /users to fetch all users, while in GraphQL you’d write a query like { user(id: "1") { id, name } }.</pre>`
+  },
+  {
+    questionId: 7,
+    question: "What is MongoDB + Mongoose ?",
+    definition: `<pre>Definition : MongoDB is a NoSQL database for storing JSON-like documents. 
+Mongoose is an ODM (Object Data Modeling) library for Node.js that helps define schemas and interact with MongoDB in an organized way.
+
+* MongoDB is a NoSQL database, and Mongoose is a Node.js library to define schemas and interact with it easily.
+
+OR
+
+MongoDB is a NoSQL database that stores data as JSON-like documents, making it flexible and scalable.
+Mongoose is a Node.js library that adds structure by defining schemas, validation, and easy methods to create, read, update, and delete data.</pre>`
+  }
+];
+
+
+
+    const questionGrid = document.getElementById("questionGrid");
+    const definitionContainer = document.getElementById("definitionContainer");
+
+    nodeQuestions.forEach(item => {
+      // create top question box
+      const card = document.createElement("div");
+      card.className = "question-card";
+      card.innerHTML = `<strong style="color:#b366ff;">Q${item.questionId}:</strong> ${item.question}`;
+      card.addEventListener("click", () => scrollToDefinition(item.questionId));
+      questionGrid.appendChild(card);
+
+      // create definition section
+      const def = document.createElement("div");
+      def.className = "definition-section";
+      def.id = `question-${item.questionId}`;
+      def.innerHTML = `
+        <h3>Question ${item.questionId}: ${item.question}</h3>
+        <pre>${item.definition}</pre>
+      `;
+      definitionContainer.appendChild(def);
+    });
+
+    function scrollToDefinition(id) {
+      const target = document.getElementById(`question-${id}`);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        target.classList.add("highlight");
+        setTimeout(() => target.classList.remove("highlight"), 1500);
+      }
+    }
+
+    
+    // === Back to Top Button Logic ===
+    const backToTopBtn = document.getElementById("backToTopBtn");
+
+    window.addEventListener("scroll", () => {
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+
+   /// === Theme Toggle Logic with Icons and Fade ===
+    const themeToggle = document.getElementById("themeToggle");
+    const body = document.body;
+
+    // Load saved theme preference
+    if (localStorage.getItem("theme") === "light") {
+    enableLightMode(false);
+    } else {
+    enableDarkMode(false);
+    }
+
+    themeToggle.addEventListener("click", () => {
+    body.classList.add("fade-transition");
+    if (body.classList.contains("light-mode")) {
+        enableDarkMode();
+    } else {
+        enableLightMode();
+    }
+    setTimeout(() => body.classList.remove("fade-transition"), 400);
+    });
+
+    function enableLightMode(save = true) {
+    body.classList.add("light-mode");
+    themeToggle.innerHTML = "🌙 Dark";
+    if (save) localStorage.setItem("theme", "light");
+    }
+
+    function enableDarkMode(save = true) {
+    body.classList.remove("light-mode");
+    themeToggle.innerHTML = "☀️ Light";
+    if (save) localStorage.setItem("theme", "dark");
+    }
+  </script>
+</body>
+</html>

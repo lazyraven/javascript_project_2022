@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>React Q&A Plan</title>
+<style>
+    body {
+        background-color: #111;
+        color: #fff;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .question-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .question-card {
+        background: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 6px;
+        padding: 10px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-align: center;
+        line-height: 1.3;
+    }
+
+    .question-card:hover {
+        background-color: #272727;
+    }
+
+    .definition-section {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 25px;
+        transition: all 0.4s ease;
+    }
+
+    .definition-section.highlight {
+        border: 2px solid #b366ff;
+        box-shadow: 0 0 15px #b366ff66;
+        background: #2a1a3a;
+    }
+
+    .definition-section h3 {
+        color: #b366ff;
+        margin-bottom: 8px;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* === Back to Top Button Styling === */
+    #backToTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background-color: #b366ff;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+        cursor: pointer;
+        box-shadow: 0 0 10px #b366ff80;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    #backToTopBtn:hover {
+        background-color: #9933ff;
+        box-shadow: 0 0 20px #b366ff;
+        transform: scale(1.1);
+    }
+    /* === Floating Theme Toggle Button === */
+    #themeToggle {
+        position: fixed;
+        top: 20px;
+        right: 25px;
+        z-index: 1100;
+        cursor: pointer;
+        background: #fff;
+        color: #0d6efd;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 30px;
+        font-weight: bold;
+        font-size: 14px;
+        box-shadow: 0 0 10px #b366ff60;
+        transition: all 0.3s ease;
+    }
+
+    #themeToggle:hover {
+        transform: scale(1.1);
+        background: #0d6efd;
+        color: #fff;
+        box-shadow: 0 0 15px #b366ff90;
+    }
+
+    /* === Smooth Fade Animation for Theme Switch === */
+    body {
+        transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    .definition-section,
+    .question-card,
+    #backToTopBtn {
+        transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    /* === Light Mode === */
+    body.light-mode {
+        background-color: #f5f5f5;
+        color: #111;
+    }
+
+    body.light-mode .question-card {
+        background: #fff;
+        border: 1px solid #ccc;
+        color: #000;
+    }
+
+    body.light-mode .question-card:hover {
+        background-color: #f0f0f0;
+    }
+
+    body.light-mode .definition-section {
+        background: #fff;
+        border: 1px solid #ddd;
+        color: #000;
+    }
+
+    body.light-mode .definition-section h3 {
+        color: #7a3fff;
+    }
+
+    body.light-mode #backToTopBtn {
+        background-color: #7a3fff;
+    }
+
+    body.light-mode #themeToggle {
+        background: #0d6efd;
+        color: #fff;
+    }
+
+    /* === Responsive Adjustments === */
+    @media (max-width: 600px) {
+        #themeToggle {
+            top: 15px;
+            right: 15px;
+            padding: 8px 14px;
+            font-size: 13px;
+        }
+    }
+    pre{
+        font-size: 16px;
+    }
+</style>
+</head>
+<body>  ✅ Week 2 – React Topics
+<button id="themeToggle">☀️ Light</button>
+<div>
+    <h4><a target="_target"
+            href="https://fullstack-interview-roadmap.netlify.app/">fullstack-interview-roadmap solution | ✅ Week 2 – React Prep</a>
+    </h4>
+</div>
+  <div class="question-grid" id="questionGrid"></div>
+  <div id="definitionContainer"></div>
+
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" title="Go to top">↑</button>
+
+  <script>
+
+const reactQuestions = [
+  {
+    questionId: 1,
+    question: "What is (React) – JSX (JavaScript XML)?",
+    definition: `In-short : JSX → whenever writing UI structure.
+
+• A syntax extension for JavaScript that lets you write HTML-like code inside JavaScript.
+• JSX is not required, but it makes UI easier to write and read.
+• Under the hood, JSX compiles into React.createElement(...).
+
+👉 Where to use it:
+• Whenever you want to define UI structure in React.
+
+Use JSX in all React components unless you want to work only with raw JavaScript.`
+  },
+  {
+    questionId: 2,
+    question: "What is Components?",
+    definition: `In-short : JSX → To break UI into small, reusable pieces.
+
+• Reusable building blocks of a React app.
+• Two types:
+   • Functional components (modern standard, simpler)
+   • Class components (older, rarely needed now).
+
+👉 Where to use it:
+• Every piece of UI should ideally be a component.
+• Helps you split big UI into small, reusable, independent pieces.
+
+💡 Use components for modularity, reusability, and maintainability.`
+  },
+  {
+    questionId: 3,
+    question: "What is Props?",
+    definition: `In-short : To pass data into components (read-only, like parameters).
+
+• Short for properties.
+• Data passed from parent to child (read-only).
+• Think of them like function parameters.
+
+👉 Where to use it:
+• When you want to customize a component with external data.`
+  },
+  {
+    questionId: 4,
+    question: "What is State?",
+    definition: `In-short : To manage data inside a component (can change, triggers re-render).
+
+• A built-in object that stores data inside a component.
+• Unlike props, state is managed within the component and can change over time.
+• When state changes → React re-renders the UI.
+
+👉 Where to use it:
+• For data that changes within the component (user input, API results, toggle, counters, etc.).`
+  },
+  {
+    questionId: 5,
+    question: "What is Class Component?",
+    definition: `In-short : Class components are ES6 classes that extend React.Component using this.state and lifecycle methods.
+
+ES6 class
+• this.state and setState()
+• Methods like componentDidMount, componentDidUpdate
+• Must handle this binding.
+• Slightly heavier, older approach`
+  },
+  {
+    questionId: 6,
+    question: "What is Functional Component?",
+    definition: `In-short : While functional components are plain functions that use hooks like useState and useEffect.
+Functional components are now preferred because they’re simpler, cleaner, and the modern React standard.
+
+Plain JS function
+• useState, useReducer 
+• Hooks like useEffect 
+• No this, simpler
+• Lighter, often preferred, Cleaner, concise
+
+* Class components are mainly for older React codebases, 
+while functional components with hooks are the modern standard for new projects because they’re simpler and more efficient.`
+  },
+  {
+    questionId: 7,
+    question: "What is (React) – useEffect, useState, lifecycle?",
+    definition: `In React, useState lets us add and manage state in functional components. 
+useEffect is used to handle side effects such as data fetching, subscriptions, or DOM updates, and it runs after render.
+
+It can be configured to run once (like componentDidMount), on every render (componentDidUpdate), or for cleanup (componentWillUnmount). 
+In class components, these behaviors are split across lifecycle methods.
+
+With hooks, we manage them inside a single functional component in a cleaner, more readable way.`
+  },
+  {
+    questionId: 8,
+    question: "How does React’s virtual DOM work?",
+    definition: `React’s Virtual DOM is a lightweight copy of the real DOM. When the state changes, React updates the Virtual DOM first, 
+compares it with the previous version (diffing), and then updates only the changed parts in the real DOM for efficiency.
+
+👉 Quick reply: “React uses a Virtual DOM to track changes. 
+It compares new and old states (diffing) and updates only the necessary parts in the real DOM for faster performance.”`
+  },
+  {
+    questionId: 9,
+    question: "What is Routing - React Router?",
+    definition: `React Router enables navigation in a React app without reloading the page. 
+It maps URLs to components, making single-page apps feel like multi-page apps.
+
+* React Router lets you navigate between views in a React app without refreshing the page.`
+  },
+  {
+    questionId: 10,
+    question: "What is SPA (Single Page Application) vs MPA (Multi Page Application)?",
+    definition: `SPA (Single Page Application) loads one HTML file and updates content dynamically without full reloads, giving a smoother, faster experience. 
+MPA (Multi Page Application) loads a new HTML page for every request, which is heavier but better for SEO and complex apps.
+
+* One-liner fallback:
+“SPA updates content dynamically on one page, while MPA reloads new pages for each request.”
+
+👉 Quick memory hook:
+
+SPA = Speedy & smooth (but SEO issues).
+MPA = SEO-friendly (but slower UX).
+
+SPA (Single Page Application)
+✅ Pros:
+• Faster, smoother user experience (no full page reloads)
+• Efficient data fetching (API-driven)
+• Great for dynamic, interactive apps (e.g., Gmail, Twitter)
+
+❌ Cons:
+• SEO challenges (requires SSR or pre-rendering)
+• Larger initial load time
+• Can be complex for very large apps
+
+MPA (Multi Page Application)
+✅ Pros:
+• Better SEO by default (separate pages with metadata)
+• Easier to manage very large, content-heavy apps
+• Built-in security (less exposed frontend code)
+
+❌ Cons:
+• Slower (full reload on every navigation)
+• Heavier server load
+• More repetitive frontend code`
+  },
+  {
+    questionId: 11,
+    question: "What is state management Redux?",
+    definition: `Redux is a state management library for JavaScript apps. 
+It uses a single centralized store where state is managed through actions and reducers, making data flow predictable and easier to debug.`
+  },
+  {
+    questionId: 12,
+    question: "What is Context API vs Redux?",
+    definition: `Context API is built into React for passing state through the component tree, ideal for simple or medium state needs.
+Redux is a standalone library with a single global store, better for large, complex apps needing predictable state and advanced debugging.
+
+One-liner fallback:
+“Context API is for simple state sharing in React, Redux is for complex global state with predictable updates.”`
+  }
+];
+
+
+    const questionGrid = document.getElementById("questionGrid");
+    const definitionContainer = document.getElementById("definitionContainer");
+
+    reactQuestions.forEach(item => {
+      // create top question box
+      const card = document.createElement("div");
+      card.className = "question-card";
+      card.innerHTML = `<strong style="color:#b366ff;">Q${item.questionId}:</strong> ${item.question}`;
+      card.addEventListener("click", () => scrollToDefinition(item.questionId));
+      questionGrid.appendChild(card);
+
+      // create definition section
+      const def = document.createElement("div");
+      def.className = "definition-section";
+      def.id = `question-${item.questionId}`;
+      def.innerHTML = `
+        <h3>Question ${item.questionId}: ${item.question}</h3>
+        <pre>${item.definition}</pre>
+      `;
+      definitionContainer.appendChild(def);
+    });
+
+    function scrollToDefinition(id) {
+      const target = document.getElementById(`question-${id}`);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        target.classList.add("highlight");
+        setTimeout(() => target.classList.remove("highlight"), 1500);
+      }
+    }
+
+    
+    // === Back to Top Button Logic ===
+    const backToTopBtn = document.getElementById("backToTopBtn");
+
+    window.addEventListener("scroll", () => {
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+
+   /// === Theme Toggle Logic with Icons and Fade ===
+    const themeToggle = document.getElementById("themeToggle");
+    const body = document.body;
+
+    // Load saved theme preference
+    if (localStorage.getItem("theme") === "light") {
+    enableLightMode(false);
+    } else {
+    enableDarkMode(false);
+    }
+
+    themeToggle.addEventListener("click", () => {
+    body.classList.add("fade-transition");
+    if (body.classList.contains("light-mode")) {
+        enableDarkMode();
+    } else {
+        enableLightMode();
+    }
+    setTimeout(() => body.classList.remove("fade-transition"), 400);
+    });
+
+    function enableLightMode(save = true) {
+    body.classList.add("light-mode");
+    themeToggle.innerHTML = "🌙 Dark";
+    if (save) localStorage.setItem("theme", "light");
+    }
+
+    function enableDarkMode(save = true) {
+    body.classList.remove("light-mode");
+    themeToggle.innerHTML = "☀️ Light";
+    if (save) localStorage.setItem("theme", "dark");
+    }
+  </script>
+</body>
+</html>
