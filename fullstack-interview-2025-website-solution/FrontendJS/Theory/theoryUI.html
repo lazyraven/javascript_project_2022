@@ -247,7 +247,7 @@ const jsInterviewQuestions = [
   {
     questionId: 1,
     question: "What is JavaScript?",
-    definition: `<pre>
+    definition: `
 JavaScript (JS) is a high-level, interpreted programming language mainly used to make web pages interactive, dynamic, and functional.
 It runs in the browser as well as on servers (using Node.js).
 
@@ -258,12 +258,12 @@ It runs in the browser as well as on servers (using Node.js).
 • Build full-stack applications.
 
 In short: HTML gives structure, CSS gives style, and JavaScript gives behavior to web applications.
-</pre>`
+`
   },
   {
     questionId: 2,
     question: "var vs let vs const?",
-    definition: `<pre>
+    definition: `
 In JavaScript:
 • var → function-scoped and allows redeclaration.
 • let → block-scoped, can be reassigned but not redeclared.
@@ -273,24 +273,24 @@ Example:
 var x = 10;  // function scope
 let y = 20;  // block scope
 const z = 30; // cannot reassign
-</pre>`
+`
   },
   {
     questionId: 3,
     question: "What is Scope?",
-    definition: `<pre>
+    definition: `
 Scope defines the accessibility or visibility of variables, functions, and objects in different parts of the code.
 
 Types of scope:
 1. Global Scope – variables accessible everywhere.
 2. Function Scope – variables declared inside a function are local to that function.
 3. Block Scope – variables declared using let and const inside {} are not accessible outside.
-</pre>`
+`
   },
   {
     questionId: 4,
     question: "What is hoisting?",
-    definition: `<pre>
+    definition: `
 Hoisting means variable and function declarations are moved to the top of their scope before code execution.
 
 👉 Behavior:
@@ -307,24 +307,24 @@ let b = 20;
 
 console.log(c); // ReferenceError
 const c = 30;
-</pre>`
+`
   },
   {
     questionId: 5,
     question: "What is a function?",
-    definition: `<pre>
+    definition: `
 A function is a reusable block of code designed to perform a specific task.
 
 Functions help to:
 • Organize code into smaller parts.
 • Reuse logic without rewriting.
 • Improve readability and maintainability.
-</pre>`
+`
   },
   {
     questionId: 6,
     question: "What is a closure? When is it useful? What is Lexical Scope?",
-    definition: `<pre>
+    definition: `
 A closure is created when a function is defined inside another function and 
 the inner function “remembers” variables from the outer function even after the outer function has returned.
 
@@ -351,24 +351,24 @@ console.log(increment()); // 2
 Lexical Scope:
 A function’s scope is determined by where it is defined in the code.
 Inner functions can access outer function variables, not vice versa.
-</pre>`
+`
   },
   {
     questionId: 7,
     question: "What is IIFE (Immediately Invoked Function Expression)?",
-    definition: `<pre>
+    definition: `
 An IIFE is a function that runs immediately after it is defined.
 
 Example:
 (function () {
   console.log("IIFE runs immediately!");
 })();
-</pre>`
+`
   },
   {
     questionId: 8,
     question: "What are Prototypes?",
-    definition: `<pre>
+    definition: `
 A prototype is an object from which other objects inherit properties and methods.
 
 Prototype Chain:
@@ -378,12 +378,12 @@ Example:
 const obj = {};
 console.log(obj.toString());
 // Not in obj → found in Object.prototype → returns "[object Object]"
-</pre>`
+`
   },
   {
     questionId: 9,
     question: "How to deep clone an object?",
-    definition: `<pre>
+    definition: `
 Deep cloning means creating a full copy of an object, including nested objects, 
 so that changes in the copy don’t affect the original.
 
@@ -391,24 +391,24 @@ Modern Method:
 const clone = structuredClone(obj);
  In Deep Learning : Go to this file console.log("file:///C:/workspace-nisha/01_github/02_Javascript/javascript_project_2022/basic-tut-2025/HTML/JavaScript");
 
-</pre>`
+`
   },
   {
     questionId: 10,
     question: "Difference between == and ===?",
-    definition: `<pre>
+    definition: `
 == → compares values only (performs type conversion).
 === → compares both value and type (strict equality).
 
 Example:
 5 == "5"   // true
 5 === "5"  // false
-</pre>`
+`
   },
   {
     questionId: 11,
     question: "Explain 'this' keyword in JS?",
-    definition: `<pre>
+    definition: `
 The 'this' keyword refers to the object that is currently executing the function. 
 Its value depends on how the function is called.
 
@@ -416,12 +416,12 @@ Its value depends on how the function is called.
 • In a regular function → refers to global object (undefined in strict mode).
 • Inside a class or constructor → refers to the instance.
 • Arrow functions → do not have their own 'this'; they inherit from their lexical scope.
-</pre>`
+`
   },
   {
     questionId: 12,
     question: "What is call/apply/bind?",
-    definition: `<pre>
+    definition: `
 • call → Immediately calls a function with a given 'this' and arguments individually.
 • apply → Immediately calls a function with a given 'this' and arguments as an array.
 • bind → Returns a new function with fixed 'this' and optional preset arguments.
@@ -431,12 +431,12 @@ call/apply = immediate execution.
 bind = delayed (returns a new function).
 
 ⚡ Key difference: call/apply = immediate execution, bind = future execution.
-</pre>`
+`
   },
   {
     questionId: 13,
     question: "Explain classes and inheritance?",
-    definition: `<pre>
+    definition: `
 A class is a blueprint for creating objects — it bundles properties and methods.
 
 Inheritance allows one class (child) to use properties and methods of another class (parent) using 'extends'.
@@ -446,12 +446,12 @@ Key points:
 • super() calls parent constructor.
 • Child classes can override methods.
 • Classes are syntactic sugar over prototypes.
-</pre>`
+`
   },
   {
     questionId: 14,
     question: "What are Promises?",
-    definition: `<pre>
+    definition: `
 A Promise represents the eventual completion (or failure) of an asynchronous operation.
 
 States:
@@ -460,12 +460,12 @@ States:
 • Rejected → failed.
 
 Use .then() for success, .catch() for errors, .finally() for cleanup.
-</pre>`
+`
   },
   {
     questionId: 15,
     question: "Explain Async/Await?",
-    definition: `<pre>
+    definition: `
 Async/Await (ES2017) are built on top of Promises.
 
 • async → makes a function return a Promise.
@@ -474,12 +474,12 @@ Async/Await (ES2017) are built on top of Promises.
 
 Promise = chaining
 async/await = clean synchronous-like code.
-</pre>`
+`
   },
   {
     questionId: 16,
     question: "Explain Promises and async/await together?",
-    definition: `<pre>
+    definition: `
 Execution Order (Event Loop):
 
 1. Sync code runs first (Start, End).
@@ -508,12 +508,12 @@ Spoken Answer :
                     then microtasks from Promises or await, and finally macrotasks like setTimeout. This is why understanding the 
                     event loop is crucial when debugging async behavior."*
                      Chcek => "js_async_cheatsheet.pdf"
-</pre>`
+`
   },
   {
     questionId: 17,
     question: "What are sequential promises?",
-    definition: `<pre>
+    definition: `
 Sequential Promises:
 Execute one after another — each waits for the previous to resolve.
 • Useful when tasks are dependent on each other.   
@@ -521,23 +521,23 @@ Execute one after another — each waits for the previous to resolve.
 Parallel Promises:
 Run simultaneously — independent tasks that don’t wait for each other.
 • Useful when tasks are independent.
-</pre>`
+`
   },
   {
     questionId: 18,
     question: "Explain the event loop?",
-    definition: `<pre>
+    definition: `
 The event loop continuously checks the call stack and callback/microtask queues,
 allowing asynchronous operations without blocking the main thread.
 
 Cycle:
 Call Stack → Microtask Queue (Promises) → Macrotask Queue (setTimeout, I/O)
-</pre>`
+`
   },
   {
     questionId: 19,
     question: "Explain Debounce & Throttle?",
-    definition: `<pre>
+    definition: `
 Debounce:
 Delays a function’s execution until after a specified time of no calls — great for search boxes.
 mainly used to improve performance
@@ -552,12 +552,12 @@ Throttle runs on schedule.
 Example:
 Debounce: Typing → run after user stops.
 Throttle: Scrolling → run every 200ms.
-</pre>`
+`
   },
   {
     questionId: 20,
     question: "Difference between process.nextTick and setImmediate (Node-specific)?",
-    definition: `<pre>
+    definition: `
 process.nextTick → Runs immediately after the current function, before event loop continues.
 setImmediate → Runs on the next event loop cycle (after I/O).
 
@@ -567,26 +567,26 @@ Use Cases:
 
 Not Required for answer:
 To use Node-specific features (process) inside the browser, which doesn’t have them.
-</pre>`
+`
   },
   {
     questionId: 21,
     question: "How many things do you know about JS?",
-    definition: `<pre>
+    definition: `
 JavaScript is a high-level, versatile language for building dynamic web applications.\nI have a strong grasp of its fundamentals, including ES6 features, async programming, and frameworks like React, Angular, Vue, and Node.js for full-stack development.
-</pre>`
+`
   },
   { 
         questionId: 22, 
         question: "What is ES6?", 
-        definition : `<pre>
+        definition : `
 ES6 is the 2015 update to JavaScript that introduced modern features\n like let, const, arrow functions, classes, modules, and promises — making code cleaner, easier, and more efficient.
-</pre>` 
+` 
   },
   {
     questionId: 23,
     question: "What is the difference between Real DOM and Virtual DOM?",
-    definition: `<pre>
+    definition: `
 Real DOM:
     • Represents the actual structure of the webpage in the browser.
     • When a change occurs, the entire page or large sections re-render — making it slower.
@@ -598,12 +598,12 @@ Virtual DOM:
 In Short:
     • Real DOM: Updates the whole UI directly — slower.
     • Virtual DOM: Updates only what’s changed — faster and smoother.
-</pre>`
+`
   },
 {
     questionId: 24,
     question: "What are Web Selectors?",
-    definition: `<pre>
+    definition: `
 A web selector (also called as CSS selector) is a pattern used in web development to sleect and target specific HTML elements on a webpage,
 so you can apply style (using css) or manipulate them (using javascript). 
 In short- selectors tell the browser “which element(s) this rule applies to.
@@ -662,12 +662,12 @@ In short- selectors tell the browser “which element(s) this rule applies to.
    document.querySelector(".btn");      // Selects the first element with class "btn"
    document.querySelectorAll("p");      // Selects all <p> elements
    document.getElementById("header");   // Selects the element with ID "header"
-</pre>`
+`
   },
   { 
         questionId: 25, 
         question: "Explain Web Storage, Cookies, Session Storage, Local Storage? what does mean Data Persistence ?",
-        definition : `<pre>Data Persistence means keeping data available even after the page reloads or the app is closed.
+        definition : `Data Persistence means keeping data available even after the page reloads or the app is closed.
 
 1. LocalStorage : backs up (saves) some data into localStorage, so the data remains even after:
     \n• Stores data with no expiration,\n• Data stays even after closing the browser,\n• Example use: saving theme preference, login state (non-sensitive), cart items.
@@ -709,7 +709,7 @@ What to Use When
     Authentication (session ID, secure tokens)
     Server-side validation
     Managing logged-in states securely
-          </pre>` 
+          ` 
   },
       { questionId: 26, question: "Client-side vs Server-side rendering?", definition : "Test 123" },
       { questionId: 27, question: "Is JavaScript multithreaded or single-threaded?", definition : "Test 123" },
