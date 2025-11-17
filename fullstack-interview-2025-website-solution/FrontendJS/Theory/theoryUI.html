@@ -664,8 +664,53 @@ In short- selectors tell the browser “which element(s) this rule applies to.
    document.getElementById("header");   // Selects the element with ID "header"
 </pre>`
   },
-      
-      { questionId: 25, question: "Explain Web Storage, Cookies, Session Storage, Local Storage?", definition : "Test 123" },
+  { 
+        questionId: 25, 
+        question: "Explain Web Storage, Cookies, Session Storage, Local Storage? what does mean Data Persistence ?",
+        definition : `<pre>Data Persistence means keeping data available even after the page reloads or the app is closed.
+
+1. LocalStorage : backs up (saves) some data into localStorage, so the data remains even after:
+    \n• Stores data with no expiration,\n• Data stays even after closing the browser,\n• Example use: saving theme preference, login state (non-sensitive), cart items.
+
+2. SessionStorage
+    • Stores data only for the current browser tab/session
+    • Data disappears when the tab is closed
+    • Example use: form progress, one-session tokens
+
+Why it’s useful
+    • Faster access to data (no server call)
+    • Simple key–value storage  
+    • Helpful for personalizing UI or maintaining state
+
+                                    localStorage.setItem("username", "Nisha");
+                                    const name = localStorage.getItem("username"); // "Nisha"
+
+3. Cookies
+   • Expire based on an expiration date (you set it)
+   • Sent to Server > Sent automatically with each HTTP request
+   • Accessible by JavaScript and the server
+   • Can be HttpOnly, Secure, SameSite → This makes them safer for authentication when used properly.
+
+
+What to Use When
+
+    Use localStorage when:
+    Saving theme (dark/light)
+    Saving user settings
+    Storing non-sensitive UI data
+    Saving cart items for a shopping website
+
+    Use sessionStorage when:
+    Temporary form data
+    Data that should clear after closing a tab
+    One-time session preferences
+
+    Use Cookies when:
+    Authentication (session ID, secure tokens)
+    Server-side validation
+    Managing logged-in states securely
+          </pre>` 
+  },
       { questionId: 26, question: "Client-side vs Server-side rendering?", definition : "Test 123" },
       { questionId: 27, question: "Is JavaScript multithreaded or single-threaded?", definition : "Test 123" },
       { questionId: 28, question: "Difference between one-way and two-way binding?", definition : "Test 123" },
