@@ -709,35 +709,419 @@ What to Use When
     Authentication (session ID, secure tokens)
     Server-side validation
     Managing logged-in states securely
+
+
+    | Feature         | localStorage       | sessionStorage    | Cookies                     |
+|-----------------|--------------------|--------------------|-----------------------------|
+| Capacity        | 5–10 MB            | 5–10 MB            | ~4 KB                       |
+| Lifetime        | Until removed      | Until tab closes   | Custom expiry               |
+| Sent to server? | No                 | No                 | Yes                         |
+| Secure options  | None               | None               | HttpOnly, Secure, SameSite  |
+| Best use        | UI data, prefs     | Temporary data     | Auth, server communication  |
+
           ` 
   },
-      { questionId: 26, question: "Client-side vs Server-side rendering?", definition : "Test 123" },
-      { questionId: 27, question: "Is JavaScript multithreaded or single-threaded?", definition : "Test 123" },
-      { questionId: 28, question: "Difference between one-way and two-way binding?", definition : "Test 123" },
-      { questionId: 29, question: "How to validate String, Object, and Array?", definition : "Test 123" },
-      { questionId: 30, question: "Explain Array methods?", definition : "Test 123" },
-      { questionId: 31, question: "Explain map, filter, and reduce?", definition : "Test 123" },
-      { questionId: 32, question: "What are Higher-Order Functions?", definition : "Test 123" },
-      { questionId: 33, question: "Difference between splice, slice, and reduce?", definition : "Test 123" },
-      { questionId: 34, question: "Difference between includes() and find()?", definition : "Test 123" },
-      { questionId: 35, question: "What is the spread operator?", definition : "Test 123" },
-      { questionId: 36, question: "Difference between deep and shallow copy?", definition : "Test 123" },
-      { questionId: 37, question: "What is a key?", definition : "Test 123" },
-      { questionId: 38, question: "How many loops are used in JS?", definition : "Test 123" },
-      { questionId: 39, question: "Difference between for loop and forEach loop?", definition : "Test 123" },
-      { questionId: 40, question: "Difference between vanilla JS and JS frameworks?", definition : "Test 123" },
-      { questionId: 41, question: "What is an anonymous function?", definition : "Test 123" },
-      { questionId: 42, question: "Explain isNaN() function?", definition : "Test 123" },
-      { questionId: 43, question: "How to handle exceptions in JS?", definition : "Test 123" },
-      { questionId: 44, question: "What is event bubbling?", definition : "Test 123" },
-      { questionId: 45, question: "What is event propagation?", definition : "Test 123" },
-      { questionId: 46, question: "How to fix a 404 error?", definition : "Test 123" },
-      { questionId: 47, question: "What is a CORS issue and what is a proxy?", definition : "Test 123" },
-      { questionId: 48, question: "Explain HTTP request methods?", definition : "Test 123" },
-      { questionId: 49, question: "Explain HTTP status codes (400, 401, 404, 500, 502)?", definition : "Test 123" },
-      { questionId: 50, question: "What is a recursive function?", definition : "Test 123" },
-      { questionId: 51, question: "Explain JWT?", definition : "Test 123" },
-      { questionId: 52, question: "Currying, memoization?", definition : "Test" }
+  { 
+        questionId: 26, 
+        question: "Client-side vs Server-side rendering?", 
+        definition : `
+Client-Side Rendering (CSR)
+
+  • The browser downloads a minimal HTML file and JavaScript.
+  • JavaScript builds the UI in the browser.
+  • Pros: Rich interactions, fast after initial load.
+  • Cons: Slow first load, weaker SEO unless handled properly.
+
+Server-Side Rendering (SSR)
+
+  • The server generates the full HTML for each request.
+  • Browser gets a ready page.
+  • Pros: Faster first load, better SEO.
+  • Cons: More server load, slower page updates after interactions.
+  
+one-sentence interview version:
+ 
+ CSR renders the UI in the browser using JavaScript, while SSR renders the HTML on the server before sending it to the browser—CSR is better for rich interactions,
+ and SSR is better for initial load speed and SEO.
+  ` 
+  },
+  { 
+        questionId: 27, 
+        question: "JavaScript multithreaded or single-threaded?", 
+        definition : `
+JavaScript is single-threaded
+
+  • It runs one task at a time using the main thread.
+  • Concurrency is handled through the event loop, callbacks, promises, and async/await—not by true multithreading.
+  • Web Workers can add parallelism, but they run on separate threads outside the main thread.
+
+` 
+  },
+  { 
+        questionId: 28, 
+        question: "Difference between one-way and two-way binding?", 
+        definition : `
+One-Way Binding
+
+  • Data flows in a single direction (model → UI).
+  • UI updates when data changes, but UI doesn’t directly change the model.
+
+  Two-Way Binding
+
+  • Data flows both ways (model ↔ UI).
+  • Changing the UI updates the model, and changing the model updates the UI automatically.
+
+` 
+  },
+  { 
+        questionId: 29, 
+        question: "How to validate String, Object, and Array? & Definition", 
+        definition : `
+Validate String
+
+  • typeof value === "string" and value.trim().length > 0.
+
+Validate Object
+
+  • typeof value === "object" and value !== null and !Array.isArray(value).
+
+Validate Array
+
+  • Array.isArray(value) and value.length > 0 (if non-empty required).
+
+String: A sequence of characters used to represent text.
+Object: A collection of key–value pairs used to store structured data.
+Array: An ordered list of values stored by index.
+` 
+  },
+  { 
+        questionId: 30, 
+        question: "Explain Array methods?", 
+        definition : ` Array methods let you add, remove, search, and transform items—for example: push/pop (add/remove), map (transform), filter (select), reduce (summarize), and find (locate).
+Common Array Methods
+  • push() – Adds an item to the end.
+
+  • pop() – Removes the last item.
+
+  • shift() – Removes the first item.
+
+  • unshift() – Adds an item to the start.
+
+  • map() – Creates a new array by transforming each element.
+
+  • filter() – Returns items that match a condition.
+
+  • reduce() – Reduces the array to a single value.
+
+  • forEach() – Runs a function on each element (no return).
+
+  • find() – Returns the first matching item.
+` 
+  },
+  { 
+        questionId: 31, 
+        question: "Explain map, filter, and reduce?", 
+        definition : `
+map(): Creates a new array by applying a function to each element.
+
+filter(): Returns a new array with elements that match a condition.
+
+reduce(): Combines all elements into a single value (like sum or total).
+` 
+  },
+  { 
+        questionId: 32, 
+        question: "What are Higher-Order Functions?", 
+        definition : `Functions that take other functions as arguments or return a function. They make code more reusable and flexible.` 
+  },
+  { 
+        questionId: 33, 
+        question: "Difference between splice, slice, and reduce?", 
+        definition : `
+slice(): Returns a new array by copying a portion of the array without modifying the original.
+
+splice(): Adds or removes elements from the array and modifies the original array.
+
+reduce(): Processes all elements and returns a single value, not an array.
+` 
+  },
+  { 
+        questionId: 34, 
+        question: "Difference between includes() and find()?", 
+        definition : `
+includes(): Checks if a value exists in the array and returns true/false.
+
+find(): Returns the first matching element based on a condition.` 
+  },
+  { 
+        questionId: 35, 
+        question: "What is the spread operator?", 
+        definition : `
+Spread Operator (...): Expands arrays or objects into individual elements, making it easy to copy, merge, or pass values.
+` 
+  },
+  { 
+        questionId: 36, 
+        question: "Difference between deep and shallow copy?", 
+        definition : `
+Shallow Copy: Copies only the top-level values; nested objects still reference the same memory.
+
+Deep Copy: Copies all levels of data; nested objects get completely new independent copies.
+` 
+  },
+  { 
+        questionId: 37, 
+        question: "What is a key in JS?", 
+        definition : `
+Key in JavaScript: A key is the name of a property in an object used to access its corresponding value.
+` 
+  },
+  { 
+        questionId: 38, 
+        question: "How many loops are used in JS?", 
+        definition : `
+JavaScript has several loops: for, while, do…while, for…of, for…in, and array loops like forEach().` 
+  },
+  { 
+        questionId: 39, 
+        question: "Difference between for loop and forEach loop?", 
+        definition : `
+for loop: Gives full control over index, conditions, and breaking out of the loop.
+          A traditional loop that lets you control the counter, skip steps, and stop the loop whenever you want.
+
+forEach(): Executes a function on each array item but can’t break early and is used mainly for cleaner array iteration.
+` 
+  },
+  { 
+        questionId: 40, 
+        question: "Difference between vanilla JS and JS, frameworks?", 
+        definition : `
+Vanilla JS vs JavaScript
+
+  • JavaScript is the programming language itself.
+
+  • Vanilla JavaScript simply means using plain, pure JavaScript without any libraries or frameworks.
+
+One-line summary:
+  Vanilla JS is just JavaScript in its raw form, without added tools.
+
+
+JavaScript Frameworks (React, Angular, Vue, etc.)
+
+  • Provide pre-built structure, patterns, and tools for building complex UIs faster.
+
+  • Handle things like state management, routing, and efficient DOM updates.
+
+  • Improve productivity and maintainability for larger applications.
+` 
+  },
+  { 
+        questionId: 41, 
+        question: "What is an anonymous function?", 
+        definition : `
+Anonymous Function
+
+  • A function without a name.
+
+  • Used when the function is needed temporarily, such as in callbacks, event handlers, or array methods.
+
+Example:
+() => { console.log("Hello"); }
+
+One-line summary:
+An anonymous function is a nameless function used mainly for short, inline operations.
+` 
+  },
+  { 
+        questionId: 42, 
+        question: "Explain isNaN() function?", 
+        definition : `
+isNaN() Function
+
+  • isNaN() checks whether a value is Not-a-Number.
+
+  • It returns true if the value cannot be converted into a valid number, otherwise false.
+
+Example:
+isNaN("abc") // true
+isNaN("20") // false
+
+One-line summary:
+isNaN() tells you if a value is not a valid number.
+` 
+  },
+  { 
+        questionId: 43, 
+        question: "How to handle exceptions in JS?", 
+        definition : `
+Handling Exceptions in JavaScript
+
+ • Use try–catch to catch and handle errors.
+
+ • try contains the code that may fail, catch handles the error, and finally runs always (optional).
+                                                        try {
+                                                          riskyFunction();
+                                                        } catch (error) {
+                                                          console.error(error);
+                                                        } finally {
+                                                          cleanup();
+                                                        }
+One-line summary:
+Use try–catch to safely catch and manage errors in JavaScript.
+` 
+  },
+  
+  { 
+        questionId: 44, 
+        question: "What is event propagation?", 
+        definition : `
+Event Propagation
+One-line summary: Event propagation defines how events travel through the DOM in capturing and bubbling phases. OR
+
+ • Event propagation is the flow of events through the DOM in two phases:
+
+    1. Capturing phase – event moves from parent to child.
+
+    2. Bubbling phase – event moves from child back up to parent.
+` 
+  },
+  { 
+        questionId: 45, 
+        question: "What is event bubbling?", 
+        definition : `
+Event Bubbling
+
+One-line summary: Event bubbling is when an event triggers on the child first and then propagates up to the parent elements.
+ 
+ • Event bubbling means an event starts from the deepest (child) element and moves upward through its parent elements.
+
+ • It helps handle events at a higher level without attaching many listeners.
+` 
+  },
+  { 
+        questionId: 46, 
+        question: "How to fix a 404 error?", 
+        definition : `
+Fixing a 404 Error
+
+ • A 404 happens when a page or resource is not found.
+
+ • Check and correct the URL, ensure the file or route exists, and verify the server or API path is correct.
+
+One-line summary:
+Fix a 404 by correcting the URL or making sure the requested resource actually exists on the server.
+` 
+  },
+  { 
+        questionId: 47, 
+        question: "What is a CORS issue and what is a proxy?", 
+        definition : `
+CORS Issue
+
+ • CORS (Cross-Origin Resource Sharing) happens when a browser blocks requests to a different domain or port for security reasons.
+
+ • It occurs when the server doesn’t allow your origin.
+
+Proxy
+
+ • A proxy is a middle layer that forwards your request to another server.
+
+ • It helps bypass CORS by making the request from the server side instead of the browser.
+
+One-line summary:
+A CORS issue is a blocked cross-domain request, and a proxy is a server that forwards requests to avoid such restrictions.
+` 
+  },
+  { 
+        questionId: 48, 
+        question: "Explain HTTP request methods?", 
+        definition : `
+ • HTTP Request Methods
+
+ • GET – Fetch data from the server.
+
+ • POST – Send new data to the server.
+
+ • PUT – Update or replace existing data.
+
+ • PATCH – Partially update data.
+
+ • DELETE – Remove data from the server.
+
+One-line summary:
+HTTP methods define the type of action you want to perform on a server’s resource.
+` 
+  },
+  { 
+        questionId: 49, 
+        question: "Explain HTTP status codes (400, 401, 404, 500, 502)?", 
+        definition : `
+HTTP Status Codes
+
+ • 400 – Bad Request: The server can’t process the request due to invalid input.
+
+ • 401 – Unauthorized: Authentication is required or failed.
+
+ • 404 – Not Found: The requested resource doesn’t exist.
+
+ • 500 – Internal Server Error: Server encountered an unexpected error.
+
+ • 502 – Bad Gateway: The server received an invalid response from another server.
+
+One-line summary:
+These codes indicate different client or server errors that help identify what went wrong in a request.
+` 
+  },
+  { 
+        questionId: 50, 
+        question: "What is a recursive function?", 
+        definition : `
+Recursive Function
+
+ • A function that calls itself to solve a problem.
+
+ • Used for tasks that can be broken into smaller, similar subproblems (e.g., factorial, tree traversal).
+
+One-line summary:
+A recursive function solves a problem by repeatedly calling itself with smaller inputs.
+` 
+  },
+  { 
+        questionId: 51, 
+        question: "Explain JWT?", 
+        definition : `
+JWT (JSON Web Token)
+
+ • JWT is a secure token format used for authentication.
+
+ • It contains encoded user data and is signed so it can’t be tampered with.
+
+ • The server verifies the token instead of checking the database each time.
+
+One-line summary:
+JWT is a signed token used to verify user identity without repeated database lookups.
+` 
+  },
+  { 
+        questionId: 52, 
+        question: "Currying, memoization?", 
+        definition : `
+Currying
+
+ • Breaking a function with multiple arguments into a series of functions that take one argument at a time.
+
+ • Helps reuse functions and improves code flexibility.
+
+Memoization
+
+ • Caching a function’s previous results to avoid recalculating.
+
+ • Improves performance for expensive operations.
+
+One-line summary:
+Currying transforms functions into smaller ones; memoization speeds them up by caching results.
+` 
+  },
 ];
 
     const questionGrid = document.getElementById("questionGrid");
