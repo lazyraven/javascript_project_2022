@@ -382,7 +382,7 @@ Error Boundaries     | Graceful error handling          | Better user experience
     definition: `In React, one common way to persist data is using LocalStorage, which stores key–value data in the browser.`
   },
   {
-    questionId: 15,
+    questionId: 16,
     question: "Why use vite for react framework or other?",
     definition: `
 Vite is used with React (and many other frontend frameworks) because it solves several performance and developer-experience limitations found in older bundlers like Webpack.
@@ -397,7 +397,7 @@ Vite uses a bundler (Rollup) only for production, not dev.
     `
   },
   {
-    questionId: 15,
+    questionId: 17,
     question: "Why does mean of bundler?",
     definition: `
   • Popular bundlers
@@ -410,6 +410,25 @@ Vite uses a bundler (Rollup) only for production, not dev.
 
   • Esbuild
   Vite uses a bundler (Rollup) only for production, not dev.
+    `
+  },
+  
+  {
+    questionId: 18,
+    question: "what does mean react memoriazation?",
+    definition: `React memoization refers to techniques that help React avoid unnecessary re-renders by remembering (“memoizing”) 
+the result of a function or component until its inputs change.
+
+key parts :
+ 1. React.memo (for components) - Wraps a component so React only re-renders it when its props change.
+ 2. useMemo (for expensive calculations) - Caches the return value of a heavy computation.
+ 3. useCallback (for functions) - Memoizes a function so its identity doesn’t change between renders.
+`
+  },
+  {
+    questionId: 19,
+    question: "",
+    definition: `
     `
   },
 ];

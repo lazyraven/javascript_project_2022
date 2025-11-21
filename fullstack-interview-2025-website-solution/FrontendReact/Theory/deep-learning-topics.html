@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReactDeep Learning</title>
+<style>
+    body {
+        background-color: #111;
+        color: #fff;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .question-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .question-card {
+        background: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 6px;
+        padding: 10px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-align: center;
+        line-height: 1.3;
+    }
+
+    .question-card:hover {
+        background-color: #272727;
+    }
+
+    .definition-section {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 25px;
+        transition: all 0.4s ease;
+    }
+
+    .definition-section.highlight {
+        border: 2px solid #b366ff;
+        box-shadow: 0 0 15px #b366ff66;
+        background: #2a1a3a;
+    }
+
+    .definition-section h3 {
+        color: #b366ff;
+        margin-bottom: 8px;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* === Back to Top Button Styling === */
+    #backToTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background-color: #b366ff;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+        cursor: pointer;
+        box-shadow: 0 0 10px #b366ff80;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    #backToTopBtn:hover {
+        background-color: #9933ff;
+        box-shadow: 0 0 20px #b366ff;
+        transform: scale(1.1);
+    }
+    /* === Floating Theme Toggle Button === */
+    #themeToggle {
+        position: fixed;
+        top: 20px;
+        right: 25px;
+        z-index: 1100;
+        cursor: pointer;
+        background: #fff;
+        color: #0d6efd;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 30px;
+        font-weight: bold;
+        font-size: 14px;
+        box-shadow: 0 0 10px #b366ff60;
+        transition: all 0.3s ease;
+    }
+
+    #themeToggle:hover {
+        transform: scale(1.1);
+        background: #0d6efd;
+        color: #fff;
+        box-shadow: 0 0 15px #b366ff90;
+    }
+
+    /* === Smooth Fade Animation for Theme Switch === */
+    body {
+        transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    .definition-section,
+    .question-card,
+    #backToTopBtn {
+        transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    /* === Light Mode === */
+    body.light-mode {
+        background-color: #f5f5f5;
+        color: #111;
+    }
+
+    body.light-mode .question-card {
+        background: #fff;
+        border: 1px solid #ccc;
+        color: #000;
+    }
+
+    body.light-mode .question-card:hover {
+        background-color: #f0f0f0;
+    }
+
+    body.light-mode .definition-section {
+        background: #fff;
+        border: 1px solid #ddd;
+        color: #000;
+    }
+
+    body.light-mode .definition-section h3 {
+        color: #7a3fff;
+    }
+
+    body.light-mode #backToTopBtn {
+        background-color: #7a3fff;
+    }
+
+    body.light-mode #themeToggle {
+        background: #0d6efd;
+        color: #fff;
+    }
+
+    /* === Responsive Adjustments === */
+    @media (max-width: 600px) {
+        #themeToggle {
+            top: 15px;
+            right: 15px;
+            padding: 8px 14px;
+            font-size: 13px;
+        }
+    }
+    pre{
+        font-size: 16px;
+    }
+</style>
+</head>
+<body>  ✅ Week 2 – React Topics
+<button id="themeToggle">☀️ Light</button>
+  <div class="question-grid" id="questionGrid"></div>
+  <div id="definitionContainer"></div>
+
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" title="Go to top">↑</button>
+
+  <script>
+
+const reactQuestions = [
+  {
+    questionId: 1,
+    question: "what does mean react memoriazation?",
+    definition: `React memoization refers to techniques that help React avoid unnecessary re-renders by remembering (“memoizing”) 
+the result of a function or component until its inputs change.
+
+key parts :
+ 1. React.memo (for components) - Wraps a component so React only re-renders it when its props change.
+    
+ This saves performance in large component trees.
+    • If props are same → skip re-render
+    • If props changed → re-render
+
+
+   • If value stays the same → component does not render again.
+   • Useful for pure functional components.
+
+ 2. useMemo (for expensive calculations) - Caches the return value of a heavy computation.
+   
+   • useMemo for caching heavy calculations
+   • Runs the function only when data changes.
+   • Prevents recalculating something costly on every render.
+  
+ 3. useCallback (for functions) - Memoizes a function so its identity doesn’t change between renders.
+ 
+useCallback is a React hook that returns a memoized version of a function, meaning the function is recreated only when its dependencies change.
+It helps prevent unnecessary re-renders, especially when passing functions to memoized child components.
+
+   • Helpful when passing callbacks to memoized child components.
+   • Avoids triggering their re-renders.
+
+Why memoization matters
+
+Without memoization:
+
+    • Components may re-render too often.
+
+    • Functions and calculations run more than needed.
+
+    • UI becomes slower for large or complex apps.
+
+With memoization:
+
+    • React skips work.
+
+    • App becomes faster.
+
+    • You control when components update.
+
+✔ Memoization is not always needed; use it when you see performance issues.
+✔ Overusing it can make code harder to read without real benefit.
+
+✔ When to use useMemo
+
+    Use it when:
+
+    • You have heavy/slow calculations
+
+    • You compute derived data that doesn’t need to update on every render
+
+    • You want to stop recalculations when dependencies don’t change
+
+    Don’t use it for simple arithmetic or trivial values.
+`
+  },
+  {
+    questionId: 19,
+    question: "",
+    definition: `
+    `
+  },
+];
+
+
+    const questionGrid = document.getElementById("questionGrid");
+    const definitionContainer = document.getElementById("definitionContainer");
+
+    reactQuestions.forEach(item => {
+      // create top question box
+      const card = document.createElement("div");
+      card.className = "question-card";
+      card.innerHTML = `<strong style="color:#b366ff;">Q${item.questionId}:</strong> ${item.question}`;
+      card.addEventListener("click", () => scrollToDefinition(item.questionId));
+      questionGrid.appendChild(card);
+
+      // create definition section
+      const def = document.createElement("div");
+      def.className = "definition-section";
+      def.id = `question-${item.questionId}`;
+      def.innerHTML = `
+        <h3>Question ${item.questionId}: ${item.question}</h3>
+        <pre>${item.definition}</pre>
+      `;
+      definitionContainer.appendChild(def);
+    });
+
+    function scrollToDefinition(id) {
+      const target = document.getElementById(`question-${id}`);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        target.classList.add("highlight");
+        setTimeout(() => target.classList.remove("highlight"), 1500);
+      }
+    }
+
+    
+    // === Back to Top Button Logic ===
+    const backToTopBtn = document.getElementById("backToTopBtn");
+
+    window.addEventListener("scroll", () => {
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+
+   /// === Theme Toggle Logic with Icons and Fade ===
+    const themeToggle = document.getElementById("themeToggle");
+    const body = document.body;
+
+    // Load saved theme preference
+    if (localStorage.getItem("theme") === "light") {
+    enableLightMode(false);
+    } else {
+    enableDarkMode(false);
+    }
+
+    themeToggle.addEventListener("click", () => {
+    body.classList.add("fade-transition");
+    if (body.classList.contains("light-mode")) {
+        enableDarkMode();
+    } else {
+        enableLightMode();
+    }
+    setTimeout(() => body.classList.remove("fade-transition"), 400);
+    });
+
+    function enableLightMode(save = true) {
+    body.classList.add("light-mode");
+    themeToggle.innerHTML = "🌙 Dark";
+    if (save) localStorage.setItem("theme", "light");
+    }
+
+    function enableDarkMode(save = true) {
+    body.classList.remove("light-mode");
+    themeToggle.innerHTML = "☀️ Light";
+    if (save) localStorage.setItem("theme", "dark");
+    }
+  </script>
+</body>
+</html>
