@@ -378,14 +378,39 @@ Error Boundaries     | Graceful error handling          | Better user experience
   },
   {
     questionId: 15,
-    question: "what does mean react memoriazation?",
-    definition: `React memoization refers to techniques that help React avoid unnecessary re-renders by remembering (“memoizing”)
-     the result of a function or component until its inputs change.`
+    question: "Save & Load Data from LocalStorage?",
+    definition: `In React, one common way to persist data is using LocalStorage, which stores key–value data in the browser.`
   },
   {
-    questionId: 16,
-    question: "WSave & Load Data from LocalStorage?",
-    definition: `In React, one common way to persist data is using LocalStorage, which stores key–value data in the browser.`
+    questionId: 15,
+    question: "Why use vite for react framework or other?",
+    definition: `
+Vite is used with React (and many other frontend frameworks) because it solves several performance and developer-experience limitations found in older bundlers like Webpack.
+• Vite uses esbuild, which is extremely fast (written in Go).
+• Vite serves your code with native ES modules—no heavy bundling during development.
+• Webpack/Snowpack/Rollup dev servers tend to slow down as your project grows. Vite stays fast.
+
+Native ES Modules (ESM) modern browser : means the browser can directly load JavaScript modules without needing a bundler like Webpack first.
+• Modern browsers now understand import and export directly.
+• Developers wrote code using import/export, but bundlers had to convert everything into one big file.
+Vite uses a bundler (Rollup) only for production, not dev.
+    `
+  },
+  {
+    questionId: 15,
+    question: "Why does mean of bundler?",
+    definition: `
+  • Popular bundlers
+
+  • Webpack (older, very common)
+
+  • Rollup
+
+  • Parcel
+
+  • Esbuild
+  Vite uses a bundler (Rollup) only for production, not dev.
+    `
   },
 ];
 

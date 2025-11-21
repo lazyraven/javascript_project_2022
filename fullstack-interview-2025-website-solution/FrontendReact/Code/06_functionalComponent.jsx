@@ -7,6 +7,9 @@ function Counter() {
     <div>
       <h2>Count: {count}</h2>
       <button onClick={() => setCount(count + 1)}>Increment</button>
+       {/* <button onClick={() => setCount((count) => count + 1)}>
+           Common Component count is {count}
+    </button> */}
     </div>
   );
 }
@@ -30,3 +33,4 @@ function Example() {
     </button>
   );
 }
+// export default Example;
