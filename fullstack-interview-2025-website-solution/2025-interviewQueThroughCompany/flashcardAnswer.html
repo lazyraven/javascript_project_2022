@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flashcard Answers Interview Ques</title>
+   <link rel="stylesheet" href="../fullstack.css">
+</head>
+
+<body> 
+    <button id="themeToggle">☀️ Light</button>
+    <div class="question-grid" id="questionGrid"></div>
+    <div id="definitionContainer"></div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" title="Go to top">↑</button>
+
+    <script>
+
+        const reactQuestions = [
+            {
+                questionId: 1,
+                question: "What is SMTP? What ports does SMTP use? Why used in Node?",
+                questionDesc: ``,
+                definition: `
+                    Simple Mail Transfer Protocol — used to send emails from server to server.
+                    ports  - 25, 465 (SSL), 587 (TLS).
+                    To send OTP emails, notifications using Nodemailer.
+                `
+            },
+            {
+                questionId: 2,
+                question: "Refresh Token & Session Handling?",
+                questionDesc: `Why use Refresh Tokens?| Where are refresh tokens stored?  | Access Token lifetime? | Refresh Token lifetime?`,
+                definition: `
+                To generate a new access token without re-login when old one expires. | 
+                refresh tokens stored - HttpOnly cookies or secure DB. |
+                Access Token lifetime - Short (e.g., 15–30 min). |
+                Refresh Token lifetime - Long (days/months).
+                `
+            },
+            {
+                questionId: 3,
+                question: "AWS EC2",
+                questionDesc: `What is EC2? | Common EC2 tasks?`,
+                definition: `
+                Virtual server on AWS for deploying backend/frontend. | 
+                Common EC2 tasks - SSH login, NGINX setup, Node deployment, security groups. |
+                `
+            },
+            {
+                questionId: 4,
+                question: "AWS Services (basic roles)",
+                questionDesc: ``,
+                definition: `
+                • S3: File storage
+
+                • RDS: Managed SQL DB
+
+                • Lambda: Serverless functions
+
+                • CloudWatch: Logs & monitoring
+
+                • IAM: Permissions & access control
+                `
+            },
+            {
+                questionId: 5,
+                question: "CI/CD Pipeline?",
+                questionDesc: ``,
+                definition: `Firebase alternative with PostgreSQL + Auth + Storage.
+                Features: Realtime DB, APIs auto-generated, auth integration.
+                `
+            },
+            {
+                questionId: 6,
+                question: "What is Node.js Debugging?",
+                questionDesc: ``,
+                definition: `
+                    • console.log()
+
+                    • Chrome DevTools (node --inspect)
+
+                    • VSCode debugger
+
+                    • Error stack trace
+
+                    Steps: Identify → reproduce → isolate → fix → test.
+                    `
+            },
+            {
+                questionId: 7,
+                question: "Databases & APIs",
+                questionDesc: ``,
+                definition: `
+                    SQL examples: MySQL, PostgreSQL
+                    NoSQL examples: MongoDB, DynamoDB
+                    Vector DB: Pinecone, Weaviate, Milvus
+                    API types: REST (JSON), GraphQL (schema).
+              `
+            },
+            {
+                questionId: 8,
+                question: "",
+                questionDesc: ``,
+                definition: ``
+            },
+            {
+                questionId: 9,
+                question: "?",
+                questionDesc: ``,
+                definition: ``
+            },
+           
+            {
+                questionId: 14,
+                question: "Technical Implementation - 📈 Performance Optimizations?",
+                questionDesc: ``,
+                definition: `---------------------------------------
+      📈 Performance Optimizations
+---------------------------------------
+Technique            | Implementation                   | Benefit
+---------------------------------------------------------------------------
+useMemo              | Filtered tasks calculation       | Prevents unnecessary re-renders
+Optimistic Updates   | UI updates before API response   | Better perceived performance
+Lazy Loading         | Components load on demand        | Faster initial load
+Error Boundaries     | Graceful error handling          | Better user experience
+--------------------------------------------------------------------------- `
+            },
+        ];
+
+
+        const questionGrid = document.getElementById("questionGrid");
+        const definitionContainer = document.getElementById("definitionContainer");
+
+        reactQuestions.forEach(item => {
+            // create top question box
+            const card = document.createElement("div");
+            card.className = "question-card";
+            card.innerHTML = `<strong style="color:#b366ff;">Q${item.questionId}:</strong> ${item.question}<p>${item.questionDesc}</p>`;
+            card.addEventListener("click", () => scrollToDefinition(item.questionId));
+            questionGrid.appendChild(card);
+
+            // create definition section
+            const def = document.createElement("div");
+            def.className = "definition-section";
+            def.id = `question-${item.questionId}`;
+            def.innerHTML = `
+        <h3>Question ${item.questionId}: ${item.question}</h3>
+        <p>${item.questionDesc}</p>
+        <pre>${item.definition}</pre>
+      `;
+            definitionContainer.appendChild(def);
+        });
+
+        function scrollToDefinition(id) {
+            const target = document.getElementById(`question-${id}`);
+            if (target) {
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+                target.classList.add("highlight");
+                setTimeout(() => target.classList.remove("highlight"), 1500);
+            }
+        }
+
+
+        // === Back to Top Button Logic ===
+        const backToTopBtn = document.getElementById("backToTopBtn");
+
+        window.addEventListener("scroll", () => {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        });
+
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+
+        /// === Theme Toggle Logic with Icons and Fade ===
+        const themeToggle = document.getElementById("themeToggle");
+        const body = document.body;
+
+        // Load saved theme preference
+        if (localStorage.getItem("theme") === "light") {
+            enableLightMode(false);
+        } else {
+            enableDarkMode(false);
+        }
+
+        themeToggle.addEventListener("click", () => {
+            body.classList.add("fade-transition");
+            if (body.classList.contains("light-mode")) {
+                enableDarkMode();
+            } else {
+                enableLightMode();
+            }
+            setTimeout(() => body.classList.remove("fade-transition"), 400);
+        });
+
+        function enableLightMode(save = true) {
+            body.classList.add("light-mode");
+            themeToggle.innerHTML = "🌙 Dark";
+            if (save) localStorage.setItem("theme", "light");
+        }
+
+        function enableDarkMode(save = true) {
+            body.classList.remove("light-mode");
+            themeToggle.innerHTML = "☀️ Light";
+            if (save) localStorage.setItem("theme", "dark");
+        }
+    </script>
+</body>
+
+</html>

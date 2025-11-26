@@ -14,3 +14,13 @@ function reverseString(value) {
   return reverseValue;
 }
 console.log(skillName, "=>", reverseString(skillName));
+
+// Interview Question : Coding: Reverse Each Word
+let str = "Hello World";
+// // output - "olleH dlroW"
+
+const result1 = str
+  .split(" ")
+  .map((w) => w.split("").reverse().join(""))
+  .join(" ");
+console.log("result1", result1);

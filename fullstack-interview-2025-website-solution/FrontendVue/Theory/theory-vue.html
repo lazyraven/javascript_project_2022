@@ -44,6 +44,13 @@
             Unmounting/Destruction Phase :
                 beforeUnmount / beforeDestroy → Cleanup before component removal.
                 unmounted / destroyed → Component fully removed from DOM.
+
+
+                Important:
+
+                        API calls: created()
+
+                        DOM access: mounted()
             `
             },
             {
@@ -51,6 +58,10 @@
                 question: "What is Composition API (definition)?",
                 questionDesc: `How to use it in code ? | How to explain it in spoken language for an interview?`,
                 definition: `
+                Definition: A modern Vue API that uses functions like ref(), reactive(), computed(), and watch() to build components more cleanly.
+
+                Benefits: Reusability, better organization, scalable code.
+ OR 
             The Composition API in Vue.js is a way of writing components introduced in Vue 3.
                 • It gives you more flexibility, reusability, and better organization of logic compared to the traditional 
                   Options API<(where we use data, methods, computed, etc. in separate blocks).
@@ -63,7 +74,8 @@
                  ** Spoken Language : 🔹 How to Speak in Interview
                     The Composition API in Vue 3 is a new way to write components using functions instead of the Options API structure. 
                     Instead of splitting logic into data, methods, and computed, we can organize related code together inside the setup() function. 
-                    This makes the code cleaner, more reusable, and easier to maintain, especially in larger projects. For example, 
+                    This makes the code cleaner, more reusable, and easier to maintain, especially in larger projects. 
+                    For example, 
                     I can define a ref for a counter and increment it directly inside setup. It’s similar to React hooks in concept, providing better logic reuse and scalability."
                 `
             },
@@ -79,8 +91,8 @@
                             • If the condition is false → element is not in DOM at all.
                             • Has higher performance cost if toggled frequently because it destroys and recreates DOM nodes.
                     • v-show
-                            • Keeps the element in the DOM always.
-                            • Just toggles the CSS property display: none when the condition is false.
+                            • Always in DOM / Keeps the element in the DOM always.
+                            • Hides using CSS (display:none) /  Just toggles the CSS property display: none when the condition is false.
                             • Faster when toggling often, but the element always exists in DOM.
 
              2. Who removes the DOM element?
@@ -109,54 +121,71 @@
                 questionId: 4,
                 question: "Explain watch & computed?",
                 questionDesc: `Give me the difference | How to use it in code | How to explain it in spoken language for an interview?`,
-                definition: ``
+                definition: `
+                computed:
+                        • Cached
+
+                        • Runs only when dependency changes
+
+                        • Used for derived values
+
+                watch:
+
+                    • Listens to changes and executes a function
+
+                    • Used for API calls, side-effects
+                `
             },
             {
                 questionId: 5,
-                question: "what works of mixin?",
+                question: "slots ?",
                 questionDesc: ``,
                 definition: `
-           Mixins let you reuse code across multiple components by sharing methods, data, or lifecycle hooks.</p>
-                Follow-up explanation:
-                    You can put common functionality (methods, computed properties, data) in a mixin.
-                    When a component uses the mixin, it merges that code into itself.
-                    Useful for avoiding repetition in large apps.`
+                Default Slot:
+                Named Slot:
+                Scoped Slot: Parent accesses child data:
+                `
             },
             {
                 questionId: 6,
-                question: "What is Functional Component?",
+                question: "",
                 questionDesc: ``,
                 definition: ``
             },
             {
                 questionId: 7,
-                question: "What is (React) – useEffect, useState, lifecycle?",
+                question: "Key in v-for?",
                 questionDesc: ``,
-                definition: ``
+                definition: `
+                Purpose: Identifies list items uniquely to help Vue track updates efficiently.
+                Best practice: Use unique ID, not index.
+                `
             },
             {
                 questionId: 8,
-                question: "How does React’s virtual DOM work?",
+                question: "Vuex?",
                 questionDesc: ``,
-                definition: ``
+                definition: `Definition: Centralized global state management.
+                Core parts: state, getters, mutations, actions.`
             },
             {
                 questionId: 9,
-                question: "What is Routing - React Router?",
+                question: "Pinia?",
                 questionDesc: ``,
-                definition: ``
+                definition: `Definition: Newer & simpler alternative to Vuex.
+                Benefits: TypeScript friendly, modular, easier API.`
             },
             {
                 questionId: 10,
-                question: "What is SPA (Single Page Application) vs MPA (Multi Page Application)?",
+                 question: "Props?",
                 questionDesc: ``,
-                definition: ``
+                definition: `Pass data from parent → child.`
             },
             {
                 questionId: 11,
-                question: ``,
+                question: "Login → Home Page Lifecycle ?",
                 questionDesc: ``,
-                definition: ``
+                definition: `User logs in → token saved (localStorage/cookie) → router guard checks auth → redirect to home → created / mounted fires in Home component.`
             },
             {
                 questionId: 12,
@@ -214,6 +243,28 @@ Error Boundaries     | Graceful error handling          | Better user experience
                 question: "",
                 questionDesc: ``,
                 definition: ``
+            },
+            
+            {
+                questionId: 19,
+                  question: "what works of mixin?",
+                questionDesc: ``,
+                definition: `Reusable logic that can be shared across components.
+                    
+                    Mixins let you reuse code across multiple components by sharing methods, data, or lifecycle hooks.</p>
+                Follow-up explanation:
+                    You can put common functionality (methods, computed properties, data) in a mixin.
+                    When a component uses the mixin, it merges that code into itself.
+                    Useful for avoiding repetition in large apps.
+          
+                    `
+            },
+            
+            {
+                questionId: 19,
+                question: "Login → Home Page Lifecycle ?",
+                questionDesc: ``,
+                definition: `User logs in → token saved (localStorage/cookie) → router guard checks auth → redirect to home → created / mounted fires in Home component.`
             },
         ];
 
