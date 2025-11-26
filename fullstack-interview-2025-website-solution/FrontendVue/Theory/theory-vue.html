@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue JS Q&A Plan</title>
+   <link rel="stylesheet" href="../../fullstack.css">
+</head>
+
+<body> ✅ Week 2 – React Topics
+    <button id="themeToggle">☀️ Light</button>
+    <div>
+        <h4><a target="_target" href="https://fullstack-interview-roadmap.netlify.app/">fullstack-interview-roadmap
+                solution | ✅ Week 2 – React Prep</a>
+        </h4>
+    </div>
+    <div class="question-grid" id="questionGrid"></div>
+    <div id="definitionContainer"></div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" title="Go to top">↑</button>
+
+    <script>
+
+        const reactQuestions = [
+            {
+                questionId: 1,
+                question: "Life cycle hooks?",
+                questionDesc: ``,
+                definition: `
+            Creation Phase :
+                beforeCreate → Instance is initialized, data/events not yet available.
+                created → Data, events, and reactivity are set up (but template not mounted).
+
+            Mounting Phase :
+                beforeMount → Template is compiled, but not added to DOM yet.
+                mounted → Component is mounted to Real DOM (good for DOM-dependent work).
+
+            Updating Phase :
+                beforeUpdate → Called before re-render when reactive data changes.
+                updated → DOM re-rendered with latest data.
+
+            Unmounting/Destruction Phase :
+                beforeUnmount / beforeDestroy → Cleanup before component removal.
+                unmounted / destroyed → Component fully removed from DOM.
+            `
+            },
+            {
+                questionId: 2,
+                question: "What is Composition API (definition)?",
+                questionDesc: `How to use it in code ? | How to explain it in spoken language for an interview?`,
+                definition: `
+            The Composition API in Vue.js is a way of writing components introduced in Vue 3.
+                • It gives you more flexibility, reusability, and better organization of logic compared to the traditional 
+                  Options API<(where we use data, methods, computed, etc. in separate blocks).
+
+                • With Composition API, you use functions like ref, reactive, computed, and watch inside a setup() function.
+                     This keeps related logic grouped together and makes components easier to scale.
+
+                •  The setup() (or &lt;script setup>) is the entry point for Composition API.
+                
+                 ** Spoken Language : 🔹 How to Speak in Interview
+                    The Composition API in Vue 3 is a new way to write components using functions instead of the Options API structure. 
+                    Instead of splitting logic into data, methods, and computed, we can organize related code together inside the setup() function. 
+                    This makes the code cleaner, more reusable, and easier to maintain, especially in larger projects. For example, 
+                    I can define a ref for a counter and increment it directly inside setup. It’s similar to React hooks in concept, providing better logic reuse and scalability."
+                `
+            },
+            {
+                questionId: 3,
+                question: "Explain v-if & v-show?",
+                questionDesc: `who will remove dom element | Give me the difference | How to use it in code | How to explain it in spoken language for an interview?`,
+                definition: `
+             1. v-if vs v-show in Vue.js
+
+                    • v-if
+                            • Completely adds/removes the element from the DOM based on the condition.
+                            • If the condition is false → element is not in DOM at all.
+                            • Has higher performance cost if toggled frequently because it destroys and recreates DOM nodes.
+                    • v-show
+                            • Keeps the element in the DOM always.
+                            • Just toggles the CSS property display: none when the condition is false.
+                            • Faster when toggling often, but the element always exists in DOM.
+
+             2. Who removes the DOM element?
+
+                    • ✅ v-if removes/creates DOM nodes.
+                    • ❌ v-show only hides/shows with CSS (does not remove).
+
+            3. How to explain in an interview **(spoken version)
+
+                    "v-if and v-show both handle conditional rendering in Vue, but they work differently.
+                    v-if creates or removes elements from the DOM based on the condition, which is good when the condition changes rarely.
+                    On the other hand, v-show keeps the element in the DOM and just toggles its visibility with CSS display: none, which is better when toggling frequently.
+                    So, I choose v-if for conditions that change rarely and v-show for things like dropdowns or modals that toggle often."
+            
+            Vue directives are special attributes with a v- prefix, like v-if, v-for, and v-model, used to add dynamic behavior directly in the template.
+                        v-if → Shows or hides an element based on a condition.
+                        v-for → Loops over a list to render elements dynamically.
+                        v-model → Creates two-way binding between input fields and data.
+
+            ✅ Summary in one line for interview:
+                Use v-if when rendering is expensive or condition is rare.
+                Use v-show when toggling visibility often but want to keep DOM intact.
+    `
+            },
+            {
+                questionId: 4,
+                question: "Explain watch & computed?",
+                questionDesc: `Give me the difference | How to use it in code | How to explain it in spoken language for an interview?`,
+                definition: ``
+            },
+            {
+                questionId: 5,
+                question: "what works of mixin?",
+                questionDesc: ``,
+                definition: `
+           Mixins let you reuse code across multiple components by sharing methods, data, or lifecycle hooks.</p>
+                Follow-up explanation:
+                    You can put common functionality (methods, computed properties, data) in a mixin.
+                    When a component uses the mixin, it merges that code into itself.
+                    Useful for avoiding repetition in large apps.`
+            },
+            {
+                questionId: 6,
+                question: "What is Functional Component?",
+                questionDesc: ``,
+                definition: ``
+            },
+            {
+                questionId: 7,
+                question: "What is (React) – useEffect, useState, lifecycle?",
+                questionDesc: ``,
+                definition: ``
+            },
+            {
+                questionId: 8,
+                question: "How does React’s virtual DOM work?",
+                questionDesc: ``,
+                definition: ``
+            },
+            {
+                questionId: 9,
+                question: "What is Routing - React Router?",
+                questionDesc: ``,
+                definition: ``
+            },
+            {
+                questionId: 10,
+                question: "What is SPA (Single Page Application) vs MPA (Multi Page Application)?",
+                questionDesc: ``,
+                definition: ``
+            },
+            {
+                questionId: 11,
+                question: ``,
+                questionDesc: ``,
+                definition: ``
+            },
+            {
+                questionId: 12,
+                question: ``,
+                questionDesc: ``,
+                definition: ``
+            },
+            {
+                questionId: 13,
+                question: "Technical Implementation - React Hooks Used?",
+                questionDesc: ``,
+                definition: ``
+            },
+            {
+                questionId: 14,
+                question: "Technical Implementation - 📈 Performance Optimizations?",
+                questionDesc: ``,
+                definition: `---------------------------------------
+      📈 Performance Optimizations
+---------------------------------------
+Technique            | Implementation                   | Benefit
+---------------------------------------------------------------------------
+useMemo              | Filtered tasks calculation       | Prevents unnecessary re-renders
+Optimistic Updates   | UI updates before API response   | Better perceived performance
+Lazy Loading         | Components load on demand        | Faster initial load
+Error Boundaries     | Graceful error handling          | Better user experience
+--------------------------------------------------------------------------- `
+            },
+            {
+                questionId: 15,
+                question: "Save & Load Data from LocalStorage?",
+                questionDesc: ``,
+                definition: ``
+            },
+            {
+                questionId: 16,
+                question: "Why use vite for react framework or other?",
+                questionDesc: ``,
+                definition: ``
+            },
+            {
+                questionId: 17,
+                question: "Why does mean of bundler?",
+                questionDesc: ``,
+                definition: ``
+            },
+            {
+                questionId: 18,
+                question: "what does mean react memoriazation?",
+                questionDesc: ``,
+                definition: ``
+            },
+            {
+                questionId: 19,
+                question: "",
+                questionDesc: ``,
+                definition: ``
+            },
+        ];
+
+
+        const questionGrid = document.getElementById("questionGrid");
+        const definitionContainer = document.getElementById("definitionContainer");
+
+        reactQuestions.forEach(item => {
+            // create top question box
+            const card = document.createElement("div");
+            card.className = "question-card";
+            card.innerHTML = `<strong style="color:#b366ff;">Q${item.questionId}:</strong> ${item.question}<p>${item.questionDesc}</p>`;
+            card.addEventListener("click", () => scrollToDefinition(item.questionId));
+            questionGrid.appendChild(card);
+
+            // create definition section
+            const def = document.createElement("div");
+            def.className = "definition-section";
+            def.id = `question-${item.questionId}`;
+            def.innerHTML = `
+        <h3>Question ${item.questionId}: ${item.question}</h3>
+        <p>${item.questionDesc}</p>
+        <pre>${item.definition}</pre>
+      `;
+            definitionContainer.appendChild(def);
+        });
+
+        function scrollToDefinition(id) {
+            const target = document.getElementById(`question-${id}`);
+            if (target) {
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+                target.classList.add("highlight");
+                setTimeout(() => target.classList.remove("highlight"), 1500);
+            }
+        }
+
+
+        // === Back to Top Button Logic ===
+        const backToTopBtn = document.getElementById("backToTopBtn");
+
+        window.addEventListener("scroll", () => {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        });
+
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+
+        /// === Theme Toggle Logic with Icons and Fade ===
+        const themeToggle = document.getElementById("themeToggle");
+        const body = document.body;
+
+        // Load saved theme preference
+        if (localStorage.getItem("theme") === "light") {
+            enableLightMode(false);
+        } else {
+            enableDarkMode(false);
+        }
+
+        themeToggle.addEventListener("click", () => {
+            body.classList.add("fade-transition");
+            if (body.classList.contains("light-mode")) {
+                enableDarkMode();
+            } else {
+                enableLightMode();
+            }
+            setTimeout(() => body.classList.remove("fade-transition"), 400);
+        });
+
+        function enableLightMode(save = true) {
+            body.classList.add("light-mode");
+            themeToggle.innerHTML = "🌙 Dark";
+            if (save) localStorage.setItem("theme", "light");
+        }
+
+        function enableDarkMode(save = true) {
+            body.classList.remove("light-mode");
+            themeToggle.innerHTML = "☀️ Light";
+            if (save) localStorage.setItem("theme", "dark");
+        }
+    </script>
+</body>
+
+</html>
