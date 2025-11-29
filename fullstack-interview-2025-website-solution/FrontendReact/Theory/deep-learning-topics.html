@@ -246,9 +246,40 @@ With memoization:
 `
   },
   {
-    questionId: 19,
-    question: "",
+    questionId: 2,
+    question: "🔹 Common Follow-ups on useState / useEffect",
     definition: `
+     1. Can we use multiple useEffects in one component?
+                Yes. Unlike class lifecycle methods, we can call useEffect multiple times in the same component to separate concerns. For example, one effect for data fetching and another for event listeners.
+
+                2. What’s the difference between useEffect and useLayoutEffect?
+
+                • useEffect runs after the render is painted to the screen (asynchronous, non-blocking).
+                • useLayoutEffect runs before the paint (synchronous), which is useful when you need DOM measurements or to avoid flickering.
+
+                3. Why do we pass dependencies to useEffect?
+                The dependency array tells React when to re-run the effect.
+
+                • [] → run only once (on mount).
+                • [var] → run when var changes.
+                • no array → run on every render.
+
+                4. Can useState updates be batched?
+                Yes. In React 18, state updates inside event handlers are batched automatically for performance.
+
+                5. How do you clean up in useEffect?
+                By returning a function from the effect. Example: removing event listeners or canceling subscriptions when a component unmounts.
+
+                Code snippet
+
+                useEffect(() => {
+                    const handleResize = () => console.log(window.innerWidth);
+                    window.addEventListener("resize", handleResize);
+
+                    return () => {
+                        window.removeEventListener("resize", handleResize);
+                    };
+                }, []);
     `
   },
 ];
