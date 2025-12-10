@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Q&A Plan</title>
+<style>
+    body {
+        background-color: #111;
+        color: #fff;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .question-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .question-card {
+        background: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 6px;
+        padding: 10px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-align: center;
+        line-height: 1.3;
+    }
+
+    .question-card:hover {
+        background-color: #272727;
+    }
+
+    .definition-section {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 25px;
+        transition: all 0.4s ease;
+    }
+
+    .definition-section.highlight {
+        border: 2px solid #b366ff;
+        box-shadow: 0 0 15px #b366ff66;
+        background: #2a1a3a;
+    }
+
+    .definition-section h3 {
+        color: #b366ff;
+        margin-bottom: 8px;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* === Back to Top Button Styling === */
+    #backToTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background-color: #b366ff;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+        cursor: pointer;
+        box-shadow: 0 0 10px #b366ff80;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    #backToTopBtn:hover {
+        background-color: #9933ff;
+        box-shadow: 0 0 20px #b366ff;
+        transform: scale(1.1);
+    }
+    /* === Floating Theme Toggle Button === */
+    #themeToggle {
+        position: fixed;
+        top: 20px;
+        right: 25px;
+        z-index: 1100;
+        cursor: pointer;
+        background: #fff;
+        color: #0d6efd;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 30px;
+        font-weight: bold;
+        font-size: 14px;
+        box-shadow: 0 0 10px #b366ff60;
+        transition: all 0.3s ease;
+    }
+
+    #themeToggle:hover {
+        transform: scale(1.1);
+        background: #0d6efd;
+        color: #fff;
+        box-shadow: 0 0 15px #b366ff90;
+    }
+
+    /* === Smooth Fade Animation for Theme Switch === */
+    body {
+        transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    .definition-section,
+    .question-card,
+    #backToTopBtn {
+        transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    /* === Light Mode === */
+    body.light-mode {
+        background-color: #f5f5f5;
+        color: #111;
+    }
+
+    body.light-mode .question-card {
+        background: #fff;
+        border: 1px solid #ccc;
+        color: #000;
+    }
+
+    body.light-mode .question-card:hover {
+        background-color: #f0f0f0;
+    }
+
+    body.light-mode .definition-section {
+        background: #fff;
+        border: 1px solid #ddd;
+        color: #000;
+    }
+
+    body.light-mode .definition-section h3 {
+        color: #7a3fff;
+    }
+
+    body.light-mode #backToTopBtn {
+        background-color: #7a3fff;
+    }
+
+    body.light-mode #themeToggle {
+        background: #0d6efd;
+        color: #fff;
+    }
+
+    /* === Responsive Adjustments === */
+    @media (max-width: 600px) {
+        #themeToggle {
+            top: 15px;
+            right: 15px;
+            padding: 8px 14px;
+            font-size: 13px;
+        }
+    }
+    pre{
+        font-size: 16px;
+    }
+</style>
+</head>
+<body>
+<button id="themeToggle">☀️ Light</button>
+<div>
+    <h4><a target="_target"
+            href="https://fullstack-interview-roadmap.netlify.app/">MongoDB</a>
+    </h4>
+</div>
+  <div class="question-grid" id="questionGrid"></div>
+  <div id="definitionContainer"></div>
+
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" title="Go to top">↑</button>
+
+  <script>
+
+const nodeQuestions = [
+  {
+    questionId: 1,
+    question: "What is MongoDB?",
+    definition: `MongoDB is a NoSQL, document-based database that stores data in JSON-like format called BSON.
+    It is flexible, scalable, and good for large data.`
+  },
+  {
+    questionId: 2,
+    question: "Difference between SQL and MongoDB?",
+    definition: `SQL uses tables and fixed schemas. MongoDB uses collections with flexible schemas and stores data as documents.
+    | SQL          | MongoDB        |
+    | ------------ | -------------- |
+    | Table        | Collection     |
+    | Row          | Document       |
+    | Column       | Field          |
+    | Fixed schema | Dynamic schema |
+
+    `
+  },
+  {
+    questionId: 3,
+    question: "What is a Collection?",
+    definition: `A collection is a group of MongoDB documents, similar to a table in SQL.
+    db.users.find()
+    `
+  },
+  {
+    questionId: 4,
+    question: "What is a Document?",
+    definition: `A document is a single record inside a collection, stored in JSON format.`
+  },
+  {
+    questionId: 5,
+    question: "How to Insert Data?",
+    definition: `We insert data using insertOne or insertMany.`
+  },
+  {
+    questionId: 6,
+    question: "How to Read Data?",
+    definition: `We fetch data using find or findOne.`
+  },
+  {
+    questionId: 7,
+    question: "How to Update a Document?",
+    definition: `We update data using updateOne or updateMany with $set.`
+  },   
+  {
+    questionId: 8,
+    question: "How to Delete Data?",
+    definition: `We use deleteOne or deleteMany.`
+  },
+{
+    questionId: 9,
+    question: "What is an Index?",
+    definition: `Index improves search performance but slightly reduces write speed.`
+},
+{
+    questionId: 10,
+    question: "What is Aggregation?",
+    definition: `Aggregation is used to process data in steps to perform grouping, filtering, and calculations.`
+},
+  {
+    questionId: 11,
+    question: "What is populate in MongoDB?",
+    definition: `Populate is used in Mongoose to get related data from another collection.`
+  },
+{
+    questionId: 12,
+    question: "What is _id?",
+    definition: `Every MongoDB document has a unique _id which acts as a primary key.`
+},
+{
+    questionId: 13,
+    question: "What are MongoDB Joins?",
+    definition: `MongoDB doesn’t use joins like SQL, but similar functionality is done using $lookup.`
+},
+{
+    questionId: 14,
+    question: "We connect using Mongoose or MongoDB driver.",
+    definition: `Populate is used in Mongoose to get related data from another collection.`
+  },
+{
+    questionId: 15,
+    question: "What is Sharding?",
+    definition: `Sharding splits large data into smaller pieces across servers for faster performance.
+    Used for large-scale apps
+    `
+},
+{
+    questionId: 16,
+    question: "What is Replication?",
+    definition: `Replication copies data across servers to improve reliability and backups.
+    High availability`
+},
+{
+    questionId: 14,
+    question: "We connect using Mongoose or MongoDB driver.",
+    definition: `Populate is used in Mongoose to get related data from another collection.`
+  },
+  {
+    questionId: 16,
+    question:`🏁 DAILY PRACTICE PLAN (20 mins) `,
+    definition: `
+      | Time   | Activity            |
+      | ------ | ------------------- |
+      | 5 min  | Read 5 queries      |
+      | 10 min | Type & run queries  |
+      | 5 min  | Speak answers aloud |
+
+      Interviewer - “How do you filter documents by age in MongoDB?”
+      You - “We use the find method with conditional operators like $gt, $lt.”
+
+      Interviewer - “How do you improve database performance in MongoDB?”
+      Your Script - “I use indexing, proper queries, and limit returned fields using projection.”
+      
+      Interviewer - “How do you update many documents?”
+      Your Script -“I use updateMany with update operators.”
+         db.users.updateMany({}, { $inc: { age: 1 }});`
+
+  }
+];
+
+
+
+    const questionGrid = document.getElementById("questionGrid");
+    const definitionContainer = document.getElementById("definitionContainer");
+
+    nodeQuestions.forEach(item => {
+      // create top question box
+      const card = document.createElement("div");
+      card.className = "question-card";
+      card.innerHTML = `<strong style="color:#b366ff;">Q${item.questionId}:</strong> ${item.question}`;
+      card.addEventListener("click", () => scrollToDefinition(item.questionId));
+      questionGrid.appendChild(card);
+
+      // create definition section
+      const def = document.createElement("div");
+      def.className = "definition-section";
+      def.id = `question-${item.questionId}`;
+      def.innerHTML = `
+        <h3>Question ${item.questionId}: ${item.question}</h3>
+        <pre>${item.definition}</pre>
+      `;
+      definitionContainer.appendChild(def);
+    });
+
+    function scrollToDefinition(id) {
+      const target = document.getElementById(`question-${id}`);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        target.classList.add("highlight");
+        setTimeout(() => target.classList.remove("highlight"), 1500);
+      }
+    }
+
+    
+    // === Back to Top Button Logic ===
+    const backToTopBtn = document.getElementById("backToTopBtn");
+
+    window.addEventListener("scroll", () => {
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+
+   /// === Theme Toggle Logic with Icons and Fade ===
+    const themeToggle = document.getElementById("themeToggle");
+    const body = document.body;
+
+    // Load saved theme preference
+    if (localStorage.getItem("theme") === "light") {
+    enableLightMode(false);
+    } else {
+    enableDarkMode(false);
+    }
+
+    themeToggle.addEventListener("click", () => {
+    body.classList.add("fade-transition");
+    if (body.classList.contains("light-mode")) {
+        enableDarkMode();
+    } else {
+        enableLightMode();
+    }
+    setTimeout(() => body.classList.remove("fade-transition"), 400);
+    });
+
+    function enableLightMode(save = true) {
+    body.classList.add("light-mode");
+    themeToggle.innerHTML = "🌙 Dark";
+    if (save) localStorage.setItem("theme", "light");
+    }
+
+    function enableDarkMode(save = true) {
+    body.classList.remove("light-mode");
+    themeToggle.innerHTML = "☀️ Light";
+    if (save) localStorage.setItem("theme", "dark");
+    }
+  </script>
+</body>
+</html>
