@@ -668,7 +668,11 @@ What to Use When
   { 
         questionId: 26, 
         question: "Client-side vs Server-side rendering?", 
-        definition : `
+        definition : `one-sentence interview version:
+ 
+ CSR renders the UI in the browser using JavaScript, while SSR renders the HTML on the server before sending it to the browser—CSR is better for rich interactions,
+ and SSR is better for initial load speed and SEO.
+
 Client-Side Rendering (CSR)
 
   • The browser downloads a minimal HTML file and JavaScript.
@@ -683,10 +687,7 @@ Server-Side Rendering (SSR)
   • Pros: Faster first load, better SEO.
   • Cons: More server load, slower page updates after interactions.
   
-one-sentence interview version:
- 
- CSR renders the UI in the browser using JavaScript, while SSR renders the HTML on the server before sending it to the browser—CSR is better for rich interactions,
- and SSR is better for initial load speed and SEO.
+
   ` 
   },
   { 
@@ -1033,7 +1034,8 @@ A recursive function solves a problem by repeatedly calling itself with smaller 
   { 
         questionId: 51, 
         question: "Explain JWT?", 
-        definition : `
+        definition : `One-line summary: JWT is a signed token used to verify user identity without repeated database lookups.
+
 JWT (JSON Web Token)
 
  • JWT is a secure token format used for authentication.
@@ -1042,8 +1044,6 @@ JWT (JSON Web Token)
 
  • The server verifies the token instead of checking the database each time.
 
-One-line summary:
-JWT is a signed token used to verify user identity without repeated database lookups.
 ` 
   },
   { 
@@ -1068,26 +1068,6 @@ Currying transforms functions into smaller ones; memoization speeds them up by c
   },
   { 
         questionId: 53, 
-        question: "Currying, memoization?", 
-        definition : `
-Currying
-
- • Breaking a function with multiple arguments into a series of functions that take one argument at a time.
-
- • Helps reuse functions and improves code flexibility.
-
-Memoization
-
- • Caching a function’s previous results to avoid recalculating.
-
- • Improves performance for expensive operations.
-
-One-line summary:
-Currying transforms functions into smaller ones; memoization speeds them up by caching results.
-` 
-  },
-  { 
-        questionId: 54, 
         question: "What is a Bundler & Compiler?", 
         definition : `Bundler :
 A bundler takes multiple files from your project and packages them into fewer files (usually 1–3 optimized bundles) for the browser.

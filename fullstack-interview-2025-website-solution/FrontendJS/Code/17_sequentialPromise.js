@@ -2,7 +2,32 @@ console.log(
   "------------------------- Sequential Promises - Parallel Promises RESULT  ------------------------"
 );
 
-// Sequential Promises
+// Mock async tasks
+function task1() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("Task 1 completed");
+    }, 1000);
+  });
+}
+
+function task2(prev) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(prev + " → Task 2 completed");
+    }, 1000);
+  });
+}
+
+function task3(prev) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(prev + " → Task 3 completed");
+    }, 1000);
+  });
+}
+
+// Sequential Promises (runs one after another)
 async function sequentialTasks() {
   console.log("Start");
 
@@ -18,17 +43,23 @@ async function sequentialTasks() {
   console.log("End");
 }
 
-// Parallel Promises
+// Parallel Promises (runs all at the same time)
 async function parallelTasks() {
   console.log("Start");
 
   const [result1, result2, result3] = await Promise.all([
     task1(),
-    task2(),
-    task3(),
+    task2("From parallel"),
+    task3("From parallel"),
   ]);
 
-  console.log(result1, result2, result3);
+  console.log(result1);
+  console.log(result2);
+  console.log(result3);
 
   console.log("End");
 }
+
+// Run
+sequentialTasks();
+// parallelTasks();
