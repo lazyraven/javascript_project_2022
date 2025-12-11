@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic String Functions</title>
+    <script src="./slice.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: #e8e8e8;
+            padding: 20px;
+        }
+
+        h1 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+        }
+
+        h1 span {
+            background-color: #3b82f6;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 18px;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 25px;
+        }
+
+        .tag {
+            background-color: #333;
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-family: monospace;
+            display: inline-block;
+            margin: 3px 0;
+        }
+
+        .section {
+            margin-top: 30px;
+        }
+
+        .task {
+            margin-top: 15px;
+            background-color: #1a1a1a;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .code-box {
+            background-color: #333;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            display: inline-block;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    https://chatgpt.com/c/693ad1ac-7c2c-8332-9554-5d071ad91909  > https://chatgpt.com/share/693aeb77-cab0-8013-9ab1-6bc591eb6e37
+
+1️⃣ Basic String Functions
+https://chatgpt.com/c/693ae0fd-7adc-832c-9f5b-b3c56f59f254   > https://chatgpt.com/share/693aeb93-bb68-8013-86c8-28212139b5f6
+
+clear set of slice() method examples in JavaScript, progressing from basic → moderate → advanced.
+https://chatgpt.com/c/693aea52-7ef4-8320-bdf3-ba151ca099d7   > https://chatgpt.com/share/693aeba5-b7c4-8013-992c-93d028c32a09
+
+
+    <h1><span>1</span> Basic String Functions</h1>
+
+    <div class="section">
+        <h3>Concepts to Learn</h3>
+        <ul>
+            <li><span class="tag">slice()</span></li>
+            <li><span class="tag">substring()</span></li>
+            <li><span class="tag">substr()</span> (legacy but good to understand)</li>
+            <li><span class="tag">split()</span></li>
+            <li><span class="tag">indexOf()</span></li>
+            <li><span class="tag">repeat()</span></li>
+            <li><span class="tag">length</span></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>Practice Tasks</h3>
+        <div class="task">
+            <p class="label">Task 1: Get last 3 characters of a string.</p>
+            <p>Input: <span class="code-box">"developer"</span></p>
+            <p>Output: <span class="code-box">"per"</span></p>
+        </div>
+        <div class="task">
+            <p class="label">Task 2: Replace all spaces with dashes.</p>
+            <p>Input: <span class="code-box">""hello world js"</span></p>
+            <p>Output: <span class="code-box">"hello-world-js"</span></p>
+        </div>
+        <div class="task">
+            <p class="label">Task 3: Mask first N characters with *.</p>
+            <p>Input: <span class="code-box">"12345678", mask first 4</span></p>
+            <p>Output: <span class="code-box">"****5678"</span></p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Quick Demos — other string functions</h2>
+        <div class="row">
+            <div>
+                <label>Example string</label>
+                <input id="demoStr" type="text" value="hello world">
+                <button onclick="showDemos()">Show demos</button>
+            </div>
+            <div>
+                <label>Results</label>
+                <pre id="demoOut">—</pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demos showing various functions
+        function showDemos() {
+            const s = document.getElementById('demoStr').value || '';
+            const lines = [];
+            lines.push('length: ' + s.length);
+            lines.push("slice(1,4): '" + s.slice(1, 4) + "'");
+            lines.push("substring(1,4): '" + s.substring(1, 4) + "'");
+            // substr is legacy but demonstrated if available
+            try { lines.push("substr(1,4): '" + (s.substr ? s.substr(1, 4) : 'n/a') + "'"); } catch (e) { lines.push('substr: n/a'); }
+            lines.push("indexOf('o'): " + s.indexOf('o'));
+            lines.push("split(' '): [" + s.split(' ') + "]");
+            lines.push("repeat(2): '" + (s.repeat ? s.repeat(2) : 'n/a') + "'");
+            document.getElementById('demoOut').textContent = lines.join('\n');
+        }
+    </script>
+</body>
+
+</html>
