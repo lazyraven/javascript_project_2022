@@ -5,6 +5,31 @@
 const str = "developer";
 console.log(str.slice(-3));
 
+// Task 2: Replace all spaces with dashes.
+
+// Input: "hello world js"
+// Output: "hello-world-js"
+const strText = "hello world js";
+console.log(strText.replace(/ /g, "-"));
+
+// Task 3: Mask first N characters with *.
+
+// Input: "12345678", mask first 4
+// Output: "****5678"
+function maskFirstN(str, n) {
+  //   console.log(str.slice(n));
+  //   console.log(str.slice(-n));
+  //   console.log("*".repeat(n));
+
+  return "*".repeat(n) + str.slice(n);
+}
+console.log(maskFirstN("1234545678", 4));
+
+// ----------------------------------------------- Other Practices Of Slice Method Questions  (Easy to Advanced)-----------------------------------------------
+console.log(
+  "--------------------------- Other Practices Of Slice Method Questions  (Easy to Advanced) ------------------------------"
+);
+
 // 1. Basic Examples (Strings & Arrays)
 // 1.1 Slice part of a string
 const text = "JavaScript";
@@ -87,3 +112,15 @@ function chunkArray(arr, size) {
 }
 console.log(chunkArray([1, 2, 3, 4, 5, 6, 7], 3)); // output :  [[1,2,3], [4,5,6], [7]]
 // console.log(chunkArray([1, 2, 3, 4, 5, 6, 7], 2)); // output :  [[1, 2],[3,4], [5, 6],[7]]
+
+function rotateRight(arr, k) {
+  const n = arr.length;
+  k = k % n; // handle large k
+  console.log(arr.slice(-k));
+  console.log(arr.slice(0, -k));
+
+  return arr.slice(-k).concat(arr.slice(0, -k));
+}
+
+console.log(rotateRight([1, 2, 3, 4, 5], 2));
+// [4, 5, 1, 2, 3]
