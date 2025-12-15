@@ -342,7 +342,12 @@ It uses a single centralized store where state is managed through actions and re
 Redux is a standalone library with a single global store, better for large, complex apps needing predictable state and advanced debugging.
 
 One-liner fallback:
-“Context API is for simple state sharing in React, Redux is for complex global state with predictable updates.”`
+“Context API is for simple state sharing in React, Redux is for complex global state with predictable updates.”
+
+“Context API allows us to create a centralized store using createContext, provide data using a Provider, and 
+consume it using useContext.
+ Any component inside the Provider can access the shared state directly.”
+`
   },
   {
     questionId: 13,

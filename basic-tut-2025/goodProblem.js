@@ -9,7 +9,7 @@ function capitalizeWords(sentence) {
 console.log(
   "capitalizeWords first word",
   capitalizeWords("hello world from js")
-);
+); //output : "Hello World From Js"
 
 // 4.2 Split array into equal-size chunks
 function chunkArray(arr, size) {
@@ -19,4 +19,4 @@ function chunkArray(arr, size) {
   }
   return resultArr;
 }
-console.log(chunkArray([1, 2, 3, 4, 5, 6, 7], 3));
+console.log(chunkArray([1, 2, 3, 4, 5, 6, 7], 3)); // output :  [[1,2,3], [4,5,6], [7]]
