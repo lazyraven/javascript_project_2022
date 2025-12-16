@@ -2,151 +2,285 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Basic String Functions</title>
-    <script src="./slice.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>String Functions Practice</title>
+  <!-- <script src="./slice.js"></script>
     <script src="./subString.js"></script>
-    <script src="./split.js"></script>
+    <script src="./split.js"></script> -->
+  <script src="./indexOf.js"></script>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #696868;
-            color: #e8e8e8;
-            padding: 20px;
-        }
 
-        h1 {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 24px;
-        }
+  <style>
+    :root {
+      --bg: #1f2933;
+      --card: #111827;
+      --border: #374151;
+      --accent: #3b82f6;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
 
-        h1 span {
-            background-color: #3b82f6;
-            color: #fff;
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 18px;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        ul {
-            list-style-type: disc;
-            margin-left: 25px;
-        }
+    body {
+      margin: 0;
+      padding: 24px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+    }
 
-        .tag {
-            background-color: #333;
-            padding: 4px 8px;
-            border-radius: 5px;
-            font-family: monospace;
-            display: inline-block;
-            margin: 3px 0;
-        }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-        .section {
-            margin-top: 30px;
-        }
+    h1 span {
+      background: var(--accent);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 16px;
+    }
 
-        .task {
-            margin-top: 15px;
-            background-color: #1a1a1a;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #3b82f6;
-        }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
 
-        .label {
-            font-weight: bold;
-        }
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
 
-        .code-box {
-            background-color: #333;
-            padding: 8px 10px;
-            border-radius: 6px;
-            font-family: monospace;
-            display: inline-block;
-            margin-top: 5px;
-        }
-    </style>
+    .card h3 {
+      margin-top: 0;
+      font-size: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    /* Tags */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background: #1f2937;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    /* Tasks */
+    .task {
+      margin-top: 12px;
+      padding: 10px;
+      border-left: 4px solid var(--accent);
+      background: #020617;
+      border-radius: 6px;
+    }
+
+    .code {
+      font-family: monospace;
+      background: #020617;
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* Demo */
+    .demo-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    input {
+      flex: 1;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #020617;
+      color: var(--text);
+    }
+
+    button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      background: var(--accent);
+      color: white;
+      cursor: pointer;
+    }
+
+    pre {
+      background: #020617;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      min-height: 120px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    https://chatgpt.com/c/693ad1ac-7c2c-8332-9554-5d071ad91909  > https://chatgpt.com/share/693aeb77-cab0-8013-9ab1-6bc591eb6e37
 
-For practice code..... slice()
-clear set of slice() method examples in JavaScript, progressing from basic → moderate → advanced.
-https://chatgpt.com/share/693aeba5-b7c4-8013-992c-93d028c32a09 (Real interview challenges focused on arrays & strings)
-For practice code..... slice()
-Real interview problems involving slice() > https://chatgpt.com/share/693bf02f-df58-8013-96e6-a204ebc0242a
+  <h1><span>1</span> Basic String Functions</h1>
 
-    <h1><span>1</span> Basic String Functions</h1>
+  <div class="container">
 
-    <div class="section">
-        <h3>Concepts to Learn</h3>
-        <ul>
-            <li><span class="tag">slice()</span></li>
-            <li><span class="tag">substring()</span></li>
-            <li><span class="tag">substr()</span> (legacy but good to understand)</li>
-            <li><span class="tag">split()</span></li>
-            <li><span class="tag">indexOf()</span></li>
-            <li><span class="tag">repeat()</span></li>
-            <li><span class="tag">length</span></li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h3>Practice Tasks</h3>
-        <div class="task">
-            <p class="label">Task 1: Get last 3 characters of a string.</p>
-            <p>Input: <span class="code-box">"developer"</span></p>
-            <p>Output: <span class="code-box">"per"</span></p>
-        </div>
-        <div class="task">
-            <p class="label">Task 2: Replace all spaces with dashes.</p>
-            <p>Input: <span class="code-box">""hello world js"</span></p>
-            <p>Output: <span class="code-box">"hello-world-js"</span></p>
-        </div>
-        <div class="task">
-            <p class="label">Task 3: Mask first N characters with *.</p>
-            <p>Input: <span class="code-box">"12345678", mask first 4</span></p>
-            <p>Output: <span class="code-box">"****5678"</span></p>
-        </div>
-    </div>
-
+    <!-- Concepts -->
     <div class="card">
-        <h2>Quick Demos — other string functions</h2>
-        <div class="row">
-            <div>
-                <label>Example string</label>
-                <input id="demoStr" type="text" value="hello world">
-                <button onclick="showDemos()">Show demos</button>
-            </div>
-            <div>
-                <label>Results</label>
-                <pre id="demoOut">—</pre>
-            </div>
-        </div>
+      <h3>Concepts</h3>
+      <div class="tags">
+        <span class="tag">slice()</span>
+        <span class="tag">substring()</span>
+        <span class="tag">substr()</span>
+        <span class="tag">split()</span>
+        <span class="tag">indexOf()</span>
+        <span class="tag">repeat()</span>
+        <span class="tag">length</span>
+      </div>
     </div>
 
-    <script>
-        // Demos showing various functions
-        function showDemos() {
-            const s = document.getElementById('demoStr').value || '';
-            const lines = [];
-            lines.push('length: ' + s.length);
-            lines.push("slice(1,4): '" + s.slice(1, 4) + "'");
-            lines.push("substring(1,4): '" + s.substring(1, 4) + "'");
-            // substr is legacy but demonstrated if available
-            try { lines.push("substr(1,4): '" + (s.substr ? s.substr(1, 4) : 'n/a') + "'"); } catch (e) { lines.push('substr: n/a'); }
-            lines.push("indexOf('o'): " + s.indexOf('o'));
-            lines.push("split(' '): [" + s.split(' ') + "]");
-            lines.push("repeat(2): '" + (s.repeat ? s.repeat(2) : 'n/a') + "'");
-            document.getElementById('demoOut').textContent = lines.join('\n');
-        }
-    </script>
+    <!-- Practice Tasks -->
+    <div class="card">
+      <h3>Practice Tasks</h3>
+
+      <div class="task">
+        Get last 3 characters<br>
+        <span class="code">"developer" → "per"</span>
+      </div>
+
+      <div class="task">
+        Replace spaces with dashes<br>
+        <span class="code">"hello world js" → "hello-world-js"</span>
+      </div>
+
+      <div class="task">
+        Mask first N characters<br>
+        <span class="code">"12345678", N=4 → "****5678"</span>
+      </div>
+    </div>
+
+    <!-- Demo -->
+    <div class="card" style="grid-column: span 2;">
+      <h3>Quick String Demos</h3>
+
+      <div class="demo-row">
+        <input id="demoStr" value="hello world">
+        <button onclick="showDemos()">Run</button>
+      </div>
+
+      <pre id="demoOut">—</pre>
+    </div>
+    <!-- Notes -->
+    <h3>Notes</h3>
+    <div class="card" style="grid-column: span 2;">
+      <a  target="_blank" href="   https://chatgpt.com/share/69416528-e5d8-8013-8a94-56e489e92170">ChatGpt Index Of</a>
+      <h3>Index Of</h3>
+      <div class="demo-row">
+      </div>
+
+      <pre id="demoOut">
+    1️⃣ Easy Level — Basics
+    ✔ Returns the starting index
+    ❌ Returns -1 if not found
+      Que1: Find position in a string | const str = "JavaScript is awesome"; // 4
+
+      Que2:Character search | const word = "hello"; // 1
+
+      Que3:Element in array | const arr = ["apple", "banana", "mango"];  // 1
+
+    2️⃣ Medium Level — Practical Usage
+     Que1: Interview question: How do you check if a string contains another string? 
+           || contains("Frontend Developer", "Developer"); // true
+
+     Que2: Case-insensitive search || findWord("I Love JavaScript", "javascript"); // true
+
+     Que3: Find all occurrences || findAllIndexes("banana", "a"); // [1, 3, 5]
+
+    3️⃣ Hard Level — Real Interview Scenarios
+     Que4: Remove duplicates from array (without Set) || removeDuplicates([1, 2, 2, 3, 1]); // [1, 2, 3]
+
+     Que5: Find first non-repeating character || firstUniqueChar("aabbcdd"); // "c"
+
+     4️⃣ Advanced Interview Challenges
+     Que6: Detect repeated words in a sentence || hasDuplicateWords("this is is a test"); // true
+
+     Que7: Implement includes() using indexOf() || customIncludes([10, 20, 30], 20); // true
+
+     Que8: Validate email domain (simple logic) || isValidEmail("test@gmail.com"); // true
+
+     5️⃣ Tricky Interview Questions (Conceptual)
+     ❓ Why indexOf() returns -1?
+      Because indexes start from 0, and -1 clearly means not found.
+
+      ❓ Why not use if (str.indexOf("a"))?
+        // ❌ Wrong
+        if (str.indexOf("a")) { }
+        ✔ Because 0 is falsy
+
+        // ✅ Correct
+        if (str.indexOf("a") !== -1) { }
+
+     6️⃣ Real Interview Challenge (Think First)
+     Que9: Find the longest word in a sentence without using split()
+    </pre>
+    <div>
+      <pre>
+     <b>Important Notes (Interview Perspective)</b> 
+
+      indexOf() uses strict equality (===)
+
+      Works on strings & arrays
+
+      Time complexity: O(n)
+
+      Often restricted in interviews to test core JS logic
+
+      Explain why you used indexOf() over includes()
+      </pre>
+    </div>
+    </div>
+  </div>
+
+  <script>
+    function showDemos() {
+      const s = demoStr.value || '';
+      demoOut.textContent =
+        `length: ${s.length}
+slice(1,4): '${s.slice(1, 4)}'
+substring(1,4): '${s.substring(1, 4)}'
+substr(1,4): '${s.substr ? s.substr(1, 4) : 'n/a'}'
+indexOf('o'): ${s.indexOf('o')}
+split(' '): [${s.split(' ')}]
+repeat(2): '${s.repeat(2)}'`;
+    }
+  </script>
+
 </body>
 
 </html>
