@@ -23,7 +23,7 @@ function maskFirstN(str, n) {
 
   return "*".repeat(n) + str.slice(n);
 }
-console.log(maskFirstN("1234545678", 4));
+console.log(maskFirstN("12345678", 4));
 
 // ----------------------------------------------- Other Practices Of Slice Method Questions  (Easy to Advanced)-----------------------------------------------
 console.log(
