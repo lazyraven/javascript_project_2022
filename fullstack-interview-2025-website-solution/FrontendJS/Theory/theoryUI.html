@@ -695,12 +695,33 @@ Server-Side Rendering (SSR)
         questionId: 27, 
         question: "JavaScript multithreaded or single-threaded?", 
         definition : `
+Spoken : JavaScript runs on a single thread, meaning it executes one task at a time.
+However, it uses asynchronous mechanisms like callbacks, promises, and the event loop to stay non-blocking.
+For CPU-intensive tasks, Node.js provides worker threads to achieve parallel execution.
+
 JavaScript is single-threaded
 
-  • It runs one task at a time using the main thread.
-  • Concurrency is handled through the event loop, callbacks, promises, and async/await—not by true multithreading.
-  • Web Workers can add parallelism, but they run on separate threads outside the main thread.
+  • It runs one task at a time using the main thread.but it uses an event loop to handle asynchronous tasks.
+  • JavaScript uses the event loop, callback queue, and microtask queue.
+  • Time-consuming tasks like API calls run outside the main thread, and their results are pushed back to the event loop when ready.”
 
+JavaScript is multi-threaded
+
+  • Multi-threaded means multiple tasks can run concurrently, improving performance for certain workloads.
+  • Where is multi-threading actually used?
+    Multi-threading is common in Java, C++, and Python for CPU-intensive tasks like image processing, gaming engines, and background services
+    
+Questions :
+  When would you prefer single-threading over multi-threading?
+    Single-threading is easier to debug and avoids race conditions.
+    It works well for I/O-based applications like web servers.
+
+  Does multi-threading always improve performance?
+    No. It adds overhead and complexity. For small tasks or I/O-heavy work, it may not help.
+
+  What are the risks of multi-threading?
+    Race conditions, deadlocks, and data inconsistency.
+    Proper synchronization is required.
 ` 
   },
   { 
@@ -743,7 +764,8 @@ Array: An ordered list of values stored by index.
   { 
         questionId: 30, 
         question: "Explain Array methods?", 
-        definition : ` Array methods let you add, remove, search, and transform items—for example: push/pop (add/remove), map (transform), filter (select), reduce (summarize), and find (locate).
+        definition : ` Array methods let you add, remove, search, and transform items—for example: push/pop (add/remove), 
+          map (transform), filter (select), reduce (summarize), and find (locate).
 Common Array Methods
   • push() – Adds an item to the end.
 

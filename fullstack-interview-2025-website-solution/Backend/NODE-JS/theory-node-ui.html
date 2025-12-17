@@ -257,13 +257,17 @@ Mongoose is a Node.js library that adds structure by defining schemas, validatio
   },
 {
     questionId: 9,
-    question: "What ports does SMTP use?",
-    definition: `25, 465 (SSL), 587 (TLS).`
+    question: "Single Thread & MultiThreaded?",
+    definition: `How does Node.js handle heavy tasks if it’s single-threaded?
+     • Node.js uses a worker thread pool and asynchronous I/O.
+    Heavy operations can be offloaded to worker threads, while the event loop stays responsive.
+    `
 },
 {
     questionId: 10,
     question: "",
-    definition: ``
+    definition: `
+    `
 },
 ];
 
