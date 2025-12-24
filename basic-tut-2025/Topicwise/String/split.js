@@ -52,3 +52,27 @@ function toSlug(str) {
 
 console.log(toSlug("Hello World from JS"));
 // "hello-world-from-js"
+
+// Real Interview Problems Involving split()
+// 1️⃣ Reverse words in a sentence
+
+console.log(reverseWords("Hello world from JS"));
+// "JS from world Hello"
+
+// 2️⃣ Count word frequency //Used in text processing and analytics roles.
+console.log(wordFrequency("apple banana apple"));
+// { apple: 2, banana: 1 }
+
+// 3️⃣ Extract domain from email
+console.log(getDomain("nisha@example.com"));
+// "example.com"
+
+// 4️⃣ Turn a URL query string into an object
+// Common interview task.
+console.log(parseQuery("name=John&age=25"));
+// { name: "John", age: "25" }
+
+// 5️⃣ Convert a sentence to URL slug
+// Used in SEO, blogging platforms, CMS.
+console.log(toSlug("Hello World from JS"));
+// "hello-world-from-js"
