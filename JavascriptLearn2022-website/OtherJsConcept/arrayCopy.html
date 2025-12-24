@@ -1,0 +1,52 @@
+<div>
+    <h1> Array Copy Problems !!</h1>
+</div>
+<script>
+
+    // console.log(letVar);
+    // console.log(constVar);
+    // console.log(defineVal);
+
+    // let letVar = 20;
+
+    notHoisted(); // TypeError: notHoisted is not a function
+
+    var notHoisted = function () {
+        console.log('bar');
+    }
+
+    hoisted(); // logs "foo"
+
+    function hoisted() {
+        console.log('foo');
+    }
+
+    // function findSecondHighest(baseArray) {
+    //     let result;
+    //     if (baseArray[0] > baseArray[1]) {
+    //         result = [baseArray[0], baseArray[1]]
+    //     } else {
+    //         result = [baseArray[1], baseArray[0]]
+    //     }
+
+    //     for (let i = 2; i < baseArray.length; i++) {
+    //         if (baseArray[i] > result[0]) {
+    //             result[1] = result[0]
+    //             result[0] = baseArray[i];
+    //         } else if (baseArray[i] > result[1]) {
+    //             result[1] = baseArray[i]
+    //         } else if (result[0] === result[1]) {
+    //             result[1] = baseArray[i]
+    //         } else {
+    //             console.log("not in value")
+    //         }
+    //     }
+    //     console.log(result)
+    //     return result[1]
+    // }
+    // console.log(findSecondHighest([7, 11, 15, 18, -1, 2]));
+    // console.log(findSecondHighest([16, 34, -2, 7, 64, 21]));
+    // console.log(findSecondHighest([16, 34, 101, 7, 64, 21]));
+    // console.log(findSecondHighest([64, 2, 2, 64, 25]));
+
+</script>

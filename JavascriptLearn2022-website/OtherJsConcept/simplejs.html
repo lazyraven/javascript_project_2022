@@ -1,0 +1,219 @@
+<script>
+    const name1 = 1002;
+    const bigIntNum = 1111111111111111n;
+    const sameValue = null;
+    const anIAbove18 = true;
+    const myAge = 24
+    const myName = 'Nisha'
+
+    //Que number, boolean, string
+    const friends = [24, true, 'Nisha']
+    const typeofMyAge = (typeof friends);
+    const sameValueNum = (typeof sameValue);
+    console.log(typeof MyAge)
+    console.log(sameValueNum)
+
+    let ageVal = 24
+    function primitiveValue() {
+        console.log('ageVal', ageVal)
+    }
+    primitiveValue();
+    ageVal = 25;
+    primitiveValue();
+
+    //Que two argument paas
+    let number = 22;
+    function numbValue(increaseNum, multiplyNum) {
+        console.log('multiplyNum', multiplyNum)
+        number = (number + increaseNum) * multiplyNum
+    }
+    numbValue(5);
+    console.log(number)
+
+    //Que return fuction
+    let sum = 12;
+    function funValue(increaseNum, multiplyNum1) {
+        // sum = (sum + increaseNum) * multiplyNum
+        return (sum + increaseNum) * multiplyNum1
+    }
+    const varFun = funValue(4, 2);
+    console.log(sum, varFun)
+
+    //Que aad number in function
+    let sumVal = 200
+    function addNum(increaseNum, multiplyNum1) {
+        sumVal = sumVal + 100
+        return
+        /* return [] */
+
+    }
+    const addFun = addNum(4, 2);
+    /* here return value is undefined so in console addFun value is undefined */
+    console.log(sumVal, addFun)
+
+
+    // Que function destructure
+    const agePerson = 23;
+    function shouldGetLicense(age, bribe) {
+        // if (age > 18) {
+        //     console.log("this person is above 18");
+        //     return
+        // } else {
+        //     if (bribe > 18) {
+        //         console.log("you pass");
+        //         return
+        //     } else {
+        //         console.log("this person is below 18");
+        //     }
+        // }
+
+        // destructure
+        if (age <= 18 && bribe > 100 || bribe > 500) {
+            console.log("you pass");
+        } else if (age > 18) {
+            console.log("this person is above 18");
+        } else if (bribe <= 100) {
+            console.log("this person is below 18");
+        }
+    }
+
+    shouldGetLicense(50, 1000)
+
+    //Que even number calculation in 
+    //  Type 1:
+    for (let i = 0; i < 20; i += 2) {
+        console.log(i);
+    }
+    // Type 2:
+    for (let i = 0; i < 20; i++) {
+        if (i % 2 === 0) {
+            console.log(i);
+        }
+    }
+    // Type 3:
+    function evenNumberFun(number) {
+        let evenNumberCal = []
+        for (let i = 0; i < 20; i++) {
+            if (i % 2 === 0 && i !== number) {
+                // if (i % 2 === 0) {
+                evenNumberCal.push(i);
+                console.log(i);
+            }
+        }
+        return evenNumberCal;
+    }
+    console.log(evenNumberFun(10));
+
+    // Que Break, Return and Continue
+    // theory return is use inside the function
+    // theory break and continue can only be use inside the loop (make sense in loop)
+    function continueNumberFun(number) {
+        let continueNumberCal = []
+        for (let i = 0; i < 20; i++) {
+            // get in output is odd number because we skip the cycle of even number
+            if (i % 2 === 0) {
+                continue
+            }
+            if (i === number) {
+                continue
+            }
+            continueNumberCal.push(i);
+        }
+        return continueNumberCal;
+    }
+    console.log(continueNumberFun(10));
+    console.log(continueNumberFun(2));
+
+    function breakNumberFun(number) {
+        let breakNumberCal = []
+        for (let i = 0; i < 20; i++) {
+            // get in output is odd number because we skip the cycle of even number
+            if (i === number) {
+                // return breakNumberCal
+                break
+            }
+            if (i % 2 === 0) {
+                breakNumberCal.push(i);
+            }
+        }
+        // line no. 129 uncomment ln130 comment -> after that ln137 check in console = this is not print in console (you don't want to return whole function)
+        console.log('final number length is', breakNumberCal.length)
+        return breakNumberCal;
+    }
+    console.log(breakNumberFun(10));
+    console.log(breakNumberFun(2));
+
+
+    // Que Object explain
+    const myObject = {
+        // 'keyname': {
+        //     'keyname1.1': "hello world"
+        // },
+        // 'keyname2': 'value2'
+        // without quotes
+        // this also valid syntax
+        keyname: {
+            'keyname1.1': "hello world",
+            obj2: {
+                key: null
+            }
+        },
+        keyname2: 'value2'
+    }
+    // console.log(myObject['keyname']['keyname1.1'])
+    console.log(myObject.keyname['keyname1.1'])
+
+
+    //Que call by referncein objects
+    const firstProfile = {
+        name: 'jake',
+        age: 21
+    }
+    const secondProfile = {
+        name: 'john',
+        age: 25
+    }
+
+    function primitiveMutate(primitive) {
+        primitive++
+        console.log(primitive)
+    }
+
+    function mutate(obj) {
+        console.log(obj.age)
+        obj.age++;
+    }
+
+    let num = 100
+    primitiveMutate(num)
+    console.log(num)
+
+    mutate(secondProfile)
+    console.log(secondProfile)
+
+    // Scope (Global & local(child of global) )
+    function x() {
+        let i = 0
+        for (i < 10; i++;) {
+            // nested scope
+            console.log(i ** 2)
+        }
+        console.log(i)
+    }
+    x()
+
+    // Shadowing variables are not required
+    const valueCase = 28
+    if (true) {
+        const valueCase = 30
+        function printValue(obj) {
+            // let use here and above is const use
+            let valueCase
+            console.log(valueCase)
+        }
+        printValue()
+    }
+
+
+
+</script>

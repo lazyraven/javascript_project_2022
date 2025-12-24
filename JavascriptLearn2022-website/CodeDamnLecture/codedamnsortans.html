@@ -1,0 +1,38 @@
+<div>
+    Simple sort answer
+</div>
+<script>
+    const str = "JavaScript is awesome"
+    // const reverseStrWord = str.split("").reverse().join("");
+    // console.log(reverseStrWord);
+    // 'emosewa si tpircSavaJ'
+
+    let rev = ""
+    for (let i = 1; i <= str.length; i++) {
+        rev = rev + str[str.length - i]
+    }
+    console.log(rev);
+
+    function reverseString(str) {
+        // console.log(str.split("").reverse().join(""))
+        let rev = ""
+        for (let i = 1; i <= str.length; i++) {
+            rev = rev + str[str.length - i]
+        }
+        console.log(rev)
+        return str;
+    }
+
+    reverseString("hello");
+
+    function randomNumberGeneratorInRange(rangeStart, rangeEnd) {
+        return Math.random() * (rangeEnd - rangeStart) + rangeStart;
+    }
+    console.log(`My random number: ${randomNumberGeneratorInRange(5, 100)}`)
+
+
+    const num = 3849;
+    const valueNum = parseInt(num.toString().split('').reverse().join(''))
+    console.log(valueNum);
+    // 9483
+</script>

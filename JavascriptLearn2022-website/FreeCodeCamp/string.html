@@ -1,0 +1,116 @@
+<h1>
+    FreeCodeCamp String World!!!
+</h1>
+
+<script>
+
+// Que Title Case a Sentence -> Pending
+function titleCase(str) {
+  console.log(str.toLowerCase())
+  console.log(str.toUpperCase())
+  console.log(str) 
+  let word = str.split(" ")
+  for(let i = 0; i<str.length; i++){
+   console.log(word[i][0])
+  //  console.log(word[i][0].toUpperCase())
+  }
+  return str;
+}
+
+titleCase("I'm a little tea pot");
+    // Que Truncate a String -> Pending
+    // function truncateString(str, num) {
+    //     let strTurn = "..."
+    //     for (let i = 0; i < num; i++) {
+    //         if (str.length > num) {
+    //             strTurn = str[i] + strTurn
+    //             console.log(str[i]);
+    //         }
+    //     }
+    //     console.log(strTurn);
+    //     //  teksit-A... -> output
+    //     return str;
+    // }
+
+    // truncateString("A-tisket a-tasket A green and yellow basket", 8);
+    // // truncateString("Peter Piper picked a peck of pickled peppers", 11)
+    
+    // // Que Confirm the Ending -> Pending
+    // function confirmEnding(str, target) {
+    //     console.log(str[str.length - 1])
+    //     for (let i = 0; i < str.length; i++) {
+    //         if (target[target.length] == str[str.length - 1]) {
+    //             return true
+    //         }
+    //         return false
+    //     }
+    //     console.log(str.length);
+    //     return str;
+    // }
+    // // console.log(confirmEnding("Bastian", "n"))
+    // // console.log(confirmEnding("Congratulation", "on"))
+    // // console.log(confirmEnding("Open sesame", "same"))
+    // console.log(confirmEnding("Connor", "n"))
+
+// Que Repeat a String
+    // function repeatStringNumTimes(str, num) {
+    //     if (num < 0) {
+    //         return ""
+    //     }
+    //     let strNum = "";
+    //     for (let i = 0; i < num; i++) {
+    //         strNum = strNum + str;
+    //         console.log(strNum);
+    //     }
+    //     return strNum;
+    // }
+    // repeatStringNumTimes("abc", 3);
+    // repeatStringNumTimes("*", 8);
+    // // repeatStringNumTimes("*", 3);
+    // // repeatStringNumTimes("abc", -2)
+
+    // // Que Find the Longest Word in a String
+    // function findLongestWordLength(str) {
+    //     // console.log(str.length);
+    //     // console.log(str.split(" "));
+    //     // console.log(str.split(" ").length);
+    //     let words = str.split(' ');
+    //     console.log(words);
+
+    //     let maxLength = 0;
+    //     for (let i = 0; i < words.length; i++) {
+    //         console.log(words[i])
+    //         if (words[i].length > maxLength) {
+    //             maxLength = words[i].length;
+    //         }
+    //     }
+    //     console.log("maxLength :", maxLength);
+    //     return maxLength;
+    // }
+    // findLongestWordLength("The quick brown fox jumped over the lazy dog");
+
+    // Que Reverse a String
+    // function reverseString(str) {
+    //     let result = ""
+    //     for (let i = 1; i <= str.length; i++) {
+    //         result = result + str[str.length - i]
+    //         console.log(str.length - i, result);
+    //     }
+    //     return result;
+    // }
+    // reverseString("hello");
+
+    //Que Debugging Catch Off By One Errors When Using Indexing ->The third example is correct.
+    // let alphabet = "abcdefghijklmnopqrstuvwxyz";
+    // let len = alphabet.length;
+    // for (let i = 0; i <= len; i++) {
+    //     // console.log(alphabet[i]);
+    // }
+    // for (let j = 1; j < len; j++) {
+    //     // console.log(alphabet[j]);
+    // }
+    // for (let k = 0; k < len; k++) {
+    //     console.log(alphabet[k]);
+    // }
+
+</script>

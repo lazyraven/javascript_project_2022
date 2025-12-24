@@ -1,0 +1,12 @@
+body{
+    font-size: 20px;
+}
+ul li{
+    background: rgb(245, 245, 94);
+}
+.red{
+    background: red;
+}
+.blue{
+    background: blue;
+}

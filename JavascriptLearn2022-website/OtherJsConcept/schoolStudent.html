@@ -1,0 +1,30 @@
+<script>
+    let school = [
+        {
+            name: "Nisha",
+            students: 20,
+            teacher: [{ name: "Shanu", students: 10 }, { name: "Ashish", students: 5 }]
+        },
+        {
+            name: "Deepa",
+            students: 30,
+        },
+        {
+            name: "Monika",
+            students: 15,
+            teacher: [{
+                name: "Vishal", students: 10, teacher: [{ name: "Suraj", students: 5 }]
+            }]
+        }
+    ]
+
+    function studentsCount(schoolArray, index) {
+        console.log(schoolArray, schoolArray[index])
+        if (index < schoolArray.length) {
+            schoolArray = schoolArray[index].students + studentsCount(schoolArray, index + 1)
+            console.log(schoolArray)
+        }
+    }
+    // return schoolArray[schoolArray.length - 1]
+    console.log(studentsCount(school, 0))
+</script>

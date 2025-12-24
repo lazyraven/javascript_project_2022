@@ -1,0 +1,40 @@
+<script>
+    function factorial1(arg){
+    let factValue = 1;
+    for (let i = 1; i <= arg; i++) {
+        factValue =  factValue * i
+            console.log(factValue);
+            // return factValue;
+        }
+    }
+
+    factorial1(6);
+
+    let a = 10;
+    let b = 20;
+    // setTimeout(()=>{
+    //     a = b;
+    // console.log(a)
+    // },1000)
+    // setTimeout(()=>{
+    //     b = a;
+    // console.log(b)
+    // },3000)
+    let c = a;
+    a = b
+    b = c;
+
+    console.log("out a", a)
+    console.log("out b", b)
+
+//  let result =  factorial1(6);
+
+//   function factorial(num) {
+//     let result = 1;
+//     for (let i = 1; i <= num; i++) {
+//       result = i * result;
+//       console.log(result)
+//     }
+//   }
+//   factorial(5);
+</script>

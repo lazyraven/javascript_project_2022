@@ -1,0 +1,11 @@
+<script>
+    let str = "Lionking"
+    function reverseWord(valueStr, index) {
+        if (index <= valueStr.length) {
+            console.log(index, valueStr[valueStr.length - index])
+            return valueStr[valueStr.length - index] + reverseWord(valueStr, index + 1)
+        }
+        return "";
+    }
+    console.log(reverseWord(str, 1))
+</script>

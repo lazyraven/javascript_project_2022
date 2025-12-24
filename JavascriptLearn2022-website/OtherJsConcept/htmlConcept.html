@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Div Concept</h1>
+
+    <div id="grandParent">
+        <div id="parent">
+            <button id="btn" style="padding: 20px;">Click Me!!
+                <span id="element">
+                    hgjhgj
+                </span>
+            </button>
+        </div>
+    </div>
+
+
+</body>
+
+<script>
+    document.getElementById('grandParent').addEventListener('click', () => {
+        console.log("button grandParent")
+    });
+    document.getElementById('parent').addEventListener('click', () => {
+        console.log("div click called")
+    });
+    document.getElementById('btn').addEventListener('click', () => {
+        console.log("button called")
+    });
+    document.getElementById('element').addEventListener('click', () => {
+        console.log("element called")
+    });
+</script>
+
+</html>

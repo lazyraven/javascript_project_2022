@@ -1,0 +1,44 @@
+<script>
+
+    // const match = { teamA: 0, teamB: 1 }
+    // if (typeof match.teamA === 'number') {
+    //     console.log('Team A: ' + match.teamA);
+    // }
+    // Que Falsy Bouncer
+    // function bouncer(arr) {
+    //     let newArray = [];
+    //     for (let i = 0; i < arr.length; i++) {
+    //         console.log("arr called", arr[i])
+    //         if (arr[i]) newArray.push(arr[i]);
+    //     }
+    //     console.log("newArray called", newArray)
+    //     return newArray;
+
+    // }
+    function bouncer(arr) { // 2nd method
+        return arr.filter(Boolean);
+    }
+    // bouncer([7, "ate", "", false, 9]);
+    // bouncer([false, null, 0, NaN, undefined, ""])
+    console.log(bouncer([null, NaN, 1, 2, undefined]))
+
+    //Que Boolean who
+    // function booWho(bool) {
+    //     if (bool === true || bool === false) {
+    //         return true
+    //     }
+    //     return false;
+    // }
+    // // function booWho(bool) {    // 2nd method
+    // //     return typeof bool === "boolean";
+    // // }
+    // booWho(null);
+    // booWho([1, 2, 2]);
+    // booWho({ "a": 1 });
+    // booWho("true")
+    // booWho(false)
+    // booWho(NaN)
+    // booWho([].slice)
+
+
+</script>

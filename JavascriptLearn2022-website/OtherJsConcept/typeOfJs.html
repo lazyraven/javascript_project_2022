@@ -1,0 +1,27 @@
+<script>
+    var arr = [10, 20, 30]
+    arr[3] = 40
+    console.log(arr);
+    arr[100] = 5000;
+    console.log(arr.length, arr);
+
+    // typeof null is object
+    const sameValue = null;
+    const sameValueNum = (typeof sameValue);
+    console.log(sameValueNum)
+
+    // typeof undefined is undefined
+    const undefineVal = undefined;
+    const sameValueUni = (typeof undefineVal);
+    console.log(sameValueUni)
+
+    // typeof array is object
+    const array = [];
+    const sameValueArray = (typeof array);
+    console.log(sameValueArray)
+
+    // typeof bigInt is bigint
+    const bigIntNum = 11111111111111111n;
+    const sameValueBigInt = (typeof bigIntNum);
+    console.log(sameValueBigInt)
+</script>

@@ -1,0 +1,108 @@
+<script>
+
+    let A = [6, 4, 1, 4, 6, 2, 2];
+    // attributes.forEach(function (prop, index) {
+    //     result[index] = prop;
+    // });
+
+    let uObj = {}
+    let result = ""
+
+
+    function findUnique(baseArray) {
+        baseArray.forEach(function (prop, index) {
+            result = prop
+            uObj[prop] = index;
+            console.log(result)
+        });
+        // for (const key in uObj) {
+        //     if (value === 1) {
+        //         return result7
+        //     }
+    }
+    console.log(uObj)
+
+    findUnique(A);
+
+    // let resultArray = [];
+    // let valueArr;
+    // function findUnique(baseArray) {
+    //     for (let i = 0; i < baseArray.length; i++) {
+    //         valueArr = baseArray[i]
+    //         console.log(valueArr, resultArray, baseArray)
+    //         if (valueArr === baseArray[i]) {
+    //             resultArray.push(baseArray[i])
+    //             console.log(resultArray)
+    //             for (let j = 0; j < resultArray.length; j++) {
+    //                 if (valueArr !== resultArray[i]) {
+    //                     resultArray.push[valueArr]
+    //                     console.log("valueArr resultArray", resultArray)
+    //                 }
+    //             }
+    //         } else {
+    //             console.log("resultArray unique show")
+    //         }
+    //     }
+    // }
+    // // 4.Add Key-Value Pairs to JavaScript Objects
+    // const tekkenCharacter = {
+    //     player: 'Hwoarang',
+    //     fightingStyle: 'Tae Kwon Doe',
+    //     human: true
+    // };
+    // tekkenCharacter.origin = 'South Korea';
+    // tekkenCharacter['hair color'] = 'dyed orange';
+    // const eyes = 'eye color';
+
+    // tekkenCharacter[eyes] = 'brown';
+
+    // const tekkenCharacter =
+    // {
+    //     player: 'Hwoarang',
+    //     fightingStyle: 'Tae Kwon Doe',
+    //     human: true,
+    //     origin: 'South Korea',
+    //     'hair color': 'dyed orange',
+    //     'eye color': 'brown'
+    // };
+
+    // // 3. The following function uses if, else if, and else statements to check multiple conditions:
+
+    // function findGreaterOrEqual(a, b) {
+    //     if (a === b) {
+    //         return "a and b are equal";
+    //     }
+    //     else if (a > b) {
+    //         return "a is greater";
+    //     }
+    //     else {
+    //         return "b is greater";
+    //     }
+    // }
+
+    // // 3.1 2nd method
+    // function findGreaterOrEqual(a, b) {
+    //     return (a === b) ? "a and b are equal"
+    //         : (a > b) ? "a is greater"
+    //             : "b is greater";
+    // }
+    // function findGreaterOrEqual(a, b) {
+    //     return (a === b) ? "a and b are equal" : (a > b) ? "a is greater" : "b is greater";
+    // }
+
+
+    // // 2. We'll start at i = 10 and loop while i > 0. We'll decrement i by 2 each loop with i -= 2.
+    // const ourArray = [];
+
+    // for (let i = 10; i > 0; i -= 2) {
+    //     ourArray.push(i);
+    // }
+
+    // //1. Push the odd numbers from 1 through 9 to myArray using a for loop.
+    // const myArray = [];
+
+    // // Only change code below this line
+    // for (let i = 1; i < 11; i = i + 2) {
+    //     myArray.push(i);
+    // }
+</script>

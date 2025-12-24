@@ -1,0 +1,74 @@
+<button>Kill Main Thread</button>
+<p>Some text. More Text</p>
+<button> Just a button</button>
+<input type="text">
+<script>
+
+    function blockEventLoop(i) {
+        // if while(true) -> you blocked the javascript on a page -> block the page after click on butotn
+        if (i % 1000 === 0) {
+            console.log("I was called")
+        }
+        // setTimeout(() => blockEventLoop(i + 1), 0)
+
+        // setTimeout(blockEventLoop, 0)
+        // console.log(i)
+        blockEventLoop(i + 1)
+        // while (true);
+    }
+    const btn = document.querySelector('button')
+    // btn.addEventListener('click', blockEventLoop, false)
+
+    btn.addEventListener('click', () => blockEventLoop(0), false)
+
+    // Destructuring Array
+    const arr1 = [1, 2, 3]  // const arr1 = [{ name: 'John' }]
+    const arr2 = [4, 5, 6]   // const arr2 = [{ name: 'Jim' }]
+    const arr3 = [...arr1, ...arr2]
+    console.log(arr3)
+
+
+    // Destructuring Object
+    const keyName = 'Cool'
+    // keyName: keyName but ES6 only allow the keyName line no. 34
+    const obj1 = { name: 'John', keyName, someOtherKey: 100 }
+    const obj2 = { name: 'Kim', age: 18 }
+
+    // override name John to Kim
+    const obj3 = { ...obj1, ...obj2 }
+    console.log(obj3)
+
+    // Que Arrow Function
+    // Implicit return
+    const arrFunctionLikeThis = (arg) => arg ** 2
+    console.log(arrFunctionLikeThis(100))
+
+    //Que array for, map, filter, find and  loop  
+    const arrayMap = [1, 2, 3, 4, 5, 6, 7, 8]
+    const arrayMethodMap_forEq = []
+    for (let i = 0; i < arrayMap.length; i++) {
+        const el = arrayMap[i];
+        arrayMethodMap_forEq.push(el ** 2)
+    }
+
+    const arrayMethodMap = arrayMap.map((element) => element ** 2)
+    // return "Map Configure"
+
+    // const arrayMethodFilter = arrayMap.filter(element => true)
+    // const arrayMethodFilter = arrayMap.filter(element => false)
+
+    // Filter
+    const arrayMethodFilter = arrayMap.filter(element => element > 4)
+    console.log("arrayMethodMap", arrayMap, arrayMethodMap, arrayMethodMap_forEq, arrayMethodFilter)
+
+    const friends = [{ name: 'x', age: 17, someprop: true }, { name: 'y', age: 21 }, { name: 'z', age: 23 }]
+    const is18AboveAge = friends.filter((element) => element.age > 18)
+    console.log(is18AboveAge);
+
+    // Find
+    const findX = friends.find(friend => friend.name === 'x');
+    console.log(findX);
+
+
+
+</script>

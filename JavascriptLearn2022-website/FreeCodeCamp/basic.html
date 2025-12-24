@@ -1,0 +1,52 @@
+<div>
+    Freecodecamp Basic Learning
+</div>
+<script>
+    // Que Factorial
+    function factorialize(num) {
+        let result = 1
+        for (let i = 0; i <= num; i++) {
+            if (num !== i) {
+                result = result * (num - i);
+                console.log(result);
+            }
+        }
+        return result;
+    }
+    factorialize(5);
+
+    // ES6 var let  const
+    var printNumTwo;
+    for (var i = 0; i < 3; i++) {
+        if (i === 2) {
+            // console.log(i);
+            printNumTwo = function () {
+                return i;
+            };
+            // console.log(printNumTwo);
+        }
+    }
+    console.log(printNumTwo());
+    console.log(i);
+
+    let printNumTwo2;
+    for (let j = 0; j < 3; j++) {
+        if (j === 2) {
+            // console.log(i);
+            printNumTwo2 = function () {
+                return j;
+            };
+            console.log(printNumTwo2);
+        }
+    }
+    console.log(printNumTwo2());
+    console.log(j);
+    let isMale = true
+    let intro = "Hi Female";
+    if (isMale) {
+        let intro = 'Hi Male!'
+        console.log(intro);
+    }
+    console.log(intro);
+
+</script>

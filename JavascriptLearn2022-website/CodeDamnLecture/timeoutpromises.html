@@ -1,0 +1,40 @@
+<button id="btn">Click Me</button>
+<button id="btn2">Programmatic Click </button>
+
+<script>
+    function scheduleWork() {
+        Promise.resolve().then(() => { console.log('#1 m1') })
+        Promise.resolve().then(() => { console.log('#1 m2') })
+        setTimeout(() => { console.log('#1 t1'), 0 })
+        setTimeout(() => {
+            Promise.resolve().then(() => { console.log('#1 m3') })
+            Promise.resolve().then(() => { console.log('#1 m4') })
+            Promise.resolve().then(() => { console.log('#1 m5') })
+        }, 0)
+        setTimeout(() => { console.log('#1 t2'), 0 })
+        setTimeout(() => { console.log('#1 t3'), 0 })
+        console.log('#1 Hello from main threads')
+
+    }
+    function scheduleWorkAgain() {
+        Promise.resolve().then(() => { console.log('#2 m1') })
+        Promise.resolve().then(() => { console.log('#2 m2') })
+        setTimeout(() => { console.log('#2 t1'), 0 })
+        setTimeout(() => {
+            Promise.resolve().then(() => { console.log('#2 m3') })
+            Promise.resolve().then(() => { console.log('#2 m4') })
+            Promise.resolve().then(() => { console.log('#2 m5') })
+        }, 0)
+        setTimeout(() => { console.log('#2 t2'), 0 })
+        setTimeout(() => { console.log('#2 t3'), 0 })
+        console.log('#2 Hello from main threads')
+
+    }
+
+    const btn = document.getElementById('btn')
+    btn.addEventListener('click', scheduleWork)
+    btn.addEventListener('click', scheduleWorkAgain)
+
+    btn2.addEventListener('click', () => btn.click())
+
+</script>

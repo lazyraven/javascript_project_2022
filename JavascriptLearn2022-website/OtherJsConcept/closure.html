@@ -1,0 +1,25 @@
+<script>
+//     function closure() {
+//     var closureVar = 7;
+//     function clouser1() {
+//         console.log(closureVar);
+//     }
+//     clouser1();
+// }
+// closure();
+
+function closure6() {
+    var closureVar5 = 7;
+    return function clouserInner7() {
+        console.log('closureVar4', closureVar5);
+    }
+    //     function clouserInner7() {
+    //         console.log('closureVar4', closureVar5);
+    //     }
+    //    return clouserInner7;
+}
+var closureVal = closure6();
+console.log('closureVal', closureVal);
+closureVal();
+
+</script>

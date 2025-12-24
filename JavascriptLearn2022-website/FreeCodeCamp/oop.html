@@ -1,0 +1,104 @@
+<script>
+    //Que Extend Constructors to Receive Arguments
+    function Dog(name, color) {
+        this.name = name;
+        this.color = color;
+        this.numLegs = 4;
+    }
+    let terrier = new Dog()
+    terrier.name
+    terrier.color
+
+    // Que Verify an Object's Constructor with instanceof
+    function House(numBedrooms) {
+        this.numBedrooms = numBedrooms;
+    }
+    let myHouse = new House(12)
+    myHouse instanceof House;
+
+    // Que Understand Own Properties -> not clear
+    function Bird(name) {
+        this.name = name;
+        this.numLegs = 2;
+    }
+    let canary = new Bird("Tweety");
+    let ownProps = [];
+    for (let property in canary) {
+        if (canary.hasOwnProperty(property)) {
+            ownProps.push(property);
+        }
+    }
+    console.log(ownProps);
+
+    // Que Use Prototype Properties to Reduce Duplicate Code
+    function Dog(name) {
+        this.name = name;
+    }
+    Dog.prototype.numLegs = 4
+    let beagle = new Dog("Snoopy");
+
+    // Que Iterate Over All Properties
+    function Dog(name) {
+        this.name = name; //own property
+    }
+    Dog.prototype.numLegs = 4; // prototype property
+    let beagle = new Dog("Snoopy");
+    let ownProps = [];
+    let prototypeProps = [];
+    for (let property in beagle) {
+        if (beagle.hasOwnProperty(property)) {
+            ownProps.push(property);
+        } else {
+            prototypeProps.push(property);
+        }
+    }
+    console.log(ownProps);
+    console.log(prototypeProps);
+
+    // Que Use a Mixin to Add Common Behavior Between Unrelated Objects
+    let bird = {
+        name: "Donald",
+        numLegs: 2
+    };
+
+    let boat = {
+        name: "Warrior",
+        type: "race-boat"
+    };
+
+    // Only change code below this line
+    let glideMixin = function (obj) {
+        obj.glide = function () {
+            console.log("Gliding!");
+        }
+        console.log(obj)
+    }
+    glideMixin(bird)
+    glideMixin(boat)
+
+    //Que Use Closure to Protect Properties Within an Object from Being Modified Externally
+    function Bird() {
+        let hatchedEgg = 10;
+        this.getHatchedEggCount = function () {
+            return hatchedEgg;
+        };
+    }
+    let ducky = new Bird();
+    ducky.getHatchedEggCount();
+
+    //Que Use an IIFE to Create a Module
+    let funModule = (function () {
+        return {
+            isCuteMixin: function (obj) {
+                obj.isCute = function () {
+                    return true;
+                };
+            },
+            singMixin: function (obj) {
+                obj.sing = function () {
+                    console.log("Singing to an awesome tune");
+                };
+            }
+        }
+    })();
+</script>

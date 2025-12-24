@@ -1,0 +1,158 @@
+<div>
+  <h1> Array Problems Handled !! </h1>
+</div>
+
+<script>
+  // let A = [2, 1, 6, 8, 4, 5]
+  // let A = [1, -2, 2]
+  // let A = [8, 1, -16, 24]
+  // let A = [2, 3, 5, 5, 8, 15]
+
+
+  // let equilArr = A[1];
+  // function equilibriumArray(baseArray) {
+  //   for (let i = 0; i < baseArray.length; i++) {
+  //     if (equilArr < baseArray[i]) {
+  //       equilArr = equilArr + baseArray[i]
+  //       console.log(equilArr);
+  //     }
+  //   }
+  //   console.log(equilArr);
+  // }
+  // console.log(equilibriumArray(A));
+
+  // let A = [10, 15, 32, 18]
+  // let i = 0;
+  // let sum = 0;
+  // while (i < A.length) {
+  //   sum = sum + A[i]
+  //   i++
+  // }
+  // console.log(sum)
+
+  let A = [6, 4, 1, 4, 6, 2, 2]
+
+  let obj = {}
+  let answer = "";
+  function findUnique(baseArray) {
+    for (let i = 0; i < baseArray.length; i++) {
+      console.log(obj[baseArray[i]])
+
+      if (obj[baseArray[i]]) {
+        obj[baseArray[i]] = obj[baseArray[i]] + 1;
+      } else {
+        obj[baseArray[i]] = 1;
+      }
+    }
+    console.log(obj)
+
+    for (let i = 0; i < baseArray.length; i++) {
+      if (obj[baseArray[i]] === 1) {
+        answer = baseArray[i]
+        break;
+      }
+    }
+    console.log(obj)
+    return answer;
+  }
+  findUnique(A)
+  // function factorial(num) {
+  //   let result = 1;
+  //   for (let i = 1; i <= num; i++) {
+  //     result = i * result;
+  //     console.log(result)
+  //   }
+  // }
+  // factorial(5);
+
+  // function findSecondLowest(baseArray) {
+  //   console.log(baseArray);
+  //   let result;
+  //   if (baseArray[0] < baseArray[1]) {
+  //     result = [baseArray[0], baseArray[1]]
+  //   } else {
+  //     result = [baseArray[1], baseArray[0]]
+  //   }
+  //   for (let i = 2; i < baseArray.length; i++) {
+  //     if (result[0] > baseArray[i]) {
+  //       result[1] = result[0]
+  //       result[0] = baseArray[i]
+  //     } else if (result[1] > baseArray[i]) {
+  //       result[1] = baseArray[i]
+  //     }
+  //   }
+  //   console.log(result)
+  //   return result[1]
+  // }
+  // console.log(findSecondLowest([1, 2, 4, 0, 8, 3, 5]));
+  // console.log(findSecondLowest([0, -1, -3]));
+
+
+  // function findSecondHighest(baseArray) {
+  //   let result;
+  //   if (baseArray[0] > baseArray[1]) {
+  //     result = [baseArray[0], baseArray[1]]
+  //   } else {
+  //     result = [baseArray[1], baseArray[0]]
+  //   }
+
+  //   for (let i = 2; i < baseArray.length; i++) {
+  //     if (baseArray[i] > result[0]) {
+  //       result[1] = result[0]
+  //       result[0] = baseArray[i];
+  //       console.log("In console", result)
+  //     } else if (baseArray[i] > result[1]) {
+  //       result[1] = baseArray[i]
+  //       console.log("else value")
+  //     }
+  //     else if (result[1] === result[0]) {
+  //       console.log(i)
+  //       result[1] = baseArray[i]
+  //       console.log("else value")
+  //     }
+  //   }
+  //   console.log(result)
+  //   return result[1];
+  // }
+
+  // // console.log(findSecondHighest([7, 11, 15, 18, -1, 2]));
+  // // console.log(findSecondHighest([16, 34, -2, 7, 64, 21]));
+  // // console.log(findSecondHighest([16, 34, 101, 7, 64, 21]));
+  // console.log(findSecondHighest([64, 2, 2, 64, 25]));
+
+
+
+  // function printHash(num) {
+  //   let str = ''
+  //   for (let i = 0; i < num; i++) {
+  //     str = '#' + str
+  //     console.log(str);
+  //   }
+  //   // for (let i = 3; i > 0; i--) {
+  //   //   console.log(i);
+  //   //   console.log("* ".repeat(i));
+  //   // }
+  // }
+  // printHash(5)
+  // for (var line = "#"; line.length < 8; line += "#")
+  //   console.log(line);
+  // // Double
+  // const arr = [5, 2, 4, 7, 1];
+  // function double(x) {
+  //   return x * 2;
+
+  // }
+  // const output = arr.map(double);
+  // console.log(output);
+
+  // //Binary
+  // const arrOne = [5, 2, 4, 7, 1];
+  // //   function binary(x){
+  // //         return x.toString(2);
+  // //     }
+  // //   const outputOne = arrOne.map(binary);
+
+  // const outputOne = arrOne.map((x) => x.toString(2));
+  // console.log(outputOne);
+
+</script>

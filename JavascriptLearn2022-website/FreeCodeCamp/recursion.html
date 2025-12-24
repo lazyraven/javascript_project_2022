@@ -1,0 +1,28 @@
+<div>
+  <h1>
+    Freecode Camp Recursion Problems
+  </h1>
+</div>
+<script>
+  //    function multiply(arr, n) {
+  //     let product = 1;
+  //     for (let i = 0; i < n; i++) {
+  //       product *= arr[i];
+  //     console.log(product)
+  //     }
+  //     console.log(product)
+  //     return product;
+  //   }
+  //   multiply([2,3,4], 1)
+
+
+  function sum(arr, n) {
+    if (n <= 0) {
+      return 0;
+    } else {
+      console.log(arr[n - 1], sum(arr, n - 1))
+      return sum(arr, n - 1) + arr[n - 1];
+    }
+  }
+  console.log(sum([2, 3, 4, 5], 3)) // output : 9
+</script>
