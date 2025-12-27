@@ -27,3 +27,8 @@ https://chatgpt.com/share/693aeba5-b7c4-8013-992c-93d028c32a09
 
 https://chatgpt.com/share/69424eda-4428-8013-a346-2abec15f2ea6
 For Javascript and react create a small quiz with code snippets where I guess the output, and then I’ll explain. give feedback one by one (interactive)? guess, then reveal and explain one by one.
+
+OR
+
+Please give a basic technical question on JavaScript that can be resolved by JavaScript logic.
+Please provide me with those questions one by one, and I'll assume the answer with the code. start from basics.
