@@ -46,3 +46,23 @@ useEffect(() => {
 }, [fetchData]);
 
 // This ensures the effect runs only when the actual function (not a new instance) changes.
+
+
+// Basic Syntax
+const memoizedFn = useCallback(() => {
+  doSomething();
+}, [dependencies]);
+
+// Common Real Example
+const handleClick1 = useCallback(() => {
+  setCount(prev => prev + 1);
+}, []);
+
+// Passed to a child component:
+<Button onClick={handleClick} />
+// ➡ Prevents unnecessary child re-renders when wrapped with React.memo.
+
+// Dependency Array (Important)
+useCallback(() => {
+  console.log(count);
+}, [count])

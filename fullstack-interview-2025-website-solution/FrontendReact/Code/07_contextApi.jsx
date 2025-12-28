@@ -29,3 +29,9 @@ function App() {
     </ThemeProvider>
   );
 }
+
+// Common Real-World Example
+// Authentication
+
+<AuthContext.Provider value={{ user, login, logout }}></AuthContext.Provider>
+// Used across navbar, dashboard, protected routes.
