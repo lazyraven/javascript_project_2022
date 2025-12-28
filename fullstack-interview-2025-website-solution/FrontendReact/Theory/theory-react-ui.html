@@ -187,6 +187,7 @@
 
   <script>
 
+// for question questionId , I'm handling with index, no need of questionId
 const reactQuestions = [
   {
     questionId: 1,
@@ -306,6 +307,47 @@ Common Mistakes (Good to Mention)
 'It can be configured to run once (like componentDidMount), on every render (componentDidUpdate), or for cleanup (componentWillUnmount). 
 In class components, these behaviors are split across lifecycle methods.
 `
+  },
+  {
+    questionId: '',
+    question: "What is useState ?",
+    definition: `Short & Strong Answer (Start Here) : useState is a React Hook used to manage local state in functional components.
+Slightly Detailed Explanation :
+“It allows a component to store and update state values, and whenever the state changes, the component re-renders with the updated data.”
+
+How State Updates Work :
+State updates using setState are asynchronous and trigger a re-render.
+
+Common Use Cases:
+  • Form inputs
+  • Toggle buttons
+  • Counters
+  • Modal open/close
+  • Tabs and UI state
+
+  interview Line: We can use multiple useState hooks to manage independent pieces of state.
+
+useState vs Props (Quick Comparison):
+Props are read-only and passed from parent, while state is mutable and managed within the component.
+
+| useState         | useReducer                  |
+| ---------------- | --------------------------- |
+| Simple state     | Complex state logic         |
+| Less boilerplate | Better for multiple actions |
+| Easy to read     | More structured             |
+
+
+Common Mistakes (Good to Mention):
+• Mutating state directly
+• Forgetting previous state
+• Using state when variable is enough
+Wrong:
+count++;
+
+Correct:
+setCount(count + 1);
+
+    `
   },
   {
     questionId: 8,
@@ -562,42 +604,8 @@ Overusing useCallback can add complexity and memory overhead, so it should be us
   },
     {
     questionId: 20,
-    question: "What is useState ?",
-    definition: `Short & Strong Answer (Start Here) : useState is a React Hook used to manage local state in functional components.
-Slightly Detailed Explanation :
-“It allows a component to store and update state values, and whenever the state changes, the component re-renders with the updated data.”
-
-How State Updates Work :
-State updates using setState are asynchronous and trigger a re-render.
-
-Common Use Cases:
-  • Form inputs
-  • Toggle buttons
-  • Counters
-  • Modal open/close
-  • Tabs and UI state
-
-  interview Line: We can use multiple useState hooks to manage independent pieces of state.
-
-useState vs Props (Quick Comparison):
-Props are read-only and passed from parent, while state is mutable and managed within the component.
-
-| useState         | useReducer                  |
-| ---------------- | --------------------------- |
-| Simple state     | Complex state logic         |
-| Less boilerplate | Better for multiple actions |
-| Easy to read     | More structured             |
-
-
-Common Mistakes (Good to Mention):
-• Mutating state directly
-• Forgetting previous state
-• Using state when variable is enough
-Wrong:
-count++;
-
-Correct:
-setCount(count + 1);
+    question: "What is  ?",
+    definition: `
 
     `
   },
@@ -607,20 +615,25 @@ setCount(count + 1);
     const questionGrid = document.getElementById("questionGrid");
     const definitionContainer = document.getElementById("definitionContainer");
 
-    reactQuestions.forEach(item => {
+    reactQuestions.forEach((item, index )=> {
       // create top question box
       const card = document.createElement("div");
       card.className = "question-card";
-      card.innerHTML = `<strong style="color:#b366ff;">Q${item.questionId}:</strong> ${item.question}`;
-      card.addEventListener("click", () => scrollToDefinition(item.questionId));
+      // card.innerHTML = `<strong style="color:#b366ff;">Q${item.questionId}:</strong> ${item.question}`;
+      // id maintain based on index
+      card.innerHTML = `<strong style="color:#b366ff;">Q${index+1}:</strong> ${item.question}`;
+      // card.addEventListener("click", () => scrollToDefinition(item.questionId));
+      card.addEventListener("click", () => scrollToDefinition(index+1));
       questionGrid.appendChild(card);
 
       // create definition section
       const def = document.createElement("div");
       def.className = "definition-section";
-      def.id = `question-${item.questionId}`;
+      // def.id = `question-${item.questionId}`;
+      // id maintain based on index
+      def.id = `question-${index+1}`;
       def.innerHTML = `
-        <h3>Question ${item.questionId}: ${item.question}</h3>
+        <h3>Question ${index+1}: ${item.question}</h3>
         <pre>${item.definition}</pre>
       `;
       definitionContainer.appendChild(def);
