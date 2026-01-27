@@ -108,3 +108,9 @@ console.log(resultValue); // "olleH dlroW."
 let arr = [1, 2, 3, 4, 5];
 arr.reverse();
 console.log(arr);
+// OR
+let resultArr = [];
+for(let i=1; i<=arr.length; i++){
+ resultArr.push(arr[arr.length - i]);
+}
+console.log("resultArr", resultArr) //"resultArr", [5, 4, 3, 2, 1]
