@@ -604,10 +604,20 @@ Overusing useCallback can add complexity and memory overhead, so it should be us
   },
     {
     questionId: 20,
-    question: "What is  ?",
-    definition: `
+    question: "What is prop drilling?",
+    definition: `Simple definition
+ Prop drilling = passing props through layers just to reach a child.
 
+ Prop drilling in React means passing data (props) from a parent component down to deeply nested child components through multiple intermediate components, 
+ even when those middle components don’t actually need the data.
     `
+  },
+    {
+    question: "How to avoid prop drilling",
+    definition: `Common solutions:
+React Context API (most common)
+State management libraries (Redux, Zustand, Recoil)
+Component composition (passing components as children)`
   },
 ];
 
