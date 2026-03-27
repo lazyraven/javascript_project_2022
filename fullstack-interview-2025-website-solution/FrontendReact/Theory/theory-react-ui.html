@@ -619,6 +619,61 @@ React Context API (most common)
 State management libraries (Redux, Zustand, Recoil)
 Component composition (passing components as children)`
   },
+    {
+    question: "PROFESSIONALLY : What is the difference between state and props in React ?",
+    definition: `Props and state are both used to manage data in React, but they serve different purposes.
+  • Props (Properties): 
+    - Passed from parent to child components.
+    - Immutable (read-only).
+    - Used to customize or configure child components. 
+    - Controlled by the parent component.
+  • State:
+    - Managed within a component (can change over time).
+    - Mutable (can be updated using setState and state setters).
+    - Used for dynamic data like (user input, API results, toggle, counters, etc.).
+    - When state changes → React re-renders the UI.
+
+  In short: Props are external and controlled by parent, while state is internal and controlled by the component.
+  Advance : When props need to be modified, we usually lift the state up to the parent component.
+`
+  },
+    {
+    question: "PROFESSIONALLY : What is useEffect in React, and when would you use it?",
+    definition: `useEffect is a React hook to used to handle side effects in functional component.
+Side effects include operation like data fetching, subscription, timers and Dom Manipulation
+
+It runs after the component render and allolw us to synchronize the component with external systems 
+such as API's and browser events.
+
+The behavior of useEffect depends on its dependency array:
+
+  • No dependency array → runs after every render
+  • Empty array [] → runs only once (on mount)
+  • With dependencies [value] → runs when those values change
+
+  It returns a clanup function which is used to clean up resources like event listeners or subscription to prevent meomory leaks.
+  Common use cases include API calls, event listeners, timers, and updating the document title.
+
+  Highlight: useEffect combines the behavior of componentDidMount, componentDidUpdate, and componentWillUnmount from class components.
+`
+  },
+{
+    question: "PROFESSIONALLY: What is Virtual DOM in React, and how does it improve performance?",
+    definition: `The virtual dom is a lightweight JavaScript representation of the Real DOM.
+    
+       1. Create a new Virtual DOM tree.
+       2. Compares it with the previous Virtual DOM (this process is called diffing)
+       3. Calculates the minimal set of changes
+       4. Updates only those parts in the real DOM (this process is called reconciliation)
+
+       This improves performance because updating the real DOM directly is expensive, so React minimizes direct DOM manipulations.
+
+       The correct flow is:
+
+      • State changes → Virtual DOM updates first
+      • Then React compares → updates Real DOM
+    `
+  },
 ];
 
 
