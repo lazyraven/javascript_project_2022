@@ -612,7 +612,7 @@ Overusing useCallback can add complexity and memory overhead, so it should be us
  even when those middle components don’t actually need the data.
     `
   },
-    {
+  {
     question: "How to avoid prop drilling",
     definition: `Common solutions:
 React Context API (most common)
@@ -620,7 +620,7 @@ State management libraries (Redux, Zustand, Recoil)
 Component composition (passing components as children)`
   },
     {
-    question: "PROFESSIONALLY : What is the difference between state and props in React ?",
+    question: "(Basic → Core Understanding) PROFESSIONALLY : What is the difference between state and props in React ?",
     definition: `Props and state are both used to manage data in React, but they serve different purposes.
   • Props (Properties): 
     - Passed from parent to child components.
@@ -638,7 +638,7 @@ Component composition (passing components as children)`
 `
   },
     {
-    question: "PROFESSIONALLY : What is useEffect in React, and when would you use it?",
+    question: "(Slightly deeper – Hooks) PROFESSIONALLY : What is useEffect in React, and when would you use it?",
     definition: `useEffect is a React hook to used to handle side effects in functional component.
 Side effects include operation like data fetching, subscription, timers and Dom Manipulation
 
@@ -658,7 +658,109 @@ The behavior of useEffect depends on its dependency array:
 `
   },
 {
-    question: "PROFESSIONALLY: What is Virtual DOM in React, and how does it improve performance?",
+    question: "(Intermediate – Important Concept) PROFESSIONALLY: What is Virtual DOM in React, and how does it improve performance?",
+    definition: `The virtual dom is a lightweight JavaScript representation of the Real DOM.
+    
+       1. Create a new Virtual DOM tree.
+       2. Compares it with the previous Virtual DOM (this process is called diffing)
+       3. Calculates the minimal set of changes
+       4. Updates only those parts in the real DOM (this process is called reconciliation)
+
+       This improves performance because updating the real DOM directly is expensive, so React minimizes direct DOM manipulations.
+
+       The correct flow is:
+
+      • State changes → Virtual DOM updates first
+      • Then React compares → updates Real DOM
+    `
+  },
+{
+    question: "(Intermediate → Real-world) What is the difference between controlled and uncontrolled components in React?",
+    definition: `Controlled and uncontrolled components refer to how form data is managed in React.
+
+      • Controlled Components:
+        - Form inputs are controlled by React state
+        - The value of the input is tied to state using useState
+        - Any change is handled via onChange
+        - React is the single source of truth
+
+      • Uncontrolled Components:
+        - Form inputs manage their own state internally in the DOM
+        - The value of the input is managed by the DOM itself
+        - We use useRef to access the value when needed
+        - React does not directly control the input
+
+    Controlled components are preferred in most cases because they provide better control, validation, and predictability.
+
+    Highlight: Controlled components are preferred for form validation and dynamic UI updates, 
+    while uncontrolled components can be useful for simple forms or when integrating with non-React code.
+
+    ***** OR ******
+    Controlled and uncontrolled components differ in how they manage form data.
+
+    In controlled components, form data is managed using React state, making React the single source of truth. 
+    This allows better control, validation, and dynamic UI updates.
+
+    In uncontrolled components, form data is handled by the DOM itself, and we use refs to access the values when needed.
+
+👉 Controlled components are generally preferred because they provide more control and predictability.
+`
+  },
+  {
+    question: "(Important – Performance) What is the difference between useMemo and useCallback?",
+    definition: `Both useMemo and useCallback are React hooks used for performance optimization by memoization,
+     but they serve different purposes.
+
+     • useMemo:
+     - Memoizes a computed value
+     - Used to avoid expensive recalculations
+     - Runs the function and stores its result
+     - Example: Filtering sorting large data
+
+      • useCallback:
+      - Memoizes a function
+      - Prevents function recreation on every render
+      - Useful when passing callbacks to child components
+
+  Key Difference:
+     • useMemo → returns a value
+     • useCallback → returns a function
+     
+  When to use:
+    • Use useMemo for expensive calculations
+    • Use useCallback when passing functions to memoized child components or using them in dependency arrays.
+
+  Important Clarification: These hooks don’t directly prevent re-renders—they help avoid unnecessary work during renders.
+    `
+  },
+  {
+    question: "(Advanced – Real Interview Favorite) What is React.memo, and how is it different from useMemo?",
+    definition: `React.memo and useMemo are both used for performance optimization, but they work at different levels.
+
+     • React.memo:
+     - A higher-order component that memoizes a component
+     - Prevents re-rendering if props have not changed (shallow comparison)
+     - Used for optimizing functional components
+
+      • useMemo:
+      - A hook that memoizes the result of a computation
+      - Prevents expensive recalculations on every render
+
+  Key Difference:
+     • React.memo → prevents component re-render
+     • useMemo → prevents expensive recalculation inside a component
+     
+  Example Use Case:
+    • Use React.memo when a child component receives the same props frequently and you want to avoid unnecessary re-renders.
+    • Use useMemo when performing heavy operations like filtering or sorting large datasets
+
+  (High Impact Line)
+   “React.memo works at the component level, while useMemo works at the value level.”
+    `
+  },
+  {
+    question: `(Advanced – Real Scenario) Suppose you have a component that fetches data from an API using useEffect,
+     but it keeps calling the API repeatedly on every render. What could be the problem, and how would you fix it?`,
     definition: `The virtual dom is a lightweight JavaScript representation of the Real DOM.
     
        1. Create a new Virtual DOM tree.
