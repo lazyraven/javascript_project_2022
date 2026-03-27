@@ -256,7 +256,6 @@ Mongoose is a Node.js library that adds structure by defining schemas, validatio
     `
   },
 {
-    questionId: 9,
     question: "Single Thread & MultiThreaded?",
     definition: `How does Node.js handle heavy tasks if it’s single-threaded?
      • Node.js uses a worker thread pool and asynchronous I/O.
@@ -264,11 +263,74 @@ Mongoose is a Node.js library that adds structure by defining schemas, validatio
     `
 },
 {
-    questionId: 10,
+    question: "(Basic) - What is Node.js?",
+    definition: `
+    Node.js is an open-source, cross-platform runtime environment that executes JavaScript code outside the browser.
+    
+    It uses an event-driven, non-blocking I/O model, which makes it efficient and suitable 
+    for building scalable network applications like APIs and real-time apps.
+    
+    ✔️ Key Points to Mention (if interviewer asks more):
+      • Uses V8 engine (same as Chrome)
+      • Single-threaded but handles multiple requests using event loop
+      • Best for:
+           - APIs
+           - Real-time apps (chat, streaming)
+      • Not ideal for:
+        - CPU-heavy tasks
+    `
+},
+{
+    question: "(Basic → Core Concept) - Why is Node.js single-threaded but still able to handle multiple requests efficiently?",
+    definition: `Node.js is single-threaded but uses an event-driven architecture with a non-blocking I/O model.
+    When a request involves operations like database access or file handling, 
+    Node.js offloads those tasks to the system and registers a callback.
+    Once the task is completed, the callback is placed in the event queue and executed by the event loop.
+    This allows Node.js to handle multiple requests concurrently without creating multiple threads.
+
+    ✔️ Easy Analogy (Use if needed)
+            Think of it like a waiter in a restaurant:
+
+            Takes order → sends to kitchen → moves to next table
+            Doesn’t wait for food to be ready
+            Comes back when food is done
+
+    ✔️ Key Terms to Mention
+        • Event Loop
+        • Non-blocking I/O
+        • Callback queue
+        • Asynchronous processing
+
+    ✔️ Bonus Tip (Impress Interviewer):
+      “Although Node.js is single-threaded, it internally uses a thread pool (via libuv) 
+      for handling certain operations like file system tasks.
+
+    ✔️ Common Mistake to Avoid
+        ❌ Saying “Node.js handles everything in one thread”
+        ✔️ Correct: It uses one main thread but offloads tasks internally  
+  `
+},
+{
+    question: "(This is very important) - What is Event Loop in Node.js?",
+    definition: `
+    `
+},
+{
     question: "",
     definition: `
     `
 },
+{
+    question: "",
+    definition: `
+    `
+},
+{
+    question: "",
+    definition: `
+    `
+},
+
 ];
 
 
@@ -276,20 +338,25 @@ Mongoose is a Node.js library that adds structure by defining schemas, validatio
     const questionGrid = document.getElementById("questionGrid");
     const definitionContainer = document.getElementById("definitionContainer");
 
-    nodeQuestions.forEach(item => {
+    nodeQuestions.forEach((item, index) => {
       // create top question box
       const card = document.createElement("div");
       card.className = "question-card";
-      card.innerHTML = `<strong style="color:#b366ff;">Q${item.questionId}:</strong> ${item.question}`;
-      card.addEventListener("click", () => scrollToDefinition(item.questionId));
+    //   card.innerHTML = `<strong style="color:#b366ff;">Q${item.questionId}:</strong> ${item.question}`;
+      card.innerHTML = `<strong style="color:#b366ff;">Q${index+1}:</strong> ${item.question}`;
+      card.addEventListener("click", () => scrollToDefinition(index+1));
+    //   card.addEventListener("click", () => scrollToDefinition(item.questionId));
       questionGrid.appendChild(card);
 
       // create definition section
       const def = document.createElement("div");
       def.className = "definition-section";
-      def.id = `question-${item.questionId}`;
+       // id maintain based on index
+    //   def.id = `question-${item.questionId}`;
+      def.id = `question-${index+1}`;
       def.innerHTML = `
-        <h3>Question ${item.questionId}: ${item.question}</h3>
+        <!-- <h3>Question ${item.questionId}: ${item.question}</h3> -->
+        <h3>Question ${index+1}: ${item.question}</h3>
         <pre>${item.definition}</pre>
       `;
       definitionContainer.appendChild(def);
