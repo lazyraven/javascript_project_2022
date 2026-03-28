@@ -312,6 +312,325 @@ Mongoose is a Node.js library that adds structure by defining schemas, validatio
 },
 {
     question: "(This is very important) - What is Event Loop in Node.js?",
+    definition: `The event loop is the core of Node.js asynchronous architecture. 
+    It continuously monitors the call stack and callback queue.
+    If the call stack is empty, it takes the first callback from the queue and pushes it to the stack for execution.
+    This process allows Node.js to handle multiple asynchronous operations efficiently without blocking the main thread.
+
+    ✔️ How It Works (Step-by-Step)
+        1. Code runs → goes into Call Stack
+        2. Async task (like API call, setTimeout) → sent to background
+        3. Once completed → callback moves to Callback Queue
+        4. Event loop checks:
+        - If stack is empty → pushes callback to stack
+        5.Executes callback
+
+    ✔️ Important Queues in Node.js
+       • Callback Queue (macrotasks)
+       • Microtask Queue (Promises, process.nextTick)
+
+👉 Microtasks run before callback queue (important detail)
+            console.log("Start");
+
+            setTimeout(() => {
+            console.log("Timeout");
+            }, 0);
+
+            Promise.resolve().then(() => {
+            console.log("Promise");
+            });
+
+            console.log("End");
+
+            Output : Start
+                    End
+                    Promise
+                    Timeout
+    ✔️ Why This Matters
+       • Enables non-blocking behavior
+       • Makes Node.js scalable
+       • Helps in handling thousands of requests
+
+    ✔️ Bonus Tip (Advanced Insight)
+
+        You can say:
+        “The event loop has different phases like timers, I/O callbacks, idle, poll, check, and close callbacks.”
+
+        (You don’t need deep detail unless asked)
+    `
+},
+{
+    question: "(Basic → Important)- What is the difference between synchronous and asynchronous code?",
+    definition: `In Node.js, synchronous code blocks the execution of the program until a task is completed, which can reduce performance.
+    Asynchronous code, on the other hand, allows tasks like file reading, API calls, or database operations to run in the background,
+    so the program can continue executing other code.
+    This non-blocking behavior improves scalability and performance.
+
+    🔴 Synchronous
+            const data = fs.readFileSync("file.txt");
+            console.log(data);
+            console.log("Done");
+       Execution waits until file is read
+
+    🟢 Asynchronous
+        fs.readFile("file.txt", (err, data) => {
+            console.log(data);
+        });
+        console.log("Done");
+        Output :Done
+               (file content later)
+
+  ✔️ Key Differences
+    | Feature     | Synchronous   | Asynchronous
+    |-------------|---------------|-------------
+    | Execution   | Blocking      | Non-blocking
+    | Performance | Slower        | Faster
+    | Use Case    | Simple tasks  | I/O operations
+
+  ✔️ When to Use What
+        Use sync → simple scripts, startup configs
+        Use async → APIs, DB calls, file handling (most real apps)
+
+  ✔️ Bonus Tip (Impress Interviewer)
+    “Node.js heavily relies on asynchronous programming to maintain high performance and scalability.”
+
+    - It’s non-blocking, not always parallel
+    `
+},
+{
+    question: "(Basic → Foundation) - What are callbacks in Node.js?",
+    definition: `In Node.js, callbacks are functions passed to other functions to be executed later, typically after an asynchronous operation completes.
+     They are a key part of handling non-blocking operations like file reading, API calls, or database queries.
+
+    function fetchData(callback) {
+        setTimeout(() => {
+            callback("Data received");
+        }, 1000);
+    }
+
+    fetchData((message) => {
+      console.log(message);
+    });
+    Output after 1 second: Data received
+
+    ✔️ Why Callbacks Are Used
+    • Handle async operations
+    • Avoid blocking execution
+    • Execute code after task completion
+
+    ✔️ Problem with Callbacks (Important)
+
+👉 Callback Hell
+  When callbacks are nested deeply, code becomes hard to read and maintain.
+        doTask1(() => {
+        doTask2(() => {
+            doTask3(() => {
+            // messy code
+            });
+        });
+ });
+
+✔️ How We Solve This
+    • Promises
+    • Async/Await (modern approach)
+
+✔️ Bonus Tip (Impress Interviewer)
+“Callbacks follow an error-first pattern in Node.js, where the first parameter is usually an error.”
+Ex :  
+    fs.readFile("file.txt", (err, data) => {
+    if (err) throw err;
+    console.log(data);
+});
+
+Callbacks are still used internally and in many APIs
+    `
+},
+{
+    question: "(Intermediate - Very important upgrade from callbacks) - What are Promises in Node.js?” ",
+    definition: `
+    A Promise in Node.js is used to handle asynchronous operations more effectively than callbacks.
+    It represents a value that may be available now later, or never.
+    Promises help avoid callback hell and provide better readability and error handling.
+
+✔️ Promise States
+    A Promise has 3 states:
+        Pending → Initial state
+        Fulfilled → Operation successful
+        Rejected → Operation failed
+
+    const myPromise = new Promise((resolve, reject) => {
+        let success = true;
+
+            if (success) {
+                resolve("Task completed");
+            } else {
+                reject("Task failed");
+            }
+    });
+
+    myPromise
+    .then((result) => console.log(result))
+    .catch((error) => console.log(error));
+
+    Output: Task completed 
+
+✔️ Why Promises Are Better Than Callbacks
+    • Avoid callback hell
+    • Better error handling
+    • Cleaner and more readable code
+    • Supports chaining (.then())
+
+✔️ Promise Chaining Example
+    doTask1()
+    .then(result1 => doTask2(result1))
+    .then(result2 => doTask3(result2))
+    .catch(err => console.error(err));
+
+✔️ Bonus Tip (Impress Interviewer)
+    “Promises are the foundation of async/await, which makes asynchronous code look synchronous.”
+
+✔️ Common Mistake
+    ❌ Thinking Promise executes only when .then() is called
+    ✔️ It executes immediately when created
+
+
+    `
+},{
+    question: "(Intermediate → Must-Know) - What is async/await in Node.js?",
+    definition: `async/await is built on top of Promises and is used to simplify asynchronous code.
+    The async keyword is used to declare a function that returns a Promise,and 
+    the await keyword pauses the execution of the function until the Promise is resolved or rejected.
+    This improves readability and makes error handling easier.
+
+    function fetchData() {
+        return new Promise((resolve) => {
+            setTimeout(() => resolve("Data received"), 1000);
+        });
+    }
+
+    async function getData() {
+        const result = await fetchData();
+        console.log(result);
+    }
+
+    getData();
+
+    Output : Data received
+
+ ✔️ Error Handling (Important)
+    async function getData() {
+        try {
+            const result = await fetchData();
+            console.log(result);
+        } catch (error) {
+            console.log(error);
+        }
+  }
+
+ ✔️ Why async/await is Better
+    • Cleaner and more readable
+    • Looks like synchronous code
+    • Easier debugging
+    • Better error handling with try...catch
+
+ ✔️ Bonus Tip (Impress Interviewer)
+    “Async/await simplifies promise chaining and avoids deeply nested .then() calls.
+
+ ✔️ Common Mistake
+    ❌ Using await outside async function
+    ❌ Thinking it blocks the whole program
+    ✔️ It only pauses inside that function
+    `
+},
+{
+    question: "(Intermediate → Comparison) - What is the difference between Promises and async/await in Node.js?",
+    definition: `Promises use .then() and .catch() for handling asynchronous operations,
+    while async/await is syntactic sugar built on top of Promises that allows writing asynchronous code in a synchronous style.
+    Async/await improves readability, reduces chaining, and makes error handling easier using try...catch.
+
+ ✔️ Example Comparison
+    🔴 Using Promises
+       fetchData()
+            .then(data => processData(data))
+            .then(result => console.log(result))
+            .catch(err => console.error(err));
+
+    🟢 Using Async/Await
+        async function handleData() {
+            try {
+                const data = await fetchData();
+                const result = await processData(data);
+                console.log(result);
+            } catch (err) {
+                console.error(err);
+            }
+       }
+| Feature        | Promises              | Async/Await      |
+| -------------- | --------------------- | ---------------- |
+| Syntax         | .then(), .catch()     | async, await     |
+| Readability    | Medium                | High             |
+| Error Handling | .catch()              | try...catch      |
+| Code Structure | Chaining              | Sequential-like  |
+
+✔️ When to Use
+  • Use async/await → most cases (clean code)
+  • Use Promises → when chaining or parallel execution (e.g. Promise.all)
+
+✔️ Bonus Tip (Impress Interviewer)
+   “Async/await internally uses Promises, so understanding Promises is essential.”
+     
+✔️ Common Mistake
+    ❌ Thinking async/await replaces Promises
+    ✔️ It is built on top of Promises
+    `
+},{
+    question: "(Intermediate → Practical) - What is Promise.all() and when do you use it?",
+    definition: `Promise.all() takes an array of promises and returns a single Promise. 
+    It resolves when all the promises are fulfilled and returns their results as an array.
+     If any one promise fails, it immediately rejects with that error.
+
+    const p1 = Promise.resolve("A");
+    const p2 = Promise.resolve("B");
+    const p3 = Promise.resolve("C");
+
+    Promise.all([p1, p2, p3])
+    .then((results) => console.log(results))
+    .catch((err) => console.error(err));
+
+    Output : ["A", "B", "C"]
+
+✔️ Real Use Case (Important)
+    👉 Fetching multiple APIs at the same time
+    const [user, posts, comments] = await Promise.all([
+            getUser(),
+            getPosts(),
+            getComments()
+    ]);
+
+✔️ Faster because all run in parallel
+
+✔️ Key Behavior
+    ✅ Runs all promises in parallel
+    ❌ Fails fast (if one fails → all fail)
+    ✅ Returns results in same order
+
+✔️ Bonus Tip (Impress Interviewer)
+
+    “If I want all results even if some fail, I would use Promise.allSettled() instead.
+    `
+},
+{
+    question: "",
+    definition: `
+    `
+},
+{
+    question: "",
+    definition: `
+    `
+},
+{
+    question: "",
     definition: `
     `
 },
@@ -330,6 +649,16 @@ Mongoose is a Node.js library that adds structure by defining schemas, validatio
     definition: `
     `
 },
+{
+    question: "",
+    definition: `
+    `
+},
+{
+    question: "",
+    definition: `
+    `
+}
 
 ];
 
