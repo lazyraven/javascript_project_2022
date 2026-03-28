@@ -1,270 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="https://img.icons8.com/?size=100&id=hsPbhkOH4FMe&format=png&color=000000">
-  <title>NodeJS Q&A Plan</title>
-<style>
-    body {
-        background-color: #111;
-        color: #fff;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        padding: 20px;
-    }
-
-    .question-grid {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-
-    .question-card {
-        background: #1e1e1e;
-        border: 1px solid #333;
-        border-radius: 6px;
-        padding: 10px;
-        font-size: 14px;
-        cursor: pointer;
-        transition: 0.3s;
-        text-align: center;
-        line-height: 1.3;
-    }
-
-    .question-card:hover {
-        background-color: #272727;
-    }
-
-    .definition-section {
-        background: #1a1a1a;
-        border: 1px solid #333;
-        border-radius: 8px;
-        padding: 15px;
-        margin-bottom: 25px;
-        transition: all 0.4s ease;
-    }
-
-    .definition-section.highlight {
-        border: 2px solid #b366ff;
-        box-shadow: 0 0 15px #b366ff66;
-        background: #2a1a3a;
-    }
-
-    .definition-section h3 {
-        color: #b366ff;
-        margin-bottom: 8px;
-    }
-
-    html {
-        scroll-behavior: smooth;
-    }
-
-    /* === Back to Top Button Styling === */
-    #backToTopBtn {
-        display: none;
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        background-color: #b366ff;
-        color: #fff;
-        border: none;
-        border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        font-size: 20px;
-        cursor: pointer;
-        box-shadow: 0 0 10px #b366ff80;
-        transition: all 0.3s ease;
-        z-index: 1000;
-    }
-
-    #backToTopBtn:hover {
-        background-color: #9933ff;
-        box-shadow: 0 0 20px #b366ff;
-        transform: scale(1.1);
-    }
-    /* === Floating Theme Toggle Button === */
-    #themeToggle {
-        position: fixed;
-        top: 20px;
-        right: 25px;
-        z-index: 1100;
-        cursor: pointer;
-        background: #fff;
-        color: #0d6efd;
-        border: none;
-        padding: 10px 16px;
-        border-radius: 30px;
-        font-weight: bold;
-        font-size: 14px;
-        box-shadow: 0 0 10px #b366ff60;
-        transition: all 0.3s ease;
-    }
-
-    #themeToggle:hover {
-        transform: scale(1.1);
-        background: #0d6efd;
-        color: #fff;
-        box-shadow: 0 0 15px #b366ff90;
-    }
-
-    /* === Smooth Fade Animation for Theme Switch === */
-    body {
-        transition: background-color 0.5s ease, color 0.5s ease;
-    }
-
-    .definition-section,
-    .question-card,
-    #backToTopBtn {
-        transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
-    }
-
-    /* === Light Mode === */
-    body.light-mode {
-        background-color: #f5f5f5;
-        color: #111;
-    }
-
-    body.light-mode .question-card {
-        background: #fff;
-        border: 1px solid #ccc;
-        color: #000;
-    }
-
-    body.light-mode .question-card:hover {
-        background-color: #f0f0f0;
-    }
-
-    body.light-mode .definition-section {
-        background: #fff;
-        border: 1px solid #ddd;
-        color: #000;
-    }
-
-    body.light-mode .definition-section h3 {
-        color: #7a3fff;
-    }
-
-    body.light-mode #backToTopBtn {
-        background-color: #7a3fff;
-    }
-
-    body.light-mode #themeToggle {
-        background: #0d6efd;
-        color: #fff;
-    }
-
-    /* === Responsive Adjustments === */
-    @media (max-width: 600px) {
-        #themeToggle {
-            top: 15px;
-            right: 15px;
-            padding: 8px 14px;
-            font-size: 13px;
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://img.icons8.com/?size=100&id=hsPbhkOH4FMe&format=png&color=000000">
+    <title>NodeJS Q&A Plan</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
         }
-    }
-    pre{
-        font-size: 16px;
-    }
-</style>
+
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .question-card {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .question-card:hover {
+            background-color: #272727;
+        }
+
+        .definition-section {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 25px;
+            transition: all 0.4s ease;
+        }
+
+        .definition-section.highlight {
+            border: 2px solid #b366ff;
+            box-shadow: 0 0 15px #b366ff66;
+            background: #2a1a3a;
+        }
+
+        .definition-section h3 {
+            color: #b366ff;
+            margin-bottom: 8px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* === Back to Top Button Styling === */
+        #backToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #b366ff;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 0 10px #b366ff80;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        #backToTopBtn:hover {
+            background-color: #9933ff;
+            box-shadow: 0 0 20px #b366ff;
+            transform: scale(1.1);
+        }
+
+        /* === Floating Theme Toggle Button === */
+        #themeToggle {
+            position: fixed;
+            top: 20px;
+            right: 25px;
+            z-index: 1100;
+            cursor: pointer;
+            background: #fff;
+            color: #0d6efd;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 0 10px #b366ff60;
+            transition: all 0.3s ease;
+        }
+
+        #themeToggle:hover {
+            transform: scale(1.1);
+            background: #0d6efd;
+            color: #fff;
+            box-shadow: 0 0 15px #b366ff90;
+        }
+
+        /* === Smooth Fade Animation for Theme Switch === */
+        body {
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .definition-section,
+        .question-card,
+        #backToTopBtn {
+            transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        /* === Light Mode === */
+        body.light-mode {
+            background-color: #f5f5f5;
+            color: #111;
+        }
+
+        body.light-mode .question-card {
+            background: #fff;
+            border: 1px solid #ccc;
+            color: #000;
+        }
+
+        body.light-mode .question-card:hover {
+            background-color: #f0f0f0;
+        }
+
+        body.light-mode .definition-section {
+            background: #fff;
+            border: 1px solid #ddd;
+            color: #000;
+        }
+
+        body.light-mode .definition-section h3 {
+            color: #7a3fff;
+        }
+
+        body.light-mode #backToTopBtn {
+            background-color: #7a3fff;
+        }
+
+        body.light-mode #themeToggle {
+            background: #0d6efd;
+            color: #fff;
+        }
+
+        /* === Responsive Adjustments === */
+        @media (max-width: 600px) {
+            #themeToggle {
+                top: 15px;
+                right: 15px;
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+        }
+
+        pre {
+            font-size: 16px;
+        }
+    </style>
 </head>
+
 <body> ✅ Week 1 and ✅ Week 5 – JS And Other Topics
-<button id="themeToggle">☀️ Light</button>
-<div>
-    <h4><a target="_target"
-            href="https://fullstack-interview-roadmap.netlify.app/">fullstack-interview-roadmap solution | ✅ Week 3 – Node.js + Backend</a>
-    </h4>
-</div>
-  <div class="question-grid" id="questionGrid"></div>
-  <div id="definitionContainer"></div>
+    <button id="themeToggle">☀️ Light</button>
+    <div>
+        <h4><a target="_target" href="https://fullstack-interview-roadmap.netlify.app/">fullstack-interview-roadmap
+                solution | ✅ Week 3 – Node.js + Backend</a>
+        </h4>
+    </div>
+    <div class="question-grid" id="questionGrid"></div>
+    <div id="definitionContainer"></div>
 
-  <!-- Back to Top Button -->
-  <button id="backToTopBtn" title="Go to top">↑</button>
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" title="Go to top">↑</button>
 
-  <script>
+    <script>
 
-const nodeQuestions = [
-  {
-    questionId: 1,
-    question: "What is Node basics (fs, path, modules) ?",
-    definition: `<pre>Definition : Node.js basics include fs for file operations, path for handling file paths, and modules for code organization and reuse. 
-They allow us to read/write files, resolve paths safely, and export/import functionality across files.</pre>`
-  },
-  {
-    questionId: 2,
-    question: "What is CommonJS vs ES modules in node js ?",
-    definition: `<pre>Definition : CommonJS (require/module.exports) is Node’s original module system, synchronous and server-focused. 
-ES Modules (import/export) are modern, support static analysis, and work natively in Node with .mjs or "type": "module" in package.json.</pre>`
-  },
-  {
-    questionId: 3,
-    question: "What is Express basics, middleware ?",
-    definition: `<pre>Definition : Express is a minimal Node.js web framework for building APIs and web apps. 
-Middleware are functions that process requests/responses, like logging, authentication, or parsing data, before reaching the route handler. 
-
-*1-liner explanation:
-Express is a Node.js web framework; middleware are functions that run during request/response processing.
-app.use((req, res, next) => { console.log(req.url); next(); });</pre>`
-  },
-  {
-    questionId: 4,
-    question: "What is Types of middleware ?",
-    definition: `<pre>Definition : Express middleware can be application-level (used across the app), router-level (used for specific routes), 
-built-in (like express.json()), or error-handling (handles errors passed via next(err)).</pre>`
-  },
-  {
-    questionId: 5,
-    question: "What is REST APIs with Express ?",
-    definition: `<pre>Definition : REST APIs in Express let you handle HTTP requests (GET, POST, PUT, DELETE) to perform CRUD operations.
-Express routes map URLs to functions that process data and return responses in JSON or other formats.</pre>`
-  },
-  {
-    questionId: 6,
-    question: "What is REST vs GraphQL ?",
-    definition: `<pre>Definition : REST APIs expose multiple endpoints and return fixed data structures, 
-while GraphQL uses a single endpoint and lets clients request exactly the data they need. 
-GraphQL reduces over-fetching and under-fetching compared to REST.
-
-OR 
-
-REST APIs use multiple endpoints, each returning fixed data, so you often over-fetch or under-fetch. 
-GraphQL uses a single endpoint and lets clients request exactly the data they need. 
-For example, in REST you’d use GET /users to fetch all users, while in GraphQL you’d write a query like { user(id: "1") { id, name } }.</pre>`
-  },
-  {
-    questionId: 7,
-    question: "What is MongoDB + Mongoose ?",
-    definition: `* MongoDB is a NoSQL database, and Mongoose is a Node.js library to define schemas and interact with it easily.
-
-Definition : MongoDB is a NoSQL database for storing JSON-like documents. 
-Mongoose is an ODM (Object Data Modeling) library for Node.js that helps define schemas and interact with MongoDB in an organized way.
-
-OR
-
-MongoDB is a NoSQL database that stores data as JSON-like documents, making it flexible and scalable.
-Mongoose is a Node.js library that adds structure by defining schemas, validation, and easy methods to create, read, update, and delete data.</pre>`
-  },   
-  {
-    questionId: 8,
-    question: "What is SMTP? What ports does SMTP use? Why used in Node?",
-    definition: `
-        Simple Mail Transfer Protocol — used to send emails from server to server.
-        25, 465 (SSL), 587 (TLS).
-        To send OTP emails, notifications using Nodemailer.
-    `
-  },
-{
-    question: "Single Thread & MultiThreaded?",
-    definition: `How does Node.js handle heavy tasks if it’s single-threaded?
-     • Node.js uses a worker thread pool and asynchronous I/O.
-    Heavy operations can be offloaded to worker threads, while the event loop stays responsive.
-    `
-},
-{
-    question: "(Basic) - What is Node.js?",
-    definition: `
+        const nodeQuestions = [
+            {
+                question: "(Basic) - What is Node.js?",
+                definition: `
     Node.js is an open-source, cross-platform runtime environment that executes JavaScript code outside the browser.
     
     It uses an event-driven, non-blocking I/O model, which makes it efficient and suitable 
@@ -279,10 +207,10 @@ Mongoose is a Node.js library that adds structure by defining schemas, validatio
       • Not ideal for:
         - CPU-heavy tasks
     `
-},
-{
-    question: "(Basic → Core Concept) - Why is Node.js single-threaded but still able to handle multiple requests efficiently?",
-    definition: `Node.js is single-threaded but uses an event-driven architecture with a non-blocking I/O model.
+            },
+            {
+                question: "(Basic → Core Concept) - Why is Node.js single-threaded but still able to handle multiple requests efficiently?",
+                definition: `Node.js is single-threaded but uses an event-driven architecture with a non-blocking I/O model.
     When a request involves operations like database access or file handling, 
     Node.js offloads those tasks to the system and registers a callback.
     Once the task is completed, the callback is placed in the event queue and executed by the event loop.
@@ -309,10 +237,10 @@ Mongoose is a Node.js library that adds structure by defining schemas, validatio
         ❌ Saying “Node.js handles everything in one thread”
         ✔️ Correct: It uses one main thread but offloads tasks internally  
   `
-},
-{
-    question: "(This is very important) - What is Event Loop in Node.js?",
-    definition: `The event loop is the core of Node.js asynchronous architecture. 
+            },
+            {
+                question: "(This is very important) - What is Event Loop in Node.js?",
+                definition: `The event loop is the core of Node.js asynchronous architecture. 
     It continuously monitors the call stack and callback queue.
     If the call stack is empty, it takes the first callback from the queue and pushes it to the stack for execution.
     This process allows Node.js to handle multiple asynchronous operations efficiently without blocking the main thread.
@@ -358,10 +286,10 @@ Mongoose is a Node.js library that adds structure by defining schemas, validatio
 
         (You don’t need deep detail unless asked)
     `
-},
-{
-    question: "(Basic → Important)- What is the difference between synchronous and asynchronous code?",
-    definition: `In Node.js, synchronous code blocks the execution of the program until a task is completed, which can reduce performance.
+            },
+            {
+                question: "(Basic → Important)- What is the difference between synchronous and asynchronous code?",
+                definition: `In Node.js, synchronous code blocks the execution of the program until a task is completed, which can reduce performance.
     Asynchronous code, on the other hand, allows tasks like file reading, API calls, or database operations to run in the background,
     so the program can continue executing other code.
     This non-blocking behavior improves scalability and performance.
@@ -396,10 +324,10 @@ Mongoose is a Node.js library that adds structure by defining schemas, validatio
 
     - It’s non-blocking, not always parallel
     `
-},
-{
-    question: "(Basic → Foundation) - What are callbacks in Node.js?",
-    definition: `In Node.js, callbacks are functions passed to other functions to be executed later, typically after an asynchronous operation completes.
+            },
+            {
+                question: "(Basic → Foundation) - What are callbacks in Node.js?",
+                definition: `In Node.js, callbacks are functions passed to other functions to be executed later, typically after an asynchronous operation completes.
      They are a key part of handling non-blocking operations like file reading, API calls, or database queries.
 
     function fetchData(callback) {
@@ -444,10 +372,10 @@ Ex :
 
 Callbacks are still used internally and in many APIs
     `
-},
-{
-    question: "(Intermediate - Very important upgrade from callbacks) - What are Promises in Node.js?” ",
-    definition: `
+            },
+            {
+                question: "(Intermediate - Very important upgrade from callbacks) - What are Promises in Node.js?” ",
+                definition: `
     A Promise in Node.js is used to handle asynchronous operations more effectively than callbacks.
     It represents a value that may be available now later, or never.
     Promises help avoid callback hell and provide better readability and error handling.
@@ -495,9 +423,9 @@ Callbacks are still used internally and in many APIs
 
 
     `
-},{
-    question: "(Intermediate → Must-Know) - What is async/await in Node.js?",
-    definition: `async/await is built on top of Promises and is used to simplify asynchronous code.
+            }, {
+                question: "(Intermediate → Must-Know) - What is async/await in Node.js?",
+                definition: `async/await is built on top of Promises and is used to simplify asynchronous code.
     The async keyword is used to declare a function that returns a Promise,and 
     the await keyword pauses the execution of the function until the Promise is resolved or rejected.
     This improves readability and makes error handling easier.
@@ -541,10 +469,10 @@ Callbacks are still used internally and in many APIs
     ❌ Thinking it blocks the whole program
     ✔️ It only pauses inside that function
     `
-},
-{
-    question: "(Intermediate → Comparison) - What is the difference between Promises and async/await in Node.js?",
-    definition: `Promises use .then() and .catch() for handling asynchronous operations,
+            },
+            {
+                question: "(Intermediate → Comparison) - What is the difference between Promises and async/await in Node.js?",
+                definition: `Promises use .then() and .catch() for handling asynchronous operations,
     while async/await is syntactic sugar built on top of Promises that allows writing asynchronous code in a synchronous style.
     Async/await improves readability, reduces chaining, and makes error handling easier using try...catch.
 
@@ -583,9 +511,9 @@ Callbacks are still used internally and in many APIs
     ❌ Thinking async/await replaces Promises
     ✔️ It is built on top of Promises
     `
-},{
-    question: "(Intermediate → Practical) - What is Promise.all() and when do you use it?",
-    definition: `Promise.all() takes an array of promises and returns a single Promise. 
+            }, {
+                question: "(Intermediate → Practical) - What is Promise.all() and when do you use it?",
+                definition: `Promise.all() takes an array of promises and returns a single Promise. 
     It resolves when all the promises are fulfilled and returns their results as an array.
      If any one promise fails, it immediately rejects with that error.
 
@@ -618,137 +546,207 @@ Callbacks are still used internally and in many APIs
 
     “If I want all results even if some fail, I would use Promise.allSettled() instead.
     `
-},
-{
-    question: "",
-    definition: `
-    `
-},
-{
-    question: "",
-    definition: `
-    `
-},
-{
-    question: "",
-    definition: `
-    `
-},
-{
-    question: "",
-    definition: `
-    `
-},
-{
-    question: "",
-    definition: `
-    `
-},
-{
-    question: "",
-    definition: `
-    `
-},
-{
-    question: "",
-    definition: `
-    `
-},
-{
-    question: "",
-    definition: `
-    `
-}
+            },
+            {
+                question: "What is Node basics (fs, path, modules) ?",
+                definition: `<pre>Definition : Node.js basics include fs for file operations, path for handling file paths, and modules for code organization and reuse. 
+They allow us to read/write files, resolve paths safely, and export/import functionality across files.</pre>`
+            },
+            {
+                question: "What is CommonJS vs ES modules in node js ?",
+                definition: `<pre>Definition : CommonJS (require/module.exports) is Node’s original module system, synchronous and server-focused. 
+ES Modules (import/export) are modern, support static analysis, and work natively in Node with .mjs or "type": "module" in package.json.</pre>`
+            },
+            {
+                question: "What is Express basics, middleware ?",
+                definition: `<pre>Definition : Express is a minimal Node.js web framework for building APIs and web apps. 
+Middleware are functions that process requests/responses, like logging, authentication, or parsing data, before reaching the route handler. 
 
-];
+*1-liner explanation:
+Express is a Node.js web framework; middleware are functions that run during request/response processing.
+app.use((req, res, next) => { console.log(req.url); next(); });</pre>`
+            },
+            {
+                question: "What is Types of middleware ?",
+                definition: `<pre>Definition : Express middleware can be application-level (used across the app), router-level (used for specific routes), 
+built-in (like express.json()), or error-handling (handles errors passed via next(err)).</pre>`
+            },
+            {
+                question: "What is REST APIs with Express ?",
+                definition: `<pre>Definition : REST APIs in Express let you handle HTTP requests (GET, POST, PUT, DELETE) to perform CRUD operations.
+Express routes map URLs to functions that process data and return responses in JSON or other formats.</pre>`
+            },
+            {
+                question: "What is REST vs GraphQL ?",
+                definition: `<pre>Definition : REST APIs expose multiple endpoints and return fixed data structures, 
+while GraphQL uses a single endpoint and lets clients request exactly the data they need. 
+GraphQL reduces over-fetching and under-fetching compared to REST.
+
+OR 
+
+REST APIs use multiple endpoints, each returning fixed data, so you often over-fetch or under-fetch. 
+GraphQL uses a single endpoint and lets clients request exactly the data they need. 
+For example, in REST you’d use GET /users to fetch all users, while in GraphQL you’d write a query like { user(id: "1") { id, name } }.</pre>`
+            },
+            {
+                question: "What is MongoDB + Mongoose ?",
+                definition: `* MongoDB is a NoSQL database, and Mongoose is a Node.js library to define schemas and interact with it easily.
+
+Definition : MongoDB is a NoSQL database for storing JSON-like documents. 
+Mongoose is an ODM (Object Data Modeling) library for Node.js that helps define schemas and interact with MongoDB in an organized way.
+
+OR
+
+MongoDB is a NoSQL database that stores data as JSON-like documents, making it flexible and scalable.
+Mongoose is a Node.js library that adds structure by defining schemas, validation, and easy methods to create, read, update, and delete data.</pre>`
+            },
+            {
+                question: "What is SMTP? What ports does SMTP use? Why used in Node?",
+                definition: `
+        Simple Mail Transfer Protocol — used to send emails from server to server.
+        25, 465 (SSL), 587 (TLS).
+        To send OTP emails, notifications using Nodemailer.
+    `
+            },
+            {
+                question: "Single Thread & MultiThreaded?",
+                definition: `How does Node.js handle heavy tasks if it’s single-threaded?
+     • Node.js uses a worker thread pool and asynchronous I/O.
+    Heavy operations can be offloaded to worker threads, while the event loop stays responsive.
+    `
+            },
+
+            {
+                question: "",
+                definition: `
+    `
+            },
+            {
+                question: "",
+                definition: `
+    `
+            },
+            {
+                question: "",
+                definition: `
+    `
+            },
+            {
+                question: "",
+                definition: `
+    `
+            },
+            {
+                question: "",
+                definition: `
+    `
+            },
+            {
+                question: "",
+                definition: `
+    `
+            },
+            {
+                question: "",
+                definition: `
+    `
+            },
+            {
+                question: "",
+                definition: `
+    `
+            }
+
+        ];
 
 
 
-    const questionGrid = document.getElementById("questionGrid");
-    const definitionContainer = document.getElementById("definitionContainer");
+        const questionGrid = document.getElementById("questionGrid");
+        const definitionContainer = document.getElementById("definitionContainer");
 
-    nodeQuestions.forEach((item, index) => {
-      // create top question box
-      const card = document.createElement("div");
-      card.className = "question-card";
-    //   card.innerHTML = `<strong style="color:#b366ff;">Q${item.questionId}:</strong> ${item.question}`;
-      card.innerHTML = `<strong style="color:#b366ff;">Q${index+1}:</strong> ${item.question}`;
-      card.addEventListener("click", () => scrollToDefinition(index+1));
-    //   card.addEventListener("click", () => scrollToDefinition(item.questionId));
-      questionGrid.appendChild(card);
+        nodeQuestions.forEach((item, index) => {
+            // create top question box
+            const card = document.createElement("div");
+            card.className = "question-card";
+            //   card.innerHTML = `<strong style="color:#b366ff;">Q${item.questionId}:</strong> ${item.question}`;
+            card.innerHTML = `<strong style="color:#b366ff;">Q${index + 1}:</strong> ${item.question}`;
+            card.addEventListener("click", () => scrollToDefinition(index + 1));
+            //   card.addEventListener("click", () => scrollToDefinition(item.questionId));
+            questionGrid.appendChild(card);
 
-      // create definition section
-      const def = document.createElement("div");
-      def.className = "definition-section";
-       // id maintain based on index
-    //   def.id = `question-${item.questionId}`;
-      def.id = `question-${index+1}`;
-      def.innerHTML = `
+            // create definition section
+            const def = document.createElement("div");
+            def.className = "definition-section";
+            // id maintain based on index
+            //   def.id = `question-${item.questionId}`;
+            def.id = `question-${index + 1}`;
+            def.innerHTML = `
         <!-- <h3>Question ${item.questionId}: ${item.question}</h3> -->
-        <h3>Question ${index+1}: ${item.question}</h3>
+        <h3>Question ${index + 1}: ${item.question}</h3>
         <pre>${item.definition}</pre>
       `;
-      definitionContainer.appendChild(def);
-    });
+            definitionContainer.appendChild(def);
+        });
 
-    function scrollToDefinition(id) {
-      const target = document.getElementById(`question-${id}`);
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-        target.classList.add("highlight");
-        setTimeout(() => target.classList.remove("highlight"), 1500);
-      }
-    }
-
-    
-    // === Back to Top Button Logic ===
-    const backToTopBtn = document.getElementById("backToTopBtn");
-
-    window.addEventListener("scroll", () => {
-      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-        backToTopBtn.style.display = "block";
-      } else {
-        backToTopBtn.style.display = "none";
-      }
-    });
-
-    backToTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+        function scrollToDefinition(id) {
+            const target = document.getElementById(`question-${id}`);
+            if (target) {
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+                target.classList.add("highlight");
+                setTimeout(() => target.classList.remove("highlight"), 1500);
+            }
+        }
 
 
-   /// === Theme Toggle Logic with Icons and Fade ===
-    const themeToggle = document.getElementById("themeToggle");
-    const body = document.body;
+        // === Back to Top Button Logic ===
+        const backToTopBtn = document.getElementById("backToTopBtn");
 
-    // Load saved theme preference
-    if (localStorage.getItem("theme") === "light") {
-    enableLightMode(false);
-    } else {
-    enableDarkMode(false);
-    }
+        window.addEventListener("scroll", () => {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        });
 
-    themeToggle.addEventListener("click", () => {
-    body.classList.add("fade-transition");
-    if (body.classList.contains("light-mode")) {
-        enableDarkMode();
-    } else {
-        enableLightMode();
-    }
-    setTimeout(() => body.classList.remove("fade-transition"), 400);
-    });
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
 
-    function enableLightMode(save = true) {
-    body.classList.add("light-mode");
-    themeToggle.innerHTML = "🌙 Dark";
-    if (save) localStorage.setItem("theme", "light");
-    }
 
-    function enableDarkMode(save = true) {
-    body.classList.remove("light-mode");
-    themeToggle.innerHTML = "☀️ Light";
-    if (save) localStorage.setItem("theme", "dark");
-    }
-  </script>
+        /// === Theme Toggle Logic with Icons and Fade ===
+        const themeToggle = document.getElementById("themeToggle");
+        const body = document.body;
+
+        // Load saved theme preference
+        if (localStorage.getItem("theme") === "light") {
+            enableLightMode(false);
+        } else {
+            enableDarkMode(false);
+        }
+
+        themeToggle.addEventListener("click", () => {
+            body.classList.add("fade-transition");
+            if (body.classList.contains("light-mode")) {
+                enableDarkMode();
+            } else {
+                enableLightMode();
+            }
+            setTimeout(() => body.classList.remove("fade-transition"), 400);
+        });
+
+        function enableLightMode(save = true) {
+            body.classList.add("light-mode");
+            themeToggle.innerHTML = "🌙 Dark";
+            if (save) localStorage.setItem("theme", "light");
+        }
+
+        function enableDarkMode(save = true) {
+            body.classList.remove("light-mode");
+            themeToggle.innerHTML = "☀️ Light";
+            if (save) localStorage.setItem("theme", "dark");
+        }
+    </script>
 </body>
+
 </html>
