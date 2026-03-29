@@ -108,10 +108,7 @@
   <div class="container">
 
     <!-- PWC -->
-     <div>
-      <a href="https://chatgpt.com/share/6981dc95-646c-8013-a7e3-77284d60b4b5">Websocket : https://chatgpt.com/share/6981dc95-646c-8013-a7e3-77284d60b4b5</a>
-      <a href="https://chatgpt.com/share/6981dd17-d5bc-8013-86c3-6f25bea5b42a">:https://chatgpt.com/share/6981dd17-d5bc-8013-86c3-6f25bea5b42a:</a>
-     </div>
+
     <div class="card">
       <h2>PWC — React / Node | 2026</h2>
       <div class="meta">
@@ -119,7 +116,10 @@
         <br />
         <b>Date:</b> 27 Jan 2026 | 1:00 – 1:30 PM
       </div>
-
+     <div>
+      <a href="https://chatgpt.com/share/6981dc95-646c-8013-a7e3-77284d60b4b5">Websocket : https://chatgpt.com/share/6981dc95-646c-8013-a7e3-77284d60b4b5</a>
+      <a href="https://chatgpt.com/share/6981dd17-d5bc-8013-86c3-6f25bea5b42a">:https://chatgpt.com/share/6981dd17-d5bc-8013-86c3-6f25bea5b42a:</a>
+     </div>
       <div class="section-title">Technical Stack</div>
       <div class="tags">
         <span class="tag">React</span>
@@ -149,6 +149,101 @@
       </pre>
     </div>
 
+    <!-- Infosys-React -->
+     <div class="card">
+      <h2>Infosys — JS / React / Node | 2026</h2>
+      <div class="meta">
+        <b>Mail:</b> Interview Invite: Nisha | Candidate ID: 1
+        <br />
+        <b>Date:</b> 28 March 2026 | 2:00 – 3:00 PM
+      </div>
+
+      <div class="section-title">Technical Stack</div>
+      <div class="tags">
+        <span class="tag">Javascript</span>
+        <span class="tag">React</span>
+        <span class="tag">Typescript</span>
+      </div>
+
+      <div class="section-title">Key Questions</div>
+      <div class="qa">
+        <div class="divider"></div>
+        <b>Typescript:</b>  Typescript Interface
+
+        <b>Javascript:</b> Hoisiting, ES6 feature and explain, Rest Operator, Spread operator, concat and .push difference 
+        concat and .push difference check in flatten example ...Recursive define in the example
+         <pre>
+          Que 1
+          // let user = null;
+          // const { name } = user 
+          // console.log(name); // error
+
+          correct this question: const { name } = user || {}; // output of name = undefined
+
+        Que 2  I correct this function with this solution added in function  result =  result.concat(flatten(item))
+          Recursive > // function flatten(arr) {
+
+          //   let result = [];
+
+          //   for (let item of arr) {
+          //     if (Array.isArray(item)) {
+          //       result.concat(flatten(item));
+          //     result =  result.concat(flatten(item))
+          //     //  result = [...result, ...flatten(item)];
+          //     } else {
+          //       result.push(item);
+          //     }
+          //   }
+
+          //   return result;
+          // }
+
+          // console.log(flatten([1, [2, [3, 4]]]));
+      </pre>
+        <b>React:</b> How many hooks use in ReactJs ?
+        <!-- correct this code
+        import { useState, useEffect } from "react";
+        export default function Counter() {
+          const [count, setCount] = useState(0);
+          useEffect(() => {
+            setInterval(() => {
+              console.log(count);
+            }, 1000);
+          }, []);
+          return (
+        <button onClick={() => setCount(count + 1)}>
+              {count}
+        </button>
+          );
+        } -->
+
+        <pre> Que 1: correct this code
+          import { useState, useEffect } from "react";
+        
+        export default function Counter() {
+
+          const [count, setCount] = useState(0);
+        
+          useEffect(() => {
+
+            setInterval(() => {
+
+              console.log(count);
+
+            }, 1000);
+
+          }, []);
+        
+          return (
+        button onClick={() => setCount(count + 1)}>
+
+              {count}
+        /button
+
+          );
+        </pre>
+      </div>
+    </div>
   </div>
 </body>
 </html>
