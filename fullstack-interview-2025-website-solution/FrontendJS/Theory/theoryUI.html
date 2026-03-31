@@ -405,6 +405,21 @@ States:
 • Rejected → failed.
 
 Use .then() for success, .catch() for errors, .finally() for cleanup.
+
+✔️ Why Promises Are Better Than Callbacks
+    • Avoid callback hell
+    • Better error handling
+    • Cleaner and more readable code
+    • Supports chaining (.then())
+
+✔️ Promise Chaining Example
+  doTask1()
+    .then(result1 => doTask2(result1))
+    .then(result2 => doTask3(result2))
+    .catch(err => console.error(err));
+
+✔️ It executes immediately when created
+Promises are the foundation of async/await, which makes asynchronous code look synchronous.
 `
   },
   {
@@ -419,6 +434,48 @@ Async/Await (ES2017) are built on top of Promises.
 
 Promise = chaining
 async/await = clean synchronous-like code.
+
+async/await is built on top of Promises and is used to simplify asynchronous code. 
+The async keyword is used to declare a function that returns a Promise, and 
+the await keyword pauses the execution of the function until the Promise is resolved or rejected. 
+This improves readability and makes error handling easier.
+
+    function fetchData() {
+      return new Promise((resolve) => {
+        setTimeout(() => resolve("Data received"), 1000);
+      });
+    }
+
+    async function getData() {
+      const result = await fetchData();
+      console.log(result);
+    }
+
+    getData();
+    ✔️ Output
+      Data received
+
+  ✔️ Error Handling (Important)
+    async function getData() {
+      try {
+        const result = await fetchData();
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+  ✔️ Why async/await is Better
+    • Cleaner and more readable
+    • Looks like synchronous code
+    • Easier debugging
+    • Better error handling with try...catch
+ ✔️ Important Rules
+    • await can only be used inside an async function
+    • async function always returns a Promise
+    Async/await simplifies promise chaining and avoids deeply nested .then() calls.
+
+  ✔️ It only pauses inside that function
 `
   },
   {
@@ -477,6 +534,8 @@ allowing asynchronous operations without blocking the main thread.
 
 Cycle:
 Call Stack → Microtask Queue (Promises) → Macrotask Queue (setTimeout, I/O)
+Tip:
+The event loop has different phases like timers, I/O callbacks, idle, poll, check, and close callbacks.
 `
   },
   {
@@ -1133,6 +1192,80 @@ Examples:
 
 Babel, TypeScript compiler (tsc), Sass, esbuild (can compile and bundle)
 const greet: string = "Hello"; Compiler (tsc) outputs: const greet = "Hello"; | Just transforms the code.
+` 
+  },
+{ 
+        questionId: 53, 
+        question: "What is the difference between synchronous and asynchronous code?", 
+        definition : `Synchronous code executes line by line, blocking the next operation until the current one finishes.
+Asynchronous code allows the program to continue execution without waiting for the current task to complete.
+
+    🔴 Synchronous
+    const data = fs.readFileSync("file.txt");
+    console.log(data);
+    console.log("Done");
+
+    👉 Execution waits until file is read
+
+    🟢 Asynchronous
+    fs.readFile("file.txt", (err, data) => {
+      console.log(data);
+    });
+      👉 Output:
+
+      Done
+      (file content later)
+      console.log("Done");
+
+      | Feature     | Synchronous  | Asynchronous   |
+      | ----------- | ------------ | -------------- |
+      | Execution   | Blocking     | Non-blocking   |
+      | Performance | Slower       | Faster         |
+      | Use Case    | Simple tasks | I/O operations |
+
+✔️ When to Use What
+  • Use sync → simple scripts, startup configs
+  • Use async → APIs, DB calls, file handling (most real apps)
+` 
+  },
+{ 
+        questionId: 53, 
+        question: "What is the callbacks?", 
+        definition : `A callback is a function that is passed as an argument to another function and is executed after that function completes its task.
+
+            function fetchData(callback) {
+            setTimeout(() => {
+              callback("Data received");
+            }, 1000);
+          }
+
+          fetchData((message) => {
+            console.log(message);
+          });
+
+          👉 Output after 1 second:
+          Data received
+
+✔️ Why Callbacks Are Used
+      • Handle async operations
+      • Avoid blocking execution
+      • Execute code after task completion
+
+✔️ Problem with Callbacks (Important)
+  👉 Callback Hell
+  When callbacks are nested deeply, code becomes hard to read and maintain.
+        doTask1(() => {
+        doTask2(() => {
+          doTask3(() => {
+            // messy code
+          });
+        });
+      });
+✔️ How We Solve This
+    • Promises
+    • Async/Await (modern approach)
+✔️ They(CALLBACKS) are still used internally and in many APIs
+
 ` 
   },
 ];
