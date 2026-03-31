@@ -393,6 +393,45 @@ Key points:
 • Classes are syntactic sugar over prototypes.
 `
   },
+  { 
+        question: "What is the callbacks?", 
+        definition : `A callback is a function that is passed as an argument to another function and is executed after that function completes its task.
+
+            function fetchData(callback) {
+            setTimeout(() => {
+              callback("Data received");
+            }, 1000);
+          }
+
+          fetchData((message) => {
+            console.log(message);
+          });
+
+          👉 Output after 1 second:
+          Data received
+
+✔️ Why Callbacks Are Used
+      • Handle async operations
+      • Avoid blocking execution
+      • Execute code after task completion
+
+✔️ Problem with Callbacks (Important)
+  👉 Callback Hell
+  When callbacks are nested deeply, code becomes hard to read and maintain.
+        doTask1(() => {
+        doTask2(() => {
+          doTask3(() => {
+            // messy code
+          });
+        });
+      });
+✔️ How We Solve This
+    • Promises
+    • Async/Await (modern approach)
+✔️ They(CALLBACKS) are still used internally and in many APIs
+
+` 
+  },
   {
     questionId: 14,
     question: "What are Promises?",
@@ -476,6 +515,8 @@ This improves readability and makes error handling easier.
     Async/await simplifies promise chaining and avoids deeply nested .then() calls.
 
   ✔️ It only pauses inside that function
+
+
 `
   },
   {
@@ -510,6 +551,43 @@ Spoken Answer :
                     then microtasks from Promises or await, and finally macrotasks like setTimeout. This is why understanding the 
                     event loop is crucial when debugging async behavior."*
                      Chcek => "js_async_cheatsheet.pdf"
+                     
+                     OR 
+
+                     Promises use .then() and .catch() for handling asynchronous operations, while async/await is syntactic 
+                     sugar built on top of Promises that allows writing asynchronous code in a synchronous style. 
+                     Async/await improves readability, reduces chaining, 
+                     and makes error handling easier using try...catch.
+  ✔️ Example Comparison
+      🔴 Using Promises
+      fetchData()
+        .then(data => processData(data))
+        .then(result => console.log(result))
+        .catch(err => console.error(err))
+
+      🟢 Using Async/Await
+        async function handleData() {
+        try {
+          const data = await fetchData();
+          const result = await processData(data);
+          console.log(result);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+  | Feature        | Promises              | Async/Await      |
+  | -------------- | --------------------- | ---------------- |
+  | Syntax         | .then(), .catch()     | async, await     |
+  | Readability    | Medium                | High             |
+  | Error Handling | .catch()              | try...catch      |
+  | Code Structure | Chaining              | Sequential-like  |
+
+  ✔️ When to Use
+  • Use async/await → most cases (clean code)
+  • Use Promises → when chaining or parallel execution (e.g. Promise.all)
+
+✔️ Bonus Tip (Impress Interviewer)
+   “Async/await internally uses Promises, so understanding Promises is essential.”
 `
   },
   {
@@ -525,6 +603,44 @@ Run simultaneously — independent tasks that don’t wait for each other.
 • Useful when tasks are independent.
 `
   },
+  {
+    question: " What is Promise.all() and when do you use it?",
+    definition: `Promise.all() takes an array of promises and returns a single Promise. 
+    It resolves when all the promises are fulfilled and returns their results as an array. If any one promise fails, 
+    it immediately rejects with that error.
+
+        const p1 = Promise.resolve("A");
+        const p2 = Promise.resolve("B");
+        const p3 = Promise.resolve("C");
+
+        Promise.all([p1, p2, p3])
+          .then((results) => console.log(results))
+          .catch((err) => console.error(err));
+        ✔️ Output
+        ["A", "B", "C"]
+
+        ✔️ Real Use Case (Important)
+
+👉 Fetching multiple APIs at the same time
+
+      const [user, posts, comments] = await Promise.all([
+        getUser(),
+        getPosts(),
+        getComments()
+      ]);
+
+✔️ Faster because all run in parallel
+
+✔️ Key Behavior
+✅ Runs all promises in parallel
+❌ Fails fast (if one fails → all fail)
+✅ Returns results in same order
+
+✔️ Bonus Tip (Impress Interviewer)
+    “If I want all results even if some fail, I would use Promise.allSettled() instead.”
+`
+  },
+
   {
     questionId: 18,
     question: "Explain the event loop?",
@@ -1228,65 +1344,31 @@ Asynchronous code allows the program to continue execution without waiting for t
   • Use async → APIs, DB calls, file handling (most real apps)
 ` 
   },
-{ 
-        questionId: 53, 
-        question: "What is the callbacks?", 
-        definition : `A callback is a function that is passed as an argument to another function and is executed after that function completes its task.
 
-            function fetchData(callback) {
-            setTimeout(() => {
-              callback("Data received");
-            }, 1000);
-          }
-
-          fetchData((message) => {
-            console.log(message);
-          });
-
-          👉 Output after 1 second:
-          Data received
-
-✔️ Why Callbacks Are Used
-      • Handle async operations
-      • Avoid blocking execution
-      • Execute code after task completion
-
-✔️ Problem with Callbacks (Important)
-  👉 Callback Hell
-  When callbacks are nested deeply, code becomes hard to read and maintain.
-        doTask1(() => {
-        doTask2(() => {
-          doTask3(() => {
-            // messy code
-          });
-        });
-      });
-✔️ How We Solve This
-    • Promises
-    • Async/Await (modern approach)
-✔️ They(CALLBACKS) are still used internally and in many APIs
-
-` 
-  },
 ];
 
     const questionGrid = document.getElementById("questionGrid");
     const definitionContainer = document.getElementById("definitionContainer");
 
-    jsInterviewQuestions.forEach(item => {
+    jsInterviewQuestions.forEach((item, index) => {
       // create top question box
       const card = document.createElement("div");
       card.className = "question-card";
-      card.innerHTML = `<strong style="color:#b366ff;">Q${item.questionId}:</strong> ${item.question}`;
-      card.addEventListener("click", () => scrollToDefinition(item.questionId));
+      // card.innerHTML = `<strong style="color:#b366ff;">Q${item.questionId}:</strong> ${item.question}`;
+      card.innerHTML = `<strong style="color:#b366ff;">Q${index+1}:</strong> ${item.question}`;
+      // card.addEventListener("click", () => scrollToDefinition(item.questionId));
+      card.addEventListener("click", () => scrollToDefinition(index+1));
+
       questionGrid.appendChild(card);
 
       // create definition section
       const def = document.createElement("div");
       def.className = "definition-section";
-      def.id = `question-${item.questionId}`;
+      // def.id = `question-${item.questionId}`;
+      def.id = `question-${index+1}`;
       def.innerHTML = `
-        <h3>Question ${item.questionId}: ${item.question}</h3>
+        <!-- <h3>Question ${item.questionId}: ${item.question}</h3> -->
+        <h3>Question ${index+1}: ${item.question}</h3>
         <pre>${item.definition}</pre>
       `;
       definitionContainer.appendChild(def);
