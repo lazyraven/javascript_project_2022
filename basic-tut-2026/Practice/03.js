@@ -17,5 +17,16 @@ function findMaxEle() {
     }
     console.log("maxVal", maxVal);
     console.log("minVal", minVal);
+      return { minVal, maxVal };
 }
 console.log(findMaxEle(arr));
+
+
+// for (let i = 1; i < arr.length; i++) {
+//     if (arr[i] < min) {
+//       min = arr[i];
+//     }
+//     if (arr[i] > max) {
+//       max = arr[i];
+//     }
+//   }
