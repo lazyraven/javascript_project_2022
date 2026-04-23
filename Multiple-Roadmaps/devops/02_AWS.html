@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS DevOps Roadmap</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      background-color: #f9fafc;
+      color: #333;
+    }
+    h1, h2, h3 {
+      color: #1f4e79;
+    }
+    section {
+      margin-bottom: 30px;
+      padding: 15px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    ul {
+      margin-left: 20px;
+    }
+    .highlight {
+      color: #d9534f;
+      font-weight: bold;
+    }
+    .project {
+      background: #eef6ff;
+      padding: 10px;
+      border-left: 5px solid #1f4e79;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🚀 AWS DevOps Roadmap (Interview + Real-World Focused)</h1>
+
+<section>
+<h2>1. Core DevOps Concepts (Foundation)</h2>
+<ul>
+  <li>DevOps lifecycle: Plan → Code → Build → Test → Deploy → Monitor</li>
+  <li>CI vs CD vs Continuous Deployment</li>
+  <li>Git workflows (feature branch, trunk-based)</li>
+  <li>Linux basics (permissions, processes, networking)</li>
+</ul>
+<p><b>Real-world:</b> Teams collaborate via Git + pipelines, automation reduces deployment errors.</p>
+<p><b>Interview Q:</b> Why DevOps? → Faster releases, reliability, automation.</p>
+</section>
+
+<section>
+<h2>2. CI/CD Pipelines</h2>
+<ul>
+  <li>Pipeline stages: Build → Test → Package → Deploy</li>
+  <li>Tools: Jenkins, GitHub Actions</li>
+  <li>Pipeline as Code (YAML)</li>
+  <li>Rollback & failure handling</li>
+</ul>
+<p><b>Interview Q:</b> Failed deployment? → Rollback, health checks, alerts.</p>
+</section>
+
+<section>
+<h2>3. AWS Core Services <span class="highlight">(High Priority)</span></h2>
+
+<h3>Compute</h3>
+<ul>
+  <li>EC2 (VMs)</li>
+  <li>Lambda (serverless)</li>
+  <li>ECS / EKS (containers)</li>
+</ul>
+
+<h3>Storage</h3>
+<ul>
+  <li>S3 (object storage)</li>
+  <li>EBS (block storage)</li>
+</ul>
+
+<h3>Database</h3>
+<ul>
+  <li>RDS (SQL)</li>
+  <li>DynamoDB (NoSQL)</li>
+</ul>
+
+<h3>Networking</h3>
+<ul>
+  <li>VPC (subnets, routing)</li>
+  <li>Load Balancer (ALB/NLB)</li>
+</ul>
+
+<p><b>Common Architectures:</b></p>
+<ul>
+  <li>EC2 + ALB + RDS</li>
+  <li>Lambda + API Gateway + DynamoDB</li>
+</ul>
+</section>
+
+<section>
+<h2>4. Infrastructure as Code (IaC)</h2>
+<ul>
+  <li>Terraform (industry standard)</li>
+  <li>CloudFormation (AWS native)</li>
+</ul>
+<p><b>Practice:</b> EC2, VPC, automation</p>
+<p><b>Why IaC?</b> Repeatability, version control, automation</p>
+</section>
+
+<section>
+<h2>5. Monitoring & Logging</h2>
+<ul>
+  <li>CloudWatch</li>
+  <li>ELK Stack</li>
+  <li>Prometheus + Grafana</li>
+</ul>
+<p>Use alerts + logs to debug production issues.</p>
+</section>
+
+<section>
+<h2>6. Security & Best Practices</h2>
+<ul>
+  <li>IAM (roles, policies)</li>
+  <li>Security Groups vs NACL</li>
+  <li>Secrets Manager / SSM</li>
+</ul>
+<p><b>Golden Rules:</b></p>
+<ul>
+  <li>Least privilege access</li>
+  <li>Never hardcode secrets</li>
+</ul>
+</section>
+
+<section>
+<h2>🧠 Most Important Interview Topics</h2>
+<ul>
+  <li>CI/CD pipelines</li>
+  <li>IAM & security</li>
+  <li>VPC basics</li>
+  <li>EC2 vs Lambda</li>
+  <li>Docker & containers</li>
+  <li>Deployment strategies (Blue-Green, Canary)</li>
+</ul>
+</section>
+
+<section>
+<h2>🏗️ 4–6 Week Learning Plan</h2>
+<ul>
+  <li><b>Week 1:</b> DevOps + AWS basics (EC2, S3)</li>
+  <li><b>Week 2:</b> Compute + Networking (VPC, ALB)</li>
+  <li><b>Week 3:</b> CI/CD pipelines</li>
+  <li><b>Week 4:</b> Docker + Containers</li>
+  <li><b>Week 5:</b> Terraform + Monitoring</li>
+  <li><b>Week 6:</b> Security + Final Project</li>
+</ul>
+</section>
+
+<section>
+<h2>📅 42-Day Plan</h2>
+<ul>
+  <li>Days 1–7: DevOps + Git + EC2 + S3</li>
+  <li>Days 8–14: VPC + Load Balancer</li>
+  <li>Days 15–21: CI/CD pipelines</li>
+  <li>Days 22–28: Docker + ECS</li>
+  <li>Days 29–35: Terraform + Monitoring</li>
+  <li>Days 36–42: IAM + Deployment + Interview Prep</li>
+</ul>
+</section>
+
+<section>
+<h2>🏗️ Real-World Projects</h2>
+
+<div class="project">
+<h3>Project 1: CI/CD Pipeline</h3>
+<ul>
+  <li>GitHub → CI/CD → EC2/ECS</li>
+  <li>ALB + S3 integration</li>
+  <li>Auto build, test, deploy</li>
+  <li>Rollback support</li>
+</ul>
+</div>
+
+<div class="project">
+<h3>Project 2: Full DevOps Pipeline</h3>
+<ul>
+  <li>Docker + ECS</li>
+  <li>Terraform (IaC)</li>
+  <li>CloudWatch monitoring</li>
+</ul>
+</div>
+
+</section>
+
+<section>
+<h2>📚 References</h2>
+<ul>
+  <li>AWS Official Documentation</li>
+  <li>AWS Free Tier</li>
+  <li>AWS Skill Builder</li>
+  <li>FreeCodeCamp</li>
+  <li>YouTube DevOps Channels</li>
+</ul>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWS DevOps Roadmap</title>
+
+<style>
+:root {
+  --bg: #f5f7fa;
+  --text: #1a1a1a;
+  --card: #ffffff;
+  --accent: #4f46e5;
+}
+
+.dark {
+  --bg: #0f172a;
+  --text: #e2e8f0;
+  --card: #1e293b;
+  --accent: #6366f1;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+header {
+  padding: 20px;
+  text-align: center;
+  background: var(--accent);
+  color: white;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+.section {
+  background: var(--card);
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+  color: var(--accent);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  padding: 15px;
+  border-radius: 10px;
+  background: rgba(79,70,229,0.1);
+}
+
+button {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--accent);
+  color: white;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<button onclick="toggleTheme()">Toggle Theme</button>
+
+<header>
+  <h1>🚀 AWS DevOps Roadmap</h1>
+  <p>Interview + Real World Focused</p>
+</header>
+
+<div class="container">
+
+  <!-- Step 1 -->
+  <div class="section">
+    <h2>Step 1: Core DevOps Concepts</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Lifecycle</h3>
+        <p>Plan → Code → Build → Test → Deploy → Monitor</p>
+      </div>
+      <div class="card">
+        <h3>CI/CD</h3>
+        <p>Continuous Integration & Delivery pipelines</p>
+      </div>
+      <div class="card">
+        <h3>Git</h3>
+        <p>Feature branching & trunk-based workflows</p>
+      </div>
+      <div class="card">
+        <h3>Linux</h3>
+        <p>Permissions, processes, networking</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CI/CD -->
+  <div class="section">
+    <h2>CI/CD Pipelines</h2>
+    <ul>
+      <li>Build → Test → Package → Deploy</li>
+      <li>Tools: Jenkins, GitHub Actions</li>
+      <li>YAML-based pipelines</li>
+      <li>Rollback & failure handling</li>
+    </ul>
+  </div>
+
+  <!-- AWS -->
+  <div class="section">
+    <h2>AWS Core Services</h2>
+    <div class="grid">
+      <div class="card"><b>Compute:</b> EC2, Lambda, ECS/EKS</div>
+      <div class="card"><b>Storage:</b> S3, EBS</div>
+      <div class="card"><b>Database:</b> RDS, DynamoDB</div>
+      <div class="card"><b>Networking:</b> VPC, Load Balancer</div>
+    </div>
+  </div>
+
+  <!-- IaC -->
+  <div class="section">
+    <h2>Infrastructure as Code</h2>
+    <ul>
+      <li>Terraform (Industry standard)</li>
+      <li>CloudFormation (AWS native)</li>
+      <li>Automate infra provisioning</li>
+    </ul>
+  </div>
+
+  <!-- Monitoring -->
+  <div class="section">
+    <h2>Monitoring & Logging</h2>
+    <ul>
+      <li>CloudWatch</li>
+      <li>ELK Stack</li>
+      <li>Prometheus + Grafana</li>
+    </ul>
+  </div>
+
+  <!-- Security -->
+  <div class="section">
+    <h2>Security</h2>
+    <ul>
+      <li>IAM roles & policies</li>
+      <li>Security Groups vs NACL</li>
+      <li>Secrets Manager</li>
+      <li>Least privilege principle</li>
+    </ul>
+  </div>
+
+  <!-- Weekly Plan -->
+  <div class="section">
+    <h2>6-Week Learning Plan</h2>
+    <ul>
+      <li><b>Week 1:</b> DevOps + AWS basics</li>
+      <li><b>Week 2:</b> EC2 + Networking</li>
+      <li><b>Week 3:</b> CI/CD pipelines</li>
+      <li><b>Week 4:</b> Docker + Containers</li>
+      <li><b>Week 5:</b> Terraform + Monitoring</li>
+      <li><b>Week 6:</b> Advanced + Final Project</li>
+    </ul>
+  </div>
+
+  <!-- Projects -->
+  <div class="section">
+    <h2>Projects</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>CI/CD Pipeline</h3>
+        <p>GitHub → Pipeline → EC2/ECS with auto deploy & rollback</p>
+      </div>
+      <div class="card">
+        <h3>Full DevOps Pipeline</h3>
+        <p>Docker + ECS + Terraform + Monitoring</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>

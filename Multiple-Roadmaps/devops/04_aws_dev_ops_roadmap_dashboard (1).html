@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AWS DevOps Learning Dashboard</title>
+
+<style>
+:root{
+  --bg:#0f172a;
+  --card:#1e293b;
+  --text:#e2e8f0;
+  --accent:#22c55e;
+}
+
+.light{
+  --bg:#f8fafc;
+  --card:#ffffff;
+  --text:#0f172a;
+}
+
+body{
+  margin:0;
+  font-family:system-ui;
+  background:var(--bg);
+  color:var(--text);
+  transition:0.3s;
+}
+
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 25px;
+  background:var(--card);
+  position:sticky;
+  top:0;
+}
+
+nav a{
+  margin:0 10px;
+  text-decoration:none;
+  color:var(--text);
+  font-size:14px;
+}
+
+.container{padding:20px;max-width:1100px;margin:auto}
+
+.card{
+  background:var(--card);
+  padding:20px;
+  border-radius:16px;
+  margin-bottom:20px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.2);
+}
+
+h2{margin-top:0}
+
+button{
+  background:var(--accent);
+  border:none;
+  padding:8px 14px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.progress{
+  width:100%;
+  height:10px;
+  background:#334155;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:var(--accent);
+  transition:0.3s;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:15px;
+}
+
+.checkbox{
+  display:flex;
+  align-items:center;
+  margin:6px 0;
+}
+
+.checkbox input{margin-right:10px}
+
+.badge{
+  font-size:12px;
+  background:#334155;
+  padding:4px 8px;
+  border-radius:6px;
+  margin-left:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div>
+    <strong>AWS DevOps</strong>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#weekly">Weekly</a>
+    <a href="#daily">Daily</a>
+    <a href="#project">Project</a>
+  </div>
+  <button onclick="toggleTheme()">Theme</button>
+</nav>
+
+<div class="container">
+
+<!-- Progress -->
+<div class="card">
+  <h2>Progress Tracker</h2>
+  <div class="progress"><div id="bar" class="progress-bar"></div></div>
+  <p id="progressText">0% Completed</p>
+</div>
+
+<!-- Roadmap -->
+<div id="roadmap" class="card">
+  <h2>Roadmap</h2>
+  <div class="grid">
+    <div>
+      <h4>Core DevOps</h4>
+      <p>CI/CD, Git, Linux</p>
+    </div>
+    <div>
+      <h4>AWS Core</h4>
+      <p>EC2, S3, IAM, VPC</p>
+    </div>
+    <div>
+      <h4>CI/CD</h4>
+      <p>GitHub Actions, Jenkins</p>
+    </div>
+    <div>
+      <h4>Containers</h4>
+      <p>Docker, ECS</p>
+    </div>
+    <div>
+      <h4>IaC</h4>
+      <p>Terraform</p>
+    </div>
+    <div>
+      <h4>Monitoring</h4>
+      <p>CloudWatch</p>
+    </div>
+  </div>
+</div>
+
+<!-- Weekly -->
+<div id="weekly" class="card">
+  <h2>Weekly Plan</h2>
+  <div class="grid">
+    <div>Week 1 <span class="badge">Basics</span></div>
+    <div>Week 2 <span class="badge">Networking</span></div>
+    <div>Week 3 <span class="badge">CI/CD</span></div>
+    <div>Week 4 <span class="badge">Docker</span></div>
+    <div>Week 5 <span class="badge">Terraform</span></div>
+    <div>Week 6 <span class="badge">Project</span></div>
+  </div>
+</div>
+
+<!-- Daily Tracker -->
+<div id="daily" class="card">
+  <h2>42-Day Tracker</h2>
+  <div id="days"></div>
+</div>
+
+<!-- Project -->
+<div id="project" class="card">
+  <h2>Project Checklist</h2>
+  <div class="checkbox"><input type="checkbox" onclick="update()">Setup EC2</div>
+  <div class="checkbox"><input type="checkbox" onclick="update()">Dockerize App</div>
+  <div class="checkbox"><input type="checkbox" onclick="update()">CI/CD Pipeline</div>
+  <div class="checkbox"><input type="checkbox" onclick="update()">Deploy App</div>
+  <div class="checkbox"><input type="checkbox" onclick="update()">Monitoring</div>
+</div>
+
+</div>
+
+<script>
+const daysContainer = document.getElementById('days');
+let total = 47;
+
+for(let i=1;i<=42;i++){
+  const div=document.createElement('div');
+  div.className='checkbox';
+  div.innerHTML=`<input type='checkbox' onclick='update()'> Day ${i}`;
+  daysContainer.appendChild(div);
+}
+
+function update(){
+  const checks=document.querySelectorAll('input:checked').length;
+  const percent=Math.round((checks/total)*100);
+  document.getElementById('bar').style.width=percent+'%';
+  document.getElementById('progressText').innerText=percent+'% Completed';
+}
+
+function toggleTheme(){
+  document.body.classList.toggle('light');
+}
+</script>
+
+</body>
+</html>

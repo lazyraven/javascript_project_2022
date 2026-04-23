@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWS DevOps Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root[data-theme="dark"] {
+    --bg: #0a0c10;
+    --bg2: #0f1219;
+    --bg3: #161b26;
+    --surface: #1c2333;
+    --surface2: #232d42;
+    --border: #2a3550;
+    --text: #e8edf5;
+    --text2: #8b9ab5;
+    --text3: #5a6a88;
+
+    --c1: #ff6b35;   /* orange - CI/CD */
+    --c2: #00c9a7;   /* teal - AWS Core */
+    --c3: #a78bfa;   /* purple - IaC */
+    --c4: #f59e0b;   /* amber - Monitoring */
+    --c5: #ef4444;   /* red - Security */
+    --c6: #38bdf8;   /* sky - Containers */
+    --c7: #34d399;   /* green - Projects */
+    --c8: #f472b6;   /* pink - Plan */
+
+    --glow1: rgba(255,107,53,0.15);
+    --glow2: rgba(0,201,167,0.15);
+    --glow3: rgba(167,139,250,0.15);
+  }
+  :root[data-theme="light"] {
+    --bg: #f0f4fb;
+    --bg2: #e8eef8;
+    --bg3: #dde5f5;
+    --surface: #ffffff;
+    --surface2: #f5f8ff;
+    --border: #c9d5ee;
+    --text: #1a2340;
+    --text2: #4a5a7a;
+    --text3: #7a8aaa;
+
+    --c1: #e05a20;
+    --c2: #009e82;
+    --c3: #7c5fd4;
+    --c4: #c27c00;
+    --c5: #cc2222;
+    --c6: #1a9fd4;
+    --c7: #20a870;
+    --c8: #d44090;
+
+    --glow1: rgba(224,90,32,0.08);
+    --glow2: rgba(0,158,130,0.08);
+    --glow3: rgba(124,95,212,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+    overflow-x: hidden;
+  }
+
+  /* GRID BG */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+
+  /* HEADER */
+  header {
+    padding: 48px 0 32px;
+    text-align: center;
+    position: relative;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--c2);
+    border: 1px solid var(--c2);
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin-bottom: 18px;
+  }
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 50%, var(--c3) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  header p {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--text2);
+    letter-spacing: 0.5px;
+  }
+
+  /* THEME TOGGLE */
+  .theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 6px;
+    display: flex;
+    gap: 4px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .theme-toggle button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 50px;
+    font-size: 14px;
+    color: var(--text3);
+    transition: all 0.2s;
+  }
+  .theme-toggle button.active {
+    background: var(--surface2);
+    color: var(--text);
+  }
+
+  /* SECTION */
+  section { margin-bottom: 60px; }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-weight: 700;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title .icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  .card ul { list-style: none; }
+  .card ul li {
+    font-size: 12.5px;
+    color: var(--text2);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+  .card ul li:last-child { border-bottom: none; }
+  .card ul li::before {
+    content: '▸';
+    font-size: 10px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+
+  .interview-box {
+    margin-top: 14px;
+    background: var(--bg3);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .interview-box .q { color: var(--c4); margin-bottom: 4px; }
+  .interview-box .a { color: var(--text2); }
+
+  /* PRIORITY TOPICS */
+  .priority-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .priority-tag {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid;
+    transition: transform 0.15s;
+    cursor: default;
+  }
+  .priority-tag:hover { transform: scale(1.04); }
+
+  /* WEEK PLAN */
+  .weeks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .week-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .week-header {
+    padding: 14px 20px;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .week-header .week-num {
+    font-size: 11px;
+    opacity: 0.8;
+    letter-spacing: 1px;
+  }
+  .week-body { padding: 16px 20px; }
+  .week-body .day {
+    font-size: 12px;
+    color: var(--text2);
+    padding: 4px 0;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+  }
+  .day-num {
+    font-size: 10px;
+    color: var(--text3);
+    min-width: 45px;
+  }
+  .week-project {
+    margin-top: 12px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* PROJECTS */
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card + .project-card { margin-top: 16px; }
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .arch-flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .arch-node {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .arch-arrow { color: var(--text3); font-size: 14px; }
+  .feature-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .feature-chip {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 11.5px;
+    color: var(--text2);
+  }
+
+  /* COMMANDS */
+  .cmd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .cmd-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .cmd-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .cmd { font-size: 12px; color: var(--c2); line-height: 1.8; }
+
+  /* REFERENCES */
+  .ref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .ref-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .ref-card:hover { transform: translateY(-2px); border-color: var(--c2); }
+  .ref-icon { font-size: 22px; }
+  .ref-info .ref-title { font-size: 13px; font-weight: 600; }
+  .ref-info .ref-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 48px 0;
+  }
+
+  /* PROGRESS BAR (decorative) */
+  .timeline-bar {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 28px;
+  }
+  .timeline-bar .seg {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    opacity: 0.8;
+  }
+
+  /* COLOR CLASSES */
+  .ci   { --cc: var(--c1); }
+  .aws  { --cc: var(--c2); }
+  .iac  { --cc: var(--c3); }
+  .mon  { --cc: var(--c4); }
+  .sec  { --cc: var(--c5); }
+  .con  { --cc: var(--c6); }
+  .proj { --cc: var(--c7); }
+  .plan { --cc: var(--c8); }
+
+  .card.ci::before   { background: var(--c1); }
+  .card.aws::before  { background: var(--c2); }
+  .card.iac::before  { background: var(--c3); }
+  .card.mon::before  { background: var(--c4); }
+  .card.sec::before  { background: var(--c5); }
+  .card.con::before  { background: var(--c6); }
+  .card.proj::before { background: var(--c7); }
+  .card.plan::before { background: var(--c8); }
+
+  .card.ci:hover  { box-shadow: 0 8px 40px var(--glow1); }
+  .card.aws:hover { box-shadow: 0 8px 40px var(--glow2); }
+  .card.iac:hover { box-shadow: 0 8px 40px var(--glow3); }
+
+  .dot-ci   { background: var(--c1); }
+  .dot-aws  { background: var(--c2); }
+  .dot-iac  { background: var(--c3); }
+  .dot-mon  { background: var(--c4); }
+  .dot-sec  { background: var(--c5); }
+  .dot-con  { background: var(--c6); }
+  .dot-proj { background: var(--c7); }
+  .dot-plan { background: var(--c8); }
+
+  .icon-ci   { background: rgba(255,107,53,0.15); }
+  .icon-aws  { background: rgba(0,201,167,0.15); }
+  .icon-iac  { background: rgba(167,139,250,0.15); }
+  .icon-mon  { background: rgba(245,158,11,0.15); }
+  .icon-sec  { background: rgba(239,68,68,0.15); }
+  .icon-con  { background: rgba(56,189,248,0.15); }
+  .icon-proj { background: rgba(52,211,153,0.15); }
+  .icon-plan { background: rgba(244,114,182,0.15); }
+
+  .tag-ci   { color: var(--c1); border-color: rgba(255,107,53,0.3); background: rgba(255,107,53,0.08); }
+  .tag-aws  { color: var(--c2); border-color: rgba(0,201,167,0.3); background: rgba(0,201,167,0.08); }
+  .tag-iac  { color: var(--c3); border-color: rgba(167,139,250,0.3); background: rgba(167,139,250,0.08); }
+  .tag-mon  { color: var(--c4); border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.08); }
+  .tag-sec  { color: var(--c5); border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.08); }
+  .tag-con  { color: var(--c6); border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.08); }
+  .tag-proj { color: var(--c7); border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.08); }
+  .tag-plan { color: var(--c8); border-color: rgba(244,114,182,0.3); background: rgba(244,114,182,0.08); }
+
+  /* Week colors */
+  .wk1 { background: linear-gradient(135deg, rgba(244,114,182,0.9), rgba(244,114,182,0.7)); color: #fff; }
+  .wk2 { background: linear-gradient(135deg, rgba(0,201,167,0.9), rgba(0,201,167,0.7)); color: #fff; }
+  .wk3 { background: linear-gradient(135deg, rgba(255,107,53,0.9), rgba(255,107,53,0.7)); color: #fff; }
+  .wk4 { background: linear-gradient(135deg, rgba(56,189,248,0.9), rgba(56,189,248,0.7)); color: #fff; }
+  .wk5 { background: linear-gradient(135deg, rgba(167,139,250,0.9), rgba(167,139,250,0.7)); color: #fff; }
+  .wk6 { background: linear-gradient(135deg, rgba(245,158,11,0.9), rgba(245,158,11,0.7)); color: #fff; }
+
+  .proj-bg1 { background: rgba(255,107,53,0.08); border-color: rgba(255,107,53,0.3); color: var(--c1); }
+  .proj-bg2 { background: rgba(52,211,153,0.08); border-color: rgba(52,211,153,0.3); color: var(--c7); }
+
+  .node-a { background: rgba(255,107,53,0.15); color: var(--c1); }
+  .node-b { background: rgba(0,201,167,0.15); color: var(--c2); }
+  .node-c { background: rgba(56,189,248,0.15); color: var(--c6); }
+  .node-d { background: rgba(167,139,250,0.15); color: var(--c3); }
+  .node-e { background: rgba(52,211,153,0.15); color: var(--c7); }
+
+  footer {
+    text-align: center;
+    padding: 32px 0 48px;
+    font-size: 12px;
+    color: var(--text3);
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+
+  @media (max-width: 640px) {
+    .cards-grid, .weeks-grid { grid-template-columns: 1fr; }
+    .theme-toggle { top: 12px; right: 12px; }
+    header { padding: 40px 0 24px; }
+    .timeline-bar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- THEME TOGGLE -->
+<div class="theme-toggle" id="themeToggle">
+  <button id="btnDark" class="active" onclick="setTheme('dark')">🌙 Dark</button>
+  <button id="btnLight" onclick="setTheme('light')">☀️ Light</button>
+</div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="badge">Complete Learning Path</div>
+    <h1>AWS DevOps Roadmap</h1>
+    <p>Interview-ready · Real-world focused · 42-day plan</p>
+  </header>
+
+  <!-- TIMELINE BAR -->
+  <div class="timeline-bar">
+    <div class="seg" style="background:var(--c8)"></div>
+    <div class="seg" style="background:var(--c2)"></div>
+    <div class="seg" style="background:var(--c1)"></div>
+    <div class="seg" style="background:var(--c6)"></div>
+    <div class="seg" style="background:var(--c3)"></div>
+    <div class="seg" style="background:var(--c4)"></div>
+    <div class="seg" style="background:var(--c5)"></div>
+    <div class="seg" style="background:var(--c7)"></div>
+  </div>
+
+  <!-- SECTION 1: CORE CONCEPTS -->
+  <section>
+    <div class="section-label">Step 01</div>
+    <div class="section-title">
+      <span class="icon icon-plan">🏗️</span>
+      Core DevOps Concepts
+    </div>
+    <div class="cards-grid">
+
+      <div class="card plan">
+        <div class="card-title">
+          <span class="card-dot dot-plan"></span>DevOps Lifecycle
+        </div>
+        <ul>
+          <li>Plan → Code → Build → Test → Deploy → Monitor</li>
+          <li>Teams collaborate via Git + automated pipelines</li>
+          <li>Automation reduces manual deployment errors</li>
+          <li>Version control: Feature branch, trunk-based</li>
+          <li>Linux basics: permissions, processes, networking</li>
+        </ul>
+        <div class="interview-box">
+          <div class="q">Q: Why is DevOps important?</div>
+          <div class="a">A: Reduces release time, improves reliability, and enables continuous delivery through automation.</div>
+        </div>
+      </div>
+
+      <div class="card ci">
+        <div class="card-title">
+          <span class="card-dot dot-ci"></span>CI/CD Pipelines
+        </div>
+        <ul>
+          <li>Pipeline stages: Build → Test → Package → Deploy</li>
+          <li>CI vs CD vs Continuous Deployment</li>
+          <li>Tools: Jenkins, GitHub Actions</li>
+          <li>Pipeline as Code (YAML format)</li>
+          <li>Rollbacks & failure handling strategies</li>
+        </ul>
+        <div class="interview-box">
+          <div class="q">Q: How do you handle a failed deployment?</div>
+          <div class="a">A: Rollback to previous stable version, use health checks, set up automated alerts.</div>
+        </div>
+      </div>
+
+      <div class="card plan">
+        <div class="card-title">
+          <span class="card-dot dot-plan"></span>Git Workflows
+        </div>
+        <ul>
+          <li>Feature branch workflow — isolated development</li>
+          <li>Trunk-based development — fast integration</li>
+          <li>Pull requests + code reviews</li>
+          <li>Commit conventions & tagging</li>
+          <li>Merge strategies: squash, rebase, merge</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 2: AWS CORE -->
+  <section>
+    <div class="section-label">Step 02 — HIGH PRIORITY</div>
+    <div class="section-title">
+      <span class="icon icon-aws">☁️</span>
+      AWS Core Services
+    </div>
+    <div class="cards-grid">
+
+      <div class="card aws">
+        <div class="card-title">
+          <span class="card-dot dot-aws"></span>Compute
+        </div>
+        <ul>
+          <li><strong style="color:var(--c2)">EC2</strong> — Virtual machines, scalable compute</li>
+          <li><strong style="color:var(--c2)">Lambda</strong> — Serverless, event-driven functions</li>
+          <li><strong style="color:var(--c2)">ECS / EKS</strong> — Managed containers & Kubernetes</li>
+          <li>Auto Scaling Groups for high availability</li>
+          <li>Spot instances for cost optimization</li>
+        </ul>
+        <div class="interview-box">
+          <div class="q">Q: EC2 vs Lambda?</div>
+          <div class="a">A: EC2 for persistent, long-running workloads. Lambda for short, event-driven, stateless functions with auto-scaling.</div>
+        </div>
+      </div>
+
+      <div class="card aws">
+        <div class="card-title">
+          <span class="card-dot dot-aws"></span>Storage & Database
+        </div>
+        <ul>
+          <li><strong style="color:var(--c2)">S3</strong> — Object storage, static hosting, artifacts</li>
+          <li><strong style="color:var(--c2)">EBS</strong> — Block storage attached to EC2</li>
+          <li><strong style="color:var(--c2)">RDS</strong> — Managed SQL (MySQL, PostgreSQL)</li>
+          <li><strong style="color:var(--c2)">DynamoDB</strong> — Serverless NoSQL</li>
+          <li>S3 storage classes: Standard, IA, Glacier</li>
+        </ul>
+      </div>
+
+      <div class="card aws">
+        <div class="card-title">
+          <span class="card-dot dot-aws"></span>Networking
+        </div>
+        <ul>
+          <li><strong style="color:var(--c2)">VPC</strong> — Isolated virtual network</li>
+          <li>Subnets: public vs private</li>
+          <li><strong style="color:var(--c2)">ALB / NLB</strong> — Application & Network Load Balancer</li>
+          <li>Route Tables + Internet Gateway</li>
+          <li>Security Groups vs Network ACLs</li>
+        </ul>
+      </div>
+
+      <div class="card aws">
+        <div class="card-title">
+          <span class="card-dot dot-aws"></span>Real-World Combos
+        </div>
+        <ul>
+          <li>EC2 + ALB + RDS — Traditional web app</li>
+          <li>Lambda + API Gateway + DynamoDB — Serverless API</li>
+          <li>ECS + ECR + ALB — Containerized app</li>
+          <li>S3 + CloudFront — Static site CDN</li>
+          <li>CodePipeline + CodeBuild + ECS — Full CI/CD</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 3: IaC + Containers -->
+  <section>
+    <div class="section-label">Step 03</div>
+    <div class="section-title">
+      <span class="icon icon-iac">⚙️</span>
+      Infrastructure as Code + Containers
+    </div>
+    <div class="cards-grid">
+
+      <div class="card iac">
+        <div class="card-title">
+          <span class="card-dot dot-iac"></span>Terraform
+        </div>
+        <ul>
+          <li>Write declarative HCL configs</li>
+          <li>Create EC2, VPC, subnets via code</li>
+          <li>Variables, modules, outputs</li>
+          <li>Remote state in S3 + DynamoDB lock</li>
+          <li>Plan → Apply → Destroy workflow</li>
+        </ul>
+        <div class="interview-box">
+          <div class="q">Q: Why IaC?</div>
+          <div class="a">A: Repeatability, version control, automated provisioning, and reduced human error.</div>
+        </div>
+      </div>
+
+      <div class="card iac">
+        <div class="card-title">
+          <span class="card-dot dot-iac"></span>CloudFormation
+        </div>
+        <ul>
+          <li>AWS-native IaC using YAML/JSON templates</li>
+          <li>Stacks, nested stacks, change sets</li>
+          <li>Rollback on deployment failure</li>
+          <li>Integrates natively with all AWS services</li>
+          <li>CDK — define infra using Python/TypeScript</li>
+        </ul>
+      </div>
+
+      <div class="card con">
+        <div class="card-title">
+          <span class="card-dot dot-con"></span>Docker
+        </div>
+        <ul>
+          <li>Dockerfile: FROM, RUN, COPY, EXPOSE, CMD</li>
+          <li>Build image → Push to ECR registry</li>
+          <li>Multi-stage builds for smaller images</li>
+          <li>docker-compose for local dev</li>
+          <li>Layer caching best practices</li>
+        </ul>
+      </div>
+
+      <div class="card con">
+        <div class="card-title">
+          <span class="card-dot dot-con"></span>ECS / EKS
+        </div>
+        <ul>
+          <li>ECS Fargate — serverless containers</li>
+          <li>Task Definitions & Services</li>
+          <li>EKS — managed Kubernetes on AWS</li>
+          <li>Pods, Deployments, Services, Ingress</li>
+          <li>Horizontal Pod Autoscaler</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 4: MONITORING + SECURITY -->
+  <section>
+    <div class="section-label">Step 04</div>
+    <div class="section-title">
+      <span class="icon icon-mon">📊</span>
+      Monitoring, Logging & Security
+    </div>
+    <div class="cards-grid">
+
+      <div class="card mon">
+        <div class="card-title">
+          <span class="card-dot dot-mon"></span>Monitoring Tools
+        </div>
+        <ul>
+          <li><strong style="color:var(--c4)">CloudWatch</strong> — Metrics, logs, alarms, dashboards</li>
+          <li><strong style="color:var(--c4)">Prometheus + Grafana</strong> — Open-source monitoring</li>
+          <li><strong style="color:var(--c4)">ELK Stack</strong> — Elasticsearch, Logstash, Kibana</li>
+          <li>CPU, memory, request latency alerts</li>
+          <li>Centralized log aggregation</li>
+        </ul>
+      </div>
+
+      <div class="card sec">
+        <div class="card-title">
+          <span class="card-dot dot-sec"></span>IAM & Security
+        </div>
+        <ul>
+          <li><strong style="color:var(--c5)">IAM</strong> — Users, groups, roles, policies</li>
+          <li>Least privilege access principle</li>
+          <li>Never hardcode secrets in code</li>
+          <li><strong style="color:var(--c5)">Secrets Manager / SSM</strong> — Secure secrets storage</li>
+          <li>Security Groups vs NACLs</li>
+        </ul>
+        <div class="interview-box">
+          <div class="q">Q: IAM best practices?</div>
+          <div class="a">A: Least privilege, use roles not users for services, rotate keys, enable MFA, use Secrets Manager.</div>
+        </div>
+      </div>
+
+      <div class="card sec">
+        <div class="card-title">
+          <span class="card-dot dot-sec"></span>Deployment Strategies
+        </div>
+        <ul>
+          <li><strong style="color:var(--c5)">Blue-Green</strong> — Two environments, instant swap</li>
+          <li><strong style="color:var(--c5)">Canary</strong> — Gradual traffic shift (5% → 100%)</li>
+          <li><strong style="color:var(--c5)">Rolling</strong> — Replace instances incrementally</li>
+          <li>Feature flags for controlled releases</li>
+          <li>Health check gates before full rollout</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PRIORITY TOPICS -->
+  <section>
+    <div class="section-label">Focus Area</div>
+    <div class="section-title">
+      <span class="icon icon-ci">🧠</span>
+      Must-Know Interview Topics
+    </div>
+    <div class="priority-grid">
+      <span class="priority-tag tag-ci">CI/CD Pipeline Design</span>
+      <span class="priority-tag tag-ci">Failure Handling & Rollback</span>
+      <span class="priority-tag tag-sec">IAM Roles & Policies</span>
+      <span class="priority-tag tag-aws">VPC Basics & Networking</span>
+      <span class="priority-tag tag-aws">EC2 vs Lambda</span>
+      <span class="priority-tag tag-aws">S3 + Storage Classes</span>
+      <span class="priority-tag tag-con">Docker & Containers</span>
+      <span class="priority-tag tag-con">ECS / EKS Deployment</span>
+      <span class="priority-tag tag-sec">Blue-Green Deployment</span>
+      <span class="priority-tag tag-sec">Canary Releases</span>
+      <span class="priority-tag tag-iac">Terraform Basics</span>
+      <span class="priority-tag tag-mon">CloudWatch Alerts</span>
+      <span class="priority-tag tag-aws">Load Balancer (ALB/NLB)</span>
+      <span class="priority-tag tag-sec">Secrets Management</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 42-DAY PLAN -->
+  <section>
+    <div class="section-label">Step 05</div>
+    <div class="section-title">
+      <span class="icon icon-plan">📅</span>
+      42-Day Detailed Learning Plan
+    </div>
+    <div class="weeks-grid">
+
+      <div class="week-card">
+        <div class="week-header wk1">
+          <span>DevOps + AWS Basics</span>
+          <span class="week-num">WEEK 1</span>
+        </div>
+        <div class="week-body">
+          <div class="day"><span class="day-num">Day 1</span>DevOps basics & lifecycle</div>
+          <div class="day"><span class="day-num">Day 2</span>Git commands + branching</div>
+          <div class="day"><span class="day-num">Day 3</span>GitHub repo + workflow</div>
+          <div class="day"><span class="day-num">Day 4</span>AWS account + EC2 intro</div>
+          <div class="day"><span class="day-num">Day 5</span>Launch EC2 + SSH access</div>
+          <div class="day"><span class="day-num">Day 6</span>Install Node app on EC2</div>
+          <div class="day"><span class="day-num">Day 7</span>S3 static hosting</div>
+          <div class="week-project tag-plan">🚀 Host static website on S3</div>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-header wk2">
+          <span>Compute + Networking</span>
+          <span class="week-num">WEEK 2</span>
+        </div>
+        <div class="week-body">
+          <div class="day"><span class="day-num">Day 8</span>VPC basics</div>
+          <div class="day"><span class="day-num">Day 9</span>Subnets + routing tables</div>
+          <div class="day"><span class="day-num">Day 10</span>Security groups setup</div>
+          <div class="day"><span class="day-num">Day 11</span>Load balancer setup</div>
+          <div class="day"><span class="day-num">Day 12</span>Attach EC2 to ALB</div>
+          <div class="day"><span class="day-num">Day 13</span>Health checks config</div>
+          <div class="day"><span class="day-num">Day 14</span>Mini project complete</div>
+          <div class="week-project tag-aws">🚀 Deploy Node.js on EC2 + ALB</div>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-header wk3">
+          <span>CI/CD Pipelines</span>
+          <span class="week-num">WEEK 3</span>
+        </div>
+        <div class="week-body">
+          <div class="day"><span class="day-num">Day 15</span>CI/CD concepts</div>
+          <div class="day"><span class="day-num">Day 16</span>GitHub Actions intro</div>
+          <div class="day"><span class="day-num">Day 17</span>Build pipeline (YAML)</div>
+          <div class="day"><span class="day-num">Day 18</span>Add testing stage</div>
+          <div class="day"><span class="day-num">Day 19</span>Deploy via pipeline</div>
+          <div class="day"><span class="day-num">Day 20</span>Failure handling + alerts</div>
+          <div class="day"><span class="day-num">Day 21</span>CI/CD project done</div>
+          <div class="week-project tag-ci">🚀 CI/CD pipeline for Node app</div>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-header wk4">
+          <span>Containers + Docker</span>
+          <span class="week-num">WEEK 4</span>
+        </div>
+        <div class="week-body">
+          <div class="day"><span class="day-num">Day 22</span>Docker basics</div>
+          <div class="day"><span class="day-num">Day 23</span>Create Dockerfile</div>
+          <div class="day"><span class="day-num">Day 24</span>Build image locally</div>
+          <div class="day"><span class="day-num">Day 25</span>Push to ECR registry</div>
+          <div class="day"><span class="day-num">Day 26</span>ECS intro + Fargate</div>
+          <div class="day"><span class="day-num">Day 27</span>Deploy container to ECS</div>
+          <div class="day"><span class="day-num">Day 28</span>Container project done</div>
+          <div class="week-project tag-con">🚀 Dockerize app + deploy to ECS</div>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-header wk5">
+          <span>IaC + Monitoring</span>
+          <span class="week-num">WEEK 5</span>
+        </div>
+        <div class="week-body">
+          <div class="day"><span class="day-num">Day 29</span>Terraform basics + HCL</div>
+          <div class="day"><span class="day-num">Day 30</span>Create EC2 via Terraform</div>
+          <div class="day"><span class="day-num">Day 31</span>VPC via Terraform</div>
+          <div class="day"><span class="day-num">Day 32</span>Variables & modules</div>
+          <div class="day"><span class="day-num">Day 33</span>CloudWatch logs setup</div>
+          <div class="day"><span class="day-num">Day 34</span>Metrics & alarms</div>
+          <div class="day"><span class="day-num">Day 35</span>Monitoring dashboard</div>
+          <div class="week-project tag-iac">🚀 Full infra using Terraform</div>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-header wk6">
+          <span>Advanced + Final Project</span>
+          <span class="week-num">WEEK 6</span>
+        </div>
+        <div class="week-body">
+          <div class="day"><span class="day-num">Day 36</span>IAM deep dive</div>
+          <div class="day"><span class="day-num">Day 37</span>Roles & policies</div>
+          <div class="day"><span class="day-num">Day 38</span>Blue-Green deployment</div>
+          <div class="day"><span class="day-num">Day 39</span>Canary deployment</div>
+          <div class="day"><span class="day-num">Day 40</span>Final project setup</div>
+          <div class="day"><span class="day-num">Day 41</span>Complete pipeline</div>
+          <div class="day"><span class="day-num">Day 42</span>Review + mock interview</div>
+          <div class="week-project tag-mon">🚀 Full AWS DevOps pipeline</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROJECTS -->
+  <section>
+    <div class="section-label">Step 06</div>
+    <div class="section-title">
+      <span class="icon icon-proj">🏗️</span>
+      Real-World Projects
+    </div>
+
+    <div class="project-card">
+      <div class="project-title" style="color:var(--c1)">Project 1 — CI/CD Pipeline <span style="font-size:13px; color:var(--text3); font-weight:400">(Most Important)</span></div>
+      <div class="arch-flow">
+        <span class="arch-node node-a">GitHub</span>
+        <span class="arch-arrow">→</span>
+        <span class="arch-node node-b">CI/CD Pipeline</span>
+        <span class="arch-arrow">→</span>
+        <span class="arch-node node-c">EC2 / ECS</span>
+        <span class="arch-arrow">→</span>
+        <span class="arch-node node-a">ALB</span>
+        <span class="arch-arrow">→</span>
+        <span class="arch-node node-d">S3 Artifacts</span>
+      </div>
+      <div class="feature-list">
+        <span class="feature-chip">Auto build on commit</span>
+        <span class="feature-chip">Run tests</span>
+        <span class="feature-chip">Deploy to EC2/ECS</span>
+        <span class="feature-chip">Rollback support</span>
+        <span class="feature-chip">Health checks</span>
+        <span class="feature-chip">Failure alerts</span>
+      </div>
+    </div>
+
+    <div class="project-card" style="margin-top:16px">
+      <div class="project-title" style="color:var(--c7)">Project 2 — Full DevOps Pipeline</div>
+      <div class="arch-flow">
+        <span class="arch-node node-b">Docker</span>
+        <span class="arch-arrow">→</span>
+        <span class="arch-node node-c">ECS Fargate</span>
+        <span class="arch-arrow">→</span>
+        <span class="arch-node node-d">Terraform IaC</span>
+        <span class="arch-arrow">→</span>
+        <span class="arch-node node-e">CloudWatch</span>
+      </div>
+      <div class="feature-list">
+        <span class="feature-chip">Dockerized app</span>
+        <span class="feature-chip">Terraform provisioning</span>
+        <span class="feature-chip">ECS deployment</span>
+        <span class="feature-chip">CloudWatch monitoring</span>
+        <span class="feature-chip">IAM roles</span>
+        <span class="feature-chip">Secrets Manager</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- REFERENCES -->
+  <section>
+    <div class="section-label">Step 07</div>
+    <div class="section-title">
+      <span class="icon icon-aws">📚</span>
+      References & Resources
+    </div>
+    <div class="ref-grid">
+      <a href="https://docs.aws.amazon.com" target="_blank" class="ref-card">
+        <span class="ref-icon">☁️</span>
+        <div class="ref-info">
+          <div class="ref-title">AWS Documentation</div>
+          <div class="ref-sub">docs.aws.amazon.com</div>
+        </div>
+      </a>
+      <a href="https://aws.amazon.com/free" target="_blank" class="ref-card">
+        <span class="ref-icon">🆓</span>
+        <div class="ref-info">
+          <div class="ref-title">AWS Free Tier</div>
+          <div class="ref-sub">aws.amazon.com/free</div>
+        </div>
+      </a>
+      <a href="https://explore.skillbuilder.aws" target="_blank" class="ref-card">
+        <span class="ref-icon">🎓</span>
+        <div class="ref-info">
+          <div class="ref-title">AWS Skill Builder</div>
+          <div class="ref-sub">explore.skillbuilder.aws</div>
+        </div>
+      </a>
+      <a href="https://github.com" target="_blank" class="ref-card">
+        <span class="ref-icon">🐙</span>
+        <div class="ref-info">
+          <div class="ref-title">GitHub Projects</div>
+          <div class="ref-sub">Practice repos & forks</div>
+        </div>
+      </a>
+      <a href="https://freecodecamp.org" target="_blank" class="ref-card">
+        <span class="ref-icon">🔥</span>
+        <div class="ref-info">
+          <div class="ref-title">FreeCodeCamp</div>
+          <div class="ref-sub">Free DevOps courses</div>
+        </div>
+      </a>
+      <a href="https://youtube.com" target="_blank" class="ref-card">
+        <span class="ref-icon">▶️</span>
+        <div class="ref-info">
+          <div class="ref-title">YouTube DevOps</div>
+          <div class="ref-sub">TechWorld, Nana, Fireship</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>AWS DevOps Roadmap — Interview + Real-World Focused · 42-Day Plan</p>
+    <p style="margin-top:6px; font-size:11px">Built for engineers who want to ship faster and break things less 🚀</p>
+  </footer>
+
+</div>
+
+<script>
+  function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    document.getElementById('btnDark').classList.toggle('active', t === 'dark');
+    document.getElementById('btnLight').classList.toggle('active', t === 'light');
+    localStorage.setItem('roadmap-theme', t);
+  }
+
+  const saved = localStorage.getItem('roadmap-theme');
+  if (saved) setTheme(saved);
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.card, .week-card, .project-card, .ref-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AWS DevOps Dashboard</title>
+<style>
+:root {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #e2e8f0;
+  --accent: #38bdf8;
+}
+.light {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #0f172a;
+}
+body {
+  margin: 0;
+  font-family: Arial;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: var(--card);
+  height: 100vh;
+  padding: 20px;
+}
+.sidebar h2 { margin-bottom: 20px; }
+.sidebar a {
+  display: block;
+  margin: 10px 0;
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  padding: 20px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.progress {
+  height: 10px;
+  background: #334155;
+  border-radius: 10px;
+}
+.progress-bar {
+  height: 10px;
+  width: 0%;
+  background: var(--accent);
+  transition: 0.3s;
+}
+
+.timeline {
+  border-left: 2px solid var(--accent);
+  padding-left: 15px;
+}
+.timeline div { margin-bottom: 10px; }
+
+button {
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>Dashboard</h2>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#plan">6 Week Plan</a>
+  <a href="#timeline">42 Days</a>
+  <a href="#interview">Interview Q&A</a>
+  <a href="#notes">Notes</a>
+</div>
+
+<div class="main">
+
+<nav>
+  <h2>AWS DevOps</h2>
+  <button onclick="toggleTheme()">Theme</button>
+</nav>
+
+<div class="card">
+  <h3>Progress</h3>
+  <div class="progress"><div class="progress-bar" id="bar"></div></div>
+</div>
+
+<div id="roadmap" class="grid">
+  <div class="card">
+    <h3>Beginner</h3>
+    <label><input type="checkbox" onchange="save()"> CI/CD Basics</label><br>
+    <label><input type="checkbox" onchange="save()"> Git</label><br>
+    <label><input type="checkbox" onchange="save()"> Linux</label>
+  </div>
+  <div class="card">
+    <h3>Intermediate</h3>
+    <label><input type="checkbox" onchange="save()"> AWS Core</label><br>
+    <label><input type="checkbox" onchange="save()"> Pipelines</label><br>
+    <label><input type="checkbox" onchange="save()"> Docker</label>
+  </div>
+  <div class="card">
+    <h3>Advanced</h3>
+    <label><input type="checkbox" onchange="save()"> Terraform</label><br>
+    <label><input type="checkbox" onchange="save()"> Monitoring</label><br>
+    <label><input type="checkbox" onchange="save()"> Security</label>
+  </div>
+</div>
+
+<div id="plan" class="card">
+  <h3>6 Week Plan</h3>
+  <ul>
+    <li>Week 1: IAM + EC2</li>
+    <li>Week 2: S3 + VPC</li>
+    <li>Week 3: CI/CD</li>
+    <li>Week 4: Docker</li>
+    <li>Week 5: Terraform</li>
+    <li>Week 6: Monitoring</li>
+  </ul>
+</div>
+
+<div id="timeline" class="card">
+  <h3>42-Day Timeline</h3>
+  <div class="timeline">
+    <div>Days 1-7: EC2 + Linux</div>
+    <div>Days 8-14: S3 + VPC</div>
+    <div>Days 15-21: CI/CD</div>
+    <div>Days 22-28: Docker</div>
+    <div>Days 29-35: Terraform</div>
+    <div>Days 36-42: Monitoring</div>
+  </div>
+</div>
+
+<div id="interview" class="card">
+  <h3>Interview Q&A</h3>
+  <p><b>CI vs CD:</b> Continuous Integration vs Deployment</p>
+  <p><b>IAM Roles vs Policies:</b> Roles are identities, policies define permissions</p>
+  <p><b>VPC:</b> Private cloud network</p>
+</div>
+
+<div class="card">
+  <h3>Project Architecture</h3>
+  <p>GitHub → CI/CD → Docker → EC2 → CloudWatch</p>
+</div>
+
+<div id="notes" class="card">
+  <h3>Notes</h3>
+  <textarea id="notesBox"></textarea>
+</div>
+
+</div>
+
+<script>
+function toggleTheme(){
+  document.body.classList.toggle('light');
+}
+
+function save(){
+  const checks = document.querySelectorAll('input[type=checkbox]');
+  let count = 0;
+  checks.forEach((c,i)=>{
+    localStorage.setItem('c'+i,c.checked);
+    if(c.checked) count++;
+  });
+  document.getElementById('bar').style.width = (count/checks.length*100)+'%';
+}
+
+function load(){
+  const checks = document.querySelectorAll('input[type=checkbox]');
+  let count = 0;
+  checks.forEach((c,i)=>{
+    c.checked = localStorage.getItem('c'+i)==='true';
+    if(c.checked) count++;
+  });
+  document.getElementById('bar').style.width = (count/checks.length*100)+'%';
+  document.getElementById('notesBox').value = localStorage.getItem('notes')||'';
+}
+
+document.getElementById('notesBox').addEventListener('input',e=>{
+  localStorage.setItem('notes',e.target.value);
+});
+
+load();
+</script>
+
+</body>
+</html>
