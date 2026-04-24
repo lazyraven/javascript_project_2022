@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>React Roadmap 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   THEME TOKENS
+═══════════════════════════════════════ */
+[data-theme="dark"] {
+  --bg:       #05080d;
+  --bg2:      #090e16;
+  --sur:      #0e1621;
+  --sur2:     #141f30;
+  --brd:      #1a2840;
+  --txt:      #c8daf0;
+  --txt2:     #6882a4;
+  --txt3:     #2e4060;
+  --inv:      #ffffff;
+
+  --cyan:   #00e5ff;
+  --react:  #61dafb;
+  --green:  #00ff9d;
+  --orange: #ff8c42;
+  --pink:   #ff4f8b;
+  --purple: #b87cff;
+  --yellow: #ffe566;
+  --red:    #ff5252;
+  --teal:   #1de9b6;
+  --lime:   #b2ff59;
+}
+[data-theme="light"] {
+  --bg:       #f2f5fa;
+  --bg2:      #e8edf6;
+  --sur:      #ffffff;
+  --sur2:     #f0f4fc;
+  --brd:      #c5d2e8;
+  --txt:      #0d1b2e;
+  --txt2:     #4a6080;
+  --txt3:     #9ab0c8;
+  --inv:      #000000;
+
+  --cyan:   #0077aa;
+  --react:  #0a94c8;
+  --green:  #00875a;
+  --orange: #d4610a;
+  --pink:   #c01060;
+  --purple: #7230cc;
+  --yellow: #a07800;
+  --red:    #cc2020;
+  --teal:   #007060;
+  --lime:   #527a00;
+}
+
+/* ═══════════════════════════════════════
+   BASE
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  background: var(--bg);
+  color: var(--txt);
+  overflow-x: hidden;
+  transition: background .3s, color .3s;
+  min-height: 100vh;
+}
+
+/* Noise overlay */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: .025;
+  pointer-events: none;
+}
+
+/* Ambient blobs */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 10% 20%, rgba(97,218,251,.05) 0%, transparent 60%),
+    radial-gradient(ellipse 500px 500px at 90% 80%, rgba(184,124,255,.04) 0%, transparent 60%),
+    radial-gradient(ellipse 400px 300px at 50% 50%, rgba(0,229,255,.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+/* ═══════════════════════════════════════
+   THEME TOGGLE
+═══════════════════════════════════════ */
+.toggle {
+  position: fixed; top: 20px; right: 20px; z-index: 999;
+  display: flex;
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 6px; overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,.4);
+}
+.toggle button {
+  border: none; background: none; cursor: pointer;
+  padding: 8px 16px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1px;
+  color: var(--txt2); transition: .2s;
+}
+.toggle button.on { background: var(--sur2); color: var(--txt); }
+
+/* ═══════════════════════════════════════
+   HEADER — BIG BRUTALIST TYPE
+═══════════════════════════════════════ */
+header {
+  padding: 80px 0 0;
+  position: relative;
+}
+.h-tag {
+  font-size: 10px; letter-spacing: 6px; text-transform: uppercase;
+  color: var(--react); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.h-tag::after { content: ''; flex: 1; height: 1px; background: var(--brd); }
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5rem, 16vw, 11rem);
+  line-height: .88;
+  letter-spacing: -2px;
+  position: relative;
+}
+.h1-react { color: var(--react); display: block; }
+.h1-road  { color: var(--txt);   display: block; }
+.h1-map   {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--brd);
+  display: block;
+}
+.h1-year  {
+  font-size: .28em;
+  color: var(--txt2);
+  letter-spacing: 4px;
+  vertical-align: super;
+}
+
+.header-meta {
+  margin: 28px 0 0;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+  font-size: 11px; color: var(--txt2);
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--brd);
+}
+.meta-pill {
+  padding: 4px 12px; border: 1px solid; border-radius: 3px; font-size: 10px;
+}
+
+/* ═══════════════════════════════════════
+   RAINBOW BAR
+═══════════════════════════════════════ */
+.rainbow {
+  height: 4px;
+  background: linear-gradient(90deg,
+    var(--react) 0%, var(--cyan) 14%, var(--green) 28%,
+    var(--teal) 42%, var(--purple) 57%, var(--pink) 71%,
+    var(--orange) 85%, var(--yellow) 100%);
+  margin: 0 0 56px;
+}
+
+/* ═══════════════════════════════════════
+   SECTION
+═══════════════════════════════════════ */
+.sec { margin-bottom: 80px; }
+
+.sec-header {
+  display: grid; grid-template-columns: auto 1fr; gap: 16px;
+  align-items: end; margin-bottom: 28px;
+}
+.sec-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem; line-height: 1;
+  color: var(--brd);
+}
+.sec-info {}
+.sec-cat {
+  font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.sec-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 600; line-height: 1.1;
+}
+
+/* ═══════════════════════════════════════
+   CARDS
+═══════════════════════════════════════ */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
+.grid-2 { grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+@media(max-width: 700px) { .grid-3 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 22px 24px;
+  position: relative; overflow: hidden;
+  transition: transform .22s, box-shadow .22s;
+}
+.card:hover { transform: translateY(-5px); }
+
+/* left accent strip */
+.card::before {
+  content: ''; position: absolute;
+  left: 0; top: 0; bottom: 0; width: 4px;
+}
+
+.c-tag {
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 10px; display: block;
+}
+.c-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px; font-weight: 600;
+  margin-bottom: 14px;
+}
+.c-list { list-style: none; }
+.c-list li {
+  font-size: 12px; color: var(--txt2);
+  padding: 5px 0; border-bottom: 1px solid var(--brd);
+  display: flex; gap: 8px; align-items: baseline; line-height: 1.55;
+}
+.c-list li:last-child { border-bottom: none; }
+.arr { color: var(--txt3); font-size: 9px; flex-shrink: 0; margin-top: 3px; }
+em { font-style: normal; color: var(--react); }
+
+/* ═══════════════════════════════════════
+   HIGHLIGHT / CALLOUT
+═══════════════════════════════════════ */
+.callout {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: var(--sur2); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 16px 20px;
+  font-size: 12px; color: var(--txt2); line-height: 1.6;
+  margin-top: 14px;
+}
+.callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.callout strong { color: var(--txt); display: block; margin-bottom: 3px; font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; }
+
+/* ═══════════════════════════════════════
+   CODE BLOCK
+═══════════════════════════════════════ */
+.code-wrap {
+  background: var(--bg2); border: 1px solid var(--brd);
+  border-radius: 8px; overflow: hidden; margin-top: 14px;
+}
+.code-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 16px; border-bottom: 1px solid var(--brd);
+  font-size: 10px; color: var(--txt3);
+}
+.dots { display: flex; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+pre {
+  padding: 18px 20px; overflow-x: auto;
+  font-size: 11.5px; line-height: 1.8;
+}
+.kw  { color: var(--pink); }
+.fn  { color: var(--cyan); }
+.str { color: var(--green); }
+.cm  { color: var(--txt3); }
+.num { color: var(--orange); }
+.tag-jsx { color: var(--react); }
+.prop { color: var(--yellow); }
+.op  { color: var(--purple); }
+
+/* ═══════════════════════════════════════
+   TAGS ROW
+═══════════════════════════════════════ */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  padding: 7px 15px; border-radius: 4px; font-size: 11px;
+  border: 1px solid; cursor: default; transition: transform .15s;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.tag:hover { transform: scale(1.06); }
+
+/* ═══════════════════════════════════════
+   LEARNING ORDER — HORIZONTAL SCROLL TRACK
+═══════════════════════════════════════ */
+.order-track {
+  display: flex; gap: 0; overflow-x: auto;
+  border: 1px solid var(--brd); border-radius: 10px;
+  background: var(--sur); scrollbar-width: thin;
+}
+.order-step {
+  min-width: 140px; flex: 1; padding: 18px 16px;
+  border-right: 1px solid var(--brd); position: relative;
+  transition: background .2s;
+}
+.order-step:last-child { border-right: none; }
+.order-step:hover { background: var(--sur2); }
+.o-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem; line-height: 1;
+  margin-bottom: 6px;
+}
+.o-name { font-size: 11px; font-weight: 600; color: var(--txt); }
+.o-sub  { font-size: 10px; color: var(--txt2); margin-top: 3px; }
+
+/* ═══════════════════════════════════════
+   STACK CARDS — REAL WORLD
+═══════════════════════════════════════ */
+.stack-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px;
+}
+.stack-card {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 18px 16px;
+  text-align: center; transition: transform .2s;
+}
+.stack-card:hover { transform: translateY(-4px); }
+.stack-icon { font-size: 26px; margin-bottom: 8px; }
+.stack-name { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.stack-desc { font-size: 10px; color: var(--txt2); line-height: 1.5; }
+
+/* ═══════════════════════════════════════
+   MISS SECTION
+═══════════════════════════════════════ */
+.miss-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.miss-item {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 16px 18px;
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.miss-bullet {
+  width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; margin-top: 2px;
+}
+.miss-text .mt { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
+.miss-text .ms { font-size: 11px; color: var(--txt2); }
+
+/* ═══════════════════════════════════════
+   REFS
+═══════════════════════════════════════ */
+.ref-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.ref-btn {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 12px 18px;
+  text-decoration: none; color: var(--txt);
+  font-size: 12px; transition: transform .2s, border-color .2s;
+}
+.ref-btn:hover { transform: translateY(-2px); }
+.ref-ico { font-size: 18px; }
+.ref-name { font-weight: 600; }
+.ref-sub  { font-size: 10px; color: var(--txt2); margin-top: 1px; }
+
+/* ═══════════════════════════════════════
+   DIVIDER
+═══════════════════════════════════════ */
+.div { height: 1px; background: linear-gradient(90deg, transparent, var(--brd), transparent); margin: 64px 0; }
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer {
+  text-align: center; padding: 28px 0 48px;
+  font-size: 11px; color: var(--txt3);
+  border-top: 1px solid var(--brd);
+}
+
+/* ═══════════════════════════════════════
+   COLOR SYSTEM — ACCENT STRIPS + HOVER GLOWS
+═══════════════════════════════════════ */
+/* strips */
+.a-react::before { background: var(--react); }
+.a-green::before { background: var(--green); }
+.a-orange::before { background: var(--orange); }
+.a-purple::before { background: var(--purple); }
+.a-cyan::before { background: var(--cyan); }
+.a-pink::before { background: var(--pink); }
+.a-yellow::before { background: var(--yellow); }
+.a-teal::before { background: var(--teal); }
+.a-red::before { background: var(--red); }
+.a-lime::before { background: var(--lime); }
+
+/* glows */
+.a-react:hover  { box-shadow: 0 8px 40px rgba(97,218,251,.12); }
+.a-green:hover  { box-shadow: 0 8px 40px rgba(0,255,157,.10); }
+.a-orange:hover { box-shadow: 0 8px 40px rgba(255,140,66,.10); }
+.a-purple:hover { box-shadow: 0 8px 40px rgba(184,124,255,.10); }
+.a-cyan:hover   { box-shadow: 0 8px 40px rgba(0,229,255,.10); }
+.a-pink:hover   { box-shadow: 0 8px 40px rgba(255,79,139,.10); }
+.a-yellow:hover { box-shadow: 0 8px 40px rgba(255,229,102,.10); }
+.a-teal:hover   { box-shadow: 0 8px 40px rgba(29,233,182,.10); }
+.a-red:hover    { box-shadow: 0 8px 40px rgba(255,82,82,.10); }
+.a-lime:hover   { box-shadow: 0 8px 40px rgba(178,255,89,.10); }
+
+/* category label colors */
+.l-react  { color: var(--react); }
+.l-green  { color: var(--green); }
+.l-orange { color: var(--orange); }
+.l-purple { color: var(--purple); }
+.l-cyan   { color: var(--cyan); }
+.l-pink   { color: var(--pink); }
+.l-yellow { color: var(--yellow); }
+.l-teal   { color: var(--teal); }
+.l-red    { color: var(--red); }
+.l-lime   { color: var(--lime); }
+
+/* tags */
+.t-react  { color: var(--react);  border-color: rgba(97,218,251,.3);  background: rgba(97,218,251,.06); }
+.t-green  { color: var(--green);  border-color: rgba(0,255,157,.3);   background: rgba(0,255,157,.06); }
+.t-orange { color: var(--orange); border-color: rgba(255,140,66,.3);  background: rgba(255,140,66,.06); }
+.t-purple { color: var(--purple); border-color: rgba(184,124,255,.3); background: rgba(184,124,255,.06); }
+.t-cyan   { color: var(--cyan);   border-color: rgba(0,229,255,.3);   background: rgba(0,229,255,.06); }
+.t-pink   { color: var(--pink);   border-color: rgba(255,79,139,.3);  background: rgba(255,79,139,.06); }
+.t-yellow { color: var(--yellow); border-color: rgba(255,229,102,.3); background: rgba(255,229,102,.06); }
+.t-teal   { color: var(--teal);   border-color: rgba(29,233,182,.3);  background: rgba(29,233,182,.06); }
+.t-red    { color: var(--red);    border-color: rgba(255,82,82,.3);   background: rgba(255,82,82,.06); }
+.t-lime   { color: var(--lime);   border-color: rgba(178,255,89,.3);  background: rgba(178,255,89,.06); }
+
+/* section num colors */
+.n-react  { color: rgba(97,218,251,.25); }
+.n-green  { color: rgba(0,255,157,.2); }
+.n-orange { color: rgba(255,140,66,.25); }
+.n-purple { color: rgba(184,124,255,.25); }
+.n-cyan   { color: rgba(0,229,255,.2); }
+.n-pink   { color: rgba(255,79,139,.25); }
+.n-yellow { color: rgba(255,229,102,.25); }
+.n-teal   { color: rgba(29,233,182,.25); }
+.n-red    { color: rgba(255,82,82,.25); }
+.n-lime   { color: rgba(178,255,89,.25); }
+
+/* order step colors */
+.os-react { color: var(--react); }
+.os-green { color: var(--green); }
+.os-purple{ color: var(--purple);}
+.os-cyan  { color: var(--cyan);  }
+.os-pink  { color: var(--pink);  }
+.os-orange{ color: var(--orange);}
+.os-yellow{ color: var(--yellow);}
+.os-teal  { color: var(--teal);  }
+.os-red   { color: var(--red);   }
+
+/* miss bullet */
+.mb-react  { background: rgba(97,218,251,.1);  }
+.mb-orange { background: rgba(255,140,66,.1);  }
+.mb-green  { background: rgba(0,255,157,.1);   }
+.mb-purple { background: rgba(184,124,255,.1); }
+.mb-yellow { background: rgba(255,229,102,.1); }
+
+/* stack card accent top border */
+.sc-react  { border-top: 3px solid var(--react);  }
+.sc-purple { border-top: 3px solid var(--purple); }
+.sc-cyan   { border-top: 3px solid var(--cyan);   }
+.sc-green  { border-top: 3px solid var(--green);  }
+.sc-orange { border-top: 3px solid var(--orange); }
+.sc-yellow { border-top: 3px solid var(--yellow); }
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+.rv {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.rv.visible { opacity: 1; transform: none; }
+
+@media(max-width: 640px) {
+  h1 { letter-spacing: -1px; }
+  .sec-num { font-size: 2.5rem; }
+  .toggle { top: 10px; right: 10px; }
+  .order-step { min-width: 120px; }
+  .grid-2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- THEME TOGGLE -->
+<div class="toggle">
+  <button id="bD" class="on" onclick="setTheme('dark')">◐ DARK</button>
+  <button id="bL" onclick="setTheme('light')">◑ LIGHT</button>
+</div>
+
+<div class="wrap">
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="h-tag">Complete Learning Path · 14 Topics · Interview Ready</div>
+  <h1>
+    <span class="h1-react">React</span>
+    <span class="h1-road">Road</span>
+    <span class="h1-map">map<span class="h1-year">2026</span></span>
+  </h1>
+  <div class="header-meta">
+    <span>⚛️ Modern React · Hooks · Next.js · TypeScript</span>
+    <span class="meta-pill t-react">Virtual DOM</span>
+    <span class="meta-pill t-purple">Redux Toolkit</span>
+    <span class="meta-pill t-green">TanStack Query</span>
+    <span class="meta-pill t-cyan">Next.js</span>
+  </div>
+</header>
+
+<div class="rainbow"></div>
+
+<!-- ═══ 1. FOUNDATIONS ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-react">01</div>
+    <div class="sec-info">
+      <div class="sec-cat l-react">Pre-React Checklist</div>
+      <div class="sec-title">🧱 Strong Foundations</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-react">
+      <span class="c-tag l-react">Must-Have Before React</span>
+      <div class="c-title">JS Prerequisites</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>ES6+: arrow functions, destructuring, spread/rest</li>
+        <li><span class="arr">▸</span>Promises & async/await — async patterns</li>
+        <li><span class="arr">▸</span>Closures & event loop — how JS works</li>
+        <li><span class="arr">▸</span>Array methods: map, filter, reduce</li>
+        <li><span class="arr">▸</span>DOM basics — selection & manipulation</li>
+      </ul>
+      <div class="callout">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>Important</strong>If these are weak, React will feel confusing. Solid JS = smoother React learning curve.</div>
+      </div>
+    </div>
+    <div class="card a-react">
+      <span class="c-tag l-react">Why These Matter</span>
+      <div class="c-title">Foundation → Framework</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>React heavily uses destructuring in props</li>
+        <li><span class="arr">▸</span>async/await is used in every API call</li>
+        <li><span class="arr">▸</span>Closures underpin hooks (useState, useEffect)</li>
+        <li><span class="arr">▸</span>map() renders lists — used in every component</li>
+        <li><span class="arr">▸</span>DOM understanding helps debug React refs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ 2. CORE REACT ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-green">02</div>
+    <div class="sec-info">
+      <div class="sec-cat l-green">Absolutely Essential</div>
+      <div class="sec-title">⚛️ Core React</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-green">
+      <span class="c-tag l-green">Building Blocks</span>
+      <div class="c-title">Components & JSX</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Functional components — modern standard</li>
+        <li><span class="arr">▸</span>JSX syntax — HTML-like in JavaScript</li>
+        <li><span class="arr">▸</span>Props — parent → child data flow</li>
+        <li><span class="arr">▸</span>PropTypes / TypeScript for type safety</li>
+        <li><span class="arr">▸</span>Keys — proper list rendering</li>
+      </ul>
+    </div>
+    <div class="card a-green">
+      <span class="c-tag l-green">State Management (Local) ⭐</span>
+      <div class="c-title">useState & Forms</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>useState — declare reactive state</li>
+        <li><span class="arr">▸</span>Derived state — compute from existing state</li>
+        <li><span class="arr">▸</span>Controlled components — input tied to state</li>
+        <li><span class="arr">▸</span>Batched state updates (React 18+)</li>
+        <li><span class="arr">▸</span>State initializers (lazy init)</li>
+      </ul>
+    </div>
+    <div class="card a-green">
+      <span class="c-tag l-green">Side Effects ⭐ Interview Fav</span>
+      <div class="c-title">useEffect</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Runs after render — sync with externals</li>
+        <li><span class="arr">▸</span>Cleanup functions — prevent memory leaks</li>
+        <li><span class="arr">▸</span>Dependency array — controls when effect runs</li>
+        <li><span class="arr">▸</span>[] = run once, [val] = on val change</li>
+        <li><span class="arr">▸</span>No array = runs on every render</li>
+      </ul>
+      <div class="callout">
+        <span class="callout-icon">🎯</span>
+        <div><strong>Interview Q: When does useEffect run?</strong>After paint. Dep array controls frequency. Cleanup runs before next effect + unmount.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ 3. ARCHITECTURE + 4. ROUTING ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-cyan">03-04</div>
+    <div class="sec-info">
+      <div class="sec-cat l-cyan">Structure & Navigation</div>
+      <div class="sec-title">🔁 Component Architecture & 🌐 Routing</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-cyan">
+      <span class="c-tag l-cyan">Reusability</span>
+      <div class="c-title">Component Design</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Reusable components — single responsibility</li>
+        <li><span class="arr">▸</span>Lifting state up — shared state management</li>
+        <li><span class="arr">▸</span>Prop drilling — passing too many levels</li>
+        <li><span class="arr">▸</span>Composition over inheritance</li>
+        <li><span class="arr">▸</span>Children prop — flexible layouts</li>
+      </ul>
+      <div class="callout">
+        <span class="callout-icon">💬</span>
+        <div><strong>Interview: "How do you manage shared state?"</strong>Lift it up, use Context, or add Redux/Zustand depending on scale.</div>
+      </div>
+    </div>
+    <div class="card a-cyan">
+      <span class="c-tag l-cyan">Must for Projects</span>
+      <div class="c-title">React Router</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>BrowserRouter, Routes, Route setup</li>
+        <li><span class="arr">▸</span>Dynamic routes — /post/:id</li>
+        <li><span class="arr">▸</span>Nested routes — layouts</li>
+        <li><span class="arr">▸</span>Protected routes — auth guards</li>
+        <li><span class="arr">▸</span>useNavigate, useParams, useLocation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ 5. STATE MANAGEMENT ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-purple">05</div>
+    <div class="sec-info">
+      <div class="sec-cat l-purple">Global State</div>
+      <div class="sec-title">📦 State Management</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-purple">
+      <span class="c-tag l-purple">Start With</span>
+      <div class="c-title">Context API</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>createContext — make a context</li>
+        <li><span class="arr">▸</span>Provider — wrap components with data</li>
+        <li><span class="arr">▸</span>useContext — consume in any child</li>
+        <li><span class="arr">▸</span>Good for: theme, auth, language</li>
+        <li><span class="arr">▸</span>Limitation: re-renders on every change</li>
+      </ul>
+    </div>
+    <div class="card a-purple">
+      <span class="c-tag l-purple">Industry Standard</span>
+      <div class="c-title">Redux Toolkit</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>createSlice — reducers + actions together</li>
+        <li><span class="arr">▸</span>configureStore — single source of truth</li>
+        <li><span class="arr">▸</span>useSelector — read state</li>
+        <li><span class="arr">▸</span>useDispatch — trigger actions</li>
+        <li><span class="arr">▸</span>RTK Query — built-in data fetching</li>
+      </ul>
+    </div>
+    <div class="card a-purple">
+      <span class="c-tag l-purple">Lightweight Alternative</span>
+      <div class="c-title">Zustand</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>create() — define store in one function</li>
+        <li><span class="arr">▸</span>No boilerplate — simpler than Redux</li>
+        <li><span class="arr">▸</span>Selective re-renders — efficient</li>
+        <li><span class="arr">▸</span>Middleware support — persist, devtools</li>
+        <li><span class="arr">▸</span>Great for small-medium projects</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ 6. FORMS + 7. API ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-orange">06-07</div>
+    <div class="sec-info">
+      <div class="sec-cat l-orange">Data In & Out</div>
+      <div class="sec-title">🎯 Forms & Validation · 🔄 API Handling</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-orange">
+      <span class="c-tag l-orange">Forms</span>
+      <div class="c-title">React Hook Form + Yup</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Controlled vs uncontrolled components</li>
+        <li><span class="arr">▸</span>React Hook Form — minimal re-renders</li>
+        <li><span class="arr">▸</span>register, handleSubmit, formState</li>
+        <li><span class="arr">▸</span>Yup schema validation — type-safe rules</li>
+        <li><span class="arr">▸</span>Error messages, touched states</li>
+      </ul>
+    </div>
+    <div class="card a-orange">
+      <span class="c-tag l-orange">Modern Approach ⭐</span>
+      <div class="c-title">TanStack Query</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>useQuery — fetch + cache + sync</li>
+        <li><span class="arr">▸</span>useMutation — POST/PUT/DELETE</li>
+        <li><span class="arr">▸</span>Automatic background refetching</li>
+        <li><span class="arr">▸</span>Loading, error, success states built-in</li>
+        <li><span class="arr">▸</span>Stale-while-revalidate caching</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ 8. STYLING ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-pink">08</div>
+    <div class="sec-info">
+      <div class="sec-cat l-pink">Styling</div>
+      <div class="sec-title">🎨 Styling Approaches</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-pink">
+      <span class="c-tag l-pink">Most Popular Now</span>
+      <div class="c-title">Tailwind CSS</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Utility-first — no custom CSS files</li>
+        <li><span class="arr">▸</span>Responsive prefixes: sm:, md:, lg:</li>
+        <li><span class="arr">▸</span>Dark mode: dark: prefix</li>
+        <li><span class="arr">▸</span>JIT compiler — only ships used classes</li>
+        <li><span class="arr">▸</span>Most companies prefer this now</li>
+      </ul>
+    </div>
+    <div class="card a-pink">
+      <span class="c-tag l-pink">Component Scoping</span>
+      <div class="c-title">CSS Modules & Styled</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>CSS Modules — scoped class names</li>
+        <li><span class="arr">▸</span>Styled Components — CSS-in-JS</li>
+        <li><span class="arr">▸</span>Emotion — performant CSS-in-JS</li>
+        <li><span class="arr">▸</span>Theme providers — consistent tokens</li>
+        <li><span class="arr">▸</span>Dynamic styles based on props</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ 9. PERFORMANCE ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-yellow">09</div>
+    <div class="sec-info">
+      <div class="sec-cat l-yellow">Interview Favorite</div>
+      <div class="sec-title">⚡ Performance Optimization</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-yellow">
+      <span class="c-tag l-yellow">Memoization</span>
+      <div class="c-title">React.memo & useMemo</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>React.memo — skip re-render if props same</li>
+        <li><span class="arr">▸</span>useMemo — cache expensive calculations</li>
+        <li><span class="arr">▸</span>useCallback — stable function reference</li>
+        <li><span class="arr">▸</span>When to use: only for actual perf bottlenecks</li>
+        <li><span class="arr">▸</span>Premature optimization = bad practice</li>
+      </ul>
+      <div class="callout">
+        <span class="callout-icon">💬</span>
+        <div><strong>Interview: "Why is my component re-rendering?"</strong>Check: parent re-render, prop reference change, context update, state mutation.</div>
+      </div>
+    </div>
+    <div class="card a-yellow">
+      <span class="c-tag l-yellow">Code Loading</span>
+      <div class="c-title">Lazy Loading & Splitting</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>React.lazy() — load components on demand</li>
+        <li><span class="arr">▸</span>Suspense — show fallback while loading</li>
+        <li><span class="arr">▸</span>Dynamic import() — code splitting</li>
+        <li><span class="arr">▸</span>Route-based splitting — load per page</li>
+        <li><span class="arr">▸</span>Bundle analysis — identify large chunks</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ 10. ADVANCED + 11. NEXT.JS ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-teal">10-11</div>
+    <div class="sec-info">
+      <div class="sec-cat l-teal">Level Up</div>
+      <div class="sec-title">🧠 Advanced React & 🧩 Next.js</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-teal">
+      <span class="c-tag l-teal">Custom Hooks ⭐ Very Important</span>
+      <div class="c-title">Advanced Patterns</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Custom hooks — reusable stateful logic</li>
+        <li><span class="arr">▸</span>useReducer — complex state transitions</li>
+        <li><span class="arr">▸</span>Error Boundaries — catch render errors</li>
+        <li><span class="arr">▸</span>Portals — render outside DOM tree</li>
+        <li><span class="arr">▸</span>Suspense — async rendering</li>
+      </ul>
+    </div>
+    <div class="card a-teal">
+      <span class="c-tag l-teal">Very Important ⭐</span>
+      <div class="c-title">Next.js Framework</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>App Router — file-based routing</li>
+        <li><span class="arr">▸</span>SSR — Server-Side Rendering</li>
+        <li><span class="arr">▸</span>SSG — Static Site Generation</li>
+        <li><span class="arr">▸</span>API Routes — backend in same repo</li>
+        <li><span class="arr">▸</span>Server Components (React 18+)</li>
+      </ul>
+    </div>
+    <div class="card a-teal">
+      <span class="c-tag l-teal">Testing + Build</span>
+      <div class="c-title">Testing & Tools</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Jest — unit testing, assertions</li>
+        <li><span class="arr">▸</span>React Testing Library — user-centric tests</li>
+        <li><span class="arr">▸</span>Vite — modern bundler, fast HMR</li>
+        <li><span class="arr">▸</span>TypeScript — near-mandatory in industry</li>
+        <li><span class="arr">▸</span>ESLint + Prettier — code quality</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ CODE EXAMPLE ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-react">EX</div>
+    <div class="sec-info">
+      <div class="sec-cat l-react">Interview-Level Code</div>
+      <div class="sec-title">💡 Todo App — What Interviews Test</div>
+    </div>
+  </div>
+  <div class="rv">
+    <div class="code-wrap">
+      <div class="code-bar">
+        <div class="dots">
+          <div class="dot" style="background:#ff5252"></div>
+          <div class="dot" style="background:#ffc107"></div>
+          <div class="dot" style="background:#4caf50"></div>
+        </div>
+        <span>TodoApp.jsx — tests: useState, useEffect, controlled input</span>
+        <span></span>
+      </div>
+<pre><span class="kw">import</span> { <span class="fn">useState</span>, <span class="fn">useEffect</span> } <span class="kw">from</span> <span class="str">"react"</span>;
+
+<span class="kw">export default function</span> <span class="fn">TodoApp</span>() {
+  <span class="kw">const</span> [todos, setTodos] = <span class="fn">useState</span>(() <span class="op">=></span> {
+    <span class="kw">return</span> JSON.<span class="fn">parse</span>(<span class="fn">localStorage</span>.<span class="fn">getItem</span>(<span class="str">"todos"</span>)) <span class="op">||</span> [];
+  }); <span class="cm">// lazy initializer — runs once</span>
+
+  <span class="kw">const</span> [input, setInput] = <span class="fn">useState</span>(<span class="str">""</span>);
+
+  <span class="fn">useEffect</span>(() <span class="op">=></span> {
+    <span class="fn">localStorage</span>.<span class="fn">setItem</span>(<span class="str">"todos"</span>, JSON.<span class="fn">stringify</span>(todos));
+  }, [todos]); <span class="cm">// runs whenever todos changes</span>
+
+  <span class="kw">const</span> <span class="fn">addTodo</span> = () <span class="op">=></span> {
+    <span class="kw">if</span> (!input.<span class="fn">trim</span>()) <span class="kw">return</span>;
+    <span class="fn">setTodos</span>([...todos, { id: Date.<span class="fn">now</span>(), text: input, done: <span class="kw">false</span> }]);
+    <span class="fn">setInput</span>(<span class="str">""</span>);
+  };
+
+  <span class="kw">const</span> <span class="fn">toggleTodo</span> = (id) <span class="op">=></span>
+    <span class="fn">setTodos</span>(todos.<span class="fn">map</span>(t <span class="op">=></span> t.id <span class="op">===</span> id ? { ...t, done: !t.done } : t));
+
+  <span class="kw">return</span> (
+    <span class="tag-jsx">&lt;div&gt;</span>
+      <span class="tag-jsx">&lt;input</span> <span class="prop">value</span>={input} <span class="prop">onChange</span>={(e) <span class="op">=></span> <span class="fn">setInput</span>(e.target.value)} <span class="tag-jsx">/&gt;</span>
+      <span class="tag-jsx">&lt;button</span> <span class="prop">onClick</span>={addTodo}<span class="tag-jsx">&gt;</span>Add<span class="tag-jsx">&lt;/button&gt;</span>
+      {todos.<span class="fn">map</span>(todo <span class="op">=></span> (
+        <span class="tag-jsx">&lt;div</span> <span class="prop">key</span>={todo.id} <span class="prop">onClick</span>={() <span class="op">=></span> <span class="fn">toggleTodo</span>(todo.id)}<span class="tag-jsx">&gt;</span>
+          {todo.text} {todo.done ? <span class="str">"✔"</span> : <span class="str">""</span>}
+        <span class="tag-jsx">&lt;/div&gt;</span>
+      ))}
+    <span class="tag-jsx">&lt;/div&gt;</span>
+  );
+}</pre>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;">
+      <span class="tag t-react">Tests: useState</span>
+      <span class="tag t-green">Tests: useEffect</span>
+      <span class="tag t-cyan">Tests: Controlled input</span>
+      <span class="tag t-purple">Tests: State updates</span>
+      <span class="tag t-orange">Tests: Immutable patterns</span>
+      <span class="tag t-yellow">Tests: Lazy init</span>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ INTERVIEW TOPICS ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-pink">🎯</div>
+    <div class="sec-info">
+      <div class="sec-cat l-pink">High Priority</div>
+      <div class="sec-title">Interview-Focused Topics</div>
+    </div>
+  </div>
+  <div class="tags rv">
+    <span class="tag t-react">Virtual DOM</span>
+    <span class="tag t-react">Reconciliation</span>
+    <span class="tag t-green">useEffect behavior</span>
+    <span class="tag t-green">State vs Props</span>
+    <span class="tag t-orange">Controlled vs Uncontrolled</span>
+    <span class="tag t-yellow">useMemo / useCallback</span>
+    <span class="tag t-yellow">React.memo</span>
+    <span class="tag t-teal">Custom Hooks</span>
+    <span class="tag t-purple">Context API</span>
+    <span class="tag t-purple">Redux vs Zustand</span>
+    <span class="tag t-cyan">Protected Routes</span>
+    <span class="tag t-pink">Performance optimization</span>
+    <span class="tag t-lime">Error Boundaries</span>
+    <span class="tag t-red">Lazy Loading</span>
+    <span class="tag t-react">Server Components</span>
+    <span class="tag t-cyan">useReducer</span>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ REAL WORLD STACK ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-green">💼</div>
+    <div class="sec-info">
+      <div class="sec-cat l-green">Industry Standard</div>
+      <div class="sec-title">Real-World React Stack</div>
+    </div>
+  </div>
+  <div class="stack-grid rv">
+    <div class="stack-card sc-react">
+      <div class="stack-icon">⚛️</div>
+      <div class="stack-name" style="color:var(--react)">React + Next.js</div>
+      <div class="stack-desc">Core UI library + fullstack framework with SSR/SSG</div>
+    </div>
+    <div class="stack-card sc-purple">
+      <div class="stack-icon">🗃️</div>
+      <div class="stack-name" style="color:var(--purple)">Redux Toolkit / Zustand</div>
+      <div class="stack-desc">Global state management for complex apps</div>
+    </div>
+    <div class="stack-card sc-green">
+      <div class="stack-icon">🔄</div>
+      <div class="stack-name" style="color:var(--green)">TanStack Query</div>
+      <div class="stack-desc">Server state, caching, and API syncing</div>
+    </div>
+    <div class="stack-card sc-cyan">
+      <div class="stack-icon">🎨</div>
+      <div class="stack-name" style="color:var(--cyan)">Tailwind CSS</div>
+      <div class="stack-desc">Utility-first styling, no CSS files needed</div>
+    </div>
+    <div class="stack-card sc-orange">
+      <div class="stack-icon">📝</div>
+      <div class="stack-name" style="color:var(--orange)">React Hook Form</div>
+      <div class="stack-desc">High-performance forms with Yup validation</div>
+    </div>
+    <div class="stack-card sc-yellow">
+      <div class="stack-icon">🔷</div>
+      <div class="stack-name" style="color:var(--yellow)">TypeScript</div>
+      <div class="stack-desc">Type safety — near mandatory in good companies</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ LEARNING ORDER ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-cyan">🧭</div>
+    <div class="sec-info">
+      <div class="sec-cat l-cyan">Simple Flow</div>
+      <div class="sec-title">Suggested Learning Order</div>
+    </div>
+  </div>
+  <div class="order-track rv">
+    <div class="order-step"><div class="o-num os-react">01</div><div class="o-name">Core React</div><div class="o-sub">Components + Hooks</div></div>
+    <div class="order-step"><div class="o-num os-cyan">02</div><div class="o-name">Routing</div><div class="o-sub">React Router</div></div>
+    <div class="order-step"><div class="o-num os-orange">03</div><div class="o-name">Forms + API</div><div class="o-sub">Hook Form + Fetch</div></div>
+    <div class="order-step"><div class="o-num os-purple">04</div><div class="o-name">State Mgmt</div><div class="o-sub">Redux / Zustand</div></div>
+    <div class="order-step"><div class="o-num os-pink">05</div><div class="o-name">Styling</div><div class="o-sub">Tailwind CSS</div></div>
+    <div class="order-step"><div class="o-num os-yellow">06</div><div class="o-name">Performance</div><div class="o-sub">Memo + Lazy</div></div>
+    <div class="order-step"><div class="o-num os-teal">07</div><div class="o-name">Next.js</div><div class="o-sub">SSR + SSG</div></div>
+    <div class="order-step"><div class="o-num os-react">08</div><div class="o-name">TypeScript</div><div class="o-sub">Type safety</div></div>
+    <div class="order-step"><div class="o-num os-green">09</div><div class="o-name">Testing</div><div class="o-sub">Jest + RTL</div></div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ WHAT PEOPLE MISS ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-red">⚠️</div>
+    <div class="sec-info">
+      <div class="sec-cat l-red">Common Gaps</div>
+      <div class="sec-title">What Most People Miss</div>
+    </div>
+  </div>
+  <div class="miss-grid rv">
+    <div class="miss-item">
+      <div class="miss-bullet mb-react">🧩</div>
+      <div class="miss-text">
+        <div class="mt" style="color:var(--react)">Reusable Components</div>
+        <div class="ms">Writing single-purpose, composable components from the start</div>
+      </div>
+    </div>
+    <div class="miss-item">
+      <div class="miss-bullet mb-orange">📁</div>
+      <div class="miss-text">
+        <div class="mt" style="color:var(--orange)">Clean Folder Structure</div>
+        <div class="ms">Feature-based or atomic structure — not one giant folder</div>
+      </div>
+    </div>
+    <div class="miss-item">
+      <div class="miss-bullet mb-yellow">⚡</div>
+      <div class="miss-text">
+        <div class="mt" style="color:var(--yellow)">Performance Thinking Early</div>
+        <div class="ms">Avoid premature optimization but understand re-render triggers</div>
+      </div>
+    </div>
+    <div class="miss-item">
+      <div class="miss-bullet mb-green">🔄</div>
+      <div class="miss-text">
+        <div class="mt" style="color:var(--green)">Real-World API Handling</div>
+        <div class="ms">Loading states, error states, empty states — all three matter</div>
+      </div>
+    </div>
+    <div class="miss-item">
+      <div class="miss-bullet mb-purple">🚨</div>
+      <div class="miss-text">
+        <div class="mt" style="color:var(--purple)">Error Handling</div>
+        <div class="ms">Error boundaries, try/catch in async, fallback UIs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ REFS ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-react">📚</div>
+    <div class="sec-info">
+      <div class="sec-cat l-react">Best Resources</div>
+      <div class="sec-title">References & Practice</div>
+    </div>
+  </div>
+  <div class="ref-row rv">
+    <a href="https://react.dev" target="_blank" class="ref-btn" style="border-color:rgba(97,218,251,.3)">
+      <span class="ref-ico">⚛️</span>
+      <div><div class="ref-name">React Docs</div><div class="ref-sub">react.dev — official</div></div>
+    </a>
+    <a href="https://nextjs.org/docs" target="_blank" class="ref-btn" style="border-color:rgba(255,255,255,.15)">
+      <span class="ref-ico">▲</span>
+      <div><div class="ref-name">Next.js Docs</div><div class="ref-sub">nextjs.org/docs</div></div>
+    </a>
+    <a href="https://frontendmentor.io" target="_blank" class="ref-btn" style="border-color:rgba(184,124,255,.3)">
+      <span class="ref-ico">🎨</span>
+      <div><div class="ref-name">Frontend Mentor</div><div class="ref-sub">Real project practice</div></div>
+    </a>
+    <a href="https://leetcode.com" target="_blank" class="ref-btn" style="border-color:rgba(255,140,66,.3)">
+      <span class="ref-ico">💻</span>
+      <div><div class="ref-name">LeetCode</div><div class="ref-sub">Algorithm challenges</div></div>
+    </a>
+    <a href="https://tanstack.com/query" target="_blank" class="ref-btn" style="border-color:rgba(0,255,157,.3)">
+      <span class="ref-ico">🔄</span>
+      <div><div class="ref-name">TanStack Query</div><div class="ref-sub">tanstack.com</div></div>
+    </a>
+    <a href="https://redux-toolkit.js.org" target="_blank" class="ref-btn" style="border-color:rgba(184,124,255,.3)">
+      <span class="ref-ico">🗃️</span>
+      <div><div class="ref-name">Redux Toolkit</div><div class="ref-sub">redux-toolkit.js.org</div></div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>React Roadmap 2026 — Interview-ready · Production-focused · 14 Core Topics</p>
+  <p style="margin-top:6px">Components in, confidence out. Ship it. ⚛️</p>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('bD').classList.toggle('on', t==='dark');
+  document.getElementById('bL').classList.toggle('on', t==='light');
+  localStorage.setItem('rr-theme', t);
+}
+const saved = localStorage.getItem('rr-theme');
+if (saved) setTheme(saved);
+
+// Scroll reveal with stagger
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const siblings = e.target.parentElement?.querySelectorAll('.rv') || [];
+      let delay = 0;
+      siblings.forEach(s => {
+        if (s === e.target) {
+          setTimeout(() => s.classList.add('visible'), delay);
+          delay += 60;
+        }
+      });
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
