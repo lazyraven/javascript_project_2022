@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Roadmap 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== THEME VARS ===== */
+[data-theme="dark"] {
+  --bg:       #080b0f;
+  --bg2:      #0d1117;
+  --surface:  #111720;
+  --surface2: #192030;
+  --border:   #1e2d45;
+  --text:     #dce8f5;
+  --text2:    #7a95b8;
+  --text3:    #3d5570;
+  --shadow:   rgba(0,0,0,0.6);
+
+  --y:   #f0c040;   /* yellow   - fundamentals */
+  --o:   #ff7043;   /* orange   - functions    */
+  --g:   #29d98a;   /* green    - arrays/obj   */
+  --b:   #38b6ff;   /* blue     - async        */
+  --v:   #a78bfa;   /* violet   - engine       */
+  --p:   #f472b6;   /* pink     - OOP          */
+  --t:   #2dd4bf;   /* teal     - ES6+         */
+  --r:   #fb7185;   /* red      - DOM          */
+  --c:   #60a5fa;   /* cornflower - perf       */
+  --lime:#a3e635;   /* lime     - patterns     */
+}
+[data-theme="light"] {
+  --bg:       #f4f6fb;
+  --bg2:      #eaeff8;
+  --surface:  #ffffff;
+  --surface2: #f0f4fc;
+  --border:   #cdd8ee;
+  --text:     #0f1e35;
+  --text2:    #435a7a;
+  --text3:    #8a9db8;
+  --shadow:   rgba(15,30,53,0.12);
+
+  --y:   #b88a00;
+  --o:   #d44020;
+  --g:   #18a060;
+  --b:   #1a88d4;
+  --v:   #6d4fd4;
+  --p:   #c0306a;
+  --t:   #0fa898;
+  --r:   #d42040;
+  --c:   #2060d4;
+  --lime:#5a9000;
+}
+
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background .35s, color .35s;
+}
+
+/* ===== GRID TEXTURE ===== */
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(56,182,255,.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(167,139,250,.04) 0%, transparent 50%),
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: auto, auto, 50px 50px, 50px 50px;
+  opacity:.5;
+}
+
+/* ===== LAYOUT ===== */
+.wrap { max-width:1180px; margin:0 auto; padding:0 20px; position:relative; z-index:1; }
+
+/* ===== TOGGLE ===== */
+.toggle {
+  position:fixed; top:18px; right:18px; z-index:999;
+  display:flex; align-items:center; gap:0;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:40px; padding:4px;
+  box-shadow:0 4px 24px var(--shadow);
+}
+.toggle button {
+  border:none; background:none; cursor:pointer;
+  padding:6px 14px; border-radius:30px;
+  font-family:'JetBrains Mono',monospace; font-size:12px;
+  color:var(--text3); transition:.2s;
+}
+.toggle button.on {
+  background:var(--surface2); color:var(--text);
+}
+
+/* ===== HEADER ===== */
+header {
+  padding: 72px 0 48px;
+  position: relative;
+}
+.eyebrow {
+  font-size:10px; letter-spacing:5px; text-transform:uppercase;
+  color:var(--text3); margin-bottom:16px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow::before { content:''; display:block; width:28px; height:1px; background:var(--y); }
+
+h1 {
+  font-family:'Playfair Display', serif;
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  font-weight:900;
+  line-height:.95;
+  letter-spacing:-3px;
+}
+h1 .js  { color:var(--y); }
+h1 .rd  { color:var(--text); }
+h1 .yr  { color:var(--text2); font-size:.6em; letter-spacing:-1px; }
+
+.header-sub {
+  margin-top:20px;
+  font-size:12px; color:var(--text2);
+  display:flex; flex-wrap:wrap; gap:20px; align-items:center;
+}
+.pill {
+  padding:4px 12px; border-radius:3px; font-size:11px;
+  border:1px solid; display:inline-block;
+}
+
+/* ===== ACCENT LINE ===== */
+.stripe {
+  height:3px;
+  background: linear-gradient(90deg, var(--y), var(--o), var(--g), var(--b), var(--v), var(--p), var(--t), var(--r), var(--lime));
+  margin: 32px 0 56px;
+  border-radius:2px;
+}
+
+/* ===== SECTION ===== */
+.sec { margin-bottom:72px; }
+.sec-head {
+  display:flex; align-items:baseline; gap:16px; margin-bottom:28px;
+}
+.sec-num {
+  font-size:10px; letter-spacing:3px; color:var(--text3);
+  min-width:48px;
+}
+.sec-title {
+  font-family:'Playfair Display',serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight:700;
+  display:flex; align-items:center; gap:12px;
+}
+.sec-title .bullet {
+  display:inline-block; width:10px; height:10px;
+  border-radius:50%; flex-shrink:0;
+}
+
+/* ===== CARD GRID ===== */
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:14px; }
+.grid-2 { grid-template-columns:repeat(auto-fill, minmax(380px,1fr)); }
+
+.card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:22px 24px;
+  position:relative;
+  overflow:hidden;
+  transition: transform .2s, box-shadow .2s;
+}
+.card:hover { transform:translateY(-4px); }
+.card::after {
+  content:'';
+  position:absolute; left:0; top:0; bottom:0;
+  width:3px;
+}
+
+.card-label {
+  font-size:10px; letter-spacing:3px; text-transform:uppercase;
+  margin-bottom:10px;
+}
+.card-title {
+  font-family:'Playfair Display',serif;
+  font-size:16px; font-weight:700;
+  margin-bottom:14px;
+}
+.card ul { list-style:none; }
+.card ul li {
+  font-size:12px; color:var(--text2);
+  padding:5px 0; border-bottom:1px solid var(--border);
+  display:flex; gap:8px; align-items:baseline; line-height:1.6;
+}
+.card ul li:last-child { border-bottom:none; }
+.card ul li .arrow { color:var(--text3); font-size:9px; flex-shrink:0; margin-top:3px; }
+.star { font-size:10px; }
+
+/* code block */
+.code-block {
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:18px 20px;
+  font-size:11.5px;
+  line-height:1.8;
+  color:var(--text2);
+  overflow-x:auto;
+}
+.code-block .kw  { color:var(--b); }
+.code-block .fn  { color:var(--y); }
+.code-block .str { color:var(--g); }
+.code-block .cm  { color:var(--text3); }
+.code-block .num { color:var(--o); }
+.code-block .op  { color:var(--v); }
+
+/* ===== TAG ROW ===== */
+.tags { display:flex; flex-wrap:wrap; gap:8px; }
+.tag {
+  padding:6px 14px; border-radius:4px; font-size:11px;
+  border:1px solid; cursor:default;
+  transition: transform .15s;
+}
+.tag:hover { transform:scale(1.05); }
+
+/* ===== INTERVIEW BOX ===== */
+.interview {
+  margin-top:14px;
+  background:var(--bg2);
+  border-left:3px solid var(--y);
+  border-radius:0 6px 6px 0;
+  padding:12px 14px;
+  font-size:12px; line-height:1.7;
+}
+.interview .q { color:var(--y); margin-bottom:4px; font-weight:600; }
+.interview .a { color:var(--text2); }
+
+/* ===== STEPS BAR ===== */
+.steps {
+  display:flex; align-items:stretch; gap:0;
+  margin-bottom:32px; overflow-x:auto;
+  border:1px solid var(--border); border-radius:10px;
+  background:var(--surface);
+}
+.step {
+  flex:1; min-width:140px;
+  padding:16px 18px;
+  border-right:1px solid var(--border);
+  position:relative;
+}
+.step:last-child { border-right:none; }
+.step-num { font-size:9px; letter-spacing:3px; color:var(--text3); margin-bottom:6px; }
+.step-name { font-size:12px; font-weight:600; color:var(--text); }
+.step-desc { font-size:10.5px; color:var(--text2); margin-top:4px; }
+.step-bar {
+  position:absolute; bottom:0; left:0; right:0; height:2px;
+}
+
+/* ===== NEXT STEPS GRID ===== */
+.next-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+@media(max-width:600px){ .next-grid { grid-template-columns:1fr; } }
+
+.next-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:22px;
+  text-align:center;
+  transition: transform .2s;
+}
+.next-card:hover { transform:translateY(-3px); }
+.next-icon { font-size:28px; margin-bottom:10px; }
+.next-title {
+  font-family:'Playfair Display',serif;
+  font-size:17px; font-weight:700; margin-bottom:6px;
+}
+.next-sub { font-size:11px; color:var(--text2); }
+
+/* ===== REFS ===== */
+.ref-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:12px; }
+.ref-card {
+  display:flex; align-items:center; gap:12px;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:8px; padding:14px 16px;
+  text-decoration:none; color:var(--text);
+  transition: transform .2s, border-color .2s;
+}
+.ref-card:hover { transform:translateY(-2px); border-color:var(--b); }
+.ref-ico { font-size:20px; }
+.ref-info .rt { font-size:13px; font-weight:600; }
+.ref-info .rs { font-size:10.5px; color:var(--text3); margin-top:2px; }
+
+/* ===== DIVIDER ===== */
+.div { height:1px; background:linear-gradient(90deg,transparent,var(--border),transparent); margin:56px 0; }
+
+footer {
+  text-align:center; padding:28px 0 48px;
+  font-size:11px; color:var(--text3);
+  border-top:1px solid var(--border);
+}
+
+/* ===== COLOR HELPERS ===== */
+/* card accent bars */
+.acc-y::after  { background:var(--y); }
+.acc-o::after  { background:var(--o); }
+.acc-g::after  { background:var(--g); }
+.acc-b::after  { background:var(--b); }
+.acc-v::after  { background:var(--v); }
+.acc-p::after  { background:var(--p); }
+.acc-t::after  { background:var(--t); }
+.acc-r::after  { background:var(--r); }
+.acc-c::after  { background:var(--c); }
+.acc-lime::after { background:var(--lime); }
+
+/* hover glows */
+.card.acc-y:hover  { box-shadow:0 8px 40px rgba(240,192,64,.12); }
+.card.acc-o:hover  { box-shadow:0 8px 40px rgba(255,112,67,.12); }
+.card.acc-g:hover  { box-shadow:0 8px 40px rgba(41,217,138,.12); }
+.card.acc-b:hover  { box-shadow:0 8px 40px rgba(56,182,255,.12); }
+.card.acc-v:hover  { box-shadow:0 8px 40px rgba(167,139,250,.12); }
+.card.acc-p:hover  { box-shadow:0 8px 40px rgba(244,114,182,.12); }
+.card.acc-t:hover  { box-shadow:0 8px 40px rgba(45,212,191,.12); }
+.card.acc-r:hover  { box-shadow:0 8px 40px rgba(251,113,133,.12); }
+.card.acc-c:hover  { box-shadow:0 8px 40px rgba(96,165,250,.12); }
+.card.acc-lime:hover { box-shadow:0 8px 40px rgba(163,230,53,.12); }
+
+/* tag colors */
+.ty   { color:var(--y);  border-color:rgba(240,192,64,.3);  background:rgba(240,192,64,.07); }
+.to   { color:var(--o);  border-color:rgba(255,112,67,.3);  background:rgba(255,112,67,.07); }
+.tg   { color:var(--g);  border-color:rgba(41,217,138,.3);  background:rgba(41,217,138,.07); }
+.tb   { color:var(--b);  border-color:rgba(56,182,255,.3);  background:rgba(56,182,255,.07); }
+.tv   { color:var(--v);  border-color:rgba(167,139,250,.3); background:rgba(167,139,250,.07); }
+.tp   { color:var(--p);  border-color:rgba(244,114,182,.3); background:rgba(244,114,182,.07); }
+.tt   { color:var(--t);  border-color:rgba(45,212,191,.3);  background:rgba(45,212,191,.07); }
+.tr   { color:var(--r);  border-color:rgba(251,113,133,.3); background:rgba(251,113,133,.07); }
+.tc   { color:var(--c);  border-color:rgba(96,165,250,.3);  background:rgba(96,165,250,.07); }
+.tlime{ color:var(--lime);border-color:rgba(163,230,53,.3); background:rgba(163,230,53,.07); }
+
+/* section bullet colors */
+.by { background:var(--y); }
+.bo { background:var(--o); }
+.bg { background:var(--g); }
+.bb { background:var(--b); }
+.bv { background:var(--v); }
+.bp { background:var(--p); }
+.bt { background:var(--t); }
+.br { background:var(--r); }
+.bc { background:var(--c); }
+.blime { background:var(--lime); }
+
+/* label colors */
+.ly { color:var(--y); }
+.lo { color:var(--o); }
+.lg { color:var(--g); }
+.lb { color:var(--b); }
+.lv { color:var(--v); }
+.lp { color:var(--p); }
+.lt { color:var(--t); }
+.lr { color:var(--r); }
+.lc { color:var(--c); }
+.llime { color:var(--lime); }
+
+/* scroll reveal */
+.reveal {
+  opacity:0; transform:translateY(20px);
+  transition:opacity .5s ease, transform .5s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+@media(max-width:640px){
+  h1 { letter-spacing:-2px; }
+  .grid-2 { grid-template-columns:1fr; }
+  .steps { flex-direction:column; }
+  .step { border-right:none; border-bottom:1px solid var(--border); }
+  .step:last-child { border-bottom:none; }
+  .toggle { top:10px; right:10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOGGLE -->
+<div class="toggle">
+  <button id="btnD" class="on" onclick="setTheme('dark')">◐ Dark</button>
+  <button id="btnL" onclick="setTheme('light')">◑ Light</button>
+</div>
+
+<div class="wrap">
+
+<!-- HEADER -->
+<header>
+  <div class="eyebrow">Complete Developer Path</div>
+  <h1>
+    <span class="js">Java<br>Script</span><br>
+    <span class="rd">Road</span><span class="yr">—2026</span>
+  </h1>
+  <div class="header-sub">
+    <span>15 Topics · Interview-ready · Real-world focused</span>
+    <span class="pill ty">⭐ Closures</span>
+    <span class="pill tb">⭐ Async/Await</span>
+    <span class="pill tg">⭐ Array Methods</span>
+  </div>
+</header>
+
+<div class="stripe"></div>
+
+<!-- APPROACH STEPS -->
+<div class="steps reveal">
+  <div class="step">
+    <div class="step-num">01</div>
+    <div class="step-name">Learn Concept</div>
+    <div class="step-desc">Read & understand</div>
+    <div class="step-bar" style="background:var(--y)"></div>
+  </div>
+  <div class="step">
+    <div class="step-num">02</div>
+    <div class="step-name">Practice</div>
+    <div class="step-desc">Small problems first</div>
+    <div class="step-bar" style="background:var(--g)"></div>
+  </div>
+  <div class="step">
+    <div class="step-num">03</div>
+    <div class="step-name">Build Project</div>
+    <div class="step-desc">Apply the concept</div>
+    <div class="step-bar" style="background:var(--b)"></div>
+  </div>
+  <div class="step">
+    <div class="step-num">04</div>
+    <div class="step-name">Revise</div>
+    <div class="step-desc">Interview questions</div>
+    <div class="step-bar" style="background:var(--v)"></div>
+  </div>
+  <div class="step">
+    <div class="step-num">05</div>
+    <div class="step-name">Repeat</div>
+    <div class="step-desc">Build mastery</div>
+    <div class="step-bar" style="background:var(--p)"></div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ① CORE FUNDAMENTALS -->
+<section class="sec">
+  <div class="sec-head reveal">
+    <span class="sec-num">01</span>
+    <h2 class="sec-title">
+      <span class="bullet by"></span>
+      🧱 Core Fundamentals
+    </h2>
+  </div>
+  <div class="grid reveal">
+
+    <div class="card acc-y">
+      <div class="card-label ly">Variables & Types</div>
+      <div class="card-title">Data Foundation</div>
+      <ul>
+        <li><span class="arrow">▸</span>var, let, const — scoping rules</li>
+        <li><span class="arrow">▸</span>Primitive vs Reference types</li>
+        <li><span class="arrow">▸</span>Type Coercion & == vs ===</li>
+        <li><span class="arrow">▸</span>Operators & Expressions</li>
+        <li><span class="arrow">▸</span>Control flow: if/else, switch</li>
+        <li><span class="arrow">▸</span>Loops: for, while, for...of, for...in</li>
+      </ul>
+    </div>
+
+    <div class="card acc-y">
+      <div class="card-label ly">Execution Model</div>
+      <div class="card-title">How JS Runs</div>
+      <ul>
+        <li><span class="arrow">▸</span>Execution Context — Global & Function</li>
+        <li><span class="arrow">▸</span>Call Stack — LIFO execution order</li>
+        <li><span class="arrow">▸</span>Hoisting — var & function declarations</li>
+        <li><span class="arrow">▸</span>Scope: Global, Function, Block</li>
+        <li><span class="arrow">▸</span>Temporal Dead Zone (let/const)</li>
+      </ul>
+    </div>
+
+    <div class="card acc-y">
+      <div class="card-label ly">Functions Basics</div>
+      <div class="card-title">Function Types</div>
+      <ul>
+        <li><span class="arrow">▸</span>Function declaration vs expression</li>
+        <li><span class="arrow">▸</span>Arrow functions — lexical this</li>
+        <li><span class="arrow">▸</span>Parameters & default values</li>
+        <li><span class="arrow">▸</span>Practice: Reverse string, FizzBuzz</li>
+        <li><span class="arrow">▸</span>Practice: Find duplicates in array</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ② ADVANCED FUNCTIONS -->
+<section class="sec">
+  <div class="sec-head reveal">
+    <span class="sec-num">02</span>
+    <h2 class="sec-title">
+      <span class="bullet bo"></span>
+      ⚙️ Functions & Advanced Concepts
+    </h2>
+  </div>
+  <div class="grid reveal">
+
+    <div class="card acc-o">
+      <div class="card-label lo">Interview Core ⭐</div>
+      <div class="card-title">Closures & Scope</div>
+      <ul>
+        <li><span class="arrow">▸</span>Closures — function + its lexical scope</li>
+        <li><span class="arrow">▸</span>Lexical Scope — where it's defined</li>
+        <li><span class="arrow">▸</span>Higher-Order Functions</li>
+        <li><span class="arrow">▸</span>Callbacks — passing functions as args</li>
+        <li><span class="arrow">▸</span>Practice: Counter using closure</li>
+      </ul>
+      <div class="interview">
+        <div class="q">Why asked?</div>
+        <div class="a">Closures appear in debounce, memoization, module patterns, and private state — core to JS mastery.</div>
+      </div>
+    </div>
+
+    <div class="card acc-o">
+      <div class="card-label lo">Critical for Interviews</div>
+      <div class="card-title">this keyword</div>
+      <ul>
+        <li><span class="arrow">▸</span>this in global, method, arrow context</li>
+        <li><span class="arrow">▸</span>bind() — permanently set context</li>
+        <li><span class="arrow">▸</span>call() — invoke with context + args</li>
+        <li><span class="arrow">▸</span>apply() — invoke with context + array</li>
+        <li><span class="arrow">▸</span>Practice: Custom bind() implementation</li>
+      </ul>
+    </div>
+
+    <div class="card acc-o">
+      <div class="card-label lo">Performance</div>
+      <div class="card-title">Debounce & Throttle</div>
+      <ul>
+        <li><span class="arrow">▸</span>Debounce: delay until input stops</li>
+        <li><span class="arrow">▸</span>Throttle: limit execution rate</li>
+        <li><span class="arrow">▸</span>Real use: search bars, scroll events</li>
+        <li><span class="arrow">▸</span>Combines closures + this</li>
+        <li><span class="arrow">▸</span>Practice: Build both from scratch</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- CODE EXAMPLE -->
+  <div class="code-block reveal" style="margin-top:14px">
+<span class="cm">// Classic debounce — tests closures + this + real-world thinking</span>
+<span class="kw">function</span> <span class="fn">debounce</span>(<span class="num">fn</span>, <span class="num">delay</span>) {
+  <span class="kw">let</span> timer;
+  <span class="kw">return function</span> (...<span class="num">args</span>) {
+    <span class="fn">clearTimeout</span>(timer);
+    timer = <span class="fn">setTimeout</span>(() <span class="op">=></span> {
+      <span class="num">fn</span>.<span class="fn">apply</span>(<span class="kw">this</span>, <span class="num">args</span>);
+    }, <span class="num">delay</span>);
+  };
+}</div>
+</section>
+
+<div class="div"></div>
+
+<!-- ③ ARRAYS & OBJECTS -->
+<section class="sec">
+  <div class="sec-head reveal">
+    <span class="sec-num">03</span>
+    <h2 class="sec-title">
+      <span class="bullet bg"></span>
+      📦 Arrays & Objects
+    </h2>
+  </div>
+  <div class="grid reveal">
+
+    <div class="card acc-g">
+      <div class="card-label lg">Heavy Usage ⭐</div>
+      <div class="card-title">Array Methods</div>
+      <ul>
+        <li><span class="arrow">▸</span>map() — transform every element</li>
+        <li><span class="arrow">▸</span>filter() — keep matching elements</li>
+        <li><span class="arrow">▸</span>reduce() — accumulate to single value</li>
+        <li><span class="arrow">▸</span>find() / some() / every()</li>
+        <li><span class="arrow">▸</span>flat() / flatMap() for nested arrays</li>
+        <li><span class="arrow">▸</span>Practice: Flatten, group by property</li>
+      </ul>
+    </div>
+
+    <div class="card acc-g">
+      <div class="card-label lg">Data Handling</div>
+      <div class="card-title">Objects & Spread</div>
+      <ul>
+        <li><span class="arrow">▸</span>Object.keys / values / entries</li>
+        <li><span class="arrow">▸</span>Destructuring — arrays & objects</li>
+        <li><span class="arrow">▸</span>Spread operator (...) — shallow copy</li>
+        <li><span class="arrow">▸</span>Rest operator — gather remaining args</li>
+        <li><span class="arrow">▸</span>Practice: Deep clone, merge objects</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ④ ASYNC -->
+<section class="sec">
+  <div class="sec-head reveal">
+    <span class="sec-num">04</span>
+    <h2 class="sec-title">
+      <span class="bullet bb"></span>
+      ⏳ Asynchronous JavaScript
+    </h2>
+  </div>
+  <div class="grid reveal">
+
+    <div class="card acc-b">
+      <div class="card-label lb">Foundation</div>
+      <div class="card-title">Callbacks → Promises</div>
+      <ul>
+        <li><span class="arrow">▸</span>Callbacks — traditional async pattern</li>
+        <li><span class="arrow">▸</span>Callback Hell — pyramid of doom</li>
+        <li><span class="arrow">▸</span>Promises — .then() / .catch() / .finally()</li>
+        <li><span class="arrow">▸</span>Promise.all / Promise.race</li>
+        <li><span class="arrow">▸</span>Chaining vs nesting</li>
+      </ul>
+    </div>
+
+    <div class="card acc-b">
+      <div class="card-label lb">Modern Standard ⭐</div>
+      <div class="card-title">async / await</div>
+      <ul>
+        <li><span class="arrow">▸</span>async functions always return Promise</li>
+        <li><span class="arrow">▸</span>await pauses execution until resolved</li>
+        <li><span class="arrow">▸</span>try/catch for error handling</li>
+        <li><span class="arrow">▸</span>Fetch API + Axios patterns</li>
+        <li><span class="arrow">▸</span>Parallel: Promise.all with async/await</li>
+      </ul>
+    </div>
+
+    <div class="card acc-b">
+      <div class="card-label lb">Deep Internals ⭐</div>
+      <div class="card-title">Event Loop</div>
+      <ul>
+        <li><span class="arrow">▸</span>Call Stack → Web APIs → Queue</li>
+        <li><span class="arrow">▸</span>Microtask queue (Promises)</li>
+        <li><span class="arrow">▸</span>Macrotask queue (setTimeout)</li>
+        <li><span class="arrow">▸</span>Microtasks run before macrotasks</li>
+        <li><span class="arrow">▸</span>Single-threaded non-blocking model</li>
+      </ul>
+      <div class="interview">
+        <div class="q">Q: What logs first — Promise or setTimeout?</div>
+        <div class="a">A: Promise (microtask) always before setTimeout (macrotask), even with 0ms delay.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ⑤ ENGINE + OOP -->
+<section class="sec">
+  <div class="sec-head reveal">
+    <span class="sec-num">05 — 06</span>
+    <h2 class="sec-title">
+      <span class="bullet bv"></span>
+      🧠 Engine Internals &nbsp;&nbsp;
+      <span class="bullet bp"></span>
+      🏗️ OOP
+    </h2>
+  </div>
+  <div class="grid reveal">
+
+    <div class="card acc-v">
+      <div class="card-label lv">Mid-level+ Interviews</div>
+      <div class="card-title">JS Engine & Memory</div>
+      <ul>
+        <li><span class="arrow">▸</span>V8 engine — parse → compile → run</li>
+        <li><span class="arrow">▸</span>JIT (Just-in-time) compilation</li>
+        <li><span class="arrow">▸</span>Memory: Stack (primitives) vs Heap (refs)</li>
+        <li><span class="arrow">▸</span>Garbage collection — mark & sweep</li>
+        <li><span class="arrow">▸</span>Memory leaks — closures & detached nodes</li>
+      </ul>
+    </div>
+
+    <div class="card acc-p">
+      <div class="card-label lp">Prototype Chain ⭐</div>
+      <div class="card-title">OOP in JavaScript</div>
+      <ul>
+        <li><span class="arrow">▸</span>Prototypes — __proto__ & prototype</li>
+        <li><span class="arrow">▸</span>Prototype chain — property lookup</li>
+        <li><span class="arrow">▸</span>class / constructor / new keyword</li>
+        <li><span class="arrow">▸</span>Inheritance with extends / super</li>
+        <li><span class="arrow">▸</span>Encapsulation — private fields (#)</li>
+        <li><span class="arrow">▸</span>Practice: User, Product classes</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ⑦ ES6+ + DOM -->
+<section class="sec">
+  <div class="sec-head reveal">
+    <span class="sec-num">07 — 08</span>
+    <h2 class="sec-title">
+      <span class="bullet bt"></span>
+      📚 ES6+ Modern JS &nbsp;&nbsp;
+      <span class="bullet br"></span>
+      🌐 DOM & Browser
+    </h2>
+  </div>
+  <div class="grid reveal">
+
+    <div class="card acc-t">
+      <div class="card-label lt">Used Everywhere</div>
+      <div class="card-title">Modern Syntax</div>
+      <ul>
+        <li><span class="arrow">▸</span>Template literals — backtick strings</li>
+        <li><span class="arrow">▸</span>Modules — import / export (ESM)</li>
+        <li><span class="arrow">▸</span>Optional chaining ?. — safe access</li>
+        <li><span class="arrow">▸</span>Nullish coalescing ?? — default fallback</li>
+        <li><span class="arrow">▸</span>Dynamic imports — lazy loading</li>
+        <li><span class="arrow">▸</span>Symbol, WeakMap, WeakSet</li>
+      </ul>
+    </div>
+
+    <div class="card acc-r">
+      <div class="card-label lr">UI Building</div>
+      <div class="card-title">DOM Manipulation</div>
+      <ul>
+        <li><span class="arrow">▸</span>querySelector / querySelectorAll</li>
+        <li><span class="arrow">▸</span>Event handling — addEventListener</li>
+        <li><span class="arrow">▸</span>Event delegation ⭐ — one handler, many targets</li>
+        <li><span class="arrow">▸</span>LocalStorage / SessionStorage</li>
+        <li><span class="arrow">▸</span>Forms & client-side validation</li>
+        <li><span class="arrow">▸</span>Practice: Todo app, Modal, Form validator</li>
+      </ul>
+    </div>
+
+    <div class="card acc-r">
+      <div class="card-label lr">Error Handling</div>
+      <div class="card-title">Debugging & Errors</div>
+      <ul>
+        <li><span class="arrow">▸</span>try / catch / finally</li>
+        <li><span class="arrow">▸</span>Custom error classes</li>
+        <li><span class="arrow">▸</span>Chrome DevTools — breakpoints</li>
+        <li><span class="arrow">▸</span>console.time / console.table</li>
+        <li><span class="arrow">▸</span>Network tab — API debugging</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ⑩ PERFORMANCE + PATTERNS + APIs -->
+<section class="sec">
+  <div class="sec-head reveal">
+    <span class="sec-num">10 — 12</span>
+    <h2 class="sec-title">
+      <span class="bullet bc"></span>
+      ⚡ Performance &nbsp;
+      <span class="bullet blime"></span>
+      🧩 Patterns &amp; APIs
+    </h2>
+  </div>
+  <div class="grid reveal">
+
+    <div class="card acc-c">
+      <div class="card-label lc">Better UX</div>
+      <div class="card-title">Optimization</div>
+      <ul>
+        <li><span class="arrow">▸</span>Debounce & Throttle (revisit)</li>
+        <li><span class="arrow">▸</span>Lazy loading — defer until needed</li>
+        <li><span class="arrow">▸</span>Code splitting — smaller bundles</li>
+        <li><span class="arrow">▸</span>Memoization — cache function results</li>
+        <li><span class="arrow">▸</span>Virtual scrolling — large lists</li>
+      </ul>
+    </div>
+
+    <div class="card acc-lime">
+      <div class="card-label llime">Scalable Apps</div>
+      <div class="card-title">Design Patterns</div>
+      <ul>
+        <li><span class="arrow">▸</span>Module pattern — encapsulation</li>
+        <li><span class="arrow">▸</span>Factory pattern — object creation</li>
+        <li><span class="arrow">▸</span>Singleton — single instance</li>
+        <li><span class="arrow">▸</span>Observer — pub/sub events</li>
+        <li><span class="arrow">▸</span>Strategy pattern — swappable logic</li>
+      </ul>
+    </div>
+
+    <div class="card acc-b">
+      <div class="card-label lb">Real Projects</div>
+      <div class="card-title">Working with APIs</div>
+      <ul>
+        <li><span class="arrow">▸</span>REST APIs — GET, POST, PUT, DELETE</li>
+        <li><span class="arrow">▸</span>JSON — parse & stringify</li>
+        <li><span class="arrow">▸</span>Auth: JWT tokens, Bearer header</li>
+        <li><span class="arrow">▸</span>Practice: Weather app</li>
+        <li><span class="arrow">▸</span>Practice: GitHub API project</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- TOOLING + TESTING -->
+<section class="sec">
+  <div class="sec-head reveal">
+    <span class="sec-num">13 — 14</span>
+    <h2 class="sec-title">
+      <span class="bullet bv"></span>
+      🧪 Testing &amp; 🧰 Tooling
+    </h2>
+  </div>
+  <div class="grid reveal">
+
+    <div class="card acc-v">
+      <div class="card-label lv">Optional but Valuable</div>
+      <div class="card-title">Testing</div>
+      <ul>
+        <li><span class="arrow">▸</span>Unit testing — test isolated functions</li>
+        <li><span class="arrow">▸</span>Jest — describe / it / expect</li>
+        <li><span class="arrow">▸</span>Mocking API calls</li>
+        <li><span class="arrow">▸</span>TDD basics — test-first approach</li>
+      </ul>
+    </div>
+
+    <div class="card acc-t">
+      <div class="card-label lt">Ecosystem</div>
+      <div class="card-title">Dev Tooling</div>
+      <ul>
+        <li><span class="arrow">▸</span>NPM / Yarn — package management</li>
+        <li><span class="arrow">▸</span>Webpack / Vite — bundling</li>
+        <li><span class="arrow">▸</span>Babel — transpile modern JS</li>
+        <li><span class="arrow">▸</span>ESLint — catch errors early</li>
+        <li><span class="arrow">▸</span>Prettier — auto formatting</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- INTERVIEW TOPICS -->
+<section class="sec">
+  <div class="sec-head reveal">
+    <span class="sec-num">Focus</span>
+    <h2 class="sec-title">
+      <span class="bullet by"></span>
+      🎯 Must-Know Interview Topics
+    </h2>
+  </div>
+  <div class="tags reveal">
+    <span class="tag to">Closures</span>
+    <span class="tag to">this keyword</span>
+    <span class="tag tb">Event Loop</span>
+    <span class="tag tb">Promises vs async/await</span>
+    <span class="tag ty">Hoisting</span>
+    <span class="tag tp">Prototype Chain</span>
+    <span class="tag to">Debounce / Throttle</span>
+    <span class="tag tg">Deep vs Shallow Copy</span>
+    <span class="tag tv">Garbage Collection</span>
+    <span class="tag tr">Event Delegation</span>
+    <span class="tag tt">Optional Chaining (?.)</span>
+    <span class="tag tg">map / filter / reduce</span>
+    <span class="tag tc">Memoization</span>
+    <span class="tag tlime">Module Pattern</span>
+    <span class="tag tp">OOP & Inheritance</span>
+    <span class="tag ty">var vs let vs const</span>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- MOST USED IN REAL PROJECTS -->
+<section class="sec">
+  <div class="sec-head reveal">
+    <span class="sec-num">Real World</span>
+    <h2 class="sec-title">
+      <span class="bullet bg"></span>
+      📌 Most Used in Real Projects
+    </h2>
+  </div>
+  <div class="grid grid-2 reveal">
+    <div class="card acc-g">
+      <div class="card-label lg">Focus More On</div>
+      <div class="card-title">High-Priority Skills</div>
+      <ul>
+        <li><span class="arrow">▸</span>Async/Await + API handling</li>
+        <li><span class="arrow">▸</span>Array methods: map, filter, reduce</li>
+        <li><span class="arrow">▸</span>DOM manipulation & Event handling</li>
+        <li><span class="arrow">▸</span>ES6+ syntax — used in every codebase</li>
+        <li><span class="arrow">▸</span>Modules — import/export patterns</li>
+        <li><span class="arrow">▸</span>State handling logic</li>
+      </ul>
+    </div>
+    <div class="card acc-b">
+      <div class="card-label lb">Interview Prep Code</div>
+      <div class="card-title">Retry API + Parallel Calls</div>
+      <div class="code-block" style="margin-top:10px; background:var(--bg)">
+<span class="cm">// Parallel API calls</span>
+<span class="kw">const</span> [<span class="num">users</span>, <span class="num">posts</span>] = <span class="kw">await</span> Promise.<span class="fn">all</span>([
+  <span class="fn">fetch</span>(<span class="str">'/api/users'</span>).<span class="fn">then</span>(<span class="num">r</span> <span class="op">=></span> <span class="num">r</span>.<span class="fn">json</span>()),
+  <span class="fn">fetch</span>(<span class="str">'/api/posts'</span>).<span class="fn">then</span>(<span class="num">r</span> <span class="op">=></span> <span class="num">r</span>.<span class="fn">json</span>())
+]);</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- NEXT STEPS -->
+<section class="sec">
+  <div class="sec-head reveal">
+    <span class="sec-num">15</span>
+    <h2 class="sec-title">
+      <span class="bullet bt"></span>
+      ⚛️ Next Step After JavaScript
+    </h2>
+  </div>
+  <div class="next-grid reveal">
+    <div class="next-card">
+      <div class="next-icon">⚛️</div>
+      <div class="next-title" style="color:var(--b)">React</div>
+      <div class="next-sub">Most popular UI library. Components, hooks, state management.</div>
+    </div>
+    <div class="next-card">
+      <div class="next-icon">🟢</div>
+      <div class="next-title" style="color:var(--g)">Node.js</div>
+      <div class="next-sub">Backend JavaScript. REST APIs, Express, databases.</div>
+    </div>
+    <div class="next-card">
+      <div class="next-icon">▲</div>
+      <div class="next-title" style="color:var(--text)">Next.js</div>
+      <div class="next-sub">Fullstack framework. SSR, SSG, API routes, deployment.</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- REFERENCES -->
+<section class="sec">
+  <div class="sec-head reveal">
+    <span class="sec-num">Refs</span>
+    <h2 class="sec-title">
+      <span class="bullet by"></span>
+      📚 Best References
+    </h2>
+  </div>
+  <div class="ref-grid reveal">
+    <a href="https://developer.mozilla.org" target="_blank" class="ref-card">
+      <span class="ref-ico">📖</span>
+      <div class="ref-info">
+        <div class="rt">MDN Web Docs</div>
+        <div class="rs">Best JS documentation</div>
+      </div>
+    </a>
+    <a href="https://javascript.info" target="_blank" class="ref-card">
+      <span class="ref-ico">🌐</span>
+      <div class="ref-info">
+        <div class="rt">JavaScript.info</div>
+        <div class="rs">Deep tutorials, modern JS</div>
+      </div>
+    </a>
+    <a href="https://tc39.es/ecma262" target="_blank" class="ref-card">
+      <span class="ref-ico">📜</span>
+      <div class="ref-info">
+        <div class="rt">ECMAScript Spec</div>
+        <div class="rs">Official language spec</div>
+      </div>
+    </a>
+    <a href="https://leetcode.com" target="_blank" class="ref-card">
+      <span class="ref-ico">💻</span>
+      <div class="ref-info">
+        <div class="rt">LeetCode</div>
+        <div class="rs">Algorithm practice</div>
+      </div>
+    </a>
+    <a href="https://hackerrank.com" target="_blank" class="ref-card">
+      <span class="ref-ico">🏆</span>
+      <div class="ref-info">
+        <div class="rt">HackerRank</div>
+        <div class="rs">Coding challenges</div>
+      </div>
+    </a>
+    <a href="https://github.com/getify/You-Dont-Know-JS" target="_blank" class="ref-card">
+      <span class="ref-ico">📘</span>
+      <div class="ref-info">
+        <div class="rt">You Don't Know JS</div>
+        <div class="rs">Free book series by Kyle Simpson</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>JavaScript Roadmap 2026 — Interview-ready · Real-world focused</p>
+  <p style="margin-top:6px">Learn it deeply, build it boldly, ship it confidently 🚀</p>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('btnD').classList.toggle('on', t === 'dark');
+  document.getElementById('btnL').classList.toggle('on', t === 'light');
+  localStorage.setItem('js-rm-theme', t);
+}
+const saved = localStorage.getItem('js-rm-theme');
+if (saved) setTheme(saved);
+
+// scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
