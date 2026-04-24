@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Dashboard</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111;
+      --card: #f4f4f4;
+    }
+
+    body.dark {
+      --bg: #111;
+      --text: #fff;
+      --card: #1e1e1e;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+      background: var(--card);
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+    }
+
+    .progress {
+      height: 20px;
+      background: #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: green;
+      transition: width 0.3s;
+    }
+
+    button {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <h3>JS Dashboard</h3>
+  <button onclick="toggleTheme()">Toggle Theme</button>
+</nav>
+
+<div class="container">
+  <div class="card">
+    <h4>Progress</h4>
+    <div class="progress">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4>Tasks</h4>
+    <ul id="taskList"></ul>
+    <input id="taskInput" placeholder="New task">
+    <button onclick="addTask()">Add</button>
+  </div>
+</div>
+
+<script>
+  let tasks = [];
+
+  function toggleTheme() {
+    document.body.classList.toggle('dark');
+  }
+
+  function addTask() {
+    const input = document.getElementById('taskInput');
+    if (input.value.trim() === '') return;
+
+    tasks.push({ text: input.value, done: false });
+    input.value = '';
+    renderTasks();
+  }
+
+  function toggleTask(index) {
+    tasks[index].done = !tasks[index].done;
+    renderTasks();
+  }
+
+  function renderTasks() {
+    const list = document.getElementById('taskList');
+    list.innerHTML = '';
+
+    let completed = 0;
+
+    tasks.forEach((task, index) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<input type="checkbox" ${task.done ? 'checked' : ''} onclick="toggleTask(${index})"> ${task.text}`;
+      list.appendChild(li);
+
+      if (task.done) completed++;
+    });
+
+    const progress = tasks.length ? (completed / tasks.length) * 100 : 0;
+    document.getElementById('progressBar').style.width = progress + '%';
+  }
+</script>
+
+</body>
+</html>
