@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSA Roadmap — Complete Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════
+   TOKENS
+══════════════════════════════════════ */
+[data-theme="dark"] {
+  --bg:      #060810;
+  --bg2:     #0b0f1a;
+  --bg3:     #0f1525;
+  --sur:     #121930;
+  --sur2:    #18223a;
+  --brd:     #1e2d50;
+  --txt:     #ccdaf5;
+  --txt2:    #6880a8;
+  --txt3:    #2e4070;
+  --grd:     rgba(30,45,80,0.5);
+
+  --p0: #f5d020;   /* yellow  — foundations */
+  --p1: #ff6b6b;   /* red     — arrays */
+  --p2: #48dbfb;   /* sky     — linked list */
+  --p3: #ff9f43;   /* orange  — stack/queue */
+  --p4: #1dd1a1;   /* teal    — trees */
+  --p5: #a29bfe;   /* violet  — graphs */
+  --p6: #fd79a8;   /* pink    — dp */
+  --p7: #fdcb6e;   /* amber   — advanced */
+  --ex: #00cec9;   /* cyan    — interview */
+}
+[data-theme="light"] {
+  --bg:      #f0f3fa;
+  --bg2:     #e6ebf7;
+  --bg3:     #dce3f5;
+  --sur:     #ffffff;
+  --sur2:    #f5f8ff;
+  --brd:     #c8d5ee;
+  --txt:     #0a1628;
+  --txt2:    #4a6090;
+  --txt3:    #9ab0d0;
+  --grd:     rgba(200,213,238,0.5);
+
+  --p0: #b8960a;
+  --p1: #cc2a2a;
+  --p2: #0a7fa0;
+  --p3: #c06010;
+  --p4: #0a8060;
+  --p5: #5040c0;
+  --p6: #b02060;
+  --p7: #a07010;
+  --ex: #006870;
+}
+
+/* ══════════════════════════════════════
+   BASE
+══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background .3s, color .3s;
+  cursor: default;
+}
+
+/* dot-grid texture */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: radial-gradient(circle, var(--brd) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: .4;
+}
+
+/* ambient light */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 800px 600px at 0% 0%, rgba(245,208,32,.04) 0%, transparent 55%),
+    radial-gradient(ellipse 600px 500px at 100% 100%, rgba(162,155,254,.05) 0%, transparent 55%),
+    radial-gradient(ellipse 500px 400px at 60% 40%, rgba(29,209,161,.03) 0%, transparent 55%);
+}
+
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 22px; position: relative; z-index: 1; }
+
+/* ══════════════════════════════════════
+   THEME TOGGLE
+══════════════════════════════════════ */
+.toggle {
+  position: fixed; top: 18px; right: 18px; z-index: 1000;
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; display: flex; overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,.35);
+}
+.toggle button {
+  border: none; background: none; cursor: pointer;
+  padding: 8px 18px;
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  color: var(--txt2); transition: .2s;
+}
+.toggle button.on { background: var(--sur2); color: var(--txt); }
+
+/* ══════════════════════════════════════
+   HEADER
+══════════════════════════════════════ */
+header {
+  padding: 72px 0 48px;
+  position: relative;
+}
+
+.h-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--p0); border: 1px solid var(--p0);
+  padding: 5px 14px; border-radius: 3px; margin-bottom: 20px;
+  opacity: .9;
+}
+
+h1 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(3.5rem, 12vw, 8.5rem);
+  line-height: .9; letter-spacing: -3px;
+  position: relative;
+}
+.h1-dsa  {
+  display: block; color: var(--p0);
+  text-shadow: 0 0 80px rgba(245,208,32,.25);
+}
+.h1-road { display: block; color: var(--txt); }
+.h1-map  {
+  display: block; color: transparent;
+  -webkit-text-stroke: 1.5px var(--brd);
+}
+
+.h-sub {
+  margin-top: 24px;
+  font-size: 13px; color: var(--txt2);
+  display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+}
+.h-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; padding: 4px 12px;
+  border: 1px solid; border-radius: 3px;
+}
+
+/* ══════════════════════════════════════
+   PHASE INDICATOR BAR
+══════════════════════════════════════ */
+.phase-bar {
+  display: flex; gap: 4px; margin: 32px 0 56px;
+  overflow-x: auto; padding-bottom: 4px;
+}
+.phase-seg {
+  flex: 1; min-width: 80px;
+  padding: 10px 12px;
+  border-radius: 6px; border: 1px solid var(--brd);
+  background: var(--sur);
+  cursor: pointer; transition: transform .15s, box-shadow .15s;
+  text-align: center;
+}
+.phase-seg:hover { transform: translateY(-2px); }
+.ps-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 2px; margin-bottom: 4px;
+}
+.ps-name { font-size: 10px; font-weight: 600; color: var(--txt2); }
+.ps-bar  { height: 3px; border-radius: 2px; margin-top: 8px; }
+
+/* ══════════════════════════════════════
+   SECTION
+══════════════════════════════════════ */
+.sec { margin-bottom: 80px; }
+
+.sec-top {
+  display: flex; align-items: flex-end; gap: 18px;
+  margin-bottom: 24px; padding-bottom: 18px;
+  border-bottom: 1px solid var(--brd);
+  position: relative;
+}
+.sec-top::after {
+  content: ''; position: absolute;
+  left: 0; bottom: -1px; height: 3px; width: 60px;
+  border-radius: 2px;
+}
+
+.sec-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  padding: 3px 10px; border: 1px solid; border-radius: 3px;
+  white-space: nowrap;
+}
+.sec-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  line-height: 1; letter-spacing: -1px;
+}
+.sec-why {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; color: var(--txt2);
+  margin-left: auto; white-space: nowrap;
+  padding: 4px 10px; background: var(--sur);
+  border: 1px solid var(--brd); border-radius: 4px;
+}
+
+/* ══════════════════════════════════════
+   CARDS
+══════════════════════════════════════ */
+.grid  { display: grid; grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); gap: 12px; }
+.grid2 { grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); }
+.grid3 { grid-template-columns: repeat(3, 1fr); }
+@media(max-width:680px){ .grid3 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 10px; padding: 20px 22px;
+  position: relative; overflow: hidden;
+  transition: transform .2s, box-shadow .2s;
+}
+.card:hover { transform: translateY(-4px); }
+.card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+}
+
+.c-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 10px; display: block;
+}
+.c-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 15px; letter-spacing: -.3px;
+  margin-bottom: 14px; line-height: 1.1;
+}
+.c-list { list-style: none; }
+.c-list li {
+  font-size: 12.5px; color: var(--txt2);
+  padding: 5px 0; border-bottom: 1px solid var(--brd);
+  display: flex; gap: 8px; align-items: baseline; line-height: 1.5;
+}
+.c-list li:last-child { border-bottom: none; }
+.arr { font-size: 9px; color: var(--txt3); flex-shrink: 0; margin-top: 2px; }
+.star { color: var(--p6); font-size: 10px; }
+
+/* ══════════════════════════════════════
+   CODE BLOCK
+══════════════════════════════════════ */
+.code-wrap {
+  background: var(--bg2); border: 1px solid var(--brd);
+  border-radius: 10px; overflow: hidden;
+}
+.code-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; border-bottom: 1px solid var(--brd);
+  font-family: 'Space Mono', monospace; font-size: 10px; color: var(--txt2);
+}
+.code-dots { display: flex; gap: 6px; }
+.cd { width: 10px; height: 10px; border-radius: 50%; }
+.cd1 { background: #ff5f57; }
+.cd2 { background: #febc2e; }
+.cd3 { background: #28c840; }
+.complexity {
+  display: flex; gap: 8px;
+}
+.cx {
+  padding: 2px 10px; border-radius: 3px; font-size: 10px;
+  border: 1px solid;
+}
+pre {
+  padding: 18px 20px; overflow-x: auto;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px; line-height: 1.9; color: var(--txt2);
+}
+.kw   { color: #ff79c6; }
+.fn   { color: #50fa7b; }
+.str  { color: #f1fa8c; }
+.cm   { color: #6272a4; }
+.num  { color: #bd93f9; }
+.prop { color: #8be9fd; }
+.op   { color: #ffb86c; }
+.var  { color: var(--txt); }
+
+/* ══════════════════════════════════════
+   INLINE HIGHLIGHT
+══════════════════════════════════════ */
+.callout {
+  background: var(--sur2); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 12px 16px;
+  font-size: 12px; color: var(--txt2); line-height: 1.6;
+  margin-top: 12px; display: flex; gap: 10px; align-items: flex-start;
+}
+.callout-ico { font-size: 16px; flex-shrink: 0; }
+.callout-body strong { display: block; color: var(--txt); margin-bottom: 2px; font-size: 13px; }
+
+/* ══════════════════════════════════════
+   TAGS
+══════════════════════════════════════ */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: 'Space Mono', monospace;
+  padding: 6px 14px; border: 1px solid; border-radius: 4px;
+  font-size: 10px; cursor: default; transition: transform .15s;
+}
+.tag:hover { transform: scale(1.05); }
+
+/* ══════════════════════════════════════
+   WEEK PLAN
+══════════════════════════════════════ */
+.weeks { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.wk {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 10px; overflow: hidden;
+}
+.wk-head {
+  padding: 14px 18px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--brd);
+}
+.wk-name {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 13px; letter-spacing: -.3px;
+}
+.wk-range {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 2px; color: var(--txt2);
+}
+.wk-body { padding: 14px 18px; }
+.wk-item {
+  font-size: 12px; color: var(--txt2);
+  padding: 5px 0; border-bottom: 1px solid var(--brd);
+  display: flex; gap: 8px; align-items: baseline;
+}
+.wk-item:last-child { border-bottom: none; }
+.wk-check { color: var(--p4); font-size: 10px; flex-shrink: 0; }
+
+/* ══════════════════════════════════════
+   DAILY PLAN
+══════════════════════════════════════ */
+.day-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.day-slot {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 14px 16px;
+}
+.day-time {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 2px; margin-bottom: 6px;
+}
+.day-act { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.day-sub { font-size: 11px; color: var(--txt2); }
+
+/* ══════════════════════════════════════
+   PROJECTS
+══════════════════════════════════════ */
+.proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.proj {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 10px; padding: 18px 20px;
+  position: relative; overflow: hidden; transition: transform .2s;
+}
+.proj:hover { transform: translateY(-3px); }
+.proj::after { content: ''; position: absolute; top: 0; right: 0; width: 50px; height: 50px; }
+.proj-level {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.proj-name { font-family: 'Archivo Black', sans-serif; font-size: 14px; margin-bottom: 8px; }
+.proj-tech { font-size: 11px; color: var(--txt2); }
+
+/* ══════════════════════════════════════
+   MISTAKES
+══════════════════════════════════════ */
+.mistakes { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.mistake {
+  background: var(--sur); border: 1px solid rgba(255,107,107,.25);
+  border-left: 4px solid; border-radius: 0 8px 8px 0;
+  padding: 14px 16px;
+}
+.mk-head { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.mk-body { font-size: 12px; color: var(--txt2); }
+
+/* ══════════════════════════════════════
+   REFS
+══════════════════════════════════════ */
+.refs { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.ref {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 12px 14px;
+  text-decoration: none; color: var(--txt);
+  transition: transform .2s, border-color .2s; font-size: 12px;
+}
+.ref:hover { transform: translateY(-2px); }
+.ref-ico { font-size: 18px; }
+.ref-title { font-weight: 600; }
+.ref-sub { font-size: 10px; color: var(--txt2); margin-top: 2px; }
+
+/* ══════════════════════════════════════
+   DIVIDER
+══════════════════════════════════════ */
+.div { height: 1px; background: linear-gradient(90deg, transparent, var(--brd), transparent); margin: 64px 0; }
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+  text-align: center; padding: 28px 0 48px;
+  border-top: 1px solid var(--brd);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: var(--txt2);
+}
+
+/* ══════════════════════════════════════
+   COLOR SYSTEM PER PHASE
+══════════════════════════════════════ */
+/* card top bars */
+.tp0::before { background: var(--p0); }
+.tp1::before { background: var(--p1); }
+.tp2::before { background: var(--p2); }
+.tp3::before { background: var(--p3); }
+.tp4::before { background: var(--p4); }
+.tp5::before { background: var(--p5); }
+.tp6::before { background: var(--p6); }
+.tp7::before { background: var(--p7); }
+.tex::before { background: var(--ex); }
+
+/* glows */
+.tp0:hover { box-shadow: 0 8px 40px rgba(245,208,32,.1); }
+.tp1:hover { box-shadow: 0 8px 40px rgba(255,107,107,.1); }
+.tp2:hover { box-shadow: 0 8px 40px rgba(72,219,251,.1); }
+.tp3:hover { box-shadow: 0 8px 40px rgba(255,159,67,.1); }
+.tp4:hover { box-shadow: 0 8px 40px rgba(29,209,161,.1); }
+.tp5:hover { box-shadow: 0 8px 40px rgba(162,155,254,.1); }
+.tp6:hover { box-shadow: 0 8px 40px rgba(253,121,168,.1); }
+.tp7:hover { box-shadow: 0 8px 40px rgba(253,203,110,.1); }
+.tex:hover { box-shadow: 0 8px 40px rgba(0,206,201,.1); }
+
+/* sec-top accent line */
+.st0::after { background: var(--p0); }
+.st1::after { background: var(--p1); }
+.st2::after { background: var(--p2); }
+.st3::after { background: var(--p3); }
+.st4::after { background: var(--p4); }
+.st5::after { background: var(--p5); }
+.st6::after { background: var(--p6); }
+.st7::after { background: var(--p7); }
+.stx::after { background: var(--ex); }
+
+/* label / text colors */
+.c0 { color: var(--p0); } .c1 { color: var(--p1); } .c2 { color: var(--p2); }
+.c3 { color: var(--p3); } .c4 { color: var(--p4); } .c5 { color: var(--p5); }
+.c6 { color: var(--p6); } .c7 { color: var(--p7); } .cx { color: var(--ex); }
+
+/* badge border + bg */
+.bd0 { color: var(--p0); border-color: rgba(245,208,32,.35); background: rgba(245,208,32,.07); }
+.bd1 { color: var(--p1); border-color: rgba(255,107,107,.35); background: rgba(255,107,107,.07); }
+.bd2 { color: var(--p2); border-color: rgba(72,219,251,.35); background: rgba(72,219,251,.07); }
+.bd3 { color: var(--p3); border-color: rgba(255,159,67,.35); background: rgba(255,159,67,.07); }
+.bd4 { color: var(--p4); border-color: rgba(29,209,161,.35); background: rgba(29,209,161,.07); }
+.bd5 { color: var(--p5); border-color: rgba(162,155,254,.35); background: rgba(162,155,254,.07); }
+.bd6 { color: var(--p6); border-color: rgba(253,121,168,.35); background: rgba(253,121,168,.07); }
+.bd7 { color: var(--p7); border-color: rgba(253,203,110,.35); background: rgba(253,203,110,.07); }
+.bdx { color: var(--ex); border-color: rgba(0,206,201,.35); background: rgba(0,206,201,.07); }
+
+/* week header backgrounds */
+.wh0 { background: rgba(245,208,32,.1); }
+.wh1 { background: rgba(255,107,107,.1); }
+.wh2 { background: rgba(72,219,251,.1); }
+.wh3 { background: rgba(255,159,67,.1); }
+.wh4 { background: rgba(29,209,161,.1); }
+.wh5 { background: rgba(162,155,254,.1); }
+
+/* mistake border */
+.mk0 { border-left-color: var(--p1); }
+.mk1 { border-left-color: var(--p6); }
+.mk2 { border-left-color: var(--p7); }
+
+/* phase seg colors */
+.ps0 .ps-bar { background: var(--p0); } .ps0 .ps-num { color: var(--p0); }
+.ps1 .ps-bar { background: var(--p1); } .ps1 .ps-num { color: var(--p1); }
+.ps2 .ps-bar { background: var(--p2); } .ps2 .ps-num { color: var(--p2); }
+.ps3 .ps-bar { background: var(--p3); } .ps3 .ps-num { color: var(--p3); }
+.ps4 .ps-bar { background: var(--p4); } .ps4 .ps-num { color: var(--p4); }
+.ps5 .ps-bar { background: var(--p5); } .ps5 .ps-num { color: var(--p5); }
+.ps6 .ps-bar { background: var(--p6); } .ps6 .ps-num { color: var(--p6); }
+.ps7 .ps-bar { background: var(--p7); } .ps7 .ps-num { color: var(--p7); }
+
+/* day slot colors */
+.ds0 { border-top: 3px solid var(--p0); }
+.ds1 { border-top: 3px solid var(--p4); }
+.ds2 { border-top: 3px solid var(--p2); }
+
+/* proj levels */
+.beg { color: var(--p4); } .int { color: var(--p3); } .adv { color: var(--p6); }
+.p-beg::after { background: radial-gradient(circle at top right, rgba(29,209,161,.15), transparent 70%); width:60px; height:60px; border-radius: 0 10px 0 0;}
+.p-int::after { background: radial-gradient(circle at top right, rgba(255,159,67,.15), transparent 70%); width:60px; height:60px; border-radius: 0 10px 0 0;}
+.p-adv::after { background: radial-gradient(circle at top right, rgba(253,121,168,.15), transparent 70%); width:60px; height:60px; border-radius: 0 10px 0 0;}
+
+/* ══════════════════════════════════════
+   REVEAL ANIMATION
+══════════════════════════════════════ */
+.rv {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.rv.vis { opacity: 1; transform: none; }
+
+@media(max-width: 640px) {
+  h1 { letter-spacing: -2px; }
+  .sec-why { display: none; }
+  .phase-bar { gap: 3px; }
+  .toggle { top: 10px; right: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOGGLE -->
+<div class="toggle">
+  <button id="bD" class="on" onclick="setTheme('dark')">// DARK</button>
+  <button id="bL" onclick="setTheme('light')">// LIGHT</button>
+</div>
+
+<div class="wrap">
+
+<!-- ═══════ HEADER ═══════ -->
+<header>
+  <div class="h-chip">◈ Complete Guide · 8 Phases · Interview Ready</div>
+  <h1>
+    <span class="h1-dsa">DSA</span>
+    <span class="h1-road">ROAD</span>
+    <span class="h1-map">MAP</span>
+  </h1>
+  <div class="h-sub">
+    <span>Data Structures & Algorithms — From Zero to Interview-Ready</span>
+    <span class="h-badge bd1">~40% Arrays in Interviews</span>
+    <span class="h-badge bd6">DP = Game Changer</span>
+    <span class="h-badge bd4">Patterns &gt; Memorization</span>
+  </div>
+</header>
+
+<!-- PHASE BAR -->
+<div class="phase-bar rv">
+  <div class="phase-seg ps0"><div class="ps-num">PH.0</div><div class="ps-name">Foundations</div><div class="ps-bar"></div></div>
+  <div class="phase-seg ps1"><div class="ps-num">PH.1</div><div class="ps-name">Arrays</div><div class="ps-bar"></div></div>
+  <div class="phase-seg ps2"><div class="ps-num">PH.2</div><div class="ps-name">Linked List</div><div class="ps-bar"></div></div>
+  <div class="phase-seg ps3"><div class="ps-num">PH.3</div><div class="ps-name">Stack/Queue</div><div class="ps-bar"></div></div>
+  <div class="phase-seg ps4"><div class="ps-num">PH.4</div><div class="ps-name">Trees</div><div class="ps-bar"></div></div>
+  <div class="phase-seg ps5"><div class="ps-num">PH.5</div><div class="ps-name">Graphs</div><div class="ps-bar"></div></div>
+  <div class="phase-seg ps6"><div class="ps-num">PH.6</div><div class="ps-name">DP</div><div class="ps-bar"></div></div>
+  <div class="phase-seg ps7"><div class="ps-num">PH.7</div><div class="ps-name">Advanced</div><div class="ps-bar"></div></div>
+</div>
+
+<!-- ═══════ PHASE 0: FOUNDATIONS ═══════ -->
+<section class="sec">
+  <div class="sec-top st0 rv">
+    <span class="sec-badge bd0">Phase 0</span>
+    <h2 class="sec-title">🧱 Foundations</h2>
+    <span class="sec-why">Goal: Write clean code + understand complexity</span>
+  </div>
+  <div class="grid rv">
+    <div class="card tp0">
+      <span class="c-label c0">Core Theory</span>
+      <div class="c-title">Time & Space Complexity</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Big-O notation — O(1), O(n), O(log n), O(n²)</li>
+        <li><span class="arr">▸</span>Best / Average / Worst case analysis</li>
+        <li><span class="arr">▸</span>Space complexity — stack & heap usage</li>
+        <li><span class="arr">▸</span>Analyze loops — nested loops = O(n²)</li>
+        <li><span class="arr">▸</span>Drop constants — O(2n) = O(n)</li>
+      </ul>
+      <div class="callout">
+        <span class="callout-ico">💡</span>
+        <div class="callout-body"><strong>Real-world:</strong>Performance optimization in APIs, avoiding slow frontend rendering</div>
+      </div>
+    </div>
+    <div class="card tp0">
+      <span class="c-label c0">Must Master First</span>
+      <div class="c-title">Recursion & Math</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Recursion = function calling itself</li>
+        <li><span class="arr">▸</span>Base case — prevents infinite recursion</li>
+        <li><span class="arr">▸</span>Call stack depth — O(n) space per call</li>
+        <li><span class="arr">▸</span>Practice: factorial, Fibonacci</li>
+        <li><span class="arr">▸</span>Math: modulo, primes, GCD</li>
+      </ul>
+    </div>
+    <div class="card tp0">
+      <span class="c-label c0">Complexity Cheatsheet</span>
+      <div class="c-title">Big-O Quick Reference</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span><strong class="c0">O(1)</strong> — Hash map lookup, array index</li>
+        <li><span class="arr">▸</span><strong class="c0">O(log n)</strong> — Binary search</li>
+        <li><span class="arr">▸</span><strong class="c0">O(n)</strong> — Linear scan, single loop</li>
+        <li><span class="arr">▸</span><strong class="c0">O(n log n)</strong> — Merge sort, heap sort</li>
+        <li><span class="arr">▸</span><strong class="c0">O(n²)</strong> — Nested loops, bubble sort</li>
+        <li><span class="arr">▸</span><strong class="c0">O(2ⁿ)</strong> — Subsets, backtracking</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════ PHASE 1: ARRAYS ═══════ -->
+<section class="sec">
+  <div class="sec-top st1 rv">
+    <span class="sec-badge bd1">Phase 1 — ~40% of Interviews</span>
+    <h2 class="sec-title">🔢 Arrays & Strings</h2>
+    <span class="sec-why">Most Asked Topic</span>
+  </div>
+  <div class="grid rv">
+    <div class="card tp1">
+      <span class="c-label c1">Pattern 1</span>
+      <div class="c-title">Two Pointers</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Start from both ends, move inward</li>
+        <li><span class="arr">▸</span>Works on sorted arrays</li>
+        <li><span class="arr">▸</span>Reduces O(n²) brute force to O(n)</li>
+        <li><span class="arr">▸</span>Problems: Two Sum II, Container With Most Water</li>
+        <li><span class="arr">▸</span>Palindrome checking</li>
+      </ul>
+    </div>
+    <div class="card tp1">
+      <span class="c-label c1">Pattern 2 ⭐</span>
+      <div class="c-title">Sliding Window</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Fixed or variable window size</li>
+        <li><span class="arr">▸</span>Expand right, shrink left</li>
+        <li><span class="arr">▸</span>Track max/min in current window</li>
+        <li><span class="arr">▸</span>Longest Substring Without Repeating Chars</li>
+        <li><span class="arr">▸</span>Max Sum Subarray of size K</li>
+      </ul>
+    </div>
+    <div class="card tp1">
+      <span class="c-label c1">Pattern 3</span>
+      <div class="c-title">Prefix Sum & Hashing</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Prefix sum: precompute cumulative sums</li>
+        <li><span class="arr">▸</span>Range sum query in O(1)</li>
+        <li><span class="arr">▸</span>HashMap: complement lookup in O(1)</li>
+        <li><span class="arr">▸</span>HashSet: duplicate detection</li>
+        <li><span class="arr">▸</span>Two Sum — classic HashMap problem</li>
+      </ul>
+    </div>
+    <div class="card tp1">
+      <span class="c-label c1">Practice Problems</span>
+      <div class="c-title">Top Array Questions</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Two Sum — HashMap O(n)</li>
+        <li><span class="arr">▸</span>Maximum Subarray — Kadane's Algorithm</li>
+        <li><span class="arr">▸</span>Longest Substring Without Repeating</li>
+        <li><span class="arr">▸</span>Product of Array Except Self</li>
+        <li><span class="arr">▸</span>Best Time to Buy & Sell Stock</li>
+      </ul>
+      <div class="callout">
+        <span class="callout-ico">🌐</span>
+        <div class="callout-body"><strong>Real-world:</strong>Search filters, data transformation, logs & analytics processing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════ CODE EXAMPLE: TWO SUM ═══════ -->
+<section class="sec">
+  <div class="sec-top stx rv">
+    <span class="sec-badge bdx">Interview Example</span>
+    <h2 class="sec-title">🎯 Two Sum — Optimal Solution</h2>
+  </div>
+  <div class="rv">
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="cd cd1"></div><div class="cd cd2"></div><div class="cd cd3"></div></div>
+        <span>twoSum.js — HashMap approach</span>
+        <div class="complexity">
+          <span class="cx bdx">Time: O(n)</span>
+          <span class="cx bd4">Space: O(n)</span>
+        </div>
+      </div>
+<pre><span class="cm">// Find two numbers that add up to target</span>
+<span class="kw">function</span> <span class="fn">twoSum</span>(<span class="prop">nums</span>, <span class="prop">target</span>) {
+  <span class="kw">const</span> <span class="var">map</span> = <span class="kw">new</span> <span class="fn">Map</span>();   <span class="cm">// store: num → index</span>
+
+  <span class="kw">for</span> (<span class="kw">let</span> <span class="var">i</span> <span class="op">=</span> <span class="num">0</span>; <span class="var">i</span> <span class="op">&lt;</span> <span class="prop">nums</span>.length; <span class="var">i</span><span class="op">++</span>) {
+    <span class="kw">let</span> <span class="var">complement</span> <span class="op">=</span> <span class="prop">target</span> <span class="op">-</span> <span class="prop">nums</span>[<span class="var">i</span>]; <span class="cm">// what we need</span>
+
+    <span class="kw">if</span> (<span class="var">map</span>.<span class="fn">has</span>(<span class="var">complement</span>)) {         <span class="cm">// found it!</span>
+      <span class="kw">return</span> [<span class="var">map</span>.<span class="fn">get</span>(<span class="var">complement</span>), <span class="var">i</span>];
+    }
+
+    <span class="var">map</span>.<span class="fn">set</span>(<span class="prop">nums</span>[<span class="var">i</span>], <span class="var">i</span>);             <span class="cm">// store current</span>
+  }
+}
+
+<span class="cm">// twoSum([2,7,11,15], 9) → [0, 1]</span></pre>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;">
+      <span class="tag bd1">Tests: HashMap</span>
+      <span class="tag bdx">Tests: O(n) thinking</span>
+      <span class="tag bd4">Tests: Complement pattern</span>
+      <span class="tag bd5">Tests: Clean code</span>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════ PHASE 2 & 3 ═══════ -->
+<section class="sec">
+  <div class="sec-top st2 rv">
+    <span class="sec-badge bd2">Phase 2</span>
+    <h2 class="sec-title">🔗 Linked List &nbsp;<span style="color:var(--p3);font-size:.6em">+ 🥞 Stack & Queue</span></h2>
+  </div>
+  <div class="grid rv">
+    <div class="card tp2">
+      <span class="c-label c2">Linked List</span>
+      <div class="c-title">Core Operations</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Reversal — track prev, curr, next</li>
+        <li><span class="arr">▸</span>Cycle detection — Floyd's (slow/fast pointer)</li>
+        <li><span class="arr">▸</span>Merge two sorted lists</li>
+        <li><span class="arr">▸</span>Find middle node — two pointer trick</li>
+        <li><span class="arr">▸</span>Dummy head pattern for edge cases</li>
+      </ul>
+      <div class="callout">
+        <span class="callout-ico">🌐</span>
+        <div class="callout-body"><strong>Real-world:</strong>LRU Cache implementation, memory-efficient structures</div>
+      </div>
+    </div>
+    <div class="card tp2">
+      <span class="c-label c2">Practice</span>
+      <div class="c-title">Linked List Problems</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Reverse Linked List (iterative + recursive)</li>
+        <li><span class="arr">▸</span>Detect Cycle — Floyd's Algorithm</li>
+        <li><span class="arr">▸</span>Merge Two Sorted Lists</li>
+        <li><span class="arr">▸</span>Remove Nth Node From End</li>
+        <li><span class="arr">▸</span>Linked List Cycle II — find entry point</li>
+      </ul>
+    </div>
+    <div class="card tp3">
+      <span class="c-label c3">Stack & Queue</span>
+      <div class="c-title">Key Patterns</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Monotonic stack — next greater element</li>
+        <li><span class="arr">▸</span>Queue using two stacks</li>
+        <li><span class="arr">▸</span>Priority Queue / Min-Heap</li>
+        <li><span class="arr">▸</span>Valid Parentheses — classic stack</li>
+        <li><span class="arr">▸</span>Min Stack — O(1) getMin</li>
+      </ul>
+      <div class="callout">
+        <span class="callout-ico">🌐</span>
+        <div class="callout-body"><strong>Real-world:</strong>Undo/Redo systems, task scheduling, parsing expressions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════ PHASE 4: TREES ═══════ -->
+<section class="sec">
+  <div class="sec-top st4 rv">
+    <span class="sec-badge bd4">Phase 4 — Very Important</span>
+    <h2 class="sec-title">🌳 Trees</h2>
+    <span class="sec-why">DOM · File Systems · Decision Trees</span>
+  </div>
+  <div class="grid rv">
+    <div class="card tp4">
+      <span class="c-label c4">Traversal Patterns</span>
+      <div class="c-title">DFS — Depth First</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Inorder: Left → Root → Right (BST sorted)</li>
+        <li><span class="arr">▸</span>Preorder: Root → Left → Right (copy tree)</li>
+        <li><span class="arr">▸</span>Postorder: Left → Right → Root (delete tree)</li>
+        <li><span class="arr">▸</span>Recursive and iterative approaches</li>
+        <li><span class="arr">▸</span>Uses call stack — O(h) space where h = height</li>
+      </ul>
+    </div>
+    <div class="card tp4">
+      <span class="c-label c4">Level Order</span>
+      <div class="c-title">BFS — Breadth First</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Process nodes level by level</li>
+        <li><span class="arr">▸</span>Uses a Queue — FIFO</li>
+        <li><span class="arr">▸</span>Level order traversal output</li>
+        <li><span class="arr">▸</span>Right-side view of tree</li>
+        <li><span class="arr">▸</span>Find minimum depth</li>
+      </ul>
+    </div>
+    <div class="card tp4">
+      <span class="c-label c4">BST & Practice</span>
+      <div class="c-title">Top Tree Problems</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Maximum Depth of Binary Tree</li>
+        <li><span class="arr">▸</span>Lowest Common Ancestor (LCA)</li>
+        <li><span class="arr">▸</span>Validate BST — inorder should be sorted</li>
+        <li><span class="arr">▸</span>Symmetric Tree — mirror check</li>
+        <li><span class="arr">▸</span>Path Sum — root-to-leaf</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════ PHASE 5: GRAPHS ═══════ -->
+<section class="sec">
+  <div class="sec-top st5 rv">
+    <span class="sec-badge bd5">Phase 5 — High-Level Thinking</span>
+    <h2 class="sec-title">🌐 Graphs</h2>
+    <span class="sec-why">Social Networks · Routing · npm Dependencies</span>
+  </div>
+  <div class="grid rv">
+    <div class="card tp5">
+      <span class="c-label c5">Traversal</span>
+      <div class="c-title">BFS & DFS on Graphs</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Adjacency list representation</li>
+        <li><span class="arr">▸</span>Visited set — prevent infinite loops</li>
+        <li><span class="arr">▸</span>BFS — shortest path in unweighted graph</li>
+        <li><span class="arr">▸</span>DFS — connected components, cycle detection</li>
+        <li><span class="arr">▸</span>Number of Islands — classic grid DFS/BFS</li>
+      </ul>
+    </div>
+    <div class="card tp5">
+      <span class="c-label c5">Advanced Patterns</span>
+      <div class="c-title">Topo Sort & Dijkstra</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Topological sort — DAG ordering</li>
+        <li><span class="arr">▸</span>Kahn's algorithm (BFS-based toposort)</li>
+        <li><span class="arr">▸</span>Dijkstra — shortest path, weighted graph</li>
+        <li><span class="arr">▸</span>Union-Find — disjoint set connectivity</li>
+        <li><span class="arr">▸</span>Course Schedule — toposort example</li>
+      </ul>
+    </div>
+    <div class="card tp5">
+      <span class="c-label c5">Practice Problems</span>
+      <div class="c-title">Must-Solve Graph Problems</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Number of Islands (grid BFS/DFS)</li>
+        <li><span class="arr">▸</span>Course Schedule (cycle detection)</li>
+        <li><span class="arr">▸</span>Clone Graph (deep copy)</li>
+        <li><span class="arr">▸</span>Word Ladder (BFS shortest path)</li>
+        <li><span class="arr">▸</span>Network Delay Time (Dijkstra)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════ PHASE 6: DP ═══════ -->
+<section class="sec">
+  <div class="sec-top st6 rv">
+    <span class="sec-badge bd6">Phase 6 — Game Changer 🔥</span>
+    <h2 class="sec-title">⚡ Dynamic Programming</h2>
+    <span class="sec-why">Optimization · AI/Game Logic · Resource Allocation</span>
+  </div>
+  <div class="grid rv">
+    <div class="card tp6">
+      <span class="c-label c6">Top-Down</span>
+      <div class="c-title">Memoization</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Recursion + cache results</li>
+        <li><span class="arr">▸</span>Use HashMap / array as memo</li>
+        <li><span class="arr">▸</span>Solve sub-problem once, reuse</li>
+        <li><span class="arr">▸</span>More intuitive — mirrors recursion</li>
+        <li><span class="arr">▸</span>Top-down = recursive + cache</li>
+      </ul>
+    </div>
+    <div class="card tp6">
+      <span class="c-label c6">Bottom-Up</span>
+      <div class="c-title">Tabulation</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Fill DP table iteratively</li>
+        <li><span class="arr">▸</span>No recursion — avoids stack overflow</li>
+        <li><span class="arr">▸</span>Usually more space-efficient</li>
+        <li><span class="arr">▸</span>1D DP: Climbing Stairs, Fibonacci</li>
+        <li><span class="arr">▸</span>2D DP: Longest Common Subsequence</li>
+      </ul>
+    </div>
+    <div class="card tp6">
+      <span class="c-label c6">Classic DP Problems</span>
+      <div class="c-title">Must-Solve DP</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Climbing Stairs — Fibonacci DP</li>
+        <li><span class="arr">▸</span>Longest Increasing Subsequence (LIS)</li>
+        <li><span class="arr">▸</span>0/1 Knapsack — include/exclude choice</li>
+        <li><span class="arr">▸</span>Coin Change — minimum coins</li>
+        <li><span class="arr">▸</span>Edit Distance — 2D DP</li>
+      </ul>
+      <div class="callout">
+        <span class="callout-ico">⚠️</span>
+        <div class="callout-body"><strong>Don't jump to DP early.</strong>Master arrays, trees, and graphs first — DP builds on those foundations.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════ PHASE 7: ADVANCED ═══════ -->
+<section class="sec">
+  <div class="sec-top st7 rv">
+    <span class="sec-badge bd7">Phase 7 — Advanced</span>
+    <h2 class="sec-title">⚡ Advanced Topics</h2>
+  </div>
+  <div class="grid rv">
+    <div class="card tp7">
+      <span class="c-label c7">Greedy & Bits</span>
+      <div class="c-title">Greedy + Bit Manipulation</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Greedy: locally optimal → globally optimal</li>
+        <li><span class="arr">▸</span>Activity selection, interval scheduling</li>
+        <li><span class="arr">▸</span>Bit manipulation: AND, OR, XOR, shifts</li>
+        <li><span class="arr">▸</span>XOR trick: find single number</li>
+        <li><span class="arr">▸</span>Count set bits — Brian Kernighan</li>
+      </ul>
+    </div>
+    <div class="card tp7">
+      <span class="c-label c7">Trie</span>
+      <div class="c-title">Prefix Tree</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Tree of characters — prefix search O(L)</li>
+        <li><span class="arr">▸</span>Insert, search, startsWith operations</li>
+        <li><span class="arr">▸</span>Autocomplete systems</li>
+        <li><span class="arr">▸</span>Word Search II — Trie + DFS</li>
+        <li><span class="arr">▸</span>Longest word in dictionary</li>
+      </ul>
+    </div>
+    <div class="card tp7">
+      <span class="c-label c7">Backtracking</span>
+      <div class="c-title">Explore & Prune</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Try option → recurse → undo (backtrack)</li>
+        <li><span class="arr">▸</span>N-Queens — place queens safely</li>
+        <li><span class="arr">▸</span>Word Search — DFS on grid</li>
+        <li><span class="arr">▸</span>Subsets — power set generation</li>
+        <li><span class="arr">▸</span>Permutations — all orderings</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════ 6-WEEK PLAN ═══════ -->
+<section class="sec">
+  <div class="sec-top rv" style="--stc: var(--p4)">
+    <span class="sec-badge bd4">6-Week Structured Plan</span>
+    <h2 class="sec-title">🗓️ Week-by-Week Plan</h2>
+  </div>
+  <style>.sec-top.st-green::after { background: var(--p4); }</style>
+  <div class="weeks rv">
+    <div class="wk">
+      <div class="wk-head wh1">
+        <span class="wk-name c1">Week 1–2</span>
+        <span class="wk-range">DAYS 1–14</span>
+      </div>
+      <div class="wk-body">
+        <div class="wk-item"><span class="wk-check">✓</span>Arrays + Strings patterns</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Two-pointer technique</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Sliding window pattern</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Prefix sum & hashing</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Solve 5 problems/day</div>
+      </div>
+    </div>
+    <div class="wk">
+      <div class="wk-head wh2">
+        <span class="wk-name c2">Week 3</span>
+        <span class="wk-range">DAYS 15–21</span>
+      </div>
+      <div class="wk-body">
+        <div class="wk-item"><span class="wk-check">✓</span>Linked List from scratch</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Floyd's cycle detection</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Stack implementation</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Monotonic stack pattern</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Solve medium problems</div>
+      </div>
+    </div>
+    <div class="wk">
+      <div class="wk-head wh3">
+        <span class="wk-name c3">Week 4</span>
+        <span class="wk-range">DAYS 22–28</span>
+      </div>
+      <div class="wk-body">
+        <div class="wk-item"><span class="wk-check">✓</span>Binary trees — DFS + BFS</div>
+        <div class="wk-item"><span class="wk-check">✓</span>BST operations</div>
+        <div class="wk-item"><span class="wk-check">✓</span>LCA pattern</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Tree serialization</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Daily tree problems</div>
+      </div>
+    </div>
+    <div class="wk">
+      <div class="wk-head wh4">
+        <span class="wk-name c4">Week 5</span>
+        <span class="wk-range">DAYS 29–35</span>
+      </div>
+      <div class="wk-body">
+        <div class="wk-item"><span class="wk-check">✓</span>Graph BFS + DFS</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Topological sort</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Union-Find basics</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Dijkstra's algorithm</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Real-world graph problems</div>
+      </div>
+    </div>
+    <div class="wk">
+      <div class="wk-head wh5">
+        <span class="wk-name c5">Week 6</span>
+        <span class="wk-range">DAYS 36–42</span>
+      </div>
+      <div class="wk-body">
+        <div class="wk-item"><span class="wk-check">✓</span>DP: 1D problems (2–3/day)</div>
+        <div class="wk-item"><span class="wk-check">✓</span>DP: 2D problems</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Revise all phases</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Mock interviews</div>
+        <div class="wk-item"><span class="wk-check">✓</span>Re-solve weak areas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════ DAILY PLAN ═══════ -->
+<section class="sec">
+  <div class="sec-top rv" style="position:relative;">
+    <span class="sec-badge bd0" style="border-color:rgba(245,208,32,.35)">Daily Schedule</span>
+    <h2 class="sec-title">📅 Daily Plan Structure</h2>
+  </div>
+  <div class="day-grid rv">
+    <div class="day-slot ds0">
+      <div class="day-time c0">01:00 HR</div>
+      <div class="day-act">Theory</div>
+      <div class="day-sub">Read concept, understand Big-O, watch explanation</div>
+    </div>
+    <div class="day-slot ds1">
+      <div class="day-time c4">02:00 HRS</div>
+      <div class="day-act">Problem Solving</div>
+      <div class="day-sub">2–3 LeetCode problems — think before coding</div>
+    </div>
+    <div class="day-slot ds2">
+      <div class="day-time c2">01:00 HR</div>
+      <div class="day-act">Mini Project</div>
+      <div class="day-sub">Apply concept in real-world mini build</div>
+    </div>
+    <div class="day-slot" style="border-top:3px solid var(--p6)">
+      <div class="day-time c6">Example Day</div>
+      <div class="day-act" style="font-size:12px; color:var(--txt2)">Arrays Day</div>
+      <div class="day-sub">Learn: Sliding Window → Solve: Longest Substring + Max Subarray → Build: Search filter UI</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════ PROJECTS ═══════ -->
+<section class="sec">
+  <div class="sec-top rv">
+    <span class="sec-badge bd4">Apply DSA</span>
+    <h2 class="sec-title">🧩 Mini Projects Using DSA</h2>
+  </div>
+  <div class="proj-grid rv">
+    <div class="proj p-beg">
+      <div class="proj-level beg">◈ BEGINNER</div>
+      <div class="proj-name">Todo App with Priority Queue</div>
+      <div class="proj-tech">Heap / Priority Queue · Greedy ordering</div>
+    </div>
+    <div class="proj p-beg">
+      <div class="proj-level beg">◈ BEGINNER</div>
+      <div class="proj-name">String Search Autocomplete</div>
+      <div class="proj-tech">Trie · Prefix matching · String algorithms</div>
+    </div>
+    <div class="proj p-int">
+      <div class="proj-level int">◈ INTERMEDIATE</div>
+      <div class="proj-name">LRU Cache</div>
+      <div class="proj-tech">Doubly Linked List + HashMap · O(1) ops</div>
+    </div>
+    <div class="proj p-int">
+      <div class="proj-level int">◈ INTERMEDIATE</div>
+      <div class="proj-name">Chat Message Ordering</div>
+      <div class="proj-tech">Priority Queue · Timestamps · Sorting</div>
+    </div>
+    <div class="proj p-adv">
+      <div class="proj-level adv">◈ ADVANCED</div>
+      <div class="proj-name">Route Finder</div>
+      <div class="proj-tech">Graph + Dijkstra · Shortest path algorithm</div>
+    </div>
+    <div class="proj p-adv">
+      <div class="proj-level adv">◈ ADVANCED</div>
+      <div class="proj-name">Recommendation System</div>
+      <div class="proj-tech">Graph traversal + DP · Collaborative filtering</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════ WHAT MATTERS MOST ═══════ -->
+<section class="sec">
+  <div class="sec-top rv">
+    <span class="sec-badge bd1">Focus Area</span>
+    <h2 class="sec-title">📊 What Matters MOST</h2>
+  </div>
+  <div class="grid rv">
+    <div class="card tp1" style="grid-column: span 1;">
+      <span class="c-label c1">Priority #1</span>
+      <div class="c-title">Pattern Recognition</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Spot the pattern — don't brute force</li>
+        <li><span class="arr">▸</span>Two pointers? Sliding window? DFS?</li>
+        <li><span class="arr">▸</span>Same problem type = same approach</li>
+        <li><span class="arr">▸</span>Practice 5–7 problems per pattern</li>
+      </ul>
+    </div>
+    <div class="card tp4">
+      <span class="c-label c4">Priority #2</span>
+      <div class="c-title">Clean Code + Explanation</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Name variables clearly</li>
+        <li><span class="arr">▸</span>Think out loud during interviews</li>
+        <li><span class="arr">▸</span>Explain complexity after solving</li>
+        <li><span class="arr">▸</span>Walk through an example</li>
+      </ul>
+    </div>
+    <div class="card tp5">
+      <span class="c-label c5">Priority #3</span>
+      <div class="c-title">Medium-Level Mastery</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Most interviews are medium problems</li>
+        <li><span class="arr">▸</span>Easy = baseline, Hard = bonus</li>
+        <li><span class="arr">▸</span>Solve mediums consistently</li>
+        <li><span class="arr">▸</span>Speed comes with repetition</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════ MISTAKES ═══════ -->
+<section class="sec">
+  <div class="sec-top rv">
+    <span class="sec-badge bd1">⚠️ Watch Out</span>
+    <h2 class="sec-title">Common Mistakes to Avoid</h2>
+  </div>
+  <div class="mistakes rv">
+    <div class="mistake mk0">
+      <div class="mk-head c1">Jumping to DP Too Early</div>
+      <div class="mk-body">DP requires strong recursion + array foundations. Master simpler patterns first — arrays, trees, then DP.</div>
+    </div>
+    <div class="mistake mk1">
+      <div class="mk-head c6">Not Revising Problems</div>
+      <div class="mk-body">Re-solve problems after 1 week. Spaced repetition cements patterns better than solving new problems daily.</div>
+    </div>
+    <div class="mistake mk2">
+      <div class="mk-head c7">Memorizing Instead of Understanding</div>
+      <div class="mk-body">Interviewers change inputs. Understanding why an approach works beats memorizing the code every time.</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════ REFERENCES ═══════ -->
+<section class="sec">
+  <div class="sec-top rv">
+    <span class="sec-badge bdx">Resources</span>
+    <h2 class="sec-title">📚 Best Learning References</h2>
+  </div>
+  <div class="refs rv">
+    <a href="https://leetcode.com" target="_blank" class="ref" style="border-color:rgba(255,184,0,.3)">
+      <span class="ref-ico">💻</span>
+      <div><div class="ref-title">LeetCode</div><div class="ref-sub">Best for interviews</div></div>
+    </a>
+    <a href="https://geeksforgeeks.org" target="_blank" class="ref" style="border-color:rgba(29,209,161,.3)">
+      <span class="ref-ico">📖</span>
+      <div><div class="ref-title">GeeksforGeeks</div><div class="ref-sub">Theory + problems</div></div>
+    </a>
+    <a href="https://hackerrank.com" target="_blank" class="ref" style="border-color:rgba(0,206,201,.3)">
+      <span class="ref-ico">🏆</span>
+      <div><div class="ref-title">HackerRank</div><div class="ref-sub">Coding challenges</div></div>
+    </a>
+    <a href="https://codeforces.com" target="_blank" class="ref" style="border-color:rgba(255,107,107,.3)">
+      <span class="ref-ico">⚔️</span>
+      <div><div class="ref-title">Codeforces</div><div class="ref-sub">Competitive programming</div></div>
+    </a>
+    <a href="https://freecodecamp.org" target="_blank" class="ref" style="border-color:rgba(72,219,251,.3)">
+      <span class="ref-ico">🔥</span>
+      <div><div class="ref-title">freeCodeCamp</div><div class="ref-sub">Free structured courses</div></div>
+    </a>
+    <a href="https://coursera.org" target="_blank" class="ref" style="border-color:rgba(162,155,254,.3)">
+      <span class="ref-ico">🎓</span>
+      <div><div class="ref-title">Coursera</div><div class="ref-sub">Stanford DSA courses</div></div>
+    </a>
+  </div>
+
+  <!-- FOCUS TAGS -->
+  <div style="margin-top:24px;">
+    <div style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:3px; color:var(--txt2); margin-bottom:12px;">// KEY INTERVIEW TOPICS</div>
+    <div class="tags">
+      <span class="tag bd1">Two Pointers</span>
+      <span class="tag bd1">Sliding Window</span>
+      <span class="tag bd2">Floyd's Algorithm</span>
+      <span class="tag bd3">Monotonic Stack</span>
+      <span class="tag bd4">DFS / BFS Trees</span>
+      <span class="tag bd4">LCA Pattern</span>
+      <span class="tag bd5">Graph BFS/DFS</span>
+      <span class="tag bd5">Topological Sort</span>
+      <span class="tag bd6">Memoization</span>
+      <span class="tag bd6">Knapsack DP</span>
+      <span class="tag bd7">Backtracking</span>
+      <span class="tag bd7">Trie</span>
+      <span class="tag bdx">Dijkstra</span>
+      <span class="tag bd0">Big-O Analysis</span>
+      <span class="tag bd6">LIS / LCS</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>DSA Roadmap — 8 Phases · 6-Week Plan · Interview Ready</p>
+  <p style="margin-top:6px; font-size:10px; opacity:.6">Pattern recognition &gt; memorization. Understand the why, the how follows. 🧠</p>
+</footer>
+
+</div>
+
+<script>
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('bD').classList.toggle('on', t === 'dark');
+  document.getElementById('bL').classList.toggle('on', t === 'light');
+  localStorage.setItem('dsa-theme', t);
+}
+const saved = localStorage.getItem('dsa-theme');
+if (saved) setTheme(saved);
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('vis');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+// Phase bar nav
+document.querySelectorAll('.phase-seg').forEach((seg, i) => {
+  seg.addEventListener('click', () => {
+    const secs = document.querySelectorAll('section');
+    if (secs[i]) secs[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
