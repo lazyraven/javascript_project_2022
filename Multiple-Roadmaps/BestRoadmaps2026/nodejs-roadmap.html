@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Node.js Roadmap — Beginner to Advanced</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,700&family=Fira+Code:wght@300;400;500;600&family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   THEME TOKENS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+[data-theme="dark"] {
+  --bg:    #050d08;
+  --bg2:   #07110a;
+  --bg3:   #091508;
+  --sur:   #0c1e10;
+  --sur2:  #101f14;  
+  --brd:   #163320;
+  --txt:   #c8eed5;
+  --txt2:  #5a8a68;
+  --txt3:  #2a5035;
+
+  /* section palette */
+  --s1: #39ff8a;   /* electric lime  — foundations */
+  --s2: #00e5cc;   /* aqua           — core concepts */
+  --s3: #5b9eff;   /* cornflower     — backend dev */
+  --s4: #ff9a3c;   /* amber          — databases */
+  --s5: #ff5fa0;   /* hot pink       — auth/security */
+  --s6: #b87cff;   /* lavender       — advanced */
+  --s7: #ffde59;   /* gold           — performance */
+  --s8: #ff6b6b;   /* coral          — real-time */
+  --s9: #3dffd0;   /* mint           — testing */
+  --s10:#7ec8ff;   /* sky            — devops */
+  --s11:#ffa3d7;   /* rose           — modern tools */
+
+  --node: #8cc84b; /* node.js brand green */
+}
+[data-theme="light"] {
+  --bg:    #f2f9f4;
+  --bg2:   #e6f4ea;
+  --bg3:   #daeee0;
+  --sur:   #ffffff;
+  --sur2:  #f0faf3;
+  --brd:   #b8dfc4;
+  --txt:   #0a2010;
+  --txt2:  #3a6045;
+  --txt3:  #8ab89a;
+
+  --s1: #1d8a40;
+  --s2: #007a6e;
+  --s3: #1a5cc0;
+  --s4: #c06010;
+  --s5: #b0105a;
+  --s6: #6030b0;
+  --s7: #806800;
+  --s8: #b02020;
+  --s9: #008060;
+  --s10:#1060a0;
+  --s11:#903060;
+
+  --node: #3d7a1a;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BASE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  overflow-x: hidden;
+  min-height: 100vh;
+  transition: background .35s, color .35s;
+}
+
+/* Mesh background */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 900px 700px at -10% 10%, rgba(57,255,138,.06) 0%, transparent 60%),
+    radial-gradient(ellipse 700px 600px at 110% 90%, rgba(0,229,204,.05) 0%, transparent 60%),
+    radial-gradient(ellipse 500px 400px at 50% 50%, rgba(91,158,255,.03) 0%, transparent 60%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 39px,
+      var(--brd) 39px,
+      var(--brd) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 39px,
+      var(--brd) 39px,
+      var(--brd) 40px
+    );
+  opacity: .35;
+}
+
+.page { max-width: 1180px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TOGGLE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.tog {
+  position: fixed; top: 18px; right: 18px; z-index: 999;
+  display: flex; align-items: stretch;
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 10px; overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,.4);
+}
+.tog button {
+  border: none; background: none; cursor: pointer;
+  padding: 9px 18px;
+  font-family: 'Fira Code', monospace; font-size: 11px;
+  color: var(--txt2); transition: .2s; letter-spacing: .5px;
+}
+.tog button.on { background: var(--sur2); color: var(--txt); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HEADER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+header { padding: 80px 0 52px; }
+
+.h-pre {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px; letter-spacing: 4px; color: var(--node);
+  margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+}
+.h-pre::before { content: '●'; animation: blink 1.2s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(3.8rem, 11vw, 8rem);
+  font-weight: 900;
+  line-height: .88;
+  letter-spacing: -3px;
+}
+.h1-node { color: var(--node); display: block; }
+.h1-js   { color: var(--s1); display: block; font-style: italic; }
+.h1-road {
+  display: block; color: transparent;
+  -webkit-text-stroke: 1.5px var(--brd);
+  font-style: normal;
+}
+
+.h-meta {
+  margin-top: 28px;
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  font-size: 13px; color: var(--txt2);
+  padding-bottom: 40px; border-bottom: 1px solid var(--brd);
+}
+.h-pill {
+  font-family: 'Fira Code', monospace; font-size: 10px;
+  padding: 5px 13px; border: 1px solid; border-radius: 4px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   NAV STRIP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.nav-strip {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin: 28px 0 56px;
+}
+.nav-btn {
+  font-family: 'Fira Code', monospace; font-size: 10px; letter-spacing: .5px;
+  padding: 6px 14px; border: 1px solid var(--brd);
+  border-radius: 4px; background: var(--sur);
+  color: var(--txt2); cursor: pointer; transition: .15s;
+  text-decoration: none;
+}
+.nav-btn:hover { transform: translateY(-2px); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.sec { margin-bottom: 84px; scroll-margin-top: 20px; }
+
+.sec-hd {
+  margin-bottom: 26px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--brd);
+  display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap;
+  position: relative;
+}
+.sec-hd::after {
+  content: ''; position: absolute;
+  bottom: -1px; left: 0; height: 3px; width: 72px; border-radius: 2px;
+}
+
+.sec-num {
+  font-family: 'Fraunces', serif;
+  font-size: 3.5rem; font-weight: 700; line-height: 1;
+  opacity: .18; letter-spacing: -2px;
+}
+.sec-info { flex: 1; min-width: 0; }
+.sec-tag {
+  font-family: 'Fira Code', monospace; font-size: 9px;
+  letter-spacing: 3px; text-transform: uppercase;
+  padding: 3px 10px; border: 1px solid; border-radius: 3px;
+  margin-bottom: 6px; display: inline-block;
+}
+.sec-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700; line-height: 1; letter-spacing: -.5px;
+}
+.sec-note {
+  font-family: 'Fira Code', monospace; font-size: 10px;
+  color: var(--txt2); margin-left: auto;
+  background: var(--sur); border: 1px solid var(--brd);
+  padding: 5px 12px; border-radius: 4px; white-space: nowrap;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CARDS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.grid  { display: grid; grid-template-columns: repeat(auto-fill, minmax(285px,1fr)); gap: 14px; }
+.grid2 { grid-template-columns: repeat(auto-fill, minmax(355px,1fr)); }
+.grid3 { grid-template-columns: repeat(3,1fr); }
+@media(max-width:700px){ .grid3,.grid2 { grid-template-columns:1fr; } }
+
+.card {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 12px; padding: 22px 24px;
+  position: relative; overflow: hidden;
+  transition: transform .22s, box-shadow .22s;
+}
+.card:hover { transform: translateY(-5px); }
+.card::after {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+}
+
+.c-lbl {
+  font-family: 'Fira Code', monospace;
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 10px; display: block;
+}
+.c-ttl {
+  font-family: 'Fraunces', serif;
+  font-size: 16px; font-weight: 700; letter-spacing: -.3px;
+  margin-bottom: 14px; line-height: 1.1;
+}
+.c-ul { list-style: none; }
+.c-ul li {
+  font-size: 12.5px; color: var(--txt2);
+  padding: 5px 0; border-bottom: 1px solid var(--brd);
+  display: flex; gap: 8px; align-items: baseline; line-height: 1.55;
+}
+.c-ul li:last-child { border-bottom: none; }
+.ar { font-size: 9px; color: var(--txt3); flex-shrink: 0; margin-top: 3px; }
+.hl { font-weight: 600; }
+
+/* callout inside card */
+.inset {
+  margin-top: 12px; background: var(--bg3);
+  border-left: 3px solid; border-radius: 0 6px 6px 0;
+  padding: 10px 14px; font-size: 12px; color: var(--txt2); line-height: 1.6;
+}
+.inset strong { display: block; font-size: 12.5px; color: var(--txt); margin-bottom: 2px; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CODE BLOCK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.code-box {
+  background: var(--bg2); border: 1px solid var(--brd);
+  border-radius: 12px; overflow: hidden; margin-top: 14px;
+}
+.code-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 18px; border-bottom: 1px solid var(--brd);
+}
+.code-dots { display: flex; gap: 6px; }
+.cd { width: 11px; height: 11px; border-radius: 50%; }
+.r{background:#ff5f57}.y{background:#febc2e}.g{background:#28c840}
+.code-file {
+  font-family: 'Fira Code', monospace; font-size: 10px; color: var(--txt2);
+}
+.code-badges { display: flex; gap: 6px; }
+.cbadge {
+  font-family: 'Fira Code', monospace; font-size: 9px;
+  padding: 3px 9px; border: 1px solid; border-radius: 3px;
+}
+pre {
+  padding: 20px 22px; overflow-x: auto;
+  font-family: 'Fira Code', monospace; font-size: 12px; line-height: 2;
+  color: var(--txt2);
+}
+.kw  { color: #ff79c6; }
+.fn  { color: #50fa7b; }
+.str { color: #f1fa8c; }
+.cm  { color: #44475a; }
+.num { color: #bd93f9; }
+.prop{ color: #8be9fd; }
+.op  { color: #ffb86c; }
+.ev  { color: #50fa7b; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   EVENT LOOP DIAGRAM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.loop-diagram {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 12px; padding: 28px 24px; margin-top: 14px;
+}
+.loop-row {
+  display: flex; align-items: center; gap: 12px;
+  flex-wrap: wrap; justify-content: center; margin-bottom: 12px;
+}
+.loop-box {
+  padding: 10px 18px; border-radius: 8px; border: 1px solid;
+  font-family: 'Fira Code', monospace; font-size: 11px; font-weight: 600;
+  text-align: center; min-width: 110px;
+}
+.loop-arrow {
+  font-size: 20px; color: var(--txt3); flex-shrink: 0;
+}
+.loop-label {
+  font-family: 'Fira Code', monospace; font-size: 9px; letter-spacing: 2px;
+  text-transform: uppercase; text-align: center;
+  color: var(--txt2); margin-top: 6px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TAGS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: 'Fira Code', monospace; font-size: 10px;
+  padding: 6px 14px; border: 1px solid; border-radius: 4px;
+  cursor: default; transition: transform .15s;
+}
+.tag:hover { transform: scale(1.06); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PROJECTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.proj-track { display: flex; flex-direction: column; gap: 12px; }
+.proj {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 10px; padding: 18px 22px;
+  display: flex; align-items: flex-start; gap: 18px;
+  transition: transform .2s;
+}
+.proj:hover { transform: translateX(6px); }
+.proj-badge {
+  font-family: 'Fira Code', monospace; font-size: 9px;
+  padding: 4px 10px; border: 1px solid; border-radius: 4px;
+  letter-spacing: 1px; white-space: nowrap; flex-shrink: 0; margin-top: 2px;
+}
+.proj-body {}
+.proj-name {
+  font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700;
+  margin-bottom: 5px;
+}
+.proj-desc { font-size: 12px; color: var(--txt2); line-height: 1.5; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   STACK CARDS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.stack-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 10px; }
+.sc {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 10px; padding: 16px;
+  transition: transform .2s;
+}
+.sc:hover { transform: translateY(-4px); }
+.sc-top { margin-bottom: 10px; }
+.sc-icon { font-size: 22px; margin-bottom: 6px; }
+.sc-name { font-family: 'Fraunces', serif; font-size: 14px; font-weight: 700; }
+.sc-sub { font-size: 11px; color: var(--txt2); margin-top: 3px; line-height: 1.4; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MISTAKE CARDS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.mistakes { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 10px; }
+.mk {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 14px 18px;
+  border-left: 4px solid;
+}
+.mk-h { font-size: 13px; font-weight: 600; margin-bottom: 4px; display: flex; gap: 8px; align-items: center; }
+.mk-b { font-size: 12px; color: var(--txt2); line-height: 1.5; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   REFS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.refs { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px,1fr)); gap: 10px; }
+.ref {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 12px 14px;
+  text-decoration: none; color: var(--txt);
+  transition: transform .18s, border-color .18s; font-size: 12px;
+}
+.ref:hover { transform: translateY(-2px); }
+.ref-ic { font-size: 18px; }
+.ref-nm { font-weight: 600; }
+.ref-sb { font-size: 10px; color: var(--txt2); margin-top: 1px; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DIVIDER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.div { height: 1px; background: linear-gradient(90deg,transparent,var(--brd),transparent); margin: 68px 0; }
+
+footer {
+  text-align: center; padding: 28px 0 50px;
+  font-family: 'Fira Code', monospace; font-size: 11px; color: var(--txt2);
+  border-top: 1px solid var(--brd);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   COLOR SYSTEM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* card top bar */
+.a1::after{background:var(--s1)} .a2::after{background:var(--s2)} .a3::after{background:var(--s3)}
+.a4::after{background:var(--s4)} .a5::after{background:var(--s5)} .a6::after{background:var(--s6)}
+.a7::after{background:var(--s7)} .a8::after{background:var(--s8)} .a9::after{background:var(--s9)}
+.a10::after{background:var(--s10)} .a11::after{background:var(--s11)} .an::after{background:var(--node)}
+
+/* hover glows */
+.a1:hover{box-shadow:0 8px 40px rgba(57,255,138,.1)}  .a2:hover{box-shadow:0 8px 40px rgba(0,229,204,.1)}
+.a3:hover{box-shadow:0 8px 40px rgba(91,158,255,.1)}  .a4:hover{box-shadow:0 8px 40px rgba(255,154,60,.1)}
+.a5:hover{box-shadow:0 8px 40px rgba(255,95,160,.1)}  .a6:hover{box-shadow:0 8px 40px rgba(184,124,255,.1)}
+.a7:hover{box-shadow:0 8px 40px rgba(255,222,89,.1)}  .a8:hover{box-shadow:0 8px 40px rgba(255,107,107,.1)}
+.a9:hover{box-shadow:0 8px 40px rgba(61,255,208,.1)}  .a10:hover{box-shadow:0 8px 40px rgba(126,200,255,.1)}
+.a11:hover{box-shadow:0 8px 40px rgba(255,163,215,.1)} .an:hover{box-shadow:0 8px 40px rgba(140,200,75,.1)}
+
+/* section accent lines */
+.h1::after{background:var(--s1)} .h2::after{background:var(--s2)} .h3::after{background:var(--s3)}
+.h4::after{background:var(--s4)} .h5::after{background:var(--s5)} .h6::after{background:var(--s6)}
+.h7::after{background:var(--s7)} .h8::after{background:var(--s8)} .h9::after{background:var(--s9)}
+.h10::after{background:var(--s10)} .h11::after{background:var(--s11)} .hn::after{background:var(--node)}
+
+/* text colors */
+.c1{color:var(--s1)}  .c2{color:var(--s2)}  .c3{color:var(--s3)}
+.c4{color:var(--s4)}  .c5{color:var(--s5)}  .c6{color:var(--s6)}
+.c7{color:var(--s7)}  .c8{color:var(--s8)}  .c9{color:var(--s9)}
+.c10{color:var(--s10)}.c11{color:var(--s11)}.cn{color:var(--node)}
+
+/* sec-num tints */
+.n1{color:var(--s1)}  .n2{color:var(--s2)}  .n3{color:var(--s3)}
+.n4{color:var(--s4)}  .n5{color:var(--s5)}  .n6{color:var(--s6)}
+.n7{color:var(--s7)}  .n8{color:var(--s8)}  .n9{color:var(--s9)}
+.n10{color:var(--s10)}.n11{color:var(--s11)}.nn{color:var(--node)}
+
+/* tag variants */
+.t1{color:var(--s1);border-color:rgba(57,255,138,.3);background:rgba(57,255,138,.06)}
+.t2{color:var(--s2);border-color:rgba(0,229,204,.3);background:rgba(0,229,204,.06)}
+.t3{color:var(--s3);border-color:rgba(91,158,255,.3);background:rgba(91,158,255,.06)}
+.t4{color:var(--s4);border-color:rgba(255,154,60,.3);background:rgba(255,154,60,.06)}
+.t5{color:var(--s5);border-color:rgba(255,95,160,.3);background:rgba(255,95,160,.06)}
+.t6{color:var(--s6);border-color:rgba(184,124,255,.3);background:rgba(184,124,255,.06)}
+.t7{color:var(--s7);border-color:rgba(255,222,89,.3);background:rgba(255,222,89,.06)}
+.t8{color:var(--s8);border-color:rgba(255,107,107,.3);background:rgba(255,107,107,.06)}
+.t9{color:var(--s9);border-color:rgba(61,255,208,.3);background:rgba(61,255,208,.06)}
+.tn{color:var(--node);border-color:rgba(140,200,75,.3);background:rgba(140,200,75,.06)}
+
+/* badge/pill */
+.p1{color:var(--s1);border-color:rgba(57,255,138,.35)}
+.p2{color:var(--s2);border-color:rgba(0,229,204,.35)}
+.p3{color:var(--s3);border-color:rgba(91,158,255,.35)}
+.p4{color:var(--s4);border-color:rgba(255,154,60,.35)}
+.p5{color:var(--s5);border-color:rgba(255,95,160,.35)}
+.p6{color:var(--s6);border-color:rgba(184,124,255,.35)}
+.p7{color:var(--s7);border-color:rgba(255,222,89,.35)}
+.p8{color:var(--s8);border-color:rgba(255,107,107,.35)}
+.p9{color:var(--s9);border-color:rgba(61,255,208,.35)}
+.p10{color:var(--s10);border-color:rgba(126,200,255,.35)}
+.p11{color:var(--s11);border-color:rgba(255,163,215,.35)}
+.pn{color:var(--node);border-color:rgba(140,200,75,.35)}
+
+/* inset border */
+.i1{border-left-color:var(--s1)} .i2{border-left-color:var(--s2)} .i3{border-left-color:var(--s3)}
+.i4{border-left-color:var(--s4)} .i5{border-left-color:var(--s5)} .i6{border-left-color:var(--s6)}
+.i7{border-left-color:var(--s7)} .i8{border-left-color:var(--s8)} .i9{border-left-color:var(--s9)}
+
+/* loop box colors */
+.lb1{color:var(--s1);border-color:rgba(57,255,138,.4);background:rgba(57,255,138,.07)}
+.lb2{color:var(--s2);border-color:rgba(0,229,204,.4);background:rgba(0,229,204,.07)}
+.lb3{color:var(--s7);border-color:rgba(255,222,89,.4);background:rgba(255,222,89,.07)}
+.lb4{color:var(--s3);border-color:rgba(91,158,255,.4);background:rgba(91,158,255,.07)}
+.lb5{color:var(--s8);border-color:rgba(255,107,107,.4);background:rgba(255,107,107,.07)}
+
+/* project badges */
+.pb1{color:var(--s1);border-color:var(--s1);background:rgba(57,255,138,.08)}
+.pb2{color:var(--s4);border-color:var(--s4);background:rgba(255,154,60,.08)}
+.pb3{color:var(--s5);border-color:var(--s5);background:rgba(255,95,160,.08)}
+
+/* mistake borders */
+.mb1{border-left-color:var(--s8)}
+.mb2{border-left-color:var(--s5)}
+.mb3{border-left-color:var(--s4)}
+.mb4{border-left-color:var(--s7)}
+
+/* stack card top */
+.st1{border-top:3px solid var(--s1)} .st2{border-top:3px solid var(--s2)} .st3{border-top:3px solid var(--s3)}
+.st4{border-top:3px solid var(--s4)} .st5{border-top:3px solid var(--s5)} .st6{border-top:3px solid var(--s6)}
+.st7{border-top:3px solid var(--s7)}
+
+/* nav btn hover per section */
+.nb1:hover{border-color:var(--s1);color:var(--s1)} .nb2:hover{border-color:var(--s2);color:var(--s2)}
+.nb3:hover{border-color:var(--s3);color:var(--s3)} .nb4:hover{border-color:var(--s4);color:var(--s4)}
+.nb5:hover{border-color:var(--s5);color:var(--s5)} .nb6:hover{border-color:var(--s6);color:var(--s6)}
+.nb7:hover{border-color:var(--s7);color:var(--s7)} .nb8:hover{border-color:var(--s8);color:var(--s8)}
+.nb9:hover{border-color:var(--s9);color:var(--s9)} .nb10:hover{border-color:var(--s10);color:var(--s10)}
+.nb11:hover{border-color:var(--s11);color:var(--s11)}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SCROLL REVEAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.rv { opacity:0; transform:translateY(20px); transition:opacity .5s ease, transform .5s ease; }
+.rv.vis { opacity:1; transform:none; }
+
+@media(max-width:640px){
+  h1 { letter-spacing:-2px; }
+  .sec-note { display:none; }
+  .tog { top:10px; right:10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOGGLE -->
+<div class="tog">
+  <button id="bD" class="on" onclick="setTheme('dark')">◉ dark</button>
+  <button id="bL" onclick="setTheme('light')">◎ light</button>
+</div>
+
+<div class="page">
+
+<!-- ━━━ HEADER ━━━ -->
+<header>
+  <div class="h-pre">NODE.JS FULL ROADMAP · BEGINNER TO ADVANCED · 2026</div>
+  <h1>
+    <span class="h1-node">Node.</span>
+    <span class="h1-js">js</span>
+    <span class="h1-road">roadmap</span>
+  </h1>
+  <div class="h-meta">
+    <span>11 Modules · Interview Ready · Real Projects Included</span>
+    <span class="h-pill p1">Event Loop ⭐</span>
+    <span class="h-pill p2">Async Internals</span>
+    <span class="h-pill p3">Express + REST</span>
+    <span class="h-pill p6">TypeScript ⭐</span>
+  </div>
+</header>
+
+<!-- NAV STRIP -->
+<div class="nav-strip rv">
+  <a class="nav-btn nb1" href="#s1">01 Foundations</a>
+  <a class="nav-btn nb2" href="#s2">02 Core Concepts</a>
+  <a class="nav-btn nb3" href="#s3">03 Backend Dev</a>
+  <a class="nav-btn nb4" href="#s4">04 Databases</a>
+  <a class="nav-btn nb5" href="#s5">05 Auth/Security</a>
+  <a class="nav-btn nb6" href="#s6">06 Advanced</a>
+  <a class="nav-btn nb7" href="#s7">07 Performance</a>
+  <a class="nav-btn nb8" href="#s8">08 Real-Time</a>
+  <a class="nav-btn nb9" href="#s9">09 Testing</a>
+  <a class="nav-btn nb10" href="#s10">10 DevOps</a>
+  <a class="nav-btn nb11" href="#s11">11 Modern Tools</a>
+</div>
+
+<!-- ━━━ 1. FOUNDATIONS ━━━ -->
+<section class="sec" id="s1">
+  <div class="sec-hd h1 rv">
+    <div class="sec-num n1">01</div>
+    <div class="sec-info">
+      <div class="sec-tag p1">Must-Have · Start Here</div>
+      <div class="sec-title">🧱 Core Foundations</div>
+    </div>
+    <span class="sec-note">// Most candidates skip this</span>
+  </div>
+  <div class="grid rv">
+    <div class="card a1">
+      <span class="c-lbl c1">Critical ⭐</span>
+      <div class="c-ttl">JavaScript Internals</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>Closures, scope, hoisting</li>
+        <li><span class="ar">▸</span>Promises, async/await</li>
+        <li><span class="ar">▸</span>Event loop — critical for Node.js</li>
+        <li><span class="ar">▸</span>Prototypes & <span class="hl">this</span> keyword</li>
+        <li><span class="ar">▸</span>ES6+: destructuring, spread, modules</li>
+      </ul>
+      <div class="inset i1">
+        <strong>Focus: How JS works internally</strong>
+        Node.js is JavaScript — weak JS = weak Node.js. This is non-negotiable.
+      </div>
+    </div>
+    <div class="card a1">
+      <span class="c-lbl c1">Node.js Basics</span>
+      <div class="c-ttl">Runtime & Environment</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>What is Node.js? — V8 runtime, not a browser</li>
+        <li><span class="ar">▸</span>Single-threaded model explained</li>
+        <li><span class="ar">▸</span>Non-blocking I/O — the key advantage</li>
+        <li><span class="ar">▸</span>REPL — interactive Node shell</li>
+        <li><span class="ar">▸</span>Globals: <span class="hl">__dirname</span>, <span class="hl">process</span>, <span class="hl">Buffer</span></li>
+      </ul>
+    </div>
+    <div class="card a1">
+      <span class="c-lbl c1">Module System</span>
+      <div class="c-ttl">CommonJS vs ES Modules</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>CommonJS — <span class="hl">require</span> / <span class="hl">module.exports</span></li>
+        <li><span class="ar">▸</span>ES Modules — <span class="hl">import</span> / <span class="hl">export</span></li>
+        <li><span class="ar">▸</span>Differences: sync vs async loading</li>
+        <li><span class="ar">▸</span>package.json: <span class="hl">"type": "module"</span></li>
+        <li><span class="ar">▸</span>File structure best practices</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ━━━ 2. CORE CONCEPTS ━━━ -->
+<section class="sec" id="s2">
+  <div class="sec-hd h2 rv">
+    <div class="sec-num n2">02</div>
+    <div class="sec-info">
+      <div class="sec-tag p2">High Priority · Interview Favorite</div>
+      <div class="sec-title">⚙️ Core Node.js Concepts</div>
+    </div>
+    <span class="sec-note">// Most asked in interviews</span>
+  </div>
+  <div class="grid rv">
+    <div class="card a2">
+      <span class="c-lbl c2">Interview Favorite ⭐</span>
+      <div class="c-ttl">Event Loop & Async</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>Call stack — sync code runs here</li>
+        <li><span class="ar">▸</span>Callback queue (macrotask) — setTimeout, I/O</li>
+        <li><span class="ar">▸</span>Microtask queue — Promises, queueMicrotask</li>
+        <li><span class="ar">▸</span>Microtasks run BEFORE macrotasks</li>
+        <li><span class="ar">▸</span>Timers: setTimeout vs setImmediate</li>
+        <li><span class="ar">▸</span>libuv — handles async in background</li>
+      </ul>
+    </div>
+    <div class="card a2">
+      <span class="c-lbl c2">Built-In Modules</span>
+      <div class="c-ttl">Core APIs</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span><span class="hl">fs</span> — file system read/write/watch</li>
+        <li><span class="ar">▸</span><span class="hl">http</span> — create HTTP server from scratch</li>
+        <li><span class="ar">▸</span><span class="hl">path</span> — cross-platform path handling</li>
+        <li><span class="ar">▸</span><span class="hl">os</span> — system info: CPU, memory</li>
+        <li><span class="ar">▸</span><span class="hl">events</span> — EventEmitter pattern</li>
+        <li><span class="ar">▸</span><span class="hl">stream</span> — data in chunks</li>
+      </ul>
+    </div>
+    <div class="card a2">
+      <span class="c-lbl c2">Performance Systems</span>
+      <div class="c-ttl">Streams & Buffers</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>Readable streams — consume data</li>
+        <li><span class="ar">▸</span>Writable streams — write data</li>
+        <li><span class="ar">▸</span>Transform streams — read + write + modify</li>
+        <li><span class="ar">▸</span>Piping — connect streams elegantly</li>
+        <li><span class="ar">▸</span>Buffer — raw binary data handling</li>
+      </ul>
+      <div class="inset i2">
+        <strong>Why streams matter:</strong>Avoid loading entire files into memory. Stream a 2GB file without crashing.
+      </div>
+    </div>
+  </div>
+
+  <!-- Event Loop Diagram -->
+  <div class="loop-diagram rv" style="margin-top: 14px;">
+    <div style="font-family:'Fira Code',monospace; font-size:10px; letter-spacing:3px; color:var(--txt2); margin-bottom:18px;">// EVENT LOOP — HOW ASYNC NODE.JS WORKS</div>
+    <div class="loop-row">
+      <div class="loop-box lb1">Your Code<div class="loop-label">Call Stack</div></div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-box lb2">libuv / Web APIs<div class="loop-label">Background Tasks</div></div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-box lb3">Microtask Queue<div class="loop-label">Promises first</div></div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-box lb4">Callback Queue<div class="loop-label">Macrotasks next</div></div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-box lb5">Event Loop<div class="loop-label">Picks & executes</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ━━━ 3. BACKEND DEV ━━━ -->
+<section class="sec" id="s3">
+  <div class="sec-hd h3 rv">
+    <div class="sec-num n3">03</div>
+    <div class="sec-info">
+      <div class="sec-tag p3">Core Skill</div>
+      <div class="sec-title">🌐 Backend Development with Node.js</div>
+    </div>
+    <span class="sec-note">// Used in every Node.js project</span>
+  </div>
+  <div class="grid rv">
+    <div class="card a3">
+      <span class="c-lbl c3">Raw HTTP</span>
+      <div class="c-ttl">HTTP Server</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>Create server with <span class="hl">http.createServer()</span></li>
+        <li><span class="ar">▸</span>Parse request: method, URL, headers</li>
+        <li><span class="ar">▸</span>Handle routes manually</li>
+        <li><span class="ar">▸</span>Set response headers and status codes</li>
+        <li><span class="ar">▸</span>Good foundation before Express</li>
+      </ul>
+    </div>
+    <div class="card a3">
+      <span class="c-lbl c3">Most Used Framework ⭐</span>
+      <div class="c-ttl">Express.js</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>Routing — GET, POST, PUT, DELETE</li>
+        <li><span class="ar">▸</span>Middleware — chain of functions</li>
+        <li><span class="ar">▸</span>Error handling middleware — 4 params</li>
+        <li><span class="ar">▸</span>Request / response lifecycle</li>
+        <li><span class="ar">▸</span>Router modules — split routes</li>
+        <li><span class="ar">▸</span>Static file serving</li>
+      </ul>
+    </div>
+    <div class="card a3">
+      <span class="c-lbl c3">API Design</span>
+      <div class="c-ttl">REST API Development</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>CRUD operations — Create, Read, Update, Delete</li>
+        <li><span class="ar">▸</span>RESTful conventions — nouns in URLs</li>
+        <li><span class="ar">▸</span>HTTP status codes — 200, 201, 400, 401, 404, 500</li>
+        <li><span class="ar">▸</span>Input validation — never trust client data</li>
+        <li><span class="ar">▸</span>Consistent response format (JSON)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Code example -->
+  <div class="code-box rv">
+    <div class="code-top">
+      <div class="code-dots"><div class="cd r"></div><div class="cd y"></div><div class="cd g"></div></div>
+      <span class="code-file">server.js — Express REST API example</span>
+      <div class="code-badges">
+        <span class="cbadge p3">Express.js</span>
+        <span class="cbadge p1">REST</span>
+      </div>
+    </div>
+<pre><span class="kw">const</span> <span class="prop">express</span> = <span class="fn">require</span>(<span class="str">'express'</span>);
+<span class="kw">const</span> <span class="prop">app</span> = <span class="fn">express</span>();
+<span class="prop">app</span>.<span class="fn">use</span>(<span class="prop">express</span>.<span class="fn">json</span>());   <span class="cm">// parse JSON bodies</span>
+
+<span class="kw">let</span> <span class="prop">todos</span> = [];
+
+<span class="cm">// GET all todos</span>
+<span class="prop">app</span>.<span class="fn">get</span>(<span class="str">'/api/todos'</span>, (req, res) <span class="op">=></span> {
+  res.<span class="fn">json</span>({ success: <span class="kw">true</span>, data: <span class="prop">todos</span> });
+});
+
+<span class="cm">// POST create todo</span>
+<span class="prop">app</span>.<span class="fn">post</span>(<span class="str">'/api/todos'</span>, (req, res) <span class="op">=></span> {
+  <span class="kw">const</span> { <span class="prop">title</span> } = req.body;
+  <span class="kw">if</span> (!<span class="prop">title</span>) <span class="kw">return</span> res.<span class="fn">status</span>(<span class="num">400</span>).<span class="fn">json</span>({ error: <span class="str">'Title required'</span> });
+  <span class="kw">const</span> <span class="prop">todo</span> = { id: Date.<span class="fn">now</span>(), <span class="prop">title</span>, done: <span class="kw">false</span> };
+  <span class="prop">todos</span>.<span class="fn">push</span>(<span class="prop">todo</span>);
+  res.<span class="fn">status</span>(<span class="num">201</span>).<span class="fn">json</span>({ success: <span class="kw">true</span>, data: <span class="prop">todo</span> });
+});
+
+<span class="cm">// Centralized error handler (4 params = error middleware)</span>
+<span class="prop">app</span>.<span class="fn">use</span>((err, req, res, next) <span class="op">=></span> {
+  res.<span class="fn">status</span>(<span class="num">500</span>).<span class="fn">json</span>({ error: err.message });
+});
+
+<span class="prop">app</span>.<span class="fn">listen</span>(<span class="num">3000</span>, () <span class="op">=></span> console.<span class="fn">log</span>(<span class="str">'🚀 Server running on :3000'</span>));</pre>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ━━━ 4. DATABASES ━━━ -->
+<section class="sec" id="s4">
+  <div class="sec-hd h4 rv">
+    <div class="sec-num n4">04</div>
+    <div class="sec-info">
+      <div class="sec-tag p4">Data Layer</div>
+      <div class="sec-title">🗄️ Database Integration</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a4">
+      <span class="c-lbl c4">Most Common with Node</span>
+      <div class="c-ttl">MongoDB</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>Document-based — JSON-like BSON</li>
+        <li><span class="ar">▸</span>Flexible schema — no rigid tables</li>
+        <li><span class="ar">▸</span>Atlas — managed cloud MongoDB</li>
+        <li><span class="ar">▸</span>Aggregation pipeline — powerful queries</li>
+        <li><span class="ar">▸</span>Indexing for performance</li>
+      </ul>
+    </div>
+    <div class="card a4">
+      <span class="c-lbl c4">SQL Option</span>
+      <div class="c-ttl">PostgreSQL / MySQL</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>Relational tables + foreign keys</li>
+        <li><span class="ar">▸</span>ACID transactions</li>
+        <li><span class="ar">▸</span>JOINs — relate data across tables</li>
+        <li><span class="ar">▸</span>Migrations — schema versioning</li>
+        <li><span class="ar">▸</span>Great for financial, structured data</li>
+      </ul>
+    </div>
+    <div class="card a4">
+      <span class="c-lbl c4">ORMs / ODMs</span>
+      <div class="c-ttl">Mongoose & Prisma</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span><span class="hl">Mongoose</span> — MongoDB ODM, schema validation</li>
+        <li><span class="ar">▸</span>Models, virtuals, middleware hooks</li>
+        <li><span class="ar">▸</span><span class="hl">Prisma</span> — modern ORM, type-safe</li>
+        <li><span class="ar">▸</span>Prisma schema → auto-generate client</li>
+        <li><span class="ar">▸</span>Prisma Studio — visual DB browser</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ━━━ 5. AUTH & SECURITY ━━━ -->
+<section class="sec" id="s5">
+  <div class="sec-hd h5 rv">
+    <div class="sec-num n5">05</div>
+    <div class="sec-info">
+      <div class="sec-tag p5">Security Layer</div>
+      <div class="sec-title">🔐 Authentication & Security</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a5">
+      <span class="c-lbl c5">Industry Standard</span>
+      <div class="c-ttl">JWT Authentication</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>JSON Web Token — header.payload.signature</li>
+        <li><span class="ar">▸</span>Sign with secret — <span class="hl">jsonwebtoken</span> library</li>
+        <li><span class="ar">▸</span>Verify on every protected route</li>
+        <li><span class="ar">▸</span>Auth middleware pattern</li>
+        <li><span class="ar">▸</span>Access token + refresh token pattern</li>
+      </ul>
+    </div>
+    <div class="card a5">
+      <span class="c-lbl c5">Password & Sessions</span>
+      <div class="c-ttl">Hashing & Cookies</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span><span class="hl">bcrypt</span> — hash passwords before storing</li>
+        <li><span class="ar">▸</span>Salt rounds — slow hashing on purpose</li>
+        <li><span class="ar">▸</span>Sessions — server-side state (<span class="hl">express-session</span>)</li>
+        <li><span class="ar">▸</span>HttpOnly cookies — prevent XSS theft</li>
+        <li><span class="ar">▸</span>CORS configuration</li>
+      </ul>
+    </div>
+    <div class="card a5">
+      <span class="c-lbl c5">Advanced Auth</span>
+      <div class="c-ttl">OAuth & Best Practices</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>OAuth 2.0 — Google, GitHub login</li>
+        <li><span class="ar">▸</span>Passport.js — auth middleware library</li>
+        <li><span class="ar">▸</span>Rate limiting — prevent brute force</li>
+        <li><span class="ar">▸</span>Helmet.js — security headers</li>
+        <li><span class="ar">▸</span>Input sanitization — prevent injection</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ━━━ 6. ADVANCED ━━━ -->
+<section class="sec" id="s6">
+  <div class="sec-hd h6 rv">
+    <div class="sec-num n6">06</div>
+    <div class="sec-info">
+      <div class="sec-tag p6">Architecture</div>
+      <div class="sec-title">🧩 Advanced Backend Concepts</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a6">
+      <span class="c-lbl c6">Architecture Patterns</span>
+      <div class="c-ttl">MVC & Clean Architecture</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>MVC — Model, View, Controller separation</li>
+        <li><span class="ar">▸</span>Service layer — business logic isolated</li>
+        <li><span class="ar">▸</span>Repository pattern — data access layer</li>
+        <li><span class="ar">▸</span>Clean Architecture — dependency inversion</li>
+        <li><span class="ar">▸</span>Folder structure: routes/controllers/services</li>
+      </ul>
+    </div>
+    <div class="card a6">
+      <span class="c-lbl c6">Error & Logging</span>
+      <div class="c-ttl">Resilient Systems</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>Custom error classes — extend <span class="hl">Error</span></li>
+        <li><span class="ar">▸</span>Centralized error handler in Express</li>
+        <li><span class="ar">▸</span>Async error wrapper — avoid try/catch everywhere</li>
+        <li><span class="ar">▸</span><span class="hl">Winston</span> — structured logging, log levels</li>
+        <li><span class="ar">▸</span>Morgan — HTTP request logging</li>
+      </ul>
+    </div>
+    <div class="card a6">
+      <span class="c-lbl c6">Caching & Uploads</span>
+      <div class="c-ttl">Redis & File Handling</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>Redis — in-memory key-value store</li>
+        <li><span class="ar">▸</span>Cache API responses — reduce DB load</li>
+        <li><span class="ar">▸</span>Cache invalidation strategies</li>
+        <li><span class="ar">▸</span><span class="hl">Multer</span> — multipart file upload middleware</li>
+        <li><span class="ar">▸</span>Store files: S3, Cloudinary</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ━━━ 7 + 8: PERFORMANCE + REAL-TIME ━━━ -->
+<section class="sec" id="s7">
+  <div class="sec-hd h7 rv">
+    <div class="sec-num n7">07–08</div>
+    <div class="sec-info">
+      <div class="sec-tag p7">Scale & Speed</div>
+      <div class="sec-title">⚡ Performance &nbsp;<span style="color:var(--s8);font-size:.55em">+ 🔄 Real-Time</span></div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a7">
+      <span class="c-lbl c7">Performance</span>
+      <div class="c-ttl">Scalability Techniques</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>Avoid blocking the event loop</li>
+        <li><span class="ar">▸</span>Clustering — use all CPU cores</li>
+        <li><span class="ar">▸</span>Load balancing — NGINX / PM2</li>
+        <li><span class="ar">▸</span>PM2 — process manager, auto-restart</li>
+        <li><span class="ar">▸</span>Profiling with <span class="hl">--prof</span> flag</li>
+      </ul>
+    </div>
+    <div class="card a7">
+      <span class="c-lbl c7">CPU-Heavy Tasks</span>
+      <div class="c-ttl">Worker Threads</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>Worker threads — parallel CPU tasks</li>
+        <li><span class="ar">▸</span>Child processes — spawn separate processes</li>
+        <li><span class="ar">▸</span>Don't block event loop with heavy math</li>
+        <li><span class="ar">▸</span>SharedArrayBuffer — shared memory</li>
+        <li><span class="ar">▸</span>Use streams for large file processing</li>
+      </ul>
+    </div>
+    <div class="card a8">
+      <span class="c-lbl c8">Real-Time Systems</span>
+      <div class="c-ttl">WebSockets & Queues</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>WebSockets — bidirectional, persistent connection</li>
+        <li><span class="ar">▸</span><span class="hl">Socket.io</span> — rooms, namespaces, events</li>
+        <li><span class="ar">▸</span>Event-driven architecture</li>
+        <li><span class="ar">▸</span><span class="hl">Bull</span> — job queues with Redis</li>
+        <li><span class="ar">▸</span>Background jobs — email, image processing</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ━━━ 9 + 10: TESTING + DEVOPS ━━━ -->
+<section class="sec" id="s9">
+  <div class="sec-hd h9 rv">
+    <div class="sec-num n9">09–10</div>
+    <div class="sec-info">
+      <div class="sec-tag p9">Quality & Deployment</div>
+      <div class="sec-title">🧪 Testing &nbsp;<span style="color:var(--s10);font-size:.55em">+ 📦 DevOps</span></div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a9">
+      <span class="c-lbl c9">Testing</span>
+      <div class="c-ttl">Jest & Supertest</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>Unit tests — test isolated functions</li>
+        <li><span class="ar">▸</span>Jest — describe / it / expect</li>
+        <li><span class="ar">▸</span>Mocking — <span class="hl">jest.mock()</span> for modules</li>
+        <li><span class="ar">▸</span>Integration testing — test routes end-to-end</li>
+        <li><span class="ar">▸</span>Supertest — test Express without running server</li>
+      </ul>
+    </div>
+    <div class="card a10">
+      <span class="c-lbl c10">DevOps</span>
+      <div class="c-ttl">Deployment & CI/CD</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span>Environment variables — <span class="hl">.env</span> + dotenv</li>
+        <li><span class="ar">▸</span>Docker — containerize Node.js app</li>
+        <li><span class="ar">▸</span>Dockerfile + docker-compose</li>
+        <li><span class="ar">▸</span>CI/CD — GitHub Actions pipeline</li>
+        <li><span class="ar">▸</span>Deploy: AWS EC2, Render, Railway</li>
+      </ul>
+    </div>
+    <div class="card a10">
+      <span class="c-lbl c10">Modern Tools ⭐</span>
+      <div class="c-ttl" id="s11">TypeScript + Tooling</div>
+      <ul class="c-ul">
+        <li><span class="ar">▸</span><span class="hl">TypeScript</span> — increasingly mandatory</li>
+        <li><span class="ar">▸</span>Types for Express: req, res, next</li>
+        <li><span class="ar">▸</span>ESLint + Prettier — code quality</li>
+        <li><span class="ar">▸</span>Swagger / OpenAPI — document APIs</li>
+        <li><span class="ar">▸</span>GraphQL — alternative to REST (optional)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ━━━ REAL WORLD STACK ━━━ -->
+<section class="sec">
+  <div class="sec-hd hn rv">
+    <div class="sec-num nn">★</div>
+    <div class="sec-info">
+      <div class="sec-tag pn">Industry Defaults</div>
+      <div class="sec-title">💼 What's Used Most in Real Projects</div>
+    </div>
+  </div>
+  <div class="stack-row rv">
+    <div class="sc st1">
+      <div class="sc-top"><div class="sc-icon">🟢</div><div class="sc-name c1">Node.js + Express</div></div>
+      <div class="sc-sub">Core runtime + minimal, flexible framework</div>
+    </div>
+    <div class="sc st4">
+      <div class="sc-top"><div class="sc-icon">🍃</div><div class="sc-name c4">MongoDB + Mongoose</div></div>
+      <div class="sc-sub">Document DB + schema ODM</div>
+    </div>
+    <div class="sc st5">
+      <div class="sc-top"><div class="sc-icon">🔑</div><div class="sc-name c5">JWT Auth</div></div>
+      <div class="sc-sub">Stateless authentication standard</div>
+    </div>
+    <div class="sc st3">
+      <div class="sc-top"><div class="sc-icon">📡</div><div class="sc-name c3">REST APIs</div></div>
+      <div class="sc-sub">CRUD + conventional routing</div>
+    </div>
+    <div class="sc st2">
+      <div class="sc-top"><div class="sc-icon">⚡</div><div class="sc-name c2">Redis</div></div>
+      <div class="sc-sub">Caching + session storage</div>
+    </div>
+    <div class="sc st6">
+      <div class="sc-top"><div class="sc-icon">🐳</div><div class="sc-name c6">Docker</div></div>
+      <div class="sc-sub">Containerized deployments</div>
+    </div>
+    <div class="sc st7">
+      <div class="sc-top"><div class="sc-icon">🔷</div><div class="sc-name c7">TypeScript</div></div>
+      <div class="sc-sub">Increasingly mandatory in 2026</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ━━━ INTERVIEW TOPICS ━━━ -->
+<section class="sec">
+  <div class="sec-hd rv" style="position:relative;">
+    <span style="position:absolute;bottom:-1px;left:0;height:3px;width:72px;border-radius:2px;background:var(--s2)"></span>
+    <div class="sec-num" style="color:rgba(0,229,204,.2)">🎯</div>
+    <div class="sec-info">
+      <div class="sec-tag p2">High Priority</div>
+      <div class="sec-title">Must-Cover Interview Topics</div>
+    </div>
+  </div>
+  <div class="tags rv">
+    <span class="tag t2">Event Loop (deep)</span>
+    <span class="tag t1">Async Programming</span>
+    <span class="tag t3">REST API Design</span>
+    <span class="tag t3">Middleware in Express</span>
+    <span class="tag t5">JWT Authentication</span>
+    <span class="tag t8">Error Handling</span>
+    <span class="tag t2">Streams (basic)</span>
+    <span class="tag t1">Closures in Node.js</span>
+    <span class="tag t6">MVC Architecture</span>
+    <span class="tag t4">MongoDB + Mongoose</span>
+    <span class="tag t2">Microtasks vs Macrotasks</span>
+    <span class="tag t9">Unit Testing (Jest)</span>
+    <span class="tag tn">TypeScript</span>
+    <span class="tag t7">Clustering</span>
+    <span class="tag t8">Socket.io</span>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ━━━ PROJECTS ━━━ -->
+<section class="sec">
+  <div class="sec-hd rv" style="position:relative;">
+    <span style="position:absolute;bottom:-1px;left:0;height:3px;width:72px;border-radius:2px;background:var(--s1)"></span>
+    <div class="sec-num" style="color:rgba(57,255,138,.18)">🛠</div>
+    <div class="sec-info">
+      <div class="sec-tag p1">Very Important</div>
+      <div class="sec-title">Project Roadmap — Build Step by Step</div>
+    </div>
+  </div>
+  <div class="proj-track rv">
+    <div class="proj">
+      <span class="proj-badge pb1">🟢 BEGINNER</span>
+      <div class="proj-body">
+        <div class="proj-name">Simple HTTP Server</div>
+        <div class="proj-desc">Build with raw <code style="font-family:'Fira Code',monospace;font-size:11px;color:var(--s1)">http</code> module — no frameworks. Handle routes, methods, and send JSON responses manually.</div>
+      </div>
+    </div>
+    <div class="proj">
+      <span class="proj-badge pb1">🟢 BEGINNER</span>
+      <div class="proj-body">
+        <div class="proj-name">File System Tool</div>
+        <div class="proj-desc">CLI tool to read, write, and watch files using the <code style="font-family:'Fira Code',monospace;font-size:11px;color:var(--s1)">fs</code> module. Learn streams + buffers in practice.</div>
+      </div>
+    </div>
+    <div class="proj">
+      <span class="proj-badge pb2">🟡 INTERMEDIATE</span>
+      <div class="proj-body">
+        <div class="proj-name">REST API — Blog / Todo API</div>
+        <div class="proj-desc">Full CRUD with Express + MongoDB + Mongoose. Implement validation, error handling, and proper status codes.</div>
+      </div>
+    </div>
+    <div class="proj">
+      <span class="proj-badge pb3">🔴 ADVANCED</span>
+      <div class="proj-body">
+        <div class="proj-name">Auth System with JWT</div>
+        <div class="proj-desc">Register, login, protected routes. Access + refresh tokens, bcrypt hashing, rate limiting, and CORS setup.</div>
+      </div>
+    </div>
+    <div class="proj">
+      <span class="proj-badge pb3">🔴 ADVANCED</span>
+      <div class="proj-body">
+        <div class="proj-name">Real-Time Chat App</div>
+        <div class="proj-desc">Socket.io for bidirectional messaging. Rooms, typing indicators, message history with MongoDB.</div>
+      </div>
+    </div>
+    <div class="proj">
+      <span class="proj-badge pb3">🔴 ADVANCED</span>
+      <div class="proj-body">
+        <div class="proj-name">Scalable API with Caching</div>
+        <div class="proj-desc">Redis caching layer, Bull job queues, clustering for multi-core, Docker deployment, TypeScript.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ━━━ MISTAKES ━━━ -->
+<section class="sec">
+  <div class="sec-hd rv" style="position:relative;">
+    <span style="position:absolute;bottom:-1px;left:0;height:3px;width:72px;border-radius:2px;background:var(--s8)"></span>
+    <div class="sec-num" style="color:rgba(255,107,107,.2)">⚠</div>
+    <div class="sec-info">
+      <div class="sec-tag p8">Watch Out</div>
+      <div class="sec-title">Common Mistakes to Avoid</div>
+    </div>
+  </div>
+  <div class="mistakes rv">
+    <div class="mk mb1">
+      <div class="mk-h c8">❌ Skipping Event Loop</div>
+      <div class="mk-b">The event loop is Node.js's superpower. Skipping it means you'll never understand why async code behaves the way it does.</div>
+    </div>
+    <div class="mk mb2">
+      <div class="mk-h c5">❌ Tutorial Hell</div>
+      <div class="mk-b">Only watching tutorials without writing code. After any tutorial, build a variation from scratch immediately.</div>
+    </div>
+    <div class="mk mb3">
+      <div class="mk-h c4">❌ Not Building Projects</div>
+      <div class="mk-b">Projects reveal gaps tutorials hide. Every job interview will ask about real things you built, not videos you watched.</div>
+    </div>
+    <div class="mk mb4">
+      <div class="mk-h c7">❌ Ignoring Error Handling</div>
+      <div class="mk-b">Unhandled promise rejections crash Node. Centralized error handling is a must in every production app.</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ━━━ REFS ━━━ -->
+<section class="sec">
+  <div class="sec-hd rv" style="position:relative;">
+    <span style="position:absolute;bottom:-1px;left:0;height:3px;width:72px;border-radius:2px;background:var(--node)"></span>
+    <div class="sec-num" style="color:rgba(140,200,75,.2)">📚</div>
+    <div class="sec-info">
+      <div class="sec-tag pn">Resources</div>
+      <div class="sec-title">Best References</div>
+    </div>
+  </div>
+  <div class="refs rv">
+    <a href="https://nodejs.org/docs" target="_blank" class="ref" style="border-color:rgba(140,200,75,.3)">
+      <span class="ref-ic">🟢</span>
+      <div><div class="ref-nm">Node.js Docs</div><div class="ref-sb">nodejs.org/docs</div></div>
+    </a>
+    <a href="https://expressjs.com" target="_blank" class="ref" style="border-color:rgba(91,158,255,.3)">
+      <span class="ref-ic">⚡</span>
+      <div><div class="ref-nm">Express.js Docs</div><div class="ref-sb">expressjs.com</div></div>
+    </a>
+    <a href="https://mongoosejs.com" target="_blank" class="ref" style="border-color:rgba(255,154,60,.3)">
+      <span class="ref-ic">🍃</span>
+      <div><div class="ref-nm">Mongoose Docs</div><div class="ref-sb">mongoosejs.com</div></div>
+    </a>
+    <a href="https://freecodecamp.org" target="_blank" class="ref" style="border-color:rgba(57,255,138,.3)">
+      <span class="ref-ic">🔥</span>
+      <div><div class="ref-nm">freeCodeCamp</div><div class="ref-sb">Free courses</div></div>
+    </a>
+    <a href="https://frontendmasters.com" target="_blank" class="ref" style="border-color:rgba(255,95,160,.3)">
+      <span class="ref-ic">🎓</span>
+      <div><div class="ref-nm">Frontend Masters</div><div class="ref-sb">Deep Node.js courses</div></div>
+    </a>
+    <a href="https://github.com" target="_blank" class="ref" style="border-color:rgba(184,124,255,.3)">
+      <span class="ref-ic">🐙</span>
+      <div><div class="ref-nm">GitHub Portfolio</div><div class="ref-sb">Build & show projects</div></div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>Node.js Roadmap 2026 — Beginner to Advanced · 11 Modules · Interview Ready</p>
+  <p style="margin-top:6px; opacity:.5; font-size:10px">Build things. Break them. Understand why. Ship again. 🟢</p>
+</footer>
+
+</div>
+
+<script>
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('bD').classList.toggle('on', t === 'dark');
+  document.getElementById('bL').classList.toggle('on', t === 'light');
+  localStorage.setItem('node-theme', t);
+}
+const saved = localStorage.getItem('node-theme');
+if (saved) setTheme(saved);
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
