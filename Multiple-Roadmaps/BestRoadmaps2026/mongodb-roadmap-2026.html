@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MongoDB Full Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Fira+Code:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+[data-theme="dark"] {
+  --bg:     #06080a;
+  --bg2:    #090c10;
+  --bg3:    #0d1218;
+  --sur:    #101620;
+  --sur2:   #151d2b;
+  --brd:    #1c2a3e;
+  --txt:    #d0dfee;
+  --txt2:   #5a7896;
+  --txt3:   #2a405a;
+
+  --mongo:  #00ed64;  /* MongoDB green */
+  --L1:     #00ed64;  /* green  – fundamentals */
+  --L2:     #fbbf24;  /* amber  – intermediate */
+  --L3:     #fb923c;  /* orange – advanced */
+  --L4:     #60a5fa;  /* blue   – backend */
+  --L5:     #c084fc;  /* violet – real-world */
+  --L6:     #f472b6;  /* pink   – interview */
+  --L7:     #34d399;  /* teal   – projects */
+  --L8:     #94a3b8;  /* slate  – references */
+}
+[data-theme="light"] {
+  --bg:     #f5f8fb;
+  --bg2:    #eaf0f8;
+  --bg3:    #dde8f2;
+  --sur:    #ffffff;
+  --sur2:   #f0f6fc;
+  --brd:    #c2d5e8;
+  --txt:    #0b1e30;
+  --txt2:   #3d607a;
+  --txt3:   #90adc0;
+
+  --mongo:  #00684a;
+  --L1:     #15803d;
+  --L2:     #b45309;
+  --L3:     #c2410c;
+  --L4:     #1d4ed8;
+  --L5:     #7e22ce;
+  --L6:     #be185d;
+  --L7:     #047857;
+  --L8:     #475569;
+}
+
+/* ═══════════════════════════════════════
+   RESET
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background .3s, color .3s;
+}
+
+/* Hexagonal grid texture */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 700px 500px at 5% 15%,  rgba(0,237,100,.05) 0%, transparent 55%),
+    radial-gradient(ellipse 600px 500px at 95% 85%, rgba(96,165,250,.04) 0%, transparent 55%),
+    radial-gradient(ellipse 400px 300px at 50% 50%, rgba(251,191,36,.03) 0%, transparent 55%);
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(var(--brd) 1px, transparent 1px),
+    linear-gradient(90deg, var(--brd) 1px, transparent 1px);
+  background-size: 44px 44px;
+  opacity: .2;
+}
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 22px; position: relative; z-index: 1; }
+
+/* ═══════════════════════════════════════
+   TOGGLE
+═══════════════════════════════════════ */
+.toggle {
+  position: fixed; top: 18px; right: 18px; z-index: 999;
+  display: flex;
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; overflow: hidden;
+  box-shadow: 0 6px 28px rgba(0,0,0,.4);
+}
+.toggle button {
+  border: none; background: none; cursor: pointer;
+  padding: 9px 18px;
+  font-family: 'Fira Code', monospace; font-size: 11px;
+  color: var(--txt2); transition: .2s;
+}
+.toggle button.on { background: var(--sur2); color: var(--txt); }
+
+/* ═══════════════════════════════════════
+   HEADER
+═══════════════════════════════════════ */
+header { padding: 76px 0 48px; }
+
+.h-eyebrow {
+  font-family: 'Fira Code', monospace;
+  font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--mongo); margin-bottom: 18px;
+  display: flex; align-items: center; gap: 10px;
+}
+.h-eyebrow::before {
+  content: ''; display: block; width: 32px; height: 2px;
+  background: var(--mongo); border-radius: 2px;
+}
+
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(3.8rem, 11vw, 8rem);
+  line-height: .88; letter-spacing: -3px;
+}
+.t-mongo { color: var(--mongo); display: block; }
+.t-full  { color: var(--txt); display: block; }
+.t-road  {
+  display: block; color: transparent;
+  -webkit-text-stroke: 1.5px var(--brd);
+  font-style: italic;
+}
+
+.h-pills {
+  margin-top: 26px;
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  font-size: 12px; color: var(--txt2);
+  padding-bottom: 38px; border-bottom: 1px solid var(--brd);
+}
+.hp {
+  font-family: 'Fira Code', monospace; font-size: 10px;
+  padding: 5px 13px; border: 1px solid; border-radius: 4px;
+}
+
+/* ═══════════════════════════════════════
+   LEVEL NAV TABS
+═══════════════════════════════════════ */
+.lvl-nav {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin: 26px 0 54px;
+}
+.lvl-tab {
+  font-family: 'Fira Code', monospace; font-size: 10px; letter-spacing: .5px;
+  padding: 7px 16px; border: 1px solid var(--brd);
+  border-radius: 5px; background: var(--sur);
+  color: var(--txt2); cursor: pointer; text-decoration: none;
+  transition: .18s;
+}
+.lvl-tab:hover { transform: translateY(-2px); }
+
+/* ═══════════════════════════════════════
+   SECTION
+═══════════════════════════════════════ */
+.sec { margin-bottom: 82px; scroll-margin-top: 20px; }
+
+.sec-head {
+  display: flex; align-items: flex-end; gap: 18px;
+  margin-bottom: 26px; padding-bottom: 18px;
+  border-bottom: 1px solid var(--brd);
+  position: relative;
+}
+.sec-head::after {
+  content: ''; position: absolute;
+  bottom: -1px; left: 0; width: 64px; height: 3px; border-radius: 2px;
+}
+
+.sec-n {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3.5rem; line-height: 1; letter-spacing: -2px; opacity: .15;
+}
+.sec-meta {}
+.sec-badge {
+  font-family: 'Fira Code', monospace; font-size: 9px;
+  letter-spacing: 3px; text-transform: uppercase;
+  padding: 3px 10px; border: 1px solid; border-radius: 3px;
+  margin-bottom: 6px; display: inline-block;
+}
+.sec-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1; letter-spacing: -.5px;
+}
+.sec-aside {
+  margin-left: auto; font-family: 'Fira Code', monospace;
+  font-size: 10px; color: var(--txt2);
+  background: var(--sur); border: 1px solid var(--brd);
+  padding: 5px 12px; border-radius: 4px; white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════
+   CARD GRID
+═══════════════════════════════════════ */
+.grid  { display: grid; grid-template-columns: repeat(auto-fill, minmax(285px,1fr)); gap: 14px; }
+.grid2 { grid-template-columns: repeat(auto-fill, minmax(355px,1fr)); }
+.grid3 { grid-template-columns: repeat(3,1fr); }
+@media(max-width:700px){ .grid3,.grid2 { grid-template-columns:1fr; } }
+
+.card {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 12px; padding: 22px 24px;
+  position: relative; overflow: hidden;
+  transition: transform .22s, box-shadow .22s;
+}
+.card:hover { transform: translateY(-5px); }
+.card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+}
+
+.cl {
+  font-family: 'Fira Code', monospace; font-size: 9px;
+  letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 10px; display: block;
+}
+.ct {
+  font-family: 'DM Serif Display', serif;
+  font-size: 16px; font-weight: 400; letter-spacing: -.2px;
+  margin-bottom: 14px; line-height: 1.1;
+}
+.cul { list-style: none; }
+.cul li {
+  font-size: 12.5px; color: var(--txt2);
+  padding: 5px 0; border-bottom: 1px solid var(--brd);
+  display: flex; gap: 8px; align-items: baseline; line-height: 1.55;
+}
+.cul li:last-child { border-bottom: none; }
+.ar { font-size: 9px; color: var(--txt3); flex-shrink: 0; margin-top: 3px; }
+.hl { font-family: 'Fira Code', monospace; font-size: 11.5px; }
+
+/* callout */
+.note {
+  margin-top: 12px; background: var(--bg3);
+  border-left: 3px solid; border-radius: 0 6px 6px 0;
+  padding: 10px 14px; font-size: 12px; color: var(--txt2); line-height: 1.65;
+}
+.note strong { display: block; color: var(--txt); font-size: 12.5px; margin-bottom: 3px; }
+
+/* ═══════════════════════════════════════
+   CODE BLOCK
+═══════════════════════════════════════ */
+.code-box {
+  background: var(--bg2); border: 1px solid var(--brd);
+  border-radius: 12px; overflow: hidden; margin-top: 14px;
+}
+.code-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 18px; border-bottom: 1px solid var(--brd);
+  font-family: 'Fira Code', monospace; font-size: 10px; color: var(--txt2);
+}
+.dots { display: flex; gap: 6px; }
+.dot { width: 11px; height: 11px; border-radius: 50%; }
+.dr{background:#ff5f57} .dy{background:#febc2e} .dg{background:#28c840}
+.cbdg { display: flex; gap: 6px; }
+.cb {
+  font-family: 'Fira Code', monospace; font-size: 9px;
+  padding: 2px 9px; border: 1px solid; border-radius: 3px;
+}
+pre {
+  padding: 20px 22px; overflow-x: auto;
+  font-family: 'Fira Code', monospace; font-size: 12px; line-height: 1.9;
+  color: var(--txt2);
+}
+.kw  { color: #ff79c6; } .fn  { color: #50fa7b; }
+.str { color: #f1fa8c; } .cm  { color: #44475a; }
+.num { color: #bd93f9; } .op  { color: #ffb86c; }
+.field { color: #8be9fd; } .val { color: #f1fa8c; }
+
+/* ═══════════════════════════════════════
+   AGGREGATION PIPELINE VISUAL
+═══════════════════════════════════════ */
+.pipeline {
+  display: flex; align-items: stretch; gap: 0;
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 12px; overflow: hidden; margin-top: 14px;
+  overflow-x: auto;
+}
+.pipe-stage {
+  flex: 1; min-width: 120px; padding: 16px 14px;
+  border-right: 1px solid var(--brd); position: relative;
+  transition: background .2s;
+}
+.pipe-stage:last-child { border-right: none; }
+.pipe-stage:hover { background: var(--sur2); }
+.ps-op {
+  font-family: 'Fira Code', monospace; font-size: 10px;
+  margin-bottom: 6px; font-weight: 600;
+}
+.ps-desc { font-size: 11px; color: var(--txt2); line-height: 1.4; }
+.ps-bar { height: 3px; border-radius: 2px; margin-top: 10px; }
+
+/* ═══════════════════════════════════════
+   TAGS
+═══════════════════════════════════════ */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: 'Fira Code', monospace; font-size: 10px;
+  padding: 6px 14px; border: 1px solid; border-radius: 4px;
+  cursor: default; transition: transform .15s;
+}
+.tag:hover { transform: scale(1.06); }
+
+/* ═══════════════════════════════════════
+   INTERVIEW Qs
+═══════════════════════════════════════ */
+.iq-list { display: flex; flex-direction: column; gap: 10px; }
+.iq {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 10px; padding: 16px 20px;
+  display: flex; gap: 14px; align-items: flex-start;
+  transition: transform .2s;
+}
+.iq:hover { transform: translateX(6px); }
+.iq-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem; line-height: 1; opacity: .2;
+  flex-shrink: 0; min-width: 36px;
+}
+.iq-q { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.iq-hint { font-size: 11.5px; color: var(--txt2); line-height: 1.5; }
+
+/* ═══════════════════════════════════════
+   PROJECTS
+═══════════════════════════════════════ */
+.proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 12px; }
+.proj {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 10px; padding: 18px 20px;
+  position: relative; overflow: hidden; transition: transform .2s;
+}
+.proj:hover { transform: translateY(-4px); }
+.proj::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.proj-lvl {
+  font-family: 'Fira Code', monospace; font-size: 9px;
+  letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px;
+}
+.proj-name {
+  font-family: 'DM Serif Display', serif; font-size: 15px;
+  margin-bottom: 6px; line-height: 1.2;
+}
+.proj-desc { font-size: 11.5px; color: var(--txt2); line-height: 1.5; }
+
+/* ═══════════════════════════════════════
+   FINAL PATH
+═══════════════════════════════════════ */
+.path-track {
+  display: flex; flex-direction: column; gap: 0;
+  border: 1px solid var(--brd); border-radius: 12px;
+  overflow: hidden;
+}
+.path-step {
+  display: flex; align-items: center; gap: 18px;
+  padding: 16px 22px; border-bottom: 1px solid var(--brd);
+  transition: background .2s;
+}
+.path-step:last-child { border-bottom: none; }
+.path-step:hover { background: var(--sur2); }
+.path-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem; line-height: 1; min-width: 40px; opacity: .25;
+}
+.path-name { font-size: 14px; font-weight: 600; }
+.path-sub { font-size: 11.5px; color: var(--txt2); margin-top: 2px; }
+.path-dot {
+  margin-left: auto; width: 10px; height: 10px;
+  border-radius: 50%; flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════
+   REFS
+═══════════════════════════════════════ */
+.refs { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 10px; }
+.ref {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 12px 14px;
+  text-decoration: none; color: var(--txt);
+  font-size: 12px; transition: transform .18s, border-color .18s;
+}
+.ref:hover { transform: translateY(-2px); }
+.ri { font-size: 18px; }
+.rn { font-weight: 600; }
+.rs { font-size: 10px; color: var(--txt2); margin-top: 2px; }
+
+/* ═══════════════════════════════════════
+   SCHEMA COMPARISON
+═══════════════════════════════════════ */
+.compare {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+@media(max-width:600px){ .compare { grid-template-columns: 1fr; } }
+.cmp-card {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 10px; overflow: hidden;
+}
+.cmp-head {
+  padding: 12px 18px; border-bottom: 1px solid var(--brd);
+  font-family: 'Fira Code', monospace; font-size: 11px; font-weight: 600;
+}
+.cmp-body { padding: 14px 18px; }
+.cmp-body li {
+  font-size: 12px; color: var(--txt2); padding: 4px 0;
+  border-bottom: 1px solid var(--brd); list-style: none;
+  display: flex; gap: 8px;
+}
+.cmp-body li:last-child { border-bottom: none; }
+
+/* ═══════════════════════════════════════
+   DIVIDER
+═══════════════════════════════════════ */
+.div { height: 1px; background: linear-gradient(90deg,transparent,var(--brd),transparent); margin: 66px 0; }
+
+footer {
+  text-align: center; padding: 28px 0 50px;
+  font-family: 'Fira Code', monospace; font-size: 11px; color: var(--txt2);
+  border-top: 1px solid var(--brd);
+}
+
+/* ═══════════════════════════════════════
+   COLOR SYSTEM
+═══════════════════════════════════════ */
+/* card top bars */
+.a1::before{background:var(--L1)} .a2::before{background:var(--L2)} .a3::before{background:var(--L3)}
+.a4::before{background:var(--L4)} .a5::before{background:var(--L5)} .a6::before{background:var(--L6)}
+.a7::before{background:var(--L7)} .a8::before{background:var(--L8)} .am::before{background:var(--mongo)}
+
+/* glows */
+.a1:hover{box-shadow:0 8px 40px rgba(0,237,100,.1)}  .a2:hover{box-shadow:0 8px 40px rgba(251,191,36,.1)}
+.a3:hover{box-shadow:0 8px 40px rgba(251,146,60,.1)}  .a4:hover{box-shadow:0 8px 40px rgba(96,165,250,.1)}
+.a5:hover{box-shadow:0 8px 40px rgba(192,132,252,.1)} .a6:hover{box-shadow:0 8px 40px rgba(244,114,182,.1)}
+.a7:hover{box-shadow:0 8px 40px rgba(52,211,153,.1)}  .am:hover{box-shadow:0 8px 40px rgba(0,237,100,.1)}
+
+/* sec head accent */
+.h1::after{background:var(--L1)} .h2::after{background:var(--L2)} .h3::after{background:var(--L3)}
+.h4::after{background:var(--L4)} .h5::after{background:var(--L5)} .h6::after{background:var(--L6)}
+.h7::after{background:var(--L7)} .h8::after{background:var(--L8)} .hm::after{background:var(--mongo)}
+
+/* text */
+.c1{color:var(--L1)} .c2{color:var(--L2)} .c3{color:var(--L3)} .c4{color:var(--L4)}
+.c5{color:var(--L5)} .c6{color:var(--L6)} .c7{color:var(--L7)} .c8{color:var(--L8)}
+.cm{color:var(--mongo)}
+
+/* sec num tints */
+.n1{color:var(--L1)} .n2{color:var(--L2)} .n3{color:var(--L3)} .n4{color:var(--L4)}
+.n5{color:var(--L5)} .n6{color:var(--L6)} .n7{color:var(--L7)} .n8{color:var(--L8)}
+
+/* badges */
+.b1{color:var(--L1);border-color:rgba(0,237,100,.35);background:rgba(0,237,100,.06)}
+.b2{color:var(--L2);border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.06)}
+.b3{color:var(--L3);border-color:rgba(251,146,60,.35);background:rgba(251,146,60,.06)}
+.b4{color:var(--L4);border-color:rgba(96,165,250,.35);background:rgba(96,165,250,.06)}
+.b5{color:var(--L5);border-color:rgba(192,132,252,.35);background:rgba(192,132,252,.06)}
+.b6{color:var(--L6);border-color:rgba(244,114,182,.35);background:rgba(244,114,182,.06)}
+.b7{color:var(--L7);border-color:rgba(52,211,153,.35);background:rgba(52,211,153,.06)}
+.b8{color:var(--L8);border-color:rgba(148,163,184,.35);background:rgba(148,163,184,.06)}
+.bm{color:var(--mongo);border-color:rgba(0,237,100,.35);background:rgba(0,237,100,.06)}
+
+/* note left border */
+.n-l1{border-left-color:var(--L1)} .n-l2{border-left-color:var(--L2)} .n-l3{border-left-color:var(--L3)}
+.n-l4{border-left-color:var(--L4)} .n-l5{border-left-color:var(--L5)} .n-l6{border-left-color:var(--L6)}
+
+/* tags */
+.t1{color:var(--L1);border-color:rgba(0,237,100,.3);background:rgba(0,237,100,.05)}
+.t2{color:var(--L2);border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.05)}
+.t3{color:var(--L3);border-color:rgba(251,146,60,.3);background:rgba(251,146,60,.05)}
+.t4{color:var(--L4);border-color:rgba(96,165,250,.3);background:rgba(96,165,250,.05)}
+.t5{color:var(--L5);border-color:rgba(192,132,252,.3);background:rgba(192,132,252,.05)}
+.t6{color:var(--L6);border-color:rgba(244,114,182,.3);background:rgba(244,114,182,.05)}
+.t7{color:var(--L7);border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.05)}
+.tm{color:var(--mongo);border-color:rgba(0,237,100,.3);background:rgba(0,237,100,.05)}
+
+/* proj level */
+.p1::before{background:var(--L1)} .p1 .proj-lvl{color:var(--L1)}
+.p2::before{background:var(--L2)} .p2 .proj-lvl{color:var(--L2)}
+.p3::before{background:var(--L3)} .p3 .proj-lvl{color:var(--L3)}
+
+/* pipeline stage bars */
+.ps1{background:var(--L1)} .ps2{background:var(--L2)} .ps3{background:var(--L3)}
+.ps4{background:var(--L4)} .ps5{background:var(--L5)} .ps6{background:var(--L6)}
+.ps7{background:var(--L7)}
+
+/* path dots */
+.pd1{background:var(--L1)} .pd2{background:var(--L2)} .pd3{background:var(--L3)}
+.pd4{background:var(--L4)} .pd5{background:var(--L5)} .pd6{background:var(--L7)}
+
+/* lvl tab hover */
+.lt1:hover{border-color:var(--L1);color:var(--L1)} .lt2:hover{border-color:var(--L2);color:var(--L2)}
+.lt3:hover{border-color:var(--L3);color:var(--L3)} .lt4:hover{border-color:var(--L4);color:var(--L4)}
+.lt5:hover{border-color:var(--L5);color:var(--L5)} .lt6:hover{border-color:var(--L6);color:var(--L6)}
+.lt7:hover{border-color:var(--L7);color:var(--L7)} .lt8:hover{border-color:var(--L8);color:var(--L8)}
+
+/* cmp head colors */
+.ch-embed{color:var(--L1);border-bottom-color:var(--brd)}
+.ch-ref{color:var(--L4);border-bottom-color:var(--brd)}
+
+/* ═══════════════════════════════════════
+   REVEAL
+═══════════════════════════════════════ */
+.rv { opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s ease; }
+.rv.vis { opacity:1; transform:none; }
+
+@media(max-width:640px){
+  h1 { letter-spacing:-2px; }
+  .sec-aside { display:none; }
+  .toggle { top:10px; right:10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="toggle">
+  <button id="bD" class="on" onclick="setTheme('dark')">◉ dark</button>
+  <button id="bL" onclick="setTheme('light')">◎ light</button>
+</div>
+
+<div class="wrap">
+
+<!-- ══════ HEADER ══════ -->
+<header>
+  <div class="h-eyebrow">MongoDB Full Roadmap · 8 Modules · Interview Ready · 2026</div>
+  <h1>
+    <span class="t-mongo">Mongo</span>
+    <span class="t-full">DB Full</span>
+    <span class="t-road">Roadmap</span>
+  </h1>
+  <div class="h-pills">
+    <span>NoSQL · Document DB · Aggregation · Scaling</span>
+    <span class="hp b1">🟢 CRUD Basics</span>
+    <span class="hp b2">🔥 Aggregation ⭐</span>
+    <span class="hp b3">⚠️ Skip = Big Mistake</span>
+    <span class="hp b4">Node.js + Mongoose</span>
+  </div>
+</header>
+
+<!-- LEVEL NAV -->
+<div class="lvl-nav rv">
+  <a class="lvl-tab lt1" href="#s1">🟢 Fundamentals</a>
+  <a class="lvl-tab lt2" href="#s2">🟡 Intermediate</a>
+  <a class="lvl-tab lt3" href="#s3">🟠 Advanced</a>
+  <a class="lvl-tab lt4" href="#s4">🔵 Backend Integration</a>
+  <a class="lvl-tab lt5" href="#s5">🟣 Real-World Features</a>
+  <a class="lvl-tab lt6" href="#s6">🎯 Interview Focus</a>
+  <a class="lvl-tab lt7" href="#s7">🛠️ Projects</a>
+  <a class="lvl-tab lt8" href="#s8">📚 References</a>
+</div>
+
+<!-- ══════ 1. FUNDAMENTALS ══════ -->
+<section class="sec" id="s1">
+  <div class="sec-head h1 rv">
+    <div class="sec-n n1">01</div>
+    <div class="sec-meta">
+      <div class="sec-badge b1">🟢 Must Start Here · Non-Negotiable</div>
+      <div class="sec-title">Fundamentals</div>
+    </div>
+    <span class="sec-aside">// Very common in interviews</span>
+  </div>
+
+  <div class="grid rv">
+    <div class="card a1">
+      <span class="cl c1">Core Concepts</span>
+      <div class="ct">NoSQL vs SQL</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>NoSQL = Not Only SQL — flexible data</li>
+        <li><span class="ar">▸</span>Document-based model — JSON/BSON format</li>
+        <li><span class="ar">▸</span>Collections ≈ Tables · Documents ≈ Rows</li>
+        <li><span class="ar">▸</span>Dynamic schema — no rigid column definitions</li>
+        <li><span class="ar">▸</span>Horizontal scaling by design</li>
+      </ul>
+      <div class="note n-l1">
+        <strong>SQL vs MongoDB mental model</strong>
+        Table → Collection · Row → Document · Column → Field · JOIN → $lookup
+      </div>
+    </div>
+
+    <div class="card a1">
+      <span class="cl c1">Basic Operations ⭐</span>
+      <div class="ct">CRUD — Create, Read, Update, Delete</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span><span class="hl">insertOne()</span> — single document</li>
+        <li><span class="ar">▸</span><span class="hl">insertMany()</span> — bulk insert</li>
+        <li><span class="ar">▸</span><span class="hl">find()</span> / <span class="hl">findOne()</span> — read</li>
+        <li><span class="ar">▸</span><span class="hl">updateOne()</span> / <span class="hl">updateMany()</span></li>
+        <li><span class="ar">▸</span><span class="hl">deleteOne()</span> / <span class="hl">deleteMany()</span></li>
+      </ul>
+    </div>
+
+    <div class="card a1">
+      <span class="cl c1">Query Operators</span>
+      <div class="ct">Filters & Projections</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Comparison: <span class="hl">$eq</span>, <span class="hl">$gt</span>, <span class="hl">$lt</span>, <span class="hl">$gte</span>, <span class="hl">$ne</span></li>
+        <li><span class="ar">▸</span>Logical: <span class="hl">$and</span>, <span class="hl">$or</span>, <span class="hl">$not</span>, <span class="hl">$nor</span></li>
+        <li><span class="ar">▸</span>Array: <span class="hl">$in</span>, <span class="hl">$nin</span>, <span class="hl">$all</span></li>
+        <li><span class="ar">▸</span>Projection — select specific fields</li>
+        <li><span class="ar">▸</span>Sorting, limit, skip for pagination</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CRUD Code Example -->
+  <div class="code-box rv">
+    <div class="code-top">
+      <div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
+      <span>crud-basics.js — MongoDB CRUD operations</span>
+      <div class="cbdg"><span class="cb b1">MongoDB</span><span class="cb b4">Node.js</span></div>
+    </div>
+<pre><span class="cm">// INSERT</span>
+<span class="kw">await</span> db.collection(<span class="str">'students'</span>).<span class="fn">insertOne</span>({
+  <span class="field">name</span>: <span class="val">"Aarav"</span>, <span class="field">grade</span>: <span class="num">10</span>, <span class="field">score</span>: <span class="num">92</span>
+});
+
+<span class="cm">// READ with query operators</span>
+<span class="kw">const</span> topStudents = <span class="kw">await</span> db.collection(<span class="str">'students'</span>)
+  .<span class="fn">find</span>({ <span class="field">score</span>: { <span class="op">$gte</span>: <span class="num">85</span> } })
+  .<span class="fn">sort</span>({ <span class="field">score</span>: <span class="op">-1</span> })
+  .<span class="fn">limit</span>(<span class="num">5</span>)
+  .<span class="fn">toArray</span>();
+
+<span class="cm">// UPDATE — only the matched fields</span>
+<span class="kw">await</span> db.collection(<span class="str">'students'</span>).<span class="fn">updateOne</span>(
+  { <span class="field">name</span>: <span class="val">"Aarav"</span> },
+  { <span class="op">$set</span>: { <span class="field">score</span>: <span class="num">95</span> } }
+);
+
+<span class="cm">// DELETE</span>
+<span class="kw">await</span> db.collection(<span class="str">'students'</span>).<span class="fn">deleteOne</span>({ <span class="field">score</span>: { <span class="op">$lt</span>: <span class="num">40</span> } });</pre>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ 2. INTERMEDIATE ══════ -->
+<section class="sec" id="s2">
+  <div class="sec-head h2 rv">
+    <div class="sec-n n2">02</div>
+    <div class="sec-meta">
+      <div class="sec-badge b2">🟡 Highly Asked in Interviews</div>
+      <div class="sec-title">Intermediate</div>
+    </div>
+    <span class="sec-aside">// Indexing + Schema + Aggregation</span>
+  </div>
+
+  <div class="grid rv">
+    <div class="card a2">
+      <span class="cl c2">Performance 🔥</span>
+      <div class="ct">Indexing</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Single field index — fastest lookup</li>
+        <li><span class="ar">▸</span>Compound index — multiple fields together</li>
+        <li><span class="ar">▸</span>Unique index — enforce uniqueness</li>
+        <li><span class="ar">▸</span>Text index — full-text search</li>
+        <li><span class="ar">▸</span>TTL index — auto-expire documents</li>
+      </ul>
+      <div class="note n-l2">
+        <strong>Interview: "How does MongoDB optimize queries?"</strong>
+        Indexes allow O(log n) lookup instead of full collection scan O(n).
+      </div>
+    </div>
+
+    <div class="card a2">
+      <span class="cl c2">Real-World Critical 🔥</span>
+      <div class="ct">Schema Design</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Embedded — store related data together</li>
+        <li><span class="ar">▸</span>Referenced — store IDs, join via $lookup</li>
+        <li><span class="ar">▸</span>One-to-One: always embed</li>
+        <li><span class="ar">▸</span>One-to-Many: embed if small, reference if large</li>
+        <li><span class="ar">▸</span>Many-to-Many: reference with junction or arrays</li>
+      </ul>
+      <div class="note n-l2">
+        <strong>Interview: "Embed vs Reference?"</strong>
+        Embed when data is always read together. Reference when data is large, shared, or updated often.
+      </div>
+    </div>
+
+    <div class="card a2">
+      <span class="cl c2">Data Patterns</span>
+      <div class="ct">Schema Design Patterns</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Bucket — group time-series data in arrays</li>
+        <li><span class="ar">▸</span>Subset — store only frequently accessed fields</li>
+        <li><span class="ar">▸</span>Outlier — handle edge-case large documents</li>
+        <li><span class="ar">▸</span>Computed — pre-calculate expensive values</li>
+        <li><span class="ar">▸</span>Polymorphic — different shapes, same collection</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Embed vs Reference compare -->
+  <div class="compare rv" style="margin-top:14px">
+    <div class="cmp-card">
+      <div class="cmp-head ch-embed">✅ Embed — Use When</div>
+      <ul class="cmp-body">
+        <li><span class="ar">▸</span>Data always accessed together</li>
+        <li><span class="ar">▸</span>Small, bounded sub-documents</li>
+        <li><span class="ar">▸</span>Data doesn't change frequently</li>
+        <li><span class="ar">▸</span>No need to query sub-document alone</li>
+        <li><span class="ar">▸</span>Example: User + address</li>
+      </ul>
+    </div>
+    <div class="cmp-card">
+      <div class="cmp-head ch-ref">🔗 Reference — Use When</div>
+      <ul class="cmp-body">
+        <li><span class="ar">▸</span>Data is shared across documents</li>
+        <li><span class="ar">▸</span>Sub-document grows unbounded</li>
+        <li><span class="ar">▸</span>Need to query child docs independently</li>
+        <li><span class="ar">▸</span>Frequent updates to related data</li>
+        <li><span class="ar">▸</span>Example: Post + comments (many)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Aggregation -->
+  <div class="sec-head hm rv" style="margin-top:48px">
+    <div class="sec-n" style="color:rgba(0,237,100,.15)">agg</div>
+    <div class="sec-meta">
+      <div class="sec-badge bm">🔥 Must Master — VERY Important</div>
+      <div class="sec-title">Aggregation Framework</div>
+    </div>
+  </div>
+
+  <!-- Pipeline visual -->
+  <div class="pipeline rv">
+    <div class="pipe-stage">
+      <div class="ps-op c1">$match</div>
+      <div class="ps-desc">Filter documents like a WHERE clause</div>
+      <div class="ps-bar ps1"></div>
+    </div>
+    <div class="pipe-stage">
+      <div class="ps-op c2">$group</div>
+      <div class="ps-desc">Group by field, compute sums/counts</div>
+      <div class="ps-bar ps2"></div>
+    </div>
+    <div class="pipe-stage">
+      <div class="ps-op c3">$project</div>
+      <div class="ps-desc">Reshape output, include/exclude fields</div>
+      <div class="ps-bar ps3"></div>
+    </div>
+    <div class="pipe-stage">
+      <div class="ps-op c4">$lookup</div>
+      <div class="ps-desc">Join documents from another collection</div>
+      <div class="ps-bar ps4"></div>
+    </div>
+    <div class="pipe-stage">
+      <div class="ps-op c5">$unwind</div>
+      <div class="ps-desc">Deconstruct array into separate docs</div>
+      <div class="ps-bar ps5"></div>
+    </div>
+    <div class="pipe-stage">
+      <div class="ps-op c6">$sort</div>
+      <div class="ps-desc">Sort by any field ascending/descending</div>
+      <div class="ps-bar ps6"></div>
+    </div>
+    <div class="pipe-stage">
+      <div class="ps-op c7">$limit</div>
+      <div class="ps-desc">Limit output size</div>
+      <div class="ps-bar ps7"></div>
+    </div>
+  </div>
+
+  <!-- Aggregation code -->
+  <div class="code-box rv">
+    <div class="code-top">
+      <div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
+      <span>aggregation.js — Total sales per user</span>
+      <div class="cbdg"><span class="cb b2">Aggregation</span><span class="cb bm">MongoDB</span></div>
+    </div>
+<pre><span class="cm">// Find top 3 users by total sales</span>
+<span class="kw">const</span> result = <span class="kw">await</span> db.collection(<span class="str">'orders'</span>).<span class="fn">aggregate</span>([
+  { <span class="op">$match</span>: { <span class="field">status</span>: <span class="val">"completed"</span> } },    <span class="cm">// filter</span>
+  { <span class="op">$group</span>: {
+      <span class="field">_id</span>: <span class="val">"$userId"</span>,
+      <span class="field">totalSales</span>: { <span class="op">$sum</span>: <span class="val">"$amount"</span> },     <span class="cm">// aggregate</span>
+      <span class="field">orderCount</span>: { <span class="op">$sum</span>: <span class="num">1</span> }
+  }},
+  { <span class="op">$sort</span>: { <span class="field">totalSales</span>: <span class="op">-1</span> } },          <span class="cm">// sort desc</span>
+  { <span class="op">$limit</span>: <span class="num">3</span> },                           <span class="cm">// top 3</span>
+  { <span class="op">$lookup</span>: {                               <span class="cm">// join users</span>
+      <span class="field">from</span>: <span class="val">"users"</span>,
+      <span class="field">localField</span>: <span class="val">"_id"</span>,
+      <span class="field">foreignField</span>: <span class="val">"_id"</span>,
+      <span class="field">as</span>: <span class="val">"userInfo"</span>
+  }}
+]).<span class="fn">toArray</span>();</pre>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ 3. ADVANCED ══════ -->
+<section class="sec" id="s3">
+  <div class="sec-head h3 rv">
+    <div class="sec-n n3">03</div>
+    <div class="sec-meta">
+      <div class="sec-badge b3">🟠 Stand Out Level</div>
+      <div class="sec-title">Advanced Topics</div>
+    </div>
+    <span class="sec-aside">// Replicas · Sharding · ACID</span>
+  </div>
+
+  <div class="grid rv">
+    <div class="card a3">
+      <span class="cl c3">Query Analysis</span>
+      <div class="ct">Performance Optimization</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span><span class="hl">explain()</span> — see query execution plan</li>
+        <li><span class="ar">▸</span>Check: COLLSCAN (bad) vs IXSCAN (good)</li>
+        <li><span class="ar">▸</span>Index selectivity — high = more efficient</li>
+        <li><span class="ar">▸</span>Covered queries — answered entirely by index</li>
+        <li><span class="ar">▸</span>Avoid: $where, regex without prefix</li>
+      </ul>
+    </div>
+
+    <div class="card a3">
+      <span class="cl c3">ACID Compliance</span>
+      <div class="ct">Transactions</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Multi-document transactions (v4.0+)</li>
+        <li><span class="ar">▸</span>session.startTransaction()</li>
+        <li><span class="ar">▸</span>commitTransaction / abortTransaction</li>
+        <li><span class="ar">▸</span>Use for: financial ops, cart + inventory</li>
+        <li><span class="ar">▸</span>Performance cost — use sparingly</li>
+      </ul>
+    </div>
+
+    <div class="card a3">
+      <span class="cl c3">High Availability</span>
+      <div class="ct">Replication</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Replica set — group of MongoDB instances</li>
+        <li><span class="ar">▸</span>Primary — handles all writes</li>
+        <li><span class="ar">▸</span>Secondary — replicates from primary</li>
+        <li><span class="ar">▸</span>Automatic failover — secondary becomes primary</li>
+        <li><span class="ar">▸</span>Reads from secondaries — reduce primary load</li>
+      </ul>
+    </div>
+
+    <div class="card a3">
+      <span class="cl c3">Horizontal Scaling</span>
+      <div class="ct">Sharding</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Split data across multiple servers (shards)</li>
+        <li><span class="ar">▸</span>Shard key — determines data distribution</li>
+        <li><span class="ar">▸</span>Chunk distribution — data in range chunks</li>
+        <li><span class="ar">▸</span>mongos — query router for sharded cluster</li>
+        <li><span class="ar">▸</span>Good shard key = even distribution</li>
+      </ul>
+    </div>
+
+    <div class="card a3">
+      <span class="cl c3">Access Control</span>
+      <div class="ct">Security</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Authentication — SCRAM, x.509</li>
+        <li><span class="ar">▸</span>Authorization — role-based access control</li>
+        <li><span class="ar">▸</span>Built-in roles: readWrite, dbAdmin, root</li>
+        <li><span class="ar">▸</span>Encryption at rest + in transit (TLS)</li>
+        <li><span class="ar">▸</span>Field-level encryption (sensitive data)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ 4. BACKEND INTEGRATION ══════ -->
+<section class="sec" id="s4">
+  <div class="sec-head h4 rv">
+    <div class="sec-n n4">04</div>
+    <div class="sec-meta">
+      <div class="sec-badge b4">🔵 Real Development</div>
+      <div class="sec-title">Backend Integration</div>
+    </div>
+    <span class="sec-aside">// Node.js + Mongoose</span>
+  </div>
+
+  <div class="grid rv">
+    <div class="card a4">
+      <span class="cl c4">Raw Driver</span>
+      <div class="ct">MongoDB Node.js Driver</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span><span class="hl">MongoClient.connect()</span> — establish connection</li>
+        <li><span class="ar">▸</span>Connection pooling — reuse connections</li>
+        <li><span class="ar">▸</span>CRUD with native driver methods</li>
+        <li><span class="ar">▸</span>Aggregation pipeline via JS arrays</li>
+        <li><span class="ar">▸</span>GridFS — store large files in MongoDB</li>
+      </ul>
+    </div>
+
+    <div class="card a4">
+      <span class="cl c4">ODM Layer ⭐</span>
+      <div class="ct">Mongoose</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Schema — define structure + types</li>
+        <li><span class="ar">▸</span>Model — interface for collection</li>
+        <li><span class="ar">▸</span>Validation — required, min, max, enum</li>
+        <li><span class="ar">▸</span>Middleware (hooks) — pre/post save, find</li>
+        <li><span class="ar">▸</span>Virtuals — computed fields not in DB</li>
+        <li><span class="ar">▸</span>Populate — reference-based "join"</li>
+      </ul>
+    </div>
+
+    <div class="card a4">
+      <span class="cl c4">Practice</span>
+      <div class="ct">REST API Pattern</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Define schema → Create model</li>
+        <li><span class="ar">▸</span>Express routes → Controller functions</li>
+        <li><span class="ar">▸</span>Mongoose CRUD in controllers</li>
+        <li><span class="ar">▸</span>Error handling with try/catch</li>
+        <li><span class="ar">▸</span>Pagination with skip + limit</li>
+      </ul>
+      <div class="note n-l4">
+        <strong>Build this:</strong>Blog API — users, posts, comments with references and populate.
+      </div>
+    </div>
+  </div>
+
+  <!-- Mongoose code -->
+  <div class="code-box rv">
+    <div class="code-top">
+      <div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
+      <span>user.model.js — Mongoose schema example</span>
+      <div class="cbdg"><span class="cb b4">Mongoose</span><span class="cb b1">Schema</span></div>
+    </div>
+<pre><span class="kw">const</span> mongoose = <span class="fn">require</span>(<span class="str">'mongoose'</span>);
+
+<span class="kw">const</span> userSchema = <span class="kw">new</span> mongoose.<span class="fn">Schema</span>({
+  <span class="field">name</span>:  { type: String, required: <span class="kw">true</span>, trim: <span class="kw">true</span> },
+  <span class="field">email</span>: { type: String, required: <span class="kw">true</span>, unique: <span class="kw">true</span>, lowercase: <span class="kw">true</span> },
+  <span class="field">age</span>:   { type: Number, min: <span class="num">0</span>, max: <span class="num">120</span> },
+  <span class="field">posts</span>: [{ type: mongoose.Schema.Types.ObjectId, <span class="field">ref</span>: <span class="str">'Post'</span> }]
+}, { timestamps: <span class="kw">true</span> });
+
+<span class="cm">// Pre-save middleware — hash password</span>
+userSchema.<span class="fn">pre</span>(<span class="str">'save'</span>, <span class="kw">async function</span>() {
+  <span class="kw">if</span> (<span class="kw">this</span>.isModified(<span class="str">'password'</span>)) {
+    <span class="kw">this</span>.password = <span class="kw">await</span> bcrypt.<span class="fn">hash</span>(<span class="kw">this</span>.password, <span class="num">12</span>);
+  }
+});
+
+<span class="cm">// Virtual — fullName computed field</span>
+userSchema.<span class="fn">virtual</span>(<span class="str">'postCount'</span>).<span class="fn">get</span>(<span class="kw">function</span>() {
+  <span class="kw">return this</span>.posts.length;
+});
+
+<span class="kw">module</span>.exports = mongoose.<span class="fn">model</span>(<span class="str">'User'</span>, userSchema);</pre>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ 5. REAL-WORLD FEATURES ══════ -->
+<section class="sec" id="s5">
+  <div class="sec-head h5 rv">
+    <div class="sec-n n5">05</div>
+    <div class="sec-meta">
+      <div class="sec-badge b5">🟣 Used in Almost Every Project</div>
+      <div class="sec-title">Real-World Features</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a5">
+      <span class="cl c5">Must Know</span>
+      <div class="ct">Pagination</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span><span class="hl">skip()</span> + <span class="hl">limit()</span> — offset pagination</li>
+        <li><span class="ar">▸</span>Cursor-based — faster for large datasets</li>
+        <li><span class="ar">▸</span>Page = (page - 1) × limit</li>
+        <li><span class="ar">▸</span>Count total with <span class="hl">countDocuments()</span></li>
+        <li><span class="ar">▸</span>Return metadata: total, page, hasNext</li>
+      </ul>
+    </div>
+
+    <div class="card a5">
+      <span class="cl c5">Full-Text Search</span>
+      <div class="ct">Text Index & Search</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Create text index on searchable fields</li>
+        <li><span class="ar">▸</span><span class="hl">$text: { $search: "query" }</span></li>
+        <li><span class="ar">▸</span>Score-based relevance sorting</li>
+        <li><span class="ar">▸</span>Multi-language support</li>
+        <li><span class="ar">▸</span>Atlas Search — advanced full-text (Lucene)</li>
+      </ul>
+    </div>
+
+    <div class="card a5">
+      <span class="cl c5">Validation & Relationships</span>
+      <div class="ct">Data Integrity</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Mongoose schema validation</li>
+        <li><span class="ar">▸</span>Custom validators — custom logic</li>
+        <li><span class="ar">▸</span>Populate — resolve object references</li>
+        <li><span class="ar">▸</span>Indexes for foreign key-like constraints</li>
+        <li><span class="ar">▸</span>$jsonSchema validation at DB level</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ 6. INTERVIEW FOCUS ══════ -->
+<section class="sec" id="s6">
+  <div class="sec-head h6 rv">
+    <div class="sec-n n6">06</div>
+    <div class="sec-meta">
+      <div class="sec-badge b6">🎯 Be Strong In These</div>
+      <div class="sec-title">Interview-Focused Topics</div>
+    </div>
+  </div>
+
+  <div class="tags rv" style="margin-bottom:24px">
+    <span class="tag tm">CRUD operations</span>
+    <span class="tag t2">Aggregation pipeline</span>
+    <span class="tag t2">Indexing</span>
+    <span class="tag t2">Schema design</span>
+    <span class="tag t3">SQL vs MongoDB</span>
+    <span class="tag t4">Mongoose populate</span>
+    <span class="tag t3">Sharding</span>
+    <span class="tag t3">Replica sets</span>
+    <span class="tag t5">Embedded vs Referenced</span>
+    <span class="tag t6">Query performance</span>
+    <span class="tag t2">$lookup (joins)</span>
+    <span class="tag t7">Pagination</span>
+  </div>
+
+  <div class="iq-list rv">
+    <div class="iq">
+      <div class="iq-num n1">1</div>
+      <div>
+        <div class="iq-q">How does MongoDB store data internally?</div>
+        <div class="iq-hint">BSON (Binary JSON) format — supports more data types than JSON. Stored in collection files on disk. Documents up to 16MB max.</div>
+      </div>
+    </div>
+    <div class="iq">
+      <div class="iq-num n2">2</div>
+      <div>
+        <div class="iq-q">Difference between embedded and referenced documents?</div>
+        <div class="iq-hint">Embedded = store sub-data inside parent (one read). Referenced = store IDs, use $lookup (two reads). Choose based on read patterns and data size.</div>
+      </div>
+    </div>
+    <div class="iq">
+      <div class="iq-num n2">3</div>
+      <div>
+        <div class="iq-q">What is an aggregation pipeline?</div>
+        <div class="iq-hint">A chain of stages that process documents in sequence. Each stage transforms data. Output of one stage = input of next. Powerful for analytics and reporting.</div>
+      </div>
+    </div>
+    <div class="iq">
+      <div class="iq-num n2">4</div>
+      <div>
+        <div class="iq-q">How do indexes improve performance?</div>
+        <div class="iq-hint">Indexes create a sorted data structure (B-tree) that allows O(log n) lookup instead of O(n) collection scan. Dramatically faster for large collections.</div>
+      </div>
+    </div>
+    <div class="iq">
+      <div class="iq-num n3">5</div>
+      <div>
+        <div class="iq-q">What is sharding in MongoDB?</div>
+        <div class="iq-hint">Horizontal scaling — split collection data across multiple servers (shards) using a shard key. Enables handling datasets larger than a single server.</div>
+      </div>
+    </div>
+    <div class="iq">
+      <div class="iq-num n3">6</div>
+      <div>
+        <div class="iq-q">Explain replica sets.</div>
+        <div class="iq-hint">A group of MongoDB instances maintaining the same data. One primary (writes), multiple secondaries (replicate from primary). Automatic failover if primary goes down.</div>
+      </div>
+    </div>
+    <div class="iq">
+      <div class="iq-num n2">7</div>
+      <div>
+        <div class="iq-q">Write a query to find top 3 users by activity.</div>
+        <div class="iq-hint">Use aggregation: $group by userId with $sum, $sort descending, $limit 3, $lookup to join user details.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ 7. PROJECTS ══════ -->
+<section class="sec" id="s7">
+  <div class="sec-head h7 rv">
+    <div class="sec-n n7">07</div>
+    <div class="sec-meta">
+      <div class="sec-badge b7">🛠️ Must Build</div>
+      <div class="sec-title">Practice Projects</div>
+    </div>
+  </div>
+
+  <div class="proj-grid rv">
+    <div class="proj p1">
+      <div class="proj-lvl">🟢 Beginner</div>
+      <div class="proj-name">Student Management System</div>
+      <div class="proj-desc">Full CRUD with filters, sorting, and projection. Practice all query operators and basic indexing.</div>
+    </div>
+    <div class="proj p1">
+      <div class="proj-lvl">🟢 Beginner</div>
+      <div class="proj-name">Notes App</div>
+      <div class="proj-desc">Create, read, update, delete notes. Add text search, tags array, and TTL for draft expiry.</div>
+    </div>
+    <div class="proj p2">
+      <div class="proj-lvl">🟡 Intermediate</div>
+      <div class="proj-name">Blog API</div>
+      <div class="proj-desc">Users, posts, comments with references. Implement populate, pagination, text search, and compound indexes.</div>
+    </div>
+    <div class="proj p2">
+      <div class="proj-lvl">🟡 Intermediate</div>
+      <div class="proj-name">E-Commerce Backend</div>
+      <div class="proj-desc">Products, orders, users. Cart + inventory with transactions. Aggregation for sales reports and revenue totals.</div>
+    </div>
+    <div class="proj p3">
+      <div class="proj-lvl">🟠 Advanced</div>
+      <div class="proj-name">Analytics Dashboard</div>
+      <div class="proj-desc">Heavy aggregation: daily/monthly metrics, user cohorts, funnel analysis. Practice every pipeline operator.</div>
+    </div>
+    <div class="proj p3">
+      <div class="proj-lvl">🟠 Advanced</div>
+      <div class="proj-name">Real-Time Chat App</div>
+      <div class="proj-desc">Messages with schema design decisions, read receipts, TTL for ephemeral messages, Socket.io + MongoDB.</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ FINAL PATH ══════ -->
+<section class="sec">
+  <div class="sec-head hm rv">
+    <div class="sec-n" style="color:rgba(0,237,100,.15)">✓</div>
+    <div class="sec-meta">
+      <div class="sec-badge bm">Simple View</div>
+      <div class="sec-title">Final Learning Path</div>
+    </div>
+  </div>
+  <div class="path-track rv">
+    <div class="path-step">
+      <div class="path-num" style="color:rgba(0,237,100,.25)">1</div>
+      <div><div class="path-name">Basics — CRUD + Queries</div><div class="path-sub">insertOne, find, update, delete · Query operators · Projections</div></div>
+      <div class="path-dot pd1"></div>
+    </div>
+    <div class="path-step">
+      <div class="path-num" style="color:rgba(251,191,36,.25)">2</div>
+      <div><div class="path-name">Indexing + Schema Design</div><div class="path-sub">Single, compound, text indexes · Embed vs reference decisions</div></div>
+      <div class="path-dot pd2"></div>
+    </div>
+    <div class="path-step">
+      <div class="path-num" style="color:rgba(251,146,60,.25)">3</div>
+      <div><div class="path-name">Aggregation Framework</div><div class="path-sub">$match, $group, $project, $lookup, $unwind, $sort, $limit</div></div>
+      <div class="path-dot pd3"></div>
+    </div>
+    <div class="path-step">
+      <div class="path-num" style="color:rgba(96,165,250,.25)">4</div>
+      <div><div class="path-name">Backend Integration</div><div class="path-sub">Node.js driver · Mongoose schemas, models, hooks · REST APIs</div></div>
+      <div class="path-dot pd4"></div>
+    </div>
+    <div class="path-step">
+      <div class="path-num" style="color:rgba(192,132,252,.25)">5</div>
+      <div><div class="path-name">Performance + Scaling</div><div class="path-sub">explain(), replica sets, sharding, transactions</div></div>
+      <div class="path-dot pd5"></div>
+    </div>
+    <div class="path-step">
+      <div class="path-num" style="color:rgba(52,211,153,.25)">6</div>
+      <div><div class="path-name">Build Projects</div><div class="path-sub">Blog API → E-commerce → Analytics Dashboard</div></div>
+      <div class="path-dot pd6"></div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ WHAT PEOPLE MISS ══════ -->
+<section class="sec">
+  <div class="sec-head rv" style="position:relative">
+    <span style="position:absolute;bottom:-1px;left:0;width:64px;height:3px;background:var(--L6);border-radius:2px"></span>
+    <div class="sec-n" style="color:rgba(244,114,182,.15)">⚠</div>
+    <div class="sec-meta">
+      <div class="sec-badge b6">Common Gaps</div>
+      <div class="sec-title">What Most People Miss</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a6">
+      <span class="cl c6">❌ Mistake #1</span>
+      <div class="ct">Skipping Aggregation</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Aggregation is asked in almost every interview</li>
+        <li><span class="ar">▸</span>Real apps need it for analytics, reports</li>
+        <li><span class="ar">▸</span>Without it, you can't do MongoDB "joins"</li>
+        <li><span class="ar">▸</span>Practice at least 10 pipeline problems</li>
+      </ul>
+    </div>
+    <div class="card a6">
+      <span class="cl c6">❌ Mistake #2</span>
+      <div class="ct">Ignoring Schema Design</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Bad schema = slow queries forever</li>
+        <li><span class="ar">▸</span>Design for how you read, not how you write</li>
+        <li><span class="ar">▸</span>Most bugs come from wrong data modeling</li>
+        <li><span class="ar">▸</span>Practice embed vs reference decisions daily</li>
+      </ul>
+    </div>
+    <div class="card a6">
+      <span class="cl c6">❌ Mistake #3</span>
+      <div class="ct">Theory Without Projects</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Watching videos ≠ understanding MongoDB</li>
+        <li><span class="ar">▸</span>Build real APIs — experience the pain points</li>
+        <li><span class="ar">▸</span>Every project teaches a lesson videos can't</li>
+        <li><span class="ar">▸</span>Focus on: hands-on + real queries always</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ 8. REFS ══════ -->
+<section class="sec" id="s8">
+  <div class="sec-head h8 rv">
+    <div class="sec-n n8">08</div>
+    <div class="sec-meta">
+      <div class="sec-badge b8">📚 Best Resources</div>
+      <div class="sec-title">References</div>
+    </div>
+  </div>
+  <div class="refs rv">
+    <a href="https://www.mongodb.com/docs" target="_blank" class="ref" style="border-color:rgba(0,237,100,.3)">
+      <span class="ri">🍃</span>
+      <div><div class="rn">MongoDB Docs</div><div class="rs">Primary source — mongodb.com/docs</div></div>
+    </a>
+    <a href="https://university.mongodb.com" target="_blank" class="ref" style="border-color:rgba(0,237,100,.3)">
+      <span class="ri">🎓</span>
+      <div><div class="rn">MongoDB University</div><div class="rs">Free official courses</div></div>
+    </a>
+    <a href="https://www.mongodb.com/products/compass" target="_blank" class="ref" style="border-color:rgba(96,165,250,.3)">
+      <span class="ri">🧭</span>
+      <div><div class="rn">MongoDB Compass</div><div class="rs">GUI for local dev</div></div>
+    </a>
+    <a href="https://www.mongodb.com/atlas" target="_blank" class="ref" style="border-color:rgba(251,191,36,.3)">
+      <span class="ri">☁️</span>
+      <div><div class="rn">MongoDB Atlas</div><div class="rs">Managed cloud cluster</div></div>
+    </a>
+    <a href="https://mongoosejs.com" target="_blank" class="ref" style="border-color:rgba(251,146,60,.3)">
+      <span class="ri">📦</span>
+      <div><div class="rn">Mongoose Docs</div><div class="rs">mongoosejs.com</div></div>
+    </a>
+    <a href="https://leetcode.com" target="_blank" class="ref" style="border-color:rgba(192,132,252,.3)">
+      <span class="ri">💻</span>
+      <div><div class="rn">LeetCode DB</div><div class="rs">SQL & DB query practice</div></div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>MongoDB Full Roadmap · 8 Modules · CRUD → Aggregation → Scaling · Interview Ready</p>
+  <p style="margin-top:6px;opacity:.5;font-size:10px">Design for reads. Index what you query. Aggregate everything else. 🍃</p>
+</footer>
+
+</div>
+
+<script>
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('bD').classList.toggle('on', t === 'dark');
+  document.getElementById('bL').classList.toggle('on', t === 'light');
+  localStorage.setItem('mg-theme', t);
+}
+const saved = localStorage.getItem('mg-theme');
+if (saved) setTheme(saved);
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
