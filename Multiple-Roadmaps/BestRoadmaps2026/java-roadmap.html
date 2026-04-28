@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java Full Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════
+   TOKENS
+══════════════════════════════════════ */
+[data-theme="dark"] {
+  --bg:    #04060a;
+  --bg2:   #070a10;
+  --bg3:   #0b0f18;
+  --sur:   #0e1420;
+  --sur2:  #131c2e;
+  --brd:   #1a2640;
+  --txt:   #ccd8ee;
+  --txt2:  #5572a0;
+  --txt3:  #283d60;
+
+  --java:  #f89820;  /* Java orange */
+  --s1:    #f89820;  /* orange  — core java */
+  --s2:    #e84393;  /* pink    — advanced */
+  --s3:    #3bc9db;  /* cyan    — DSA */
+  --s4:    #69db7c;  /* green   — backend */
+  --s5:    #ffd43b;  /* yellow  — database */
+  --s6:    #f06595;  /* rose    — security */
+  --s7:    #a9e34b;  /* lime    — tools */
+  --s8:    #74c0fc;  /* sky     — testing */
+  --s9:    #b197fc;  /* violet  — system design */
+  --sq:    #ff6b6b;  /* red     — interview */
+}
+[data-theme="light"] {
+  --bg:    #f5f7fc;
+  --bg2:   #eaeff8;
+  --bg3:   #dde5f5;
+  --sur:   #ffffff;
+  --sur2:  #f0f4fc;
+  --brd:   #c8d5ee;
+  --txt:   #0a1628;
+  --txt2:  #3d5888;
+  --txt3:  #8aa0c0;
+
+  --java:  #c06a00;
+  --s1:    #c06a00;
+  --s2:    #a8005a;
+  --s3:    #007a8a;
+  --s4:    #1a7a30;
+  --s5:    #907000;
+  --s6:    #b03060;
+  --s7:    #508000;
+  --s8:    #1060a0;
+  --s9:    #5030a0;
+  --sq:    #aa1010;
+}
+
+/* ══════════════════════════════════════
+   BASE
+══════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background .3s, color .3s;
+}
+
+/* Blueprint dot matrix */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    radial-gradient(circle, var(--brd) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: .35;
+}
+
+/* Ambient color blobs */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 700px 500px at 5% 10%,  rgba(248,152,32,.06) 0%, transparent 55%),
+    radial-gradient(ellipse 600px 500px at 95% 90%, rgba(105,219,124,.05) 0%, transparent 55%),
+    radial-gradient(ellipse 500px 400px at 60% 40%, rgba(59,201,219,.04) 0%, transparent 55%);
+}
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 22px; position: relative; z-index: 1; }
+
+/* ══════════════════════════════════════
+   TOGGLE
+══════════════════════════════════════ */
+.toggle {
+  position: fixed; top: 18px; right: 18px; z-index: 999;
+  display: flex;
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; overflow: hidden;
+  box-shadow: 0 6px 28px rgba(0,0,0,.4);
+}
+.toggle button {
+  border: none; background: none; cursor: pointer;
+  padding: 9px 18px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--txt2); transition: .2s;
+}
+.toggle button.on { background: var(--sur2); color: var(--txt); }
+
+/* ══════════════════════════════════════
+   HEADER
+══════════════════════════════════════ */
+header { padding: 76px 0 48px; }
+
+.h-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--java); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.h-tag::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--java), transparent); }
+
+h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(4rem, 13vw, 9rem);
+  line-height: .85; letter-spacing: -2px;
+}
+.t-java { color: var(--java); display: block; }
+.t-full { color: var(--txt); display: block; }
+.t-road {
+  display: block; color: transparent;
+  -webkit-text-stroke: 1.5px var(--brd);
+}
+
+.h-meta {
+  margin-top: 26px;
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  font-size: 12px; color: var(--txt2);
+  padding-bottom: 38px; border-bottom: 1px solid var(--brd);
+}
+.hpill {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  padding: 5px 13px; border: 1px solid; border-radius: 4px;
+}
+
+/* ══════════════════════════════════════
+   STEP NAV BAR
+══════════════════════════════════════ */
+.stepnav {
+  display: flex; overflow-x: auto; gap: 4px;
+  margin: 26px 0 54px; padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.stepnav::-webkit-scrollbar { display: none; }
+.sn {
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  padding: 7px 15px; border: 1px solid var(--brd);
+  border-radius: 5px; background: var(--sur);
+  color: var(--txt2); text-decoration: none; transition: .18s;
+}
+.sn:hover { transform: translateY(-2px); }
+
+/* ══════════════════════════════════════
+   SECTION
+══════════════════════════════════════ */
+.sec { margin-bottom: 82px; scroll-margin-top: 20px; }
+
+.shead {
+  display: flex; align-items: flex-end; gap: 16px;
+  margin-bottom: 26px; padding-bottom: 18px;
+  border-bottom: 1px solid var(--brd);
+  position: relative; flex-wrap: wrap;
+}
+.shead::after {
+  content: ''; position: absolute;
+  bottom: -1px; left: 0; height: 3px; width: 64px; border-radius: 2px;
+}
+
+.snum {
+  font-family: 'Anton', sans-serif;
+  font-size: 3.5rem; line-height: 1; opacity: .14; letter-spacing: -2px;
+}
+.smeta {}
+.sbadge {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  letter-spacing: 3px; text-transform: uppercase;
+  padding: 3px 10px; border: 1px solid; border-radius: 3px;
+  margin-bottom: 6px; display: inline-block;
+}
+.stitle {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1; letter-spacing: -.5px;
+}
+.saside {
+  margin-left: auto; font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--txt2);
+  background: var(--sur); border: 1px solid var(--brd);
+  padding: 5px 12px; border-radius: 4px; white-space: nowrap;
+}
+
+/* ══════════════════════════════════════
+   CARDS
+══════════════════════════════════════ */
+.grid  { display: grid; grid-template-columns: repeat(auto-fill, minmax(285px,1fr)); gap: 14px; }
+.grid2 { grid-template-columns: repeat(auto-fill, minmax(360px,1fr)); }
+.grid3 { grid-template-columns: repeat(3,1fr); }
+@media(max-width:700px){ .grid3,.grid2{grid-template-columns:1fr} }
+
+.card {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 12px; padding: 22px 24px;
+  position: relative; overflow: hidden;
+  transition: transform .22s, box-shadow .22s;
+}
+.card:hover { transform: translateY(-5px); }
+.card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+}
+
+.cl {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 10px; display: block;
+}
+.ct {
+  font-family: 'Anton', sans-serif;
+  font-size: 16px; letter-spacing: -.3px;
+  margin-bottom: 14px; line-height: 1.1;
+}
+.cul { list-style: none; }
+.cul li {
+  font-size: 12.5px; color: var(--txt2);
+  padding: 5px 0; border-bottom: 1px solid var(--brd);
+  display: flex; gap: 8px; align-items: baseline; line-height: 1.55;
+}
+.cul li:last-child { border-bottom: none; }
+.ar { font-size: 9px; color: var(--txt3); flex-shrink: 0; margin-top: 3px; }
+.hl { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; }
+.bold { font-weight: 600; }
+
+/* Note/callout */
+.note {
+  margin-top: 12px; background: var(--bg3);
+  border-left: 3px solid; border-radius: 0 6px 6px 0;
+  padding: 10px 14px; font-size: 12px; color: var(--txt2); line-height: 1.65;
+}
+.note strong { display: block; color: var(--txt); font-size: 12.5px; margin-bottom: 3px; }
+
+/* ══════════════════════════════════════
+   CODE BLOCK
+══════════════════════════════════════ */
+.codebox {
+  background: var(--bg2); border: 1px solid var(--brd);
+  border-radius: 12px; overflow: hidden; margin-top: 14px;
+}
+.ctop {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 18px; border-bottom: 1px solid var(--brd);
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--txt2);
+}
+.dots { display: flex; gap: 6px; }
+.dot { width: 11px; height: 11px; border-radius: 50%; }
+.dr{background:#ff5f57} .dy{background:#febc2e} .dg{background:#28c840}
+.cbgs { display: flex; gap: 6px; }
+.cb {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  padding: 2px 9px; border: 1px solid; border-radius: 3px;
+}
+pre {
+  padding: 20px 22px; overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; line-height: 1.9; color: var(--txt2);
+}
+.kw   { color: #ff79c6; } .fn  { color: #50fa7b; }
+.str  { color: #f1fa8c; } .cm  { color: #44475a; }
+.num  { color: #bd93f9; } .op  { color: #ffb86c; }
+.type { color: #8be9fd; } .ann { color: #ff6e6e; }
+.gen  { color: #ffffa5; }
+
+/* ══════════════════════════════════════
+   LEARNING FLOW — VERTICAL TRACK
+══════════════════════════════════════ */
+.flow {
+  display: flex; flex-direction: column;
+  border: 1px solid var(--brd); border-radius: 12px;
+  background: var(--sur); overflow: hidden;
+}
+.fstep {
+  display: flex; align-items: center; gap: 18px;
+  padding: 16px 22px; border-bottom: 1px solid var(--brd);
+  transition: background .2s; position: relative;
+}
+.fstep:last-child { border-bottom: none; }
+.fstep:hover { background: var(--sur2); }
+.fnum {
+  font-family: 'Anton', sans-serif;
+  font-size: 2.2rem; line-height: 1; min-width: 44px; opacity: .2;
+}
+.fbody {}
+.fname { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.fsub  { font-size: 11.5px; color: var(--txt2); }
+.fdot  { margin-left: auto; width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.farrow {
+  position: absolute; bottom: -1px; left: 50%;
+  transform: translateX(-50%); z-index: 2;
+  font-size: 10px; color: var(--txt3);
+}
+
+/* ══════════════════════════════════════
+   INTERVIEW Q&A
+══════════════════════════════════════ */
+.iqs { display: flex; flex-direction: column; gap: 12px; }
+.iq {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 10px; overflow: hidden;
+  transition: transform .2s;
+}
+.iq:hover { transform: translateX(6px); }
+.iq-q {
+  padding: 14px 20px; font-size: 13px; font-weight: 600;
+  display: flex; gap: 12px; align-items: flex-start;
+  border-bottom: 1px solid var(--brd);
+}
+.iq-num {
+  font-family: 'Anton', sans-serif; font-size: 1.5rem;
+  line-height: 1; opacity: .2; flex-shrink: 0;
+}
+.iq-a {
+  padding: 12px 20px; font-size: 12px; color: var(--txt2);
+  line-height: 1.6; display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+}
+
+/* ══════════════════════════════════════
+   PROJECT STACK
+══════════════════════════════════════ */
+.stackrow { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap: 10px; }
+.sc {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 10px; padding: 16px;
+  transition: transform .2s;
+}
+.sc:hover { transform: translateY(-4px); }
+.sc-ico { font-size: 22px; margin-bottom: 8px; }
+.sc-name { font-family: 'Anton', sans-serif; font-size: 14px; margin-bottom: 4px; }
+.sc-sub  { font-size: 11px; color: var(--txt2); line-height: 1.4; }
+
+/* ══════════════════════════════════════
+   TAGS
+══════════════════════════════════════ */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  padding: 6px 14px; border: 1px solid; border-radius: 4px;
+  cursor: default; transition: transform .15s;
+}
+.tag:hover { transform: scale(1.06); }
+
+/* ══════════════════════════════════════
+   MISS SECTION
+══════════════════════════════════════ */
+.missrow { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap: 12px; }
+.miss {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 10px; padding: 16px 20px;
+  border-left: 4px solid;
+}
+.miss-h { font-size: 13px; font-weight: 600; margin-bottom: 5px; display: flex; gap: 8px; align-items: center; }
+.miss-b { font-size: 12px; color: var(--txt2); line-height: 1.55; }
+
+/* ══════════════════════════════════════
+   REFS
+══════════════════════════════════════ */
+.refs { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 10px; }
+.ref {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 12px 14px;
+  text-decoration: none; color: var(--txt);
+  font-size: 12px; transition: transform .18s, border-color .18s;
+}
+.ref:hover { transform: translateY(-2px); }
+.ri { font-size: 18px; }
+.rn { font-weight: 600; }
+.rs { font-size: 10px; color: var(--txt2); margin-top: 2px; }
+
+/* ══════════════════════════════════════
+   DIVIDER
+══════════════════════════════════════ */
+.div { height: 1px; background: linear-gradient(90deg,transparent,var(--brd),transparent); margin: 66px 0; }
+
+footer {
+  text-align: center; padding: 28px 0 50px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--txt2);
+  border-top: 1px solid var(--brd);
+}
+
+/* ══════════════════════════════════════
+   COLOR SYSTEM
+══════════════════════════════════════ */
+/* card top bars */
+.a1::before{background:var(--s1)} .a2::before{background:var(--s2)} .a3::before{background:var(--s3)}
+.a4::before{background:var(--s4)} .a5::before{background:var(--s5)} .a6::before{background:var(--s6)}
+.a7::before{background:var(--s7)} .a8::before{background:var(--s8)} .a9::before{background:var(--s9)}
+.aq::before{background:var(--sq)}
+
+/* glows */
+.a1:hover{box-shadow:0 8px 40px rgba(248,152,32,.1)}  .a2:hover{box-shadow:0 8px 40px rgba(232,67,147,.1)}
+.a3:hover{box-shadow:0 8px 40px rgba(59,201,219,.1)}  .a4:hover{box-shadow:0 8px 40px rgba(105,219,124,.1)}
+.a5:hover{box-shadow:0 8px 40px rgba(255,212,59,.1)}  .a6:hover{box-shadow:0 8px 40px rgba(240,101,149,.1)}
+.a7:hover{box-shadow:0 8px 40px rgba(169,227,75,.1)}  .a8:hover{box-shadow:0 8px 40px rgba(116,192,252,.1)}
+.a9:hover{box-shadow:0 8px 40px rgba(177,151,252,.1)} .aq:hover{box-shadow:0 8px 40px rgba(255,107,107,.1)}
+
+/* sec head accent */
+.h1::after{background:var(--s1)} .h2::after{background:var(--s2)} .h3::after{background:var(--s3)}
+.h4::after{background:var(--s4)} .h5::after{background:var(--s5)} .h6::after{background:var(--s6)}
+.h7::after{background:var(--s7)} .h8::after{background:var(--s8)} .h9::after{background:var(--s9)}
+.hq::after{background:var(--sq)}
+
+/* text */
+.c1{color:var(--s1)} .c2{color:var(--s2)} .c3{color:var(--s3)} .c4{color:var(--s4)}
+.c5{color:var(--s5)} .c6{color:var(--s6)} .c7{color:var(--s7)} .c8{color:var(--s8)}
+.c9{color:var(--s9)} .cq{color:var(--sq)} .cj{color:var(--java)}
+
+/* sec num tints */
+.n1{color:var(--s1)} .n2{color:var(--s2)} .n3{color:var(--s3)} .n4{color:var(--s4)}
+.n5{color:var(--s5)} .n6{color:var(--s6)} .n7{color:var(--s7)} .n8{color:var(--s8)}
+.n9{color:var(--s9)} .nq{color:var(--sq)}
+
+/* badges */
+.b1{color:var(--s1);border-color:rgba(248,152,32,.35);background:rgba(248,152,32,.06)}
+.b2{color:var(--s2);border-color:rgba(232,67,147,.35);background:rgba(232,67,147,.06)}
+.b3{color:var(--s3);border-color:rgba(59,201,219,.35);background:rgba(59,201,219,.06)}
+.b4{color:var(--s4);border-color:rgba(105,219,124,.35);background:rgba(105,219,124,.06)}
+.b5{color:var(--s5);border-color:rgba(255,212,59,.35);background:rgba(255,212,59,.06)}
+.b6{color:var(--s6);border-color:rgba(240,101,149,.35);background:rgba(240,101,149,.06)}
+.b7{color:var(--s7);border-color:rgba(169,227,75,.35);background:rgba(169,227,75,.06)}
+.b8{color:var(--s8);border-color:rgba(116,192,252,.35);background:rgba(116,192,252,.06)}
+.b9{color:var(--s9);border-color:rgba(177,151,252,.35);background:rgba(177,151,252,.06)}
+.bq{color:var(--sq);border-color:rgba(255,107,107,.35);background:rgba(255,107,107,.06)}
+.bj{color:var(--java);border-color:rgba(248,152,32,.35);background:rgba(248,152,32,.06)}
+
+/* note border */
+.n-l1{border-left-color:var(--s1)} .n-l2{border-left-color:var(--s2)} .n-l3{border-left-color:var(--s3)}
+.n-l4{border-left-color:var(--s4)} .n-l5{border-left-color:var(--s5)} .n-l9{border-left-color:var(--s9)}
+
+/* tags */
+.t1{color:var(--s1);border-color:rgba(248,152,32,.3);background:rgba(248,152,32,.05)}
+.t2{color:var(--s2);border-color:rgba(232,67,147,.3);background:rgba(232,67,147,.05)}
+.t3{color:var(--s3);border-color:rgba(59,201,219,.3);background:rgba(59,201,219,.05)}
+.t4{color:var(--s4);border-color:rgba(105,219,124,.3);background:rgba(105,219,124,.05)}
+.t5{color:var(--s5);border-color:rgba(255,212,59,.3);background:rgba(255,212,59,.05)}
+.t6{color:var(--s6);border-color:rgba(240,101,149,.3);background:rgba(240,101,149,.05)}
+.t7{color:var(--s7);border-color:rgba(169,227,75,.3);background:rgba(169,227,75,.05)}
+.t8{color:var(--s8);border-color:rgba(116,192,252,.3);background:rgba(116,192,252,.05)}
+.t9{color:var(--s9);border-color:rgba(177,151,252,.3);background:rgba(177,151,252,.05)}
+.tq{color:var(--sq);border-color:rgba(255,107,107,.3);background:rgba(255,107,107,.05)}
+
+/* flow dots */
+.fd1{background:var(--s1)} .fd2{background:var(--s2)} .fd3{background:var(--s3)}
+.fd4{background:var(--s4)} .fd5{background:var(--s5)} .fd6{background:var(--s6)}
+.fd7{background:var(--s7)} .fd8{background:var(--s8)} .fd9{background:var(--s9)}
+
+/* stack card top */
+.st1{border-top:3px solid var(--s1)} .st2{border-top:3px solid var(--s2)} .st3{border-top:3px solid var(--s3)}
+.st4{border-top:3px solid var(--s4)} .st5{border-top:3px solid var(--s5)} .st6{border-top:3px solid var(--s6)}
+
+/* miss border-left */
+.ml1{border-left-color:var(--sq)} .ml2{border-left-color:var(--s6)} .ml3{border-left-color:var(--s5)} .ml4{border-left-color:var(--s3)}
+
+/* stepnav hover */
+.sv1:hover{border-color:var(--s1);color:var(--s1)} .sv2:hover{border-color:var(--s2);color:var(--s2)}
+.sv3:hover{border-color:var(--s3);color:var(--s3)} .sv4:hover{border-color:var(--s4);color:var(--s4)}
+.sv5:hover{border-color:var(--s5);color:var(--s5)} .sv6:hover{border-color:var(--s6);color:var(--s6)}
+.sv7:hover{border-color:var(--s7);color:var(--s7)} .sv8:hover{border-color:var(--s8);color:var(--s8)}
+.sv9:hover{border-color:var(--s9);color:var(--s9)}
+
+/* ══════════════════════════════════════
+   REVEAL
+══════════════════════════════════════ */
+.rv { opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s ease; }
+.rv.vis { opacity:1; transform:none; }
+
+@media(max-width:640px){
+  h1{letter-spacing:-1px}
+  .saside{display:none}
+  .toggle{top:10px;right:10px}
+}
+</style>
+</head>
+<body>
+
+<div class="toggle">
+  <button id="bD" class="on" onclick="setTheme('dark')">// dark</button>
+  <button id="bL" onclick="setTheme('light')">// light</button>
+</div>
+
+<div class="wrap">
+
+<!-- ══════ HEADER ══════ -->
+<header>
+  <div class="h-tag">Java Full Roadmap · 9 Modules · Interview Ready · 2026</div>
+  <h1>
+    <span class="t-java">Java</span>
+    <span class="t-full">Full</span>
+    <span class="t-road">Roadmap</span>
+  </h1>
+  <div class="h-meta">
+    <span>Core → OOP → Spring Boot → DSA → Real Projects</span>
+    <span class="hpill b1">OOP Principles ⭐</span>
+    <span class="hpill b2">HashMap Internals 🔥</span>
+    <span class="hpill b4">Spring Boot ⭐</span>
+    <span class="hpill b3">Java 8+ Must Know</span>
+  </div>
+</header>
+
+<!-- STEP NAV -->
+<div class="stepnav rv">
+  <a class="sn sv1" href="#s1">01 Core Java</a>
+  <a class="sn sv2" href="#s2">02 Advanced Java</a>
+  <a class="sn sv3" href="#s3">03 DSA</a>
+  <a class="sn sv4" href="#s4">04 Backend / Spring</a>
+  <a class="sn sv5" href="#s5">05 Databases</a>
+  <a class="sn sv6" href="#s6">06 Security</a>
+  <a class="sn sv7" href="#s7">07 Tools</a>
+  <a class="sn sv8" href="#s8">08 Testing</a>
+  <a class="sn sv9" href="#s9">09 System Design</a>
+</div>
+
+<!-- ══════ 1. CORE JAVA ══════ -->
+<section class="sec" id="s1">
+  <div class="shead h1 rv">
+    <div class="snum n1">01</div>
+    <div class="smeta">
+      <div class="sbadge b1">🧱 Foundation — MUST MASTER</div>
+      <div class="stitle">Core Java</div>
+    </div>
+    <span class="saside">// Most interview Qs come from here</span>
+  </div>
+
+  <div class="grid rv">
+    <div class="card a1">
+      <span class="cl c1">Language Basics</span>
+      <div class="ct">Variables, Types & Control Flow</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Primitive types: <span class="hl">int, long, double, boolean, char</span></li>
+        <li><span class="ar">▸</span>Reference types — objects stored on heap</li>
+        <li><span class="ar">▸</span>Operators: arithmetic, bitwise, ternary</li>
+        <li><span class="ar">▸</span>Control flow: if/else, switch, loops</li>
+        <li><span class="ar">▸</span>for, while, do-while, enhanced for</li>
+        <li><span class="ar">▸</span>Break, continue, return</li>
+      </ul>
+    </div>
+
+    <div class="card a1">
+      <span class="cl c1">OOP ⭐ Core</span>
+      <div class="ct">Classes & Objects</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Class — blueprint · Object — instance</li>
+        <li><span class="ar">▸</span>Constructors — default vs parameterized</li>
+        <li><span class="ar">▸</span><span class="hl">this</span> — current object reference</li>
+        <li><span class="ar">▸</span><span class="hl">super</span> — parent class reference</li>
+        <li><span class="ar">▸</span>Access modifiers: public, private, protected</li>
+        <li><span class="ar">▸</span>static keyword — class-level members</li>
+      </ul>
+    </div>
+
+    <div class="card a1">
+      <span class="cl c1">OOP Pillars ⭐</span>
+      <div class="ct">4 Principles of OOP</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span><span class="bold c1">Encapsulation</span> — hide data, expose via methods</li>
+        <li><span class="ar">▸</span><span class="bold c1">Inheritance</span> — extend parent class (IS-A)</li>
+        <li><span class="ar">▸</span><span class="bold c1">Polymorphism</span> — overloading + overriding</li>
+        <li><span class="ar">▸</span><span class="bold c1">Abstraction</span> — abstract class + interface</li>
+        <li><span class="ar">▸</span>Interface vs Abstract class differences</li>
+        <li><span class="ar">▸</span>Method overriding — @Override annotation</li>
+      </ul>
+    </div>
+
+    <div class="card a1">
+      <span class="cl c1">Memory & Internals</span>
+      <div class="ct">How Java Runs</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Stack — method calls, local variables</li>
+        <li><span class="ar">▸</span>Heap — all objects live here</li>
+        <li><span class="ar">▸</span>Pass by value — always in Java</li>
+        <li><span class="ar">▸</span>String immutability — String Pool</li>
+        <li><span class="ar">▸</span>GC — automatic garbage collection</li>
+        <li><span class="ar">▸</span>JVM → JRE → JDK hierarchy</li>
+      </ul>
+      <div class="note n-l1">
+        <strong>Pass by Value — very common interview topic</strong>
+        Java passes object references by value. The reference is copied, not the object.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ 2. ADVANCED JAVA ══════ -->
+<section class="sec" id="s2">
+  <div class="shead h2 rv">
+    <div class="snum n2">02</div>
+    <div class="smeta">
+      <div class="sbadge b2">⚙️ Core Strength — Separates Beginners from Strong</div>
+      <div class="stitle">Advanced Java</div>
+    </div>
+    <span class="saside">// Collections + Threads + Java 8+</span>
+  </div>
+
+  <div class="grid rv">
+    <div class="card a2">
+      <span class="cl c2">Collections Framework ⭐</span>
+      <div class="ct">List, Set, Map</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span><span class="hl">ArrayList</span> — dynamic array, O(1) get</li>
+        <li><span class="ar">▸</span><span class="hl">LinkedList</span> — doubly-linked, O(1) insert</li>
+        <li><span class="ar">▸</span><span class="hl">HashSet</span> — unique elements, O(1) ops</li>
+        <li><span class="ar">▸</span><span class="hl">TreeSet</span> — sorted, O(log n)</li>
+        <li><span class="ar">▸</span><span class="hl">HashMap</span> — key-value, O(1) avg</li>
+        <li><span class="ar">▸</span>Comparable vs Comparator</li>
+      </ul>
+      <div class="note n-l2">
+        <strong>HashMap Internals — VERY IMPORTANT</strong>
+        Hashing → bucket selection → collision via LinkedList → converts to Red-Black Tree at 8+ entries.
+      </div>
+    </div>
+
+    <div class="card a2">
+      <span class="cl c2">Exception Handling</span>
+      <div class="ct">Robust Error Management</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>try-catch-finally — guaranteed cleanup</li>
+        <li><span class="ar">▸</span>try-with-resources — AutoCloseable</li>
+        <li><span class="ar">▸</span>Checked — must handle (IOException)</li>
+        <li><span class="ar">▸</span>Unchecked — runtime (NullPointerException)</li>
+        <li><span class="ar">▸</span>Custom exceptions — extend Exception</li>
+        <li><span class="ar">▸</span>throw vs throws</li>
+      </ul>
+    </div>
+
+    <div class="card a2">
+      <span class="cl c2">Concurrency</span>
+      <div class="ct">Multithreading</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Thread lifecycle: NEW → RUNNABLE → BLOCKED → DEAD</li>
+        <li><span class="ar">▸</span>Runnable vs Thread — prefer Runnable</li>
+        <li><span class="ar">▸</span>synchronized — mutual exclusion</li>
+        <li><span class="ar">▸</span>volatile — visibility across threads</li>
+        <li><span class="ar">▸</span>ExecutorService + ThreadPool</li>
+        <li><span class="ar">▸</span>CompletableFuture — async chaining</li>
+      </ul>
+    </div>
+
+    <div class="card a2">
+      <span class="cl c2">Java 8+ ⭐ Very Important</span>
+      <div class="ct">Modern Java Features</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Lambda expressions — concise anonymous fn</li>
+        <li><span class="ar">▸</span>Streams API — functional data pipeline</li>
+        <li><span class="ar">▸</span>Functional interfaces — Predicate, Function</li>
+        <li><span class="ar">▸</span>Optional — avoid NullPointerException</li>
+        <li><span class="ar">▸</span>Method references — <span class="hl">System.out::println</span></li>
+        <li><span class="ar">▸</span>Default methods in interfaces</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Stream API code -->
+  <div class="codebox rv">
+    <div class="ctop">
+      <div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
+      <span>StreamExample.java — Java 8 Streams + Lambdas</span>
+      <div class="cbgs"><span class="cb b2">Java 8+</span><span class="cb b1">Streams</span></div>
+    </div>
+<pre><span class="kw">import</span> java.util.*;
+<span class="kw">import</span> java.util.stream.*;
+
+<span class="type">List</span>&lt;<span class="type">Integer</span>&gt; nums = Arrays.<span class="fn">asList</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>);
+
+<span class="cm">// Filter even numbers, square them, collect to list</span>
+<span class="type">List</span>&lt;<span class="type">Integer</span>&gt; result = nums.<span class="fn">stream</span>()
+    .<span class="fn">filter</span>(n -&gt; n % <span class="num">2</span> == <span class="num">0</span>)          <span class="cm">// 2, 4, 6</span>
+    .<span class="fn">map</span>(n -&gt; n * n)                    <span class="cm">// 4, 16, 36</span>
+    .<span class="fn">collect</span>(Collectors.<span class="fn">toList</span>());
+
+<span class="cm">// Group students by grade</span>
+<span class="type">Map</span>&lt;<span class="type">String</span>, <span class="type">List</span>&lt;<span class="type">Student</span>&gt;&gt; byGrade = students.<span class="fn">stream</span>()
+    .<span class="fn">collect</span>(Collectors.<span class="fn">groupingBy</span>(Student::<span class="fn">getGrade</span>));
+
+<span class="cm">// Optional — safe null handling</span>
+<span class="type">Optional</span>&lt;<span class="type">String</span>&gt; name = <span class="type">Optional</span>.<span class="fn">ofNullable</span>(<span class="fn">getName</span>());
+<span class="type">String</span> result2 = name.<span class="fn">orElse</span>(<span class="str">"Unknown"</span>);
+
+<span class="cm">// Method references</span>
+nums.<span class="fn">forEach</span>(System.out::println);</pre>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ 3. DSA ══════ -->
+<section class="sec" id="s3">
+  <div class="shead h3 rv">
+    <div class="snum n3">03</div>
+    <div class="smeta">
+      <div class="sbadge b3">🧠 For Interviews — Implement in Java</div>
+      <div class="stitle">Data Structures & Algorithms</div>
+    </div>
+    <span class="saside">// LeetCode medium = target level</span>
+  </div>
+
+  <div class="grid rv">
+    <div class="card a3">
+      <span class="cl c3">Linear DS</span>
+      <div class="ct">Arrays, Strings, Lists</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Arrays — fixed size, O(1) access</li>
+        <li><span class="ar">▸</span>String manipulation — StringBuilder</li>
+        <li><span class="ar">▸</span>Two pointers, sliding window</li>
+        <li><span class="ar">▸</span>Singly + Doubly Linked List</li>
+        <li><span class="ar">▸</span>Stack — LIFO, Queue — FIFO</li>
+        <li><span class="ar">▸</span>Deque — double-ended queue</li>
+      </ul>
+    </div>
+
+    <div class="card a3">
+      <span class="cl c3">Trees & Graphs</span>
+      <div class="ct">Hierarchical Structures</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Binary Tree — DFS (in/pre/post order)</li>
+        <li><span class="ar">▸</span>BST — sorted property, O(log n)</li>
+        <li><span class="ar">▸</span>BFS — level-order traversal</li>
+        <li><span class="ar">▸</span>Graph: adjacency list/matrix</li>
+        <li><span class="ar">▸</span>BFS/DFS on graphs</li>
+        <li><span class="ar">▸</span>Topological sort</li>
+      </ul>
+    </div>
+
+    <div class="card a3">
+      <span class="cl c3">Algorithms</span>
+      <div class="ct">Sorting & Searching</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Binary search — O(log n)</li>
+        <li><span class="ar">▸</span>Merge sort, Quick sort — O(n log n)</li>
+        <li><span class="ar">▸</span>HashMap pattern — O(1) lookup</li>
+        <li><span class="ar">▸</span>Dynamic programming basics</li>
+        <li><span class="ar">▸</span>Recursion + backtracking</li>
+        <li><span class="ar">▸</span>Greedy algorithms</li>
+      </ul>
+      <div class="note n-l3">
+        <strong>Practice platforms:</strong>LeetCode → HackerRank → GeeksforGeeks. Aim for 5 mediums/week consistently.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ 4. BACKEND / SPRING ══════ -->
+<section class="sec" id="s4">
+  <div class="shead h4 rv">
+    <div class="snum n4">04</div>
+    <div class="smeta">
+      <div class="sbadge b4">🌐 What Companies Actually Use</div>
+      <div class="stitle">Backend Development with Java</div>
+    </div>
+    <span class="saside">// Spring Boot = Industry Standard</span>
+  </div>
+
+  <div class="grid rv">
+    <div class="card a4">
+      <span class="cl c4">Most Important ⭐</span>
+      <div class="ct">Spring Boot</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Auto-configuration — no XML needed</li>
+        <li><span class="ar">▸</span>Embedded server — Tomcat built-in</li>
+        <li><span class="ar">▸</span>Spring Application context</li>
+        <li><span class="ar">▸</span>@SpringBootApplication entry point</li>
+        <li><span class="ar">▸</span>application.properties / .yml config</li>
+        <li><span class="ar">▸</span>Profiles — dev, prod, test</li>
+      </ul>
+    </div>
+
+    <div class="card a4">
+      <span class="cl c4">Dependency Injection ⭐</span>
+      <div class="ct">Spring Core & IoC</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>IoC — Spring manages object creation</li>
+        <li><span class="ar">▸</span>DI — inject deps, not create them</li>
+        <li><span class="ar">▸</span>@Autowired — inject by type</li>
+        <li><span class="ar">▸</span>@Component, @Service, @Repository</li>
+        <li><span class="ar">▸</span>Constructor injection (preferred)</li>
+        <li><span class="ar">▸</span>Bean lifecycle — @PostConstruct</li>
+      </ul>
+    </div>
+
+    <div class="card a4">
+      <span class="cl c4">REST APIs</span>
+      <div class="ct">Controllers & Routes</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>@RestController — returns JSON</li>
+        <li><span class="ar">▸</span>@GetMapping, @PostMapping, @PutMapping</li>
+        <li><span class="ar">▸</span>@RequestBody, @PathVariable, @RequestParam</li>
+        <li><span class="ar">▸</span>DTO pattern — decouple API from DB</li>
+        <li><span class="ar">▸</span>Validation — @Valid + @NotNull</li>
+        <li><span class="ar">▸</span>ResponseEntity — control HTTP status</li>
+      </ul>
+    </div>
+
+    <div class="card a4">
+      <span class="cl c4">Architecture</span>
+      <div class="ct">Service Layer & MVC</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Controller → Service → Repository → DB</li>
+        <li><span class="ar">▸</span>Service layer — business logic</li>
+        <li><span class="ar">▸</span>Repository — data access</li>
+        <li><span class="ar">▸</span>@Transactional — manage DB transactions</li>
+        <li><span class="ar">▸</span>Exception handler — @ControllerAdvice</li>
+        <li><span class="ar">▸</span>Global exception handling</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Spring Boot code -->
+  <div class="codebox rv">
+    <div class="ctop">
+      <div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
+      <span>UserController.java — Spring Boot REST API</span>
+      <div class="cbgs"><span class="cb b4">Spring Boot</span><span class="cb b5">REST</span></div>
+    </div>
+<pre><span class="ann">@RestController</span>
+<span class="ann">@RequestMapping</span>(<span class="str">"/api/users"</span>)
+<span class="kw">public class</span> <span class="type">UserController</span> {
+
+    <span class="ann">@Autowired</span>
+    <span class="kw">private</span> <span class="type">UserService</span> userService;
+
+    <span class="ann">@GetMapping</span>(<span class="str">"/{id}"</span>)
+    <span class="kw">public</span> <span class="type">ResponseEntity</span>&lt;<span class="type">UserDTO</span>&gt; <span class="fn">getUser</span>(<span class="ann">@PathVariable</span> <span class="type">Long</span> id) {
+        <span class="type">UserDTO</span> user = userService.<span class="fn">findById</span>(id);
+        <span class="kw">return</span> <span class="type">ResponseEntity</span>.<span class="fn">ok</span>(user);  <span class="cm">// 200 OK</span>
+    }
+
+    <span class="ann">@PostMapping</span>
+    <span class="kw">public</span> <span class="type">ResponseEntity</span>&lt;<span class="type">UserDTO</span>&gt; <span class="fn">createUser</span>(
+            <span class="ann">@Valid</span> <span class="ann">@RequestBody</span> <span class="type">CreateUserRequest</span> req) {
+        <span class="type">UserDTO</span> created = userService.<span class="fn">create</span>(req);
+        <span class="kw">return</span> <span class="type">ResponseEntity</span>
+            .<span class="fn">status</span>(<span class="type">HttpStatus</span>.CREATED)  <span class="cm">// 201</span>
+            .<span class="fn">body</span>(created);
+    }
+}</pre>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ 5–6: DB + SECURITY ══════ -->
+<section class="sec" id="s5">
+  <div class="shead h5 rv">
+    <div class="snum n5">05–06</div>
+    <div class="smeta">
+      <div class="sbadge b5">🗄️ Persistence + 🔐 Security</div>
+      <div class="stitle">Database & Security</div>
+    </div>
+  </div>
+
+  <div class="grid rv">
+    <div class="card a5">
+      <span class="cl c5">Database</span>
+      <div class="ct">SQL + JPA/Hibernate</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>SQL: SELECT, JOIN, GROUP BY, indexes</li>
+        <li><span class="ar">▸</span>MySQL or PostgreSQL</li>
+        <li><span class="ar">▸</span>Hibernate — ORM, maps Java → SQL</li>
+        <li><span class="ar">▸</span>Spring Data JPA — CrudRepository</li>
+        <li><span class="ar">▸</span>@Entity, @Table, @Column annotations</li>
+        <li><span class="ar">▸</span>Relationships: @OneToMany, @ManyToOne</li>
+      </ul>
+    </div>
+
+    <div class="card a5">
+      <span class="cl c5">JPA Queries</span>
+      <div class="ct">Data Access Patterns</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Derived queries — findByName(), findByAge()</li>
+        <li><span class="ar">▸</span>JPQL — Java Persistence Query Language</li>
+        <li><span class="ar">▸</span>@Query — custom SQL in repository</li>
+        <li><span class="ar">▸</span>Pagination — Pageable, Page</li>
+        <li><span class="ar">▸</span>Lazy vs Eager loading</li>
+        <li><span class="ar">▸</span>N+1 problem and how to fix it</li>
+      </ul>
+    </div>
+
+    <div class="card a6">
+      <span class="cl c6">Security</span>
+      <div class="ct">Spring Security + JWT</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Authentication vs Authorization</li>
+        <li><span class="ar">▸</span>JWT — header.payload.signature</li>
+        <li><span class="ar">▸</span>Spring Security filter chain</li>
+        <li><span class="ar">▸</span>BCrypt — password hashing</li>
+        <li><span class="ar">▸</span>@PreAuthorize — method-level security</li>
+        <li><span class="ar">▸</span>CORS configuration</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ 7–8: TOOLS + TESTING ══════ -->
+<section class="sec" id="s7">
+  <div class="shead h7 rv">
+    <div class="snum n7">07–08</div>
+    <div class="smeta">
+      <div class="sbadge b7">🛠️ Tools + 🧪 Testing</div>
+      <div class="stitle">Dev Ecosystem & Quality</div>
+    </div>
+  </div>
+
+  <div class="grid rv">
+    <div class="card a7">
+      <span class="cl c7">Build & Version Control</span>
+      <div class="ct">Tools You'll Use Daily</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Maven — pom.xml, dependency management</li>
+        <li><span class="ar">▸</span>Gradle — build.gradle, faster builds</li>
+        <li><span class="ar">▸</span>Git — branches, commits, PR workflow</li>
+        <li><span class="ar">▸</span>Postman — API testing, collections</li>
+        <li><span class="ar">▸</span>IntelliJ IDEA — shortcut mastery</li>
+        <li><span class="ar">▸</span>Docker — containerize Spring Boot app</li>
+      </ul>
+    </div>
+
+    <div class="card a8">
+      <span class="cl c8">Testing</span>
+      <div class="ct">JUnit + Mockito</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>JUnit 5 — @Test, @BeforeEach, @AfterEach</li>
+        <li><span class="ar">▸</span>Assertions — assertEquals, assertThrows</li>
+        <li><span class="ar">▸</span>Mockito — mock dependencies</li>
+        <li><span class="ar">▸</span>@Mock, @InjectMocks, when().thenReturn()</li>
+        <li><span class="ar">▸</span>@SpringBootTest — integration tests</li>
+        <li><span class="ar">▸</span>MockMvc — test controllers</li>
+      </ul>
+    </div>
+
+    <div class="card a9" id="s9">
+      <span class="cl c9">System Design</span>
+      <div class="ct">For Growth & Senior Roles</div>
+      <ul class="cul">
+        <li><span class="ar">▸</span>Microservices vs Monolith</li>
+        <li><span class="ar">▸</span>REST design principles</li>
+        <li><span class="ar">▸</span>Redis caching basics</li>
+        <li><span class="ar">▸</span>Load balancing — round robin, least conn</li>
+        <li><span class="ar">▸</span>Message queues — Kafka/RabbitMQ basics</li>
+        <li><span class="ar">▸</span>API Gateway pattern</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ INTERVIEW TOPICS ══════ -->
+<section class="sec" id="sq">
+  <div class="shead hq rv">
+    <div class="snum nq">★</div>
+    <div class="smeta">
+      <div class="sbadge bq">🎯 Focus Heavily Here</div>
+      <div class="stitle">Most Important Interview Topics</div>
+    </div>
+  </div>
+
+  <div class="tags rv" style="margin-bottom:28px">
+    <span class="tag t1">OOP Principles</span>
+    <span class="tag t2">HashMap Internals</span>
+    <span class="tag t2">ArrayList vs LinkedList</span>
+    <span class="tag t2">Comparable vs Comparator</span>
+    <span class="tag t2">Multithreading Basics</span>
+    <span class="tag t1">Pass by Value</span>
+    <span class="tag t1">String Immutability</span>
+    <span class="tag t3">Streams vs Loops</span>
+    <span class="tag t3">Lambda Expressions</span>
+    <span class="tag t3">Optional</span>
+    <span class="tag t4">REST API Design</span>
+    <span class="tag t4">Spring Boot Flow</span>
+    <span class="tag t4">DI & IoC</span>
+    <span class="tag t5">Lazy vs Eager Loading</span>
+    <span class="tag t3">Arrays, Trees, Strings</span>
+    <span class="tag tq">Checked vs Unchecked</span>
+  </div>
+
+  <!-- Interview Q&As -->
+  <div class="iqs rv">
+    <div class="iq">
+      <div class="iq-q">
+        <div class="iq-num" style="color:rgba(248,152,32,.5)">1</div>
+        <div>What happens inside HashMap?</div>
+      </div>
+      <div class="iq-a">
+        <span class="tag t2">hashCode() called</span>
+        <span class="tag t2">→ bucket index</span>
+        <span class="tag t2">→ LinkedList for collision</span>
+        <span class="tag t2">→ Red-Black Tree at 8+ entries</span>
+        <span class="tag t1">→ O(1) avg, O(log n) worst</span>
+      </div>
+    </div>
+    <div class="iq">
+      <div class="iq-q">
+        <div class="iq-num" style="color:rgba(59,201,219,.5)">2</div>
+        <div>Difference between ArrayList and LinkedList?</div>
+      </div>
+      <div class="iq-a">
+        <span class="tag t1">ArrayList: O(1) get, O(n) insert/delete</span>
+        <span class="tag t3">LinkedList: O(n) get, O(1) insert/delete at pointer</span>
+        <span class="tag t4">Use ArrayList for random access, LinkedList for frequent insert/delete</span>
+      </div>
+    </div>
+    <div class="iq">
+      <div class="iq-q">
+        <div class="iq-num" style="color:rgba(232,67,147,.5)">3</div>
+        <div>Explain Stream API with example</div>
+      </div>
+      <div class="iq-a" style="display:block; padding:14px 20px">
+        <code style="font-family:'JetBrains Mono',monospace; font-size:11.5px; display:block; background:var(--bg3); padding:12px 16px; border-radius:6px; line-height:1.9; color:var(--txt2)">
+          <span class="kw">List</span>&lt;Integer&gt; nums = Arrays.asList(1,2,3,4);<br>
+          nums.stream()<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;.filter(n -> n % 2 == 0)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;.forEach(System.out::println);
+        </code>
+      </div>
+    </div>
+    <div class="iq">
+      <div class="iq-q">
+        <div class="iq-num" style="color:rgba(105,219,124,.5)">4</div>
+        <div>How does Spring Boot work internally?</div>
+      </div>
+      <div class="iq-a">
+        <span class="tag t4">Auto-configuration via @EnableAutoConfiguration</span>
+        <span class="tag t4">→ Component scan</span>
+        <span class="tag t4">→ DI via ApplicationContext</span>
+        <span class="tag t4">→ Embedded Tomcat starts</span>
+        <span class="tag t5">→ Ready to serve requests</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ PROJECT STACK ══════ -->
+<section class="sec">
+  <div class="shead rv" style="position:relative">
+    <span style="position:absolute;bottom:-1px;left:0;width:64px;height:3px;background:var(--s4);border-radius:2px"></span>
+    <div class="snum" style="color:rgba(105,219,124,.15)">★</div>
+    <div class="smeta">
+      <div class="sbadge b4">Real-World Stack</div>
+      <div class="stitle">Typical Java Backend Project</div>
+    </div>
+  </div>
+  <div class="stackrow rv">
+    <div class="sc st1"><div class="sc-ico">☕</div><div class="sc-name c1">Java</div><div class="sc-sub">Core runtime + OOP foundation</div></div>
+    <div class="sc st4"><div class="sc-ico">🍃</div><div class="sc-name c4">Spring Boot</div><div class="sc-sub">REST APIs, DI, embedded server</div></div>
+    <div class="sc st5"><div class="sc-ico">🗄️</div><div class="sc-name c5">MySQL/PG</div><div class="sc-sub">Relational database, JOINs</div></div>
+    <div class="sc st2"><div class="sc-ico">🔗</div><div class="sc-name c2">Hibernate</div><div class="sc-sub">ORM, entity mapping, JPA</div></div>
+    <div class="sc st6"><div class="sc-ico">🔐</div><div class="sc-name c6">Spring Security</div><div class="sc-sub">JWT auth, roles, filters</div></div>
+    <div class="sc" style="border-top:3px solid var(--s7)"><div class="sc-ico">🐳</div><div class="sc-name c7">Docker</div><div class="sc-sub">Containerize & deploy</div></div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ LEARNING FLOW ══════ -->
+<section class="sec">
+  <div class="shead rv" style="position:relative">
+    <span style="position:absolute;bottom:-1px;left:0;width:64px;height:3px;background:var(--java);border-radius:2px"></span>
+    <div class="snum" style="color:rgba(248,152,32,.15)">→</div>
+    <div class="smeta">
+      <div class="sbadge bj">Final Learning Flow — Follow This Order</div>
+      <div class="stitle">Learning Roadmap</div>
+    </div>
+  </div>
+  <div class="flow rv">
+    <div class="fstep"><div class="fnum" style="color:rgba(248,152,32,.3)">1</div><div class="fbody"><div class="fname">Core Java</div><div class="fsub">Variables, OOP, classes, constructors, access modifiers</div></div><div class="fdot fd1"></div></div>
+    <div class="fstep"><div class="fnum" style="color:rgba(248,152,32,.3)">2</div><div class="fbody"><div class="fname">OOP Deep Understanding</div><div class="fsub">Inheritance, polymorphism, abstraction, design patterns</div></div><div class="fdot fd1"></div></div>
+    <div class="fstep"><div class="fnum" style="color:rgba(232,67,147,.3)">3</div><div class="fbody"><div class="fname">Collections + Multithreading</div><div class="fsub">HashMap internals, List/Set/Map, thread safety</div></div><div class="fdot fd2"></div></div>
+    <div class="fstep"><div class="fnum" style="color:rgba(232,67,147,.3)">4</div><div class="fbody"><div class="fname">Java 8+ Features</div><div class="fsub">Lambdas, Streams, Optional, method references</div></div><div class="fdot fd2"></div></div>
+    <div class="fstep"><div class="fnum" style="color:rgba(59,201,219,.3)">5</div><div class="fbody"><div class="fname">DSA — Parallel Practice</div><div class="fsub">Arrays, Strings, Trees, Graphs on LeetCode</div></div><div class="fdot fd3"></div></div>
+    <div class="fstep"><div class="fnum" style="color:rgba(105,219,124,.3)">6</div><div class="fbody"><div class="fname">Spring Boot + REST APIs</div><div class="fsub">Controllers, services, DI, request/response lifecycle</div></div><div class="fdot fd4"></div></div>
+    <div class="fstep"><div class="fnum" style="color:rgba(255,212,59,.3)">7</div><div class="fbody"><div class="fname">Database + JPA</div><div class="fsub">SQL, Hibernate, Spring Data, entity relationships</div></div><div class="fdot fd5"></div></div>
+    <div class="fstep"><div class="fnum" style="color:rgba(240,101,149,.3)">8</div><div class="fbody"><div class="fname">Security</div><div class="fsub">Spring Security, JWT, roles, authentication flow</div></div><div class="fdot fd6"></div></div>
+    <div class="fstep"><div class="fnum" style="color:rgba(169,227,75,.3)">9</div><div class="fbody"><div class="fname">Projects + Deployment</div><div class="fsub">Build 2–3 real projects, Docker, Git portfolio</div></div><div class="fdot fd7"></div></div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ WHAT PEOPLE MISS ══════ -->
+<section class="sec">
+  <div class="shead rv" style="position:relative">
+    <span style="position:absolute;bottom:-1px;left:0;width:64px;height:3px;background:var(--sq);border-radius:2px"></span>
+    <div class="snum" style="color:rgba(255,107,107,.15)">⚠</div>
+    <div class="smeta">
+      <div class="sbadge bq">Do NOT Skip These</div>
+      <div class="stitle">What Most People Miss</div>
+    </div>
+  </div>
+  <div class="missrow rv">
+    <div class="miss ml1">
+      <div class="miss-h cq">❌ Not Writing Clean Code</div>
+      <div class="miss-b">Naming, formatting, single responsibility — interviewers judge code quality, not just correctness. Practice writing readable code always.</div>
+    </div>
+    <div class="miss ml2">
+      <div class="miss-h c6">❌ Skipping Debugging Skills</div>
+      <div class="miss-b">Knowing IntelliJ debugger, reading stack traces, and fixing NullPointerException efficiently is a core real-world skill.</div>
+    </div>
+    <div class="miss ml3">
+      <div class="miss-h c5">❌ Not Building Real Projects</div>
+      <div class="miss-b">Tutorial code ≠ project experience. Build a full CRUD REST API, add JWT, deploy it. That's what impresses interviewers.</div>
+    </div>
+    <div class="miss ml4">
+      <div class="miss-h c3">❌ Memorizing Syntax, Not Understanding</div>
+      <div class="miss-b">Know WHY HashMap uses hashing, WHY threads need synchronization. Interviewers dig deeper — understand the "why".</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ══════ REFS ══════ -->
+<section class="sec">
+  <div class="shead rv" style="position:relative">
+    <span style="position:absolute;bottom:-1px;left:0;width:64px;height:3px;background:var(--s8);border-radius:2px"></span>
+    <div class="snum" style="color:rgba(116,192,252,.15)">📚</div>
+    <div class="smeta">
+      <div class="sbadge b8">Best References</div>
+      <div class="stitle">Learning Resources</div>
+    </div>
+  </div>
+  <div class="refs rv">
+    <a href="https://docs.oracle.com/en/java" target="_blank" class="ref" style="border-color:rgba(248,152,32,.3)">
+      <span class="ri">☕</span><div><div class="rn">Oracle Java Docs</div><div class="rs">docs.oracle.com</div></div>
+    </a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank" class="ref" style="border-color:rgba(105,219,124,.3)">
+      <span class="ri">🍃</span><div><div class="rn">Spring Boot Docs</div><div class="rs">spring.io</div></div>
+    </a>
+    <a href="https://leetcode.com" target="_blank" class="ref" style="border-color:rgba(255,212,59,.3)">
+      <span class="ri">💻</span><div><div class="rn">LeetCode</div><div class="rs">DSA interview practice</div></div>
+    </a>
+    <a href="https://geeksforgeeks.org" target="_blank" class="ref" style="border-color:rgba(59,201,219,.3)">
+      <span class="ri">📖</span><div><div class="rn">GeeksforGeeks</div><div class="rs">Theory + examples</div></div>
+    </a>
+    <a href="https://baeldung.com" target="_blank" class="ref" style="border-color:rgba(177,151,252,.3)">
+      <span class="ri">🎯</span><div><div class="rn">Baeldung</div><div class="rs">Spring & Java deep dives</div></div>
+    </a>
+    <a href="https://github.com" target="_blank" class="ref" style="border-color:rgba(169,227,75,.3)">
+      <span class="ri">🐙</span><div><div class="rn">GitHub Portfolio</div><div class="rs">Show real projects</div></div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>Java Full Roadmap · 9 Modules · Core → Spring Boot → DSA → Interview Ready</p>
+  <p style="margin-top:6px;opacity:.5;font-size:10px">Write clean code. Understand the why. Build real things. ☕</p>
+</footer>
+
+</div>
+
+<script>
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('bD').classList.toggle('on', t === 'dark');
+  document.getElementById('bL').classList.toggle('on', t === 'light');
+  localStorage.setItem('java-theme', t);
+}
+const saved = localStorage.getItem('java-theme');
+if (saved) setTheme(saved);
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
