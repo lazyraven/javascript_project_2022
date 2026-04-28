@@ -1368,7 +1368,427 @@ Asynchronous code allows the program to continue execution without waiting for t
   • Use async → APIs, DB calls, file handling (most real apps)
 ` 
   },
+  //  Core Fundamentals - https://lifecodewithnisha.in/javascript-roadmap-2026.html
+  {
+    question: "2026 | Core Fundamentals - https://lifecodewithnisha.in/javascript-roadmap-2026.html",
+    definition: `2026 JS | Data Foundation(Variables & Types)| How JS Runs (Execution Model) | Function Types (Functions Basics
+   
+    )`
 
+  },
+  {
+    question: "Primitive vs Reference types?",
+    definition: `JavaScript has two main categories of data types: primitive and reference types.
+      
+    • Primitive types are immutable and stored directly in memory. Examples include number, string, boolean, null, 
+      undefined, symbol, and bigint. When we assign or copy a primitive value, it creates a completely separate copy.
+
+    • Reference types, like objects, arrays, and functions, are stored as references in memory. So when we assign them, 
+      we’re copying the reference, not the actual value. That’s why modifying one variable affects the other.
+
+
+| Feature          | Primitive Types           | Reference Types            |
+|------------------|---------------------------|----------------------------|  
+| Storage          | Stored directly in memory | Stored as reference        |
+| Mutability       | Immutable                 | Mutable                    |
+| Assignment       | Creates a new copy        | Copies the reference       |
+| Examples         | number, string, boolean   | object, array, function    |
+
+Real-Life Analogy (Interview Bonus) :
+    Primitive types are like writing a number on two separate papers. Changing one doesn’t affect the other.
+    Reference types are like sharing the same Google Doc link—if one person edits it, everyone sees the change.
+
+Fluency :
+    JavaScript has two types of data: primitive and reference.
+    Primitive types store values directly, like numbers and strings.
+    Reference types store memory addresses, like objects and arrays.
+    When copying primitives, we get a new value.
+    When copying reference types, we get a shared reference.
+    That’s why changes in one variable affect the other.”
+`
+  },
+  {
+    question: "Type Coercion & == vs === ?",
+    definition: `JavaScript uses type coercion to convert values between types when needed.
+
+There are two types: 
+    • implicit coercion, done automatically by JavaScript, and 
+    • explicit coercion, done manually using functions like Number() or String()
+
+When comparing values, == allows type coercion, meaning it converts operands to the same type before comparing.
+On the other hand, === checks both value and type strictly without conversion, which makes it safer and more predictable.”
+
+Real-Life Analogy :
+    Using == is like comparing values after converting units automatically, like converting meters to centimeters.
+    Using === is like checking both value and unit strictly without conversion.
+
+Fluency :
+    == compares values after type conversion, while === compares both value and type without conversion.”
+    OR
+    “Type coercion is the conversion of one data type to another in JavaScript.
+    It can be implicit or explicit.
+    The == operator allows coercion before comparison, while === checks both type and value strictly.
+    That’s why === is preferred in most cases to avoid unexpected behavior.
+
+Pro :
+    JavaScript follows specific coercion rules defined by the abstract equality comparison algorithm, 
+    which can sometimes lead to unexpected results.
+`
+  },
+  {
+    question: "Operators & Expressions?",
+    definition: `Operators are symbols that perform operations on values, like +, -, or ===.
+An expression is any valid combination of values, variables, and operators that produces a result.
+operators are used to perform operations on operands—for example arithmetic, comparison, or logical operations.
+
+| Operator Type     | Examples                 | Description                          |
+|-------------------|--------------------------|--------------------------------------|
+| Arithmetic        | +, -, *, /, %            | Perform mathematical calculations     |
+| Comparison        | ==, ===, !=, >, <        | Compare values and return boolean       |
+| Logical           | &&, ||, !                | Combine boolean values                 |
+Expressions can be simple (like 5 + 3) or complex (like (a > 10 && b < 5) || c === "hello"). 
+They are evaluated to produce a value, which can be used in further operations or assigned to variables.
+
+Types of Operators: JavaScript has different types of operators:
+    1. Arithmetic Operators: +, -, *, /, % for mathematical operations.
+    2. Comparison Operators: ==, ===, !=, >, < for comparing values.
+    3. Logical Operators: &&, ||, ! for combining boolean values.
+    4. Assignment Operators: =, +=, -= for assigning values to variables.
+    5. Ternary Operator: condition ? exprIfTrue : exprIfFalse for inline conditional expressions.
+    6. Type Operators: typeof, instanceof for checking types.
+    7. Bitwise Operators: &, |, ^ for bit-level operations.
+    8. Spread and Rest Operators: ... for expanding or collecting values.
+
+Each is used depending on the requirement.
+
+Real-Life Analogy:
+  Operators are like actions, such as adding or comparing.
+  Expressions are complete sentences that give a result.
+
+Fluency :
+  Operators are symbols used to perform operations on values.
+  Expressions are combinations of values, variables, and operators that produce a result.
+  For example, 5 + 3 is an expression that evaluates to 8.
+  Operators help form expressions, and expressions always return a value.
+
+One-line summary: Operators perform operations, and expressions are combinations that evaluate to a value.
+`
+  },
+  {
+    question: "Control flow: if/else, switch?",
+    definition: `Control flow determines how a program executes based on conditions.
+      The if/else statement is used when we want to check conditions and execute code blocks accordingly.
+      The switch statement is useful when we have multiple possible values for a single variable and want cleaner code instead of multiple if-else conditions.
+
+    Key Difference :
+        if/else is better when we have complex conditions or ranges.
+        switch is better when we compare one variable against multiple exact values.
+
+    Real-Life Analogy :
+        if/else is like asking questions step by step—if this condition is true, do this.
+        switch is like selecting an option from a menu.
+
+    Fluency :
+        Control flow is used to decide how code executes based on conditions.
+        The if/else statement evaluates conditions and runs code accordingly.
+        The switch statement is used when we compare one value against multiple cases.
+        It helps make code cleaner when dealing with many conditions.
+
+    Pro Tip:
+        switch uses strict comparison (===) internally.
+
+    One-Line Summary:
+        Control flow allows us to execute different code paths based on conditions using if/else or switch
+`
+  },
+  {
+    question: "Loops: for, while, for...of, for...in ?",
+    definition: `Loops help us avoid writing repetitive code by executing a block multiple times.
+  A for loop is commonly used when we know the number of iterations.
+  A while loop is used when the number of iterations depends on a condition.
+  for...of is used to iterate over iterable values like arrays or strings.
+  for...in is used to iterate over object keys.
+
+Key Difference :
+    for...of iterates over values, while for...in iterates over keys.
+    So we use for...of for arrays and for...in for objects.
+
+Real-Life Analogy :
+    A for loop is like counting from 1 to 10 when you know the limit.
+    A while loop is like waiting for a traffic light to turn green before crossing.
+    for...of is like going through each item in a shopping list.
+    for...in is like checking each key in a dictionary. 
+
+
+  Fluency :
+      Loops are used to run code multiple times.
+      A for loop is used when we know the number of iterations.
+      A while loop runs based on a condition.
+      for...of is used to iterate over values in arrays or strings.
+      for...in is used to iterate over object keys
+
+  Pro Tip:
+      for...in can iterate over inherited properties as well, so we often use hasOwnProperty() check when needed.
+
+  One-Line Summary:
+      Loops allow repeated execution, and different loop types are used based on whether we need index, condition, values, or keys.`
+  },
+  {
+    question: "Execution Model | Execution Context — Global & Function?",
+    definition: `In JavaScript, execution context is the environment where code runs. There are mainly two types: global execution context and function execution context.
+The global execution context is created when the JavaScript file starts running. It creates a global object and sets this to it.
+A function execution context is created every time a function is called. Each function gets its own scope, variables, and this value.
+JavaScript executes code using a call stack, where global context is pushed first, and then function contexts are added and removed as functions are executed
+
+Slightly more detailed:
+Each execution context has two phases:
+
+Creation phase — where variables and functions are stored in memory. Variables are initialized as undefined, and functions are fully hoisted.
+Execution phase — where code runs line by line and values are assigned.
+
+The global execution context is created once, while function execution contexts are created whenever a function is invoked.
+These contexts are managed using the call stack, which follows a last-in, first-out approach.
+
+Callstack :
+    JavaScript uses a call stack to manage execution contexts.
+    The global context is pushed first. When a function is called, its context is pushed onto the stack.
+    Once the function finishes execution, it is popped off the stack.
+
+Fluency :
+    So, execution context in JavaScript defines how code is executed. There are two main types — global and function execution context.
+    The global one is created first and represents the overall environment.
+    Whenever a function is called, JavaScript creates a new execution context for that function.
+    Each context goes through a creation phase and an execution phase.
+    JavaScript manages all of this using a call stack, where contexts are pushed and popped as functions run.
+
+Pro :
+    Execution context is closely related to lexical scope and closures,
+    which define how variables are accessed across different contexts.
+`
+  },
+  {
+    question: "Call Stack — LIFO execution order ?",
+    definition: `Short Answer: The call stack in JavaScript is a mechanism used to keep track of function execution. It follows the LIFO principle — Last In, First Out.
+      This means the most recently called function is executed first and removed first from the stack.
+
+      Slightly Detailed: When JavaScript runs, the global execution context is pushed onto the call stack first.
+      Every time a function is called, a new execution context is created and pushed onto the stack.
+      Once the function finishes execution, it is popped off the stack.
+      This continues until the stack becomes empty.
+
+`
+  },
+  {
+    question: "Hoisting — var & function declarations ?",
+    definition: `Hoisting in JavaScript means that variable and function declarations are moved to the top of their scope during the creation phase of execution context.
+    Variables declared with var are hoisted and initialized with undefined, while function declarations are fully hoisted with their complete definition.”
+
+  Detailed Explanation:
+    JavaScript executes code in two phases — creation and execution.
+    During the creation phase, memory is allocated for variables and functions.
+    var variables are hoisted and set to undefined, while function declarations are stored entirely in memory.
+    That’s why we can call a function before its declaration, but accessing a var variable before assignment gives undefined.
+
+  Fluency :
+    Hoisting is JavaScript’s behavior of moving declarations to the top of their scope during the creation phase.
+    Variables declared with var are hoisted but initialized as undefined.
+    Function declarations, however, are fully hoisted with their body.
+    That’s why we can call a function before it is defined, but accessing a variable before assignment gives undefined.
+    It’s important to note that function expressions are not fully hoisted.
+
+  One-Line Summary:
+        Hoisting means JavaScript moves declarations to the top — var becomes undefined, and functions are fully available.
+
+  Pro Tip:
+      let and const are also hoisted but remain in a temporal dead zone until initialized, 
+      so accessing them before declaration throws a reference error.
+`
+  },
+  {
+    question: "Scope: Global, Function, Block ?",
+    definition: `Global scope variables are declared outside any function and can be accessed anywhere.
+Function scope variables are declared inside a function and are only accessible within that function.
+Block scope was introduced with let and const, where variables are limited to a block defined by curly braces.
+This helps avoid unintended access and improves code safety.
+
+Fluency :
+    Scope in JavaScript determines where variables can be accessed.
+    There are three types — global, function, and block scope.
+    Global variables are accessible everywhere.
+    Function-scoped variables are limited to the function they are declared in.
+    Block scope applies to let and const, where variables are restricted to a specific block.
+    This helps prevent bugs and improves code maintainability
+One-Line Summary:
+   Scope defines variable accessibility — global is everywhere, function is inside functions, and block is limited to {} using let and const.
+   
+Pro :
+   Scope is determined by lexical structure, meaning where 
+   variables are written in code defines their accessibility, not where they are called.
+   `
+  },
+  {
+    question: "Temporal Dead Zone (let/const)?",
+    definition: `The Temporal Dead Zone is the time between when a let or const variable is hoisted and when it is initialized.
+During this period, accessing the variable throws a ReferenceError.
+
+Detailed Explanation:
+    let and const are hoisted like var, but unlike var, they are not initialized immediately.
+    From the start of the block until the declaration line, the variable stays in a Temporal Dead Zone.
+    If we try to access it in this zone, JavaScript throws a ReferenceError instead of returning undefined.
+
+Fluency :
+    Temporal Dead Zone refers to the phase where let and const variables are hoisted but not yet initialized.
+    This happens from the start of the block until the variable is declared.
+    If we try to access the variable during this time, JavaScript throws a ReferenceError.
+    This behavior helps prevent accidental usage of variables before initialization, making the code more predictable.
+
+One-Line Summary:
+    TDZ is the time between hoisting and initialization of let and const, where accessing them throws a ReferenceError.
+
+Pro Tip:
+    TDZ enforces better coding practices by preventing access to variables before initialization, which avoids subtle bugs common with var.
+   
+Bonus:  DZ exists because JavaScript uses lexical scoping, and let/const bindings are created at the start of the block but remain uninitialized until execution reaches their declaration.
+    `
+  },
+  {
+    question: "Function Declarations vs Function Expressions?",
+    definition: `A function declaration defines a function with a name and is fully hoisted, so it can be called before it appears in the code.
+A function expression assigns a function to a variable, and it is not fully hoisted, so it can only be used after the assignment.
+
+Slightly Detailed:
+    Function Declaration:
+        function greet() {
+          console.log("Hello");
+        }
+    This can be called before its declaration due to hoisting.
+
+    Function Expression:
+        const greet = function() {
+          console.log("Hello");
+        }
+    This cannot be called before the assignment, as it is not fully hoisted.
+
+    function declarations are created during the creation phase of execution context, so the entire function is available before execution.
+    Function expressions, however, behave like variables. If declared with var, they are hoisted as undefined, and if declared with let or const, 
+    they remain in the Temporal Dead Zone until initialization.
+
+Fluency :
+    The main difference between function declaration and function expression is how they are defined and hoisted.
+    A function declaration is fully hoisted, so it can be called before it appears in the code.
+    A function expression is assigned to a variable and behaves like that variable.
+    So it can only be used after initialization.
+    This difference is important when deciding how to structure code and avoid runtime errors.
+
+One-Line Summary:
+    Function declarations are fully hoisted, while function expressions are treated like variables and only available after assignment.
+
+Pro Tip:
+Function expressions are often used for callbacks and closures, while declarations are useful for defining reusable logic at the top level.
+
+Bonus:
+Named function expressions can also be used for better debugging, as they provide meaningful stack traces
+    `
+  },
+  {
+    question: "Arrow functions — lexical this?",
+    definition: `Arrow functions don’t have their own this.
+They use lexical this, meaning they inherit this from their surrounding scope.
+Detailed Explanation:
+   In regular functions, the value of this depends on how the function is called.
+But in arrow functions, this is fixed at the time of definition and comes from the outer scope.
+This behavior is called lexical this, and it helps avoid common issues with context binding.
+    const obj = {
+      name: "Alice",
+      regularFunc: function() {
+        console.log(this.name); // Alice
+      },
+      arrowFunc: () => {
+        console.log(this.name); // undefined (lexical this from global scope)
+      }
+    };
+
+Fluency :
+    Arrow functions differ from regular functions mainly in how they handle this.
+    They don’t have their own this value.
+    Instead, they inherit this from the surrounding lexical scope.
+    This makes them very useful in callbacks and asynchronous code, where maintaining the correct context is important.
+    However, they should not be used as object methods when we need dynamic this binding.
+
+One-Line Summary: Arrow functions use lexical this, meaning they inherit this from their surrounding scope instead of defining their own.
+
+Pro Tip : Arrow functions also don’t have arguments, super, or new.target, which makes them unsuitable for constructors.”
+
+Bonus : Because arrow functions capture this lexically, methods like call, apply, and bind cannot change their this value.
+`
+  },
+  {
+    question: "Parameters & default values?",
+    definition: `Short : Parameters are variables defined in a function to accept input values.
+Default parameters allow us to assign a default value if no argument or undefined is passed.
+
+In JavaScript, parameters receive values from arguments when a function is called.
+With ES6, we can define default values directly in the function signature.
+If the argument is missing or undefined, the default value is used.
+This helps avoid manual checks and makes the code cleaner.
+
+Fluency :
+    Parameters are used to receive input values in a function.
+    JavaScript allows default parameter values, which are used when no argument or undefined is passed.
+    This feature helps simplify code by removing the need for manual checks.
+    It also supports expressions, making it flexible for dynamic defaults.
+
+ One-Line Summary: Default parameters allow functions to use predefined values when arguments are missing or undefined.
+        
+        `
+  },
+  {
+    question: "?",
+    definition: ``
+  },
+  {
+    question: "?",
+    definition: ``
+  },
+
+  {
+    question: "?",
+    definition: ``
+  },
+  {
+    question: "?",
+    definition: ``
+  },
+  {
+    question: "?",
+    definition: ``
+  },
+
+  {
+    question: "?",
+    definition: ``
+  },
+  {
+    question: "?",
+    definition: ``
+  },
+  {
+    question: "?",
+    definition: ``
+  },
+
+  {
+    question: "?",
+    definition: ``
+  },
+  {
+    question: "?",
+    definition: ``
+  },
+  {
+    question: "?",
+    definition: ``
+  },
 ];
 
     const questionGrid = document.getElementById("questionGrid");

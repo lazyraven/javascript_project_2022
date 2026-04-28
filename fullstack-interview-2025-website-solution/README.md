@@ -9,3 +9,7 @@ It helps me track my learning, revisit concepts, and build small projects.
 
 ---
 [Fullstack Interview Solution] (https://lazyraven.github.io/developer-study-hub/)
+
+Prompt :
+Primitive vs Reference types, how to reply to this topic to the interviewer? 
+how to reply to them? In spoken language and code scenario? Voice-spoken practice scripts for fluency
