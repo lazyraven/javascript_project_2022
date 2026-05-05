@@ -1,0 +1,36 @@
+
+Most Imp > https://chatgpt.com/share/69d141f3-6844-83e8-8d81-b7148e565eb7
+Step0 : 00_Most_Imp_Interview.html | Cover In Daily Bases
+Step1 : Product Engineering Prep 2026 with REACT, NODEJS AND DSA > 02_structure.html file
+Step2 : Daily Routine Wise Created Roadmap On Daily Bases > 01_routine_map.html | Created Readme File HIGHIMPACTPROJECT.md | MERN.md
+Step3 > Created DSA Roadmap (MOST IMPORTANT FOR DSA PRACTICE AND LEARNING) > 03_day_to_day_roadmap.html
+
+
+Notes :
+Array > 
+1. while loop practice you can take > reverse array example 
+
+
+****************
+Prompt For All Question Resolve From Easy To Advanced...
+
+I am working on a JavaScript DSA problem.
+Please guide me step by step with a strong focus on building understanding.
+
+1. First, explain what concepts or topics are required to solve this problem (from basic to intermediate level).
+2. Break down the logic needed to approach the problem in a clear, step-by-step manner.
+3. Explain how to think about the problem before jumping into code.
+4. Then, provide a detailed solution in JavaScript with proper explanation.
+5. Also, include the time and space complexity analysis.
+6. If possible, suggest alternative approaches or optimizations.
+
+Make sure the explanation is beginner-friendly but progresses toward an intermediate understanding.
+explain common mistakes, edge cases, and how this pattern can be reused in other problems.
+
+
+Optional (Stronger Version for Deep Learning)
+If you want even better learning:
+
+Additionally, explain common mistakes, edge cases, and how this pattern can be reused in other problems.
+
+You learn patterns + thinking
