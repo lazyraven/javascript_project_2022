@@ -1,3 +1,6 @@
+// https://chatgpt.com/g/g-p-69d8c5fe26488191a2228938541cb3df-dsa-topicquecover/c/69fc1407-14c8-83e8-9295-5d42c6304788
+// DSA-2025 REPO ALSO EXPLAINED
+
 // Problem 1: Find Duplicate Elements in an Array
 // Input: [1,2,3,2,4,1]
 // Output: [1,2]
@@ -28,3 +31,9 @@ function find_duplicate(arr) {
 console.log("find_duplicate result1", find_duplicate(input1));
 console.log("find_duplicate result2", find_duplicate(input2));
 console.log("find_duplicate result3", find_duplicate(input3));
+
+// Time Complexity
+// Your current approach uses includes() multiple times.
+// Complexity:
+// O(n²)
+
