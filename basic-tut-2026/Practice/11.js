@@ -17,20 +17,30 @@
 // Check if element exists in object
 // Increment count
 // Otherwise initialize with 1
-
 function countOccurrences(arr) {
   const frequency = {};
-  for (let i = 0; i < arr.length; i++) {
-    const element = arr[i];
-    if (frequency[element]) {
-      frequency[element]++;
-    } else {
-      frequency[element] = 1;
-    }
+
+  for (const item of arr) {
+    frequency[item] = (frequency[item] || 0) + 1;
   }
+
   return frequency;
 }
+
+// function countOccurrences(arr) {
+//   const frequency = {};
+//   for (let i = 0; i < arr.length; i++) {
+//     const element = arr[i];
+//     if (frequency[element]) {
+//       frequency[element]++;
+//     } else {
+//       frequency[element] = 1;
+//     }
+//   }
+//   return frequency;
+// }
 console.log(countOccurrences([1, 2, 2, 3, 1, 1]));
+
 
 // Method 3
 // Using Map (Best for Advanced Cases)
