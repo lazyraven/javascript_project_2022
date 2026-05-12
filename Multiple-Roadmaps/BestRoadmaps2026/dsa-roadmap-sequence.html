@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSA Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --border: #2a2a3a;
+    --accent: #7c5cfc;
+    --accent2: #fc5c7d;
+    --accent3: #5cfc9a;
+    --accent4: #fcb85c;
+    --text: #e8e8f0;
+    --text-muted: #7070a0;
+    --mono: 'Space Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+  }
+
+  /* Header */
+  header {
+    margin-bottom: 64px;
+    position: relative;
+  }
+
+  .header-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: clamp(40px, 8vw, 80px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--text);
+  }
+
+  h1 span {
+    display: block;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header-subtitle {
+    margin-top: 20px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-muted);
+    max-width: 440px;
+    line-height: 1.7;
+  }
+
+  /* Phase labels */
+  .phase-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .phase-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: default;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--card-accent, var(--accent));
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .card-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--card-accent, var(--accent));
+    min-width: 32px;
+    padding-top: 4px;
+    letter-spacing: 0.1em;
+  }
+
+  .card-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .card-body {
+    padding-left: 48px;
+  }
+
+  /* Sub-sections */
+  .sub-section {
+    margin-bottom: 16px;
+  }
+
+  .sub-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    transition: background 0.15s;
+  }
+
+  .tag.learn { border-color: color-mix(in srgb, var(--card-accent, var(--accent)) 40%, transparent); }
+  .tag.practice { 
+    background: color-mix(in srgb, var(--card-accent, var(--accent)) 10%, transparent);
+    border-color: color-mix(in srgb, var(--card-accent, var(--accent)) 30%, transparent);
+    color: var(--card-accent, var(--accent));
+  }
+
+  /* Color variants */
+  .c1 { --card-accent: #7c5cfc; }
+  .c2 { --card-accent: #fc5c7d; }
+  .c3 { --card-accent: #5cfc9a; }
+  .c4 { --card-accent: #fcb85c; }
+  .c5 { --card-accent: #5cc8fc; }
+  .c6 { --card-accent: #fc5cec; }
+  .c7 { --card-accent: #a8fc5c; }
+
+  /* Nested group */
+  .nested {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+  }
+
+  .nested-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--card-accent, var(--accent));
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Final order */
+  .order-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .order-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .order-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    min-width: 20px;
+  }
+
+  .order-name {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* Platforms */
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .platform-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 14px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .platform-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent3);
+    flex-shrink: 0;
+  }
+
+  /* Strategy */
+  .strategy-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .strategy-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 12px 16px;
+    font-size: 12px;
+    line-height: 1.5;
+    display: flex;
+    gap: 10px;
+  }
+
+  .strategy-arrow {
+    color: var(--accent4);
+    font-family: var(--mono);
+    flex-shrink: 0;
+  }
+
+  /* DP order */
+  .dp-flow {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  .dp-step {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 5px 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text);
+  }
+
+  .dp-arrow {
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 16px;
+  }
+
+  .footer-text {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .footer-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 6px 14px;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.10s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.20s; }
+  .card:nth-child(5) { animation-delay: 0.25s; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header>
+    <div class="header-tag">// complete learning path</div>
+    <h1>DSA<span>Roadmap</span></h1>
+    <p class="header-subtitle">A structured guide to mastering Data Structures & Algorithms — from basics to advanced. Follow the order, solve the problems, ship the career.</p>
+  </header>
+
+  <!-- Phase 1 -->
+  <div class="phase-label">Phase 01 — Foundation</div>
+
+  <div class="card c1">
+    <div class="card-header">
+      <div class="card-number">01</div>
+      <div class="card-title">Programming Basics</div>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">
+        <div class="sub-title">Before DSA, be comfortable with</div>
+        <div class="tag-list">
+          <span class="tag learn">Variables &amp; Loops</span>
+          <span class="tag learn">Functions</span>
+          <span class="tag learn">Arrays / Strings</span>
+          <span class="tag learn">Big-O Notation</span>
+          <span class="tag learn">Basic Recursion</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 2 -->
+  <div class="phase-label">Phase 02 — Core Patterns</div>
+
+  <div class="card c2">
+    <div class="card-header">
+      <div class="card-number">02</div>
+      <div class="card-title">Arrays &amp; Strings</div>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">
+        <div class="sub-title">Learn</div>
+        <div class="tag-list">
+          <span class="tag learn">Traversal</span>
+          <span class="tag learn">Prefix Sum</span>
+          <span class="tag learn">Two Pointers</span>
+          <span class="tag learn">Sorting Basics</span>
+          <span class="tag learn">Hashing</span>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Practice</div>
+        <div class="tag-list">
+          <span class="tag practice">Reverse Array/String</span>
+          <span class="tag practice">Move Zeros</span>
+          <span class="tag practice">Remove Duplicates</span>
+          <span class="tag practice">Frequency Counting</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c3">
+    <div class="card-header">
+      <div class="card-number">03</div>
+      <div class="card-title">Hashing</div>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">
+        <div class="sub-title">Learn</div>
+        <div class="tag-list">
+          <span class="tag learn">HashMap / Set</span>
+          <span class="tag learn">Frequency Maps</span>
+          <span class="tag learn">Lookup Optimization</span>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Practice</div>
+        <div class="tag-list">
+          <span class="tag practice">Two Sum</span>
+          <span class="tag practice">Anagrams</span>
+          <span class="tag practice">Duplicate Detection</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c4">
+    <div class="card-header">
+      <div class="card-number">04</div>
+      <div class="card-title">Two Pointers &amp; Sliding Window</div>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">
+        <div class="nested">
+          <div class="nested-title">Two Pointers</div>
+          <div class="tag-list">
+            <span class="tag learn">Pair Problems</span>
+            <span class="tag learn">Sorted Arrays</span>
+            <span class="tag learn">Opposite / End Pointers</span>
+          </div>
+        </div>
+        <div class="nested">
+          <div class="nested-title">Sliding Window</div>
+          <div class="tag-list">
+            <span class="tag learn">Fixed-size Window</span>
+            <span class="tag learn">Variable-size Window</span>
+          </div>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Practice</div>
+        <div class="tag-list">
+          <span class="tag practice">Longest Substring</span>
+          <span class="tag practice">Maximum Subarray</span>
+          <span class="tag practice">Minimum Window Problems</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 3 -->
+  <div class="phase-label">Phase 03 — Data Structures</div>
+
+  <div class="card c5">
+    <div class="card-header">
+      <div class="card-number">05</div>
+      <div class="card-title">Stack &amp; Queue</div>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">
+        <div class="nested">
+          <div class="nested-title">Stack</div>
+          <div class="tag-list">
+            <span class="tag learn">Monotonic Stack</span>
+            <span class="tag learn">Expression Evaluation</span>
+            <span class="tag learn">Next Greater Element</span>
+          </div>
+        </div>
+        <div class="nested">
+          <div class="nested-title">Queue / Deque</div>
+          <div class="tag-list">
+            <span class="tag learn">BFS Basics</span>
+            <span class="tag learn">Sliding Window Maximum</span>
+          </div>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Practice</div>
+        <div class="tag-list">
+          <span class="tag practice">Valid Parentheses</span>
+          <span class="tag practice">Min Stack</span>
+          <span class="tag practice">Daily Temperatures</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c6">
+    <div class="card-header">
+      <div class="card-number">06</div>
+      <div class="card-title">Linked List</div>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">
+        <div class="sub-title">Learn</div>
+        <div class="tag-list">
+          <span class="tag learn">Reverse List</span>
+          <span class="tag learn">Fast &amp; Slow Pointers</span>
+          <span class="tag learn">Cycle Detection</span>
+          <span class="tag learn">Merge Lists</span>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Practice</div>
+        <div class="tag-list">
+          <span class="tag practice">Reverse Linked List</span>
+          <span class="tag practice">Detect Cycle</span>
+          <span class="tag practice">Middle Node</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c7">
+    <div class="card-header">
+      <div class="card-number">07</div>
+      <div class="card-title">Recursion</div>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">
+        <div class="sub-title">Learn</div>
+        <div class="tag-list">
+          <span class="tag learn">Base Condition</span>
+          <span class="tag learn">Recursive Tree Thinking</span>
+          <span class="tag learn">Divide &amp; Conquer</span>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Practice</div>
+        <div class="tag-list">
+          <span class="tag practice">Fibonacci</span>
+          <span class="tag practice">Factorial</span>
+          <span class="tag practice">Subsets</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 4 -->
+  <div class="phase-label">Phase 04 — Search &amp; Trees</div>
+
+  <div class="card c1">
+    <div class="card-header">
+      <div class="card-number">08</div>
+      <div class="card-title">Binary Search</div>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">
+        <div class="sub-title">Learn</div>
+        <div class="tag-list">
+          <span class="tag learn">Binary Search on Sorted Arrays</span>
+          <span class="tag learn">Search Space Problems</span>
+          <span class="tag learn">Lower / Upper Bound</span>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Practice</div>
+        <div class="tag-list">
+          <span class="tag practice">First / Last Occurrence</span>
+          <span class="tag practice">Rotated Array</span>
+          <span class="tag practice">Binary Search on Answer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c2">
+    <div class="card-header">
+      <div class="card-number">09</div>
+      <div class="card-title">Trees &amp; Binary Trees</div>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">
+        <div class="sub-title">Learn</div>
+        <div class="tag-list">
+          <span class="tag learn">DFS</span>
+          <span class="tag learn">BFS</span>
+          <span class="tag learn">Tree Traversals</span>
+          <span class="tag learn">Height / Depth</span>
+          <span class="tag learn">Lowest Common Ancestor</span>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Practice</div>
+        <div class="tag-list">
+          <span class="tag practice">Inorder Traversal</span>
+          <span class="tag practice">Diameter</span>
+          <span class="tag practice">Level Order Traversal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c3">
+    <div class="card-header">
+      <div class="card-number">10</div>
+      <div class="card-title">Heap / Priority Queue</div>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">
+        <div class="sub-title">Learn</div>
+        <div class="tag-list">
+          <span class="tag learn">Min Heap / Max Heap</span>
+          <span class="tag learn">Top K Problems</span>
+          <span class="tag learn">Priority Scheduling</span>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Practice</div>
+        <div class="tag-list">
+          <span class="tag practice">K Largest Elements</span>
+          <span class="tag practice">Merge K Lists</span>
+          <span class="tag practice">Heap Sort Basics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 5 -->
+  <div class="phase-label">Phase 05 — Advanced</div>
+
+  <div class="card c4">
+    <div class="card-header">
+      <div class="card-number">11</div>
+      <div class="card-title">Backtracking</div>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">
+        <div class="sub-title">Learn</div>
+        <div class="tag-list">
+          <span class="tag learn">Choice → Explore → Undo</span>
+          <span class="tag learn">State-Space Tree</span>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Practice</div>
+        <div class="tag-list">
+          <span class="tag practice">Permutations</span>
+          <span class="tag practice">Combinations</span>
+          <span class="tag practice">N-Queens</span>
+          <span class="tag practice">Sudoku Solver</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c5">
+    <div class="card-header">
+      <div class="card-number">12</div>
+      <div class="card-title">Greedy Algorithms</div>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">
+        <div class="sub-title">Practice</div>
+        <div class="tag-list">
+          <span class="tag practice">Activity Selection</span>
+          <span class="tag practice">Interval Merging</span>
+          <span class="tag practice">Jump Game</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c6">
+    <div class="card-header">
+      <div class="card-number">13</div>
+      <div class="card-title">Dynamic Programming</div>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">
+        <div class="sub-title">DP Learning Order</div>
+        <div class="dp-flow">
+          <span class="dp-step">Recursion</span>
+          <span class="dp-arrow">→</span>
+          <span class="dp-step">Memoization</span>
+          <span class="dp-arrow">→</span>
+          <span class="dp-step">Tabulation</span>
+          <span class="dp-arrow">→</span>
+          <span class="dp-step">Space Optimization</span>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Core Patterns</div>
+        <div class="tag-list">
+          <span class="tag learn">1D DP</span>
+          <span class="tag learn">2D DP</span>
+          <span class="tag learn">Knapsack</span>
+          <span class="tag learn">LIS</span>
+          <span class="tag learn">DP on Strings</span>
+          <span class="tag learn">DP on Trees</span>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Practice</div>
+        <div class="tag-list">
+          <span class="tag practice">Climbing Stairs</span>
+          <span class="tag practice">House Robber</span>
+          <span class="tag practice">Coin Change</span>
+          <span class="tag practice">Longest Common Subsequence</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c7">
+    <div class="card-header">
+      <div class="card-number">14</div>
+      <div class="card-title">Graphs</div>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">
+        <div class="sub-title">Learn</div>
+        <div class="tag-list">
+          <span class="tag learn">BFS / DFS</span>
+          <span class="tag learn">Topological Sort</span>
+          <span class="tag learn">Union Find</span>
+          <span class="tag learn">Dijkstra</span>
+          <span class="tag learn">MST</span>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Practice</div>
+        <div class="tag-list">
+          <span class="tag practice">Number of Islands</span>
+          <span class="tag practice">Course Schedule</span>
+          <span class="tag practice">Shortest Path</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final Order -->
+  <div class="phase-label">Recommended Final Order</div>
+  <div class="card c1" style="animation-delay:0s">
+    <div class="card-header">
+      <div class="card-number">★</div>
+      <div class="card-title">Study Sequence</div>
+    </div>
+    <div class="card-body">
+      <div class="order-grid">
+        <div class="order-item"><span class="order-num">01</span><span class="order-name">Arrays &amp; Strings</span></div>
+        <div class="order-item"><span class="order-num">02</span><span class="order-name">Hashing</span></div>
+        <div class="order-item"><span class="order-num">03</span><span class="order-name">Two Pointers</span></div>
+        <div class="order-item"><span class="order-num">04</span><span class="order-name">Sliding Window</span></div>
+        <div class="order-item"><span class="order-num">05</span><span class="order-name">Stack &amp; Queue</span></div>
+        <div class="order-item"><span class="order-num">06</span><span class="order-name">Linked List</span></div>
+        <div class="order-item"><span class="order-num">07</span><span class="order-name">Recursion</span></div>
+        <div class="order-item"><span class="order-num">08</span><span class="order-name">Binary Search</span></div>
+        <div class="order-item"><span class="order-num">09</span><span class="order-name">Trees</span></div>
+        <div class="order-item"><span class="order-num">10</span><span class="order-name">Heap</span></div>
+        <div class="order-item"><span class="order-num">11</span><span class="order-name">Backtracking</span></div>
+        <div class="order-item"><span class="order-num">12</span><span class="order-name">Greedy</span></div>
+        <div class="order-item"><span class="order-num">13</span><span class="order-name">Dynamic Prog.</span></div>
+        <div class="order-item"><span class="order-num">14</span><span class="order-name">Graphs</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Strategy -->
+  <div class="phase-label">Best Learning Strategy</div>
+  <div class="card c3" style="animation-delay:0s">
+    <div class="card-header">
+      <div class="card-number">✦</div>
+      <div class="card-title">Per Topic Approach</div>
+    </div>
+    <div class="card-body">
+      <div class="strategy-list">
+        <div class="strategy-item"><span class="strategy-arrow">→</span> Learn theory from videos or articles</div>
+        <div class="strategy-item"><span class="strategy-arrow">→</span> Understand patterns deeply</div>
+        <div class="strategy-item"><span class="strategy-arrow">→</span> Solve easy problems first</div>
+        <div class="strategy-item"><span class="strategy-arrow">→</span> Progress to medium problems</div>
+        <div class="strategy-item"><span class="strategy-arrow">→</span> Solve 15–30 focused problems</div>
+        <div class="strategy-item"><span class="strategy-arrow">→</span> Revisit after 1 week</div>
+        <div class="strategy-item"><span class="strategy-arrow">→</span> Move to next topic</div>
+        <div class="strategy-item"><span class="strategy-arrow">→</span> Revise old patterns weekly</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Platforms -->
+  <div class="phase-label">Recommended Platforms</div>
+  <div class="card c4" style="animation-delay:0s">
+    <div class="card-header">
+      <div class="card-number">⬡</div>
+      <div class="card-title">Practice Here</div>
+    </div>
+    <div class="card-body">
+      <div class="platform-grid">
+        <div class="platform-item"><span class="platform-dot"></span>LeetCode</div>
+        <div class="platform-item"><span class="platform-dot"></span>GeeksforGeeks</div>
+        <div class="platform-item"><span class="platform-dot"></span>NeetCode</div>
+        <div class="platform-item"><span class="platform-dot"></span>CodeStudio by Coding Ninjas</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-text">DSA Roadmap — 14 Topics · 5 Phases · ∞ Growth</div>
+    <div class="footer-badge">START → MASTER</div>
+  </footer>
+
+</div>
+</body>
+</html>
