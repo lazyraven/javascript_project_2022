@@ -33,7 +33,7 @@ OR
 Please give a basic technical question on JavaScript that can be resolved by JavaScript logic.
 Please provide me with those questions one by one, and I'll assume the answer with the code. start from basics.
 
-###### ** Quiz Prompt May 2026 **
+###### **May 2026  Quiz Prompt**
 I want to practice JavaScript array problems one by one.
 Give me problems in this format:
 

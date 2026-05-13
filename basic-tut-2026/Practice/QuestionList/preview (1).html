@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JavaScript Interview Practice Roadmap</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background:#f4f7fb;
+      padding:40px 20px;
+      color:#222;
+      line-height:1.6;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:auto;
+      background:white;
+      padding:35px;
+      border-radius:16px;
+      box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    h1{
+      text-align:center;
+      color:#1e3a8a;
+      margin-bottom:40px;
+    }
+
+    h2{
+      color:#2563eb;
+      margin:40px 0 20px;
+      border-left:6px solid #2563eb;
+      padding-left:12px;
+    }
+
+    h3{
+      margin:25px 0 15px;
+      color:#0f172a;
+    }
+
+    .problem-card{
+      background:#f9fbff;
+      border:1px solid #dbeafe;
+      border-radius:14px;
+      padding:20px;
+      margin-bottom:20px;
+      transition:0.3s;
+    }
+
+    .problem-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 5px 15px rgba(0,0,0,0.06);
+    }
+
+    .problem-title{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:15px;
+    }
+
+    .problem-title input{
+      width:20px;
+      height:20px;
+      cursor:pointer;
+    }
+
+    .problem-title label{
+      font-size:20px;
+      font-weight:bold;
+      cursor:pointer;
+    }
+
+    .example-box{
+      background:white;
+      border-left:4px solid #2563eb;
+      padding:14px;
+      margin-top:12px;
+      border-radius:10px;
+    }
+
+    .example-box p{
+      margin-bottom:10px;
+    }
+
+    code{
+      background:#eef2ff;
+      padding:2px 6px;
+      border-radius:6px;
+      color:#1e3a8a;
+      font-weight:bold;
+    }
+
+    pre{
+      background:#0f172a;
+      color:#f8fafc;
+      padding:20px;
+      border-radius:12px;
+      overflow-x:auto;
+      margin-top:20px;
+    }
+
+    ul{
+      margin-top:12px;
+      padding-left:20px;
+    }
+
+    ul li{
+      margin-bottom:10px;
+    }
+
+    .info-box{
+      background:#eef6ff;
+      border-left:5px solid #2563eb;
+      padding:20px;
+      border-radius:12px;
+      margin-top:20px;
+    }
+
+    .footer{
+      text-align:center;
+      margin-top:40px;
+      color:#555;
+      font-size:15px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>JavaScript Interview Practice Checklist</h1>
+
+  <!-- BEGINNER -->
+  <h2>Beginner Level</h2>
+
+  <!-- Count Vowels -->
+  <div class="problem-card">
+
+    <div class="problem-title">
+      <input type="checkbox" id="vowels">
+      <label for="vowels">Count Vowels in a String</label>
+    </div>
+
+    <div class="example-box">
+      <p><strong>Example 1</strong></p>
+      <p>Input: <code>"javascript"</code></p>
+      <p>Output: <code>3</code></p>
+
+      <p><strong>Example 2</strong></p>
+      <p>Input: <code>"hello world"</code></p>
+      <p>Output: <code>3</code></p>
+
+      <p><strong>Example 3</strong></p>
+      <p>Input: <code>"AEIOU"</code></p>
+      <p>Output: <code>5</code></p>
+
+      <p><strong>Example 4</strong></p>
+      <p>Input: <code>"rhythm"</code></p>
+      <p>Output: <code>0</code></p>
+    </div>
+
+  </div>
+
+  <!-- Count Characters -->
+  <div class="problem-card">
+
+    <div class="problem-title">
+      <input type="checkbox" id="characters">
+      <label for="characters">Count Characters in a String</label>
+    </div>
+
+    <div class="example-box">
+      <p><strong>Example 1</strong></p>
+      <p>Input: <code>"hello"</code></p>
+      <p>Output: <code>5</code></p>
+
+      <p><strong>Example 2</strong></p>
+      <p>Input: <code>"JavaScript"</code></p>
+      <p>Output: <code>10</code></p>
+
+      <p><strong>Example 3</strong></p>
+      <p>Input: <code>"12345"</code></p>
+      <p>Output: <code>5</code></p>
+
+      <p><strong>Example 4</strong></p>
+      <p>Input: <code>""</code></p>
+      <p>Output: <code>0</code></p>
+    </div>
+
+  </div>
+
+  <!-- Find Duplicates -->
+  <div class="problem-card">
+
+    <div class="problem-title">
+      <input type="checkbox" id="duplicates">
+      <label for="duplicates">Find Duplicates in Array</label>
+    </div>
+
+    <div class="example-box">
+      <p><strong>Example 1</strong></p>
+      <p>Input: <code>[1,2,3,2,4,1]</code></p>
+      <p>Output: <code>[1,2]</code></p>
+
+      <p><strong>Example 2</strong></p>
+      <p>Input: <code>[5,5,5,5]</code></p>
+      <p>Output: <code>[5]</code></p>
+
+      <p><strong>Example 3</strong></p>
+      <p>Input: <code>[1,2,3]</code></p>
+      <p>Output: <code>[]</code></p>
+
+      <p><strong>Example 4</strong></p>
+      <p>Input: <code>["a","b","a"]</code></p>
+      <p>Output: <code>["a"]</code></p>
+    </div>
+
+  </div>
+
+  <!-- INTERMEDIATE -->
+  <h2>Intermediate Level</h2>
+
+  <!-- Valid Anagram -->
+  <div class="problem-card">
+
+    <div class="problem-title">
+      <input type="checkbox" id="anagram">
+      <label for="anagram">Valid Anagram</label>
+    </div>
+
+    <div class="example-box">
+
+      <p><strong>Example 1</strong></p>
+      <p>Input: <code>"listen", "silent"</code></p>
+      <p>Output: <code>true</code></p>
+
+      <p><strong>Example 2</strong></p>
+      <p>Input: <code>"hello", "world"</code></p>
+      <p>Output: <code>false</code></p>
+
+      <p><strong>Example 3</strong></p>
+      <p>Input: <code>"race", "care"</code></p>
+      <p>Output: <code>true</code></p>
+
+      <p><strong>Example 4</strong></p>
+      <p>Input: <code>"abc", "ab"</code></p>
+      <p>Output: <code>false</code></p>
+
+    </div>
+
+  </div>
+
+  <!-- Group Anagrams -->
+  <div class="problem-card">
+
+    <div class="problem-title">
+      <input type="checkbox" id="group">
+      <label for="group">Group Anagrams</label>
+    </div>
+
+    <div class="example-box">
+
+      <p><strong>Example 1</strong></p>
+      <p>Input: <code>["eat","tea","tan","ate","nat","bat"]</code></p>
+      <p>Output:</p>
+      <p><code>[["eat","tea","ate"],["tan","nat"],["bat"]]</code></p>
+
+      <p><strong>Example 2</strong></p>
+      <p>Input: <code>["abc","bca","cab"]</code></p>
+      <p>Output:</p>
+      <p><code>[["abc","bca","cab"]]</code></p>
+
+    </div>
+
+  </div>
+
+  <!-- Top K Frequent -->
+  <div class="problem-card">
+
+    <div class="problem-title">
+      <input type="checkbox" id="topk">
+      <label for="topk">Top K Frequent Elements</label>
+    </div>
+
+    <div class="example-box">
+
+      <p><strong>Example 1</strong></p>
+      <p>Input: <code>[1,1,1,2,2,3], k = 2</code></p>
+      <p>Output: <code>[1,2]</code></p>
+
+      <p><strong>Example 2</strong></p>
+      <p>Input: <code>[4,4,4,6,6,1], k = 1</code></p>
+      <p>Output: <code>[4]</code></p>
+
+      <p><strong>Example 3</strong></p>
+      <p>Input: <code>[5,5,1,2,2], k = 2</code></p>
+      <p>Output: <code>[5,2]</code></p>
+
+    </div>
+
+  </div>
+
+  <!-- ADVANCED -->
+  <h2>Advanced Level</h2>
+
+  <!-- Longest Substring -->
+  <div class="problem-card">
+
+    <div class="problem-title">
+      <input type="checkbox" id="substring">
+      <label for="substring">Longest Substring Without Repeating Characters</label>
+    </div>
+
+    <div class="example-box">
+
+      <p><strong>Example 1</strong></p>
+      <p>Input: <code>"abcabcbb"</code></p>
+      <p>Output: <code>3</code></p>
+
+      <p><strong>Example 2</strong></p>
+      <p>Input: <code>"bbbbb"</code></p>
+      <p>Output: <code>1</code></p>
+
+      <p><strong>Example 3</strong></p>
+      <p>Input: <code>"pwwkew"</code></p>
+      <p>Output: <code>3</code></p>
+
+      <p><strong>Example 4</strong></p>
+      <p>Input: <code>""</code></p>
+      <p>Output: <code>0</code></p>
+
+    </div>
+
+  </div>
+
+  <!-- Minimum Window -->
+  <div class="problem-card">
+
+    <div class="problem-title">
+      <input type="checkbox" id="window">
+      <label for="window">Minimum Window Substring</label>
+    </div>
+
+    <div class="example-box">
+
+      <p><strong>Example 1</strong></p>
+      <p>Input: <code>s = "ADOBECODEBANC", t = "ABC"</code></p>
+      <p>Output: <code>"BANC"</code></p>
+
+      <p><strong>Example 2</strong></p>
+      <p>Input: <code>s = "a", t = "a"</code></p>
+      <p>Output: <code>"a"</code></p>
+
+      <p><strong>Example 3</strong></p>
+      <p>Input: <code>s = "a", t = "aa"</code></p>
+      <p>Output: <code>""</code></p>
+
+    </div>
+
+  </div>
+
+  <!-- Interview Insight -->
+  <h2>11. Real Interview Insight</h2>
+
+  <div class="info-box">
+
+    <p>
+      Frequency Counter pattern appears everywhere in:
+    </p>
+
+    <ul>
+      <li>Array problems</li>
+      <li>String problems</li>
+      <li>HashMap problems</li>
+      <li>Sliding Window problems</li>
+      <li>Data analysis tasks</li>
+    </ul>
+
+    <p style="margin-top:15px;">
+      If you master frequency counters, many medium-level interview problems become much easier.
+    </p>
+
+  </div>
+
+  <!-- Final Solution -->
+  <h2>12. Final Clean Interview Solution</h2>
+
+  <pre><code>function countOccurrences(arr) {
+  const frequency = {};
+
+  for (const item of arr) {
+    frequency[item] = (frequency[item] || 0) + 1;
+  }
+
+  return frequency;
+}</code></pre>
+
+  <!-- Practice Next -->
+  <h2>13. What You Should Practice Next</h2>
+
+  <div class="problem-card">
+
+    <div class="problem-title">
+      <input type="checkbox" id="next1">
+      <label for="next1">Hash Maps / Objects deeply</label>
+    </div>
+
+    <div class="problem-title">
+      <input type="checkbox" id="next2">
+      <label for="next2">Sliding Window Pattern</label>
+    </div>
+
+    <div class="problem-title">
+      <input type="checkbox" id="next3">
+      <label for="next3">Two Pointer Pattern</label>
+    </div>
+
+    <div class="problem-title">
+      <input type="checkbox" id="next4">
+      <label for="next4">Sets and Maps</label>
+    </div>
+
+    <div class="problem-title">
+      <input type="checkbox" id="next5">
+      <label for="next5">Time Complexity Analysis</label>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Keep practicing consistently 🚀
+  </div>
+
+</div>
+
+</body>
+</html>

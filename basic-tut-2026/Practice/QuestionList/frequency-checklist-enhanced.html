@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JavaScript Interview Practice Checklist</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #1c2333;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --accent3: #f78166;
+      --accent4: #d2a8ff;
+      --accent5: #ffa657;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --code-bg: #0d1117;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      padding: 40px 20px 80px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+      padding: 50px 30px;
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(88,166,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; right: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(212,168,255,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    header h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .progress-bar-wrap {
+      background: var(--border);
+      border-radius: 100px;
+      height: 6px;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent4));
+      border-radius: 100px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    .progress-label {
+      margin-top: 8px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 45px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      background: rgba(88,166,255,0.1);
+      border: 1px solid rgba(88,166,255,0.25);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .section-header h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Difficulty badges */
+    .diff-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin: 18px 0 10px;
+      display: inline-block;
+    }
+
+    .beginner { background: rgba(63,185,80,0.15); color: var(--accent2); border: 1px solid rgba(63,185,80,0.3); }
+    .intermediate { background: rgba(255,166,87,0.15); color: var(--accent5); border: 1px solid rgba(255,166,87,0.3); }
+    .advanced { background: rgba(247,129,102,0.15); color: var(--accent3); border: 1px solid rgba(247,129,102,0.3); }
+
+    /* Problem Card */
+    .problem-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .problem-card:hover {
+      border-color: var(--accent);
+    }
+
+    .problem-card.done {
+      border-color: var(--accent2);
+      opacity: 0.7;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      cursor: pointer;
+    }
+
+    .card-top input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent2);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-size: 0.97rem;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .done .card-title {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    .expand-btn {
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      background: rgba(88,166,255,0.1);
+      border: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .expand-btn:hover { background: rgba(88,166,255,0.2); }
+
+    .card-body {
+      display: none;
+      border-top: 1px solid var(--border);
+      padding: 18px;
+    }
+
+    .card-body.open { display: block; }
+
+    .problem-statement {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    .examples-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .examples-grid { grid-template-columns: 1fr; }
+      header h1 { font-size: 1.4rem; }
+    }
+
+    .example-box {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .example-box-header {
+      padding: 6px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .input-header { background: rgba(88,166,255,0.08); color: var(--accent); }
+    .output-header { background: rgba(63,185,80,0.08); color: var(--accent2); }
+
+    .example-box pre {
+      padding: 10px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text);
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .hint-box {
+      background: rgba(212,168,255,0.06);
+      border-left: 3px solid var(--accent4);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.85rem;
+      color: var(--accent4);
+      margin-top: 8px;
+    }
+
+    /* Code block */
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .code-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .code-block-header span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .copy-btn {
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .copy-btn:hover { color: var(--text); }
+
+    .code-block pre {
+      padding: 16px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      overflow-x: auto;
+      line-height: 1.6;
+      color: #e6edf3;
+    }
+
+    .kw { color: #ff7b72; }
+    .fn { color: #d2a8ff; }
+    .str { color: #a5d6ff; }
+    .cm { color: #8b949e; font-style: italic; }
+    .num { color: #79c0ff; }
+    .var { color: #ffa657; }
+
+    /* Info / insight box */
+    .insight-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+
+    .insight-box p { color: var(--muted); font-size: 0.9rem; margin-bottom: 10px; }
+    .insight-box ul { padding-left: 18px; }
+    .insight-box ul li { color: var(--text); font-size: 0.9rem; margin-bottom: 8px; }
+    .insight-box ul li::marker { color: var(--accent); }
+
+    /* Checklist simple */
+    .simple-task {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      transition: border-color 0.2s;
+    }
+
+    .simple-task:hover { border-color: var(--accent); }
+    .simple-task.done { opacity: 0.6; border-color: var(--accent2); }
+
+    .simple-task input { width: 18px; height: 18px; accent-color: var(--accent2); cursor: pointer; }
+    .simple-task label { font-size: 0.93rem; cursor: pointer; }
+    .simple-task.done label { text-decoration: line-through; color: var(--muted); }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>// JS Interview Checklist</h1>
+    <p>Frequency Counter Pattern — Problems, Examples &amp; Solutions</p>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="progress-label" id="progressLabel">0 / 0 completed</div>
+  </header>
+
+  <!-- ==================== SECTION 10 ==================== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <h2>Similar Practice Problems for Interviews</h2>
+    </div>
+
+    <span class="diff-label beginner">● BEGINNER</span>
+
+    <!-- B1 -->
+    <div class="problem-card" id="card-b1">
+      <div class="card-top">
+        <input type="checkbox" id="b1" onchange="toggleDone('card-b1','b1'); updateProgress()">
+        <span class="card-title">Count vowels in a string</span>
+        <button class="expand-btn" onclick="toggleCard('body-b1', this)">+ Details</button>
+      </div>
+      <div class="card-body" id="body-b1">
+        <p class="problem-statement">
+          Given a string <code>s</code>, return the total count of vowel characters (<code>a, e, i, o, u</code>) — both uppercase and lowercase. Use a frequency counter or set to check membership efficiently.
+        </p>
+        <div class="examples-grid">
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "Hello World"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>3  // e, o, o</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "JavaScript"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>3  // a, a, i</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "rhythm"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>0</pre>
+          </div>
+        </div>
+        <div class="hint-box">💡 Hint: Use a Set of vowels for O(1) lookup. Iterate characters, increment counter if vowel.</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>solution.js</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          <pre><code><span class="kw">function</span> <span class="fn">countVowels</span>(s) {
+  <span class="kw">const</span> <span class="var">vowels</span> = <span class="kw">new</span> <span class="fn">Set</span>([<span class="str">'a','e','i','o','u'</span>]);
+  <span class="kw">let</span> <span class="var">count</span> = <span class="num">0</span>;
+  <span class="kw">for</span> (<span class="kw">const</span> <span class="var">ch</span> <span class="kw">of</span> s.<span class="fn">toLowerCase</span>()) {
+    <span class="kw">if</span> (<span class="var">vowels</span>.<span class="fn">has</span>(<span class="var">ch</span>)) <span class="var">count</span>++;
+  }
+  <span class="kw">return</span> <span class="var">count</span>;
+}
+<span class="cm">// Time: O(n) | Space: O(1)</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- B2 -->
+    <div class="problem-card" id="card-b2">
+      <div class="card-top">
+        <input type="checkbox" id="b2" onchange="toggleDone('card-b2','b2'); updateProgress()">
+        <span class="card-title">Count characters in a string</span>
+        <button class="expand-btn" onclick="toggleCard('body-b2', this)">+ Details</button>
+      </div>
+      <div class="card-body" id="body-b2">
+        <p class="problem-statement">
+          Given a string <code>s</code>, return an object (frequency map) where each key is a character and the value is how many times it appears. Ignore spaces.
+        </p>
+        <div class="examples-grid">
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "hello"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>{ h:1, e:1, l:2, o:1 }</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "aabbcc"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>{ a:2, b:2, c:2 }</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "aab"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>{ a:2, b:1 }</pre>
+          </div>
+        </div>
+        <div class="hint-box">💡 Hint: Classic frequency counter. Loop, build an object. This is the core pattern used everywhere.</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>solution.js</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          <pre><code><span class="kw">function</span> <span class="fn">charCount</span>(s) {
+  <span class="kw">const</span> <span class="var">freq</span> = {};
+  <span class="kw">for</span> (<span class="kw">const</span> <span class="var">ch</span> <span class="kw">of</span> s) {
+    <span class="kw">if</span> (<span class="var">ch</span> !== <span class="str">' '</span>)
+      <span class="var">freq</span>[<span class="var">ch</span>] = (<span class="var">freq</span>[<span class="var">ch</span>] || <span class="num">0</span>) + <span class="num">1</span>;
+  }
+  <span class="kw">return</span> <span class="var">freq</span>;
+}
+<span class="cm">// Time: O(n) | Space: O(k) — k = unique chars</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- B3 -->
+    <div class="problem-card" id="card-b3">
+      <div class="card-top">
+        <input type="checkbox" id="b3" onchange="toggleDone('card-b3','b3'); updateProgress()">
+        <span class="card-title">Find duplicates in array</span>
+        <button class="expand-btn" onclick="toggleCard('body-b3', this)">+ Details</button>
+      </div>
+      <div class="card-body" id="body-b3">
+        <p class="problem-statement">
+          Given an array of integers <code>nums</code>, return all elements that appear more than once. The result may be in any order.
+        </p>
+        <div class="examples-grid">
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>nums = [1,2,3,2,4,3,5]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>[2, 3]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>nums = [4,4,4,1,2]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>[4]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>nums = [1,2,3]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>[]</pre>
+          </div>
+        </div>
+        <div class="hint-box">💡 Hint: Build frequency map first. Then filter keys where count > 1.</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>solution.js</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          <pre><code><span class="kw">function</span> <span class="fn">findDuplicates</span>(nums) {
+  <span class="kw">const</span> <span class="var">freq</span> = {};
+  <span class="kw">for</span> (<span class="kw">const</span> <span class="var">n</span> <span class="kw">of</span> nums)
+    <span class="var">freq</span>[<span class="var">n</span>] = (<span class="var">freq</span>[<span class="var">n</span>] || <span class="num">0</span>) + <span class="num">1</span>;
+  <span class="kw">return</span> Object.<span class="fn">keys</span>(<span class="var">freq</span>).<span class="fn">filter</span>(<span class="var">k</span> => <span class="var">freq</span>[<span class="var">k</span>] > <span class="num">1</span>).<span class="fn">map</span>(Number);
+}
+<span class="cm">// Time: O(n) | Space: O(n)</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- B4 -->
+    <div class="problem-card" id="card-b4">
+      <div class="card-top">
+        <input type="checkbox" id="b4" onchange="toggleDone('card-b4','b4'); updateProgress()">
+        <span class="card-title">Find unique elements</span>
+        <button class="expand-btn" onclick="toggleCard('body-b4', this)">+ Details</button>
+      </div>
+      <div class="card-body" id="body-b4">
+        <p class="problem-statement">
+          Given an array, return only the elements that appear exactly once. Order doesn't matter.
+        </p>
+        <div class="examples-grid">
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>nums = [1,2,2,3,4,4,5]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>[1, 3, 5]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>nums = [7,7,7]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>[]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>nums = [9]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>[9]</pre>
+          </div>
+        </div>
+        <div class="hint-box">💡 Hint: Same as duplicates — just filter where count === 1 instead of > 1.</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>solution.js</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          <pre><code><span class="kw">function</span> <span class="fn">findUnique</span>(nums) {
+  <span class="kw">const</span> <span class="var">freq</span> = {};
+  <span class="kw">for</span> (<span class="kw">const</span> <span class="var">n</span> <span class="kw">of</span> nums)
+    <span class="var">freq</span>[<span class="var">n</span>] = (<span class="var">freq</span>[<span class="var">n</span>] || <span class="num">0</span>) + <span class="num">1</span>;
+  <span class="kw">return</span> Object.<span class="fn">keys</span>(<span class="var">freq</span>)
+    .<span class="fn">filter</span>(<span class="var">k</span> => <span class="var">freq</span>[<span class="var">k</span>] === <span class="num">1</span>)
+    .<span class="fn">map</span>(Number);
+}
+<span class="cm">// Time: O(n) | Space: O(n)</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- B5 -->
+    <div class="problem-card" id="card-b5">
+      <div class="card-top">
+        <input type="checkbox" id="b5" onchange="toggleDone('card-b5','b5'); updateProgress()">
+        <span class="card-title">First non-repeating character</span>
+        <button class="expand-btn" onclick="toggleCard('body-b5', this)">+ Details</button>
+      </div>
+      <div class="card-body" id="body-b5">
+        <p class="problem-statement">
+          Given a string <code>s</code>, find the first character that appears exactly once and return its index. If none exist, return <code>-1</code>. (LeetCode #387)
+        </p>
+        <div class="examples-grid">
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "leetcode"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>0  // 'l' appears once</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "loveleetcode"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>2  // 'v'</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "aabb"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>-1</pre>
+          </div>
+        </div>
+        <div class="hint-box">💡 Hint: Two passes — first build frequency map, then scan again to find first char with count 1.</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>solution.js</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          <pre><code><span class="kw">function</span> <span class="fn">firstUniqChar</span>(s) {
+  <span class="kw">const</span> <span class="var">freq</span> = {};
+  <span class="kw">for</span> (<span class="kw">const</span> <span class="var">ch</span> <span class="kw">of</span> s)
+    <span class="var">freq</span>[<span class="var">ch</span>] = (<span class="var">freq</span>[<span class="var">ch</span>] || <span class="num">0</span>) + <span class="num">1</span>;
+  <span class="kw">for</span> (<span class="kw">let</span> <span class="var">i</span> = <span class="num">0</span>; <span class="var">i</span> &lt; s.length; <span class="var">i</span>++) {
+    <span class="kw">if</span> (<span class="var">freq</span>[s[<span class="var">i</span>]] === <span class="num">1</span>) <span class="kw">return</span> <span class="var">i</span>;
+  }
+  <span class="kw">return</span> -<span class="num">1</span>;
+}
+<span class="cm">// Time: O(n) | Space: O(1) — at most 26 keys</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <span class="diff-label intermediate">● INTERMEDIATE</span>
+
+    <!-- I1 -->
+    <div class="problem-card" id="card-i1">
+      <div class="card-top">
+        <input type="checkbox" id="i1" onchange="toggleDone('card-i1','i1'); updateProgress()">
+        <span class="card-title">Valid Anagram</span>
+        <button class="expand-btn" onclick="toggleCard('body-i1', this)">+ Details</button>
+      </div>
+      <div class="card-body" id="body-i1">
+        <p class="problem-statement">
+          Given two strings <code>s</code> and <code>t</code>, return <code>true</code> if <code>t</code> is an anagram of <code>s</code>, and <code>false</code> otherwise. An anagram uses all the same characters the same number of times. (LeetCode #242)
+        </p>
+        <div class="examples-grid">
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "anagram"
+t = "nagaram"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>true</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "rat"
+t = "car"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>false</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "ab"
+t = "a"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>false  // different lengths</pre>
+          </div>
+        </div>
+        <div class="hint-box">💡 Hint: Build freq map for <code>s</code>, then decrement using <code>t</code>. If all values are 0 → anagram.</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>solution.js</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          <pre><code><span class="kw">function</span> <span class="fn">isAnagram</span>(s, t) {
+  <span class="kw">if</span> (s.length !== t.length) <span class="kw">return false</span>;
+  <span class="kw">const</span> <span class="var">freq</span> = {};
+  <span class="kw">for</span> (<span class="kw">const</span> <span class="var">ch</span> <span class="kw">of</span> s)
+    <span class="var">freq</span>[<span class="var">ch</span>] = (<span class="var">freq</span>[<span class="var">ch</span>] || <span class="num">0</span>) + <span class="num">1</span>;
+  <span class="kw">for</span> (<span class="kw">const</span> <span class="var">ch</span> <span class="kw">of</span> t) {
+    <span class="kw">if</span> (!<span class="var">freq</span>[<span class="var">ch</span>]) <span class="kw">return false</span>;
+    <span class="var">freq</span>[<span class="var">ch</span>]--;
+  }
+  <span class="kw">return true</span>;
+}
+<span class="cm">// Time: O(n) | Space: O(1)</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- I2 -->
+    <div class="problem-card" id="card-i2">
+      <div class="card-top">
+        <input type="checkbox" id="i2" onchange="toggleDone('card-i2','i2'); updateProgress()">
+        <span class="card-title">Group Anagrams</span>
+        <button class="expand-btn" onclick="toggleCard('body-i2', this)">+ Details</button>
+      </div>
+      <div class="card-body" id="body-i2">
+        <p class="problem-statement">
+          Given an array of strings <code>strs</code>, group the anagrams together. Return the groups in any order. (LeetCode #49)
+        </p>
+        <div class="examples-grid">
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>strs = ["eat","tea","tan","ate","nat","bat"]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>[["eat","tea","ate"],
+ ["tan","nat"],
+ ["bat"]]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>strs = [""]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>[[""]]</pre>
+          </div>
+        </div>
+        <div class="hint-box">💡 Hint: Sort each word as a key — anagrams have the same sorted form. Use a Map to group them.</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>solution.js</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          <pre><code><span class="kw">function</span> <span class="fn">groupAnagrams</span>(strs) {
+  <span class="kw">const</span> <span class="var">map</span> = <span class="kw">new</span> <span class="fn">Map</span>();
+  <span class="kw">for</span> (<span class="kw">const</span> <span class="var">s</span> <span class="kw">of</span> strs) {
+    <span class="kw">const</span> <span class="var">key</span> = s.<span class="fn">split</span>(<span class="str">''</span>).<span class="fn">sort</span>().<span class="fn">join</span>(<span class="str">''</span>);
+    <span class="kw">if</span> (!<span class="var">map</span>.<span class="fn">has</span>(<span class="var">key</span>)) <span class="var">map</span>.<span class="fn">set</span>(<span class="var">key</span>, []);
+    <span class="var">map</span>.<span class="fn">get</span>(<span class="var">key</span>).<span class="fn">push</span>(<span class="var">s</span>);
+  }
+  <span class="kw">return</span> [...<span class="var">map</span>.<span class="fn">values</span>()];
+}
+<span class="cm">// Time: O(n·k·log k) | Space: O(n·k)</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- I3 -->
+    <div class="problem-card" id="card-i3">
+      <div class="card-top">
+        <input type="checkbox" id="i3" onchange="toggleDone('card-i3','i3'); updateProgress()">
+        <span class="card-title">Majority Element</span>
+        <button class="expand-btn" onclick="toggleCard('body-i3', this)">+ Details</button>
+      </div>
+      <div class="card-body" id="body-i3">
+        <p class="problem-statement">
+          Given array <code>nums</code> of size <code>n</code>, return the element that appears more than <code>⌊n/2⌋</code> times. It is guaranteed the majority element always exists. (LeetCode #169)
+        </p>
+        <div class="examples-grid">
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>nums = [3,2,3]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>3</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>nums = [2,2,1,1,1,2,2]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>2</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>nums = [6,5,5]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>5</pre>
+          </div>
+        </div>
+        <div class="hint-box">💡 Bonus: Boyer-Moore Voting Algorithm solves this in O(1) space. For interviews, frequency counter is clearer.</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>solution.js</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          <pre><code><span class="kw">function</span> <span class="fn">majorityElement</span>(nums) {
+  <span class="kw">const</span> <span class="var">freq</span> = {};
+  <span class="kw">const</span> <span class="var">half</span> = nums.length / <span class="num">2</span>;
+  <span class="kw">for</span> (<span class="kw">const</span> <span class="var">n</span> <span class="kw">of</span> nums) {
+    <span class="var">freq</span>[<span class="var">n</span>] = (<span class="var">freq</span>[<span class="var">n</span>] || <span class="num">0</span>) + <span class="num">1</span>;
+    <span class="kw">if</span> (<span class="var">freq</span>[<span class="var">n</span>] > <span class="var">half</span>) <span class="kw">return</span> +<span class="var">n</span>;
+  }
+}
+<span class="cm">// Time: O(n) | Space: O(n)</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- I4 -->
+    <div class="problem-card" id="card-i4">
+      <div class="card-top">
+        <input type="checkbox" id="i4" onchange="toggleDone('card-i4','i4'); updateProgress()">
+        <span class="card-title">Top K Frequent Elements</span>
+        <button class="expand-btn" onclick="toggleCard('body-i4', this)">+ Details</button>
+      </div>
+      <div class="card-body" id="body-i4">
+        <p class="problem-statement">
+          Given an integer array <code>nums</code> and an integer <code>k</code>, return the <code>k</code> most frequently occurring elements. Answer may be in any order. (LeetCode #347)
+        </p>
+        <div class="examples-grid">
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>nums = [1,1,1,2,2,3], k = 2</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>[1, 2]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>nums = [1], k = 1</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>[1]</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>nums = [4,1,1,2,2,2], k = 2</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>[2, 1]</pre>
+          </div>
+        </div>
+        <div class="hint-box">💡 Hint: Build freq map → sort keys by frequency descending → slice first k elements.</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>solution.js</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          <pre><code><span class="kw">function</span> <span class="fn">topKFrequent</span>(nums, k) {
+  <span class="kw">const</span> <span class="var">freq</span> = {};
+  <span class="kw">for</span> (<span class="kw">const</span> <span class="var">n</span> <span class="kw">of</span> nums)
+    <span class="var">freq</span>[<span class="var">n</span>] = (<span class="var">freq</span>[<span class="var">n</span>] || <span class="num">0</span>) + <span class="num">1</span>;
+  <span class="kw">return</span> Object.<span class="fn">keys</span>(<span class="var">freq</span>)
+    .<span class="fn">sort</span>((<span class="var">a</span>,<span class="var">b</span>) => <span class="var">freq</span>[<span class="var">b</span>] - <span class="var">freq</span>[<span class="var">a</span>])
+    .<span class="fn">slice</span>(<span class="num">0</span>, k)
+    .<span class="fn">map</span>(Number);
+}
+<span class="cm">// Time: O(n log n) | Space: O(n)</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- I5 -->
+    <div class="problem-card" id="card-i5">
+      <div class="card-top">
+        <input type="checkbox" id="i5" onchange="toggleDone('card-i5','i5'); updateProgress()">
+        <span class="card-title">Frequency Sort (Sort by Character Frequency)</span>
+        <button class="expand-btn" onclick="toggleCard('body-i5', this)">+ Details</button>
+      </div>
+      <div class="card-body" id="body-i5">
+        <p class="problem-statement">
+          Given a string <code>s</code>, sort it in decreasing order based on the frequency of characters. If two characters have the same frequency, their order can be arbitrary. (LeetCode #451)
+        </p>
+        <div class="examples-grid">
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "tree"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>"eert"  // e appears twice</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "cccaaa"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>"aaaccc" or "cccaaa"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "Aabb"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>"bbAa" or "bbaA"</pre>
+          </div>
+        </div>
+        <div class="hint-box">💡 Hint: Build freq map → sort characters by freq desc → repeat each character freq times.</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>solution.js</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          <pre><code><span class="kw">function</span> <span class="fn">frequencySort</span>(s) {
+  <span class="kw">const</span> <span class="var">freq</span> = {};
+  <span class="kw">for</span> (<span class="kw">const</span> <span class="var">ch</span> <span class="kw">of</span> s)
+    <span class="var">freq</span>[<span class="var">ch</span>] = (<span class="var">freq</span>[<span class="var">ch</span>] || <span class="num">0</span>) + <span class="num">1</span>;
+  <span class="kw">return</span> Object.<span class="fn">keys</span>(<span class="var">freq</span>)
+    .<span class="fn">sort</span>((<span class="var">a</span>,<span class="var">b</span>) => <span class="var">freq</span>[<span class="var">b</span>] - <span class="var">freq</span>[<span class="var">a</span>])
+    .<span class="fn">map</span>(<span class="var">ch</span> => <span class="var">ch</span>.<span class="fn">repeat</span>(<span class="var">freq</span>[<span class="var">ch</span>]))
+    .<span class="fn">join</span>(<span class="str">''</span>);
+}
+<span class="cm">// Time: O(n log n) | Space: O(n)</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <span class="diff-label advanced">● ADVANCED</span>
+
+    <!-- A1 -->
+    <div class="problem-card" id="card-a1">
+      <div class="card-top">
+        <input type="checkbox" id="a1" onchange="toggleDone('card-a1','a1'); updateProgress()">
+        <span class="card-title">Sliding Window + Frequency Counter</span>
+        <button class="expand-btn" onclick="toggleCard('body-a1', this)">+ Details</button>
+      </div>
+      <div class="card-body" id="body-a1">
+        <p class="problem-statement">
+          Given a string <code>s</code> and a string <code>p</code>, find all start indices of <code>p</code>'s anagrams in <code>s</code>. Return indices in any order. (LeetCode #438 — Find All Anagrams in a String)
+        </p>
+        <div class="examples-grid">
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "cbaebabacd"
+p = "abc"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>[0, 6]
+// "cba" at 0, "bac" at 6</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "abab"
+p = "ab"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>[0, 1, 2]</pre>
+          </div>
+        </div>
+        <div class="hint-box">💡 Hint: Maintain a sliding window of size p.length. Keep two freq maps — slide by adding right char and removing left char. Compare maps.</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>solution.js</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          <pre><code><span class="kw">function</span> <span class="fn">findAnagrams</span>(s, p) {
+  <span class="kw">const</span> <span class="var">result</span> = [];
+  <span class="kw">const</span> <span class="var">pFreq</span> = {}, <span class="var">wFreq</span> = {};
+  <span class="kw">for</span> (<span class="kw">const</span> <span class="var">ch</span> <span class="kw">of</span> p)
+    <span class="var">pFreq</span>[<span class="var">ch</span>] = (<span class="var">pFreq</span>[<span class="var">ch</span>] || <span class="num">0</span>) + <span class="num">1</span>;
+
+  <span class="kw">let</span> <span class="var">matches</span> = <span class="num">0</span>;
+  <span class="kw">const</span> <span class="var">required</span> = Object.<span class="fn">keys</span>(<span class="var">pFreq</span>).length;
+
+  <span class="kw">for</span> (<span class="kw">let</span> <span class="var">r</span> = <span class="num">0</span>; <span class="var">r</span> &lt; s.length; <span class="var">r</span>++) {
+    <span class="kw">const</span> <span class="var">ch</span> = s[<span class="var">r</span>];
+    <span class="var">wFreq</span>[<span class="var">ch</span>] = (<span class="var">wFreq</span>[<span class="var">ch</span>] || <span class="num">0</span>) + <span class="num">1</span>;
+    <span class="kw">if</span> (<span class="var">pFreq</span>[<span class="var">ch</span>] && <span class="var">wFreq</span>[<span class="var">ch</span>] === <span class="var">pFreq</span>[<span class="var">ch</span>]) <span class="var">matches</span>++;
+
+    <span class="kw">if</span> (<span class="var">r</span> >= p.length) {
+      <span class="kw">const</span> <span class="var">left</span> = s[<span class="var">r</span> - p.length];
+      <span class="kw">if</span> (<span class="var">pFreq</span>[<span class="var">left</span>] && <span class="var">wFreq</span>[<span class="var">left</span>] === <span class="var">pFreq</span>[<span class="var">left</span>]) <span class="var">matches</span>--;
+      <span class="var">wFreq</span>[<span class="var">left</span>]--;
+    }
+
+    <span class="kw">if</span> (<span class="var">matches</span> === <span class="var">required</span>) <span class="var">result</span>.<span class="fn">push</span>(<span class="var">r</span> - p.length + <span class="num">1</span>);
+  }
+  <span class="kw">return</span> <span class="var">result</span>;
+}
+<span class="cm">// Time: O(n) | Space: O(1)</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- A2 -->
+    <div class="problem-card" id="card-a2">
+      <div class="card-top">
+        <input type="checkbox" id="a2" onchange="toggleDone('card-a2','a2'); updateProgress()">
+        <span class="card-title">Minimum Window Substring</span>
+        <button class="expand-btn" onclick="toggleCard('body-a2', this)">+ Details</button>
+      </div>
+      <div class="card-body" id="body-a2">
+        <p class="problem-statement">
+          Given strings <code>s</code> and <code>t</code>, return the minimum window in <code>s</code> which contains all characters of <code>t</code>. If no such window exists, return <code>""</code>. (LeetCode #76 — Hard)
+        </p>
+        <div class="examples-grid">
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "ADOBECODEBANC"
+t = "ABC"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>"BANC"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "a", t = "a"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>"a"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "a", t = "aa"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>""  // not enough 'a'</pre>
+          </div>
+        </div>
+        <div class="hint-box">💡 Hint: Expand window right until all t chars are covered, then shrink from left. Track how many unique chars are "satisfied".</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>solution.js</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          <pre><code><span class="kw">function</span> <span class="fn">minWindow</span>(s, t) {
+  <span class="kw">const</span> <span class="var">need</span> = {}, <span class="var">have</span> = {};
+  <span class="kw">for</span> (<span class="kw">const</span> <span class="var">ch</span> <span class="kw">of</span> t) <span class="var">need</span>[<span class="var">ch</span>] = (<span class="var">need</span>[<span class="var">ch</span>] || <span class="num">0</span>) + <span class="num">1</span>;
+  <span class="kw">let</span> <span class="var">formed</span> = <span class="num">0</span>, <span class="var">required</span> = Object.<span class="fn">keys</span>(<span class="var">need</span>).length;
+  <span class="kw">let</span> <span class="var">l</span> = <span class="num">0</span>, <span class="var">res</span> = <span class="str">""</span>, <span class="var">minLen</span> = Infinity;
+  <span class="kw">for</span> (<span class="kw">let</span> <span class="var">r</span> = <span class="num">0</span>; <span class="var">r</span> &lt; s.length; <span class="var">r</span>++) {
+    <span class="kw">const</span> <span class="var">ch</span> = s[<span class="var">r</span>];
+    <span class="var">have</span>[<span class="var">ch</span>] = (<span class="var">have</span>[<span class="var">ch</span>] || <span class="num">0</span>) + <span class="num">1</span>;
+    <span class="kw">if</span> (<span class="var">need</span>[<span class="var">ch</span>] && <span class="var">have</span>[<span class="var">ch</span>] === <span class="var">need</span>[<span class="var">ch</span>]) <span class="var">formed</span>++;
+    <span class="kw">while</span> (<span class="var">formed</span> === <span class="var">required</span>) {
+      <span class="kw">if</span> (<span class="var">r</span> - <span class="var">l</span> + <span class="num">1</span> &lt; <span class="var">minLen</span>) { <span class="var">minLen</span> = <span class="var">r</span> - <span class="var">l</span> + <span class="num">1</span>; <span class="var">res</span> = s.<span class="fn">slice</span>(<span class="var">l</span>, <span class="var">r</span>+<span class="num">1</span>); }
+      <span class="kw">const</span> <span class="var">lc</span> = s[<span class="var">l</span>++];
+      <span class="var">have</span>[<span class="var">lc</span>]--;
+      <span class="kw">if</span> (<span class="var">need</span>[<span class="var">lc</span>] && <span class="var">have</span>[<span class="var">lc</span>] &lt; <span class="var">need</span>[<span class="var">lc</span>]) <span class="var">formed</span>--;
+    }
+  }
+  <span class="kw">return</span> <span class="var">res</span>;
+}
+<span class="cm">// Time: O(n) | Space: O(k)</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- A3 -->
+    <div class="problem-card" id="card-a3">
+      <div class="card-top">
+        <input type="checkbox" id="a3" onchange="toggleDone('card-a3','a3'); updateProgress()">
+        <span class="card-title">Longest Substring Without Repeating Characters</span>
+        <button class="expand-btn" onclick="toggleCard('body-a3', this)">+ Details</button>
+      </div>
+      <div class="card-body" id="body-a3">
+        <p class="problem-statement">
+          Given a string <code>s</code>, find the length of the longest substring without repeating characters. (LeetCode #3)
+        </p>
+        <div class="examples-grid">
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "abcabcbb"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>3  // "abc"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "bbbbb"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>1  // "b"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header input-header">INPUT</div>
+            <pre>s = "pwwkew"</pre>
+          </div>
+          <div class="example-box">
+            <div class="example-box-header output-header">OUTPUT</div>
+            <pre>3  // "wke"</pre>
+          </div>
+        </div>
+        <div class="hint-box">💡 Hint: Use a Set and two pointers. When a duplicate is found, shrink from left. Max window = answer.</div>
+        <div class="code-block">
+          <div class="code-block-header"><span>solution.js</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          <pre><code><span class="kw">function</span> <span class="fn">lengthOfLongestSubstring</span>(s) {
+  <span class="kw">const</span> <span class="var">set</span> = <span class="kw">new</span> <span class="fn">Set</span>();
+  <span class="kw">let</span> <span class="var">l</span> = <span class="num">0</span>, <span class="var">max</span> = <span class="num">0</span>;
+  <span class="kw">for</span> (<span class="kw">let</span> <span class="var">r</span> = <span class="num">0</span>; <span class="var">r</span> &lt; s.length; <span class="var">r</span>++) {
+    <span class="kw">while</span> (<span class="var">set</span>.<span class="fn">has</span>(s[<span class="var">r</span>])) <span class="var">set</span>.<span class="fn">delete</span>(s[<span class="var">l</span>++]);
+    <span class="var">set</span>.<span class="fn">add</span>(s[<span class="var">r</span>]);
+    <span class="var">max</span> = Math.<span class="fn">max</span>(<span class="var">max</span>, <span class="var">r</span> - <span class="var">l</span> + <span class="num">1</span>);
+  }
+  <span class="kw">return</span> <span class="var">max</span>;
+}
+<span class="cm">// Time: O(n) | Space: O(min(n, m))</span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 11 ==================== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">11</span>
+      <h2>Real Interview Insight</h2>
+    </div>
+    <div class="insight-box">
+      <p>Frequency Counter pattern appears everywhere in:</p>
+      <ul>
+        <li><strong>Array problems</strong> — duplicates, missing numbers, majority elements</li>
+        <li><strong>String problems</strong> — anagrams, character counts, palindrome checks</li>
+        <li><strong>HashMap problems</strong> — two-sum variants, subarray sums</li>
+        <li><strong>Sliding window problems</strong> — substring problems, max window conditions</li>
+        <li><strong>Data analysis tasks</strong> — top-k, ranking, histograms</li>
+      </ul>
+      <p style="margin-top:14px; color: #58a6ff;">If you master frequency counters, many medium-level problems become straightforward.</p>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 12 ==================== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">12</span>
+      <h2>Final Clean Interview Solution</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-block-header"><span>core-pattern.js</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+      <pre><code><span class="cm">// Core Frequency Counter Template</span>
+<span class="kw">function</span> <span class="fn">countOccurrences</span>(arr) {
+  <span class="kw">const</span> <span class="var">frequency</span> = {};
+
+  <span class="kw">for</span> (<span class="kw">const</span> <span class="var">item</span> <span class="kw">of</span> arr) {
+    <span class="var">frequency</span>[<span class="var">item</span>] = (<span class="var">frequency</span>[<span class="var">item</span>] || <span class="num">0</span>) + <span class="num">1</span>;
+  }
+
+  <span class="kw">return</span> <span class="var">frequency</span>;
+}
+
+<span class="cm">// With Map (recommended for non-string keys)</span>
+<span class="kw">function</span> <span class="fn">countWithMap</span>(arr) {
+  <span class="kw">const</span> <span class="var">freq</span> = <span class="kw">new</span> <span class="fn">Map</span>();
+  <span class="kw">for</span> (<span class="kw">const</span> <span class="var">item</span> <span class="kw">of</span> arr)
+    <span class="var">freq</span>.<span class="fn">set</span>(<span class="var">item</span>, (<span class="var">freq</span>.<span class="fn">get</span>(<span class="var">item</span>) || <span class="num">0</span>) + <span class="num">1</span>);
+  <span class="kw">return</span> <span class="var">freq</span>;
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 13 ==================== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">13</span>
+      <h2>What You Should Practice Next</h2>
+    </div>
+
+    <div class="simple-task" id="stask-n1">
+      <input type="checkbox" id="n1" onchange="toggleDone('stask-n1','n1'); updateProgress()">
+      <label for="n1">Hash Maps / Objects deeply — the backbone of most interview solutions</label>
+    </div>
+    <div class="simple-task" id="stask-n2">
+      <input type="checkbox" id="n2" onchange="toggleDone('stask-n2','n2'); updateProgress()">
+      <label for="n2">Sliding Window Pattern — combine with frequency counters for string/array problems</label>
+    </div>
+    <div class="simple-task" id="stask-n3">
+      <input type="checkbox" id="n3" onchange="toggleDone('stask-n3','n3'); updateProgress()">
+      <label for="n3">Two Pointer Pattern — works alongside frequency maps for sorted arrays</label>
+    </div>
+    <div class="simple-task" id="stask-n4">
+      <input type="checkbox" id="n4" onchange="toggleDone('stask-n4','n4'); updateProgress()">
+      <label for="n4">Sets and Maps — when to use Map vs object, unique value tracking</label>
+    </div>
+    <div class="simple-task" id="stask-n5">
+      <input type="checkbox" id="n5" onchange="toggleDone('stask-n5','n5'); updateProgress()">
+      <label for="n5">Time Complexity Analysis — always state O(n) vs O(n²) when explaining to interviewers</label>
+    </div>
+
+    <div class="insight-box" style="margin-top: 16px;">
+      These patterns are heavily used in JavaScript interviews at top tech companies.
+    </div>
+  </div>
+
+  <footer>// keep practicing consistently 🚀</footer>
+</div>
+
+<script>
+  const allCheckboxIds = ['b1','b2','b3','b4','b5','i1','i2','i3','i4','i5','a1','a2','a3','n1','n2','n3','n4','n5'];
+
+  function toggleCard(bodyId, btn) {
+    const body = document.getElementById(bodyId);
+    const isOpen = body.classList.toggle('open');
+    btn.textContent = isOpen ? '− Hide' : '+ Details';
+  }
+
+  function toggleDone(cardId, cbId) {
+    const card = document.getElementById(cardId);
+    const cb = document.getElementById(cbId);
+    if (cb.checked) card.classList.add('done');
+    else card.classList.remove('done');
+    saveState();
+  }
+
+  function updateProgress() {
+    const total = allCheckboxIds.length;
+    const done = allCheckboxIds.filter(id => document.getElementById(id)?.checked).length;
+    const pct = total ? (done / total * 100).toFixed(0) : 0;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = `${done} / ${total} completed`;
+  }
+
+  function saveState() {
+    const state = {};
+    allCheckboxIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) state[id] = el.checked;
+    });
+    try { localStorage.setItem('js_checklist', JSON.stringify(state)); } catch(e){}
+  }
+
+  function loadState() {
+    try {
+      const state = JSON.parse(localStorage.getItem('js_checklist') || '{}');
+      allCheckboxIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && state[id]) {
+          el.checked = true;
+          const cardId = el.closest('.problem-card, .simple-task')?.id;
+          if (cardId) document.getElementById(cardId)?.classList.add('done');
+        }
+      });
+    } catch(e){}
+    updateProgress();
+  }
+
+  function copyCode(btn) {
+    const pre = btn.closest('.code-block').querySelector('pre');
+    navigator.clipboard.writeText(pre.innerText).then(() => {
+      btn.textContent = 'copied!';
+      setTimeout(() => btn.textContent = 'copy', 1500);
+    });
+  }
+
+  loadState();
+</script>
+</body>
+</html>

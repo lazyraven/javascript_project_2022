@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JavaScript Interview Practice Checklist</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      padding: 40px 20px;
+      color: #222;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      border-radius: 14px;
+      padding: 35px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #1e3a8a;
+    }
+
+    h2 {
+      margin-top: 30px;
+      margin-bottom: 15px;
+      color: #2563eb;
+      border-left: 5px solid #2563eb;
+      padding-left: 10px;
+    }
+
+    .section {
+      margin-bottom: 25px;
+    }
+
+    .task {
+      display: flex;
+      align-items: center;
+      background: #f9fafc;
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      transition: 0.3s;
+    }
+
+    .task:hover {
+      background: #eef4ff;
+      transform: translateX(3px);
+    }
+
+    .task input {
+      margin-right: 12px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .task label {
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .info-box {
+      background: #eef6ff;
+      border-left: 5px solid #2563eb;
+      padding: 18px;
+      border-radius: 10px;
+      margin-top: 20px;
+      line-height: 1.7;
+    }
+
+    pre {
+      background: #1e293b;
+      color: #f8fafc;
+      padding: 20px;
+      border-radius: 10px;
+      overflow-x: auto;
+      margin-top: 15px;
+    }
+
+    code {
+      font-size: 15px;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-note {
+      margin-top: 30px;
+      text-align: center;
+      color: #555;
+      font-size: 14px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>JavaScript Interview Practice Checklist</h1>
+
+    <!-- Similar Practice Problems -->
+    <div class="section">
+      <h2>10. Similar Practice Problems for Interviews</h2>
+
+      <h3 style="margin-bottom: 10px;">Beginner</h3>
+
+      <div class="task">
+        <input type="checkbox" id="b1">
+        <label for="b1">Count vowels in a string</label>
+      </div>
+
+      <div class="task">
+        <input type="checkbox" id="b2">
+        <label for="b2">Count characters in a string</label>
+      </div>
+
+      <div class="task">
+        <input type="checkbox" id="b3">
+        <label for="b3">Find duplicates in array</label>
+      </div>
+
+      <div class="task">
+        <input type="checkbox" id="b4">
+        <label for="b4">Find unique elements</label>
+      </div>
+
+      <div class="task">
+        <input type="checkbox" id="b5">
+        <label for="b5">First non-repeating character</label>
+      </div>
+
+      <h3 style="margin: 20px 0 10px;">Intermediate</h3>
+
+      <div class="task">
+        <input type="checkbox" id="i1">
+        <label for="i1">Valid Anagram</label>
+      </div>
+
+      <div class="task">
+        <input type="checkbox" id="i2">
+        <label for="i2">Group Anagrams</label>
+      </div>
+
+      <div class="task">
+        <input type="checkbox" id="i3">
+        <label for="i3">Majority Element</label>
+      </div>
+
+      <div class="task">
+        <input type="checkbox" id="i4">
+        <label for="i4">Top K Frequent Elements</label>
+      </div>
+
+      <div class="task">
+        <input type="checkbox" id="i5">
+        <label for="i5">Frequency Sort</label>
+      </div>
+
+      <h3 style="margin: 20px 0 10px;">Advanced</h3>
+
+      <div class="task">
+        <input type="checkbox" id="a1">
+        <label for="a1">Sliding Window + Frequency Counter</label>
+      </div>
+
+      <div class="task">
+        <input type="checkbox" id="a2">
+        <label for="a2">Minimum Window Substring</label>
+      </div>
+
+      <div class="task">
+        <input type="checkbox" id="a3">
+        <label for="a3">Longest Substring Without Repeating Characters</label>
+      </div>
+
+    </div>
+
+    <!-- Real Interview Insight -->
+    <div class="section">
+      <h2>11. Real Interview Insight</h2>
+
+      <div class="info-box">
+        <p>
+          Frequency Counter pattern appears everywhere in:
+        </p>
+
+        <ul>
+          <li>Array problems</li>
+          <li>String problems</li>
+          <li>HashMap problems</li>
+          <li>Sliding window problems</li>
+          <li>Data analysis tasks</li>
+        </ul>
+
+        <p style="margin-top: 15px;">
+          If you master frequency counters, many medium-level interview problems become much easier.
+        </p>
+      </div>
+    </div>
+
+    <!-- Final Interview Solution -->
+    <div class="section">
+      <h2>12. Final Clean Interview Solution</h2>
+
+      <pre><code>function countOccurrences(arr) {
+  const frequency = {};
+
+  for (const item of arr) {
+    frequency[item] = (frequency[item] || 0) + 1;
+  }
+
+  return frequency;
+}</code></pre>
+
+    </div>
+
+    <!-- Practice Next -->
+    <div class="section">
+      <h2>13. What You Should Practice Next</h2>
+
+      <div class="task">
+        <input type="checkbox" id="n1">
+        <label for="n1">Hash Maps / Objects deeply</label>
+      </div>
+
+      <div class="task">
+        <input type="checkbox" id="n2">
+        <label for="n2">Sliding Window Pattern</label>
+      </div>
+
+      <div class="task">
+        <input type="checkbox" id="n3">
+        <label for="n3">Two Pointer Pattern</label>
+      </div>
+
+      <div class="task">
+        <input type="checkbox" id="n4">
+        <label for="n4">Sets and Maps</label>
+      </div>
+
+      <div class="task">
+        <input type="checkbox" id="n5">
+        <label for="n5">Time Complexity Analysis</label>
+      </div>
+
+      <div class="info-box">
+        These patterns are heavily used in JavaScript interviews.
+      </div>
+    </div>
+
+    <div class="footer-note">
+      Keep practicing consistently 🚀
+    </div>
+
+  </div>
+
+</body>
+</html>
