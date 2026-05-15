@@ -43,3 +43,7 @@ Give me problems in this format:
 First, only give me the problem statement with input and output examples.
 Then I will try to solve it and write the code myself.
 After I share my solution, review my code, suggest corrections if needed, and explain the improvements clearly. 
+
+
+Generate step-by-step interview questions and answers for JavaScript, React, and Node.js from basic to advanced, including coding questions, practical examples, and interviewer-ready answers.
+Created HTML File for this prompt.> file:///F:/Projects/github/02_Javascript/javascript_project_2022/Interview-answer-MERN/interview-prep.html
