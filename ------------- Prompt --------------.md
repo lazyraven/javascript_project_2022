@@ -44,6 +44,23 @@ First, only give me the problem statement with input and output examples.
 Then I will try to solve it and write the code myself.
 After I share my solution, review my code, suggest corrections if needed, and explain the improvements clearly. 
 
+###### ** MERN All Answer Prompt May 2026 **
 
 Generate step-by-step interview questions and answers for JavaScript, React, and Node.js from basic to advanced, including coding questions, practical examples, and interviewer-ready answers.
+
 Created HTML File for this prompt.> file:///F:/Projects/github/02_Javascript/javascript_project_2022/Interview-answer-MERN/interview-prep.html
+
+JavaScript (20 Qs) — Hoisting, closures, event loop, Promises, prototypes, this, ES6+, debounce/throttle, generators, Proxy, WeakMap
+React (20 Qs) — Virtual DOM, hooks deep-dives (useEffect, useCallback, useMemo, useRef), custom hooks, state management, React.memo, lazy loading, compound components, Concurrent Mode, Error Boundaries
+Node.js (15 Qs) — Event loop, streams, clustering, worker threads, Express middleware, JWT auth, caching, memory leaks, security, connection pooling
+
+UI features:
+
+Sticky sidebar with a Table of Contents and live search
+Click any question to expand/collapse the answer
+"Expand all" toggle per section
+Scroll progress bar at the top
+Active section highlighting in the sidebar
+Back-to-top button
+
+#######
