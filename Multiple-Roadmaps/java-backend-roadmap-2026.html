@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Java Backend Roadmap 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f3ee;
+      --surface: #ffffff;
+      --border: #d6d0c4;
+      --text: #1a1a1a;
+      --muted: #6b6560;
+      --accent: #c0392b;
+      --accent-light: #fdf0ee;
+      --phase-1: #2c5f8a;
+      --phase-2: #1a6b4a;
+      --phase-3: #7b4f12;
+      --phase-4: #5c2d8a;
+      --phase-5: #c0392b;
+      --phase-6: #1a5c5c;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--text);
+      color: #fff;
+      padding: 48px 40px 40px;
+    }
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .header-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 12px;
+    }
+    header h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    header h1 span { color: #e87060; }
+    .header-sub {
+      margin-top: 12px;
+      color: #bbb;
+      font-size: 15px;
+      font-weight: 300;
+    }
+    .timeline-bar {
+      display: flex;
+      gap: 4px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .tbar-item {
+      font-family: var(--mono);
+      font-size: 10px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 4px 10px;
+      border-radius: 2px;
+      color: #ccc;
+      white-space: nowrap;
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    /* ── PHASE CARD ── */
+    .phase {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .phase-number {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--surface);
+      background: var(--phase-color, #444);
+      padding: 3px 9px;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    .phase-title {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .phase-duration {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .phase-body {
+      padding: 20px 24px 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    /* ── SECTION WITHIN PHASE ── */
+    .section-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 2px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+    }
+    .tag.colored {
+      background: color-mix(in srgb, var(--phase-color, #444) 10%, white);
+      border-color: color-mix(in srgb, var(--phase-color, #444) 25%, white);
+      color: var(--phase-color, #444);
+    }
+
+    /* ── PLATFORM / GOAL ROW ── */
+    .row-section { grid-column: 1 / -1; }
+    .goal-box {
+      background: var(--accent-light);
+      border: 1px solid #e8c4be;
+      border-radius: 3px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ── PROJECT LIST ── */
+    .project-list {
+      list-style: none;
+    }
+    .project-list li {
+      font-size: 13px;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+    }
+    .project-list li:last-child { border-bottom: none; }
+    .project-list li::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--phase-color, #444);
+      flex-shrink: 0;
+    }
+
+    /* ── FINAL SECTION ── */
+    .final-card {
+      background: var(--text);
+      color: #fff;
+      border-radius: 4px;
+      padding: 28px 28px 24px;
+      margin-bottom: 24px;
+    }
+    .final-card h2 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+    .final-card .goal-line {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: #e87060;
+      margin-bottom: 18px;
+    }
+    .priority-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 8px;
+    }
+    .priority-list li {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 3px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: #ddd;
+    }
+    .priority-list li strong {
+      display: block;
+      font-size: 14px;
+      color: #fff;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    /* ── PHASE COLORS ── */
+    .p1 { --phase-color: var(--phase-1); }
+    .p2 { --phase-color: var(--phase-2); }
+    .p3 { --phase-color: var(--phase-3); }
+    .p4 { --phase-color: var(--phase-4); }
+    .p5 { --phase-color: var(--phase-5); }
+    .p6 { --phase-color: var(--phase-6); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 520px) {
+      header { padding: 32px 20px 28px; }
+      .phase-header { flex-wrap: wrap; }
+      .phase-duration { margin-left: 0; }
+      .phase-body { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-label">Career Roadmap · 2026 Edition</div>
+    <h1>Java <span>Backend</span><br>Developer Roadmap</h1>
+    <p class="header-sub">A structured path from Java fundamentals to job-ready backend engineering</p>
+    <div class="timeline-bar">
+      <div class="tbar-item">Phase 1 — Java Fundamentals · 1.5–2 mo</div>
+      <div class="tbar-item">Phase 2 — DSA · 2–3 mo</div>
+      <div class="tbar-item">Phase 3 — SQL · 2–3 wk</div>
+      <div class="tbar-item">Phase 4 — Spring Boot · 2–3 mo</div>
+      <div class="tbar-item">Phase 5 — Advanced · Ongoing</div>
+      <div class="tbar-item">Phase 6 — Placement · Final</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- PHASE 1 -->
+  <div class="phase p1">
+    <div class="phase-header">
+      <span class="phase-number">PHASE 01</span>
+      <span class="phase-title">Java Fundamentals</span>
+      <span class="phase-duration">1.5 – 2 Months</span>
+    </div>
+    <div class="phase-body">
+      <div>
+        <div class="section-title">Core Topics</div>
+        <div class="tag-list">
+          <span class="tag colored">Variables</span>
+          <span class="tag colored">Loops</span>
+          <span class="tag colored">Functions</span>
+          <span class="tag colored">Arrays</span>
+          <span class="tag colored">OOP</span>
+          <span class="tag colored">Inheritance</span>
+          <span class="tag colored">Polymorphism</span>
+          <span class="tag colored">Interfaces</span>
+          <span class="tag colored">Exception Handling</span>
+          <span class="tag colored">Collections</span>
+          <span class="tag colored">Generics</span>
+          <span class="tag colored">Java 8 Streams</span>
+          <span class="tag colored">Multithreading Basics</span>
+          <span class="tag colored">File Handling</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-title">Practice Goals</div>
+        <ul class="project-list">
+          <li>Solve 100+ Java problems</li>
+          <li>Build small console applications</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase p2">
+    <div class="phase-header">
+      <span class="phase-number">PHASE 02</span>
+      <span class="phase-title">DSA + Problem Solving</span>
+      <span class="phase-duration">2 – 3 Months</span>
+    </div>
+    <div class="phase-body">
+      <div>
+        <div class="section-title">Data Structures & Algorithms</div>
+        <div class="tag-list">
+          <span class="tag colored">Arrays</span>
+          <span class="tag colored">Strings</span>
+          <span class="tag colored">HashMap</span>
+          <span class="tag colored">Stack / Queue</span>
+          <span class="tag colored">Linked List</span>
+          <span class="tag colored">Trees</span>
+          <span class="tag colored">Binary Search</span>
+          <span class="tag colored">Recursion</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-title">Platforms</div>
+        <div class="tag-list">
+          <span class="tag">LeetCode</span>
+          <span class="tag">HackerRank</span>
+          <span class="tag">InterviewBit</span>
+        </div>
+        <br/>
+        <div class="goal-box">🎯 Goal: Solve 200–300 problems gradually</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase p3">
+    <div class="phase-header">
+      <span class="phase-number">PHASE 03</span>
+      <span class="phase-title">Database + SQL</span>
+      <span class="phase-duration">2 – 3 Weeks</span>
+    </div>
+    <div class="phase-body">
+      <div>
+        <div class="section-title">Topics</div>
+        <div class="tag-list">
+          <span class="tag colored">MySQL</span>
+          <span class="tag colored">PostgreSQL</span>
+          <span class="tag colored">Joins</span>
+          <span class="tag colored">Indexes</span>
+          <span class="tag colored">Normalization</span>
+          <span class="tag colored">Transactions</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-title">Practice</div>
+        <ul class="project-list">
+          <li>SQL interview questions</li>
+          <li>Query optimization exercises</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase p4">
+    <div class="phase-header">
+      <span class="phase-number">PHASE 04</span>
+      <span class="phase-title">Spring Boot Backend Development</span>
+      <span class="phase-duration">2 – 3 Months</span>
+    </div>
+    <div class="phase-body">
+      <div>
+        <div class="section-title">Spring Topics</div>
+        <div class="tag-list">
+          <span class="tag colored">Spring Core</span>
+          <span class="tag colored">Spring Boot</span>
+          <span class="tag colored">REST APIs</span>
+          <span class="tag colored">MVC</span>
+          <span class="tag colored">JPA / Hibernate</span>
+          <span class="tag colored">Validation</span>
+          <span class="tag colored">JWT Auth</span>
+          <span class="tag colored">Security</span>
+          <span class="tag colored">Exception Handling</span>
+          <span class="tag colored">Logging</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-title">Build These Projects</div>
+        <ul class="project-list">
+          <li>Employee Management System</li>
+          <li>E-commerce Backend</li>
+          <li>Task Manager API</li>
+          <li>Blog Backend</li>
+          <li>Chat Application</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase p5">
+    <div class="phase-header">
+      <span class="phase-number">PHASE 05</span>
+      <span class="phase-title">Advanced Backend Skills</span>
+      <span class="phase-duration">Ongoing</span>
+    </div>
+    <div class="phase-body">
+      <div class="row-section">
+        <div class="section-title">Technologies to Learn</div>
+        <div class="tag-list">
+          <span class="tag colored">Docker</span>
+          <span class="tag colored">Redis</span>
+          <span class="tag colored">Kafka Basics</span>
+          <span class="tag colored">Microservices</span>
+          <span class="tag colored">API Gateway</span>
+          <span class="tag colored">JUnit</span>
+          <span class="tag colored">Mockito</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 6 -->
+  <div class="phase p6">
+    <div class="phase-header">
+      <span class="phase-number">PHASE 06</span>
+      <span class="phase-title">Placement Preparation</span>
+      <span class="phase-duration">Final Stage</span>
+    </div>
+    <div class="phase-body">
+      <div>
+        <div class="section-title">Preparation Areas</div>
+        <ul class="project-list">
+          <li>Resume writing</li>
+          <li>GitHub portfolio</li>
+          <li>LinkedIn profile</li>
+          <li>HR interview questions</li>
+          <li>Java interview questions</li>
+          <li>System design basics</li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-title">Capstone Project Must-Haves</div>
+        <div class="tag-list">
+          <span class="tag colored">Authentication</span>
+          <span class="tag colored">Database</span>
+          <span class="tag colored">REST API</span>
+          <span class="tag colored">Deployment</span>
+        </div>
+        <br/>
+        <div class="goal-box">Build 3 strong projects for your portfolio</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL RECOMMENDATION -->
+  <div class="final-card">
+    <h2>Final Recommendation</h2>
+    <div class="goal-line">Target: Become a job-ready Java Backend Developer in 2026</div>
+    <ul class="priority-list">
+      <li><strong>Telusko Java</strong>Core language foundation</li>
+      <li><strong>DSA Practice</strong>LeetCode daily habit</li>
+      <li><strong>Spring Boot</strong>Primary backend skill</li>
+      <li><strong>Projects</strong>Show real work</li>
+      <li><strong>SQL</strong>Essential for every role</li>
+    </ul>
+  </div>
+
+  <div class="phase" style="--phase-color: #888;">
+    <div class="phase-header">
+      <span class="phase-number" style="background:#555;">NOTE</span>
+      <span class="phase-title">On Using CodeWithHarry</span>
+    </div>
+    <div class="phase-body">
+      <div class="row-section">
+        <div class="tag-list">
+          <span class="tag">✅ Good as a comfort start</span>
+          <span class="tag">❌ Not sufficient for final backend prep</span>
+        </div>
+        <br/>
+        <div style="font-size:13px; color: var(--muted); line-height:1.7;">
+          Use CodeWithHarry to ease into Java, but transition to more structured resources (Telusko, Spring Boot official docs, DSA platforms) for job-ready preparation.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Java Backend Roadmap · 2026 · Generated for placement preparation
+</footer>
+
+</body>
+</html>
