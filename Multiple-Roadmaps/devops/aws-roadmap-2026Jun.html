@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWS Learning Roadmap – JS/Node/React/Angular Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f7f8fa;
+  color: #1c1e21;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ── TOP BAR ── */
+.topbar {
+  background: #1a1f2e;
+  color: #fff;
+  padding: 36px 0 32px;
+  border-bottom: 3px solid #f90;
+}
+.topbar .inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.topbar .eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #f90;
+  margin-bottom: 10px;
+}
+.topbar h1 {
+  font-size: 1.9rem;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.topbar p {
+  color: #9aa3b5;
+  font-size: 13.5px;
+  max-width: 560px;
+}
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #2d3347;
+}
+.meta-item { font-size: 12px; color: #6b7385; }
+.meta-item b { display: block; color: #cdd3de; font-size: 12px; font-weight: 500; margin-bottom: 1px; }
+
+/* ── BANNER: YOUR ADVANTAGE ── */
+.advantage-bar {
+  background: #fffbf0;
+  border-left: 4px solid #f90;
+  max-width: 860px;
+  margin: 20px auto 0;
+  padding: 14px 20px;
+  font-size: 13px;
+  color: #5a3e00;
+  border-radius: 0 4px 4px 0;
+}
+.advantage-bar strong { font-weight: 600; }
+.advantage-bar .tags {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
+}
+.advantage-bar .atag {
+  background: #fff3cc;
+  border: 1px solid #ffd166;
+  border-radius: 3px;
+  padding: 2px 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #7a4f00;
+}
+
+/* ── MAIN LAYOUT ── */
+.page { max-width: 860px; margin: 24px auto 48px; padding: 0 24px; }
+
+/* ── TOC ── */
+.toc {
+  background: #fff;
+  border: 1px solid #e0e3ea;
+  border-radius: 6px;
+  padding: 20px 22px;
+  margin-bottom: 20px;
+}
+.toc h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8a92a3;
+  margin-bottom: 12px;
+}
+.toc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 2px;
+}
+.toc-link {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px; border-radius: 4px;
+  font-size: 13px; color: #2d3347;
+  cursor: pointer; transition: background .12s;
+}
+.toc-link:hover { background: #f0f2f7; }
+.toc-n {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: #aab0bf; width: 22px; flex-shrink: 0;
+}
+
+/* ── CONTROLS ── */
+.controls {
+  display: flex; gap: 8px; margin-bottom: 12px;
+}
+.ctrl-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .8px; text-transform: uppercase;
+  padding: 6px 14px; border: 1px solid #d4d8e2;
+  background: #fff; color: #3a3f52; border-radius: 4px;
+  cursor: pointer; transition: all .12s;
+}
+.ctrl-btn:hover { background: #1a1f2e; color: #fff; border-color: #1a1f2e; }
+
+/* ── PHASE CARD ── */
+.phase {
+  background: #fff;
+  border: 1px solid #e0e3ea;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.phase-head {
+  display: flex; align-items: stretch;
+  cursor: pointer; user-select: none;
+  transition: background .12s;
+}
+.phase-head:hover { background: #f7f8fc; }
+
+.phase-num {
+  width: 52px; min-width: 52px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 500; color: #fff;
+  writing-mode: vertical-lr;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.phase-info {
+  flex: 1; padding: 16px 18px;
+  border-left: 1px solid #e8eaf0;
+}
+.phase-title { font-size: 14.5px; font-weight: 600; color: #1c1e21; }
+.phase-sub { font-size: 12px; color: #8a92a3; margin-top: 2px; }
+
+.phase-arrow {
+  width: 46px; display: flex; align-items: center; justify-content: center;
+  color: #aab0bf; font-size: 16px; transition: transform .18s;
+}
+.phase.open .phase-arrow { transform: rotate(180deg); }
+
+/* ── PHASE BODY ── */
+.phase-body { display: none; }
+.phase.open .phase-body { display: block; }
+
+.phase-content {
+  padding: 20px 22px 22px 70px;
+  border-top: 1px solid #ebedf3;
+}
+
+/* ── GOAL ── */
+.goal {
+  background: #f5faff;
+  border-left: 3px solid #3b82f6;
+  padding: 10px 14px;
+  border-radius: 0 4px 4px 0;
+  font-size: 13px; color: #1e3a5f;
+  margin-bottom: 18px;
+}
+
+/* ── JS DEV NOTE ── */
+.dev-note {
+  background: #fffbf0;
+  border-left: 3px solid #f90;
+  padding: 10px 14px;
+  border-radius: 0 4px 4px 0;
+  font-size: 13px; color: #5a3e00;
+  margin-bottom: 18px;
+}
+
+/* ── SECTION ── */
+.sec { margin-bottom: 18px; }
+.sec-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: #9aa3b5; margin-bottom: 8px;
+  padding-bottom: 5px; border-bottom: 1px solid #ebedf3;
+}
+
+/* ── PILLS ── */
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill {
+  background: #f0f2f7; border: 1px solid #e0e3ea;
+  border-radius: 3px; padding: 3px 10px;
+  font-size: 12.5px; color: #2d3347;
+  font-family: 'JetBrains Mono', monospace;
+}
+.pill.hi {
+  background: #fffbf0; border-color: #ffd166; color: #7a4f00;
+}
+.pill.green {
+  background: #f0faf4; border-color: #6fcf97; color: #1a5c35;
+}
+
+/* ── PROJECT GRID ── */
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  gap: 10px;
+}
+.proj-card {
+  border: 1px solid #e0e3ea; border-radius: 5px;
+  padding: 12px 14px; background: #fafbfd;
+}
+.proj-card .pname {
+  font-weight: 600; font-size: 12.5px; margin-bottom: 7px; color: #1c1e21;
+}
+.proj-card .psvcs {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: #6b7385; line-height: 1.75;
+}
+
+/* ── RESOURCE LIST ── */
+.res-list { list-style: none; }
+.res-list li {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 7px 0; border-bottom: 1px solid #f0f2f7;
+  font-size: 13px;
+}
+.res-list li:last-child { border-bottom: none; }
+.res-name { font-weight: 600; min-width: 150px; color: #1c1e21; }
+.res-desc { font-size: 12px; color: #8a92a3; }
+
+/* ── CERT TABLE ── */
+.cert-section { margin-top: 28px; }
+.cert-section h2 {
+  font-size: 14px; font-weight: 600; margin-bottom: 16px; color: #1c1e21;
+}
+.cert-rows { display: flex; flex-direction: column; gap: 10px; }
+.cert-row { display: flex; align-items: flex-start; gap: 14px; }
+.cert-level {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+  width: 100px; min-width: 100px; color: #8a92a3; padding-top: 5px;
+}
+.cert-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.cbadge {
+  border-radius: 3px; padding: 4px 11px;
+  font-size: 12px; font-weight: 500; border: 1px solid;
+}
+.cbadge.f { background:#edf9f3; border-color:#6fcf97; color:#1a5c35; }
+.cbadge.a { background:#edf2fb; border-color:#7aadee; color:#1a3a72; }
+.cbadge.p { background:#f3edfb; border-color:#b07ade; color:#4a1a72; }
+.cbadge.s { background:#fdf3ed; border-color:#e8a87c; color:#7a3a10; }
+
+/* ── JS DEV PATH ── */
+.dev-path-section {
+  background: #fff;
+  border: 1px solid #e0e3ea;
+  border-radius: 6px;
+  padding: 22px;
+  margin-top: 20px;
+}
+.dev-path-section h2 {
+  font-size: 14px; font-weight: 600; color: #1c1e21; margin-bottom: 4px;
+}
+.dev-path-section .sub {
+  font-size: 12.5px; color: #8a92a3; margin-bottom: 18px;
+}
+.step-list { display: flex; flex-direction: column; }
+.step-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 0; border-bottom: 1px solid #f0f2f7;
+  font-size: 13.5px; color: #2d3347;
+}
+.step-item:last-child { border-bottom: none; }
+.step-num {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: #1a1f2e; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 500; flex-shrink: 0;
+}
+.step-badge {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; padding: 2px 7px;
+  border-radius: 3px; background: #f0faf4;
+  border: 1px solid #6fcf97; color: #1a5c35;
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center; padding: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: #aab0bf;
+  background: #fff; border-top: 1px solid #e0e3ea;
+}
+
+@media (max-width: 600px) {
+  .topbar h1 { font-size: 1.4rem; }
+  .phase-content { padding-left: 16px; }
+  .proj-grid { grid-template-columns: 1fr 1fr; }
+  .meta-row { gap: 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="inner">
+    <div class="eyebrow">Complete Roadmap · 8–12 Months</div>
+    <h1>AWS Learning Roadmap<br>Beginner → Expert</h1>
+    <p>Designed for a software developer. Go from zero AWS knowledge to cloud architect / DevOps level expertise with consistent study.</p>
+    <div class="meta-row">
+      <div class="meta-item"><b>Duration</b>8 – 12 Months</div>
+      <div class="meta-item"><b>Phases</b>10 Total</div>
+      <div class="meta-item"><b>Level</b>Beginner → Expert</div>
+      <div class="meta-item"><b>You</b>JS · Node.js · React · Angular</div>
+    </div>
+  </div>
+</div>
+
+<!-- ADVANTAGE BANNER -->
+<div class="page" style="margin-top:20px; margin-bottom:0;">
+  <div class="advantage-bar">
+    <strong>🚀 Your Head Start:</strong> You already know JavaScript, Node.js, React, and Angular — this gives you a big advantage. You can skip frontend basics and jump straight into deploying apps you already know how to build.
+    <div class="tags">
+      <span class="atag">JavaScript ✓</span>
+      <span class="atag">Node.js ✓</span>
+      <span class="atag">React ✓</span>
+      <span class="atag">Angular ✓</span>
+      <span class="atag">REST APIs — you know this</span>
+      <span class="atag">Focus on: Cloud + Infra</span>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- TOC -->
+  <div class="toc">
+    <h2>Jump to Phase</h2>
+    <div class="toc-grid">
+      <span class="toc-link" onclick="jumpTo(0)"><span class="toc-n">01</span> Cloud Fundamentals</span>
+      <span class="toc-link" onclick="jumpTo(1)"><span class="toc-n">02</span> Core AWS Services</span>
+      <span class="toc-link" onclick="jumpTo(2)"><span class="toc-n">03</span> Associate Level</span>
+      <span class="toc-link" onclick="jumpTo(3)"><span class="toc-n">04</span> Real Projects</span>
+      <span class="toc-link" onclick="jumpTo(4)"><span class="toc-n">05</span> DevOps & Automation</span>
+      <span class="toc-link" onclick="jumpTo(5)"><span class="toc-n">06</span> Containers & Kubernetes</span>
+      <span class="toc-link" onclick="jumpTo(6)"><span class="toc-n">07</span> Security Specialization</span>
+      <span class="toc-link" onclick="jumpTo(7)"><span class="toc-n">08</span> Data Engineering</span>
+      <span class="toc-link" onclick="jumpTo(8)"><span class="toc-n">09</span> AI / ML on AWS</span>
+      <span class="toc-link" onclick="jumpTo(9)"><span class="toc-n">10</span> Advanced Architecture</span>
+    </div>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <button class="ctrl-btn" onclick="expandAll()">Expand All</button>
+    <button class="ctrl-btn" onclick="collapseAll()">Collapse All</button>
+  </div>
+
+  <!-- ═══ PHASE 1 ═══ -->
+  <div class="phase open" id="ph0">
+    <div class="phase-head" onclick="toggle(0)">
+      <div class="phase-num" style="background:#2d6a4f;">P01</div>
+      <div class="phase-info">
+        <div class="phase-title">Cloud Fundamentals</div>
+        <div class="phase-sub">2 – 4 Weeks &nbsp;·&nbsp; Zero to cloud basics</div>
+      </div>
+      <div class="phase-arrow">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-content">
+        <div class="goal">Understand cloud computing and AWS basics before touching services.</div>
+        <div class="dev-note">💡 <strong>For you:</strong> You probably already understand client-server, HTTP, and APIs. Focus on cloud-specific concepts — Regions, AZs, IAM, billing — and skip anything web-basics related.</div>
+
+        <div class="sec">
+          <div class="sec-label">Topics to Learn</div>
+          <div class="pills">
+            <span class="pill">What is Cloud Computing?</span>
+            <span class="pill">IaaS / PaaS / SaaS</span>
+            <span class="pill">Regions & Availability Zones</span>
+            <span class="pill">Shared Responsibility Model</span>
+            <span class="pill">AWS Global Infrastructure</span>
+            <span class="pill">Pricing & Billing</span>
+            <span class="pill">AWS Free Tier</span>
+            <span class="pill">Basic Security Concepts</span>
+          </div>
+        </div>
+
+        <div class="sec">
+          <div class="sec-label">Recommended Resources</div>
+          <ul class="res-list">
+            <li><span class="res-name">FreeCodeCamp</span><span class="res-desc">AWS Cloud Practitioner Full Course (YouTube, free)</span></li>
+            <li><span class="res-name">Andrew Brown – ExamPro</span><span class="res-desc">AWS Cloud Practitioner Course</span></li>
+            <li><span class="res-name">Stephane Maarek</span><span class="res-desc">AWS Cloud Practitioner playlist</span></li>
+            <li><span class="res-name">AWS Skill Builder</span><span class="res-desc">Hundreds of free courses & learning paths — skill.aws.training</span></li>
+            <li><span class="res-name">AWS Documentation</span><span class="res-desc">docs.aws.amazon.com — official reference</span></li>
+          </ul>
+        </div>
+
+        <div class="sec">
+          <div class="sec-label">Hands-On Practice (Free Tier)</div>
+          <div class="pills">
+            <span class="pill hi">Launch EC2</span>
+            <span class="pill hi">Create S3 Bucket</span>
+            <span class="pill hi">Upload Files to S3</span>
+            <span class="pill hi">Create IAM User</span>
+            <span class="pill hi">Enable MFA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 2 ═══ -->
+  <div class="phase" id="ph1">
+    <div class="phase-head" onclick="toggle(1)">
+      <div class="phase-num" style="background:#1d4e89;">P02</div>
+      <div class="phase-info">
+        <div class="phase-title">Core AWS Services</div>
+        <div class="phase-sub">1 – 2 Months &nbsp;·&nbsp; Essential building blocks</div>
+      </div>
+      <div class="phase-arrow">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-content">
+        <div class="goal">Master services used in almost every AWS architecture.</div>
+        <div class="dev-note">💡 <strong>For you:</strong> Projects 2 & 3 are perfect starting points — you already know React and Node.js. Just learn the AWS deployment layer on top of what you already build.</div>
+
+        <div class="sec">
+          <div class="sec-label">Compute</div>
+          <div class="pills">
+            <span class="pill">EC2</span><span class="pill">Auto Scaling</span><span class="pill">Load Balancer</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Storage</div>
+          <div class="pills">
+            <span class="pill">S3</span><span class="pill">EBS</span><span class="pill">EFS</span><span class="pill">Glacier</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Database</div>
+          <div class="pills">
+            <span class="pill">RDS</span><span class="pill">DynamoDB</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Networking</div>
+          <div class="pills">
+            <span class="pill">VPC</span><span class="pill">Route 53</span><span class="pill">CloudFront</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Security</div>
+          <div class="pills">
+            <span class="pill">IAM</span><span class="pill">KMS</span><span class="pill">Security Groups</span><span class="pill">NACLs</span>
+          </div>
+        </div>
+
+        <div class="sec">
+          <div class="sec-label">Projects</div>
+          <div class="proj-grid">
+            <div class="proj-card">
+              <div class="pname">Static Portfolio</div>
+              <div class="psvcs">S3<br>CloudFront<br>Route 53</div>
+            </div>
+            <div class="proj-card">
+              <div class="pname">React App Deploy ★</div>
+              <div class="psvcs">EC2<br>Nginx<br><em style="color:#f90">You know React!</em></div>
+            </div>
+            <div class="proj-card">
+              <div class="pname">Node.js API + DB ★</div>
+              <div class="psvcs">EC2<br>RDS MySQL<br><em style="color:#f90">You know Node!</em></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sec">
+          <div class="sec-label">YouTube Resources</div>
+          <ul class="res-list">
+            <li><span class="res-name">AWS Official Workshops</span><span class="res-desc">Guided hands-on labs</span></li>
+            <li><span class="res-name">Tech With Lucy</span><span class="res-desc">AWS for Beginners</span></li>
+            <li><span class="res-name">Be A Better Dev</span><span class="res-desc">AWS Fundamentals series</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 3 ═══ -->
+  <div class="phase" id="ph2">
+    <div class="phase-head" onclick="toggle(2)">
+      <div class="phase-num" style="background:#5a3e82;">P03</div>
+      <div class="phase-info">
+        <div class="phase-title">AWS Associate Level</div>
+        <div class="phase-sub">2 – 3 Months &nbsp;·&nbsp; Employer-recognized skills</div>
+      </div>
+      <div class="phase-arrow">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-content">
+        <div class="goal">This is where employers start taking your AWS skills seriously. Target: <strong>AWS Solutions Architect – Associate</strong>.</div>
+
+        <div class="sec">
+          <div class="sec-label">Advanced Networking</div>
+          <div class="pills">
+            <span class="pill">VPC Peering</span><span class="pill">Transit Gateway</span><span class="pill">PrivateLink</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Storage Deep Dive</div>
+          <div class="pills">
+            <span class="pill">Storage Classes</span><span class="pill">Replication</span><span class="pill">Lifecycle Policies</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Security</div>
+          <div class="pills">
+            <span class="pill">IAM Policies</span><span class="pill">Cross-account Access</span><span class="pill">Encryption</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Monitoring</div>
+          <div class="pills">
+            <span class="pill">CloudWatch</span><span class="pill">CloudTrail</span>
+          </div>
+        </div>
+
+        <div class="sec">
+          <div class="sec-label">Recommended Courses</div>
+          <ul class="res-list">
+            <li><span class="res-name">Stephane Maarek</span><span class="res-desc">Highly respected certification instructor (Udemy)</span></li>
+            <li><span class="res-name">Adrian Cantrill</span><span class="res-desc">Deep practical explanations, architecture focus</span></li>
+            <li><span class="res-name">Tutorials Dojo</span><span class="res-desc">Most recommended AWS practice exams by the community</span></li>
+          </ul>
+        </div>
+
+        <div class="sec">
+          <div class="sec-label">Target Certification</div>
+          <div class="pills">
+            <span class="pill hi">AWS Certified Solutions Architect – Associate</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 4 ═══ -->
+  <div class="phase" id="ph3">
+    <div class="phase-head" onclick="toggle(3)">
+      <div class="phase-num" style="background:#9b4218;">P04</div>
+      <div class="phase-info">
+        <div class="phase-title">Build Real Projects</div>
+        <div class="phase-sub">1 – 2 Months &nbsp;·&nbsp; Portfolio-worthy cloud apps</div>
+      </div>
+      <div class="phase-arrow">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-content">
+        <div class="goal">Create portfolio-worthy cloud projects that demonstrate real architectural decisions.</div>
+        <div class="dev-note">💡 <strong>For you:</strong> All 4 projects use JavaScript/Node.js. You're building the cloud infrastructure around skills you already have — massive time saver.</div>
+
+        <div class="sec">
+          <div class="sec-label">Projects</div>
+          <div class="proj-grid">
+            <div class="proj-card">
+              <div class="pname">Serverless Todo App ★</div>
+              <div class="psvcs">API Gateway<br>Lambda (Node.js)<br>DynamoDB<br>Cognito</div>
+            </div>
+            <div class="proj-card">
+              <div class="pname">Image Processing Pipeline</div>
+              <div class="psvcs">S3<br>Lambda<br>SNS</div>
+            </div>
+            <div class="proj-card">
+              <div class="pname">Microservices App ★</div>
+              <div class="psvcs">ECS<br>Load Balancer<br>RDS</div>
+            </div>
+            <div class="proj-card">
+              <div class="pname">CI/CD Pipeline</div>
+              <div class="psvcs">CodePipeline<br>CodeBuild<br>CodeDeploy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 5 ═══ -->
+  <div class="phase" id="ph4">
+    <div class="phase-head" onclick="toggle(4)">
+      <div class="phase-num" style="background:#155e75;">P05</div>
+      <div class="phase-info">
+        <div class="phase-title">DevOps & Automation</div>
+        <div class="phase-sub">2 Months &nbsp;·&nbsp; Infrastructure as Code</div>
+      </div>
+      <div class="phase-arrow">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-content">
+        <div class="goal">Infrastructure as Code is a must-have skill for any modern cloud engineer.</div>
+        <div class="dev-note">💡 <strong>For you:</strong> You already use GitHub — GitHub Actions CI/CD will feel familiar. Terraform is new but uses HCL which is easy to pick up.</div>
+
+        <div class="sec">
+          <div class="sec-label">Terraform</div>
+          <div class="pills">
+            <span class="pill">Providers</span><span class="pill">Modules</span><span class="pill">State Management</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">AWS CloudFormation</div>
+          <div class="pills">
+            <span class="pill">Templates</span><span class="pill">Stacks</span><span class="pill">Nested Stacks</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">CI/CD Tools</div>
+          <div class="pills">
+            <span class="pill hi">GitHub Actions</span>
+            <span class="pill">AWS CodePipeline</span>
+            <span class="pill">Jenkins</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Capstone Project</div>
+          <div class="pills">
+            <span class="pill green">One-click deploy: Terraform + GitHub Actions + AWS</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Resource</div>
+          <ul class="res-list">
+            <li><span class="res-name">HashiCorp Terraform Tutorials</span><span class="res-desc">developer.hashicorp.com/terraform/tutorials</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 6 ═══ -->
+  <div class="phase" id="ph5">
+    <div class="phase-head" onclick="toggle(5)">
+      <div class="phase-num" style="background:#145a32;">P06</div>
+      <div class="phase-info">
+        <div class="phase-title">Containers & Kubernetes</div>
+        <div class="phase-sub">1 – 2 Months &nbsp;·&nbsp; Expected by cloud jobs</div>
+      </div>
+      <div class="phase-arrow">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-content">
+        <div class="goal">Cloud jobs increasingly expect container knowledge. Docker → ECS → Kubernetes.</div>
+        <div class="dev-note">💡 <strong>For you:</strong> The EKS project deploys React + Node.js + PostgreSQL — exactly what you build every day. You're just containerising it and running it on Kubernetes.</div>
+
+        <div class="sec">
+          <div class="sec-label">Docker</div>
+          <div class="pills">
+            <span class="pill">Images</span><span class="pill">Containers</span><span class="pill">Networking</span><span class="pill">Volumes</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">AWS ECS</div>
+          <div class="pills">
+            <span class="pill">Fargate</span><span class="pill">Service Discovery</span><span class="pill">Auto Scaling</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Kubernetes (AWS EKS)</div>
+          <div class="pills">
+            <span class="pill">Pods</span><span class="pill">Deployments</span><span class="pill">Services</span><span class="pill">Ingress</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">EKS Project Stack ★</div>
+          <div class="pills">
+            <span class="pill hi">React</span>
+            <span class="pill hi">Node.js</span>
+            <span class="pill hi">PostgreSQL</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Resource</div>
+          <ul class="res-list">
+            <li><span class="res-name">TechWorld with Nana</span><span class="res-desc">Excellent Docker and Kubernetes playlists on YouTube</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 7 ═══ -->
+  <div class="phase" id="ph6">
+    <div class="phase-head" onclick="toggle(6)">
+      <div class="phase-num" style="background:#7b2d3f;">P07</div>
+      <div class="phase-info">
+        <div class="phase-title">Security Specialization</div>
+        <div class="phase-sub">Ongoing &nbsp;·&nbsp; Multi-account architecture</div>
+      </div>
+      <div class="phase-arrow">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-content">
+        <div class="sec">
+          <div class="sec-label">Topics</div>
+          <div class="pills">
+            <span class="pill">IAM Deep Dive</span>
+            <span class="pill">AWS Organizations</span>
+            <span class="pill">Security Hub</span>
+            <span class="pill">GuardDuty</span>
+            <span class="pill">Inspector</span>
+            <span class="pill">WAF</span>
+            <span class="pill">Shield</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Project</div>
+          <div class="pills">
+            <span class="pill green">Build secure multi-account AWS architecture</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Certification Option</div>
+          <div class="pills">
+            <span class="pill hi">AWS Certified Security – Specialty</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 8 ═══ -->
+  <div class="phase" id="ph7">
+    <div class="phase-head" onclick="toggle(7)">
+      <div class="phase-num" style="background:#1a3a4f;">P08</div>
+      <div class="phase-info">
+        <div class="phase-title">Data Engineering & Analytics</div>
+        <div class="phase-sub">Ongoing &nbsp;·&nbsp; Data lake architecture</div>
+      </div>
+      <div class="phase-arrow">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-content">
+        <div class="sec">
+          <div class="sec-label">Services</div>
+          <div class="pills">
+            <span class="pill">Redshift</span>
+            <span class="pill">Glue</span>
+            <span class="pill">Athena</span>
+            <span class="pill">EMR</span>
+            <span class="pill">Kinesis</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Project: Data Lake Architecture</div>
+          <div class="pills" style="align-items:center;">
+            <span class="pill hi">S3</span>
+            <span style="color:#aab0bf;">→</span>
+            <span class="pill hi">Glue</span>
+            <span style="color:#aab0bf;">→</span>
+            <span class="pill hi">Athena</span>
+            <span style="color:#aab0bf;">→</span>
+            <span class="pill hi">QuickSight</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 9 ═══ -->
+  <div class="phase" id="ph8">
+    <div class="phase-head" onclick="toggle(8)">
+      <div class="phase-num" style="background:#4a235a;">P09</div>
+      <div class="phase-info">
+        <div class="phase-title">AI / ML on AWS</div>
+        <div class="phase-sub">Ongoing &nbsp;·&nbsp; AWS is investing heavily here</div>
+      </div>
+      <div class="phase-arrow">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-content">
+        <div class="dev-note">💡 <strong>For you:</strong> You can build the chatbot UI in React/Angular and the backend in Node.js — AWS Bedrock + Lambda is just the AI layer on top.</div>
+        <div class="sec">
+          <div class="sec-label">Services</div>
+          <div class="pills">
+            <span class="pill">SageMaker</span>
+            <span class="pill">Bedrock</span>
+            <span class="pill">Rekognition</span>
+            <span class="pill">Comprehend</span>
+            <span class="pill">Textract</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Project: AI Chatbot ★</div>
+          <div class="pills">
+            <span class="pill hi">Bedrock</span>
+            <span class="pill hi">Lambda (Node.js)</span>
+            <span class="pill hi">API Gateway</span>
+            <span class="pill hi">React UI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 10 ═══ -->
+  <div class="phase" id="ph9">
+    <div class="phase-head" onclick="toggle(9)">
+      <div class="phase-num" style="background:#2e4057;">P10</div>
+      <div class="phase-info">
+        <div class="phase-title">Advanced Architecture</div>
+        <div class="phase-sub">Expert Level &nbsp;·&nbsp; AWS Well-Architected Framework</div>
+      </div>
+      <div class="phase-arrow">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-content">
+        <div class="sec">
+          <div class="sec-label">Topics</div>
+          <div class="pills">
+            <span class="pill">Multi-region Architectures</span>
+            <span class="pill">Disaster Recovery</span>
+            <span class="pill">Hybrid Cloud</span>
+            <span class="pill">Event-driven Systems</span>
+            <span class="pill">High Availability</span>
+            <span class="pill">Cost Optimization</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">AWS Well-Architected Framework — 6 Pillars</div>
+          <div class="pills">
+            <span class="pill green">Operational Excellence</span>
+            <span class="pill green">Security</span>
+            <span class="pill green">Reliability</span>
+            <span class="pill green">Performance Efficiency</span>
+            <span class="pill green">Cost Optimization</span>
+            <span class="pill green">Sustainability</span>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-label">Target Certification</div>
+          <div class="pills">
+            <span class="pill hi">AWS Solutions Architect – Professional</span>
+            <span class="pill hi">AWS DevOps Engineer – Professional</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CERT PATH -->
+  <div style="background:#fff; border:1px solid #e0e3ea; border-radius:6px; padding:22px; margin-top:20px;">
+    <div style="font-size:14px;font-weight:600;color:#1c1e21;margin-bottom:16px;">AWS Certification Path</div>
+    <div class="cert-rows">
+      <div class="cert-row">
+        <div class="cert-level">Foundational</div>
+        <div class="cert-badges">
+          <span class="cbadge f">Cloud Practitioner</span>
+        </div>
+      </div>
+      <div class="cert-row">
+        <div class="cert-level">Associate</div>
+        <div class="cert-badges">
+          <span class="cbadge a">Solutions Architect – Associate</span>
+          <span class="cbadge a">Developer – Associate</span>
+          <span class="cbadge a">SysOps Administrator – Associate</span>
+        </div>
+      </div>
+      <div class="cert-row">
+        <div class="cert-level">Professional</div>
+        <div class="cert-badges">
+          <span class="cbadge p">Solutions Architect – Professional</span>
+          <span class="cbadge p">DevOps Engineer – Professional</span>
+        </div>
+      </div>
+      <div class="cert-row">
+        <div class="cert-level">Specialty</div>
+        <div class="cert-badges">
+          <span class="cbadge s">Security</span>
+          <span class="cbadge s">Machine Learning</span>
+          <span class="cbadge s">Networking</span>
+          <span class="cbadge s">Data Engineering</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMMENDED PATH FOR JS DEV -->
+  <div class="dev-path-section">
+    <h2>Your Recommended Path (JS / Node / React / Angular Developer)</h2>
+    <div class="sub">Aligned with modern full-stack and cloud engineering roles. ★ = leverages your existing skills directly.</div>
+    <div class="step-list">
+      <div class="step-item"><div class="step-num">1</div> Cloud Practitioner Certification <span class="step-badge">Start here</span></div>
+      <div class="step-item"><div class="step-num">2</div> Core AWS Services (EC2, S3, RDS, VPC, IAM)</div>
+      <div class="step-item"><div class="step-num">3</div> Solutions Architect – Associate Certification</div>
+      <div class="step-item"><div class="step-num">4</div> Deploy Node.js APIs &amp; React apps on AWS <span class="step-badge">★ you know these</span></div>
+      <div class="step-item"><div class="step-num">5</div> Terraform &amp; Infrastructure as Code</div>
+      <div class="step-item"><div class="step-num">6</div> Docker — containerise your Node/React apps <span class="step-badge">★ your stack</span></div>
+      <div class="step-item"><div class="step-num">7</div> AWS ECS / Fargate</div>
+      <div class="step-item"><div class="step-num">8</div> CI/CD with GitHub Actions + CodePipeline <span class="step-badge">★ familiar</span></div>
+      <div class="step-item"><div class="step-num">9</div> Kubernetes (AWS EKS) — React + Node + Postgres <span class="step-badge">★ your stack</span></div>
+      <div class="step-item"><div class="step-num">10</div> DevOps Engineer – Professional Certification</div>
+      <div class="step-item"><div class="step-num">11</div> AI/ML with Bedrock + Lambda + React UI <span class="step-badge">★ all your tools</span></div>
+    </div>
+  </div>
+
+  <!-- PLATFORMS -->
+  <div style="background:#fff; border:1px solid #e0e3ea; border-radius:6px; padding:22px; margin-top:16px;">
+    <div style="font-size:14px;font-weight:600;color:#1c1e21;margin-bottom:14px;">Best Hands-On Platforms</div>
+    <ul class="res-list">
+      <li><span class="res-name">AWS Skill Builder</span><span class="res-desc">Labs, learning paths, Cloud Quest, cert prep — skill.aws.training</span></li>
+      <li><span class="res-name">AWS Cloud Quest</span><span class="res-desc">Gamified learning with real AWS console. Great for beginners</span></li>
+      <li><span class="res-name">AWS Workshops</span><span class="res-desc">Real-world guided projects — workshops.aws</span></li>
+      <li><span class="res-name">AWS Educate</span><span class="res-desc">Free labs and badges for beginners</span></li>
+    </ul>
+  </div>
+
+</div><!-- /page -->
+
+<footer>
+  AWS Learning Roadmap &nbsp;·&nbsp; Beginner → Expert &nbsp;·&nbsp; Tailored for JS / Node.js / React / Angular developers
+</footer>
+
+<script>
+  const phases = document.querySelectorAll('.phase');
+
+  function toggle(i) { phases[i].classList.toggle('open'); }
+
+  function jumpTo(i) {
+    phases[i].classList.add('open');
+    phases[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function expandAll()  { phases.forEach(p => p.classList.add('open')); }
+  function collapseAll(){ phases.forEach(p => p.classList.remove('open')); }
+</script>
+</body>
+</html>

@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vue.js Roadmap 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   THEME TOKENS
+═══════════════════════════════════════ */
+[data-theme="dark"] {
+  --bg:       #05080d;
+  --bg2:      #090e16;
+  --sur:      #0e1621;
+  --sur2:     #141f30;
+  --brd:      #1a2840;
+  --txt:      #c8daf0;
+  --txt2:     #6882a4;
+  --txt3:     #2e4060;
+  --inv:      #ffffff;
+
+  --cyan:   #00e5ff;
+  --vue:  #42b883;
+  --green:  #00ff9d;
+  --orange: #ff8c42;
+  --pink:   #ff4f8b;
+  --purple: #b87cff;
+  --yellow: #ffe566;
+  --red:    #ff5252;
+  --teal:   #1de9b6;
+  --lime:   #b2ff59;
+}
+[data-theme="light"] {
+  --bg:       #f2f5fa;
+  --bg2:      #e8edf6;
+  --sur:      #ffffff;
+  --sur2:     #f0f4fc;
+  --brd:      #c5d2e8;
+  --txt:      #0d1b2e;
+  --txt2:     #4a6080;
+  --txt3:     #9ab0c8;
+  --inv:      #000000;
+
+  --cyan:   #0077aa;
+  --vue:  #2c9268;
+  --green:  #00875a;
+  --orange: #d4610a;
+  --pink:   #c01060;
+  --purple: #7230cc;
+  --yellow: #a07800;
+  --red:    #cc2020;
+  --teal:   #007060;
+  --lime:   #527a00;
+}
+
+/* ═══════════════════════════════════════
+   BASE
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  background: var(--bg);
+  color: var(--txt);
+  overflow-x: hidden;
+  transition: background .3s, color .3s;
+  min-height: 100vh;
+}
+
+/* Noise overlay */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: .025;
+  pointer-events: none;
+}
+
+/* Ambient blobs */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 10% 20%, rgba(66,184,131,.06) 0%, transparent 60%),
+    radial-gradient(ellipse 500px 500px at 90% 80%, rgba(184,124,255,.04) 0%, transparent 60%),
+    radial-gradient(ellipse 400px 300px at 50% 50%, rgba(0,229,255,.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+/* ═══════════════════════════════════════
+   THEME TOGGLE
+═══════════════════════════════════════ */
+.toggle {
+  position: fixed; top: 20px; right: 20px; z-index: 999;
+  display: flex;
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 6px; overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,.4);
+}
+.toggle button {
+  border: none; background: none; cursor: pointer;
+  padding: 8px 16px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1px;
+  color: var(--txt2); transition: .2s;
+}
+.toggle button.on { background: var(--sur2); color: var(--txt); }
+
+/* ═══════════════════════════════════════
+   HEADER — BIG BRUTALIST TYPE
+═══════════════════════════════════════ */
+header {
+  padding: 80px 0 0;
+  position: relative;
+}
+.h-tag {
+  font-size: 10px; letter-spacing: 6px; text-transform: uppercase;
+  color: var(--vue); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.h-tag::after { content: ''; flex: 1; height: 1px; background: var(--brd); }
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5rem, 16vw, 11rem);
+  line-height: .88;
+  letter-spacing: -2px;
+  position: relative;
+}
+.h1-vue { color: var(--vue); display: block; }
+.h1-road  { color: var(--txt);   display: block; }
+.h1-map   {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--brd);
+  display: block;
+}
+.h1-year  {
+  font-size: .28em;
+  color: var(--txt2);
+  letter-spacing: 4px;
+  vertical-align: super;
+}
+
+.header-meta {
+  margin: 28px 0 0;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+  font-size: 11px; color: var(--txt2);
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--brd);
+}
+.meta-pill {
+  padding: 4px 12px; border: 1px solid; border-radius: 3px; font-size: 10px;
+}
+
+/* ═══════════════════════════════════════
+   RAINBOW BAR
+═══════════════════════════════════════ */
+.rainbow {
+  height: 4px;
+  background: linear-gradient(90deg,
+    var(--vue) 0%, var(--cyan) 14%, var(--green) 28%,
+    var(--teal) 42%, var(--purple) 57%, var(--pink) 71%,
+    var(--orange) 85%, var(--yellow) 100%);
+  margin: 0 0 56px;
+}
+
+/* ═══════════════════════════════════════
+   SECTION
+═══════════════════════════════════════ */
+.sec { margin-bottom: 80px; }
+
+.sec-header {
+  display: grid; grid-template-columns: auto 1fr; gap: 16px;
+  align-items: end; margin-bottom: 28px;
+}
+.sec-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem; line-height: 1;
+  color: var(--brd);
+}
+.sec-info {}
+.sec-cat {
+  font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.sec-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 600; line-height: 1.1;
+}
+
+/* ═══════════════════════════════════════
+   CARDS
+═══════════════════════════════════════ */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
+.grid-2 { grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+@media(max-width: 700px) { .grid-3 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 22px 24px;
+  position: relative; overflow: hidden;
+  transition: transform .22s, box-shadow .22s;
+}
+.card:hover { transform: translateY(-5px); }
+
+/* left accent strip */
+.card::before {
+  content: ''; position: absolute;
+  left: 0; top: 0; bottom: 0; width: 4px;
+}
+
+.c-tag {
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 10px; display: block;
+}
+.c-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px; font-weight: 600;
+  margin-bottom: 14px;
+}
+.c-list { list-style: none; }
+.c-list li {
+  font-size: 12px; color: var(--txt2);
+  padding: 5px 0; border-bottom: 1px solid var(--brd);
+  display: flex; gap: 8px; align-items: baseline; line-height: 1.55;
+}
+.c-list li:last-child { border-bottom: none; }
+.arr { color: var(--txt3); font-size: 9px; flex-shrink: 0; margin-top: 3px; }
+em { font-style: normal; color: var(--vue); }
+
+/* ═══════════════════════════════════════
+   HIGHLIGHT / CALLOUT
+═══════════════════════════════════════ */
+.callout {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: var(--sur2); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 16px 20px;
+  font-size: 12px; color: var(--txt2); line-height: 1.6;
+  margin-top: 14px;
+}
+.callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.callout strong { color: var(--txt); display: block; margin-bottom: 3px; font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; }
+
+/* ═══════════════════════════════════════
+   CODE BLOCK
+═══════════════════════════════════════ */
+.code-wrap {
+  background: var(--bg2); border: 1px solid var(--brd);
+  border-radius: 8px; overflow: hidden; margin-top: 14px;
+}
+.code-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 16px; border-bottom: 1px solid var(--brd);
+  font-size: 10px; color: var(--txt3);
+}
+.dots { display: flex; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+pre {
+  padding: 18px 20px; overflow-x: auto;
+  font-size: 11.5px; line-height: 1.8;
+}
+.kw  { color: var(--pink); }
+.fn  { color: var(--cyan); }
+.str { color: var(--green); }
+.cm  { color: var(--txt3); }
+.num { color: var(--orange); }
+.tag-vue { color: var(--vue); }
+.prop { color: var(--yellow); }
+.op  { color: var(--purple); }
+
+/* ═══════════════════════════════════════
+   TAGS ROW
+═══════════════════════════════════════ */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  padding: 7px 15px; border-radius: 4px; font-size: 11px;
+  border: 1px solid; cursor: default; transition: transform .15s;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.tag:hover { transform: scale(1.06); }
+
+/* ═══════════════════════════════════════
+   LEARNING ORDER — HORIZONTAL SCROLL TRACK
+═══════════════════════════════════════ */
+.order-track {
+  display: flex; gap: 0; overflow-x: auto;
+  border: 1px solid var(--brd); border-radius: 10px;
+  background: var(--sur); scrollbar-width: thin;
+}
+.order-step {
+  min-width: 140px; flex: 1; padding: 18px 16px;
+  border-right: 1px solid var(--brd); position: relative;
+  transition: background .2s;
+}
+.order-step:last-child { border-right: none; }
+.order-step:hover { background: var(--sur2); }
+.o-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem; line-height: 1;
+  margin-bottom: 6px;
+}
+.o-name { font-size: 11px; font-weight: 600; color: var(--txt); }
+.o-sub  { font-size: 10px; color: var(--txt2); margin-top: 3px; }
+
+/* ═══════════════════════════════════════
+   STACK CARDS — REAL WORLD
+═══════════════════════════════════════ */
+.stack-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px;
+}
+.stack-card {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 18px 16px;
+  text-align: center; transition: transform .2s;
+}
+.stack-card:hover { transform: translateY(-4px); }
+.stack-icon { font-size: 26px; margin-bottom: 8px; }
+.stack-name { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.stack-desc { font-size: 10px; color: var(--txt2); line-height: 1.5; }
+
+/* ═══════════════════════════════════════
+   MISS SECTION
+═══════════════════════════════════════ */
+.miss-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.miss-item {
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 16px 18px;
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.miss-bullet {
+  width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; margin-top: 2px;
+}
+.miss-text .mt { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
+.miss-text .ms { font-size: 11px; color: var(--txt2); }
+
+/* ═══════════════════════════════════════
+   REFS
+═══════════════════════════════════════ */
+.ref-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.ref-btn {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--sur); border: 1px solid var(--brd);
+  border-radius: 8px; padding: 12px 18px;
+  text-decoration: none; color: var(--txt);
+  font-size: 12px; transition: transform .2s, border-color .2s;
+}
+.ref-btn:hover { transform: translateY(-2px); }
+.ref-ico { font-size: 18px; }
+.ref-name { font-weight: 600; }
+.ref-sub  { font-size: 10px; color: var(--txt2); margin-top: 1px; }
+
+/* ═══════════════════════════════════════
+   DIVIDER
+═══════════════════════════════════════ */
+.div { height: 1px; background: linear-gradient(90deg, transparent, var(--brd), transparent); margin: 64px 0; }
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer {
+  text-align: center; padding: 28px 0 48px;
+  font-size: 11px; color: var(--txt3);
+  border-top: 1px solid var(--brd);
+}
+
+/* ═══════════════════════════════════════
+   COLOR SYSTEM — ACCENT STRIPS + HOVER GLOWS
+═══════════════════════════════════════ */
+/* strips */
+.a-vue::before { background: var(--vue); }
+.a-green::before { background: var(--green); }
+.a-orange::before { background: var(--orange); }
+.a-purple::before { background: var(--purple); }
+.a-cyan::before { background: var(--cyan); }
+.a-pink::before { background: var(--pink); }
+.a-yellow::before { background: var(--yellow); }
+.a-teal::before { background: var(--teal); }
+.a-red::before { background: var(--red); }
+.a-lime::before { background: var(--lime); }
+
+/* glows */
+.a-vue:hover  { box-shadow: 0 8px 40px rgba(66,184,131,.14); }
+.a-green:hover  { box-shadow: 0 8px 40px rgba(0,255,157,.10); }
+.a-orange:hover { box-shadow: 0 8px 40px rgba(255,140,66,.10); }
+.a-purple:hover { box-shadow: 0 8px 40px rgba(184,124,255,.10); }
+.a-cyan:hover   { box-shadow: 0 8px 40px rgba(0,229,255,.10); }
+.a-pink:hover   { box-shadow: 0 8px 40px rgba(255,79,139,.10); }
+.a-yellow:hover { box-shadow: 0 8px 40px rgba(255,229,102,.10); }
+.a-teal:hover   { box-shadow: 0 8px 40px rgba(29,233,182,.10); }
+.a-red:hover    { box-shadow: 0 8px 40px rgba(255,82,82,.10); }
+.a-lime:hover   { box-shadow: 0 8px 40px rgba(178,255,89,.10); }
+
+/* category label colors */
+.l-vue  { color: var(--vue); }
+.l-green  { color: var(--green); }
+.l-orange { color: var(--orange); }
+.l-purple { color: var(--purple); }
+.l-cyan   { color: var(--cyan); }
+.l-pink   { color: var(--pink); }
+.l-yellow { color: var(--yellow); }
+.l-teal   { color: var(--teal); }
+.l-red    { color: var(--red); }
+.l-lime   { color: var(--lime); }
+
+/* tags */
+.t-vue  { color: var(--vue);  border-color: rgba(66,184,131,.35);  background: rgba(66,184,131,.08); }
+.t-green  { color: var(--green);  border-color: rgba(0,255,157,.3);   background: rgba(0,255,157,.06); }
+.t-orange { color: var(--orange); border-color: rgba(255,140,66,.3);  background: rgba(255,140,66,.06); }
+.t-purple { color: var(--purple); border-color: rgba(184,124,255,.3); background: rgba(184,124,255,.06); }
+.t-cyan   { color: var(--cyan);   border-color: rgba(0,229,255,.3);   background: rgba(0,229,255,.06); }
+.t-pink   { color: var(--pink);   border-color: rgba(255,79,139,.3);  background: rgba(255,79,139,.06); }
+.t-yellow { color: var(--yellow); border-color: rgba(255,229,102,.3); background: rgba(255,229,102,.06); }
+.t-teal   { color: var(--teal);   border-color: rgba(29,233,182,.3);  background: rgba(29,233,182,.06); }
+.t-red    { color: var(--red);    border-color: rgba(255,82,82,.3);   background: rgba(255,82,82,.06); }
+.t-lime   { color: var(--lime);   border-color: rgba(178,255,89,.3);  background: rgba(178,255,89,.06); }
+
+/* section num colors */
+.n-vue  { color: rgba(66,184,131,.28); }
+.n-green  { color: rgba(0,255,157,.2); }
+.n-orange { color: rgba(255,140,66,.25); }
+.n-purple { color: rgba(184,124,255,.25); }
+.n-cyan   { color: rgba(0,229,255,.2); }
+.n-pink   { color: rgba(255,79,139,.25); }
+.n-yellow { color: rgba(255,229,102,.25); }
+.n-teal   { color: rgba(29,233,182,.25); }
+.n-red    { color: rgba(255,82,82,.25); }
+.n-lime   { color: rgba(178,255,89,.25); }
+
+/* order step colors */
+.os-vue { color: var(--vue); }
+.os-green { color: var(--green); }
+.os-purple{ color: var(--purple);}
+.os-cyan  { color: var(--cyan);  }
+.os-pink  { color: var(--pink);  }
+.os-orange{ color: var(--orange);}
+.os-yellow{ color: var(--yellow);}
+.os-teal  { color: var(--teal);  }
+.os-red   { color: var(--red);   }
+
+/* miss bullet */
+.mb-vue  { background: rgba(66,184,131,.12);  }
+.mb-orange { background: rgba(255,140,66,.1);  }
+.mb-green  { background: rgba(0,255,157,.1);   }
+.mb-purple { background: rgba(184,124,255,.1); }
+.mb-yellow { background: rgba(255,229,102,.1); }
+
+/* stack card accent top border */
+.sc-vue  { border-top: 3px solid var(--vue);  }
+.sc-purple { border-top: 3px solid var(--purple); }
+.sc-cyan   { border-top: 3px solid var(--cyan);   }
+.sc-green  { border-top: 3px solid var(--green);  }
+.sc-orange { border-top: 3px solid var(--orange); }
+.sc-yellow { border-top: 3px solid var(--yellow); }
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+.rv {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.rv.visible { opacity: 1; transform: none; }
+
+@media(max-width: 640px) {
+  h1 { letter-spacing: -1px; }
+  .sec-num { font-size: 2.5rem; }
+  .toggle { top: 10px; right: 10px; }
+  .order-step { min-width: 120px; }
+  .grid-2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- THEME TOGGLE -->
+<div class="toggle">
+  <button id="bD" class="on" onclick="setTheme('dark')">◐ DARK</button>
+  <button id="bL" onclick="setTheme('light')">◑ LIGHT</button>
+</div>
+
+<div class="wrap"><!-- ═══ HEADER ═══ -->
+<header>
+  <div class="h-tag">Complete Learning Path · 14 Topics · Interview Ready</div>
+  <h1>
+    <span class="h1-vue">Vue</span>
+    <span class="h1-road">Road</span>
+    <span class="h1-map">map<span class="h1-year">2026</span></span>
+  </h1>
+  <div class="header-meta">
+    <span>🖖 Modern Vue 3 · Composition API · Pinia · TypeScript</span>
+    <span class="meta-pill t-vue">Reactivity System</span>
+    <span class="meta-pill t-purple">Pinia</span>
+    <span class="meta-pill t-green">Vue Router</span>
+    <span class="meta-pill t-cyan">Vite</span>
+  </div>
+</header>
+
+<div class="rainbow"></div>
+
+<!-- ═══ 1. FOUNDATIONS ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-vue">01</div>
+    <div class="sec-info">
+      <div class="sec-cat l-vue">Pre-Vue Checklist</div>
+      <div class="sec-title">🧱 Strong Foundations</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-vue">
+      <span class="c-tag l-vue">Must-Have Before Vue</span>
+      <div class="c-title">JS Prerequisites</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>ES6+: arrow functions, destructuring, spread/rest</li>
+        <li><span class="arr">▸</span>Promises & async/await — async patterns</li>
+        <li><span class="arr">▸</span>Closures & event loop — how JS works</li>
+        <li><span class="arr">▸</span>Array methods: map, filter, reduce</li>
+        <li><span class="arr">▸</span>DOM basics — selection & manipulation</li>
+      </ul>
+      <div class="callout">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>Important</strong>If these are weak, Vue's reactivity will feel confusing. Solid JS = smoother Vue learning curve.</div>
+      </div>
+    </div>
+    <div class="card a-vue">
+      <span class="c-tag l-vue">Why These Matter</span>
+      <div class="c-title">Foundation → Framework</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Vue templates use destructured props constantly</li>
+        <li><span class="arr">▸</span>async/await drives every API call in setup()</li>
+        <li><span class="arr">▸</span>Closures underpin composables & watchers</li>
+        <li><span class="arr">▸</span>v-for relies on map-like array iteration</li>
+        <li><span class="arr">▸</span>DOM understanding helps debug template refs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ 2. CORE VUE & REACTIVITY ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-green">02</div>
+    <div class="sec-info">
+      <div class="sec-cat l-green">Absolutely Essential</div>
+      <div class="sec-title">🖖 Core Vue & Reactivity</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-green">
+      <span class="c-tag l-green">Building Blocks</span>
+      <div class="c-title">Components & Templates</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Single File Components — .vue structure</li>
+        <li><span class="arr">▸</span>Template syntax — HTML-like with directives</li>
+        <li><span class="arr">▸</span>Props — parent → child data flow</li>
+        <li><span class="arr">▸</span>Emits — child → parent events</li>
+        <li><span class="arr">▸</span>:key — proper list rendering with v-for</li>
+      </ul>
+    </div>
+    <div class="card a-green">
+      <span class="c-tag l-green">Reactivity System ⭐</span>
+      <div class="c-title">ref, reactive & computed</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>ref() — reactive primitive values</li>
+        <li><span class="arr">▸</span>reactive() — reactive objects/arrays</li>
+        <li><span class="arr">▸</span>computed() — cached derived state</li>
+        <li><span class="arr">▸</span>watch vs watchEffect — reacting to change</li>
+        <li><span class="arr">▸</span>Proxy-based reactivity under the hood</li>
+      </ul>
+    </div>
+    <div class="card a-green">
+      <span class="c-tag l-green">Modern Syntax ⭐ Interview Fav</span>
+      <div class="c-title">Composition API & &lt;script setup&gt;</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Composition API — logic organized by feature</li>
+        <li><span class="arr">▸</span>&lt;script setup&gt; — less boilerplate, auto-exposed</li>
+        <li><span class="arr">▸</span>defineProps / defineEmits macros</li>
+        <li><span class="arr">▸</span>Lifecycle hooks: onMounted, onUnmounted</li>
+        <li><span class="arr">▸</span>Options API vs Composition API tradeoffs</li>
+      </ul>
+      <div class="callout">
+        <span class="callout-icon">🎯</span>
+        <div><strong>Interview Q: ref vs reactive?</strong>ref wraps primitives (needs .value in script), reactive works on objects directly via Proxy — no .value needed.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ 3. DIRECTIVES + 4. ROUTING ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-cyan">03-04</div>
+    <div class="sec-info">
+      <div class="sec-cat l-cyan">Structure & Navigation</div>
+      <div class="sec-title">🔁 Directives & Forms · 🌐 Vue Router</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-cyan">
+      <span class="c-tag l-cyan">Template Power</span>
+      <div class="c-title">Directives & Event Handling</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>v-if / v-show — conditional rendering</li>
+        <li><span class="arr">▸</span>v-for — list rendering with :key</li>
+        <li><span class="arr">▸</span>v-model — two-way binding on forms</li>
+        <li><span class="arr">▸</span>v-bind / v-on — attribute & event shorthand</li>
+        <li><span class="arr">▸</span>Custom directives — reusable DOM behavior</li>
+      </ul>
+      <div class="callout">
+        <span class="callout-icon">💬</span>
+        <div><strong>Interview: "How does v-model work?"</strong>Syntactic sugar over :value + @input (or a custom modelValue prop + update:modelValue emit).</div>
+      </div>
+    </div>
+    <div class="card a-cyan">
+      <span class="c-tag l-cyan">Must for Projects</span>
+      <div class="c-title">Vue Router</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>createRouter, routes, &lt;router-view&gt;</li>
+        <li><span class="arr">▸</span>Dynamic routes — /post/:id</li>
+        <li><span class="arr">▸</span>Nested routes — layouts</li>
+        <li><span class="arr">▸</span>Navigation guards — beforeEach, auth checks</li>
+        <li><span class="arr">▸</span>useRoute, useRouter composables</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ 5. STATE MANAGEMENT (PINIA) ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-purple">05</div>
+    <div class="sec-info">
+      <div class="sec-cat l-purple">Global State</div>
+      <div class="sec-title">📦 State Management</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-purple">
+      <span class="c-tag l-purple">Local Sharing</span>
+      <div class="c-title">Provide / Inject</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>provide() — expose data to descendants</li>
+        <li><span class="arr">▸</span>inject() — consume in any child, any depth</li>
+        <li><span class="arr">▸</span>Good for: theme, auth, i18n</li>
+        <li><span class="arr">▸</span>Avoids deep prop drilling</li>
+        <li><span class="arr">▸</span>Limitation: less traceable than a real store</li>
+      </ul>
+    </div>
+    <div class="card a-purple">
+      <span class="c-tag l-purple">Industry Standard ⭐</span>
+      <div class="c-title">Pinia</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>defineStore — state, getters, actions</li>
+        <li><span class="arr">▸</span>Official replacement for Vuex</li>
+        <li><span class="arr">▸</span>Full TypeScript inference out of the box</li>
+        <li><span class="arr">▸</span>storeToRefs — destructure without losing reactivity</li>
+        <li><span class="arr">▸</span>DevTools support — time-travel debugging</li>
+      </ul>
+    </div>
+    <div class="card a-purple">
+      <span class="c-tag l-purple">Reusable Logic</span>
+      <div class="c-title">Composables</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>useX() functions — extract stateful logic</li>
+        <li><span class="arr">▸</span>Share reactive logic across components</li>
+        <li><span class="arr">▸</span>Compose multiple composables together</li>
+        <li><span class="arr">▸</span>Return refs/computed for consuming components</li>
+        <li><span class="arr">▸</span>The Vue equivalent of React custom hooks</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ 6. FORMS + 7. API ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-orange">06-07</div>
+    <div class="sec-info">
+      <div class="sec-cat l-orange">Data In & Out</div>
+      <div class="sec-title">🎯 Forms & Validation · 🔄 API Integration</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-orange">
+      <span class="c-tag l-orange">Forms</span>
+      <div class="c-title">v-model + Validation</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>v-model on inputs, checkboxes, selects</li>
+        <li><span class="arr">▸</span>v-model modifiers: .lazy, .number, .trim</li>
+        <li><span class="arr">▸</span>VeeValidate / Vuelidate — schema validation</li>
+        <li><span class="arr">▸</span>Custom form components with v-model</li>
+        <li><span class="arr">▸</span>Error messages, touched/dirty states</li>
+      </ul>
+    </div>
+    <div class="card a-orange">
+      <span class="c-tag l-orange">Modern Approach ⭐</span>
+      <div class="c-title">Axios / Fetch + TanStack Query</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Axios instances — base URL, interceptors</li>
+        <li><span class="arr">▸</span>Async data fetching inside composables</li>
+        <li><span class="arr">▸</span>TanStack Query (Vue) — cache + auto refetch</li>
+        <li><span class="arr">▸</span>Loading, error, success states built-in</li>
+        <li><span class="arr">▸</span>Environment variables via import.meta.env</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ 8. STYLING ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-pink">08</div>
+    <div class="sec-info">
+      <div class="sec-cat l-pink">Styling</div>
+      <div class="sec-title">🎨 Styling Approaches</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-pink">
+      <span class="c-tag l-pink">Most Popular Now</span>
+      <div class="c-title">Tailwind CSS</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Utility-first — no custom CSS files</li>
+        <li><span class="arr">▸</span>Responsive prefixes: sm:, md:, lg:</li>
+        <li><span class="arr">▸</span>Dark mode: dark: prefix</li>
+        <li><span class="arr">▸</span>JIT compiler — only ships used classes</li>
+        <li><span class="arr">▸</span>Pairs cleanly with Vite + Vue 3</li>
+      </ul>
+    </div>
+    <div class="card a-pink">
+      <span class="c-tag l-pink">Component Scoping</span>
+      <div class="c-title">Scoped Styles & Transitions</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>&lt;style scoped&gt; — component-local CSS</li>
+        <li><span class="arr">▸</span>CSS Modules inside SFCs</li>
+        <li><span class="arr">▸</span>&lt;Transition&gt; & &lt;TransitionGroup&gt; — animations</li>
+        <li><span class="arr">▸</span>CSS variables for theme tokens</li>
+        <li><span class="arr">▸</span>Dynamic classes bound with :class</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ 9. PERFORMANCE ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-yellow">09</div>
+    <div class="sec-info">
+      <div class="sec-cat l-yellow">Interview Favorite</div>
+      <div class="sec-title">⚡ Performance Optimization</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-yellow">
+      <span class="c-tag l-yellow">Memoization</span>
+      <div class="c-title">computed & v-memo</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>computed() — cache expensive derived values</li>
+        <li><span class="arr">▸</span>v-memo — skip re-render for unchanged nodes</li>
+        <li><span class="arr">▸</span>shallowRef / shallowReactive — reduce reactivity overhead</li>
+        <li><span class="arr">▸</span>When to use: only for actual perf bottlenecks</li>
+        <li><span class="arr">▸</span>Premature optimization = bad practice</li>
+      </ul>
+      <div class="callout">
+        <span class="callout-icon">💬</span>
+        <div><strong>Interview: "Why is my component re-rendering?"</strong>Check: reactive dependency changed, parent re-render, key changes, or a watcher triggering updates.</div>
+      </div>
+    </div>
+    <div class="card a-yellow">
+      <span class="c-tag l-yellow">Code Loading</span>
+      <div class="c-title">Async & Lazy Components</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>defineAsyncComponent — load on demand</li>
+        <li><span class="arr">▸</span>&lt;Suspense&gt; — fallback while loading</li>
+        <li><span class="arr">▸</span>Route-level code splitting</li>
+        <li><span class="arr">▸</span>Dynamic import() per route</li>
+        <li><span class="arr">▸</span>Vite bundle analysis — identify large chunks</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ 10. ADVANCED + 11. TOOLING ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-teal">10-11</div>
+    <div class="sec-info">
+      <div class="sec-cat l-teal">Level Up</div>
+      <div class="sec-title">🧠 Advanced Vue & 🧩 Tooling</div>
+    </div>
+  </div>
+  <div class="grid rv">
+    <div class="card a-teal">
+      <span class="c-tag l-teal">Advanced Patterns ⭐ Very Important</span>
+      <div class="c-title">Dynamic & Async Rendering</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Dynamic components — &lt;component :is="..."&gt;</li>
+        <li><span class="arr">▸</span>Teleport — render outside the DOM tree</li>
+        <li><span class="arr">▸</span>Slots & scoped slots — flexible layouts</li>
+        <li><span class="arr">▸</span>Error handling — onErrorCaptured</li>
+        <li><span class="arr">▸</span>Suspense — async component rendering</li>
+      </ul>
+    </div>
+    <div class="card a-teal">
+      <span class="c-tag l-teal">Very Important ⭐</span>
+      <div class="c-title">Vite & Build Tooling</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Vite — instant dev server, fast HMR</li>
+        <li><span class="arr">▸</span>Nuxt 3 — SSR/SSG framework for Vue</li>
+        <li><span class="arr">▸</span>Env variables — .env + import.meta.env</li>
+        <li><span class="arr">▸</span>Vue DevTools — inspect components/state</li>
+        <li><span class="arr">▸</span>Production build & deployment</li>
+      </ul>
+    </div>
+    <div class="card a-teal">
+      <span class="c-tag l-teal">Testing + Types</span>
+      <div class="c-title">Testing & TypeScript</div>
+      <ul class="c-list">
+        <li><span class="arr">▸</span>Vitest — unit testing, fast & Vite-native</li>
+        <li><span class="arr">▸</span>Vue Test Utils — component-level tests</li>
+        <li><span class="arr">▸</span>TypeScript with Vue — near-mandatory in industry</li>
+        <li><span class="arr">▸</span>defineProps&lt;T&gt;() — typed props</li>
+        <li><span class="arr">▸</span>ESLint + Prettier — code quality</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ CODE EXAMPLE ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-vue">EX</div>
+    <div class="sec-info">
+      <div class="sec-cat l-vue">Interview-Level Code</div>
+      <div class="sec-title">💡 Todo App — What Interviews Test</div>
+    </div>
+  </div>
+  <div class="rv">
+    <div class="code-wrap">
+      <div class="code-bar">
+        <div class="dots">
+          <div class="dot" style="background:#ff5252"></div>
+          <div class="dot" style="background:#ffc107"></div>
+          <div class="dot" style="background:#4caf50"></div>
+        </div>
+        <span>TodoApp.vue — tests: ref, computed, watch, v-model</span>
+        <span></span>
+      </div>
+<pre><span class="kw">&lt;script setup&gt;</span>
+<span class="kw">import</span> { ref, computed, watch } <span class="kw">from</span> <span class="str">"vue"</span>;
+
+<span class="kw">const</span> todos = <span class="fn">ref</span>(
+  JSON.<span class="fn">parse</span>(localStorage.<span class="fn">getItem</span>(<span class="str">"todos"</span>)) <span class="op">||</span> []
+); <span class="cm">// ref for a reactive array</span>
+
+<span class="kw">const</span> input = <span class="fn">ref</span>(<span class="str">""</span>);
+
+<span class="kw">const</span> remaining = <span class="fn">computed</span>(() <span class="op">=></span>
+  todos.value.<span class="fn">filter</span>(t <span class="op">=></span> !t.done).length
+); <span class="cm">// derived, cached state</span>
+
+<span class="fn">watch</span>(todos, (val) <span class="op">=></span> {
+  localStorage.<span class="fn">setItem</span>(<span class="str">"todos"</span>, JSON.<span class="fn">stringify</span>(val));
+}, { deep: <span class="kw">true</span> }); <span class="cm">// runs whenever todos changes</span>
+
+<span class="kw">function</span> <span class="fn">addTodo</span>() {
+  <span class="kw">if</span> (!input.value.<span class="fn">trim</span>()) <span class="kw">return</span>;
+  todos.value.<span class="fn">push</span>({ id: Date.<span class="fn">now</span>(), text: input.value, done: <span class="kw">false</span> });
+  input.value = <span class="str">""</span>;
+}
+
+<span class="kw">function</span> <span class="fn">toggleTodo</span>(id) {
+  <span class="kw">const</span> t = todos.value.<span class="fn">find</span>(t <span class="op">=></span> t.id <span class="op">===</span> id);
+  <span class="kw">if</span> (t) t.done = !t.done;
+}
+<span class="kw">&lt;/script&gt;</span>
+
+<span class="kw">&lt;template&gt;</span>
+  <span class="tag-vue">&lt;div&gt;</span>
+    <span class="tag-vue">&lt;input</span> <span class="prop">v-model</span>=<span class="str">"input"</span> <span class="prop">@keyup.enter</span>=<span class="str">"addTodo"</span> <span class="tag-vue">/&gt;</span>
+    <span class="tag-vue">&lt;button</span> <span class="prop">@click</span>=<span class="str">"addTodo"</span><span class="tag-vue">&gt;</span>Add<span class="tag-vue">&lt;/button&gt;</span>
+    <span class="tag-vue">&lt;p&gt;</span>{{ remaining }} left<span class="tag-vue">&lt;/p&gt;</span>
+    <span class="tag-vue">&lt;div</span> <span class="prop">v-for</span>=<span class="str">"todo in todos"</span> <span class="prop">:key</span>=<span class="str">"todo.id"</span> <span class="prop">@click</span>=<span class="str">"toggleTodo(todo.id)"</span><span class="tag-vue">&gt;</span>
+      {{ todo.text }} {{ todo.done ? <span class="str">"✔"</span> : <span class="str">""</span> }}
+    <span class="tag-vue">&lt;/div&gt;</span>
+  <span class="tag-vue">&lt;/div&gt;</span>
+<span class="kw">&lt;/template&gt;</span></pre>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;">
+      <span class="tag t-vue">Tests: ref</span>
+      <span class="tag t-green">Tests: computed</span>
+      <span class="tag t-cyan">Tests: watch(deep)</span>
+      <span class="tag t-purple">Tests: v-model</span>
+      <span class="tag t-orange">Tests: v-for + :key</span>
+      <span class="tag t-yellow">Tests: localStorage sync</span>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ INTERVIEW TOPICS ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-pink">🎯</div>
+    <div class="sec-info">
+      <div class="sec-cat l-pink">High Priority</div>
+      <div class="sec-title">Interview-Focused Topics</div>
+    </div>
+  </div>
+  <div class="tags rv">
+    <span class="tag t-vue">Virtual DOM diffing</span>
+    <span class="tag t-vue">Reactivity via Proxy</span>
+    <span class="tag t-green">ref vs reactive</span>
+    <span class="tag t-green">watch vs watchEffect</span>
+    <span class="tag t-orange">v-if vs v-show</span>
+    <span class="tag t-yellow">computed caching</span>
+    <span class="tag t-yellow">v-memo</span>
+    <span class="tag t-teal">Composables</span>
+    <span class="tag t-purple">Provide/Inject</span>
+    <span class="tag t-purple">Pinia vs Vuex</span>
+    <span class="tag t-cyan">Navigation guards</span>
+    <span class="tag t-pink">Performance optimization</span>
+    <span class="tag t-lime">Error handling</span>
+    <span class="tag t-red">Lazy loading</span>
+    <span class="tag t-vue">Nuxt 3 / SSR</span>
+    <span class="tag t-cyan">Custom directives</span>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ REAL WORLD STACK ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-green">💼</div>
+    <div class="sec-info">
+      <div class="sec-cat l-green">Industry Standard</div>
+      <div class="sec-title">Real-World Vue Stack</div>
+    </div>
+  </div>
+  <div class="stack-grid rv">
+    <div class="stack-card sc-vue">
+      <div class="stack-icon">🖖</div>
+      <div class="stack-name" style="color:var(--vue)">Vue 3 + Nuxt</div>
+      <div class="stack-desc">Core reactivity library + fullstack framework with SSR/SSG</div>
+    </div>
+    <div class="stack-card sc-purple">
+      <div class="stack-icon">🗃️</div>
+      <div class="stack-name" style="color:var(--purple)">Pinia</div>
+      <div class="stack-desc">Official global state management for complex apps</div>
+    </div>
+    <div class="stack-card sc-green">
+      <div class="stack-icon">🔄</div>
+      <div class="stack-name" style="color:var(--green)">Axios / TanStack Query</div>
+      <div class="stack-desc">Server state, caching, and API syncing</div>
+    </div>
+    <div class="stack-card sc-cyan">
+      <div class="stack-icon">🎨</div>
+      <div class="stack-name" style="color:var(--cyan)">Tailwind CSS</div>
+      <div class="stack-desc">Utility-first styling, no CSS files needed</div>
+    </div>
+    <div class="stack-card sc-orange">
+      <div class="stack-icon">📝</div>
+      <div class="stack-name" style="color:var(--orange)">VeeValidate</div>
+      <div class="stack-desc">High-performance forms with schema validation</div>
+    </div>
+    <div class="stack-card sc-yellow">
+      <div class="stack-icon">🔷</div>
+      <div class="stack-name" style="color:var(--yellow)">TypeScript</div>
+      <div class="stack-desc">Type safety — near mandatory in good companies</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ LEARNING ORDER ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-cyan">🧭</div>
+    <div class="sec-info">
+      <div class="sec-cat l-cyan">Simple Flow</div>
+      <div class="sec-title">Suggested Learning Order</div>
+    </div>
+  </div>
+  <div class="order-track rv">
+    <div class="order-step"><div class="o-num os-vue">01</div><div class="o-name">Core Vue</div><div class="o-sub">Components + Reactivity</div></div>
+    <div class="order-step"><div class="o-num os-cyan">02</div><div class="o-name">Routing</div><div class="o-sub">Vue Router</div></div>
+    <div class="order-step"><div class="o-num os-orange">03</div><div class="o-name">Forms + API</div><div class="o-sub">v-model + Axios</div></div>
+    <div class="order-step"><div class="o-num os-purple">04</div><div class="o-name">State Mgmt</div><div class="o-sub">Pinia</div></div>
+    <div class="order-step"><div class="o-num os-pink">05</div><div class="o-name">Styling</div><div class="o-sub">Tailwind CSS</div></div>
+    <div class="order-step"><div class="o-num os-yellow">06</div><div class="o-name">Performance</div><div class="o-sub">computed + lazy</div></div>
+    <div class="order-step"><div class="o-num os-teal">07</div><div class="o-name">Nuxt 3</div><div class="o-sub">SSR + SSG</div></div>
+    <div class="order-step"><div class="o-num os-vue">08</div><div class="o-name">TypeScript</div><div class="o-sub">Type safety</div></div>
+    <div class="order-step"><div class="o-num os-green">09</div><div class="o-name">Testing</div><div class="o-sub">Vitest + VTU</div></div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ WHAT PEOPLE MISS ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-red">⚠️</div>
+    <div class="sec-info">
+      <div class="sec-cat l-red">Common Gaps</div>
+      <div class="sec-title">What Most People Miss</div>
+    </div>
+  </div>
+  <div class="miss-grid rv">
+    <div class="miss-item">
+      <div class="miss-bullet mb-vue">🧩</div>
+      <div class="miss-text">
+        <div class="mt" style="color:var(--vue)">Reusable Components</div>
+        <div class="ms">Writing single-purpose, composable components from the start</div>
+      </div>
+    </div>
+    <div class="miss-item">
+      <div class="miss-bullet mb-orange">📁</div>
+      <div class="miss-text">
+        <div class="mt" style="color:var(--orange)">Clean Folder Structure</div>
+        <div class="ms">Feature-based structure — composables, stores, views separated</div>
+      </div>
+    </div>
+    <div class="miss-item">
+      <div class="miss-bullet mb-yellow">⚡</div>
+      <div class="miss-text">
+        <div class="mt" style="color:var(--yellow)">Performance Thinking Early</div>
+        <div class="ms">Avoid premature optimization but understand reactivity triggers</div>
+      </div>
+    </div>
+    <div class="miss-item">
+      <div class="miss-bullet mb-green">🔄</div>
+      <div class="miss-text">
+        <div class="mt" style="color:var(--green)">Real-World API Handling</div>
+        <div class="ms">Loading states, error states, empty states — all three matter</div>
+      </div>
+    </div>
+    <div class="miss-item">
+      <div class="miss-bullet mb-purple">🚨</div>
+      <div class="miss-text">
+        <div class="mt" style="color:var(--purple)">Error Handling</div>
+        <div class="ms">onErrorCaptured, try/catch in async, fallback UIs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══ REFS ═══ -->
+<section class="sec">
+  <div class="sec-header rv">
+    <div class="sec-num n-vue">📚</div>
+    <div class="sec-info">
+      <div class="sec-cat l-vue">Best Resources</div>
+      <div class="sec-title">References & Practice</div>
+    </div>
+  </div>
+  <div class="ref-row rv">
+    <a href="https://vuejs.org" target="_blank" class="ref-btn" style="border-color:rgba(66,184,131,.3)">
+      <span class="ref-ico">🖖</span>
+      <div><div class="ref-name">Vue.js Docs</div><div class="ref-sub">vuejs.org — official</div></div>
+    </a>
+    <a href="https://pinia.vuejs.org" target="_blank" class="ref-btn" style="border-color:rgba(184,124,255,.3)">
+      <span class="ref-ico">🗃️</span>
+      <div><div class="ref-name">Pinia Docs</div><div class="ref-sub">pinia.vuejs.org</div></div>
+    </a>
+    <a href="https://router.vuejs.org" target="_blank" class="ref-btn" style="border-color:rgba(0,229,255,.3)">
+      <span class="ref-ico">🌐</span>
+      <div><div class="ref-name">Vue Router Docs</div><div class="ref-sub">router.vuejs.org</div></div>
+    </a>
+    <a href="https://vitejs.dev" target="_blank" class="ref-btn" style="border-color:rgba(255,255,255,.15)">
+      <span class="ref-ico">⚡</span>
+      <div><div class="ref-name">Vite Docs</div><div class="ref-sub">vitejs.dev</div></div>
+    </a>
+    <a href="https://vueschool.io" target="_blank" class="ref-btn" style="border-color:rgba(255,140,66,.3)">
+      <span class="ref-ico">🎓</span>
+      <div><div class="ref-name">Vue School</div><div class="ref-sub">Paid — structured courses</div></div>
+    </a>
+    <a href="https://www.vuemastery.com" target="_blank" class="ref-btn" style="border-color:rgba(255,229,102,.3)">
+      <span class="ref-ico">🧑‍🏫</span>
+      <div><div class="ref-name">Vue Mastery</div><div class="ref-sub">Paid — video courses</div></div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>Vue.js Roadmap 2026 — Interview-ready · Production-focused · 14 Core Topics</p>
+  <p style="margin-top:6px">Reactivity in, confidence out. Ship it. 🖖</p>
+</footer>
+
+</div><!-- /wrap -->
+
+
+<script>
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('bD').classList.toggle('on', t==='dark');
+  document.getElementById('bL').classList.toggle('on', t==='light');
+  localStorage.setItem('vr-theme', t);
+}
+const saved = localStorage.getItem('vr-theme');
+if (saved) setTheme(saved);
+
+// Scroll reveal with stagger
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const siblings = e.target.parentElement?.querySelectorAll('.rv') || [];
+      let delay = 0;
+      siblings.forEach(s => {
+        if (s === e.target) {
+          setTimeout(() => s.classList.add('visible'), delay);
+          delay += 60;
+        }
+      });
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

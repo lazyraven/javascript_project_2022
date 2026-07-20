@@ -1,0 +1,78 @@
+Prompt 1: on chat Gpt
+
+For vue framework. What is the main topic I need to cover in Vue latest? Give me a roadmap, what do I need to practice? take me with good roadmap with the topics as well. I want to practice Vue . Can you provide an example that was asked by an interviewer? For learning purposes, what are the most important topics I need to cover? And in the project, what things are we using most for Vue ? Give me the REFERENCE. Where are all the things covered? Step 2: create a structured daily learning plan for this roadmap — with theory + mini-project tasks? Step 3: Create a detailed daily plan with what to learn, code, and build each day — including specific exercises and mini-project milestones? Would you like me to make a Notion/Markdown template of this make it responsive with a navigation bar and progress tracker (like a mini learning dashboard)? this dark/light theme switchable (so you can toggle themes with a button)? It’ll look modern and great for a personal portfolio. Update the prompt to be clearer and more concise.
+
+It'll give me good prompt with good details...
+
+After that I told the claude ai to generate the roadmap in html file and also attached react file of react roadmap, same as.
+so that same UI it cam p[rovide me.
+
+(Create an HTML file with a good-looking roadmap iframe. my roadmap looking like that, please update like that in image 2 with vuejs topics.)
+
+----------------- Other Type Initial ----------------
+
+
+https://chatgpt.com/g/g-p-69de2454b34081918a3d7fb6e61cbf81-best-prompt/project
+https://claude.ai/share/0ef6f5fe-33f6-419e-8354-e10339973bbd
+
+
+For Javascript amf other prompt 🎉 - update one skill name 
+
+What is the main topic I need to cover in Javascript latest? Give me a roadmap, what do I need to practice? take me with good roadmap with the topics as well. I want to practice JavaScript. Can you provide an example that was asked by an interviewer? For learning purposes, what are the most important topics I need to cover? And in the project, what things are we using most for JavaScript? Give me the REFERENCE. Where are all the things covered? Step 2: create a structured daily learning plan for this roadmap — with theory + mini-project tasks? Step 3: Create a detailed daily plan with what to learn, code, and build each day — including specific exercises and mini-project milestones? Would you like me to make a Notion/Markdown template of this make it responsive with a navigation bar and progress tracker (like a mini learning dashboard)? this dark/light theme switchable (so you can toggle themes with a button)? It’ll look modern and great for a personal portfolio. 
+convert in html file Update the prompt to be clearer and more concise. 
+
+This prompt gives me refine prompt - check below
+
+---start--- Refine prompt -----------
+I want to master modern JavaScript and prepare for interviews as well as real-world projects.
+Step 1: JavaScript Roadmap
+Provide a complete, up-to-date JavaScript roadmap.
+Include:
+Core fundamentals
+Advanced concepts
+Latest features (ES6+ and beyond)
+Commonly used concepts in real-world projects
+Also include:
+Important interview topics
+One or two real interview-style coding questions with explanations
+References (documentation, websites, or resources to learn each topic)
+
+Step 2: Structured Learning Plan
+Create a structured daily learning plan based on the roadmap.
+Each day should include:
+Theory topics to study
+Practice exercises
+Small mini-project tasks
+
+Step 3: Detailed Daily Execution Plan
+Break down each day in detail:
+What exactly to learn
+What to code
+Exercises to solve
+Mini-project milestones
+The plan should feel practical and hands-on.
+
+Step 4: Learning Dashboard (Project)
+Build a responsive HTML-based learning dashboard that includes:
+Navigation bar
+Progress tracker
+Sections for daily learning
+Features:
+Dark/Light theme toggle
+Clean, modern UI (portfolio-ready)
+
+Step 5: Output Format
+Provide:
+A Notion/Markdown version of the plan
+A complete HTML file for the dashboard
+Prompt 2 : I ask to chatgpt >  generate the full roadmap.
+It give me this. (below one)
+
+
+---end---
+> after that I ask to generate the full roadmap on chatGPT
+this give me whole roadmap
+
+after that I copied that section and paste it on claude ai...
+
+it give me all good view iframe roadmaps...(convert in html file Update the prompt to be clearer and more concise. )
