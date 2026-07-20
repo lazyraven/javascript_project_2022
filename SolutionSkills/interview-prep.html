@@ -1,0 +1,2319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JS · React · Node.js — Interview Prep</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #151820;
+    --surface2: #1c2030;
+    --border: #262d3f;
+    --accent-js: #f7df1e;
+    --accent-react: #61dafb;
+    --accent-node: #68a063;
+    --text: #e2e8f0;
+    --text-muted: #8892a4;
+    --text-dim: #505a6e;
+    --code-bg: #0a0c10;
+    --tag-basic: #2a3a2a;
+    --tag-basic-text: #7ec87e;
+    --tag-mid: #2a2a3a;
+    --tag-mid-text: #8080dd;
+    --tag-adv: #3a2a2a;
+    --tag-adv-text: #dd8080;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── Layout ── */
+  .shell {
+    display: grid;
+    grid-template-columns: 270px 1fr;
+    min-height: 100vh;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 0 0 40px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .sidebar-header {
+    padding: 28px 22px 20px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    z-index: 10;
+  }
+
+  .sidebar-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .search-box {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 11px;
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-box:focus { border-color: var(--accent-react); }
+  .search-box::placeholder { color: var(--text-dim); }
+
+  .toc-group { padding: 18px 0 0; }
+
+  .toc-group-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 22px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .toc-group-label .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .js-dot { background: var(--accent-js); }
+  .react-dot { background: var(--accent-react); }
+  .node-dot { background: var(--accent-node); }
+
+  .toc-item {
+    display: block;
+    padding: 6px 22px 6px 30px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    cursor: pointer;
+    line-height: 1.4;
+  }
+  .toc-item:hover { color: var(--text); background: var(--surface2); }
+  .toc-item.active { color: var(--text); border-left-color: var(--accent-react); background: rgba(97,218,251,0.05); }
+
+  /* ── Main ── */
+  .main {
+    padding: 0 48px 80px;
+    max-width: 900px;
+  }
+
+  .page-hero {
+    padding: 52px 0 44px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 52px;
+  }
+
+  .page-hero h1 {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+
+  .badge-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .badge-js  { background: rgba(247,223,30,0.12); color: var(--accent-js); border: 1px solid rgba(247,223,30,0.25); }
+  .badge-react { background: rgba(97,218,251,0.10); color: var(--accent-react); border: 1px solid rgba(97,218,251,0.2); }
+  .badge-node { background: rgba(104,160,99,0.12); color: var(--accent-node); border: 1px solid rgba(104,160,99,0.25); }
+
+  /* ── Section ── */
+  .section { margin-bottom: 64px; }
+
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-heading h2 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .section-stripe {
+    width: 4px;
+    height: 24px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .stripe-js    { background: var(--accent-js); }
+  .stripe-react { background: var(--accent-react); }
+  .stripe-node  { background: var(--accent-node); }
+
+  /* ── Q&A Card ── */
+  .qa-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 18px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .qa-card:hover { border-color: #3a4460; }
+
+  .qa-question {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .q-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-dim);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 6px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .q-text {
+    flex: 1;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .q-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .level-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .level-basic { background: var(--tag-basic); color: var(--tag-basic-text); }
+  .level-intermediate { background: var(--tag-mid); color: var(--tag-mid-text); }
+  .level-advanced { background: var(--tag-adv); color: var(--tag-adv-text); }
+
+  .chevron {
+    color: var(--text-dim);
+    font-size: 13px;
+    transition: transform 0.22s ease;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .qa-card.open .chevron { transform: rotate(180deg); }
+
+  .qa-answer {
+    display: none;
+    padding: 0 20px 20px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .qa-card.open .qa-answer { display: block; }
+
+  .answer-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 14px 0 10px;
+  }
+
+  .answer-body {
+    font-size: 14px;
+    color: #b8c4d6;
+    line-height: 1.8;
+  }
+
+  .answer-body p { margin-bottom: 12px; }
+  .answer-body p:last-child { margin-bottom: 0; }
+
+  .answer-body ul, .answer-body ol {
+    padding-left: 20px;
+    margin-bottom: 12px;
+  }
+  .answer-body li { margin-bottom: 5px; }
+
+  .answer-body strong { color: var(--text); font-weight: 600; }
+
+  /* ── Code Block ── */
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    overflow-x: auto;
+    margin: 14px 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: #c9d1e0;
+  }
+
+  .code-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+
+  /* syntax hilight helpers */
+  .kw  { color: #82aaff; }
+  .fn  { color: #82cfff; }
+  .str { color: #c3e88d; }
+  .cm  { color: #546e7a; font-style: italic; }
+  .num { color: #f78c6c; }
+  .klass { color: #ffcb6b; }
+
+  /* ── Tip box ── */
+  .tip {
+    background: rgba(97,218,251,0.06);
+    border-left: 3px solid var(--accent-react);
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 13px;
+    color: #a8d8ea;
+  }
+  .tip strong { color: var(--accent-react); }
+
+  /* ── Scroll progress ── */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-js), var(--accent-react), var(--accent-node));
+    z-index: 9999;
+    transition: width 0.1s;
+    width: 0%;
+  }
+
+  /* ── Back to top ── */
+  #back-top {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 38px; height: 38px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+  }
+  #back-top.visible { opacity: 1; pointer-events: auto; }
+  #back-top:hover { transform: translateY(-2px); color: var(--text); }
+
+  /* ── Expand all toggle ── */
+  .expand-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-bottom: 22px;
+    font-family: 'Sora', sans-serif;
+  }
+  .expand-btn:hover { border-color: var(--accent-react); color: var(--text); }
+
+  /* ── Stats bar ── */
+  .stats-bar {
+    display: flex;
+    gap: 28px;
+    padding: 16px 0;
+    margin-bottom: 10px;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .stat-lbl {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 860px) {
+    .shell { grid-template-columns: 1fr; }
+    .sidebar { position: static; height: auto; }
+    .main { padding: 0 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<div class="shell">
+
+<!-- ══════════════ SIDEBAR ══════════════ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Interview Prep</div>
+    <input class="search-box" id="searchBox" type="text" placeholder="Search questions…" oninput="filterQuestions(this.value)">
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label"><span class="dot js-dot"></span>JavaScript</div>
+    <a class="toc-item" href="#js-basics">Core Basics</a>
+    <a class="toc-item" href="#js-closures">Closures & Scope</a>
+    <a class="toc-item" href="#js-async">Async & Promises</a>
+    <a class="toc-item" href="#js-proto">Prototypes & OOP</a>
+    <a class="toc-item" href="#js-es6">ES6+ Features</a>
+    <a class="toc-item" href="#js-advanced">Advanced JS</a>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label"><span class="dot react-dot"></span>React</div>
+    <a class="toc-item" href="#react-basics">Fundamentals</a>
+    <a class="toc-item" href="#react-hooks">Hooks</a>
+    <a class="toc-item" href="#react-state">State Management</a>
+    <a class="toc-item" href="#react-perf">Performance</a>
+    <a class="toc-item" href="#react-patterns">Patterns</a>
+    <a class="toc-item" href="#react-advanced">Advanced React</a>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label"><span class="dot node-dot"></span>Node.js</div>
+    <a class="toc-item" href="#node-basics">Core Concepts</a>
+    <a class="toc-item" href="#node-async">Async Patterns</a>
+    <a class="toc-item" href="#node-streams">Streams & Buffers</a>
+    <a class="toc-item" href="#node-express">Express & APIs</a>
+    <a class="toc-item" href="#node-advanced">Advanced Node</a>
+  </div>
+</nav>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main class="main" id="mainContent">
+
+  <div class="page-hero">
+    <h1>JS · React · Node<br>Interview Prep</h1>
+    <p style="color:var(--text-muted);font-size:14px;max-width:540px;">Comprehensive question bank from basic to advanced — with code examples, mental models, and interviewer-ready answers.</p>
+    <div class="badge-row">
+      <span class="badge badge-js">⬡ JavaScript</span>
+      <span class="badge badge-react">⬡ React</span>
+      <span class="badge badge-node">⬡ Node.js</span>
+    </div>
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-num" style="color:var(--accent-js)">20</div><div class="stat-lbl">JS Questions</div></div>
+      <div class="stat"><div class="stat-num" style="color:var(--accent-react)">20</div><div class="stat-lbl">React Questions</div></div>
+      <div class="stat"><div class="stat-num" style="color:var(--accent-node)">15</div><div class="stat-lbl">Node Questions</div></div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║      JAVASCRIPT              ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+
+  <!-- JS Basics -->
+  <div class="section" id="js-basics">
+    <div class="section-heading">
+      <div class="section-stripe stripe-js"></div>
+      <h2>JavaScript — Core Basics</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('js-basics')">⊕ Expand all</button>
+
+    <!-- Q1 -->
+    <div class="qa-card" data-q="What is the difference between var, let, and const?">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q1</span>
+        <span class="q-text">What is the difference between <code>var</code>, <code>let</code>, and <code>const</code>?</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><strong>var</strong> is function-scoped and hoisted (initialized as <code>undefined</code>). It can be re-declared and updated. <strong>let</strong> is block-scoped, hoisted but not initialized (Temporal Dead Zone), and can be updated but not re-declared. <strong>const</strong> is block-scoped and must be initialized at declaration — the binding cannot be reassigned (but object contents can still be mutated).</p>
+<pre><span class="cm">// var hoisting quirk</span>
+<span class="fn">console</span>.log(x);       <span class="cm">// undefined (hoisted)</span>
+<span class="kw">var</span> x = <span class="num">5</span>;
+
+<span class="cm">// let — Temporal Dead Zone</span>
+<span class="cm">// console.log(y);     // ReferenceError</span>
+<span class="kw">let</span> y = <span class="num">10</span>;
+
+<span class="cm">// const — object mutation still allowed</span>
+<span class="kw">const</span> obj = { a: <span class="num">1</span> };
+obj.a = <span class="num">2</span>;            <span class="cm">// ✓ OK</span>
+<span class="cm">// obj = {};          // ✗ TypeError</span></pre>
+          <div class="tip"><strong>Interviewer tip:</strong> Prefer <code>const</code> by default, use <code>let</code> only when you need to reassign, and avoid <code>var</code> in modern code.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qa-card" data-q="What is hoisting in JavaScript?">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q2</span>
+        <span class="q-text">What is hoisting in JavaScript?</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Hoisting is JavaScript's behavior of moving declarations to the top of their scope during the compilation phase. <strong>Function declarations</strong> are fully hoisted (callable before declaration). <strong>var</strong> declarations are hoisted and initialized to <code>undefined</code>. <strong>let/const</strong> are hoisted but not initialized — accessing them before their declaration throws a ReferenceError (Temporal Dead Zone).</p>
+<pre><span class="fn">greet</span>();              <span class="cm">// "Hello!" — function declaration hoisted</span>
+<span class="kw">function</span> <span class="fn">greet</span>() { <span class="fn">console</span>.log(<span class="str">"Hello!"</span>); }
+
+<span class="fn">console</span>.log(name);    <span class="cm">// undefined — var hoisted, not yet assigned</span>
+<span class="kw">var</span> name = <span class="str">"Alice"</span>;
+
+<span class="cm">// sayHi();            // TypeError — function expression NOT hoisted</span>
+<span class="kw">var</span> sayHi = <span class="kw">function</span>() { <span class="fn">console</span>.log(<span class="str">"Hi"</span>); };</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qa-card" data-q="Explain == vs === in JavaScript">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q3</span>
+        <span class="q-text">Explain <code>==</code> vs <code>===</code>. When would you use each?</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><code>==</code> performs <strong>abstract equality</strong> — it coerces types before comparing. <code>===</code> performs <strong>strict equality</strong> — no type coercion, both value and type must match.</p>
+<pre><span class="num">0</span> == <span class="str">""</span>        <span class="cm">// true  (both coerced to 0)</span>
+<span class="num">0</span> === <span class="str">""</span>       <span class="cm">// false (number ≠ string)</span>
+<span class="kw">null</span> == <span class="kw">undefined</span>  <span class="cm">// true  (special case)</span>
+<span class="kw">null</span> === <span class="kw">undefined</span> <span class="cm">// false</span>
+<span class="num">1</span> == <span class="kw">true</span>     <span class="cm">// true  (true coerced to 1)</span>
+<span class="num">1</span> === <span class="kw">true</span>    <span class="cm">// false</span></pre>
+          <div class="tip"><strong>Best practice:</strong> Always use <code>===</code>. The only common exception: <code>x == null</code> to check for both <code>null</code> and <code>undefined</code>.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qa-card" data-q="What are JavaScript data types?">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q4</span>
+        <span class="q-text">What are JavaScript's data types? What's the difference between primitive and reference types?</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><strong>Primitives</strong> (stored by value): <code>string</code>, <code>number</code>, <code>boolean</code>, <code>null</code>, <code>undefined</code>, <code>symbol</code>, <code>bigint</code>. <strong>Reference types</strong> (stored by reference in heap): <code>object</code>, <code>array</code>, <code>function</code>.</p>
+<pre><span class="cm">// Primitives — copied by value</span>
+<span class="kw">let</span> a = <span class="num">5</span>, b = a;
+b = <span class="num">10</span>;
+<span class="fn">console</span>.log(a); <span class="cm">// 5 (unchanged)</span>
+
+<span class="cm">// Objects — copied by reference</span>
+<span class="kw">let</span> x = { val: <span class="num">5</span> };
+<span class="kw">let</span> y = x;
+y.val = <span class="num">10</span>;
+<span class="fn">console</span>.log(x.val); <span class="cm">// 10 (same reference)</span>
+
+<span class="cm">// Deep clone to avoid mutation</span>
+<span class="kw">let</span> z = JSON.<span class="fn">parse</span>(JSON.<span class="fn">stringify</span>(x));
+<span class="cm">// or: structuredClone(x)  (modern)</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Closures -->
+  <div class="section" id="js-closures">
+    <div class="section-heading">
+      <div class="section-stripe stripe-js"></div>
+      <h2>JavaScript — Closures &amp; Scope</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('js-closures')">⊕ Expand all</button>
+
+    <!-- Q5 -->
+    <div class="qa-card" data-q="What is a closure in JavaScript?">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q5</span>
+        <span class="q-text">What is a closure? Give a practical example.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>A closure is a function that <strong>remembers its lexical environment</strong> even when executed outside of it. The inner function has access to the outer function's variables after the outer function has returned.</p>
+<pre><span class="kw">function</span> <span class="fn">makeCounter</span>() {
+  <span class="kw">let</span> count = <span class="num">0</span>;            <span class="cm">// private state</span>
+  <span class="kw">return</span> {
+    increment() { count++; },
+    decrement() { count--; },
+    value()     { <span class="kw">return</span> count; }
+  };
+}
+
+<span class="kw">const</span> counter = <span class="fn">makeCounter</span>();
+counter.<span class="fn">increment</span>();
+counter.<span class="fn">increment</span>();
+<span class="fn">console</span>.log(counter.<span class="fn">value</span>());  <span class="cm">// 2</span>
+<span class="cm">// count is private — not accessible directly</span></pre>
+          <p><strong>Practical uses:</strong> data privacy, memoization, factory functions, event listeners, partial application.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="qa-card" data-q="Classic closure loop problem">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q6</span>
+        <span class="q-text">Classic: What does this loop print? How do you fix it?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Problem — prints 3, 3, 3</span>
+<span class="kw">for</span> (<span class="kw">var</span> i = <span class="num">0</span>; i &lt; <span class="num">3</span>; i++) {
+  <span class="fn">setTimeout</span>(() => <span class="fn">console</span>.log(i), <span class="num">100</span>);
+}
+<span class="cm">// All callbacks share same `i` (var is function-scoped)</span>
+
+<span class="cm">// Fix 1: use let (block-scoped, new binding per iteration)</span>
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; <span class="num">3</span>; i++) {
+  <span class="fn">setTimeout</span>(() => <span class="fn">console</span>.log(i), <span class="num">100</span>);  <span class="cm">// 0, 1, 2</span>
+}
+
+<span class="cm">// Fix 2: IIFE to capture each i</span>
+<span class="kw">for</span> (<span class="kw">var</span> i = <span class="num">0</span>; i &lt; <span class="num">3</span>; i++) {
+  ((<span class="kw">function</span>(j) {
+    <span class="fn">setTimeout</span>(() => <span class="fn">console</span>.log(j), <span class="num">100</span>);
+  })(i));
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="qa-card" data-q="What is the scope chain?">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q7</span>
+        <span class="q-text">What is the scope chain? How does JavaScript resolve variable lookups?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>When JavaScript resolves a variable, it starts in the <strong>current scope</strong> and walks up through parent scopes until it reaches the global scope. This chain of scopes is the <em>scope chain</em>. If the variable isn't found anywhere, a <code>ReferenceError</code> is thrown.</p>
+<pre><span class="kw">const</span> global = <span class="str">"global"</span>;
+
+<span class="kw">function</span> <span class="fn">outer</span>() {
+  <span class="kw">const</span> outerVar = <span class="str">"outer"</span>;
+  <span class="kw">function</span> <span class="fn">inner</span>() {
+    <span class="kw">const</span> innerVar = <span class="str">"inner"</span>;
+    <span class="fn">console</span>.log(innerVar);  <span class="cm">// "inner"   ← own scope</span>
+    <span class="fn">console</span>.log(outerVar);  <span class="cm">// "outer"   ← parent scope</span>
+    <span class="fn">console</span>.log(global);    <span class="cm">// "global"  ← global scope</span>
+  }
+  <span class="fn">inner</span>();
+}
+<span class="fn">outer</span>();</pre>
+          <p>Scope chains are determined <strong>lexically</strong> (at author-time), not dynamically at runtime.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Async -->
+  <div class="section" id="js-async">
+    <div class="section-heading">
+      <div class="section-stripe stripe-js"></div>
+      <h2>JavaScript — Async &amp; Promises</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('js-async')">⊕ Expand all</button>
+
+    <!-- Q8 -->
+    <div class="qa-card" data-q="Explain the JavaScript event loop">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q8</span>
+        <span class="q-text">Explain the JavaScript Event Loop. What is the call stack, task queue, and microtask queue?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>JavaScript is single-threaded. The <strong>Call Stack</strong> executes synchronous code. When the stack is empty, the <strong>Event Loop</strong> checks queues:</p>
+          <ul>
+            <li><strong>Microtask Queue</strong> (higher priority): Promise callbacks (<code>.then</code>), <code>queueMicrotask</code>, <code>MutationObserver</code></li>
+            <li><strong>Task Queue (Macrotask)</strong>: <code>setTimeout</code>, <code>setInterval</code>, I/O callbacks, UI events</li>
+          </ul>
+          <p>Microtasks are fully drained <em>before</em> the next macrotask runs.</p>
+<pre><span class="fn">console</span>.log(<span class="str">"1"</span>);                             <span class="cm">// sync</span>
+<span class="fn">setTimeout</span>(() => <span class="fn">console</span>.log(<span class="str">"2"</span>), <span class="num">0</span>);        <span class="cm">// macrotask</span>
+Promise.<span class="fn">resolve</span>().<span class="fn">then</span>(() => <span class="fn">console</span>.log(<span class="str">"3"</span>)); <span class="cm">// microtask</span>
+<span class="fn">console</span>.log(<span class="str">"4"</span>);                             <span class="cm">// sync</span>
+<span class="cm">// Output: 1, 4, 3, 2</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="qa-card" data-q="Promises vs async/await">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q9</span>
+        <span class="q-text">Promises vs async/await — when would you use each?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><strong>async/await</strong> is syntactic sugar over Promises. It makes asynchronous code read like synchronous code and is preferred for sequential operations. <strong>Promise chains</strong> shine for parallel operations and complex flow control.</p>
+<pre><span class="cm">// Promise chain</span>
+<span class="fn">fetchUser</span>(id)
+  .<span class="fn">then</span>(user => <span class="fn">fetchPosts</span>(user.id))
+  .<span class="fn">then</span>(posts => <span class="fn">render</span>(posts))
+  .<span class="fn">catch</span>(err => <span class="fn">handleError</span>(err));
+
+<span class="cm">// async/await — same logic, more readable</span>
+<span class="kw">async function</span> <span class="fn">loadUserPosts</span>(id) {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> user  = <span class="kw">await</span> <span class="fn">fetchUser</span>(id);
+    <span class="kw">const</span> posts = <span class="kw">await</span> <span class="fn">fetchPosts</span>(user.id);
+    <span class="fn">render</span>(posts);
+  } <span class="kw">catch</span> (err) {
+    <span class="fn">handleError</span>(err);
+  }
+}
+
+<span class="cm">// Parallel with Promise.all</span>
+<span class="kw">const</span> [users, products] = <span class="kw">await</span> Promise.<span class="fn">all</span>([
+  <span class="fn">fetchUsers</span>(), <span class="fn">fetchProducts</span>()
+]);</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="qa-card" data-q="Promise.all vs Promise.allSettled vs Promise.race">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q10</span>
+        <span class="q-text">Explain <code>Promise.all</code>, <code>Promise.allSettled</code>, <code>Promise.race</code>, and <code>Promise.any</code>.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="kw">const</span> p1 = Promise.<span class="fn">resolve</span>(<span class="num">1</span>);
+<span class="kw">const</span> p2 = Promise.<span class="fn">reject</span>(<span class="str">"fail"</span>);
+<span class="kw">const</span> p3 = Promise.<span class="fn">resolve</span>(<span class="num">3</span>);
+
+<span class="cm">// all — rejects immediately if ANY rejects</span>
+Promise.<span class="fn">all</span>([p1, p2, p3]).<span class="fn">catch</span>(e => <span class="fn">console</span>.log(e)); <span class="cm">// "fail"</span>
+
+<span class="cm">// allSettled — waits for ALL, returns status+value for each</span>
+Promise.<span class="fn">allSettled</span>([p1, p2, p3]).<span class="fn">then</span>(results => {
+  <span class="cm">// [{status:"fulfilled",value:1},{status:"rejected",reason:"fail"},...]</span>
+});
+
+<span class="cm">// race — resolves/rejects with FIRST settled promise</span>
+Promise.<span class="fn">race</span>([p1, p2]).<span class="fn">then</span>(v => <span class="fn">console</span>.log(v)); <span class="cm">// 1</span>
+
+<span class="cm">// any — resolves with FIRST fulfilled; rejects if ALL reject</span>
+Promise.<span class="fn">any</span>([p2, p3]).<span class="fn">then</span>(v => <span class="fn">console</span>.log(v));  <span class="cm">// 3</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Prototypes -->
+  <div class="section" id="js-proto">
+    <div class="section-heading">
+      <div class="section-stripe stripe-js"></div>
+      <h2>JavaScript — Prototypes &amp; OOP</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('js-proto')">⊕ Expand all</button>
+
+    <!-- Q11 -->
+    <div class="qa-card" data-q="Prototypal inheritance in JavaScript">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q11</span>
+        <span class="q-text">Explain prototypal inheritance. How does the prototype chain work?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Every JavaScript object has an internal <code>[[Prototype]]</code> link to another object. When accessing a property, JS first checks the object itself, then walks up the prototype chain until it finds it or reaches <code>null</code>.</p>
+<pre><span class="kw">function</span> <span class="klass">Animal</span>(name) { <span class="kw">this</span>.name = name; }
+<span class="klass">Animal</span>.prototype.<span class="fn">speak</span> = <span class="kw">function</span>() {
+  <span class="kw">return</span> <span class="str">`${<span class="kw">this</span>.name} makes a sound`</span>;
+};
+
+<span class="kw">function</span> <span class="klass">Dog</span>(name) { <span class="klass">Animal</span>.<span class="fn">call</span>(<span class="kw">this</span>, name); }
+<span class="klass">Dog</span>.prototype = Object.<span class="fn">create</span>(<span class="klass">Animal</span>.prototype);
+<span class="klass">Dog</span>.prototype.constructor = <span class="klass">Dog</span>;
+<span class="klass">Dog</span>.prototype.<span class="fn">speak</span> = <span class="kw">function</span>() {
+  <span class="kw">return</span> <span class="str">`${<span class="kw">this</span>.name} barks`</span>;
+};
+
+<span class="kw">const</span> d = <span class="kw">new</span> <span class="klass">Dog</span>(<span class="str">"Rex"</span>);
+<span class="fn">console</span>.log(d.<span class="fn">speak</span>());         <span class="cm">// "Rex barks"</span>
+<span class="fn">console</span>.log(d <span class="kw">instanceof</span> <span class="klass">Animal</span>); <span class="cm">// true</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="qa-card" data-q="What is 'this' in JavaScript?">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q12</span>
+        <span class="q-text">Explain <code>this</code> in JavaScript. How does it behave in different contexts?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><code>this</code> is determined at <em>call-time</em>, not definition-time (except for arrow functions which lexically bind <code>this</code>).</p>
+<pre><span class="cm">// 1. Method call — this = owning object</span>
+<span class="kw">const</span> obj = { name:<span class="str">"Alice"</span>, greet() { <span class="kw">return</span> <span class="kw">this</span>.name; } };
+obj.<span class="fn">greet</span>(); <span class="cm">// "Alice"</span>
+
+<span class="cm">// 2. Regular function call — this = undefined (strict) or global</span>
+<span class="kw">function</span> <span class="fn">who</span>() { <span class="kw">return</span> <span class="kw">this</span>; }
+<span class="fn">who</span>(); <span class="cm">// window / undefined</span>
+
+<span class="cm">// 3. Arrow function — this = enclosing lexical context</span>
+<span class="kw">const</span> timer = {
+  id: <span class="num">42</span>,
+  <span class="fn">start</span>() {
+    <span class="fn">setTimeout</span>(() => <span class="fn">console</span>.log(<span class="kw">this</span>.id), <span class="num">100</span>); <span class="cm">// 42</span>
+  }
+};
+
+<span class="cm">// 4. Explicit binding — call, apply, bind</span>
+<span class="kw">function</span> <span class="fn">greet</span>(greeting) { <span class="kw">return</span> <span class="str">`${greeting}, ${<span class="kw">this</span>.name}`</span>; }
+<span class="fn">greet</span>.<span class="fn">call</span>({name:<span class="str">"Bob"</span>}, <span class="str">"Hi"</span>);  <span class="cm">// "Hi, Bob"</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ES6+ -->
+  <div class="section" id="js-es6">
+    <div class="section-heading">
+      <div class="section-stripe stripe-js"></div>
+      <h2>JavaScript — ES6+ Features</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('js-es6')">⊕ Expand all</button>
+
+    <!-- Q13 -->
+    <div class="qa-card" data-q="Destructuring, spread and rest operators">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q13</span>
+        <span class="q-text">Explain destructuring, spread (<code>...</code>), and rest parameters with practical examples.</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Destructuring — arrays</span>
+<span class="kw">const</span> [first, second, ...rest] = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>];
+<span class="cm">// first=1, second=2, rest=[3,4]</span>
+
+<span class="cm">// Destructuring — objects (with rename + default)</span>
+<span class="kw">const</span> { name: fullName, age = <span class="num">25</span> } = { name: <span class="str">"Alice"</span> };
+<span class="cm">// fullName="Alice", age=25</span>
+
+<span class="cm">// Spread — copy/merge</span>
+<span class="kw">const</span> arr1 = [<span class="num">1</span>, <span class="num">2</span>], arr2 = [<span class="num">3</span>, <span class="num">4</span>];
+<span class="kw">const</span> merged = [...arr1, ...arr2];  <span class="cm">// [1,2,3,4]</span>
+<span class="kw">const</span> newObj = { ...obj, extra: <span class="num">5</span> }; <span class="cm">// shallow clone+extend</span>
+
+<span class="cm">// Rest — collect remaining arguments</span>
+<span class="kw">function</span> <span class="fn">sum</span>(first, ...nums) {
+  <span class="kw">return</span> first + nums.<span class="fn">reduce</span>((a, b) => a + b, <span class="num">0</span>);
+}
+<span class="fn">sum</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>); <span class="cm">// 10</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="qa-card" data-q="Map, Filter, Reduce">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q14</span>
+        <span class="q-text">Explain <code>map</code>, <code>filter</code>, and <code>reduce</code>. When would you use each?</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="kw">const</span> nums = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>];
+
+<span class="cm">// map — transform each element → new array (same length)</span>
+<span class="kw">const</span> doubled = nums.<span class="fn">map</span>(n => n * <span class="num">2</span>);  <span class="cm">// [2,4,6,8,10]</span>
+
+<span class="cm">// filter — keep elements that pass a test → new array (≤ length)</span>
+<span class="kw">const</span> evens = nums.<span class="fn">filter</span>(n => n % <span class="num">2</span> === <span class="num">0</span>);  <span class="cm">// [2,4]</span>
+
+<span class="cm">// reduce — accumulate into a single value</span>
+<span class="kw">const</span> sum = nums.<span class="fn">reduce</span>((acc, n) => acc + n, <span class="num">0</span>);  <span class="cm">// 15</span>
+
+<span class="cm">// Chaining — total of doubled evens</span>
+<span class="kw">const</span> result = nums
+  .<span class="fn">filter</span>(n => n % <span class="num">2</span> === <span class="num">0</span>)
+  .<span class="fn">map</span>(n => n * <span class="num">2</span>)
+  .<span class="fn">reduce</span>((acc, n) => acc + n, <span class="num">0</span>);  <span class="cm">// 12</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Advanced JS -->
+  <div class="section" id="js-advanced">
+    <div class="section-heading">
+      <div class="section-stripe stripe-js"></div>
+      <h2>JavaScript — Advanced</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('js-advanced')">⊕ Expand all</button>
+
+    <!-- Q15 -->
+    <div class="qa-card" data-q="What is debouncing and throttling?">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q15</span>
+        <span class="q-text">Implement debounce and throttle from scratch. When would you use each?</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><strong>Debounce</strong>: executes after a delay from the <em>last</em> call — good for search-as-you-type, resize handlers. <strong>Throttle</strong>: executes at most once per interval — good for scroll events, mousemove.</p>
+<pre><span class="cm">// Debounce</span>
+<span class="kw">function</span> <span class="fn">debounce</span>(fn, delay) {
+  <span class="kw">let</span> timer;
+  <span class="kw">return function</span>(...args) {
+    <span class="fn">clearTimeout</span>(timer);
+    timer = <span class="fn">setTimeout</span>(() => fn.<span class="fn">apply</span>(<span class="kw">this</span>, args), delay);
+  };
+}
+
+<span class="cm">// Throttle</span>
+<span class="kw">function</span> <span class="fn">throttle</span>(fn, limit) {
+  <span class="kw">let</span> lastCall = <span class="num">0</span>;
+  <span class="kw">return function</span>(...args) {
+    <span class="kw">const</span> now = Date.<span class="fn">now</span>();
+    <span class="kw">if</span> (now - lastCall >= limit) {
+      lastCall = now;
+      <span class="kw">return</span> fn.<span class="fn">apply</span>(<span class="kw">this</span>, args);
+    }
+  };
+}
+
+<span class="cm">// Usage</span>
+<span class="kw">const</span> onSearch = <span class="fn">debounce</span>(val => <span class="fn">fetchResults</span>(val), <span class="num">300</span>);
+<span class="kw">const</span> onScroll = <span class="fn">throttle</span>(() => <span class="fn">updatePosition</span>(), <span class="num">100</span>);</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="qa-card" data-q="What is memoization?">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q16</span>
+        <span class="q-text">What is memoization? Implement a generic memoize function.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Memoization caches the results of expensive function calls so repeated calls with the same arguments return the cached result without recomputation.</p>
+<pre><span class="kw">function</span> <span class="fn">memoize</span>(fn) {
+  <span class="kw">const</span> cache = <span class="kw">new</span> Map();
+  <span class="kw">return function</span>(...args) {
+    <span class="kw">const</span> key = JSON.<span class="fn">stringify</span>(args);
+    <span class="kw">if</span> (cache.<span class="fn">has</span>(key)) <span class="kw">return</span> cache.<span class="fn">get</span>(key);
+    <span class="kw">const</span> result = fn.<span class="fn">apply</span>(<span class="kw">this</span>, args);
+    cache.<span class="fn">set</span>(key, result);
+    <span class="kw">return</span> result;
+  };
+}
+
+<span class="kw">const</span> fib = <span class="fn">memoize</span>(<span class="kw">function</span>(n) {
+  <span class="kw">return</span> n <= <span class="num">1</span> ? n : fib(n - <span class="num">1</span>) + fib(n - <span class="num">2</span>);
+});
+
+<span class="fn">console</span>.log(<span class="fn">fib</span>(<span class="num">40</span>)); <span class="cm">// Fast — results cached</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q17 -->
+    <div class="qa-card" data-q="Generators and iterators">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q17</span>
+        <span class="q-text">What are generators? How do they differ from regular functions?</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Generator functions (<code>function*</code>) can be paused and resumed via <code>yield</code>. They return an iterator that produces values lazily — useful for infinite sequences and cooperative multitasking.</p>
+<pre><span class="kw">function</span>* <span class="fn">idGenerator</span>() {
+  <span class="kw">let</span> id = <span class="num">1</span>;
+  <span class="kw">while</span> (<span class="kw">true</span>) <span class="kw">yield</span> id++;     <span class="cm">// infinite, but lazy</span>
+}
+
+<span class="kw">const</span> gen = <span class="fn">idGenerator</span>();
+<span class="fn">console</span>.log(gen.<span class="fn">next</span>().value); <span class="cm">// 1</span>
+<span class="fn">console</span>.log(gen.<span class="fn">next</span>().value); <span class="cm">// 2</span>
+
+<span class="cm">// Range generator</span>
+<span class="kw">function</span>* <span class="fn">range</span>(start, end, step = <span class="num">1</span>) {
+  <span class="kw">for</span> (<span class="kw">let</span> i = start; i &lt; end; i += step) <span class="kw">yield</span> i;
+}
+<span class="fn">console</span>.log([...<span class="fn">range</span>(<span class="num">0</span>, <span class="num">10</span>, <span class="num">2</span>)]); <span class="cm">// [0,2,4,6,8]</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q18 -->
+    <div class="qa-card" data-q="WeakMap vs Map vs WeakSet vs Set">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q18</span>
+        <span class="q-text">When would you use <code>Map</code>/<code>Set</code> over plain objects/arrays? What is <code>WeakMap</code>?</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><strong>Map</strong>: any value as key (including objects), preserves insertion order, O(1) lookups. <strong>Set</strong>: unique values only — great for deduplication. <strong>WeakMap/WeakSet</strong>: keys must be objects and are held <em>weakly</em> — won't prevent garbage collection, non-iterable. Ideal for caching metadata without memory leaks.</p>
+<pre><span class="cm">// Set deduplication</span>
+<span class="kw">const</span> unique = [...<span class="kw">new</span> Set([<span class="num">1</span>, <span class="num">2</span>, <span class="num">2</span>, <span class="num">3</span>])];  <span class="cm">// [1,2,3]</span>
+
+<span class="cm">// Map with object keys</span>
+<span class="kw">const</span> cache = <span class="kw">new</span> Map();
+<span class="kw">const</span> domEl = document.<span class="fn">querySelector</span>(<span class="str">"#app"</span>);
+cache.<span class="fn">set</span>(domEl, { clicks: <span class="num">0</span> });
+
+<span class="cm">// WeakMap — metadata that doesn't prevent GC</span>
+<span class="kw">const</span> meta = <span class="kw">new</span> WeakMap();
+<span class="kw">function</span> <span class="fn">trackObject</span>(obj) {
+  meta.<span class="fn">set</span>(obj, { created: Date.<span class="fn">now</span>() });
+}
+<span class="cm">// When obj is GC'd, the metadata entry is automatically removed</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q19 -->
+    <div class="qa-card" data-q="Deep clone vs shallow clone">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q19</span>
+        <span class="q-text">What is the difference between deep clone and shallow clone? How do you deep clone?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="kw">const</span> obj = { a: <span class="num">1</span>, nested: { b: <span class="num">2</span> } };
+
+<span class="cm">// Shallow clone — nested is still shared reference</span>
+<span class="kw">const</span> shallow = { ...obj };
+shallow.nested.b = <span class="num">99</span>;
+<span class="fn">console</span>.log(obj.nested.b); <span class="cm">// 99 (mutated!)</span>
+
+<span class="cm">// Deep clone options</span>
+<span class="cm">// 1. structuredClone (modern, handles Date/Map/Set)</span>
+<span class="kw">const</span> deep1 = structuredClone(obj);
+
+<span class="cm">// 2. JSON round-trip (simple, but loses functions/undefined/Date)</span>
+<span class="kw">const</span> deep2 = JSON.<span class="fn">parse</span>(JSON.<span class="fn">stringify</span>(obj));
+
+<span class="cm">// 3. Recursive implementation</span>
+<span class="kw">function</span> <span class="fn">deepClone</span>(val) {
+  <span class="kw">if</span> (val === <span class="kw">null</span> || <span class="kw">typeof</span> val !== <span class="str">"object"</span>) <span class="kw">return</span> val;
+  <span class="kw">if</span> (Array.<span class="fn">isArray</span>(val)) <span class="kw">return</span> val.<span class="fn">map</span>(<span class="fn">deepClone</span>);
+  <span class="kw">return</span> Object.<span class="fn">fromEntries</span>(
+    Object.<span class="fn">entries</span>(val).<span class="fn">map</span>(([k, v]) => [k, <span class="fn">deepClone</span>(v)])
+  );
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q20 -->
+    <div class="qa-card" data-q="Proxy and Reflect">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">Q20</span>
+        <span class="q-text">What are <code>Proxy</code> and <code>Reflect</code>? Give a real-world use case.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><code>Proxy</code> intercepts object operations (get, set, delete, etc.). <code>Reflect</code> provides default implementations for those operations. Used in reactive systems (Vue 3's reactivity), validation, logging.</p>
+<pre><span class="cm">// Validation proxy</span>
+<span class="kw">function</span> <span class="fn">createValidator</span>(target, rules) {
+  <span class="kw">return new</span> Proxy(target, {
+    <span class="fn">set</span>(obj, prop, value) {
+      <span class="kw">if</span> (rules[prop] && !rules[prop](value)) {
+        <span class="kw">throw new</span> TypeError(<span class="str">`Invalid value for ${prop}`</span>);
+      }
+      <span class="kw">return</span> Reflect.<span class="fn">set</span>(obj, prop, value);
+    }
+  });
+}
+
+<span class="kw">const</span> user = <span class="fn">createValidator</span>({}, {
+  age: v => <span class="kw">typeof</span> v === <span class="str">"number"</span> && v >= <span class="num">0</span>
+});
+user.age = <span class="num">25</span>;   <span class="cm">// ✓</span>
+<span class="cm">// user.age = -1;  // TypeError</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║           REACT              ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+
+  <div class="section" id="react-basics">
+    <div class="section-heading">
+      <div class="section-stripe stripe-react"></div>
+      <h2>React — Fundamentals</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('react-basics')">⊕ Expand all</button>
+
+    <!-- R1 -->
+    <div class="qa-card" data-q="What is the Virtual DOM?">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">R1</span>
+        <span class="q-text">What is the Virtual DOM and how does React's reconciliation algorithm work?</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>The <strong>Virtual DOM</strong> is a lightweight in-memory representation of the real DOM. When state changes, React:</p>
+          <ol>
+            <li>Creates a new Virtual DOM tree</li>
+            <li><strong>Diffs</strong> it against the previous tree (reconciliation)</li>
+            <li>Computes the minimal set of real DOM operations needed (the "diff")</li>
+            <li>Applies those changes in a single batch (<strong>commit phase</strong>)</li>
+          </ol>
+          <p>React's heuristic diff algorithm is O(n) — it assumes elements of different types produce different trees, and uses <code>key</code> props to match list items across renders.</p>
+          <div class="tip"><strong>Key insight:</strong> Stable <code>key</code> values on list items prevent unnecessary unmounting/remounting. Never use array index as key when the list can reorder.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- R2 -->
+    <div class="qa-card" data-q="Controlled vs uncontrolled components">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">R2</span>
+        <span class="q-text">What is the difference between controlled and uncontrolled components?</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>In a <strong>controlled component</strong>, form data is handled by React state — the component is the "single source of truth". In an <strong>uncontrolled component</strong>, data is handled by the DOM itself, accessed via <code>ref</code>.</p>
+<pre><span class="cm">// Controlled — React owns the value</span>
+<span class="kw">function</span> <span class="klass">ControlledInput</span>() {
+  <span class="kw">const</span> [value, setValue] = useState(<span class="str">""</span>);
+  <span class="kw">return</span> &lt;input value={value} onChange={e => <span class="fn">setValue</span>(e.target.value)} /&gt;;
+}
+
+<span class="cm">// Uncontrolled — DOM owns the value</span>
+<span class="kw">function</span> <span class="klass">UncontrolledInput</span>() {
+  <span class="kw">const</span> inputRef = <span class="fn">useRef</span>(<span class="kw">null</span>);
+  <span class="kw">const</span> <span class="fn">handleSubmit</span> = () => <span class="fn">console</span>.log(inputRef.current.value);
+  <span class="kw">return</span> &lt;input ref={inputRef} defaultValue=<span class="str">"hello"</span> /&gt;;
+}</pre>
+          <p>Prefer controlled components — they're easier to validate and test. Use uncontrolled for file inputs or when integrating with non-React libraries.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- R3 -->
+    <div class="qa-card" data-q="Props vs State">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">R3</span>
+        <span class="q-text">What is the difference between props and state? When should you lift state up?</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><strong>Props</strong> are inputs passed from parent to child — read-only for the child. <strong>State</strong> is data owned and managed by a component — mutable via <code>setState</code>/setter.</p>
+          <p><strong>Lift state up</strong> when multiple sibling components need to share/react to the same data — move the state to their closest common ancestor and pass it down via props.</p>
+<pre><span class="cm">// Before: each component has its own count</span>
+<span class="cm">// After: parent owns the shared count</span>
+<span class="kw">function</span> <span class="klass">Parent</span>() {
+  <span class="kw">const</span> [count, setCount] = <span class="fn">useState</span>(<span class="num">0</span>);
+  <span class="kw">return</span> (
+    &lt;&gt;
+      &lt;<span class="klass">Display</span> count={count} /&gt;
+      &lt;<span class="klass">Controls</span> onIncrement={() => <span class="fn">setCount</span>(c => c + <span class="num">1</span>)} /&gt;
+    &lt;/&gt;
+  );
+}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- React Hooks -->
+  <div class="section" id="react-hooks">
+    <div class="section-heading">
+      <div class="section-stripe stripe-react"></div>
+      <h2>React — Hooks</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('react-hooks')">⊕ Expand all</button>
+
+    <!-- R4 -->
+    <div class="qa-card" data-q="useEffect hook deep dive">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">R4</span>
+        <span class="q-text">Explain <code>useEffect</code> — dependencies, cleanup, and common pitfalls.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Runs after every render</span>
+<span class="fn">useEffect</span>(() => { ... });
+
+<span class="cm">// Runs once on mount (empty dep array)</span>
+<span class="fn">useEffect</span>(() => { ... }, []);
+
+<span class="cm">// Runs when `userId` changes</span>
+<span class="fn">useEffect</span>(() => {
+  <span class="kw">let</span> cancelled = <span class="kw">false</span>;
+  <span class="fn">fetchUser</span>(userId).<span class="fn">then</span>(data => {
+    <span class="kw">if</span> (!cancelled) <span class="fn">setUser</span>(data);
+  });
+  <span class="kw">return</span> () => { cancelled = <span class="kw">true</span>; }; <span class="cm">// cleanup — cancel stale request</span>
+}, [userId]);
+
+<span class="cm">// Event listener with cleanup</span>
+<span class="fn">useEffect</span>(() => {
+  <span class="kw">const</span> <span class="fn">handler</span> = (e) => <span class="fn">setKey</span>(e.key);
+  window.<span class="fn">addEventListener</span>(<span class="str">"keydown"</span>, handler);
+  <span class="kw">return</span> () => window.<span class="fn">removeEventListener</span>(<span class="str">"keydown"</span>, handler);
+}, []);</pre>
+          <div class="tip"><strong>Common pitfalls:</strong> Missing dependencies (stale closures), objects/arrays in deps triggering infinite loops, forgetting cleanup for subscriptions/timers.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- R5 -->
+    <div class="qa-card" data-q="useCallback vs useMemo">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">R5</span>
+        <span class="q-text">When should you use <code>useCallback</code> vs <code>useMemo</code>?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><strong>useMemo</strong> memoizes a <em>computed value</em>. <strong>useCallback</strong> memoizes a <em>function reference</em>. Both only recompute/recreate when dependencies change. Use them when the cost of recreation is high or when passing to memoized children.</p>
+<pre><span class="kw">function</span> <span class="klass">ProductList</span>({ products, minPrice }) {
+  <span class="cm">// useMemo — expensive filtering</span>
+  <span class="kw">const</span> filtered = <span class="fn">useMemo</span>(
+    () => products.<span class="fn">filter</span>(p => p.price >= minPrice),
+    [products, minPrice]
+  );
+
+  <span class="cm">// useCallback — stable ref for child component</span>
+  <span class="kw">const</span> handleBuy = <span class="fn">useCallback</span>((productId) => {
+    <span class="fn">addToCart</span>(productId);
+  }, []);  <span class="cm">// recreate only if addToCart changes</span>
+
+  <span class="kw">return</span> filtered.<span class="fn">map</span>(p =>
+    &lt;<span class="klass">ProductCard</span> key={p.id} product={p} onBuy={handleBuy} /&gt;
+  );
+}</pre>
+          <div class="tip"><strong>Don't over-optimize.</strong> useMemo/useCallback add overhead. Profile first with React DevTools before adding them everywhere.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- R6 -->
+    <div class="qa-card" data-q="useRef uses beyond DOM">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">R6</span>
+        <span class="q-text">What are the different uses of <code>useRef</code> beyond DOM access?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// 1. DOM access</span>
+<span class="kw">const</span> inputRef = <span class="fn">useRef</span>(<span class="kw">null</span>);
+&lt;input ref={inputRef} /&gt;
+inputRef.current.<span class="fn">focus</span>();
+
+<span class="cm">// 2. Persist mutable value across renders (no re-render on change)</span>
+<span class="kw">const</span> renderCount = <span class="fn">useRef</span>(<span class="num">0</span>);
+<span class="fn">useEffect</span>(() => { renderCount.current++; });
+
+<span class="cm">// 3. Store previous value</span>
+<span class="kw">function</span> <span class="fn">usePrevious</span>(value) {
+  <span class="kw">const</span> ref = <span class="fn">useRef</span>();
+  <span class="fn">useEffect</span>(() => { ref.current = value; }, [value]);
+  <span class="kw">return</span> ref.current;
+}
+
+<span class="cm">// 4. Store timer/subscription IDs</span>
+<span class="kw">const</span> timerRef = <span class="fn">useRef</span>(<span class="kw">null</span>);
+timerRef.current = <span class="fn">setInterval</span>(...);
+<span class="kw">return</span> () => <span class="fn">clearInterval</span>(timerRef.current);</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- R7 Custom Hook -->
+    <div class="qa-card" data-q="Custom hooks in React">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">R7</span>
+        <span class="q-text">What are custom hooks? Build a <code>useFetch</code> hook from scratch.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Custom hooks are functions starting with <code>use</code> that extract and share stateful logic between components without changing component hierarchy.</p>
+<pre><span class="kw">function</span> <span class="fn">useFetch</span>(url) {
+  <span class="kw">const</span> [state, setState] = <span class="fn">useState</span>({
+    data: <span class="kw">null</span>, loading: <span class="kw">true</span>, error: <span class="kw">null</span>
+  });
+
+  <span class="fn">useEffect</span>(() => {
+    <span class="kw">let</span> cancelled = <span class="kw">false</span>;
+    setState({ data: <span class="kw">null</span>, loading: <span class="kw">true</span>, error: <span class="kw">null</span> });
+
+    <span class="fn">fetch</span>(url)
+      .<span class="fn">then</span>(r => r.<span class="fn">json</span>())
+      .<span class="fn">then</span>(data => { <span class="kw">if</span> (!cancelled) <span class="fn">setState</span>({ data, loading: <span class="kw">false</span>, error: <span class="kw">null</span> }); })
+      .<span class="fn">catch</span>(err  => { <span class="kw">if</span> (!cancelled) <span class="fn">setState</span>({ data: <span class="kw">null</span>, loading: <span class="kw">false</span>, error: err }); });
+
+    <span class="kw">return</span> () => { cancelled = <span class="kw">true</span>; };
+  }, [url]);
+
+  <span class="kw">return</span> state;
+}
+
+<span class="cm">// Usage</span>
+<span class="kw">const</span> { data, loading, error } = <span class="fn">useFetch</span>(<span class="str">"/api/users"</span>);</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- React State -->
+  <div class="section" id="react-state">
+    <div class="section-heading">
+      <div class="section-stripe stripe-react"></div>
+      <h2>React — State Management</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('react-state')">⊕ Expand all</button>
+
+    <!-- R8 -->
+    <div class="qa-card" data-q="useReducer vs useState">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">R8</span>
+        <span class="q-text">When would you use <code>useReducer</code> instead of <code>useState</code>?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Use <code>useReducer</code> when: state is an object with multiple sub-values, next state depends on current state in complex ways, or you have many related state transitions.</p>
+<pre><span class="kw">const</span> initialState = { count: <span class="num">0</span>, step: <span class="num">1</span>, history: [] };
+
+<span class="kw">function</span> <span class="fn">reducer</span>(state, action) {
+  <span class="kw">switch</span> (action.type) {
+    <span class="kw">case</span> <span class="str">"INCREMENT"</span>:
+      <span class="kw">return</span> { ...state, count: state.count + state.step,
+               history: [...state.history, state.count] };
+    <span class="kw">case</span> <span class="str">"SET_STEP"</span>:
+      <span class="kw">return</span> { ...state, step: action.payload };
+    <span class="kw">case</span> <span class="str">"RESET"</span>:
+      <span class="kw">return</span> initialState;
+    <span class="kw">default</span>:
+      <span class="kw">return</span> state;
+  }
+}
+
+<span class="kw">function</span> <span class="klass">Counter</span>() {
+  <span class="kw">const</span> [state, dispatch] = <span class="fn">useReducer</span>(reducer, initialState);
+  <span class="kw">return</span> (
+    &lt;button onClick={() => <span class="fn">dispatch</span>({ type: <span class="str">"INCREMENT"</span> })}&gt;
+      Count: {state.count}
+    &lt;/button&gt;
+  );
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- R9 -->
+    <div class="qa-card" data-q="Context API vs Redux">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">R9</span>
+        <span class="q-text">Context API vs Redux — when would you choose each?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><strong>Context API</strong> is built into React, zero setup, great for low-frequency updates (theme, auth, locale). Its downside: all consumers re-render when context value changes — can cause performance issues with frequently-changing state.</p>
+          <p><strong>Redux</strong> (or Zustand/Jotai) shines when: you have complex state logic, need time-travel debugging, have high-frequency updates, or need fine-grained subscriptions to prevent unnecessary re-renders.</p>
+<pre><span class="cm">// Context — simple theme toggle</span>
+<span class="kw">const</span> ThemeCtx = createContext(<span class="str">"light"</span>);
+
+<span class="kw">function</span> <span class="klass">App</span>() {
+  <span class="kw">const</span> [theme, setTheme] = <span class="fn">useState</span>(<span class="str">"light"</span>);
+  <span class="kw">return</span> (
+    &lt;ThemeCtx.Provider value={{ theme, setTheme }}&gt;
+      &lt;<span class="klass">Children</span> /&gt;
+    &lt;/ThemeCtx.Provider&gt;
+  );
+}
+
+<span class="kw">function</span> <span class="klass">Button</span>() {
+  <span class="kw">const</span> { theme, setTheme } = <span class="fn">useContext</span>(ThemeCtx);
+  <span class="kw">return</span> &lt;button onClick={() => <span class="fn">setTheme</span>(t => t === <span class="str">"light"</span> ? <span class="str">"dark"</span> : <span class="str">"light"</span>)}&gt;Toggle&lt;/button&gt;;
+}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- React Performance -->
+  <div class="section" id="react-perf">
+    <div class="section-heading">
+      <div class="section-stripe stripe-react"></div>
+      <h2>React — Performance</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('react-perf')">⊕ Expand all</button>
+
+    <!-- R10 -->
+    <div class="qa-card" data-q="React.memo and when to use it">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">R10</span>
+        <span class="q-text">What is <code>React.memo</code>? When does it help and when does it not?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><code>React.memo</code> is a HOC that prevents re-rendering if props haven't changed (shallow comparison). It helps when a child is expensive to render and its parent re-renders frequently.</p>
+<pre><span class="cm">// Without memo — re-renders every time Parent renders</span>
+<span class="kw">const</span> <span class="klass">ExpensiveChild</span> = ({ data }) => &lt;<span class="fn">HeavyChart</span> data={data} /&gt;;
+
+<span class="cm">// With memo — only re-renders when `data` changes</span>
+<span class="kw">const</span> <span class="klass">ExpensiveChild</span> = React.<span class="fn">memo</span>(({ data }) => &lt;<span class="fn">HeavyChart</span> data={data} /&gt;);
+
+<span class="cm">// Custom comparison (for deep equality)</span>
+<span class="kw">const</span> <span class="klass">MemoComp</span> = React.<span class="fn">memo</span>(Comp, (prevProps, nextProps) => {
+  <span class="kw">return</span> prevProps.items.<span class="fn">length</span> === nextProps.items.length;
+});</pre>
+          <div class="tip"><strong>Gotcha:</strong> React.memo does a shallow comparison. Objects/arrays created inline (e.g. <code>style={{color:'red'}}</code>) are always new references — wrap the parent's callbacks in <code>useCallback</code> and objects in <code>useMemo</code>.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- R11 -->
+    <div class="qa-card" data-q="Code splitting and lazy loading in React">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">R11</span>
+        <span class="q-text">How do you implement code splitting and lazy loading in React?</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="kw">import</span> { lazy, Suspense } from <span class="str">"react"</span>;
+
+<span class="cm">// Dynamic import — bundler creates separate chunk</span>
+<span class="kw">const</span> <span class="klass">Dashboard</span> = <span class="fn">lazy</span>(() => <span class="kw">import</span>(<span class="str">"./Dashboard"</span>));
+<span class="kw">const</span> <span class="klass">Settings</span>  = <span class="fn">lazy</span>(() => <span class="kw">import</span>(<span class="str">"./Settings"</span>));
+
+<span class="kw">function</span> <span class="klass">App</span>() {
+  <span class="kw">return</span> (
+    &lt;Suspense fallback={&lt;Spinner /&gt;}&gt;
+      &lt;Routes&gt;
+        &lt;Route path=<span class="str">"/dashboard"</span> element={&lt;<span class="klass">Dashboard</span> /&gt;} /&gt;
+        &lt;Route path=<span class="str">"/settings"</span>  element={&lt;<span class="klass">Settings</span>  /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/Suspense&gt;
+  );
+}
+
+<span class="cm">// Preload on hover — anticipate navigation</span>
+<span class="kw">const</span> preloadDashboard = () => <span class="kw">import</span>(<span class="str">"./Dashboard"</span>);
+&lt;Link onMouseEnter={preloadDashboard} to=<span class="str">"/dashboard"</span>&gt;Dashboard&lt;/Link&gt;</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- React Patterns -->
+  <div class="section" id="react-patterns">
+    <div class="section-heading">
+      <div class="section-stripe stripe-react"></div>
+      <h2>React — Patterns</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('react-patterns')">⊕ Expand all</button>
+
+    <!-- R12 -->
+    <div class="qa-card" data-q="Compound component pattern">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">R12</span>
+        <span class="q-text">Explain the Compound Component pattern with an example.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Compound components share implicit state via context, giving consumers flexible composition without exposing internal details (think <code>&lt;select&gt;/&lt;option&gt;</code>).</p>
+<pre><span class="kw">const</span> TabsCtx = createContext();
+
+<span class="kw">function</span> <span class="klass">Tabs</span>({ children, defaultTab }) {
+  <span class="kw">const</span> [active, setActive] = <span class="fn">useState</span>(defaultTab);
+  <span class="kw">return</span> (
+    &lt;TabsCtx.Provider value={{ active, setActive }}&gt;
+      {children}
+    &lt;/TabsCtx.Provider&gt;
+  );
+}
+
+<span class="klass">Tabs</span>.<span class="klass">Tab</span> = ({ id, children }) => {
+  <span class="kw">const</span> { active, setActive } = <span class="fn">useContext</span>(TabsCtx);
+  <span class="kw">return</span> &lt;button onClick={() => <span class="fn">setActive</span>(id)} className={active === id ? <span class="str">"active"</span> : <span class="str">""</span>}&gt;{children}&lt;/button&gt;;
+};
+
+<span class="klass">Tabs</span>.<span class="klass">Panel</span> = ({ id, children }) => {
+  <span class="kw">const</span> { active } = <span class="fn">useContext</span>(TabsCtx);
+  <span class="kw">return</span> active === id ? &lt;div&gt;{children}&lt;/div&gt; : <span class="kw">null</span>;
+};
+
+<span class="cm">// Usage</span>
+&lt;<span class="klass">Tabs</span> defaultTab=<span class="str">"a"</span>&gt;
+  &lt;<span class="klass">Tabs.Tab</span> id=<span class="str">"a"</span>&gt;Tab A&lt;/<span class="klass">Tabs.Tab</span>&gt;
+  &lt;<span class="klass">Tabs.Panel</span> id=<span class="str">"a"</span>&gt;Content A&lt;/<span class="klass">Tabs.Panel</span>&gt;
+&lt;/<span class="klass">Tabs</span>&gt;</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- R13 -->
+    <div class="qa-card" data-q="Render props pattern">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">R13</span>
+        <span class="q-text">What is the render props pattern? How has it been superseded by hooks?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Render props is a technique where a component receives a function as a prop and calls it with its state, allowing the consumer to control rendering.</p>
+<pre><span class="cm">// Render prop version</span>
+<span class="kw">function</span> <span class="klass">MouseTracker</span>({ render }) {
+  <span class="kw">const</span> [pos, setPos] = <span class="fn">useState</span>({ x: <span class="num">0</span>, y: <span class="num">0</span> });
+  <span class="kw">return</span> &lt;div onMouseMove={e => <span class="fn">setPos</span>({ x: e.clientX, y: e.clientY })}&gt;
+    {<span class="fn">render</span>(pos)}
+  &lt;/div&gt;;
+}
+<span class="cm">// Usage: &lt;MouseTracker render={pos => &lt;p&gt;{pos.x},{pos.y}&lt;/p&gt;} /&gt;</span>
+
+<span class="cm">// Modern hook version — same logic, simpler API</span>
+<span class="kw">function</span> <span class="fn">useMouse</span>() {
+  <span class="kw">const</span> [pos, setPos] = <span class="fn">useState</span>({ x: <span class="num">0</span>, y: <span class="num">0</span> });
+  <span class="fn">useEffect</span>(() => {
+    <span class="kw">const</span> <span class="fn">h</span> = e => <span class="fn">setPos</span>({ x: e.clientX, y: e.clientY });
+    window.<span class="fn">addEventListener</span>(<span class="str">"mousemove"</span>, h);
+    <span class="kw">return</span> () => window.<span class="fn">removeEventListener</span>(<span class="str">"mousemove"</span>, h);
+  }, []);
+  <span class="kw">return</span> pos;
+}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- React Advanced -->
+  <div class="section" id="react-advanced">
+    <div class="section-heading">
+      <div class="section-stripe stripe-react"></div>
+      <h2>React — Advanced</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('react-advanced')">⊕ Expand all</button>
+
+    <!-- R14 -->
+    <div class="qa-card" data-q="React Concurrent Mode and Suspense">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">R14</span>
+        <span class="q-text">What is React Concurrent Mode? Explain <code>useTransition</code> and <code>useDeferredValue</code>.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Concurrent Mode lets React work on multiple versions of the UI simultaneously and interrupt, pause, or abandon renders. It enables prioritizing urgent updates (typing) over non-urgent ones (search results).</p>
+<pre><span class="cm">// useTransition — mark update as non-urgent</span>
+<span class="kw">function</span> <span class="klass">SearchPage</span>() {
+  <span class="kw">const</span> [query, setQuery] = <span class="fn">useState</span>(<span class="str">""</span>);
+  <span class="kw">const</span> [results, setResults] = <span class="fn">useState</span>([]);
+  <span class="kw">const</span> [isPending, startTransition] = <span class="fn">useTransition</span>();
+
+  <span class="kw">const</span> <span class="fn">handleChange</span> = (e) => {
+    setQuery(e.target.value);        <span class="cm">// urgent — instant</span>
+    <span class="fn">startTransition</span>(() => {
+      <span class="fn">setResults</span>(<span class="fn">search</span>(e.target.value)); <span class="cm">// deferred — can be interrupted</span>
+    });
+  };
+  <span class="kw">return</span> &lt;input value={query} onChange={handleChange} /&gt;;
+}
+
+<span class="cm">// useDeferredValue — defer a value derived from props</span>
+<span class="kw">function</span> <span class="klass">List</span>({ query }) {
+  <span class="kw">const</span> deferred = <span class="fn">useDeferredValue</span>(query);
+  <span class="cm">// deferred lags behind query; shows stale content while new content loads</span>
+  <span class="kw">return</span> &lt;<span class="klass">Results</span> query={deferred} /&gt;;
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- R15 Error Boundary -->
+    <div class="qa-card" data-q="Error boundaries in React">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">R15</span>
+        <span class="q-text">What are Error Boundaries? Implement one.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Error boundaries catch JavaScript errors anywhere in their child component tree, log them, and display a fallback UI. They must be class components (as of React 18).</p>
+<pre><span class="kw">class</span> <span class="klass">ErrorBoundary</span> <span class="kw">extends</span> React.<span class="klass">Component</span> {
+  state = { hasError: <span class="kw">false</span>, error: <span class="kw">null</span> };
+
+  <span class="kw">static</span> <span class="fn">getDerivedStateFromError</span>(error) {
+    <span class="kw">return</span> { hasError: <span class="kw">true</span>, error };
+  }
+
+  <span class="fn">componentDidCatch</span>(error, info) {
+    <span class="fn">logErrorToService</span>(error, info.componentStack);
+  }
+
+  <span class="fn">render</span>() {
+    <span class="kw">if</span> (<span class="kw">this</span>.state.hasError) {
+      <span class="kw">return</span> &lt;h2&gt;Something went wrong. &lt;button onClick={() => <span class="kw">this</span>.<span class="fn">setState</span>({ hasError: <span class="kw">false</span> })}&gt;Retry&lt;/button&gt;&lt;/h2&gt;;
+    }
+    <span class="kw">return this</span>.props.children;
+  }
+}
+
+<span class="cm">// Usage</span>
+&lt;<span class="klass">ErrorBoundary</span>&gt;&lt;<span class="klass">MyWidget</span> /&gt;&lt;/<span class="klass">ErrorBoundary</span>&gt;</pre>
+          <div class="tip"><strong>Note:</strong> Error boundaries do NOT catch async errors, event handler errors, or server-side rendering errors — use try/catch for those.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║           NODE.JS            ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+
+  <div class="section" id="node-basics">
+    <div class="section-heading">
+      <div class="section-stripe stripe-node"></div>
+      <h2>Node.js — Core Concepts</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('node-basics')">⊕ Expand all</button>
+
+    <!-- N1 -->
+    <div class="qa-card" data-q="Node.js event-driven non-blocking I/O">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">N1</span>
+        <span class="q-text">How does Node.js achieve non-blocking I/O despite being single-threaded?</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Node.js uses the <strong>libuv</strong> library which provides an event loop and a <strong>thread pool</strong> (default 4 threads). For I/O operations (file, network, DNS), Node offloads work to the OS or thread pool and registers a callback. The main thread is free to continue processing. When the I/O completes, the callback is pushed to the event queue.</p>
+          <p>This model excels at I/O-bound workloads but is unsuitable for CPU-intensive tasks without <strong>worker threads</strong>, since heavy computation blocks the event loop.</p>
+<pre><span class="cm">// Non-blocking — callback fires when file is read</span>
+<span class="kw">const</span> fs = <span class="fn">require</span>(<span class="str">"fs"</span>);
+
+fs.<span class="fn">readFile</span>(<span class="str">"big.txt"</span>, <span class="str">"utf8"</span>, (err, data) => {
+  <span class="kw">if</span> (err) <span class="kw">throw</span> err;
+  <span class="fn">console</span>.log(data.<span class="fn">slice</span>(<span class="num">0</span>, <span class="num">100</span>));
+});
+
+<span class="fn">console</span>.log(<span class="str">"This runs BEFORE the file is done reading"</span>);</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- N2 -->
+    <div class="qa-card" data-q="require vs import in Node.js">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">N2</span>
+        <span class="q-text">What is the difference between CommonJS <code>require</code> and ES Modules <code>import</code>?</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// CommonJS (CJS) — synchronous, dynamic, Node default</span>
+<span class="kw">const</span> fs = <span class="fn">require</span>(<span class="str">"fs"</span>);
+<span class="kw">const</span> utils = <span class="fn">require</span>(<span class="str">"./utils"</span>);
+module.exports = { myFn };
+
+<span class="cm">// ES Modules (ESM) — static, async, tree-shakeable</span>
+<span class="kw">import</span> fs <span class="kw">from</span> <span class="str">"node:fs"</span>;
+<span class="kw">import</span> { helper } <span class="kw">from</span> <span class="str">"./utils.js"</span>;
+<span class="kw">export</span> { myFn };
+
+<span class="cm">// Dynamic import (works in both ESM and script contexts)</span>
+<span class="kw">const</span> module = <span class="kw">await</span> <span class="kw">import</span>(<span class="str">"./heavy.js"</span>);</pre>
+          <p><strong>Key differences:</strong> CJS loads synchronously and can be conditional. ESM is parsed statically at compile time, enabling tree-shaking and top-level <code>await</code>. Use ESM for new projects (<code>"type":"module"</code> in package.json).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- N3 -->
+    <div class="qa-card" data-q="process.nextTick vs setImmediate vs setTimeout">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">N3</span>
+        <span class="q-text">Explain <code>process.nextTick</code> vs <code>setImmediate</code> vs <code>setTimeout(fn, 0)</code>.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="fn">setImmediate</span>(() => <span class="fn">console</span>.log(<span class="str">"setImmediate"</span>));
+<span class="fn">setTimeout</span>(() => <span class="fn">console</span>.log(<span class="str">"setTimeout 0"</span>), <span class="num">0</span>);
+process.<span class="fn">nextTick</span>(() => <span class="fn">console</span>.log(<span class="str">"nextTick"</span>));
+Promise.<span class="fn">resolve</span>().<span class="fn">then</span>(() => <span class="fn">console</span>.log(<span class="str">"Promise"</span>));
+
+<span class="cm">// Output: nextTick → Promise → setTimeout/setImmediate*</span>
+<span class="cm">// (* setTimeout vs setImmediate order can vary)</span></pre>
+          <ul>
+            <li><strong>process.nextTick</strong>: fires before any I/O event, before the event loop continues. Use for deferring callbacks after the current operation completes.</li>
+            <li><strong>Promise microtasks</strong>: drain after nextTick queue, before I/O.</li>
+            <li><strong>setImmediate</strong>: fires in the check phase of the event loop, after I/O callbacks.</li>
+            <li><strong>setTimeout(fn, 0)</strong>: fires in the timers phase, minimum ~1ms delay.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Node Async -->
+  <div class="section" id="node-async">
+    <div class="section-heading">
+      <div class="section-stripe stripe-node"></div>
+      <h2>Node.js — Async Patterns</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('node-async')">⊕ Expand all</button>
+
+    <!-- N4 -->
+    <div class="qa-card" data-q="Error handling in Node.js async code">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">N4</span>
+        <span class="q-text">What are the best practices for error handling in Node.js?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// 1. Error-first callbacks (legacy)</span>
+fs.<span class="fn">readFile</span>(path, (err, data) => {
+  <span class="kw">if</span> (err) <span class="kw">return</span> <span class="fn">handleError</span>(err); <span class="cm">// always check err first</span>
+  <span class="fn">process</span>(data);
+});
+
+<span class="cm">// 2. Try/catch with async/await</span>
+<span class="kw">async function</span> <span class="fn">readConfig</span>() {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> data = <span class="kw">await</span> fs.promises.<span class="fn">readFile</span>(<span class="str">"config.json"</span>, <span class="str">"utf8"</span>);
+    <span class="kw">return</span> JSON.<span class="fn">parse</span>(data);
+  } <span class="kw">catch</span> (err) {
+    <span class="kw">if</span> (err.code === <span class="str">"ENOENT"</span>) <span class="kw">return</span> {};   <span class="cm">// file not found — use default</span>
+    <span class="kw">throw</span> err;                                  <span class="cm">// rethrow unexpected errors</span>
+  }
+}
+
+<span class="cm">// 3. Domain-level uncaught exception handling</span>
+process.<span class="fn">on</span>(<span class="str">"uncaughtException"</span>, (err) => {
+  logger.<span class="fn">error</span>(err);
+  process.<span class="fn">exit</span>(<span class="num">1</span>);  <span class="cm">// always exit — state is unknown</span>
+});
+
+process.<span class="fn">on</span>(<span class="str">"unhandledRejection"</span>, (reason, promise) => {
+  logger.<span class="fn">error</span>(<span class="str">"Unhandled rejection"</span>, reason);
+});</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- N5 -->
+    <div class="qa-card" data-q="Worker threads in Node.js">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">N5</span>
+        <span class="q-text">When would you use Worker Threads in Node.js?</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Worker Threads enable CPU-bound parallelism without blocking the event loop. Use them for: image/video processing, crypto operations, parsing large datasets, ML inference.</p>
+<pre><span class="cm">// worker.js</span>
+<span class="kw">const</span> { workerData, parentPort } = <span class="fn">require</span>(<span class="str">"worker_threads"</span>);
+<span class="kw">const</span> result = <span class="fn">expensiveComputation</span>(workerData);
+parentPort.<span class="fn">postMessage</span>(result);
+
+<span class="cm">// main.js</span>
+<span class="kw">const</span> { Worker } = <span class="fn">require</span>(<span class="str">"worker_threads"</span>);
+
+<span class="kw">function</span> <span class="fn">runInWorker</span>(data) {
+  <span class="kw">return new</span> Promise((resolve, reject) => {
+    <span class="kw">const</span> worker = <span class="kw">new</span> <span class="klass">Worker</span>(<span class="str">"./worker.js"</span>, { workerData: data });
+    worker.<span class="fn">on</span>(<span class="str">"message"</span>, resolve);
+    worker.<span class="fn">on</span>(<span class="str">"error"</span>,   reject);
+    worker.<span class="fn">on</span>(<span class="str">"exit"</span>,    code => {
+      <span class="kw">if</span> (code !== <span class="num">0</span>) <span class="fn">reject</span>(<span class="kw">new</span> Error(<span class="str">`Worker exited: ${code}`</span>));
+    });
+  });
+}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Node Streams -->
+  <div class="section" id="node-streams">
+    <div class="section-heading">
+      <div class="section-stripe stripe-node"></div>
+      <h2>Node.js — Streams &amp; Buffers</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('node-streams')">⊕ Expand all</button>
+
+    <!-- N6 -->
+    <div class="qa-card" data-q="Node.js streams">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">N6</span>
+        <span class="q-text">What are Node.js streams? Why use them for large files?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Streams are abstractions for handling sequential data in chunks. Instead of loading an entire file into memory, you process data as it flows. Four types: <strong>Readable</strong>, <strong>Writable</strong>, <strong>Duplex</strong>, <strong>Transform</strong>.</p>
+<pre><span class="kw">const</span> { createReadStream, createWriteStream } = <span class="fn">require</span>(<span class="str">"fs"</span>);
+<span class="kw">const</span> { createGzip } = <span class="fn">require</span>(<span class="str">"zlib"</span>);
+<span class="kw">const</span> { pipeline } = <span class="fn">require</span>(<span class="str">"stream/promises"</span>);
+
+<span class="cm">// Compress a 10GB file using constant ~few MB memory</span>
+<span class="kw">await</span> <span class="fn">pipeline</span>(
+  <span class="fn">createReadStream</span>(<span class="str">"huge.csv"</span>),
+  <span class="fn">createGzip</span>(),
+  <span class="fn">createWriteStream</span>(<span class="str">"huge.csv.gz"</span>)
+);
+
+<span class="cm">// Reading line-by-line with readline</span>
+<span class="kw">import</span> readline <span class="kw">from</span> <span class="str">"readline"</span>;
+<span class="kw">const</span> rl = readline.<span class="fn">createInterface</span>({
+  input: <span class="fn">createReadStream</span>(<span class="str">"data.csv"</span>)
+});
+<span class="kw">for await</span> (<span class="kw">const</span> line <span class="kw">of</span> rl) <span class="fn">processLine</span>(line);</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Node Express -->
+  <div class="section" id="node-express">
+    <div class="section-heading">
+      <div class="section-stripe stripe-node"></div>
+      <h2>Node.js — Express &amp; APIs</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('node-express')">⊕ Expand all</button>
+
+    <!-- N7 -->
+    <div class="qa-card" data-q="Express middleware">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">N7</span>
+        <span class="q-text">What is Express middleware? Build a custom error-handling middleware.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Middleware functions have signature <code>(req, res, next)</code>. They can modify req/res, end the request-response cycle, or call <code>next()</code> to pass control. Error-handling middleware has 4 arguments: <code>(err, req, res, next)</code>.</p>
+<pre><span class="cm">// Auth middleware</span>
+<span class="kw">const</span> <span class="fn">authenticate</span> = (req, res, next) => {
+  <span class="kw">const</span> token = req.headers.authorization?.split(<span class="str">" "</span>)[<span class="num">1</span>];
+  <span class="kw">if</span> (!token) <span class="kw">return</span> res.<span class="fn">status</span>(<span class="num">401</span>).<span class="fn">json</span>({ error: <span class="str">"No token"</span> });
+  <span class="kw">try</span> {
+    req.user = jwt.<span class="fn">verify</span>(token, process.env.JWT_SECRET);
+    <span class="fn">next</span>();
+  } <span class="kw">catch</span> {
+    res.<span class="fn">status</span>(<span class="num">403</span>).<span class="fn">json</span>({ error: <span class="str">"Invalid token"</span> });
+  }
+};
+
+<span class="cm">// Error handler — must be LAST</span>
+<span class="kw">const</span> <span class="fn">errorHandler</span> = (err, req, res, next) => {
+  <span class="kw">const</span> status = err.status || <span class="num">500</span>;
+  res.<span class="fn">status</span>(status).<span class="fn">json</span>({
+    error: err.message || <span class="str">"Internal Server Error"</span>,
+    ...(process.env.NODE_ENV === <span class="str">"development"</span> && { stack: err.stack })
+  });
+};
+
+app.<span class="fn">use</span>(errorHandler); <span class="cm">// register after routes</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- N8 -->
+    <div class="qa-card" data-q="REST API design and HTTP status codes">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">N8</span>
+        <span class="q-text">What makes a good RESTful API? How do you structure routes and choose status codes?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// RESTful routes for a "users" resource</span>
+GET    /users          <span class="cm">// 200 — list all</span>
+POST   /users          <span class="cm">// 201 — create</span>
+GET    /users/:id      <span class="cm">// 200 | 404</span>
+PUT    /users/:id      <span class="cm">// 200 — full replace</span>
+PATCH  /users/:id      <span class="cm">// 200 — partial update</span>
+DELETE /users/:id      <span class="cm">// 204 — no content</span>
+
+<span class="cm">// Common status codes</span>
+<span class="cm">// 200 OK, 201 Created, 204 No Content</span>
+<span class="cm">// 400 Bad Request, 401 Unauthorized, 403 Forbidden</span>
+<span class="cm">// 404 Not Found, 409 Conflict, 422 Unprocessable Entity</span>
+<span class="cm">// 429 Too Many Requests, 500 Internal Server Error</span>
+
+<span class="cm">// Express example</span>
+router.<span class="fn">post</span>(<span class="str">"/users"</span>, <span class="kw">async</span> (req, res, next) => {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> user = <span class="kw">await</span> User.<span class="fn">create</span>(req.body);
+    res.<span class="fn">status</span>(<span class="num">201</span>).<span class="fn">json</span>(user);
+  } <span class="kw">catch</span> (err) {
+    <span class="kw">if</span> (err.code === <span class="str">"DUPLICATE"</span>) <span class="kw">return</span> res.<span class="fn">status</span>(<span class="num">409</span>).<span class="fn">json</span>({ error: <span class="str">"Email taken"</span> });
+    <span class="fn">next</span>(err); <span class="cm">// pass to error middleware</span>
+  }
+});</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Node Advanced -->
+  <div class="section" id="node-advanced">
+    <div class="section-heading">
+      <div class="section-stripe stripe-node"></div>
+      <h2>Node.js — Advanced</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('node-advanced')">⊕ Expand all</button>
+
+    <!-- N9 -->
+    <div class="qa-card" data-q="Clustering and scaling Node.js">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">N9</span>
+        <span class="q-text">How do you scale a Node.js application? Explain clustering.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Node.js runs on a single core by default. The <strong>cluster</strong> module spawns worker processes that share a server port, using all CPU cores. In production, tools like <strong>PM2</strong> handle clustering automatically.</p>
+<pre><span class="kw">const</span> cluster = <span class="fn">require</span>(<span class="str">"cluster"</span>);
+<span class="kw">const</span> os = <span class="fn">require</span>(<span class="str">"os"</span>);
+
+<span class="kw">if</span> (cluster.<span class="fn">isPrimary</span>) {
+  <span class="kw">const</span> numCPUs = os.<span class="fn">cpus</span>().length;
+  <span class="fn">console</span>.log(<span class="str">`Master: forking ${numCPUs} workers`</span>);
+
+  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; numCPUs; i++) cluster.<span class="fn">fork</span>();
+
+  cluster.<span class="fn">on</span>(<span class="str">"exit"</span>, (worker, code) => {
+    <span class="fn">console</span>.log(<span class="str">`Worker ${worker.process.pid} died. Restarting…`</span>);
+    cluster.<span class="fn">fork</span>();  <span class="cm">// auto-restart</span>
+  });
+} <span class="kw">else</span> {
+  <span class="cm">// Each worker runs the actual server</span>
+  <span class="fn">require</span>(<span class="str">"./server"</span>);
+}
+
+<span class="cm">// PM2 alternative (simpler)</span>
+<span class="cm">// pm2 start server.js -i max</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- N10 -->
+    <div class="qa-card" data-q="Memory leaks in Node.js">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">N10</span>
+        <span class="q-text">What causes memory leaks in Node.js and how do you detect and fix them?</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><strong>Common causes:</strong></p>
+          <ul>
+            <li>Global variables accumulating data</li>
+            <li>Event listeners not removed (<code>emitter.removeListener</code>)</li>
+            <li>Closures holding large objects unnecessarily</li>
+            <li>Uncleaned timers/intervals</li>
+            <li>Caches that grow unbounded</li>
+          </ul>
+<pre><span class="cm">// Leak: event listener added every request</span>
+app.<span class="fn">get</span>(<span class="str">"/bad"</span>, (req, res) => {
+  someEmitter.<span class="fn">on</span>(<span class="str">"data"</span>, handler); <span class="cm">// never removed — leak!</span>
+});
+
+<span class="cm">// Fix: remove listener, use once(), or use WeakRef</span>
+app.<span class="fn">get</span>(<span class="str">"/good"</span>, (req, res) => {
+  someEmitter.<span class="fn">once</span>(<span class="str">"data"</span>, handler); <span class="cm">// auto-removes</span>
+});
+
+<span class="cm">// Detection tools</span>
+<span class="cm">// node --inspect server.js → Chrome DevTools heap snapshots</span>
+<span class="cm">// clinic.js: clinic doctor -- node server.js</span>
+<span class="cm">// process.memoryUsage() for monitoring</span>
+
+<span class="kw">setInterval</span>(() => {
+  <span class="kw">const</span> { heapUsed, heapTotal } = process.<span class="fn">memoryUsage</span>();
+  <span class="kw">if</span> (heapUsed / heapTotal > <span class="num">0.9</span>) console.<span class="fn">warn</span>(<span class="str">"High heap usage!"</span>);
+}, <span class="num">30_000</span>);</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- N11 -->
+    <div class="qa-card" data-q="Caching strategies in Node.js">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">N11</span>
+        <span class="q-text">What caching strategies do you use in a Node.js API?</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// 1. In-memory cache (simple, single-instance)</span>
+<span class="kw">const</span> cache = <span class="kw">new</span> Map();
+
+<span class="kw">async function</span> <span class="fn">getCachedUser</span>(id) {
+  <span class="kw">if</span> (cache.<span class="fn">has</span>(id)) <span class="kw">return</span> cache.<span class="fn">get</span>(id);
+  <span class="kw">const</span> user = <span class="kw">await</span> db.<span class="fn">findUser</span>(id);
+  cache.<span class="fn">set</span>(id, user);
+  <span class="fn">setTimeout</span>(() => cache.<span class="fn">delete</span>(id), <span class="num">60_000</span>); <span class="cm">// TTL: 60s</span>
+  <span class="kw">return</span> user;
+}
+
+<span class="cm">// 2. Redis cache (distributed, multi-instance)</span>
+<span class="kw">async function</span> <span class="fn">getUserWithRedis</span>(id) {
+  <span class="kw">const</span> cached = <span class="kw">await</span> redis.<span class="fn">get</span>(<span class="str">`user:${id}`</span>);
+  <span class="kw">if</span> (cached) <span class="kw">return</span> JSON.<span class="fn">parse</span>(cached);
+
+  <span class="kw">const</span> user = <span class="kw">await</span> db.<span class="fn">findUser</span>(id);
+  <span class="kw">await</span> redis.<span class="fn">setEx</span>(<span class="str">`user:${id}`</span>, <span class="num">3600</span>, JSON.<span class="fn">stringify</span>(user));
+  <span class="kw">return</span> user;
+}
+
+<span class="cm">// 3. HTTP cache headers</span>
+res.<span class="fn">set</span>(<span class="str">"Cache-Control"</span>, <span class="str">"public, max-age=3600, stale-while-revalidate=86400"</span>);</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- N12 -->
+    <div class="qa-card" data-q="Rate limiting and security in Node.js">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">N12</span>
+        <span class="q-text">How do you secure a Node.js/Express API? Name at least 5 security best practices.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="kw">const</span> helmet     = <span class="fn">require</span>(<span class="str">"helmet"</span>);
+<span class="kw">const</span> rateLimit  = <span class="fn">require</span>(<span class="str">"express-rate-limit"</span>);
+<span class="kw">const</span> mongoSanitize = <span class="fn">require</span>(<span class="str">"express-mongo-sanitize"</span>);
+
+<span class="cm">// 1. Security headers (XSS, clickjacking, etc.)</span>
+app.<span class="fn">use</span>(<span class="fn">helmet</span>());
+
+<span class="cm">// 2. Rate limiting</span>
+app.<span class="fn">use</span>(<span class="str">"/api"</span>, <span class="fn">rateLimit</span>({ windowMs: <span class="num">15</span>*<span class="num">60</span>*<span class="num">1000</span>, max: <span class="num">100</span> }));
+
+<span class="cm">// 3. Input sanitization (prevent NoSQL injection)</span>
+app.<span class="fn">use</span>(<span class="fn">mongoSanitize</span>());
+
+<span class="cm">// 4. Validate + sanitize with zod/joi</span>
+<span class="kw">const</span> schema = z.<span class="fn">object</span>({ email: z.<span class="fn">string</span>().<span class="fn">email</span>(), age: z.<span class="fn">number</span>().<span class="fn">min</span>(<span class="num">0</span>) });
+<span class="kw">const</span> data = schema.<span class="fn">parse</span>(req.body);  <span class="cm">// throws on invalid</span>
+
+<span class="cm">// 5. Store secrets in env, never in code</span>
+<span class="cm">// process.env.DB_PASSWORD — never "hardcode"</span>
+
+<span class="cm">// 6. Use parameterized queries (prevent SQL injection)</span>
+db.<span class="fn">query</span>(<span class="str">"SELECT * FROM users WHERE id = $1"</span>, [userId]);
+
+<span class="cm">// 7. HTTPS only in production</span>
+<span class="cm">// 8. Disable x-powered-by: app.disable("x-powered-by")</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- N13 -->
+    <div class="qa-card" data-q="Database connection pooling">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">N13</span>
+        <span class="q-text">What is connection pooling and why is it important in Node.js?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Creating a new DB connection per request is expensive (~50–100ms). A <strong>connection pool</strong> maintains a set of reusable connections. Requests borrow a connection from the pool, use it, and return it — dramatically reducing latency.</p>
+<pre><span class="cm">// pg (PostgreSQL)</span>
+<span class="kw">const</span> { Pool } = <span class="fn">require</span>(<span class="str">"pg"</span>);
+<span class="kw">const</span> pool = <span class="kw">new</span> <span class="klass">Pool</span>({
+  connectionString: process.env.DATABASE_URL,
+  max: <span class="num">20</span>,              <span class="cm">// max connections</span>
+  idleTimeoutMillis: <span class="num">30_000</span>,
+  connectionTimeoutMillis: <span class="num">2_000</span>
+});
+
+<span class="cm">// Reuse the pool across your app (singleton)</span>
+<span class="kw">async function</span> <span class="fn">query</span>(text, params) {
+  <span class="kw">const</span> client = <span class="kw">await</span> pool.<span class="fn">connect</span>();
+  <span class="kw">try</span> {
+    <span class="kw">return</span> <span class="kw">await</span> client.<span class="fn">query</span>(text, params);
+  } <span class="kw">finally</span> {
+    client.<span class="fn">release</span>(); <span class="cm">// ALWAYS release back to pool</span>
+  }
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- N14 -->
+    <div class="qa-card" data-q="Environment configuration and 12-factor app">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">N14</span>
+        <span class="q-text">How do you manage configuration and environment variables in Node.js?</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// .env file (never commit to git)</span>
+<span class="cm">// DATABASE_URL=postgres://localhost/myapp</span>
+<span class="cm">// JWT_SECRET=supersecret</span>
+<span class="cm">// PORT=3000</span>
+
+<span class="cm">// Load with dotenv</span>
+<span class="fn">require</span>(<span class="str">"dotenv"</span>).<span class="fn">config</span>();
+
+<span class="cm">// Validate required vars at startup</span>
+<span class="kw">const</span> required = [<span class="str">"DATABASE_URL"</span>, <span class="str">"JWT_SECRET"</span>];
+<span class="kw">for</span> (<span class="kw">const</span> key <span class="kw">of</span> required) {
+  <span class="kw">if</span> (!process.env[key]) <span class="kw">throw new</span> Error(<span class="str">`Missing env var: ${key}`</span>);
+}
+
+<span class="cm">// Centralize config (config.js)</span>
+module.exports = {
+  port:    +process.env.PORT || <span class="num">3000</span>,
+  db:      { url: process.env.DATABASE_URL },
+  jwt:     { secret: process.env.JWT_SECRET, expiresIn: <span class="str">"7d"</span> },
+  isProd:  process.env.NODE_ENV === <span class="str">"production"</span>
+};</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- N15 -->
+    <div class="qa-card" data-q="Build a simple REST API with authentication">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">N15</span>
+        <span class="q-text">Walk through building a JWT-authenticated REST endpoint end-to-end.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// POST /auth/login  → returns JWT</span>
+router.<span class="fn">post</span>(<span class="str">"/auth/login"</span>, <span class="kw">async</span> (req, res, next) => {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> { email, password } = req.body;
+    <span class="kw">const</span> user = <span class="kw">await</span> User.<span class="fn">findOne</span>({ email });
+    <span class="kw">if</span> (!user || !(<span class="kw">await</span> bcrypt.<span class="fn">compare</span>(password, user.passwordHash))) {
+      <span class="kw">return</span> res.<span class="fn">status</span>(<span class="num">401</span>).<span class="fn">json</span>({ error: <span class="str">"Invalid credentials"</span> });
+    }
+    <span class="kw">const</span> token = jwt.<span class="fn">sign</span>({ sub: user._id, role: user.role },
+                              config.jwt.secret, { expiresIn: <span class="str">"7d"</span> });
+    res.<span class="fn">json</span>({ token });
+  } <span class="kw">catch</span> (err) { <span class="fn">next</span>(err); }
+});
+
+<span class="cm">// Auth middleware</span>
+<span class="kw">const</span> <span class="fn">auth</span> = (req, res, next) => {
+  <span class="kw">const</span> token = req.headers.authorization?.split(<span class="str">" "</span>)[<span class="num">1</span>];
+  <span class="kw">if</span> (!token) <span class="kw">return</span> res.<span class="fn">status</span>(<span class="num">401</span>).<span class="fn">json</span>({ error: <span class="str">"Unauthorized"</span> });
+  req.user = jwt.<span class="fn">verify</span>(token, config.jwt.secret);  <span class="cm">// throws if invalid</span>
+  <span class="fn">next</span>();
+};
+
+<span class="cm">// Protected route</span>
+router.<span class="fn">get</span>(<span class="str">"/me"</span>, auth, <span class="kw">async</span> (req, res) => {
+  <span class="kw">const</span> user = <span class="kw">await</span> User.<span class="fn">findById</span>(req.user.sub).<span class="fn">select</span>(<span class="str">"-passwordHash"</span>);
+  res.<span class="fn">json</span>(user);
+});</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<script>
+  // Toggle single card
+  function toggleCard(btn) {
+    const card = btn.closest('.qa-card');
+    card.classList.toggle('open');
+  }
+
+  // Expand/collapse all in a section
+  function toggleSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    const cards = section.querySelectorAll('.qa-card');
+    const btn = section.querySelector('.expand-btn');
+    const allOpen = [...cards].every(c => c.classList.contains('open'));
+    cards.forEach(c => c.classList.toggle('open', !allOpen));
+    btn.textContent = allOpen ? '⊕ Expand all' : '⊖ Collapse all';
+  }
+
+  // Search
+  function filterQuestions(query) {
+    const q = query.toLowerCase();
+    document.querySelectorAll('.qa-card').forEach(card => {
+      const text = card.dataset.q?.toLowerCase() + ' ' + card.textContent.toLowerCase();
+      const match = !q || text.includes(q);
+      card.style.display = match ? '' : 'none';
+      if (match && q) card.classList.add('open');
+    });
+  }
+
+  // Scroll progress
+  const bar = document.getElementById('progress-bar');
+  const backTop = document.getElementById('back-top');
+  window.addEventListener('scroll', () => {
+    const s = document.documentElement;
+    const pct = (s.scrollTop / (s.scrollHeight - s.clientHeight)) * 100;
+    bar.style.width = pct + '%';
+    backTop.classList.toggle('visible', s.scrollTop > 400);
+  });
+
+  // Active TOC item
+  const sections = document.querySelectorAll('.section');
+  const tocItems = document.querySelectorAll('.toc-item');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocItems.forEach(i => i.classList.remove('active'));
+        const active = document.querySelector(`.toc-item[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
