@@ -1743,21 +1743,49 @@ Fluency :
         `
   },
   {
-    question: "?",
-    definition: ``
+    question: "DOM basics for refs, events, and debugging?",
+    definition: `
+    The DOM, or Document Object Model, is a tree-like representation of an HTML document. 
+    JavaScript uses the DOM to read and modify elements dynamically.
+
+    Events allow us to respond to user actions like clicks, typing, or scrolling.
+
+    Refs are a way to directly access a DOM element when necessary, especially in React or Vue.
+
+    For debugging DOM-related issues, I usually use the browser DevTools, inspect elements, check event listeners, console.log values, 
+    and use breakpoints to understand what is happening.
+
+    In Details :
+
+    The DOM stands for Document Object Model. When a browser loads an HTML page, it converts it into a tree of JavaScript objects called the DOM.
+
+    JavaScript can use this DOM to select elements, change their content, update styles, add or remove elements, and respond to user interactions.
+
+    Events are actions triggered by users or the browser, such as clicking a button, submitting a form, typing into an input, or hovering over an element.
+    We attach event listeners to handle these actions.
+
+    Refs are mainly used in frameworks like React and Vue when we need direct access to a DOM element instead of using state. For example, focusing an input field,
+    measuring an element's size, or integrating third-party libraries.
+
+    When debugging DOM issues, I inspect the HTML using Chrome DevTools, check whether elements exist, verify event handlers are firing, use console.log or debugger statements, 
+    and examine the Elements and Console tabs.
+    `
   },
   {
-    question: "?",
-    definition: ``
+    question: "Why would you use refs instead of state?",
+    definition: `State is used for rendering UI changes, while refs are used to directly access DOM elements without causing a re-render. For example, focusing an input, 
+    scrolling to an element, or integrating with third-party libraries.`
   },
 
   {
-    question: "?",
-    definition: ``
+    question: "What is event delegation??",
+    definition: `Event delegation means attaching one event listener to a parent element and using event bubbling to handle events from child elements.
+     It's more efficient when there are many dynamically created elements.`
   },
   {
-    question: "?",
-    definition: ``
+    question: "How do you debug DOM issues?",
+    definition: `I inspect the HTML using DevTools, verify the element exists, check whether the event listener is attached, use console.log or breakpoints, inspect the event object, 
+    and confirm that the script executes after the DOM has loaded.`
   },
   {
     question: "?",
