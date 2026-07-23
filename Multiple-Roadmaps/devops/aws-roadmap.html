@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWS Learning Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2ee;
+    --surface: #ffffff;
+    --border: #d8d3cc;
+    --text: #1a1814;
+    --muted: #6b6560;
+    --accent: #e8591a;
+    --accent-light: #fff0ea;
+    --phase-colors: #2d6a4f, #1d4e89, #6b2d8b, #8b4513, #1a5276, #145a32, #6b2737, #1a3a4f, #4a235a, #2e4057;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--text);
+    color: #fff;
+    padding: 48px 40px 40px;
+    border-bottom: 4px solid var(--accent);
+  }
+
+  header .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  header h1 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  header p {
+    color: #aaa49e;
+    font-weight: 300;
+    max-width: 600px;
+    font-size: 15px;
+  }
+
+  .meta-strip {
+    display: flex;
+    gap: 32px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid #333;
+  }
+
+  .meta-item {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #888;
+  }
+
+  .meta-item strong {
+    display: block;
+    color: #fff;
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* PHASE */
+  .phase {
+    margin: 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .phase:last-child { border-bottom: none; }
+
+  .phase-header {
+    display: flex;
+    align-items: stretch;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .phase-header:hover { background: #faf8f5; }
+
+  .phase-number {
+    width: 64px;
+    min-width: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #fff;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .phase-title-block {
+    flex: 1;
+    padding: 22px 24px;
+    border-left: 1px solid var(--border);
+  }
+
+  .phase-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .phase-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .phase-toggle {
+    width: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 18px;
+    transition: transform 0.2s;
+  }
+
+  .phase.open .phase-toggle { transform: rotate(180deg); }
+
+  /* PHASE BODY */
+  .phase-body {
+    display: none;
+    padding: 0 0 28px 64px;
+    border-left: none;
+  }
+
+  .phase.open .phase-body { display: block; }
+
+  .phase-inner {
+    padding: 24px 24px 0;
+    border-left: 1px solid var(--border);
+  }
+
+  /* SECTIONS */
+  .section {
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* TAGS / PILLS */
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .tag-pill {
+    background: #f0ece7;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .tag-pill.highlight {
+    background: var(--accent-light);
+    border-color: #f5b89a;
+    color: var(--accent);
+  }
+
+  /* GOAL BOX */
+  .goal-box {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #5a2800;
+  }
+
+  /* PROJECT CARDS */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px;
+    background: #faf8f5;
+  }
+
+  .project-card .proj-name {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .project-card .proj-services {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1.7;
+  }
+
+  /* LINKS */
+  .resource-list {
+    list-style: none;
+  }
+
+  .resource-list li {
+    padding: 6px 0;
+    border-bottom: 1px solid #f0ece7;
+    font-size: 13px;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+
+  .resource-list li:last-child { border-bottom: none; }
+
+  .resource-list .r-name { font-weight: 600; min-width: 160px; }
+  .resource-list .r-desc { color: var(--muted); font-size: 12px; }
+
+  /* CERT PATH */
+  .cert-track {
+    margin-bottom: 16px;
+  }
+
+  .cert-track-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .cert-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .cert-badge {
+    border: 1px solid;
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .cert-badge.foundational { border-color: #2d6a4f; color: #2d6a4f; background: #eaf5f0; }
+  .cert-badge.associate    { border-color: #1d4e89; color: #1d4e89; background: #eaf0f9; }
+  .cert-badge.professional { border-color: #6b2d8b; color: #6b2d8b; background: #f5eef9; }
+  .cert-badge.specialty    { border-color: #8b4513; color: #8b4513; background: #f9f1ea; }
+
+  /* JS DEV ROADMAP */
+  .roadmap-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .roadmap-step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 9px 0;
+    border-bottom: 1px solid #f0ece7;
+  }
+
+  .roadmap-step:last-child { border-bottom: none; }
+
+  .step-num {
+    width: 24px;
+    height: 24px;
+    background: var(--text);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .step-text { font-size: 13.5px; }
+
+  /* TOC */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin: 24px 0;
+  }
+
+  .toc h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 4px;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.1s;
+    font-size: 13px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .toc-item:hover { background: #f0ece7; }
+
+  .toc-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    width: 20px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--text);
+    color: #888;
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-top: 0;
+  }
+
+  /* EXPAND ALL */
+  .controls {
+    padding: 16px 24px;
+    display: flex;
+    gap: 12px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    border-radius: 3px;
+    color: var(--text);
+    transition: all 0.15s;
+  }
+
+  .btn:hover { background: var(--text); color: #fff; border-color: var(--text); }
+
+  @media (max-width: 600px) {
+    header { padding: 32px 20px; }
+    header h1 { font-size: 1.7rem; }
+    .phase-body { padding-left: 0; }
+    .phase-inner { border-left: none; }
+    .meta-strip { flex-wrap: wrap; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <span class="tag">Learning Roadmap</span>
+    <h1>Complete AWS<br>Learning Path</h1>
+    <p>From zero AWS knowledge to cloud architect / DevOps expertise — structured in 10 progressive phases.</p>
+    <div class="meta-strip">
+      <div class="meta-item"><strong>Duration</strong>8–12 Months</div>
+      <div class="meta-item"><strong>Phases</strong>10 Phases</div>
+      <div class="meta-item"><strong>Level</strong>Beginner → Expert</div>
+      <div class="meta-item"><strong>Target</strong>Software Developer</div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="toc">
+    <h2>Quick Navigation</h2>
+    <div class="toc-grid">
+      <a class="toc-item" onclick="openPhase(0)"><span class="toc-num">01</span> Cloud Fundamentals</a>
+      <a class="toc-item" onclick="openPhase(1)"><span class="toc-num">02</span> Core AWS Services</a>
+      <a class="toc-item" onclick="openPhase(2)"><span class="toc-num">03</span> Associate Level</a>
+      <a class="toc-item" onclick="openPhase(3)"><span class="toc-num">04</span> Real Projects</a>
+      <a class="toc-item" onclick="openPhase(4)"><span class="toc-num">05</span> DevOps & Automation</a>
+      <a class="toc-item" onclick="openPhase(5)"><span class="toc-num">06</span> Containers & Kubernetes</a>
+      <a class="toc-item" onclick="openPhase(6)"><span class="toc-num">07</span> Security Specialization</a>
+      <a class="toc-item" onclick="openPhase(7)"><span class="toc-num">08</span> Data Engineering</a>
+      <a class="toc-item" onclick="openPhase(8)"><span class="toc-num">09</span> AI / ML on AWS</a>
+      <a class="toc-item" onclick="openPhase(9)"><span class="toc-num">10</span> Advanced Architecture</a>
+    </div>
+  </div>
+</div>
+
+<div class="controls container" style="position:static; border:1px solid var(--border); margin-bottom:0; background:var(--surface);">
+  <button class="btn" onclick="expandAll()">Expand All</button>
+  <button class="btn" onclick="collapseAll()">Collapse All</button>
+</div>
+
+<div class="container" style="padding-top:0; padding-bottom:48px;">
+
+<!-- PHASE 1 -->
+<div class="phase" id="phase-0">
+  <div class="phase-header" onclick="toggle(0)">
+    <div class="phase-number" style="background:#2d6a4f;">P01</div>
+    <div class="phase-title-block">
+      <div class="phase-title">Cloud Fundamentals</div>
+      <div class="phase-subtitle">2–4 Weeks &nbsp;·&nbsp; Zero to cloud basics</div>
+    </div>
+    <div class="phase-toggle">▾</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-inner">
+      <div class="goal-box">Understand cloud computing concepts and AWS basics before touching services.</div>
+      <div class="section">
+        <div class="section-title">Topics to Learn</div>
+        <div class="tag-list">
+          <span class="tag-pill">Cloud Computing</span>
+          <span class="tag-pill">IaaS / PaaS / SaaS</span>
+          <span class="tag-pill">Regions & Availability Zones</span>
+          <span class="tag-pill">Shared Responsibility Model</span>
+          <span class="tag-pill">AWS Global Infrastructure</span>
+          <span class="tag-pill">Pricing & Billing</span>
+          <span class="tag-pill">AWS Free Tier</span>
+          <span class="tag-pill">Basic Security Concepts</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Recommended Resources</div>
+        <ul class="resource-list">
+          <li><span class="r-name">AWS Official Channel</span><span class="r-desc">AWS Training & Certification</span></li>
+          <li><span class="r-name">FreeCodeCamp</span><span class="r-desc">AWS Cloud Practitioner Full Course</span></li>
+          <li><span class="r-name">Andrew Brown (ExamPro)</span><span class="r-desc">AWS Cloud Practitioner Course</span></li>
+          <li><span class="r-name">Stephane Maarek</span><span class="r-desc">AWS Cloud Practitioner playlist</span></li>
+          <li><span class="r-name">AWS Skill Builder</span><span class="r-desc">Hundreds of free courses and learning paths</span></li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-title">Hands-On Practice (Free Tier)</div>
+        <div class="tag-list">
+          <span class="tag-pill highlight">Launch EC2</span>
+          <span class="tag-pill highlight">Create S3 Bucket</span>
+          <span class="tag-pill highlight">Upload Files</span>
+          <span class="tag-pill highlight">Create IAM User</span>
+          <span class="tag-pill highlight">Enable MFA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 2 -->
+<div class="phase" id="phase-1">
+  <div class="phase-header" onclick="toggle(1)">
+    <div class="phase-number" style="background:#1d4e89;">P02</div>
+    <div class="phase-title-block">
+      <div class="phase-title">Core AWS Services</div>
+      <div class="phase-subtitle">1–2 Months &nbsp;·&nbsp; Master the essential building blocks</div>
+    </div>
+    <div class="phase-toggle">▾</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-inner">
+      <div class="goal-box">Master services used in almost every AWS architecture.</div>
+      <div class="section">
+        <div class="section-title">Compute</div>
+        <div class="tag-list">
+          <span class="tag-pill">EC2</span>
+          <span class="tag-pill">Auto Scaling</span>
+          <span class="tag-pill">Load Balancer</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Storage</div>
+        <div class="tag-list">
+          <span class="tag-pill">S3</span>
+          <span class="tag-pill">EBS</span>
+          <span class="tag-pill">EFS</span>
+          <span class="tag-pill">Glacier</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Database</div>
+        <div class="tag-list">
+          <span class="tag-pill">RDS</span>
+          <span class="tag-pill">DynamoDB</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Networking</div>
+        <div class="tag-list">
+          <span class="tag-pill">VPC</span>
+          <span class="tag-pill">Route 53</span>
+          <span class="tag-pill">CloudFront</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Security</div>
+        <div class="tag-list">
+          <span class="tag-pill">IAM</span>
+          <span class="tag-pill">KMS</span>
+          <span class="tag-pill">Security Groups</span>
+          <span class="tag-pill">NACLs</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Practical Projects</div>
+        <div class="project-grid">
+          <div class="project-card">
+            <div class="proj-name">Static Portfolio</div>
+            <div class="proj-services">S3<br>CloudFront<br>Route 53</div>
+          </div>
+          <div class="project-card">
+            <div class="proj-name">React App Deploy</div>
+            <div class="proj-services">EC2<br>Nginx</div>
+          </div>
+          <div class="project-card">
+            <div class="proj-name">Node.js API</div>
+            <div class="proj-services">EC2<br>RDS MySQL</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 3 -->
+<div class="phase" id="phase-2">
+  <div class="phase-header" onclick="toggle(2)">
+    <div class="phase-number" style="background:#6b2d8b;">P03</div>
+    <div class="phase-title-block">
+      <div class="phase-title">AWS Associate Level</div>
+      <div class="phase-subtitle">2–3 Months &nbsp;·&nbsp; Employer-recognized skills</div>
+    </div>
+    <div class="phase-toggle">▾</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-inner">
+      <div class="goal-box">This is where employers start taking your AWS skills seriously. Target: <strong>AWS Solutions Architect – Associate</strong>.</div>
+      <div class="section">
+        <div class="section-title">Advanced Networking</div>
+        <div class="tag-list">
+          <span class="tag-pill">VPC Peering</span>
+          <span class="tag-pill">Transit Gateway</span>
+          <span class="tag-pill">PrivateLink</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Storage Deep Dive</div>
+        <div class="tag-list">
+          <span class="tag-pill">Storage Classes</span>
+          <span class="tag-pill">Replication</span>
+          <span class="tag-pill">Lifecycle Policies</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Security</div>
+        <div class="tag-list">
+          <span class="tag-pill">IAM Policies</span>
+          <span class="tag-pill">Cross-account Access</span>
+          <span class="tag-pill">Encryption</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Monitoring</div>
+        <div class="tag-list">
+          <span class="tag-pill">CloudWatch</span>
+          <span class="tag-pill">CloudTrail</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Recommended Courses</div>
+        <ul class="resource-list">
+          <li><span class="r-name">Stephane Maarek</span><span class="r-desc">Highly respected certification instructor</span></li>
+          <li><span class="r-name">Adrian Cantrill</span><span class="r-desc">Deep practical explanations, architecture focus</span></li>
+          <li><span class="r-name">Tutorials Dojo</span><span class="r-desc">Most recommended AWS practice exams by community</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 4 -->
+<div class="phase" id="phase-3">
+  <div class="phase-header" onclick="toggle(3)">
+    <div class="phase-number" style="background:#8b4513;">P04</div>
+    <div class="phase-title-block">
+      <div class="phase-title">Build Real Projects</div>
+      <div class="phase-subtitle">1–2 Months &nbsp;·&nbsp; Portfolio-worthy cloud apps</div>
+    </div>
+    <div class="phase-toggle">▾</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-inner">
+      <div class="goal-box">Create portfolio-worthy cloud projects that demonstrate real architectural decisions.</div>
+      <div class="section">
+        <div class="section-title">Projects</div>
+        <div class="project-grid">
+          <div class="project-card">
+            <div class="proj-name">Serverless Todo App</div>
+            <div class="proj-services">API Gateway<br>Lambda<br>DynamoDB<br>Cognito</div>
+          </div>
+          <div class="project-card">
+            <div class="proj-name">Image Processing Pipeline</div>
+            <div class="proj-services">S3<br>Lambda<br>SNS</div>
+          </div>
+          <div class="project-card">
+            <div class="proj-name">Microservices App</div>
+            <div class="proj-services">ECS<br>Load Balancer<br>RDS</div>
+          </div>
+          <div class="project-card">
+            <div class="proj-name">CI/CD Pipeline</div>
+            <div class="proj-services">CodePipeline<br>CodeBuild<br>CodeDeploy</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 5 -->
+<div class="phase" id="phase-4">
+  <div class="phase-header" onclick="toggle(4)">
+    <div class="phase-number" style="background:#1a5276;">P05</div>
+    <div class="phase-title-block">
+      <div class="phase-title">DevOps & Automation</div>
+      <div class="phase-subtitle">2 Months &nbsp;·&nbsp; Infrastructure as Code</div>
+    </div>
+    <div class="phase-toggle">▾</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-inner">
+      <div class="goal-box">Infrastructure as Code is a must-have skill for any modern cloud engineer.</div>
+      <div class="section">
+        <div class="section-title">Terraform</div>
+        <div class="tag-list">
+          <span class="tag-pill">Providers</span>
+          <span class="tag-pill">Modules</span>
+          <span class="tag-pill">State Management</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">AWS CloudFormation</div>
+        <div class="tag-list">
+          <span class="tag-pill">Templates</span>
+          <span class="tag-pill">Stacks</span>
+          <span class="tag-pill">Nested Stacks</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">CI/CD Tools</div>
+        <div class="tag-list">
+          <span class="tag-pill">GitHub Actions</span>
+          <span class="tag-pill">AWS CodePipeline</span>
+          <span class="tag-pill">Jenkins</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Capstone Project</div>
+        <div class="tag-list">
+          <span class="tag-pill highlight">One-click deploy: Terraform + GitHub Actions + AWS</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Resource</div>
+        <ul class="resource-list">
+          <li><span class="r-name">HashiCorp Terraform Tutorials</span><span class="r-desc">Official tutorials from HashiCorp</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 6 -->
+<div class="phase" id="phase-5">
+  <div class="phase-header" onclick="toggle(5)">
+    <div class="phase-number" style="background:#145a32;">P06</div>
+    <div class="phase-title-block">
+      <div class="phase-title">Containers & Kubernetes</div>
+      <div class="phase-subtitle">1–2 Months &nbsp;·&nbsp; Expected by cloud jobs</div>
+    </div>
+    <div class="phase-toggle">▾</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-inner">
+      <div class="goal-box">Cloud jobs increasingly expect container knowledge. Docker → ECS → Kubernetes.</div>
+      <div class="section">
+        <div class="section-title">Docker</div>
+        <div class="tag-list">
+          <span class="tag-pill">Images</span>
+          <span class="tag-pill">Containers</span>
+          <span class="tag-pill">Networking</span>
+          <span class="tag-pill">Volumes</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">AWS ECS</div>
+        <div class="tag-list">
+          <span class="tag-pill">Fargate</span>
+          <span class="tag-pill">Service Discovery</span>
+          <span class="tag-pill">Auto Scaling</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Kubernetes (AWS EKS)</div>
+        <div class="tag-list">
+          <span class="tag-pill">Pods</span>
+          <span class="tag-pill">Deployments</span>
+          <span class="tag-pill">Services</span>
+          <span class="tag-pill">Ingress</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">EKS Project Stack</div>
+        <div class="tag-list">
+          <span class="tag-pill highlight">React</span>
+          <span class="tag-pill highlight">Node.js</span>
+          <span class="tag-pill highlight">PostgreSQL</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Resource</div>
+        <ul class="resource-list">
+          <li><span class="r-name">TechWorld with Nana</span><span class="r-desc">Excellent Docker and Kubernetes playlists</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 7 -->
+<div class="phase" id="phase-6">
+  <div class="phase-header" onclick="toggle(6)">
+    <div class="phase-number" style="background:#6b2737;">P07</div>
+    <div class="phase-title-block">
+      <div class="phase-title">Security Specialization</div>
+      <div class="phase-subtitle">Ongoing &nbsp;·&nbsp; Multi-account secure architecture</div>
+    </div>
+    <div class="phase-toggle">▾</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-inner">
+      <div class="section">
+        <div class="section-title">Topics</div>
+        <div class="tag-list">
+          <span class="tag-pill">IAM Deep Dive</span>
+          <span class="tag-pill">AWS Organizations</span>
+          <span class="tag-pill">Security Hub</span>
+          <span class="tag-pill">GuardDuty</span>
+          <span class="tag-pill">Inspector</span>
+          <span class="tag-pill">WAF</span>
+          <span class="tag-pill">Shield</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Project</div>
+        <div class="tag-list">
+          <span class="tag-pill highlight">Build secure multi-account AWS architecture</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 8 -->
+<div class="phase" id="phase-7">
+  <div class="phase-header" onclick="toggle(7)">
+    <div class="phase-number" style="background:#1a3a4f;">P08</div>
+    <div class="phase-title-block">
+      <div class="phase-title">Data Engineering & Analytics</div>
+      <div class="phase-subtitle">Ongoing &nbsp;·&nbsp; Data lake architecture</div>
+    </div>
+    <div class="phase-toggle">▾</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-inner">
+      <div class="section">
+        <div class="section-title">Services</div>
+        <div class="tag-list">
+          <span class="tag-pill">Redshift</span>
+          <span class="tag-pill">Glue</span>
+          <span class="tag-pill">Athena</span>
+          <span class="tag-pill">EMR</span>
+          <span class="tag-pill">Kinesis</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Project: Data Lake Architecture</div>
+        <div class="tag-list">
+          <span class="tag-pill highlight">S3</span>
+          <span style="color:var(--muted);font-size:18px;line-height:1">→</span>
+          <span class="tag-pill highlight">Glue</span>
+          <span style="color:var(--muted);font-size:18px;line-height:1">→</span>
+          <span class="tag-pill highlight">Athena</span>
+          <span style="color:var(--muted);font-size:18px;line-height:1">→</span>
+          <span class="tag-pill highlight">QuickSight</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 9 -->
+<div class="phase" id="phase-8">
+  <div class="phase-header" onclick="toggle(8)">
+    <div class="phase-number" style="background:#4a235a;">P09</div>
+    <div class="phase-title-block">
+      <div class="phase-title">AI / ML on AWS</div>
+      <div class="phase-subtitle">Ongoing &nbsp;·&nbsp; AWS investing heavily here</div>
+    </div>
+    <div class="phase-toggle">▾</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-inner">
+      <div class="section">
+        <div class="section-title">Services</div>
+        <div class="tag-list">
+          <span class="tag-pill">SageMaker</span>
+          <span class="tag-pill">Bedrock</span>
+          <span class="tag-pill">Rekognition</span>
+          <span class="tag-pill">Comprehend</span>
+          <span class="tag-pill">Textract</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Project: AI Chatbot</div>
+        <div class="tag-list">
+          <span class="tag-pill highlight">Bedrock</span>
+          <span class="tag-pill highlight">Lambda</span>
+          <span class="tag-pill highlight">API Gateway</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 10 -->
+<div class="phase" id="phase-9">
+  <div class="phase-header" onclick="toggle(9)">
+    <div class="phase-number" style="background:#2e4057;">P10</div>
+    <div class="phase-title-block">
+      <div class="phase-title">Advanced Architecture</div>
+      <div class="phase-subtitle">Expert Level &nbsp;·&nbsp; AWS Well-Architected Framework</div>
+    </div>
+    <div class="phase-toggle">▾</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-inner">
+      <div class="section">
+        <div class="section-title">Topics</div>
+        <div class="tag-list">
+          <span class="tag-pill">Multi-region Architectures</span>
+          <span class="tag-pill">Disaster Recovery</span>
+          <span class="tag-pill">Hybrid Cloud</span>
+          <span class="tag-pill">Event-driven Systems</span>
+          <span class="tag-pill">High Availability</span>
+          <span class="tag-pill">Cost Optimization</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">AWS Well-Architected Framework Pillars</div>
+        <div class="tag-list">
+          <span class="tag-pill highlight">Operational Excellence</span>
+          <span class="tag-pill highlight">Security</span>
+          <span class="tag-pill highlight">Reliability</span>
+          <span class="tag-pill highlight">Performance Efficiency</span>
+          <span class="tag-pill highlight">Cost Optimization</span>
+          <span class="tag-pill highlight">Sustainability</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CERT PATH -->
+<div style="background:var(--surface); border:1px solid var(--border); border-top:none; padding:28px 24px;">
+  <div class="section-title" style="margin-bottom:18px;">AWS Certification Path</div>
+  <div class="cert-track">
+    <div class="cert-track-name">Foundational</div>
+    <div class="cert-items">
+      <span class="cert-badge foundational">Cloud Practitioner</span>
+    </div>
+  </div>
+  <div class="cert-track" style="margin-top:14px;">
+    <div class="cert-track-name">Associate</div>
+    <div class="cert-items">
+      <span class="cert-badge associate">Solutions Architect – Associate</span>
+      <span class="cert-badge associate">Developer – Associate</span>
+      <span class="cert-badge associate">SysOps Administrator – Associate</span>
+    </div>
+  </div>
+  <div class="cert-track" style="margin-top:14px;">
+    <div class="cert-track-name">Professional</div>
+    <div class="cert-items">
+      <span class="cert-badge professional">Solutions Architect – Professional</span>
+      <span class="cert-badge professional">DevOps Engineer – Professional</span>
+    </div>
+  </div>
+  <div class="cert-track" style="margin-top:14px;">
+    <div class="cert-track-name">Specialty</div>
+    <div class="cert-items">
+      <span class="cert-badge specialty">Security</span>
+      <span class="cert-badge specialty">Machine Learning</span>
+      <span class="cert-badge specialty">Networking</span>
+      <span class="cert-badge specialty">Data Engineering</span>
+    </div>
+  </div>
+</div>
+
+<!-- JS DEV RECOMMENDED PATH -->
+<div style="background:var(--surface); border:1px solid var(--border); border-top:none; padding:28px 24px;">
+  <div class="section-title" style="margin-bottom:6px;">Recommended Path for Java/JS Developers</div>
+  <p style="font-size:13px; color:var(--muted); margin-bottom:18px;">Aligns with modern full-stack and cloud engineering roles.</p>
+  <div class="roadmap-steps">
+    <div class="roadmap-step"><div class="step-num">1</div><div class="step-text">Cloud Practitioner</div></div>
+    <div class="roadmap-step"><div class="step-num">2</div><div class="step-text">Core AWS Services</div></div>
+    <div class="roadmap-step"><div class="step-num">3</div><div class="step-text">Solutions Architect Associate</div></div>
+    <div class="roadmap-step"><div class="step-num">4</div><div class="step-text">Deploy Node.js / Java APIs on AWS</div></div>
+    <div class="roadmap-step"><div class="step-num">5</div><div class="step-text">Terraform</div></div>
+    <div class="roadmap-step"><div class="step-num">6</div><div class="step-text">Docker</div></div>
+    <div class="roadmap-step"><div class="step-num">7</div><div class="step-text">ECS / Fargate</div></div>
+    <div class="roadmap-step"><div class="step-num">8</div><div class="step-text">CI/CD Pipelines</div></div>
+    <div class="roadmap-step"><div class="step-num">9</div><div class="step-text">EKS / Kubernetes</div></div>
+    <div class="roadmap-step"><div class="step-num">10</div><div class="step-text">DevOps Professional Certification</div></div>
+    <div class="roadmap-step"><div class="step-num">11</div><div class="step-text">AI/ML with Bedrock</div></div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  AWS Learning Roadmap &nbsp;·&nbsp; Beginner → Expert &nbsp;·&nbsp; 8–12 Months
+</footer>
+
+<script>
+  const phases = document.querySelectorAll('.phase');
+
+  function toggle(i) {
+    phases[i].classList.toggle('open');
+  }
+
+  function openPhase(i) {
+    phases[i].classList.add('open');
+    phases[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function expandAll() {
+    phases.forEach(p => p.classList.add('open'));
+  }
+
+  function collapseAll() {
+    phases.forEach(p => p.classList.remove('open'));
+  }
+
+  // Open first phase by default
+  phases[0].classList.add('open');
+</script>
+</body>
+</html>

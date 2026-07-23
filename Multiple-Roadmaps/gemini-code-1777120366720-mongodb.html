@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MongoDB Mastery Roadmap 2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --primary: #00ed64; /* MongoDB Green */
+            --primary-dark: #00684a;
+            --shadow: 0 10px 20px rgba(0,0,0,0.05);
+            
+            /* Status Colors */
+            --fundamentals: #00b894;
+            --intermediate: #fdcb6e;
+            --advanced: #e17055;
+            --integration: #0984e3;
+            --realworld: #6c5ce7;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0b1416;
+            --card-bg: #162428;
+            --text-main: #e1e1e1;
+            --text-muted: #a0a0a0;
+            --shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        /* --- Header --- */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), #023430);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+        }
+
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        header p { opacity: 0.9; font-size: 1.1rem; }
+
+        /* --- Container --- */
+        .container {
+            max-width: 1000px;
+            margin: -40px auto 0;
+            padding: 20px;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            border-left: 8px solid var(--primary);
+        }
+
+        /* Color Coding */
+        .lvl-1 { border-color: var(--fundamentals); }
+        .lvl-2 { border-color: var(--intermediate); }
+        .lvl-3 { border-color: var(--advanced); }
+        .lvl-4 { border-color: var(--integration); }
+        .lvl-5 { border-color: var(--realworld); }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        h2 i { margin-right: 15px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .topic-box {
+            background: rgba(0,0,0,0.03);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        [data-theme="dark"] .topic-box { background: rgba(255,255,255,0.03); }
+
+        h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        ul { list-style: none; }
+        li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .pro-tip {
+            background: rgba(253, 203, 110, 0.15);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid var(--intermediate);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .container { margin-top: -20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <i id="theme-icon" class="fas fa-moon"></i> Toggle Theme
+        </button>
+        <h1><i class="fas fa-leaf"></i> MongoDB Roadmap</h1>
+        <p>The Complete Path from Beginner to MongoDB Expert</p>
+    </header>
+
+    <div class="container">
+
+        <div class="section-card lvl-1">
+            <h2><i class="fas fa-seedling" style="color: var(--fundamentals)"></i> 1. Fundamentals</h2>
+            <div class="grid">
+                <div class="topic-box">
+                    <h3>Core Concepts</h3>
+                    <ul>
+                        <li>NoSQL vs SQL (The Big Why)</li>
+                        <li>JSON/BSON Document Model</li>
+                        <li>Collections & Documents</li>
+                        <li>Dynamic Schema Flexibility</li>
+                    </ul>
+                </div>
+                <div class="topic-box">
+                    <h3>CRUD Basics</h3>
+                    <ul>
+                        <li><code>insertOne</code> / <code>insertMany</code></li>
+                        <li><code>find</code> / <code>findOne</code></li>
+                        <li>Operators: <code>$gt</code>, <code>$lt</code>, <code>$in</code></li>
+                        <li>Logical: <code>$and</code>, <code>$or</code></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pro-tip">
+                <strong>🚀 Practice:</strong> Build a simple Student Database and perform all CRUD operations.
+            </div>
+        </div>
+
+        <div class="section-card lvl-2">
+            <h2><i class="fas fa-bolt" style="color: var(--intermediate)"></i> 2. Intermediate (Interview Prep)</h2>
+            <div class="grid">
+                <div class="topic-box">
+                    <h3>Indexing <span class="badge">Critical</span></h3>
+                    <ul>
+                        <li>Single vs Compound Index</li>
+                        <li>TTL Indexes (Self-deleting data)</li>
+                        <li>Text Index for Search</li>
+                        <li>How Indexes optimize performance</li>
+                    </ul>
+                </div>
+                <div class="topic-box">
+                    <h3>Schema Design</h3>
+                    <ul>
+                        <li>Embedding vs Referencing</li>
+                        <li>1:1, 1:N, and N:N relationships</li>
+                        <li>Data Denormalization</li>
+                    </ul>
+                </div>
+                <div class="topic-box">
+                    <h3>Aggregation Framework</h3>
+                    <ul>
+                        <li><code>$match</code>, <code>$group</code>, <code>$project</code></li>
+                        <li><code>$lookup</code> (The Mongo Join)</li>
+                        <li><code>$unwind</code> and <code>$facet</code></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card lvl-3">
+            <h2><i class="fas fa-rocket" style="color: var(--advanced)"></i> 3. Advanced (Architect Level)</h2>
+            <div class="grid">
+                <div class="topic-box">
+                    <h3>Performance</h3>
+                    <ul>
+                        <li>Using <code>explain()</code> plan</li>
+                        <li>Index Selection strategy</li>
+                        <li>ACID Transactions</li>
+                    </ul>
+                </div>
+                <div class="topic-box">
+                    <h3>Scaling</h3>
+                    <ul>
+                        <li>Replica Sets (High Availability)</li>
+                        <li>Sharding (Horizontal Scaling)</li>
+                        <li>Shard Keys & Chunk Distribution</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card lvl-4">
+            <h2><i class="fas fa-code" style="color: var(--integration)"></i> 4. Backend Integration</h2>
+            <div class="grid">
+                <div class="topic-box">
+                    <h3>Mongoose (Node.js)</h3>
+                    <ul>
+                        <li>Schema & Model Definition</li>
+                        <li>Middleware (Pre/Post Hooks)</li>
+                        <li>Virtuals & Populate</li>
+                        <li>Validation Logic</li>
+                    </ul>
+                </div>
+                <div class="topic-box">
+                    <h3>Projects</h3>
+                    <ul>
+                        <li>REST API with Express</li>
+                        <li>E-commerce Backend</li>
+                        <li>Real-time Chat App</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card lvl-5">
+            <h2><i class="fas fa-briefcase" style="color: var(--realworld)"></i> 5. Interview Questions</h2>
+            <div class="topic-box" style="background: none; border: 1px solid rgba(0,0,0,0.1);">
+                <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <li>When to use SQL vs NoSQL?</li>
+                    <li>What is an Aggregation Pipeline?</li>
+                    <li>Explain the "Working Set" concept.</li>
+                    <li>How does a Primary node failover work?</li>
+                    <li>Difference between $slice and $limit?</li>
+                    <li>What is a Shard Key?</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Built for MongoDB Developers • 2026</p>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                icon.className = 'fas fa-moon';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                icon.className = 'fas fa-sun';
+            }
+        }
+    </script>
+</body>
+</html>

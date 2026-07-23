@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vue.js 3 Complete Roadmap (2026)</title>
+<style>
+  :root {
+    --text: #1f2328;
+    --muted: #57606a;
+    --border: #d8dee4;
+    --bg: #ffffff;
+    --bg-alt: #f6f8fa;
+    --accent: #2f6feb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', 'IBM Plex Sans', -apple-system, Segoe UI, Roboto, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  h1 {
+    font-size: 28px;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  h2 {
+    font-size: 20px;
+    margin-top: 44px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--border);
+  }
+  h3 {
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 6px;
+    color: var(--accent);
+  }
+  p { margin: 6px 0; }
+  ul {
+    margin: 6px 0 6px 0;
+    padding-left: 22px;
+  }
+  li { margin: 2px 0; }
+  .phase {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 14px 0;
+    background: var(--bg-alt);
+  }
+  .phase-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .duration {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .note {
+    font-style: italic;
+    color: var(--muted);
+    margin: 4px 0 10px;
+  }
+  .interview {
+    background: #fff8e6;
+    border-left: 3px solid #e0a300;
+    padding: 6px 12px;
+    margin: 8px 0;
+    font-size: 14.5px;
+  }
+  .interview strong { color: #7a5900; }
+  .flow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin: 8px 0;
+    white-space: pre;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0 20px;
+    font-size: 14.5px;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    text-align: left;
+  }
+  th {
+    background: var(--bg-alt);
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 600px) {
+    .cols { grid-template-columns: 1fr; }
+  }
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg-alt);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 14px;
+  }
+  .toc {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 24px;
+    margin: 20px 0;
+  }
+  .toc ul { columns: 2; }
+  .toc li { margin: 3px 0; }
+  footer {
+    margin-top: 60px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Vue.js 3 Complete Roadmap (2026)</h1>
+<p class="subtitle">Goal: Become a Vue.js developer capable of building production applications and clearing product-based company interviews.</p>
+<p class="subtitle">Recommended Duration: 8–10 weeks (2–3 hours/day)</p>
+
+<div class="toc">
+  <strong>Contents</strong>
+  <ul>
+    <li>Phase 1 — JS Prerequisites</li>
+    <li>Phase 2 — Vue Fundamentals</li>
+    <li>Phase 3 — Reactivity System</li>
+    <li>Phase 4 — Components</li>
+    <li>Phase 5 — Composition API</li>
+    <li>Phase 6 — Routing</li>
+    <li>Phase 7 — Pinia</li>
+    <li>Phase 8 — API Integration</li>
+    <li>Phase 9 — Forms</li>
+    <li>Phase 10 — Performance</li>
+    <li>Phase 11 — Authentication</li>
+    <li>Phase 12 — Enterprise Patterns</li>
+    <li>Phase 13 — TypeScript</li>
+    <li>Phase 14 — Testing</li>
+    <li>Phase 15 — Nuxt Basics</li>
+    <li>Phase 16 — Deployment</li>
+    <li>Real Projects to Build</li>
+    <li>Interview Questions</li>
+    <li>Feature Usage Frequency</li>
+    <li>Best Resources</li>
+    <li>Final Learning Outcome</li>
+  </ul>
+</div>
+
+<h2>Phase 1 — JavaScript Prerequisites (5 Days)</h2>
+<p class="note">Before learning Vue, you should be comfortable with modern JavaScript.</p>
+
+<div class="cols">
+  <div>
+    <h3>ES6+</h3>
+    <ul>
+      <li>let / const</li>
+      <li>Arrow functions</li>
+      <li>Template literals</li>
+      <li>Destructuring</li>
+      <li>Spread &amp; Rest operators</li>
+      <li>Default parameters</li>
+    </ul>
+    <h3>Objects &amp; Arrays</h3>
+    <ul>
+      <li>map()</li>
+      <li>filter()</li>
+      <li>reduce()</li>
+      <li>find()</li>
+      <li>some()</li>
+      <li>every()</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Async JavaScript</h3>
+    <ul>
+      <li>Promise</li>
+      <li>async / await</li>
+      <li>fetch()</li>
+      <li>try/catch</li>
+    </ul>
+    <h3>Modules</h3>
+    <ul>
+      <li>import</li>
+      <li>export</li>
+    </ul>
+    <h3>DOM</h3>
+    <ul>
+      <li>Event delegation</li>
+      <li>querySelector</li>
+      <li>localStorage</li>
+      <li>sessionStorage</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Exercises</h3>
+<ul>
+  <li>Todo in Vanilla JS</li>
+  <li>Weather API</li>
+  <li>Calculator</li>
+  <li>Notes App</li>
+</ul>
+
+<h2>Phase 2 — Vue Fundamentals (Week 1)</h2>
+
+<div class="phase">
+  <div class="phase-title">Installation</div>
+  <ul>
+    <li>Node</li>
+    <li>npm</li>
+    <li>Vite</li>
+  </ul>
+  <div class="flow">npm create vue@latest</div>
+
+  <p><strong>Project structure</strong></p>
+  <div class="flow">src
+  components
+  views
+  router
+  stores
+  assets
+  App.vue
+  main.js</div>
+</div>
+
+<div class="phase">
+  <div class="phase-title">Single File Components</div>
+  <p><strong>Learn:</strong> <code>&lt;template&gt;</code>, <code>&lt;script setup&gt;</code>, <code>&lt;style&gt;</code></p>
+  <p><strong>Practice:</strong> Header, Footer, Sidebar, Card, Button</p>
+</div>
+
+<div class="phase">
+  <div class="phase-title">Template Syntax</div>
+  <p><strong>Learn:</strong> Interpolation <code>{{ }}</code>, Binding <code>v-bind</code>, Events <code>v-on</code>, Shortcuts <code>:</code> and <code>@</code></p>
+  <p><strong>Practice:</strong> Counter, Theme switcher</p>
+</div>
+
+<div class="phase">
+  <div class="phase-title">Directives</div>
+  <p><strong>Master:</strong> v-if, v-else, v-show, v-for, :key, v-model, v-bind, v-on, v-html, v-text</p>
+  <div class="interview"><strong>Interview:</strong> Difference between v-if vs v-show</div>
+</div>
+
+<h2>Phase 3 — Reactivity System (Week 2)</h2>
+<p class="note">Most important interview topic.</p>
+
+<div class="phase">
+  <div class="phase-title">ref()</div>
+  <p><strong>Practice:</strong> Counter</p>
+</div>
+
+<div class="phase">
+  <div class="phase-title">reactive()</div>
+  <p><strong>Understand:</strong> Difference between ref() and reactive()</p>
+  <div class="interview"><strong>Interview:</strong> "When should you use reactive instead of ref?"</div>
+</div>
+
+<div class="phase">
+  <div class="phase-title">computed()</div>
+  <p><strong>Learn:</strong> Computed caching</p>
+  <p><strong>Practice:</strong> Shopping Cart Total Price</p>
+</div>
+
+<div class="phase">
+  <div class="phase-title">watch()</div>
+  <p><strong>Practice:</strong> Search API</p>
+</div>
+
+<div class="phase">
+  <div class="phase-title">watchEffect()</div>
+  <p><strong>Difference:</strong> watch vs watchEffect</p>
+</div>
+
+<div class="phase">
+  <div class="phase-title">readonly()</div>
+  <p>Understand immutable state</p>
+</div>
+
+<div class="phase">
+  <div class="phase-title">shallowRef()</div>
+  <div class="interview"><strong>Interview topic:</strong> Performance optimization</div>
+</div>
+
+<p><strong>Mini Project:</strong> Expense Tracker</p>
+
+<h2>Phase 4 — Components (Week 3)</h2>
+
+<div class="phase">
+  <div class="phase-title">Parent Child Communication</div>
+  <p>Props, Emits, Custom Events</p>
+  <p><strong>Practice:</strong> Dashboard</p>
+  <div class="flow">Parent
+  ↓
+  Cards
+  ↓
+  Chart</div>
+</div>
+
+<div class="phase">
+  <div class="phase-title">Slots</div>
+  <p>Default Slot, Named Slot, Scoped Slot</p>
+  <div class="interview"><strong>Interview:</strong> "When should we use scoped slots?"</div>
+</div>
+
+<div class="phase">
+  <div class="phase-title">Provide / Inject</div>
+  <p>Enterprise applications: Theme, Authentication, Language</p>
+</div>
+
+<div class="phase">
+  <div class="phase-title">Dynamic Components</div>
+  <p><code>&lt;component :is=""&gt;</code>, KeepAlive — used in dashboards</p>
+</div>
+
+<p><strong>Mini Project:</strong> Dynamic Dashboard</p>
+
+<h2>Phase 5 — Composition API (Week 4)</h2>
+<p class="note">The most important Vue feature.</p>
+
+<div class="phase">
+  <div class="phase-title">Learn</div>
+  <p>setup(), ref(), reactive(), computed(), watch(), watchEffect(), provide(), inject()</p>
+</div>
+
+<div class="phase">
+  <div class="phase-title">Composables</div>
+  <p>Create: useFetch(), useTheme(), useAuth(), usePagination(), useLocalStorage(), useDebounce(), useModal(), useSearch()</p>
+  <div class="interview"><strong>Interview:</strong> "What are composables?"</div>
+</div>
+
+<p><strong>Mini Project:</strong> Reusable API Library</p>
+
+<h2>Phase 6 — Routing (Week 5)</h2>
+<div class="phase">
+  <div class="phase-title">Vue Router</div>
+  <p>Static Routes, Dynamic Routes, Nested Routes, Named Routes, Route Params, Query Params, Lazy Loading, Navigation Guards, Authentication Guards, 404 Page, Breadcrumb</p>
+  <p><strong>Practice:</strong> Admin Dashboard — Login, Dashboard, Users, Settings, Profile</p>
+  <div class="interview"><strong>Interview:</strong> Navigation Guard — beforeEach, beforeResolve</div>
+</div>
+
+<h2>Phase 7 — Pinia (Week 6)</h2>
+<p class="note">Most companies use Pinia.</p>
+<div class="phase">
+  <p><strong>Learn:</strong> Store, State, Actions, Getters, Persistence, Modules, Store Composition</p>
+  <p><strong>Practice:</strong> Shopping Cart, Authentication, User Profile, Wishlist, Theme</p>
+  <div class="interview"><strong>Interview:</strong> Pinia vs Vuex</div>
+</div>
+
+<h2>Phase 8 — API Integration</h2>
+<div class="phase">
+  <p>Axios, Fetch, REST APIs — POST, PUT, DELETE, PATCH</p>
+  <p>File Upload, Loading State, Error State, Retry, Cancellation, Pagination, Search, Infinite Scroll</p>
+  <p><strong>Practice:</strong> Employee Dashboard</p>
+</div>
+
+<h2>Phase 9 — Forms</h2>
+<div class="phase">
+  <p>Validation, Nested Forms, Dynamic Forms, File Upload, Image Preview, Drag Drop, Date Picker, OTP, Login, Signup, Forgot Password</p>
+  <p><strong>Use:</strong> VueUse, vee-validate, Zod</p>
+  <p><strong>Mini Project:</strong> Authentication System</p>
+</div>
+
+<h2>Phase 10 — Performance</h2>
+<div class="phase">
+  <p>Lazy Loading, Dynamic Imports, Tree Shaking, Virtual List, Debounce, Throttle, Code Splitting, Memoization, Image Optimization, Caching, Suspense</p>
+  <div class="interview"><strong>Interview:</strong> Performance optimization</div>
+</div>
+
+<h2>Phase 11 — Authentication</h2>
+<div class="phase">
+  <p>JWT, Refresh Token, Access Token, Protected Routes, Role Based Access — Admin, Manager, User</p>
+  <p><strong>Practice:</strong> Complete Login System</p>
+</div>
+
+<h2>Phase 12 — Enterprise Patterns</h2>
+<div class="phase">
+  <p>Folder Structure, Feature Modules, Reusable Components, Services, API Layer, Constants, Utilities, Composables, Stores, Hooks, Environment Variables</p>
+  <div class="flow">src/
+  components/
+  pages/
+  stores/
+  router/
+  services/
+  composables/
+  layouts/
+  utils/
+  constants/
+  assets/
+  types/</div>
+</div>
+
+<h2>Phase 13 — TypeScript</h2>
+<div class="phase">
+  <p>Interfaces, Types, Generic, Props, Emit, Composable Typing, Store Typing, API Typing</p>
+</div>
+
+<h2>Phase 14 — Testing</h2>
+<div class="phase">
+  <p>Vitest, Vue Test Utils, Component Testing, Mock API, Unit Testing, Integration Testing</p>
+</div>
+
+<h2>Phase 15 — Nuxt Basics</h2>
+<div class="phase">
+  <p>SSR, SSG, Hydration, Middleware, Server API, SEO</p>
+</div>
+
+<h2>Phase 16 — Deployment</h2>
+<div class="phase">
+  <p>Vercel, Netlify, Firebase, Docker, Nginx, CI/CD, GitHub Actions</p>
+</div>
+
+<h2>Real Projects to Build</h2>
+<div class="cols">
+  <div>
+    <h3>Beginner</h3>
+    <ul>
+      <li>Counter</li>
+      <li>Calculator</li>
+      <li>Todo App</li>
+      <li>Weather App</li>
+      <li>Notes App</li>
+      <li>Quote Generator</li>
+    </ul>
+    <h3>Intermediate</h3>
+    <ul>
+      <li>Expense Tracker</li>
+      <li>Movie Search</li>
+      <li>Employee CRUD</li>
+      <li>Recipe Finder</li>
+      <li>Blogging Platform</li>
+      <li>Music Player</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Advanced</h3>
+    <ul>
+      <li>Admin Dashboard</li>
+      <li>E-commerce</li>
+      <li>Hospital Management</li>
+      <li>CRM</li>
+      <li>HRMS</li>
+      <li>Banking Dashboard</li>
+      <li>Analytics Dashboard</li>
+    </ul>
+    <h3>Expert</h3>
+    <ul>
+      <li>Jira Clone</li>
+      <li>Trello Clone</li>
+      <li>Slack Clone</li>
+      <li>Notion Clone</li>
+      <li>Airbnb Clone</li>
+      <li>Netflix Clone</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Frequently Asked Interview Questions</h2>
+<div class="cols">
+  <div>
+    <h3>Vue Basics</h3>
+    <ul>
+      <li>Why Vue?</li>
+      <li>Virtual DOM</li>
+      <li>Diffing Algorithm</li>
+      <li>Reactivity System</li>
+      <li>Template Compilation</li>
+      <li>Lifecycle Hooks</li>
+      <li>Props vs Emits</li>
+      <li>Computed vs Watch</li>
+      <li>ref vs reactive</li>
+      <li>watch vs watchEffect</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Advanced</h3>
+    <ul>
+      <li>Composition API</li>
+      <li>Composables</li>
+      <li>Suspense</li>
+      <li>Teleport</li>
+      <li>KeepAlive</li>
+      <li>Async Components</li>
+      <li>Dynamic Components</li>
+      <li>Slots / Scoped Slots</li>
+      <li>Provide/Inject</li>
+      <li>Pinia</li>
+      <li>Router Guards</li>
+    </ul>
+    <h3>Performance</h3>
+    <ul>
+      <li>Lazy Loading</li>
+      <li>Tree Shaking</li>
+      <li>Virtual Scrolling</li>
+      <li>Debounce</li>
+      <li>Code Splitting</li>
+      <li>Memory Leak Prevention</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Enterprise Features You Will Use Most</h2>
+<table>
+  <tr><th>Feature</th><th>Usage Frequency</th></tr>
+  <tr><td>Components</td><td>⭐⭐⭐⭐⭐</td></tr>
+  <tr><td>Composition API</td><td>⭐⭐⭐⭐⭐</td></tr>
+  <tr><td>Pinia</td><td>⭐⭐⭐⭐⭐</td></tr>
+  <tr><td>Vue Router</td><td>⭐⭐⭐⭐⭐</td></tr>
+  <tr><td>Axios/Fetch</td><td>⭐⭐⭐⭐⭐</td></tr>
+  <tr><td>Forms</td><td>⭐⭐⭐⭐⭐</td></tr>
+  <tr><td>Authentication</td><td>⭐⭐⭐⭐⭐</td></tr>
+  <tr><td>CRUD Operations</td><td>⭐⭐⭐⭐⭐</td></tr>
+  <tr><td>Tables</td><td>⭐⭐⭐⭐⭐</td></tr>
+  <tr><td>Pagination</td><td>⭐⭐⭐⭐⭐</td></tr>
+  <tr><td>Search &amp; Filtering</td><td>⭐⭐⭐⭐⭐</td></tr>
+  <tr><td>Modals</td><td>⭐⭐⭐⭐⭐</td></tr>
+  <tr><td>Charts</td><td>⭐⭐⭐⭐☆</td></tr>
+  <tr><td>File Upload</td><td>⭐⭐⭐⭐☆</td></tr>
+  <tr><td>Infinite Scroll</td><td>⭐⭐⭐⭐☆</td></tr>
+  <tr><td>TypeScript</td><td>⭐⭐⭐⭐☆</td></tr>
+  <tr><td>Testing</td><td>⭐⭐⭐⭐☆</td></tr>
+  <tr><td>SSR/Nuxt</td><td>⭐⭐⭐☆☆</td></tr>
+</table>
+
+<h2>Best Resources</h2>
+<div class="cols">
+  <div>
+    <h3>Official Documentation</h3>
+    <ul>
+      <li>Vue.js Documentation</li>
+      <li>Vue Router Documentation</li>
+      <li>Pinia Documentation</li>
+      <li>Vite Documentation</li>
+      <li>VueUse Documentation</li>
+      <li>Vitest Documentation</li>
+    </ul>
+    <h3>Books</h3>
+    <ul>
+      <li>Vue.js: Up and Running — Callum Macrae</li>
+      <li>Fullstack Vue (Vue 3 edition if available)</li>
+    </ul>
+  </div>
+  <div>
+    <h3>YouTube Channels</h3>
+    <ul>
+      <li>Vue Mastery</li>
+      <li>Vue School</li>
+      <li>Net Ninja</li>
+      <li>Traversy Media</li>
+      <li>Academind</li>
+    </ul>
+    <h3>Practice APIs</h3>
+    <ul>
+      <li>JSONPlaceholder</li>
+      <li>DummyJSON</li>
+      <li>Fake Store API</li>
+      <li>OpenWeather API</li>
+      <li>TMDB API</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Final Learning Outcome</h2>
+<p>After completing this roadmap, you should be able to:</p>
+<ul>
+  <li>Build scalable Vue 3 applications using the Composition API</li>
+  <li>Develop production-ready dashboards, admin panels, and CRUD systems</li>
+  <li>Manage application state with Pinia and navigation with Vue Router</li>
+  <li>Integrate REST APIs, handle authentication, optimize performance, and write maintainable code</li>
+  <li>Understand common enterprise project structures and best practices</li>
+  <li>Confidently answer Vue interview questions from beginner to advanced levels and tackle practical coding exercises</li>
+</ul>
+
+<footer>
+  This roadmap aligns well with the skills typically expected from a mid-level to senior Vue.js developer in modern frontend teams.
+</footer>
+
+</body>
+</html>

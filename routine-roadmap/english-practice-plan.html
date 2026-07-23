@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Practice Plan</title>
+<style>
+  :root{
+    --bg: #0e1116;
+    --panel: #161b22;
+    --panel-2: #1c222b;
+    --border: #262d38;
+    --text: #e6e9ef;
+    --muted: #8b94a3;
+    --accent: #4fd1c5;
+    --accent-2: #9f7aea;
+    --good: #4fd1c5;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(79,209,197,0.08), transparent 60%),
+      radial-gradient(1000px 500px at 100% 0%, rgba(159,122,234,0.08), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    line-height:1.55;
+    padding:0 0 80px;
+  }
+  header{
+    max-width:900px;
+    margin:0 auto;
+    padding:56px 24px 32px;
+    text-align:center;
+  }
+  header .eyebrow{
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--accent);
+    font-weight:600;
+  }
+  header h1{
+    font-size:clamp(28px,4vw,42px);
+    margin:10px 0 8px;
+    font-weight:800;
+  }
+  header p{
+    color:var(--muted);
+    max-width:560px;
+    margin:0 auto;
+    font-size:15px;
+  }
+
+  .container{ max-width:900px; margin:0 auto; padding:0 24px; display:flex; flex-direction:column; gap:24px;}
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:26px 28px;
+  }
+  .card h2{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:19px;
+    margin:0 0 14px;
+  }
+  .card h2 .num{
+    width:30px; height:30px;
+    border-radius:9px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#0e1116;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:13px;
+    flex-shrink:0;
+  }
+  .card p.desc{ color:var(--muted); font-size:14px; margin:0 0 14px;}
+
+  ul.plain{ margin:0; padding-left:20px; color:var(--text); font-size:14.5px;}
+  ul.plain li{ margin-bottom:6px; }
+  ul.plain li::marker{ color:var(--accent);}
+
+  a.link{
+    color:var(--accent);
+    text-decoration:none;
+    border-bottom:1px dashed rgba(79,209,197,0.4);
+  }
+  a.link:hover{ border-bottom-color:var(--accent);}
+
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
+  .chip{
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:6px 14px;
+    font-size:13.5px;
+    color:var(--text);
+  }
+
+  .emotion-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:10px;
+    margin-top:14px;
+  }
+  .emotion{
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:12px 10px;
+    text-align:center;
+    font-size:13.5px;
+  }
+  .emotion .em{ font-size:22px; display:block; margin-bottom:4px;}
+
+  .channels{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:10px;
+    margin-top:14px;
+  }
+  .channel{
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:12px 14px;
+    font-size:14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .channel a {
+    color: #e6e9ef;
+    text-decoration: none;
+  }
+  .channel .dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); flex-shrink:0;}
+
+  /* Daily routine checklist */
+  .routine{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:6px;
+  }
+  .routine-item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:12px 16px;
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease;
+    user-select:none;
+  }
+  .routine-item:hover{ border-color:var(--accent); }
+  .routine-item.done{
+    border-color:var(--good);
+    background:rgba(79,209,197,0.08);
+  }
+  .routine-item .box{
+    width:20px; height:20px;
+    border-radius:6px;
+    border:2px solid var(--muted);
+    flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px;
+    color:transparent;
+    transition:all .15s ease;
+  }
+  .routine-item.done .box{
+    border-color:var(--good);
+    background:var(--good);
+    color:#0e1116;
+  }
+  .routine-item .emoji{ font-size:18px; }
+  .routine-item .label{ flex:1; font-size:14.5px; }
+  .routine-item.done .label{ color:var(--muted); text-decoration:line-through; }
+
+  .progress-wrap{
+    margin-top:16px;
+  }
+  .progress-bar{
+    height:8px;
+    background:var(--panel-2);
+    border-radius:99px;
+    overflow:hidden;
+    border:1px solid var(--border);
+  }
+  .progress-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    transition:width .3s ease;
+  }
+  .progress-label{
+    display:flex; justify-content:space-between;
+    font-size:12.5px; color:var(--muted); margin-top:6px;
+  }
+
+  .goal-card{
+    text-align:center;
+    background:linear-gradient(135deg, rgba(79,209,197,0.10), rgba(159,122,234,0.10));
+    border:1px solid var(--border);
+  }
+  .goal-card p{ font-size:15px; margin:0; }
+  .goal-card .goal-eyebrow{ color:var(--accent); font-weight:700; letter-spacing:.08em; text-transform:uppercase; font-size:12px; margin-bottom:8px;}
+
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:12.5px;
+    margin-top:40px;
+  }
+
+  @media (max-width:520px){
+    .card{ padding:20px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Daily practice</div>
+  <h1>English Learning Resources</h1>
+  <p>A simple daily plan to build vocabulary, pronunciation, speaking confidence, listening skills, grammar, and natural conversation.</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2><span class="num">1</span>Vocabulary Building</h2>
+    <p class="desc">Vocabulary Practice Playlist</p>
+    <ul class="plain">
+      <li>Learn 5–10 new words every day.</li>
+      <li>Create your own sentences using each new word.</li>
+      <li>Revise previously learned vocabulary daily.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">2</span>Pronunciation Practice</h2>
+    <p class="desc">English Pronunciation Playlist · <span class="chip" style="padding:2px 10px;">Rachel's English (YouTube)</span></p>
+    <ul class="plain">
+      <li>Focus on stress, intonation, connected speech, and difficult sounds.</li>
+      <li>Record yourself and compare your pronunciation with native speakers.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">3</span>Daily Speaking Exercise</h2>
+    <ul class="plain">
+      <li>Choose one sentence every day.</li>
+      <li>Repeat it 20–30 times with different emotions.</li>
+      <li>Focus on pronunciation, fluency, confidence, and natural expression.</li>
+    </ul>
+    <div class="emotion-grid">
+      <div class="emotion"><span class="em">😊</span>Happy</div>
+      <div class="emotion"><span class="em">😢</span>Sad</div>
+      <div class="emotion"><span class="em">😠</span>Angry</div>
+      <div class="emotion"><span class="em">😲</span>Surprised</div>
+      <div class="emotion"><span class="em">💪</span>Confident</div>
+      <div class="emotion"><span class="em">😌</span>Calm</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">4</span>Daily Conversation Practice</h2>
+    <ul class="plain">
+      <li>Daily Conversation Practice Video — watch the last 10 minutes carefully.</li>
+      <li>English Conversation Practice</li>
+      <li>Practice the conversations with ChatGPT.</li>
+      <li>Store your daily conversations in your English Practice folder.</li>
+      <li>Focus on speaking using grammatically correct and natural English sentences.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">5</span>Recommended YouTube Channels</h2>
+    <div class="channels">
+      <div class="channel"><span class="dot"></span>
+        <a href="https://www.youtube.com/@SpeakEnglishWithClass" target="_blank" rel="noopener noreferrer">Speak English With Class</a>
+      </div>
+      <div class="channel"><span class="dot"></span>
+        <a href="https://www.youtube.com/@RachelsEnglish" target="_blank" rel="noopener noreferrer">Rachel's English</a>
+      </div>
+      <div class="channel"><span class="dot"></span>
+       <a href="https://www.youtube.com/@LearnEnglishWithTVSeries" target="_blank" rel="noopener noreferrer">Learn English with TV Series</a>
+        </div>
+      <div class="channel"><span class="dot"></span><a href="https://www.youtube.com/results?search_query=SpeakUp+Sessions+English+Podcast" target="_blank" rel="noopener noreferrer">SpeakUp Sessions English Podcast</a></div>
+      <div class="channel"><span class="dot"></span><a href="https://www.youtube.com/results?search_query=English+with+Lucy" target="_blank" rel="noopener noreferrer">English with Lucy</a></div>
+      <div class="channel"><span class="dot"></span><a href="https://www.youtube.com/results?search_query=BBC+Learning+English" target="_blank" rel="noopener noreferrer">BBC Learning English</a></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">6</span>Recommended Best YouTube Videos</h2>
+    <div class="channels">
+      <div class="channel"><span class="dot"></span>
+        <a href="https://www.youtube.com/playlist?list=PLlpAWCqcstzp3Kc-uA5g_3D6cAO5YKJ3D" target="_blank" rel="noopener noreferrer">English for Children with TV Series</a>
+      </div>
+      <div class="channel"><span class="dot"></span>
+        <a href="https://www.youtube.com/watch?v=Pae6tjZ2jxs" target="_blank" rel="noopener noreferrer">Day1 - English</a>
+      </div>
+      <div class="channel"><span class="dot"></span>
+       <a href="https://www.youtube.com/playlist?list=PLXEvG5UjvcmixxYM3Ny13nVGquwoDDGSZ" target="_blank" rel="noopener noreferrer">30-Day English Fluency Challenge | Speak English Daily</a>
+        </div>
+      <div class="channel"><span class="dot"></span><a href="https://www.youtube.com/watch?v=QAHqzImyr4g" target="_blank" rel="noopener noreferrer">Train Your Mouth To Speak English | Mouth Practice</a></div>
+      <div class="channel"><span class="dot"></span><a href="https://www.youtube.com/watch?v=WjyBGCZVohU&list=PLrqHrGoMJdTQSII_1SLk8a862w24hocVu" target="_blank" rel="noopener noreferrer">VOCABULARY | Rachel's</a></div>
+      <div class="channel"><span class="dot"></span><a href="https://www.youtube.com/playlist?list=PLD6B222E02447DC07" target="_blank" rel="noopener noreferrer">English Pronunciation Tips</a></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">7</span>Daily Routine (30–60 Minutes)</h2>
+    <p class="desc">Tap each item as you complete it. Progress resets when you reload the page.</p>
+    <div class="routine" id="routine">
+      <div class="routine-item" data-item="1">
+        <div class="box">✓</div><span class="emoji">📖</span><span class="label">Learn 5–10 new vocabulary words</span>
+      </div>
+      <div class="routine-item" data-item="2">
+        <div class="box">✓</div><span class="emoji">🎧</span><span class="label">Practice pronunciation for 10–15 minutes</span>
+      </div>
+      <div class="routine-item" data-item="3">
+        <div class="box">✓</div><span class="emoji">🗣️</span><span class="label">Repeat one sentence with different emotions</span>
+      </div>
+      <div class="routine-item" data-item="4">
+        <div class="box">✓</div><span class="emoji">💬</span><span class="label">Have a 10–20 minute conversation with ChatGPT</span>
+      </div>
+      <div class="routine-item" data-item="5">
+        <div class="box">✓</div><span class="emoji">📝</span><span class="label">Write a short paragraph or journal entry</span>
+      </div>
+      <div class="routine-item" data-item="6">
+        <div class="box">✓</div><span class="emoji">🎥</span><span class="label">Watch one English conversation or TV series clip</span>
+      </div>
+      <div class="routine-item" data-item="7">
+        <div class="box">✓</div><span class="emoji">🎙️</span><span class="label">Record yourself speaking and review your progress</span>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-label"><span id="progressText">0 / 7 completed</span><span id="progressPct">0%</span></div>
+    </div>
+  </div>
+
+  
+
+  <div class="card goal-card">
+    <div class="goal-eyebrow">Goal</div>
+    <p>Practice consistently every day to improve your vocabulary, pronunciation, speaking confidence, listening skills, grammar, and natural conversational English.</p>
+  </div>
+
+</div>
+
+<footer>Made for daily practice · stay consistent 🎯</footer>
+
+<script>
+  const items = document.querySelectorAll('.routine-item');
+  const total = items.length;
+  const fill = document.getElementById('progressFill');
+  const text = document.getElementById('progressText');
+  const pct = document.getElementById('progressPct');
+
+  function update(){
+    const done = document.querySelectorAll('.routine-item.done').length;
+    const percent = Math.round((done/total)*100);
+    fill.style.width = percent + '%';
+    text.textContent = done + ' / ' + total + ' completed';
+    pct.textContent = percent + '%';
+  }
+
+  items.forEach(item=>{
+    item.addEventListener('click', ()=>{
+      item.classList.toggle('done');
+      update();
+    });
+  });
+
+  update();
+</script>
+
+</body>
+</html>

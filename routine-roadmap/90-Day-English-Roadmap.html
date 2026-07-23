@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>90-Day English Conversation Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#10192E;
+    --ink-soft:#2A3652;
+    --paper:#F6F3EA;
+    --paper-raised:#FFFFFF;
+    --line:#E3DECD;
+    --gold:#C68A2E;
+    --gold-soft:#F3E3C4;
+    --teal:#2F6F63;
+    --teal-soft:#DCEAE6;
+    --rust:#A6432A;
+    --rust-soft:#F3DCD4;
+    --muted:#68624F;
+    --radius:14px;
+    --shadow: 0 1px 2px rgba(16,25,46,0.04), 0 8px 24px rgba(16,25,46,0.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+
+  /* Layout */
+  .shell{display:flex; max-width:1280px; margin:0 auto;}
+  nav.toc{
+    width:230px; flex-shrink:0;
+    position:sticky; top:0; height:100vh; overflow-y:auto;
+    padding:28px 18px 28px 24px;
+    border-right:1px solid var(--line);
+  }
+  nav.toc .brand{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:22px; display:block;
+  }
+  nav.toc a{
+    display:block; text-decoration:none; font-size:13.5px;
+    color:var(--ink-soft); padding:6px 10px; border-radius:8px;
+    margin-bottom:2px; transition:background .15s ease, color .15s ease;
+  }
+  nav.toc a:hover{background:var(--gold-soft); color:var(--ink);}
+  main{flex:1; min-width:0; padding:0 0 80px 0;}
+  .wrap{max-width:880px; margin:0 auto; padding:0 40px;}
+  section{padding-top:64px;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--teal); margin:0 0 8px 0;
+  }
+  section h2{font-size:26px; margin:0 0 18px 0;}
+  p{color:var(--ink-soft);}
+
+  /* Hero */
+  .hero{
+    background:var(--ink); color:#EFEBDF;
+    padding:56px 40px 48px 40px;
+    display:flex; align-items:center; gap:44px; flex-wrap:wrap;
+  }
+  .hero-text{flex:1; min-width:280px;}
+  .hero-text .eyebrow{color:#D9B76A;}
+  .hero-text h1{color:#FBF8F1; font-size:38px; margin:0 0 14px 0; line-height:1.12;}
+  .hero-text p{color:#C6C2B4; font-size:15.5px; max-width:480px;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:20px;}
+  .chip{
+    font-family:'JetBrains Mono',monospace; font-size:11.5px;
+    border:1px solid rgba(239,235,223,0.25); color:#EFEBDF;
+    padding:5px 11px; border-radius:100px;
+  }
+
+  /* Day ring */
+  .ring-card{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(239,235,223,0.14);
+    border-radius:20px; padding:22px 26px; text-align:center; width:230px;
+  }
+  .ring-wrap{position:relative; width:150px; height:150px; margin:0 auto 10px auto;}
+  .ring-wrap svg{transform:rotate(-90deg);}
+  .ring-label{
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+  }
+  .ring-label .num{font-family:'Fraunces',serif; font-size:34px; color:#FBF8F1; line-height:1;}
+  .ring-label .of{font-family:'JetBrains Mono',monospace; font-size:11px; color:#9B9788; margin-top:2px;}
+  .ring-controls{display:flex; align-items:center; justify-content:center; gap:10px; margin-top:8px;}
+  .ring-controls button{
+    width:28px; height:28px; border-radius:8px; border:1px solid rgba(239,235,223,0.25);
+    background:transparent; color:#EFEBDF; font-size:15px; cursor:pointer;
+  }
+  .ring-controls button:hover{background:rgba(239,235,223,0.12);}
+  .ring-meta{font-size:12px; color:#B7B2A2; margin-top:10px;}
+
+  /* Schedule bar */
+  .stackbar{display:flex; width:100%; height:34px; border-radius:8px; overflow:hidden; margin-bottom:18px;}
+  .stackbar div{display:flex; align-items:center; justify-content:center; font-size:10.5px; color:#fff; font-family:'JetBrains Mono',monospace;}
+  table{width:100%; border-collapse:collapse; font-size:14px;}
+  table.sched td, table.sched th{padding:9px 10px; border-bottom:1px solid var(--line); text-align:left;}
+  table.sched th{font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted);}
+  .dot{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:8px;}
+
+  /* Step cards */
+  .step{
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px 24px; margin-bottom:16px; box-shadow:var(--shadow);
+  }
+  .step-head{display:flex; align-items:baseline; gap:12px; margin-bottom:8px;}
+  .step-num{font-family:'JetBrains Mono',monospace; color:var(--gold); font-size:13px;}
+  .step h3{font-size:18px; margin:0;}
+  .step ul{margin:10px 0 0 0; padding-left:20px; color:var(--ink-soft); font-size:14.5px;}
+  .step .tip{
+    margin-top:12px; font-size:13.5px; background:var(--teal-soft); color:#1D4A41;
+    border-radius:8px; padding:9px 12px;
+  }
+
+  /* Pronunciation table */
+  table.pron{width:100%; border-collapse:collapse; font-size:14px; margin-top:8px;}
+  table.pron th{background:var(--ink); color:#EFEBDF; font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; padding:9px 12px; text-align:left;}
+  table.pron td{padding:10px 12px; border-bottom:1px solid var(--line);}
+  table.pron tr:nth-child(even) td{background:#FBF9F3;}
+  .ipa{font-family:'JetBrains Mono',monospace; color:var(--rust); font-size:13px;}
+
+  /* Translation traps */
+  .trap-grid{display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
+  .trap-grid .head{font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.06em; padding:10px 16px;}
+  .trap-grid .head.bad{background:var(--rust-soft); color:var(--rust);}
+  .trap-grid .head.good{background:var(--teal-soft); color:var(--teal);}
+  .trap-row{display:contents;}
+  .trap-cell{padding:12px 16px; border-top:1px solid var(--line); font-size:14px;}
+  .trap-cell.bad{color:#7A3120;}
+  .trap-cell.good{color:#1D4A41; font-weight:500;}
+
+  /* Weekly topics grid */
+  .topic-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
+  .topic-card{
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:10px;
+    padding:14px; text-align:center;
+  }
+  .topic-card .wk{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gold);}
+  .topic-card .tt{font-size:14px; margin-top:4px; font-weight:500;}
+
+  /* Interview accordion */
+  .qa{border:1px solid var(--line); border-radius:10px; margin-bottom:8px; overflow:hidden; background:var(--paper-raised);}
+  .qa-q{
+    padding:14px 18px; cursor:pointer; font-weight:500; display:flex; justify-content:space-between;
+    align-items:center; font-size:14.5px;
+  }
+  .qa-q:hover{background:#FBF9F3;}
+  .qa-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+  .qa-a p{padding:0 18px 16px 18px; font-size:14px; margin:0; color:var(--ink-soft);}
+  .qa-plus{font-family:'JetBrains Mono',monospace; color:var(--gold); font-size:16px;}
+  .qa.open .qa-a{max-height:200px;}
+
+  /* Resources */
+  .res-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  .res-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px;}
+  .res-card h4{margin:0 0 10px 0; font-family:'JetBrains Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--teal);}
+  .res-card a{display:block; font-size:14px; padding:6px 0; text-decoration:none; border-bottom:1px dashed var(--line); color:var(--ink-soft);}
+  .res-card a:last-child{border-bottom:none;}
+  .res-card a:hover{color:var(--gold);}
+
+  /* Mistakes */
+  .mistake-row{display:flex; gap:14px; margin-bottom:10px; align-items:flex-start;}
+  .mistake-row .x, .mistake-row .ok{
+    font-family:'JetBrains Mono',monospace; font-size:13px; padding:3px 8px; border-radius:6px; flex-shrink:0; margin-top:1px;
+  }
+  .mistake-row .x{background:var(--rust-soft); color:var(--rust);}
+  .mistake-row .ok{background:var(--teal-soft); color:var(--teal);}
+  .mistake-row .txt{font-size:14.5px;}
+
+  /* Tracker */
+  .tracker-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow);}
+  .tracker-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:8px;}
+  .streak{font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--gold);}
+  .habit-list{display:grid; grid-template-columns:1fr 1fr; gap:8px 20px;}
+  .habit{display:flex; align-items:center; gap:10px; padding:8px 4px; border-bottom:1px solid var(--line); font-size:14.5px;}
+  .habit input{width:17px; height:17px; accent-color:var(--teal);}
+  .habit.done label{text-decoration:line-through; color:var(--muted);}
+  .progress-outer{height:8px; background:var(--line); border-radius:100px; margin-top:16px; overflow:hidden;}
+  .progress-inner{height:100%; background:var(--teal); width:0%; transition:width .3s ease;}
+  .tracker-note{font-size:12.5px; color:var(--muted); margin-top:10px;}
+
+  /* 90-day plan */
+  .month-plan{display:flex; gap:16px; flex-wrap:wrap;}
+  .month{
+    flex:1; min-width:230px; background:var(--paper-raised); border:1px solid var(--line);
+    border-radius:var(--radius); padding:20px; position:relative; border-top:4px solid var(--gold);
+  }
+  .month:nth-child(2){border-top-color:var(--teal);}
+  .month:nth-child(3){border-top-color:var(--rust);}
+  .month .mnum{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted);}
+  .month h3{font-size:16px; margin:4px 0 10px 0;}
+  .month ul{padding-left:18px; margin:0; font-size:13.5px; color:var(--ink-soft);}
+
+  footer{
+    text-align:center; padding:40px; color:var(--muted); font-size:13px; border-top:1px solid var(--line); margin-top:20px;
+  }
+
+  @media (max-width: 900px){
+    nav.toc{display:none;}
+    .wrap{padding:0 20px;}
+    .res-grid, .topic-grid{grid-template-columns:1fr 1fr;}
+    .trap-grid{grid-template-columns:1fr;}
+    .habit-list{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <nav class="toc">
+    <span class="brand">Roadmap · 90 Days</span>
+    <a href="#overview">Overview</a>
+    <a href="#schedule">Daily Schedule</a>
+    <a href="#steps">7 Core Steps</a>
+    <a href="#pronunciation">Pronunciation Lab</a>
+    <a href="#traps">Stop Translating</a>
+    <a href="#topics">Weekly Speaking Topics</a>
+    <a href="#interview">Mock Interview</a>
+    <a href="#resources">Free Resources</a>
+    <a href="#mistakes">Common Mistakes</a>
+    <a href="#tracker">Progress Tracker</a>
+    <a href="#plan">90-Day Plan</a>
+  </nav>
+
+  <main>
+    <section class="hero" id="overview">
+      <div class="hero-text">
+        <p class="eyebrow">Intermediate → Advanced</p>
+        <h1>90 days to speak<br>without translating.</h1>
+        <p>1.5–2 hours a day across listening, shadowing, speaking, vocabulary, grammar, reading and writing — built for meetings, interviews, and everyday conversation.</p>
+        <div class="chips">
+          <span class="chip">~900 new words</span>
+          <span class="chip">12 speaking topics</span>
+          <span class="chip">3 monthly stages</span>
+          <span class="chip">Daily habit tracker</span>
+        </div>
+      </div>
+      <div class="ring-card">
+        <div class="ring-wrap">
+          <svg width="150" height="150" viewBox="0 0 150 150">
+            <circle cx="75" cy="75" r="64" fill="none" stroke="rgba(239,235,223,0.15)" stroke-width="10"/>
+            <circle id="ringProgress" cx="75" cy="75" r="64" fill="none" stroke="#D9B76A" stroke-width="10"
+              stroke-linecap="round" stroke-dasharray="402" stroke-dashoffset="402"/>
+          </svg>
+          <div class="ring-label">
+            <div class="num" id="dayNum">1</div>
+            <div class="of">OF 90 DAYS</div>
+          </div>
+        </div>
+        <div class="ring-controls">
+          <button onclick="changeDay(-1)">−</button>
+          <span class="mono" style="font-size:12px;color:#B7B2A2;">Day</span>
+          <button onclick="changeDay(1)">+</button>
+        </div>
+        <div class="ring-meta" id="ringMeta">Week 1 · Month 1 · 89 days to go</div>
+      </div>
+    </section>
+
+    <section id="schedule">
+      <p class="eyebrow">Every Day</p>
+      <h2>The 1.5–2 hour schedule</h2>
+      <div class="stackbar">
+        <div style="width:16.7%; background:#2F6F63;">Listening 20</div>
+        <div style="width:16.7%; background:#3E8577;">Shadowing 20</div>
+        <div style="width:25%; background:#C68A2E;">Speaking 30</div>
+        <div style="width:12.5%; background:#D9A441;">Vocab 15</div>
+        <div style="width:12.5%; background:#A6432A;">Grammar 15</div>
+        <div style="width:16.7%; background:#10192E;">Reading 20</div>
+        <div style="width:8.3%; background:#68624F;">Write 10</div>
+      </div>
+      <table class="sched">
+        <tr><th>Activity</th><th>Duration</th><th>Focus</th></tr>
+        <tr><td><span class="dot" style="background:#2F6F63;"></span>Listening</td><td class="mono">20 min</td><td>Pronunciation, sentence rhythm, natural speech</td></tr>
+        <tr><td><span class="dot" style="background:#3E8577;"></span>Shadowing</td><td class="mono">20 min</td><td>Copying speed, intonation, pauses</td></tr>
+        <tr><td><span class="dot" style="background:#C68A2E;"></span>Speaking Practice</td><td class="mono">30 min</td><td>Narrating your day out loud</td></tr>
+        <tr><td><span class="dot" style="background:#D9A441;"></span>Vocabulary</td><td class="mono">15 min</td><td>10 words/day, by topic</td></tr>
+        <tr><td><span class="dot" style="background:#A6432A;"></span>Grammar</td><td class="mono">15 min</td><td>Tenses, modals, conditionals</td></tr>
+        <tr><td><span class="dot" style="background:#10192E;"></span>Reading</td><td class="mono">20 min</td><td>Aloud, for rhythm and punctuation</td></tr>
+        <tr><td><span class="dot" style="background:#68624F;"></span>Writing</td><td class="mono">10 min</td><td>A short daily journal entry</td></tr>
+      </table>
+    </section>
+
+    <section id="steps">
+      <p class="eyebrow">Method</p>
+      <h2>The 7 core steps</h2>
+
+      <div class="step">
+        <div class="step-head"><span class="step-num">01</span><h3>Listening</h3></div>
+        <ul>
+          <li>Weeks 1–4: BBC Learning English, English with Lucy, Speak English with Vanessa</li>
+          <li>Later: TED Talks, podcasts, interviews, documentaries</li>
+          <li>Method: listen once without pausing → listen again carefully → repeat what you hear</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <div class="step-head"><span class="step-num">02</span><h3>Shadowing</h3></div>
+        <ul>
+          <li>Pick a 1-minute video. For every sentence: play → pause → repeat exactly</li>
+          <li>Copy pronunciation, speed, intonation, emotion, and pauses — not just the words</li>
+        </ul>
+        <div class="tip">This is the highest-leverage 20 minutes of your day. If you only have time for one activity, choose this.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-head"><span class="step-num">03</span><h3>Speaking Practice</h3></div>
+        <ul>
+          <li><b>Morning:</b> "Today I have office." · "I need to finish my tasks." · "I have a meeting at 11."</li>
+          <li><b>While cooking:</b> "I'm cutting vegetables." · "I'm making tea." · "The food smells delicious."</li>
+          <li><b>While walking:</b> describe what you see — "I can see a white car." · "People are walking quickly."</li>
+        </ul>
+        <div class="tip">Goal: speak continuously, out loud, without stopping to correct mistakes.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-head"><span class="step-num">04</span><h3>Vocabulary Building</h3></div>
+        <ul>
+          <li>Learn by topic, not at random: Week 1 Office, Week 2 Travel, Week 3 Shopping, Week 4 Technology</li>
+          <li>For every word capture: meaning, pronunciation, an example sentence, a synonym, an antonym</li>
+          <li>Example: instead of "good" → excellent, outstanding, fantastic, impressive, exceptional</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <div class="step-head"><span class="step-num">05</span><h3>Grammar Revision</h3></div>
+        <ul>
+          <li><b>Month 1:</b> present, past and future tenses; modal verbs (can, could, should, would, must)</li>
+          <li><b>Month 2:</b> conditionals, passive voice, reported speech, relative clauses</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <div class="step-head"><span class="step-num">06</span><h3>Reading</h3></div>
+        <ul>
+          <li>Read aloud daily from BBC News, Medium articles, The Guardian, or beginner-friendly novels</li>
+          <li>Read slowly — pay attention to pronunciation, punctuation, and intonation</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <div class="step-head"><span class="step-num">07</span><h3>Writing</h3></div>
+        <ul>
+          <li>10 minutes daily in a journal: "Today I completed my tasks." · "I learned Vue.js." · "Tomorrow I will practice speaking."</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="pronunciation">
+      <p class="eyebrow">Added · Missing From Most Plans</p>
+      <h2>Pronunciation lab</h2>
+      <p>The original plan names sounds to practice but not how to shape them. Here's the "how," with minimal pairs — say each pair back to back until they sound distinct.</p>
+      <table class="pron">
+        <tr><th>Sound</th><th>How to make it</th><th>Practice words</th><th>Minimal pairs</th></tr>
+        <tr><td>TH <span class="ipa">/θ/ /ð/</span></td><td>Tongue tip lightly between teeth, push air through — don't say "t" or "d"</td><td>think, thirty, thank, this, that</td><td><span class="ipa">tin / thin</span></td></tr>
+        <tr><td>V vs W</td><td>V: top teeth touch bottom lip. W: round lips, no teeth contact</td><td>very, wine, voice, west</td><td><span class="ipa">vet / wet</span></td></tr>
+        <tr><td>Long/short vowel</td><td>Ship = short, quick "i". Sheep = longer "ee"</td><td>ship/sheep, live/leave, bit/beat</td><td><span class="ipa">ship / sheep</span></td></tr>
+        <tr><td>R vs L</td><td>R: tongue curls back, doesn't touch roof. L: tongue tip touches behind front teeth</td><td>right, light, road, load</td><td><span class="ipa">right / light</span></td></tr>
+        <tr><td>Word stress</td><td>Say the bold syllable louder and longer, others fast and light</td><td><b>de</b>velopment, conver<b>sa</b>tion, oppor<b>tu</b>nity, com<b>for</b>table, <b>con</b>fidence</td><td>—</td></tr>
+      </table>
+      <div class="tip" style="margin-top:14px;">Record yourself every Sunday reading the same 5 sentences. Compare week to week — you're listening for clearer consonants and steadier stress, not a different accent.</div>
+    </section>
+
+    <section id="traps">
+      <p class="eyebrow">Added · Direct From Hindi</p>
+      <h2>Stop translating: 10 common traps</h2>
+      <p>These are the sentences most Hindi speakers build by translating word-for-word. Read the left column, then say the right column out loud three times.</p>
+      <div class="trap-grid">
+        <div class="head bad">Hindi-influenced</div>
+        <div class="head good">Natural English</div>
+
+        <div class="trap-cell bad">I am having a doubt.</div>
+        <div class="trap-cell good">I have a question. / I'm not sure about this.</div>
+
+        <div class="trap-cell bad">Myself Nisha.</div>
+        <div class="trap-cell good">I'm Nisha. / My name is Nisha.</div>
+
+        <div class="trap-cell bad">What is your good name?</div>
+        <div class="trap-cell good">What's your name?</div>
+
+        <div class="trap-cell bad">I am understanding this.</div>
+        <div class="trap-cell good">I understand this.</div>
+
+        <div class="trap-cell bad">Please do the needful.</div>
+        <div class="trap-cell good">Please take care of this. / Please handle this.</div>
+
+        <div class="trap-cell bad">I will revert you back.</div>
+        <div class="trap-cell good">I'll get back to you.</div>
+
+        <div class="trap-cell bad">Kindly tell me the same.</div>
+        <div class="trap-cell good">Could you let me know?</div>
+
+        <div class="trap-cell bad">He is knowing the answer.</div>
+        <div class="trap-cell good">He knows the answer.</div>
+
+        <div class="trap-cell bad">I have a suggestion, isn't it?</div>
+        <div class="trap-cell good">I have a suggestion — does that work?</div>
+
+        <div class="trap-cell bad">Today only I will finish it.</div>
+        <div class="trap-cell good">I'll finish it today.</div>
+      </div>
+    </section>
+
+    <section id="topics">
+      <p class="eyebrow">Weeks 1–12</p>
+      <h2>Weekly speaking topics</h2>
+      <p>Speak for 3–5 minutes, alone or recorded, on each topic — no notes after the first minute.</p>
+      <div class="topic-grid">
+        <div class="topic-card"><div class="wk">Week 1</div><div class="tt">Introduce Yourself</div></div>
+        <div class="topic-card"><div class="wk">Week 2</div><div class="tt">Describe Your Family</div></div>
+        <div class="topic-card"><div class="wk">Week 3</div><div class="tt">Talk About Your City</div></div>
+        <div class="topic-card"><div class="wk">Week 4</div><div class="tt">Your Daily Routine</div></div>
+        <div class="topic-card"><div class="wk">Week 5</div><div class="tt">Your Work</div></div>
+        <div class="topic-card"><div class="wk">Week 6</div><div class="tt">Technology</div></div>
+        <div class="topic-card"><div class="wk">Week 7</div><div class="tt">Movies</div></div>
+        <div class="topic-card"><div class="wk">Week 8</div><div class="tt">Travel</div></div>
+        <div class="topic-card"><div class="wk">Week 9</div><div class="tt">Success</div></div>
+        <div class="topic-card"><div class="wk">Week 10</div><div class="tt">Artificial Intelligence</div></div>
+        <div class="topic-card"><div class="wk">Week 11</div><div class="tt">Climate Change</div></div>
+        <div class="topic-card"><div class="wk">Week 12</div><div class="tt">Future Goals</div></div>
+      </div>
+    </section>
+
+    <section id="interview">
+      <p class="eyebrow">Added · Professional Goal</p>
+      <h2>Mock interview practice</h2>
+      <p>The plan mentions "practice interviews" in Month 3 — here are 5 real questions to rehearse out loud, with a model answer shape. Tap to expand.</p>
+
+      <div class="qa" onclick="toggleQA(this)">
+        <div class="qa-q">Tell me about yourself. <span class="qa-plus">+</span></div>
+        <div class="qa-a"><p>Structure: current role → 1–2 relevant achievements with a number → why you're interested in this move. Keep it under 60 seconds — this isn't your full history, it's a trailer.</p></div>
+      </div>
+      <div class="qa" onclick="toggleQA(this)">
+        <div class="qa-q">Why do you want to leave your current company? <span class="qa-plus">+</span></div>
+        <div class="qa-a"><p>Stay forward-looking: talk about what you're moving toward, not what you're escaping. Avoid criticizing your current employer directly.</p></div>
+      </div>
+      <div class="qa" onclick="toggleQA(this)">
+        <div class="qa-q">Describe a challenge you faced at work. <span class="qa-plus">+</span></div>
+        <div class="qa-a"><p>Use STAR: Situation, Task, Action, Result. End on the result with a measurable outcome if you can — "reduced load time by 40%," not just "it worked well."</p></div>
+      </div>
+      <div class="qa" onclick="toggleQA(this)">
+        <div class="qa-q">Where do you see yourself in five years? <span class="qa-plus">+</span></div>
+        <div class="qa-a"><p>Connect your growth to the kind of work the role offers, so the answer feels relevant to them, not just to you.</p></div>
+      </div>
+      <div class="qa" onclick="toggleQA(this)">
+        <div class="qa-q">Do you have any questions for us? <span class="qa-plus">+</span></div>
+        <div class="qa-a"><p>Always have 2–3 ready: about the team's current priorities, how success is measured in the role, and what a typical first quarter looks like.</p></div>
+      </div>
+    </section>
+
+    <section id="resources">
+      <p class="eyebrow">Free & Ready to Use</p>
+      <h2>Best free resources</h2>
+      <div class="res-grid">
+        <div class="res-card">
+          <h4>YouTube</h4>
+          <a href="https://www.youtube.com/@bbclearningenglish" target="_blank">BBC Learning English</a>
+          <a href="https://www.youtube.com/@EnglishwithLucy" target="_blank">English with Lucy</a>
+          <a href="https://www.youtube.com/@SpeakEnglishWithVanessa" target="_blank">Speak English with Vanessa</a>
+          <a href="https://www.youtube.com/results?search_query=learn+english+with+tv+series" target="_blank">Learn English with TV Series</a>
+          <a href="https://www.youtube.com/@rachelsenglish" target="_blank">Rachel's English (Pronunciation)</a>
+        </div>
+        <div class="res-card">
+          <h4>Podcasts</h4>
+          <a href="https://www.bbc.co.uk/learningenglish/english/features/the-english-we-speak" target="_blank">The English We Speak (BBC)</a>
+          <a href="https://www.allearsenglish.com/" target="_blank">All Ears English</a>
+          <a href="https://teacherluke.co.uk/" target="_blank">Luke's English Podcast</a>
+        </div>
+        <div class="res-card">
+          <h4>Apps</h4>
+          <a href="https://elsaspeak.com/" target="_blank">ELSA Speak — Pronunciation</a>
+          <a href="https://apps.ankiweb.net/" target="_blank">Anki — Flashcards</a>
+          <a href="https://www.duolingo.com/" target="_blank">Duolingo — Vocabulary</a>
+          <a href="https://www.hellotalk.com/" target="_blank">HelloTalk — Language Exchange</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="mistakes">
+      <p class="eyebrow">Habits</p>
+      <h2>Common mistakes to avoid</h2>
+      <div class="mistake-row"><span class="x">avoid</span><span class="txt">Translating every sentence from Hindi.</span></div>
+      <div class="mistake-row"><span class="ok">instead</span><span class="txt">Think directly in English.</span></div>
+      <div class="mistake-row"><span class="x">avoid</span><span class="txt">Memorizing words without using them.</span></div>
+      <div class="mistake-row"><span class="ok">instead</span><span class="txt">Use every new word in 3–5 different sentences.</span></div>
+      <div class="mistake-row"><span class="x">avoid</span><span class="txt">Speaking only once a week.</span></div>
+      <div class="mistake-row"><span class="ok">instead</span><span class="txt">Speak every day, even for a few minutes.</span></div>
+      <div class="mistake-row"><span class="x">avoid</span><span class="txt">Being afraid of making mistakes.</span></div>
+      <div class="mistake-row"><span class="ok">instead</span><span class="txt">Fluency comes through consistent practice, not perfection.</span></div>
+      <div class="mistake-row"><span class="x">avoid</span><span class="txt">Watching English videos without speaking.</span></div>
+      <div class="mistake-row"><span class="ok">instead</span><span class="txt">For every 30 minutes of listening, spend 15–20 minutes speaking.</span></div>
+    </section>
+
+    <section id="tracker">
+      <p class="eyebrow">Today</p>
+      <h2>Progress tracker</h2>
+      <div class="tracker-card">
+        <div class="tracker-top">
+          <span class="mono" style="font-size:13px; color:var(--muted);">Check off today's habits</span>
+          <span class="streak" id="streakCount">0 / 8 done</span>
+        </div>
+        <div class="habit-list" id="habitList">
+          <div class="habit"><input type="checkbox" onchange="updateTracker()"><label>Listening (20 min)</label></div>
+          <div class="habit"><input type="checkbox" onchange="updateTracker()"><label>Shadowing (20 min)</label></div>
+          <div class="habit"><input type="checkbox" onchange="updateTracker()"><label>Speaking (30 min)</label></div>
+          <div class="habit"><input type="checkbox" onchange="updateTracker()"><label>10 new words</label></div>
+          <div class="habit"><input type="checkbox" onchange="updateTracker()"><label>Grammar revision</label></div>
+          <div class="habit"><input type="checkbox" onchange="updateTracker()"><label>Reading aloud</label></div>
+          <div class="habit"><input type="checkbox" onchange="updateTracker()"><label>Journal writing</label></div>
+          <div class="habit"><input type="checkbox" onchange="updateTracker()"><label>Sunday voice recording</label></div>
+        </div>
+        <div class="progress-outer"><div class="progress-inner" id="progressBar"></div></div>
+        <div class="tracker-note">This tracker resets when you reload the page — it's for today's session only. For a permanent log, use a notebook or spreadsheet alongside the day counter above.</div>
+      </div>
+    </section>
+
+    <section id="plan">
+      <p class="eyebrow">The Arc</p>
+      <h2>The 90-day plan</h2>
+      <div class="month-plan">
+        <div class="month">
+          <div class="mnum">MONTH 01</div>
+          <h3>Build the Foundation</h3>
+          <ul>
+            <li>Improve everyday conversations</li>
+            <li>Revise essential grammar</li>
+            <li>Learn 250–300 useful words</li>
+            <li>Speak for 2–3 minutes continuously</li>
+          </ul>
+        </div>
+        <div class="month">
+          <div class="mnum">MONTH 02</div>
+          <h3>Improve Fluency</h3>
+          <ul>
+            <li>Discuss work and technology</li>
+            <li>Improve pronunciation and intonation</li>
+            <li>Learn advanced sentence structures</li>
+            <li>Speak for 5–7 minutes confidently</li>
+          </ul>
+        </div>
+        <div class="month">
+          <div class="mnum">MONTH 03</div>
+          <h3>Speak Like a Professional</h3>
+          <ul>
+            <li>Practice interviews</li>
+            <li>Participate in workplace discussions</li>
+            <li>Deliver short presentations</li>
+            <li>Speak naturally for 10 minutes without hesitation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Consistency matters more than intensity. Practice a little every day — that's the whole plan.
+    </footer>
+  </main>
+</div>
+
+<script>
+  const totalDays = 90;
+  const circumference = 2 * Math.PI * 64;
+  let currentDay = 1;
+
+  function renderDay(){
+    document.getElementById('dayNum').textContent = currentDay;
+    const progress = currentDay / totalDays;
+    const offset = circumference - progress * circumference;
+    document.getElementById('ringProgress').style.strokeDasharray = circumference;
+    document.getElementById('ringProgress').style.strokeDashoffset = offset;
+    const week = Math.ceil(currentDay / 7);
+    const month = Math.ceil(currentDay / 30);
+    const remaining = totalDays - currentDay;
+    document.getElementById('ringMeta').textContent =
+      `Week ${week} · Month ${month} · ${remaining} day${remaining===1?'':'s'} to go`;
+  }
+  function changeDay(delta){
+    currentDay = Math.min(90, Math.max(1, currentDay + delta));
+    renderDay();
+  }
+  renderDay();
+
+  function toggleQA(el){
+    el.classList.toggle('open');
+    const plus = el.querySelector('.qa-plus');
+    plus.textContent = el.classList.contains('open') ? '−' : '+';
+  }
+
+  function updateTracker(){
+    const boxes = document.querySelectorAll('#habitList input[type=checkbox]');
+    let done = 0;
+    boxes.forEach(b=>{
+      b.parentElement.classList.toggle('done', b.checked);
+      if(b.checked) done++;
+    });
+    document.getElementById('streakCount').textContent = `${done} / ${boxes.length} done`;
+    document.getElementById('progressBar').style.width = (done/boxes.length*100) + '%';
+  }
+</script>
+
+</body>
+</html>
