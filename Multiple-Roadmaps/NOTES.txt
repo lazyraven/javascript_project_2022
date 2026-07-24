@@ -8,8 +8,8 @@ https://claude.ai/share/6ee4a6e5-cfbe-4841-908d-0e59a3de0a24 - Java Basic Roadma
 help from https://chatgpt.com/g/g-p-69de2454b34081918a3d7fb6e61cbf81-best-prompt/c/6a1993dc-8efc-8321-879c-0802055aa3c0
 
 
-FOR > https://lazyraven.github.io/developer-study-hub/#js-basics
-prompt for mern qu-ans on CLAUDE AI
+fOR > https://lazyraven.github.io/developer-study-hub/#js-basics
+prompt for mern qu-ans on CLAUDE AI - https://claude.ai/share/c0e14a5e-4dd0-4cfa-b6db-6a057c12eb71 | https://claude.ai/chat/3f939620-87f0-4b47-a1f1-d3ca8fa1dcba
 
 Generate step-by-step interview questions and answers for JavaScript, React, and Node.js from basic to advanced, including coding questions, practical examples, and interviewer-ready answers.
 with a Table of Contents.
