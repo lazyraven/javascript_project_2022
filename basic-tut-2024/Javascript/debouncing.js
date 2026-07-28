@@ -12,6 +12,8 @@ function debounce(fx, delay) {
   return function (text) {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
+      document.getElementById("result").innerHTML = 'Debounce Result: ' + text;
+      document.getElementById("result").style.color = "green";
       fx(text);
     }, delay);
   };
@@ -19,7 +21,8 @@ function debounce(fx, delay) {
 
 const debounceFn = debounce(printInputText, 2000);
 
-// inputElement.addEventListener("input", (event) => {
 inputElement?.addEventListener("input", (event) => {
+  // console.log(" event triggered",event.target.value);
   debounceFn(event.target.value);
+  console.log(" event triggered",event.target.value);
 });
