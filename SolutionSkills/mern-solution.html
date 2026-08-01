@@ -14,6 +14,7 @@
     --accent-js: #f7df1e;
     --accent-react: #61dafb;
     --accent-node: #68a063;
+    --accent-mongo: #00ed64;
     --text: #e2e8f0;
     --text-muted: #8892a4;
     --text-dim: #505a6e;
@@ -112,6 +113,7 @@
   .js-dot { background: var(--accent-js); }
   .react-dot { background: var(--accent-react); }
   .node-dot { background: var(--accent-node); }
+  .mongo-dot { background: var(--accent-mongo); }
 
   .toc-item {
     display: block;
@@ -161,6 +163,7 @@
   .badge-js  { background: rgba(247,223,30,0.12); color: var(--accent-js); border: 1px solid rgba(247,223,30,0.25); }
   .badge-react { background: rgba(97,218,251,0.10); color: var(--accent-react); border: 1px solid rgba(97,218,251,0.2); }
   .badge-node { background: rgba(104,160,99,0.12); color: var(--accent-node); border: 1px solid rgba(104,160,99,0.25); }
+  .badge-mongo { background: rgba(0,237,100,0.10); color: var(--accent-mongo); border: 1px solid rgba(0,237,100,0.22); }
 
   /* ── Section ── */
   .section { margin-bottom: 64px; }
@@ -188,6 +191,7 @@
   .stripe-js    { background: var(--accent-js); }
   .stripe-react { background: var(--accent-react); }
   .stripe-node  { background: var(--accent-node); }
+  .stripe-mongo { background: var(--accent-mongo); }
 
   /* ── Q&A Card ── */
   .qa-card {
@@ -455,23 +459,34 @@
     <a class="toc-item" href="#node-express">Express & APIs</a>
     <a class="toc-item" href="#node-advanced">Advanced Node</a>
   </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label"><span class="dot mongo-dot"></span>MongoDB</div>
+    <a class="toc-item" href="#mongo-basics">Core Concepts</a>
+    <a class="toc-item" href="#mongo-crud">CRUD & Queries</a>
+    <a class="toc-item" href="#mongo-aggregation">Aggregation</a>
+    <a class="toc-item" href="#mongo-indexes">Indexes & Performance</a>
+    <a class="toc-item" href="#mongo-advanced">Advanced MongoDB</a>
+  </div>
 </nav>
 
 <!-- ══════════════ MAIN ══════════════ -->
 <main class="main" id="mainContent">
 
   <div class="page-hero">
-    <h1>JS · React · Node<br>Interview Prep</h1>
+    <h1>JS · React · Node<br>· MongoDB Prep</h1>
     <p style="color:var(--text-muted);font-size:14px;max-width:540px;">Comprehensive question bank from basic to advanced — with code examples, mental models, and interviewer-ready answers.</p>
     <div class="badge-row">
       <span class="badge badge-js">⬡ JavaScript</span>
       <span class="badge badge-react">⬡ React</span>
       <span class="badge badge-node">⬡ Node.js</span>
+      <span class="badge badge-mongo">⬡ MongoDB</span>
     </div>
     <div class="stats-bar">
       <div class="stat"><div class="stat-num" style="color:var(--accent-js)">20</div><div class="stat-lbl">JS Questions</div></div>
       <div class="stat"><div class="stat-num" style="color:var(--accent-react)">20</div><div class="stat-lbl">React Questions</div></div>
       <div class="stat"><div class="stat-num" style="color:var(--accent-node)">15</div><div class="stat-lbl">Node Questions</div></div>
+      <div class="stat"><div class="stat-num" style="color:var(--accent-mongo)">15</div><div class="stat-lbl">MongoDB Questions</div></div>
     </div>
   </div>
 
@@ -2258,6 +2273,657 @@ router.<span class="fn">get</span>(<span class="str">"/me"</span>, auth, <span c
         </div>
       </div>
     </div>
+  </div>
+
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║          MONGODB             ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+
+  <!-- MongoDB Core Concepts -->
+  <div class="section" id="mongo-basics">
+    <div class="section-heading">
+      <div class="section-stripe stripe-mongo"></div>
+      <h2>MongoDB — Core Concepts</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('mongo-basics')">⊕ Expand all</button>
+
+    <!-- M1 -->
+    <div class="qa-card" data-q="What is MongoDB? How does it differ from relational databases?">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">M1</span>
+        <span class="q-text">What is MongoDB? How does it differ from a relational database like MySQL?</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>MongoDB is a <strong>document-oriented NoSQL database</strong> that stores data as BSON (Binary JSON) documents inside collections, rather than rows inside tables.</p>
+          <ul>
+            <li><strong>Schema</strong>: MongoDB is schema-flexible — documents in the same collection can have different fields. RDBMS enforces a rigid schema.</li>
+            <li><strong>Joins</strong>: MongoDB avoids joins by embedding related data; RDBMS normalises data across tables.</li>
+            <li><strong>Scaling</strong>: MongoDB scales horizontally via sharding; RDBMS typically scales vertically.</li>
+            <li><strong>Transactions</strong>: MongoDB supports multi-document ACID transactions (since v4.0), but RDBMS has native join-based transactions.</li>
+          </ul>
+<pre><span class="cm">// RDBMS table row</span>
+{ id: 1, name: "Alice", city: "Delhi" }
+
+<span class="cm">// MongoDB document — nested, flexible</span>
+{
+  _id: ObjectId(<span class="str">"64a..."</span>),
+  name: <span class="str">"Alice"</span>,
+  address: { city: <span class="str">"Delhi"</span>, pin: <span class="str">"110001"</span> },
+  hobbies: [<span class="str">"reading"</span>, <span class="str">"coding"</span>],
+  createdAt: ISODate(<span class="str">"2024-01-15"</span>)
+}</pre>
+          <div class="tip" style="border-color:var(--accent-mongo);background:rgba(0,237,100,0.06);color:#a8f0c6;"><strong style="color:var(--accent-mongo)">When to choose MongoDB:</strong> Rapidly evolving schemas, hierarchical/nested data, high write throughput, horizontal scalability needs.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- M2 -->
+    <div class="qa-card" data-q="What is BSON? What is ObjectId?">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">M2</span>
+        <span class="q-text">What is BSON? Explain <code>ObjectId</code> and why MongoDB uses it.</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><strong>BSON</strong> (Binary JSON) is MongoDB's wire and storage format. It extends JSON with additional types: <code>Date</code>, <code>Binary</code>, <code>Decimal128</code>, <code>ObjectId</code>, etc. BSON is traversable and more efficient to encode/decode than plain JSON.</p>
+          <p><strong>ObjectId</strong> is a 12-byte unique identifier auto-assigned to <code>_id</code> if not provided:</p>
+<pre><span class="cm">// ObjectId structure — 12 bytes total</span>
+<span class="cm">// [4 bytes timestamp][5 bytes random][3 bytes incrementing counter]</span>
+
+<span class="kw">const</span> id = <span class="kw">new</span> ObjectId();
+id.<span class="fn">getTimestamp</span>();    <span class="cm">// Date when document was created</span>
+id.<span class="fn">toString</span>();       <span class="cm">// "64ab3f2c1e8a4d5b6c7e8f9a"</span>
+
+<span class="cm">// Query by ObjectId in Mongoose</span>
+<span class="kw">await</span> User.<span class="fn">findById</span>(<span class="str">"64ab3f2c1e8a4d5b6c7e8f9a"</span>);
+<span class="cm">// findById auto-converts string → ObjectId</span>
+
+<span class="cm">// Manual conversion when needed</span>
+<span class="kw">const</span> { ObjectId } = <span class="fn">require</span>(<span class="str">"mongodb"</span>);
+db.users.<span class="fn">findOne</span>({ _id: <span class="kw">new</span> <span class="fn">ObjectId</span>(<span class="str">"64ab..."</span>) });</pre>
+          <p><strong>Benefits over auto-increment IDs:</strong> generated client-side (no DB roundtrip), sortable by creation time, globally unique — safe for distributed systems.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- M3 -->
+    <div class="qa-card" data-q="Embedding vs referencing in MongoDB schema design">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">M3</span>
+        <span class="q-text">When would you embed documents vs use references? Explain with an example.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><strong>Embed</strong> when: data is accessed together, child data is small/bounded, one-to-few relationship.</p>
+          <p><strong>Reference</strong> when: data is large/unbounded, shared across multiple documents, updated independently, many-to-many.</p>
+<pre><span class="cm">// ✅ Embed — address always fetched with user, small, owned</span>
+{
+  _id: ObjectId(), name: <span class="str">"Alice"</span>,
+  address: { street: <span class="str">"MG Road"</span>, city: <span class="str">"Bangalore"</span> }
+}
+
+<span class="cm">// ✅ Reference — posts are many, queried independently</span>
+<span class="cm">// users collection</span>
+{ _id: ObjectId(<span class="str">"u1"</span>), name: <span class="str">"Alice"</span> }
+
+<span class="cm">// posts collection</span>
+{ _id: ObjectId(), title: <span class="str">"My Post"</span>, authorId: ObjectId(<span class="str">"u1"</span>) }
+
+<span class="cm">// Mongoose populate (join via reference)</span>
+<span class="kw">const</span> post = <span class="kw">await</span> Post
+  .<span class="fn">findById</span>(id)
+  .<span class="fn">populate</span>(<span class="str">"authorId"</span>, <span class="str">"name email"</span>);
+
+<span class="cm">// Hybrid — embed summary, reference full</span>
+{
+  _id: ObjectId(<span class="str">"order1"</span>),
+  items: [
+    { productId: ObjectId(), name: <span class="str">"Shirt"</span>, price: <span class="num">499</span>, qty: <span class="num">2</span> }
+    <span class="cm">// embed snapshot of price at time of order</span>
+  ]
+}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MongoDB CRUD -->
+  <div class="section" id="mongo-crud">
+    <div class="section-heading">
+      <div class="section-stripe stripe-mongo"></div>
+      <h2>MongoDB — CRUD &amp; Queries</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('mongo-crud')">⊕ Expand all</button>
+
+    <!-- M4 -->
+    <div class="qa-card" data-q="MongoDB CRUD operations with examples">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">M4</span>
+        <span class="q-text">Walk through all CRUD operations in MongoDB with practical examples.</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// CREATE</span>
+db.users.<span class="fn">insertOne</span>({ name: <span class="str">"Alice"</span>, age: <span class="num">28</span>, city: <span class="str">"Delhi"</span> });
+db.users.<span class="fn">insertMany</span>([{ name: <span class="str">"Bob"</span> }, { name: <span class="str">"Carol"</span> }]);
+
+<span class="cm">// READ</span>
+db.users.<span class="fn">find</span>({ age: { $gte: <span class="num">25</span> } });              <span class="cm">// all matching</span>
+db.users.<span class="fn">findOne</span>({ name: <span class="str">"Alice"</span> });               <span class="cm">// first match</span>
+db.users.<span class="fn">find</span>({}, { name: <span class="num">1</span>, _id: <span class="num">0</span> });           <span class="cm">// projection</span>
+db.users.<span class="fn">find</span>({ age: { $gte: <span class="num">25</span> } }).<span class="fn">sort</span>({ age: <span class="num">-1</span> }).<span class="fn">limit</span>(<span class="num">10</span>);
+
+<span class="cm">// UPDATE</span>
+db.users.<span class="fn">updateOne</span>(
+  { name: <span class="str">"Alice"</span> },
+  { $set: { city: <span class="str">"Mumbai"</span> }, $inc: { loginCount: <span class="num">1</span> } }
+);
+db.users.<span class="fn">updateMany</span>({ age: { $lt: <span class="num">18</span> } }, { $set: { isMinor: <span class="kw">true</span> } });
+db.users.<span class="fn">findOneAndUpdate</span>(   <span class="cm">// returns document</span>
+  { name: <span class="str">"Alice"</span> },
+  { $set: { lastSeen: <span class="kw">new</span> Date() } },
+  { returnDocument: <span class="str">"after"</span> }
+);
+
+<span class="cm">// DELETE</span>
+db.users.<span class="fn">deleteOne</span>({ name: <span class="str">"Bob"</span> });
+db.users.<span class="fn">deleteMany</span>({ age: { $lt: <span class="num">18</span> } });
+
+<span class="cm">// UPSERT — update if exists, insert if not</span>
+db.users.<span class="fn">updateOne</span>(
+  { email: <span class="str">"alice@ex.com"</span> },
+  { $set: { name: <span class="str">"Alice"</span> } },
+  { upsert: <span class="kw">true</span> }
+);</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- M5 -->
+    <div class="qa-card" data-q="MongoDB query operators">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">M5</span>
+        <span class="q-text">Explain the most important MongoDB query operators with examples.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Comparison</span>
+{ age: { $eq: <span class="num">25</span> } }        <span class="cm">// equal (same as { age: 25 })</span>
+{ age: { $ne: <span class="num">25</span> } }        <span class="cm">// not equal</span>
+{ age: { $gt: <span class="num">18</span>, $lte: <span class="num">65</span> } } <span class="cm">// 18 < age <= 65</span>
+{ status: { $in: [<span class="str">"active"</span>, <span class="str">"pending"</span>] } }
+{ role: { $nin: [<span class="str">"banned"</span>] } }
+
+<span class="cm">// Logical</span>
+{ $and: [{ age: { $gte: <span class="num">18</span> } }, { city: <span class="str">"Delhi"</span> }] }
+{ $or:  [{ age: { $lt: <span class="num">18</span> } }, { isAdmin: <span class="kw">true</span> }] }
+{ $nor: [{ status: <span class="str">"banned"</span> }, { deleted: <span class="kw">true</span> }] }
+{ age: { $not: { $gte: <span class="num">65</span> } } }
+
+<span class="cm">// Element</span>
+{ phone: { $exists: <span class="kw">true</span> } }   <span class="cm">// field must exist</span>
+{ age: { $type: <span class="str">"number"</span> } }   <span class="cm">// field must be number type</span>
+
+<span class="cm">// Array</span>
+{ tags: <span class="str">"mongodb"</span> }            <span class="cm">// array contains value</span>
+{ tags: { $all: [<span class="str">"js"</span>, <span class="str">"node"</span>] } } <span class="cm">// must contain all</span>
+{ tags: { $size: <span class="num">3</span> } }         <span class="cm">// array length = 3</span>
+{ scores: { $elemMatch: { $gte: <span class="num">80</span>, $lte: <span class="num">100</span> } } }
+
+<span class="cm">// Regex</span>
+{ name: { $regex: /^ali/i } }  <span class="cm">// case-insensitive starts with "ali"</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- M6 -->
+    <div class="qa-card" data-q="Update operators in MongoDB">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">M6</span>
+        <span class="q-text">What are the key update operators in MongoDB? Show array update operators.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Field update operators</span>
+{ $set:    { name: <span class="str">"Alice"</span> } }         <span class="cm">// set field</span>
+{ $unset:  { tempField: <span class="str">""</span> } }          <span class="cm">// remove field</span>
+{ $inc:    { views: <span class="num">1</span>, score: <span class="num">-5</span> } }   <span class="cm">// increment/decrement</span>
+{ $mul:    { price: <span class="num">1.1</span> } }             <span class="cm">// multiply</span>
+{ $rename: { oldName: <span class="str">"newName"</span> } }    <span class="cm">// rename field</span>
+{ $min:    { lowestScore: <span class="num">40</span> } }        <span class="cm">// update only if new val is less</span>
+{ $max:    { highScore: <span class="num">99</span> } }          <span class="cm">// update only if new val is more</span>
+{ $currentDate: { updatedAt: <span class="kw">true</span> } }  <span class="cm">// set to current date</span>
+
+<span class="cm">// Array update operators</span>
+{ $push:  { tags: <span class="str">"mongodb"</span> } }                  <span class="cm">// append to array</span>
+{ $pull:  { tags: <span class="str">"deprecated"</span> } }               <span class="cm">// remove matching elements</span>
+{ $addToSet: { tags: <span class="str">"unique-only"</span> } }           <span class="cm">// push if not exists</span>
+{ $pop:   { items: <span class="num">1</span> } }                          <span class="cm">// remove last (1) or first (-1)</span>
+{ $push:  { scores: { $each: [<span class="num">85</span>, <span class="num">90</span>], $sort: <span class="num">-1</span>, $slice: <span class="num">5</span> } } }
+
+<span class="cm">// Update matched array element with $</span>
+db.orders.<span class="fn">updateOne</span>(
+  { <span class="str">"items.productId"</span>: ObjectId(<span class="str">"abc"</span>) },
+  { $set: { <span class="str">"items.$.qty"</span>: <span class="num">3</span> } }   <span class="cm">// $ = first matched element</span>
+);</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MongoDB Aggregation -->
+  <div class="section" id="mongo-aggregation">
+    <div class="section-heading">
+      <div class="section-stripe stripe-mongo"></div>
+      <h2>MongoDB — Aggregation Pipeline</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('mongo-aggregation')">⊕ Expand all</button>
+
+    <!-- M7 -->
+    <div class="qa-card" data-q="MongoDB aggregation pipeline explained">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">M7</span>
+        <span class="q-text">What is the aggregation pipeline? Explain the key stages.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>The aggregation pipeline processes documents through a sequence of stages, each transforming the data. Documents flow from stage to stage like Unix pipes.</p>
+<pre><span class="cm">// Find top 3 cities by average order value for active users</span>
+db.orders.<span class="fn">aggregate</span>([
+  <span class="cm">// Stage 1: $match — filter (like WHERE)</span>
+  { $match: { status: <span class="str">"completed"</span>, createdAt: { $gte: ISODate(<span class="str">"2024-01-01"</span>) } } },
+
+  <span class="cm">// Stage 2: $lookup — left join with users collection</span>
+  { $lookup: {
+    from: <span class="str">"users"</span>, localField: <span class="str">"userId"</span>,
+    foreignField: <span class="str">"_id"</span>, as: <span class="str">"user"</span>
+  }},
+
+  <span class="cm">// Stage 3: $unwind — flatten the joined array</span>
+  { $unwind: <span class="str">"$user"</span> },
+
+  <span class="cm">// Stage 4: $group — group by city, calc avg (like GROUP BY)</span>
+  { $group: {
+    _id: <span class="str">"$user.address.city"</span>,
+    avgOrderValue: { $avg: <span class="str">"$total"</span> },
+    orderCount:    { $sum: <span class="num">1</span> }
+  }},
+
+  <span class="cm">// Stage 5: $sort — descending</span>
+  { $sort: { avgOrderValue: <span class="num">-1</span> } },
+
+  <span class="cm">// Stage 6: $limit</span>
+  { $limit: <span class="num">3</span> },
+
+  <span class="cm">// Stage 7: $project — shape output</span>
+  { $project: { city: <span class="str">"$_id"</span>, avgOrderValue: <span class="num">1</span>, orderCount: <span class="num">1</span>, _id: <span class="num">0</span> } }
+]);</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- M8 -->
+    <div class="qa-card" data-q="Common aggregation operators $group $project $addFields">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">M8</span>
+        <span class="q-text">What are the most useful aggregation expressions? Give real examples of <code>$group</code>, <code>$project</code>, and <code>$addFields</code>.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// $group accumulators</span>
+{ $group: {
+  _id: <span class="str">"$category"</span>,
+  total:   { $sum: <span class="str">"$amount"</span> },    <span class="cm">// sum of field</span>
+  avg:     { $avg: <span class="str">"$rating"</span> },    <span class="cm">// average</span>
+  count:   { $sum: <span class="num">1</span> },            <span class="cm">// count documents</span>
+  maxVal:  { $max: <span class="str">"$price"</span> },
+  minVal:  { $min: <span class="str">"$price"</span> },
+  allTags: { $push: <span class="str">"$tag"</span> },      <span class="cm">// collect into array</span>
+  unique:  { $addToSet: <span class="str">"$tag"</span> }   <span class="cm">// unique values only</span>
+}}
+
+<span class="cm">// $project — reshape documents</span>
+{ $project: {
+  fullName: { $concat: [<span class="str">"$firstName"</span>, <span class="str">" "</span>, <span class="str">"$lastName"</span>] },
+  year:     { $year: <span class="str">"$createdAt"</span> },
+  discount: { $multiply: [<span class="str">"$price"</span>, <span class="num">0.1</span>] },
+  isAdult:  { $gte: [<span class="str">"$age"</span>, <span class="num">18</span>] },
+  _id: <span class="num">0</span>
+}}
+
+<span class="cm">// $addFields — add computed fields (keeps existing)</span>
+{ $addFields: {
+  totalWithTax: { $multiply: [<span class="str">"$total"</span>, <span class="num">1.18</span>] },
+  tagCount: { $size: <span class="str">"$tags"</span> }
+}}
+
+<span class="cm">// $facet — multiple aggregations in one pass</span>
+{ $facet: {
+  byStatus: [{ $group: { _id: <span class="str">"$status"</span>, count: { $sum: <span class="num">1</span> } } }],
+  priceRange: [{ $bucket: { groupBy: <span class="str">"$price"</span>, boundaries: [<span class="num">0</span>,<span class="num">100</span>,<span class="num">500</span>,<span class="num">1000</span>] } }]
+}}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- M9 -->
+    <div class="qa-card" data-q="$lookup join in MongoDB aggregation">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">M9</span>
+        <span class="q-text">How does <code>$lookup</code> work? Show a multi-collection join example.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Simple $lookup (like LEFT JOIN)</span>
+db.orders.<span class="fn">aggregate</span>([
+  { $lookup: {
+    from:         <span class="str">"products"</span>,  <span class="cm">// collection to join</span>
+    localField:   <span class="str">"productId"</span>, <span class="cm">// field in orders</span>
+    foreignField: <span class="str">"_id"</span>,       <span class="cm">// field in products</span>
+    as:           <span class="str">"product"</span>    <span class="cm">// output array field</span>
+  }},
+  { $unwind: { path: <span class="str">"$product"</span>, preserveNullAndEmptyArrays: <span class="kw">true</span> } }
+]);
+
+<span class="cm">// Advanced $lookup with pipeline (MongoDB 3.6+)</span>
+{ $lookup: {
+  from: <span class="str">"reviews"</span>,
+  let:  { pid: <span class="str">"$_id"</span> },          <span class="cm">// expose local vars</span>
+  pipeline: [
+    { $match:   { $expr: { $eq: [<span class="str">"$productId"</span>, <span class="str">"$$pid"</span>] } } },
+    { $match:   { rating: { $gte: <span class="num">4</span> } } }, <span class="cm">// filter joined docs</span>
+    { $project: { comment: <span class="num">1</span>, rating: <span class="num">1</span> } },
+    { $limit:   <span class="num">5</span> }
+  ],
+  as: <span class="str">"topReviews"</span>
+}}</pre>
+          <div class="tip" style="border-color:var(--accent-mongo);background:rgba(0,237,100,0.06);color:#a8f0c6;"><strong style="color:var(--accent-mongo)">Performance tip:</strong> Always <code>$match</code> and reduce documents <em>before</em> <code>$lookup</code>. Unindexed <code>$lookup</code> on large collections causes full collection scans on the joined collection.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MongoDB Indexes -->
+  <div class="section" id="mongo-indexes">
+    <div class="section-heading">
+      <div class="section-stripe stripe-mongo"></div>
+      <h2>MongoDB — Indexes &amp; Performance</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('mongo-indexes')">⊕ Expand all</button>
+
+    <!-- M10 -->
+    <div class="qa-card" data-q="MongoDB indexes types and when to use them">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">M10</span>
+        <span class="q-text">Explain the types of indexes in MongoDB. When would you use each?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// 1. Single field — most common</span>
+db.users.<span class="fn">createIndex</span>({ email: <span class="num">1</span> }, { unique: <span class="kw">true</span> });
+
+<span class="cm">// 2. Compound — covers multi-field queries; order matters</span>
+db.orders.<span class="fn">createIndex</span>({ userId: <span class="num">1</span>, createdAt: <span class="num">-1</span> });
+<span class="cm">// Supports: { userId }, { userId, createdAt } — NOT { createdAt } alone</span>
+
+<span class="cm">// 3. Multikey — auto-created when indexing array field</span>
+db.products.<span class="fn">createIndex</span>({ tags: <span class="num">1</span> });  <span class="cm">// each array elem is indexed</span>
+
+<span class="cm">// 4. Text index — full-text search</span>
+db.articles.<span class="fn">createIndex</span>({ title: <span class="str">"text"</span>, body: <span class="str">"text"</span> });
+db.articles.<span class="fn">find</span>({ $text: { $search: <span class="str">"mongodb aggregation"</span> } });
+
+<span class="cm">// 5. Sparse — only indexes docs where field exists</span>
+db.users.<span class="fn">createIndex</span>({ phone: <span class="num">1</span> }, { sparse: <span class="kw">true</span> });
+
+<span class="cm">// 6. TTL — auto-delete documents after expiry</span>
+db.sessions.<span class="fn">createIndex</span>({ createdAt: <span class="num">1</span> }, { expireAfterSeconds: <span class="num">3600</span> });
+
+<span class="cm">// 7. Partial — index subset of documents</span>
+db.orders.<span class="fn">createIndex</span>(
+  { status: <span class="num">1</span> },
+  { partialFilterExpression: { status: <span class="str">"active"</span> } }
+);
+
+<span class="cm">// 8. 2dsphere — geospatial queries</span>
+db.places.<span class="fn">createIndex</span>({ location: <span class="str">"2dsphere"</span> });</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- M11 -->
+    <div class="qa-card" data-q="explain() and query analysis in MongoDB">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">M11</span>
+        <span class="q-text">How do you analyse query performance in MongoDB? What does <code>explain()</code> tell you?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// explain() modes</span>
+db.users.<span class="fn">find</span>({ age: { $gte: <span class="num">25</span> } }).<span class="fn">explain</span>();               <span class="cm">// queryPlanner</span>
+db.users.<span class="fn">find</span>({ age: { $gte: <span class="num">25</span> } }).<span class="fn">explain</span>(<span class="str">"executionStats"</span>); <span class="cm">// + actual stats</span>
+
+<span class="cm">// Key fields to check in executionStats:</span>
+<span class="cm">// winningPlan.stage</span>
+<span class="cm">//   COLLSCAN → no index used (BAD for large collections)</span>
+<span class="cm">//   IXSCAN   → index used (GOOD)</span>
+<span class="cm">//   FETCH    → fetching full documents after index scan</span>
+<span class="cm">//   SORT     → in-memory sort (bad if large; add index on sort field)</span>
+
+<span class="cm">// executionStats numbers to watch:</span>
+<span class="cm">//   totalDocsExamined vs nReturned</span>
+<span class="cm">//   → ideal: examined ≈ returned (high selectivity)</span>
+<span class="cm">//   executionTimeMillis → query time</span>
+
+<span class="cm">// Force index hint</span>
+db.users.<span class="fn">find</span>({ age: <span class="num">25</span>, city: <span class="str">"Delhi"</span> }).<span class="fn">hint</span>({ age: <span class="num">1</span> });
+
+<span class="cm">// View all indexes on a collection</span>
+db.users.<span class="fn">getIndexes</span>();
+
+<span class="cm">// Drop unused index</span>
+db.users.<span class="fn">dropIndex</span>(<span class="str">"age_1"</span>);</pre>
+          <div class="tip" style="border-color:var(--accent-mongo);background:rgba(0,237,100,0.06);color:#a8f0c6;"><strong style="color:var(--accent-mongo)">ESR Rule:</strong> For compound indexes, order fields as <strong>Equality → Sort → Range</strong> for optimal performance.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MongoDB Advanced -->
+  <div class="section" id="mongo-advanced">
+    <div class="section-heading">
+      <div class="section-stripe stripe-mongo"></div>
+      <h2>MongoDB — Advanced</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('mongo-advanced')">⊕ Expand all</button>
+
+    <!-- M12 -->
+    <div class="qa-card" data-q="MongoDB transactions ACID multi-document">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">M12</span>
+        <span class="q-text">How do multi-document ACID transactions work in MongoDB?</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>MongoDB supports multi-document ACID transactions (replica sets and sharded clusters, v4.0+). They use a session and guarantee <strong>Atomicity, Consistency, Isolation, Durability</strong> across multiple documents/collections.</p>
+<pre><span class="cm">// Transfer money between accounts</span>
+<span class="kw">const</span> session = client.<span class="fn">startSession</span>();
+
+<span class="kw">try</span> {
+  session.<span class="fn">startTransaction</span>({
+    readConcern:  { level: <span class="str">"snapshot"</span> },
+    writeConcern: { w: <span class="str">"majority"</span> }
+  });
+
+  <span class="kw">await</span> accounts.<span class="fn">updateOne</span>(
+    { _id: fromId, balance: { $gte: amount } },
+    { $inc: { balance: -amount } },
+    { session }
+  );
+
+  <span class="kw">await</span> accounts.<span class="fn">updateOne</span>(
+    { _id: toId },
+    { $inc: { balance: amount } },
+    { session }
+  );
+
+  <span class="kw">await</span> session.<span class="fn">commitTransaction</span>();
+} <span class="kw">catch</span> (err) {
+  <span class="kw">await</span> session.<span class="fn">abortTransaction</span>();  <span class="cm">// rollback both ops</span>
+  <span class="kw">throw</span> err;
+} <span class="kw">finally</span> {
+  session.<span class="fn">endSession</span>();
+}</pre>
+          <div class="tip" style="border-color:var(--accent-mongo);background:rgba(0,237,100,0.06);color:#a8f0c6;"><strong style="color:var(--accent-mongo)">Important:</strong> Transactions add latency — prefer embedding related data to avoid them. Use transactions only when atomicity across separate documents is truly needed (e.g. financial transfers).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- M13 -->
+    <div class="qa-card" data-q="Mongoose schema virtuals middleware">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">M13</span>
+        <span class="q-text">Explain Mongoose schema, virtuals, and middleware (pre/post hooks).</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="kw">const</span> { Schema, model } = <span class="fn">require</span>(<span class="str">"mongoose"</span>);
+
+<span class="kw">const</span> userSchema = <span class="kw">new</span> <span class="klass">Schema</span>({
+  firstName:    { type: String, required: <span class="kw">true</span>, trim: <span class="kw">true</span> },
+  lastName:     { type: String, required: <span class="kw">true</span> },
+  email:        { type: String, unique: <span class="kw">true</span>, lowercase: <span class="kw">true</span> },
+  passwordHash: { type: String, select: <span class="kw">false</span> }, <span class="cm">// excluded by default</span>
+  role:         { type: String, enum: [<span class="str">"user"</span>, <span class="str">"admin"</span>], default: <span class="str">"user"</span> },
+  createdAt:    { type: Date, default: Date.now }
+}, { timestamps: <span class="kw">true</span> }); <span class="cm">// auto-adds createdAt + updatedAt</span>
+
+<span class="cm">// Virtual — not stored in DB</span>
+userSchema.<span class="fn">virtual</span>(<span class="str">"fullName"</span>).<span class="fn">get</span>(<span class="kw">function</span>() {
+  <span class="kw">return</span> <span class="str">`${<span class="kw">this</span>.firstName} ${<span class="kw">this</span>.lastName}`</span>;
+});
+
+<span class="cm">// Pre hook — hash password before save</span>
+userSchema.<span class="fn">pre</span>(<span class="str">"save"</span>, <span class="kw">async function</span>(next) {
+  <span class="kw">if</span> (!<span class="kw">this</span>.<span class="fn">isModified</span>(<span class="str">"passwordHash"</span>)) <span class="kw">return</span> <span class="fn">next</span>();
+  <span class="kw">this</span>.passwordHash = <span class="kw">await</span> bcrypt.<span class="fn">hash</span>(<span class="kw">this</span>.passwordHash, <span class="num">12</span>);
+  <span class="fn">next</span>();
+});
+
+<span class="cm">// Post hook — log after delete</span>
+userSchema.<span class="fn">post</span>(<span class="str">"findOneAndDelete"</span>, <span class="kw">async function</span>(doc) {
+  <span class="kw">if</span> (doc) <span class="kw">await</span> AuditLog.<span class="fn">create</span>({ action: <span class="str">"user_deleted"</span>, userId: doc._id });
+});
+
+<span class="cm">// Custom instance method</span>
+userSchema.methods.<span class="fn">comparePassword</span> = <span class="kw">async function</span>(plain) {
+  <span class="kw">return</span> bcrypt.<span class="fn">compare</span>(plain, <span class="kw">this</span>.passwordHash);
+};
+
+<span class="kw">const</span> <span class="klass">User</span> = <span class="fn">model</span>(<span class="str">"User"</span>, userSchema);
+module.exports = <span class="klass">User</span>;</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- M14 -->
+    <div class="qa-card" data-q="MongoDB replication and sharding">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">M14</span>
+        <span class="q-text">Explain replica sets and sharding in MongoDB. When would you use each?</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><strong>Replica Set</strong>: a group of MongoDB instances that maintain the same data. Provides <strong>high availability</strong> and <strong>read scaling</strong>. One primary (accepts writes), multiple secondaries (replicate data), optional arbiters (vote only).</p>
+          <p><strong>Sharding</strong>: distributes data across multiple machines (shards) using a <strong>shard key</strong>. Provides <strong>horizontal write scaling</strong> for datasets too large for a single machine.</p>
+<pre><span class="cm">// Replica set — reads from secondary (read scaling)</span>
+mongoose.<span class="fn">connect</span>(uri, {
+  readPreference: <span class="str">"secondaryPreferred"</span>
+  <span class="cm">// "primary" | "primaryPreferred" | "secondary" | "nearest"</span>
+});
+
+<span class="cm">// Sharding — choosing a shard key (critical design decision)</span>
+sh.<span class="fn">enableSharding</span>(<span class="str">"mydb"</span>);
+sh.<span class="fn">shardCollection</span>(<span class="str">"mydb.orders"</span>, { customerId: <span class="str">"hashed"</span> });
+<span class="cm">// Hashed sharding — good for even distribution</span>
+<span class="cm">// Range sharding — good for range queries but can cause hotspots</span>
+
+<span class="cm">// Bad shard keys (avoid):
+// - Low cardinality: { status: 1 } (only a few values)
+// - Monotonically increasing: { _id: 1 } (all writes hit one shard)
+// - Non-query-aligned: key never used in queries (scatter-gather)</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- M15 -->
+    <div class="qa-card" data-q="Change streams and real-time in MongoDB">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">M15</span>
+        <span class="q-text">What are Change Streams? How do you build a real-time feature with MongoDB?</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Change Streams let applications subscribe to real-time change notifications on collections, databases, or entire deployments. Built on the oplog (operation log), they require replica sets.</p>
+<pre><span class="cm">// Watch a collection for changes</span>
+<span class="kw">const</span> changeStream = db.collection(<span class="str">"orders"</span>).<span class="fn">watch</span>([
+  { $match: { <span class="str">"operationType"</span>: { $in: [<span class="str">"insert"</span>, <span class="str">"update"</span>] } } },
+  { $match: { <span class="str">"fullDocument.status"</span>: <span class="str">"shipped"</span> } }
+], { fullDocument: <span class="str">"updateLookup"</span> });
+
+changeStream.<span class="fn">on</span>(<span class="str">"change"</span>, (change) => {
+  <span class="fn">console</span>.log(<span class="str">"Operation:"</span>, change.operationType);
+  <span class="fn">console</span>.log(<span class="str">"Document:"</span>,  change.fullDocument);
+  <span class="cm">// Emit via Socket.io, trigger notification, etc.</span>
+  io.<span class="fn">to</span>(<span class="str">`user-${change.fullDocument.userId}`</span>)
+    .<span class="fn">emit</span>(<span class="str">"orderUpdate"</span>, change.fullDocument);
+});
+
+<span class="cm">// Resume from a token after reconnect</span>
+<span class="kw">const</span> resumeToken = changeStream.resumeToken;
+<span class="kw">const</span> resumed = db.collection(<span class="str">"orders"</span>).<span class="fn">watch</span>([], {
+  resumeAfter: resumeToken
+});
+
+<span class="cm">// Graceful close</span>
+process.<span class="fn">on</span>(<span class="str">"SIGTERM"</span>, () => changeStream.<span class="fn">close</span>());</pre>
+          <div class="tip" style="border-color:var(--accent-mongo);background:rgba(0,237,100,0.06);color:#a8f0c6;"><strong style="color:var(--accent-mongo)">Use cases:</strong> Real-time dashboards, push notifications, cache invalidation, audit logging, syncing with search engines (Elasticsearch).</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </main>
