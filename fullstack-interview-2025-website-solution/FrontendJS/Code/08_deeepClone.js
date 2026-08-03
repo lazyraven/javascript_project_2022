@@ -92,5 +92,7 @@ const clone = structuredClone(original1);
 console.log("clone", clone);
 
 clone.name = "Yadav";
+clone.skills.push("NodeJS");
+
 console.log("clone", clone);
 console.log("original1", original1);

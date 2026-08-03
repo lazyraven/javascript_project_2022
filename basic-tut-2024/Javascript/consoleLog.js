@@ -1,14 +1,22 @@
 // Javascript Console Methods
 
 console.log("Hi I'm Nisha !!");
-console.error("made a mistake !!");
-console.warn("This is a warning !!");
+// console.error("made a mistake !!");
+// console.warn("This is a warning !!");
 
 console.assert(5 + 5 == 15, "Expression returned false");
 console.table(["JS", "CSS", "C#"]);
+
+const object = {
+  name: "Nisha",
+  rollNo: 101,
+}
+console.dir(object, { depth: null }); // Shows nested objects in detail
+console.log(object);
 
 for (let i = 0; i < 5; i++) {
   console.count();
 }
 
 // console.clear();
+ 

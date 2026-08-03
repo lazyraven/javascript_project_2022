@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://img.icons8.com/?size=100&id=108784&format=png&color=000000">
   <title>JavaScript Q&A Plan</title>
+  <script src="../Code/08_deeepClone.js"></script>
 <style>
     body {
         background-color: #111;
@@ -327,14 +328,28 @@ console.log(obj.toString());
   },
   {
     questionId: 9,
-    question: "How to deep clone an object?",
+    question: "How to deep clone an object? What is the difference between deep clone and shallow clone? How do you deep clone in JavaScript?",
     definition: `
 Deep cloning means creating a full copy of an object, including nested objects, 
 so that changes in the copy don’t affect the original.
 
-Modern Method:
-const clone = structuredClone(obj);
- In Deep Learning : Go to this file console.log("file:///C:/workspace-nisha/01_github/02_Javascript/javascript_project_2022/basic-tut-2025/HTML/JavaScript");
+// Deep clone options
+// 1. structuredClone (modern, handles Date/Map/Set)
+const deep1 = structuredClone(obj);
+
+// 2. JSON round-trip (simple, but loses functions/undefined/Date)
+const deep2 = JSON.parse(JSON.stringify(obj));
+
+// 3. Recursive implementation // can use WeakMap to handle circular references
+function deepClone(val) {
+  if (val === null || typeof val !== "object") return val;
+  if (Array.isArray(val)) return val.map(deepClone);
+  return Object.fromEntries(
+    Object.entries(val).map(([k, v]) => [k, deepClone(v)])
+  );
+}
+
+ In Deep Learning : Go to this file console.log("file:///F:/Projects/github/02_Javascript/javascript_project_2022/basic-tut-2025/HTML/deepClone.html");
 
 `
   },

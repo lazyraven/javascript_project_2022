@@ -2,7 +2,7 @@
 // const cloneJson = JSON.parse(JSON.stringify(obj));
 // const cloneLodash = __.cloneDeep(obj);
 
-// https://chatgpt.com/c/68ba59b0-66cc-8326-8c33-b8faef83c3ae
+// https://chatgpt.com/c/68ba59b0-66cc-8326-8c33-b8faef83c3ae Or Share Link : https://chatgpt.com/share/6a702e15-76f4-83e9-be49-1d3ee8d2cf14
 
 // Works with ES modules (import/export)
 // <script type="module" src="../JavaScript/deepCloneCommonComponent.js"></script>
@@ -80,9 +80,9 @@ const copyOne = deepClone(originalOne);
 
 // Test mutations
 copyOne.hobbies.push("dancing");
-copyOne.details.joined.setFullYear(2025);
+copyOne.details.joined.setFullYear(2026);
 copyOne.tags.add("learner");
 copyOne.settings.set("theme", "light");
 
 console.log("originalOne:", originalOne);
-console.log("Clone:", copy);
+console.log("Clone:", copyOne);

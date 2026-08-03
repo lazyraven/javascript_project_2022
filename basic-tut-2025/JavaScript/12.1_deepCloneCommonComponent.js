@@ -1,5 +1,6 @@
 // Works with ES modules (import/export) > add type="module" in script
 // <script type="module" src="app.js"></script>
+https://chatgpt.com/share/6a702e15-76f4-83e9-be49-1d3ee8d2cf14
 
 const deepClone = (val, wm = new WeakMap()) => {
   // Handle primitives
