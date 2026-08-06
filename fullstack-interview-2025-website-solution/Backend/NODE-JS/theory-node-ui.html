@@ -192,7 +192,41 @@
         const nodeQuestions = [
             {
                 question: "(Basic) - What is Node.js?",
-                definition: `
+                definition: ` Node.js is a JavaScript runtime.
+    Normally JavaScript runs only inside a web browser.
+
+    Node.js allows JavaScript to run outside the browser, such as:
+
+        • Backend servers
+        • APIs
+        • Command-line tools
+        • Automation scripts
+
+    Without Node.js, you cannot run a backend project written in JavaScript.
+
+    Folder Structure :
+    backend/
+    │
+    ├── node_modules/
+    ├── src/
+    │   ├── config/
+    │   ├── controllers/
+    │   ├── middleware/
+    │   ├── models/
+    │   ├── routes/
+    │   ├── services/
+    │   ├── utils/
+    │   └── app.js
+    │
+    ├── .env
+    ├── .gitignore
+    ├── package.json
+    ├── package-lock.json
+    ├── server.js
+    └── README.md
+
+                OR
+
     Node.js is an open-source, cross-platform runtime environment that executes JavaScript code outside the browser.
     
     It uses an event-driven, non-blocking I/O model, which makes it efficient and suitable 
@@ -207,6 +241,166 @@
       • Not ideal for:
         - CPU-heavy tasks
     `
+            },
+              {
+                question: "config/ ?",
+                definition: `Purpose: Stores configuration files.
+
+            Examples:
+                • Database connection
+                • Environment configuration
+                • Third-party service setup
+
+            Example files:
+                    db.js
+                    config.js
+    `
+            },
+              {
+                question: "middleware/ ?",
+                definition: `src/
+                              └── middleware/
+                Purpose: Middleware runs before a request reaches the controller.
+                Examples:
+                    • Authentication
+                    • Logging
+                    • Error handling
+                    • Request validation
+
+                Example files:
+
+                authMiddleware.js
+                logger.js
+                errorHandler.js
+    `
+            },
+              {
+                question: "models/ ?",
+                definition: `Purpose: Defines how your data is structured.
+            When using MongoDB with Mongoose, you'll create schemas here.
+
+            Example:
+                User.js
+                Product.js
+    `
+            },
+            {
+                question: "routes/ ?",
+                definition: `Purpose: Defines API endpoints.
+
+                Example:
+                    GET /users
+                    POST /users
+                    PUT /users/:id
+                    DELETE /users/:id
+
+                Example file: userRoutes.js
+                Routes call controllers to handle requests.
+    `
+            },
+            {
+                question: "services/ ?",
+                definition: `Purpose:Contains business logic.
+                    Instead of writing all logic inside controllers, move complex operations into services.
+
+            Example: userService.js
+                    It might:
+                    • Create a user
+                    • Send an email
+                    • Validate business rules
+    `
+            },
+            {
+                question: "utils/ ?",
+                definition: `src/
+                                └── utils/
+                Purpose: Stores reusable helper functions.
+
+                Examples:
+                logger.js
+                deepClone.js
+                formatDate.js
+                generateToken.js
+    `
+            },
+             {
+                question: "app.js/ ?",
+                definition: `Purpose: Configures the Express application.
+
+                 Typical responsibilities:
+                    • Create the Express app
+                    • Register middleware
+                    • Register routes
+                    • Export the app
+                    It does not start the server.
+    `
+            },
+             {
+                question: "server.js/ ?",
+                definition: `Purpose: This is the application's entry point.
+
+            Responsibilities:
+                • Import the Express app
+                • Start listening on a port
+
+            Example:
+            const app = require("./src/app");
+
+            app.listen(3000, () => {
+            console.log("Server is running on port 3000");
+            });
+
+            We'll write this code in a later step.
+    `
+            },
+             {
+                question: ".env/ ?",
+                definition: `Purpose: Stores environment variables.
+
+            Examples:
+                PORT=3000
+                MONGO_URI=your_database_url
+                JWT_SECRET=your_secret_key
+
+            Important: Never commit sensitive values to Git.
+    `
+            },
+             {
+                question: ".gitignore/ ?",
+                definition: `Purpose: Tells Git which files or folders to ignore.
+               Typical contents:
+                           node_modules/
+                           .env
+    `
+            },
+             {
+                question: "README.md/ ?",
+                definition: `Purpose: Describes the project.
+
+            It usually includes:
+                Project overview
+                Installation steps
+                Available scripts
+                API information
+    `
+            },
+             {
+                question: "node_modules/ ?",
+                definition: `Purpose: Contains all installed npm packages.
+
+             Important: You should never edit files inside node_modules.
+             It is automatically created when you install dependencies.
+    `
+            },
+                {
+                question: "package-lock.json/ ?",
+                definition: `Purpose: Automatically generated by npm.
+        It records the exact versions of installed packages to ensure consistent installations across different machines.
+        `
+            },
+                {
+                question: "Create the Folder Structure?",
+                definition: `    mkdir config controllers middleware models routes services utils`
             },
             {
                 question: "(Basic → Core Concept) - Why is Node.js single-threaded but still able to handle multiple requests efficiently?",
@@ -617,13 +811,20 @@ Mongoose is a Node.js library that adds structure by defining schemas, validatio
             },
 
             {
-                question: "",
-                definition: `
-    `
+                question: "Controllers in node js?",
+                definition: `In a Node.js project (especially with Express.js), the controller folder contains the business logic for handling requests and responses.
+                It sits between the routes and the services/models. 
+                - controllers/
+                     - user.controller.js
+               
+                `
             },
             {
                 question: "",
                 definition: `
+
+                 mkdir middleware
+                Inside it, create a file. > touch middleware/auth.middleware.js
     `
             },
             {
