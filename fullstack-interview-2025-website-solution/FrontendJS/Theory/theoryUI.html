@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://img.icons8.com/?size=100&id=108784&format=png&color=000000">
   <title>JavaScript Q&A Plan</title>
-  <script src="../Code/08_deeepClone.js"></script>
+  <script src="../Code/47_promiseHistory.js"></script>
 <style>
     body {
         background-color: #111;
@@ -656,6 +656,28 @@ Run simultaneously — independent tasks that don’t wait for each other.
 `
   },
 
+{
+    question: "Explain Promise.all, Promise.allSettled, Promise.race, Promise.any?",
+    definition: `
+    const p1 = Promise.resolve(1);
+const p2 = Promise.reject("fail");
+const p3 = Promise.resolve(3);
+
+// all — rejects immediately if ANY rejects
+Promise.all([p1, p2, p3]).catch(e => console.log(e)); // "fail"
+
+// allSettled — waits for ALL, returns status+value for each
+Promise.allSettled([p1, p2, p3]).then(results => {
+  // [{status:"fulfilled",value:1},{status:"rejected",reason:"fail"},...]
+});
+
+// race — resolves/rejects with FIRST settled promise
+Promise.race([p1, p2]).then(v => console.log(v)); // 1
+
+// any — resolves with FIRST fulfilled; rejects if ALL reject
+Promise.any([p2, p3]).then(v => console.log(v));  // 3
+    `
+},
   {
     questionId: 18,
     question: "Explain the event loop?",

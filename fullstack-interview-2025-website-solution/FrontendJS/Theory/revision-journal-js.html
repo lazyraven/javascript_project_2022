@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="https://img.icons8.com/?size=100&id=108784&format=png&color=000000">
+<title>JavaScript Revision Journal</title>
+<style>
+  :root{
+    --bg:#0b1120;
+    --bg-soft:#0e1526;
+    --surface:#141d33;
+    --surface-hover:#182242;
+    --border:#232f4d;
+    --text:#e4e9f7;
+    --text-dim:#9aa6c4;
+    --text-faint:#5f6a8c;
+    --brand:#f2c15c;
+    --brand-soft:#f2c15c33;
+    --ring:#f2c15c66;
+    --code-bg:#0a1020;
+    --code-text:#cfe6ff;
+    --code-border:#22304f;
+    --success:#3ddc97;
+
+    --c-fundamentals:#e3b341;
+    --c-functions:#2dd4bf;
+    --c-objects:#a78bfa;
+    --c-arrays:#38bdf8;
+    --c-async:#fb7185;
+    --c-dom:#34d399;
+    --c-network:#fb923c;
+    --c-revisit:#7c88ab;
+  }
+
+  body.light-mode{
+    --bg:#f3f5fb;
+    --bg-soft:#eaeef8;
+    --surface:#ffffff;
+    --surface-hover:#eef1fb;
+    --border:#dde3f2;
+    --text:#161d33;
+    --text-dim:#525d80;
+    --text-faint:#8991ae;
+    --brand:#b8860b;
+    --brand-soft:#b8860b22;
+    --ring:#b8860b55;
+    --code-bg:#0d162c;
+    --code-text:#d7e7ff;
+    --code-border:#1c2947;
+    --success:#0f9d69;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    transition:background-color .35s ease,color .35s ease;
+    padding-bottom:64px;
+  }
+
+  a{ color:var(--brand); }
+
+  .app{
+    max-width:980px;
+    margin:0 auto;
+    padding:20px 20px 60px;
+  }
+
+  /* ===== Header ===== */
+  .topbar{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:18px;
+  }
+
+  .brand-block h1{
+    font-size:22px;
+    margin:0 0 4px;
+    letter-spacing:.2px;
+  }
+
+  .brand-block .kicker{
+    font-family:ui-monospace,SFMono-Regular,"Cascadia Code",Menlo,Consolas,monospace;
+    font-size:12px;
+    color:var(--brand);
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    margin-bottom:6px;
+  }
+
+  .resource-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 16px;
+    font-size:12.5px;
+    color:var(--text-dim);
+    margin-top:8px;
+  }
+
+  .resource-links a{
+    text-decoration:none;
+    border-bottom:1px dashed var(--brand-soft);
+  }
+  .resource-links a:hover{ border-bottom-color:var(--brand); }
+
+  #themeToggle{
+    flex:0 0 auto;
+    cursor:pointer;
+    background:var(--surface);
+    color:var(--text);
+    border:1px solid var(--border);
+    padding:9px 14px;
+    border-radius:20px;
+    font-weight:600;
+    font-size:13px;
+    transition:all .2s ease;
+    white-space:nowrap;
+  }
+  #themeToggle:hover{ background:var(--surface-hover); border-color:var(--brand); }
+
+  /* ===== Progress ===== */
+  .progress-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:14px 16px;
+    margin-bottom:18px;
+  }
+
+  .progress-top{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:10px;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .progress-top .label{
+    font-size:13px;
+    color:var(--text-dim);
+  }
+
+  .progress-top .count{
+    font-family:ui-monospace,SFMono-Regular,"Cascadia Code",Menlo,Consolas,monospace;
+    font-size:13px;
+    color:var(--text);
+  }
+
+  .progress-track{
+    display:flex;
+    height:10px;
+    width:100%;
+    border-radius:6px;
+    overflow:hidden;
+    background:var(--bg-soft);
+    border:1px solid var(--border);
+  }
+
+  .progress-seg{
+    position:relative;
+    height:100%;
+    border-right:1px solid var(--bg);
+  }
+  .progress-seg:last-child{ border-right:none; }
+
+  .progress-seg .fill{
+    position:absolute;
+    inset:0;
+    background:var(--seg-color);
+    width:var(--fill-pct,0%);
+    transition:width .4s ease;
+  }
+  .progress-seg .rest{
+    position:absolute;
+    inset:0;
+    background:var(--seg-color);
+    opacity:.18;
+  }
+
+  .progress-legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 14px;
+    margin-top:10px;
+    font-size:11.5px;
+    color:var(--text-faint);
+  }
+  .progress-legend span{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+  }
+  .legend-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--dot-color);
+    flex:0 0 auto;
+  }
+
+  /* ===== Controls ===== */
+  .controls{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-bottom:22px;
+  }
+
+  .search-row{
+    display:flex;
+    gap:10px;
+  }
+
+  #searchInput{
+    flex:1;
+    background:var(--surface);
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:11px 14px;
+    border-radius:10px;
+    font-size:14.5px;
+    outline:none;
+  }
+  #searchInput:focus{
+    border-color:var(--brand);
+    box-shadow:0 0 0 3px var(--ring);
+  }
+  #searchInput::placeholder{ color:var(--text-faint); }
+
+  .icon-btn{
+    background:var(--surface);
+    border:1px solid var(--border);
+    color:var(--text-dim);
+    border-radius:10px;
+    padding:0 14px;
+    font-size:13px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .icon-btn:hover{ background:var(--surface-hover); color:var(--text); }
+
+  .chip-row{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+
+  .chip{
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--text-dim);
+    font-size:12.5px;
+    padding:7px 13px;
+    border-radius:999px;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    transition:all .15s ease;
+    user-select:none;
+  }
+  .chip .dot{ width:7px;height:7px;border-radius:50%; }
+  .chip:hover{ border-color:var(--chip-color,var(--brand)); color:var(--text); }
+  .chip.active{
+    background:var(--chip-color,var(--brand));
+    border-color:var(--chip-color,var(--brand));
+    color:#0b1120;
+    font-weight:600;
+  }
+  .chip.active .dot{ background:#0b1120; }
+
+  .toolbar-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .toolbar-actions{
+    display:flex;
+    gap:8px;
+  }
+
+  .toggle-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    font-size:12.5px;
+    color:var(--text-dim);
+    cursor:pointer;
+    user-select:none;
+  }
+  .toggle-pill input{ accent-color:var(--brand); width:15px; height:15px; cursor:pointer; }
+
+  .results-note{
+    font-size:12.5px;
+    color:var(--text-faint);
+    margin:-6px 0 4px 2px;
+  }
+
+  /* ===== Sections ===== */
+  .category-section{ margin-bottom:26px; }
+  .category-section.is-empty{ display:none; }
+
+  .section-heading{
+    position:sticky;
+    top:0;
+    z-index:5;
+    background:var(--bg);
+    padding:10px 0 10px 2px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border-bottom:1px solid var(--border);
+    margin-bottom:12px;
+  }
+
+  .section-heading .dot{
+    width:10px;height:10px;border-radius:3px;
+    background:var(--sec-color);
+    flex:0 0 auto;
+  }
+
+  .section-heading h2{
+    font-size:14.5px;
+    margin:0;
+    font-weight:700;
+    letter-spacing:.3px;
+    color:var(--text);
+  }
+
+  .section-heading .sec-count{
+    font-family:ui-monospace,SFMono-Regular,"Cascadia Code",Menlo,Consolas,monospace;
+    font-size:12px;
+    color:var(--text-faint);
+    margin-left:auto;
+  }
+
+  /* ===== Question cards ===== */
+  .qcard{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-left:3px solid var(--card-color,var(--brand));
+    border-radius:10px;
+    margin-bottom:10px;
+    overflow:hidden;
+    transition:border-color .15s ease, opacity .15s ease;
+  }
+  .qcard.hidden-item{ display:none; }
+  .qcard.is-revised{ opacity:.62; }
+  .qcard.is-revised:hover{ opacity:1; }
+
+  .qcard-head{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    padding:13px 14px;
+    cursor:pointer;
+  }
+  .qcard-head:hover{ background:var(--surface-hover); }
+
+  .qcheck{
+    margin-top:3px;
+    width:17px;
+    height:17px;
+    accent-color:var(--success);
+    cursor:pointer;
+    flex:0 0 auto;
+  }
+
+  .qcard-main{
+    flex:1;
+    min-width:0;
+  }
+
+  .qcard-top-row{
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+
+  .qnum{
+    font-family:ui-monospace,SFMono-Regular,"Cascadia Code",Menlo,Consolas,monospace;
+    font-size:12px;
+    color:var(--card-color,var(--brand));
+    font-weight:700;
+    flex:0 0 auto;
+  }
+
+  .qtext{
+    font-size:15px;
+    font-weight:600;
+    color:var(--text);
+    line-height:1.4;
+  }
+
+  .qbadge{
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+    color:var(--card-color,var(--brand));
+    background:color-mix(in srgb, var(--card-color,var(--brand)) 16%, transparent);
+    padding:2px 8px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+
+  .chevron{
+    flex:0 0 auto;
+    color:var(--text-faint);
+    transition:transform .2s ease;
+    margin-top:4px;
+  }
+  .qcard.open .chevron{ transform:rotate(180deg); }
+
+  .qcard-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease;
+  }
+  .qcard.open .qcard-body{ max-height:4000px; }
+
+  .qcard-body-inner{
+    padding:0 16px 18px 43px;
+    font-size:14px;
+    line-height:1.65;
+    color:var(--text-dim);
+  }
+
+  .answer-text{ margin:0 0 10px; white-space:normal; }
+  .answer-text:last-child{ margin-bottom:0; }
+
+  .answer-label{
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    color:var(--card-color,var(--brand));
+    font-weight:700;
+    margin:14px 0 6px;
+  }
+  .answer-label:first-child{ margin-top:0; }
+
+  .answer-list{
+    margin:0 0 10px;
+    padding-left:20px;
+  }
+  .answer-list li{ margin-bottom:5px; }
+
+  .answer-empty{
+    color:var(--text-faint);
+    font-style:italic;
+  }
+
+  .code-block{
+    background:var(--code-bg);
+    color:var(--code-text);
+    border:1px solid var(--code-border);
+    border-radius:8px;
+    padding:12px 14px;
+    font-family:ui-monospace,SFMono-Regular,"Cascadia Code",Menlo,Consolas,monospace;
+    font-size:13px;
+    line-height:1.55;
+    overflow-x:auto;
+    margin:10px 0;
+    white-space:pre;
+  }
+
+  .highlight-flash{
+    animation:flashRing 1.4s ease;
+  }
+  @keyframes flashRing{
+    0%{ box-shadow:0 0 0 3px var(--ring); }
+    100%{ box-shadow:0 0 0 0px transparent; }
+  }
+
+  .empty-state{
+    text-align:center;
+    color:var(--text-faint);
+    padding:60px 20px;
+    font-size:14px;
+  }
+
+  /* ===== Back to top ===== */
+  #backToTopBtn{
+    display:none;
+    position:fixed;
+    bottom:22px;
+    right:22px;
+    background:var(--brand);
+    color:#0b1120;
+    border:none;
+    border-radius:50%;
+    width:44px;
+    height:44px;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 4px 16px rgba(0,0,0,.35);
+    z-index:1000;
+  }
+  #backToTopBtn:hover{ transform:translateY(-2px); }
+
+  /* ===== Responsive ===== */
+  @media (max-width:640px){
+    .app{ padding:16px 14px 50px; }
+    .topbar{ flex-direction:column; }
+    #themeToggle{ align-self:flex-start; }
+    .qcard-body-inner{ padding-left:16px; }
+    .qtext{ font-size:14px; }
+    .section-heading h2{ font-size:13.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <div class="brand-block">
+      <div class="kicker">Revision Journal</div>
+      <h1>JavaScript Q&amp;A — Week 1 &amp; Week 5</h1>
+      <div class="resource-links">
+        <a href="https://fullstack-interview-roadmap.netlify.app/" target="_blank" rel="noopener">Fullstack interview roadmap ↗</a>
+        <a href="https://notebooklm.google.com/notebook/b63600f7-7d1c-4357-9c56-857a64770cf1" target="_blank" rel="noopener">NotebookLM notebook ↗</a>
+      </div>
+    </div>
+    <button id="themeToggle">☀️ Light</button>
+  </div>
+
+  <div class="progress-card">
+    <div class="progress-top">
+      <span class="label">Revision progress</span>
+      <span class="count" id="progressCount">0 / 0 revised</span>
+    </div>
+    <div class="progress-track" id="progressTrack"></div>
+    <div class="progress-legend" id="progressLegend"></div>
+  </div>
+
+  <div class="controls">
+    <div class="search-row">
+      <input type="text" id="searchInput" placeholder="Search questions and answers…" autocomplete="off" />
+      <button class="icon-btn" id="clearSearchBtn" title="Clear search">✕</button>
+    </div>
+
+    <div class="chip-row" id="categoryChips"></div>
+
+    <div class="toolbar-row">
+      <label class="toggle-pill">
+        <input type="checkbox" id="hideRevisedToggle" />
+        Hide revised
+      </label>
+      <div class="toolbar-actions">
+        <button class="icon-btn" id="expandAllBtn">Expand all</button>
+        <button class="icon-btn" id="collapseAllBtn">Collapse all</button>
+      </div>
+    </div>
+
+    <div class="results-note" id="resultsNote"></div>
+  </div>
+
+  <main id="sectionsContainer"></main>
+</div>
+
+<button id="backToTopBtn" title="Back to top">↑</button>
+
+<script>
+  const CATEGORIES = [{"key":"fundamentals","label":"Core Fundamentals","color":"#e3b341"},{"key":"functions","label":"Functions & Closures","color":"#2dd4bf"},{"key":"objects","label":"Objects, this & OOP","color":"#a78bfa"},{"key":"arrays","label":"Arrays & Collections","color":"#38bdf8"},{"key":"async","label":"Asynchronous JS","color":"#fb7185"},{"key":"dom","label":"DOM & Events","color":"#34d399"},{"key":"network","label":"Networking & HTTP","color":"#fb923c"},{"key":"revisit","label":"To Revisit","color":"#94a3b8"}];
+
+  const DATA = [{"id":1,"category":"fundamentals","question":"What is JavaScript?","definition":"JavaScript (JS) is a high-level, interpreted programming language mainly used to make web pages interactive, dynamic, and functional.\nIt runs in the browser as well as on servers (using Node.js).\n\n👉 With JS, you can:\n• Manipulate the DOM (change HTML/CSS dynamically).\n• Handle user events (clicks, forms, etc.).\n• Communicate with servers (API calls).\n• Build full-stack applications.\n\nIn short: HTML gives structure, CSS gives style, and JavaScript gives behavior to web applications."},{"id":2,"category":"fundamentals","question":"var vs let vs const?","definition":"In JavaScript:\n• var → function-scoped and allows redeclaration.\n• let → block-scoped, can be reassigned but not redeclared.\n• const → block-scoped, cannot be reassigned.\n\nExample:\nvar x = 10;  // function scope\nlet y = 20;  // block scope\nconst z = 30; // cannot reassign"},{"id":3,"category":"fundamentals","question":"What is Scope?","definition":"Scope defines the accessibility or visibility of variables, functions, and objects in different parts of the code.\n\nTypes of scope:\n1. Global Scope – variables accessible everywhere.\n2. Function Scope – variables declared inside a function are local to that function.\n3. Block Scope – variables declared using let and const inside {} are not accessible outside."},{"id":4,"category":"fundamentals","question":"What is hoisting?","definition":"Hoisting means variable and function declarations are moved to the top of their scope before code execution.\n\n👉 Behavior:\nvar → hoisted with default value undefined.\nlet → hoisted but in the temporal dead zone (ReferenceError if accessed early).\nconst → hoisted but must be initialized at declaration.\n\nExample:\nconsole.log(a); // undefined\nvar a = 10;\n\nconsole.log(b); // ReferenceError\nlet b = 20;\n\nconsole.log(c); // ReferenceError\nconst c = 30;"},{"id":5,"category":"functions","question":"What is a function?","definition":"A function is a reusable block of code designed to perform a specific task.\n\nFunctions help to:\n• Organize code into smaller parts.\n• Reuse logic without rewriting.\n• Improve readability and maintainability."},{"id":6,"category":"functions","question":"What is a closure? When is it useful? What is Lexical Scope?","definition":"A closure is created when a function is defined inside another function and \nthe inner function “remembers” variables from the outer function even after the outer function has returned.\n\nUse cases:\n1. Data Privacy – Hide variables.\n2. Maintaining State – Keep track of previous values.\n3. Callbacks & Event Handlers - Useful when passing functions around; they can access the outer scope variables they were created with.\n4. Functional Programming – Currying, memoization, etc.\n\n ✨ In short: Closures are most useful when you need private variables, state persistence, or context preservation.\n\nExample:\nfunction counter() {\n  let count = 0;\n  return function() {\n    count++;\n    return count;\n  };\n}\nconst increment = counter();\nconsole.log(increment()); // 1\nconsole.log(increment()); // 2\n\nLexical Scope:\nA function’s scope is determined by where it is defined in the code.\nInner functions can access outer function variables, not vice versa."},{"id":7,"category":"functions","question":"What is IIFE (Immediately Invoked Function Expression)?","definition":"An IIFE is a function that runs immediately after it is defined.\n\nExample:\n(function () {\n  console.log(\"IIFE runs immediately!\");\n})();"},{"id":8,"category":"objects","question":"What are Prototypes?","definition":"A prototype is an object from which other objects inherit properties and methods.\n\nPrototype Chain:\nIf a property/method isn’t found on an object, JS looks up its prototype, then its prototype’s prototype, until it reaches null.\n\nExample:\nconst obj = {};\nconsole.log(obj.toString());\n// Not in obj → found in Object.prototype → returns \"[object Object]\""},{"id":9,"category":"objects","question":"How to deep clone an object? What is the difference between deep clone and shallow clone? How do you deep clone in JavaScript?","definition":"Deep cloning means creating a full copy of an object, including nested objects, \nso that changes in the copy don’t affect the original.\n\n// Deep clone options\n// 1. structuredClone (modern, handles Date/Map/Set)\nconst deep1 = structuredClone(obj);\n\n// 2. JSON round-trip (simple, but loses functions/undefined/Date)\nconst deep2 = JSON.parse(JSON.stringify(obj));\n\n// 3. Recursive implementation // can use WeakMap to handle circular references\nfunction deepClone(val) {\n  if (val === null || typeof val !== \"object\") return val;\n  if (Array.isArray(val)) return val.map(deepClone);\n  return Object.fromEntries(\n    Object.entries(val).map(([k, v]) => [k, deepClone(v)])\n  );\n}\n\n In Deep Learning : Go to this file console.log(\"file:///F:/Projects/github/02_Javascript/javascript_project_2022/basic-tut-2025/HTML/deepClone.html\");"},{"id":10,"category":"fundamentals","question":"Difference between == and ===?","definition":"== → compares values only (performs type conversion).\n=== → compares both value and type (strict equality).\n\nExample:\n5 == \"5\"   // true\n5 === \"5\"  // false"},{"id":11,"category":"objects","question":"Explain 'this' keyword in JS?","definition":"The 'this' keyword refers to the object that is currently executing the function. \nIts value depends on how the function is called.\n\n• Inside an object method → refers to the object.\n• In a regular function → refers to global object (undefined in strict mode).\n• Inside a class or constructor → refers to the instance.\n• Arrow functions → do not have their own 'this'; they inherit from their lexical scope."},{"id":12,"category":"objects","question":"What is call/apply/bind?","definition":"• call → Immediately calls a function with a given 'this' and arguments individually.\n• apply → Immediately calls a function with a given 'this' and arguments as an array.\n• bind → Returns a new function with fixed 'this' and optional preset arguments.\n\nKey difference:\ncall/apply = immediate execution.\nbind = delayed (returns a new function).\n\n⚡ Key difference: call/apply = immediate execution, bind = future execution."},{"id":13,"category":"objects","question":"Explain classes and inheritance?","definition":"A class is a blueprint for creating objects — it bundles properties and methods.\n\nInheritance allows one class (child) to use properties and methods of another class (parent) using 'extends'.\n\nKey points:\n• constructor() runs when a new object is created.\n• super() calls parent constructor.\n• Child classes can override methods.\n• Classes are syntactic sugar over prototypes."},{"id":14,"category":"async","question":"What is the callbacks?","definition":"A callback is a function that is passed as an argument to another function and is executed after that function completes its task.\n\n            function fetchData(callback) {\n            setTimeout(() => {\n              callback(\"Data received\");\n            }, 1000);\n          }\n\n          fetchData((message) => {\n            console.log(message);\n          });\n\n          👉 Output after 1 second:\n          Data received\n\n✔️ Why Callbacks Are Used\n      • Handle async operations\n      • Avoid blocking execution\n      • Execute code after task completion\n\n✔️ Problem with Callbacks (Important)\n  👉 Callback Hell\n  When callbacks are nested deeply, code becomes hard to read and maintain.\n        doTask1(() => {\n        doTask2(() => {\n          doTask3(() => {\n            // messy code\n          });\n        });\n      });\n✔️ How We Solve This\n    • Promises\n    • Async/Await (modern approach)\n✔️ They(CALLBACKS) are still used internally and in many APIs"},{"id":15,"category":"async","question":"What are Promises?","definition":"A Promise represents the eventual completion (or failure) of an asynchronous operation.\n\nStates:\n• Pending → initial.\n• Fulfilled → resolved successfully.\n• Rejected → failed.\n\nUse .then() for success, .catch() for errors, .finally() for cleanup.\n\n✔️ Why Promises Are Better Than Callbacks\n    • Avoid callback hell\n    • Better error handling\n    • Cleaner and more readable code\n    • Supports chaining (.then())\n\n✔️ Promise Chaining Example\n  doTask1()\n    .then(result1 => doTask2(result1))\n    .then(result2 => doTask3(result2))\n    .catch(err => console.error(err));\n\n✔️ It executes immediately when created\nPromises are the foundation of async/await, which makes asynchronous code look synchronous."},{"id":16,"category":"async","question":"Explain Async/Await?","definition":"Async/Await (ES2017) are built on top of Promises.\n\n• async → makes a function return a Promise.\n• await → pauses execution until a Promise resolves/rejects.\n• Helps avoid callback hell.\n\nPromise = chaining\nasync/await = clean synchronous-like code.\n\nasync/await is built on top of Promises and is used to simplify asynchronous code. \nThe async keyword is used to declare a function that returns a Promise, and \nthe await keyword pauses the execution of the function until the Promise is resolved or rejected. \nThis improves readability and makes error handling easier.\n\n    function fetchData() {\n      return new Promise((resolve) => {\n        setTimeout(() => resolve(\"Data received\"), 1000);\n      });\n    }\n\n    async function getData() {\n      const result = await fetchData();\n      console.log(result);\n    }\n\n    getData();\n    ✔️ Output\n      Data received\n\n  ✔️ Error Handling (Important)\n    async function getData() {\n      try {\n        const result = await fetchData();\n        console.log(result);\n      } catch (error) {\n        console.log(error);\n      }\n    }\n\n  ✔️ Why async/await is Better\n    • Cleaner and more readable\n    • Looks like synchronous code\n    • Easier debugging\n    • Better error handling with try...catch\n ✔️ Important Rules\n    • await can only be used inside an async function\n    • async function always returns a Promise\n    Async/await simplifies promise chaining and avoids deeply nested .then() calls.\n\n  ✔️ It only pauses inside that function"},{"id":17,"category":"async","question":"Explain Promises and async/await together?","definition":"Execution Order (Event Loop):\n\n1. Sync code runs first (Start, End).\n2. Microtasks (Promises, await) run next.\n3. Macrotasks (setTimeout) run last.\n\nExample Output:\nStart\nInside async\nEnd\nPromise then\nAfter await\nsetTimeout\n\nSynchronous → Microtasks → Macrotasks.\n\nconsole.log(\"Check Other practice => file:///C:/workspace-nisha/01_github/02_Javascript/javascript_project_2022/basic-tut-2025/HTML/promiseAsyncAwait.html\");\nSpoken Answer : \n                    *\"In JavaScript, execution follows the event loop model. First, synchronous code runs top to bottom. After\n                     that, microtasks like Promise.then() and await callbacks run before macrotasks like setTimeout.\n\n                    Promises are objects representing the result of an async operation, and we handle them with .then() or\n                     .catch(). Async/await is built on top of Promises and makes async code look synchronous, improving readability.\n\n                    For example, if I combine setTimeout, Promises, and async/await, the order is always: sync code first, \n                    then microtasks from Promises or await, and finally macrotasks like setTimeout. This is why understanding the \n                    event loop is crucial when debugging async behavior.\"*\n                     Chcek => \"js_async_cheatsheet.pdf\"\n                     \n                     OR \n\n                     Promises use .then() and .catch() for handling asynchronous operations, while async/await is syntactic \n                     sugar built on top of Promises that allows writing asynchronous code in a synchronous style. \n                     Async/await improves readability, reduces chaining, \n                     and makes error handling easier using try...catch.\n  ✔️ Example Comparison\n      🔴 Using Promises\n      fetchData()\n        .then(data => processData(data))\n        .then(result => console.log(result))\n        .catch(err => console.error(err))\n\n      🟢 Using Async/Await\n        async function handleData() {\n        try {\n          const data = await fetchData();\n          const result = await processData(data);\n          console.log(result);\n        } catch (err) {\n          console.error(err);\n        }\n      }\n  | Feature        | Promises              | Async/Await      |\n  | -------------- | --------------------- | ---------------- |\n  | Syntax         | .then(), .catch()     | async, await     |\n  | Readability    | Medium                | High             |\n  | Error Handling | .catch()              | try...catch      |\n  | Code Structure | Chaining              | Sequential-like  |\n\n  ✔️ When to Use\n  • Use async/await → most cases (clean code)\n  • Use Promises → when chaining or parallel execution (e.g. Promise.all)\n\n✔️ Bonus Tip (Impress Interviewer)\n   “Async/await internally uses Promises, so understanding Promises is essential.”"},{"id":18,"category":"async","question":"What are sequential promises?","definition":"Sequential Promises:\nExecute one after another — each waits for the previous to resolve.\n• Useful when tasks are dependent on each other.   \n\nParallel Promises:\nRun simultaneously — independent tasks that don’t wait for each other.\n• Useful when tasks are independent."},{"id":19,"category":"async","question":"What is Promise.all() and when do you use it?","definition":"Promise.all() takes an array of promises and returns a single Promise. \n    It resolves when all the promises are fulfilled and returns their results as an array. If any one promise fails, \n    it immediately rejects with that error.\n\n        const p1 = Promise.resolve(\"A\");\n        const p2 = Promise.resolve(\"B\");\n        const p3 = Promise.resolve(\"C\");\n\n        Promise.all([p1, p2, p3])\n          .then((results) => console.log(results))\n          .catch((err) => console.error(err));\n        ✔️ Output\n        [\"A\", \"B\", \"C\"]\n\n        ✔️ Real Use Case (Important)\n\n👉 Fetching multiple APIs at the same time\n\n      const [user, posts, comments] = await Promise.all([\n        getUser(),\n        getPosts(),\n        getComments()\n      ]);\n\n✔️ Faster because all run in parallel\n\n✔️ Key Behavior\n✅ Runs all promises in parallel\n❌ Fails fast (if one fails → all fail)\n✅ Returns results in same order\n\n✔️ Bonus Tip (Impress Interviewer)\n    “If I want all results even if some fail, I would use Promise.allSettled() instead.”"},{"id":20,"category":"async","question":"Explain Promise.all, Promise.allSettled, Promise.race, Promise.any?","definition":"const p1 = Promise.resolve(1);\nconst p2 = Promise.reject(\"fail\");\nconst p3 = Promise.resolve(3);\n\n// all — rejects immediately if ANY rejects\nPromise.all([p1, p2, p3]).catch(e => console.log(e)); // \"fail\"\n\n// allSettled — waits for ALL, returns status+value for each\nPromise.allSettled([p1, p2, p3]).then(results => {\n  // [{status:\"fulfilled\",value:1},{status:\"rejected\",reason:\"fail\"},...]\n});\n\n// race — resolves/rejects with FIRST settled promise\nPromise.race([p1, p2]).then(v => console.log(v)); // 1\n\n// any — resolves with FIRST fulfilled; rejects if ALL reject\nPromise.any([p2, p3]).then(v => console.log(v));  // 3"},{"id":21,"category":"async","question":"Explain the event loop?","definition":"The event loop continuously checks the call stack and callback/microtask queues,\nallowing asynchronous operations without blocking the main thread.\n\nCycle:\nCall Stack → Microtask Queue (Promises) → Macrotask Queue (setTimeout, I/O)\nTip:\nThe event loop has different phases like timers, I/O callbacks, idle, poll, check, and close callbacks."},{"id":22,"category":"async","question":"Explain Debounce & Throttle?","definition":"Debounce:\nDelays a function’s execution until after a specified time of no calls — great for search boxes.\nmainly used to improve performance\n\nThrottle:\nExecutes a function at fixed intervals — great for scroll or resize events.\n\nDifference:\nDebounce waits for silence.\nThrottle runs on schedule.\n\nExample:\nDebounce: Typing → run after user stops.\nThrottle: Scrolling → run every 200ms."},{"id":23,"category":"async","question":"Difference between process.nextTick and setImmediate (Node-specific)?","definition":"process.nextTick → Runs immediately after the current function, before event loop continues.\nsetImmediate → Runs on the next event loop cycle (after I/O).\n\nUse Cases:\n• nextTick – urgent microtasks.\n• setImmediate – defer heavy tasks post I/O.\n\nNot Required for answer:\nTo use Node-specific features (process) inside the browser, which doesn’t have them."},{"id":24,"category":"fundamentals","question":"How many things do you know about JS?","definition":"JavaScript is a high-level, versatile language for building dynamic web applications.\nI have a strong grasp of its fundamentals, including ES6 features, async programming, and frameworks like React, Angular, Vue, and Node.js for full-stack development."},{"id":25,"category":"fundamentals","question":"What is ES6?","definition":"ES6 (also called ECMAScript 2015) introduced many important features that modern JavaScript heavily relies on.\n         like let, const, arrow functions, classes, modules, and promises — making code cleaner, easier, and more efficient.\n\n        1. let and const - Block-scoped variables (better than var)\n        2. Arrow Functions - Shorter syntax + no own this\n        3. Template Literals - Use backticks for dynamic strings\n        4. Destructuring - Extract values from arrays/objects\n        5. Default Parameters\n        6. Spread Operator (...) - Expands values\n        7. Rest Operator (...) - Collects values\n        8. Classes - Cleaner syntax for objects\n        9. Modules (import/export)\n        10. Promises - Handle async operations , Simplifies async flows and error handling vs. callback hell.\n        11. for...of Loop\n        12. Map & Set\n\n        Most asked ES6 topics:\n\n          • Arrow functions vs normal functions\n          • let vs var vs const\n          • Spread vs Rest\n          • Promises"},{"id":26,"category":"dom","question":"What is the difference between Real DOM and Virtual DOM?","definition":"Real DOM:\n    • Represents the actual structure of the webpage in the browser.\n    • When a change occurs, the entire page or large sections re-render — making it slower.\n\nVirtual DOM:\n    \n• A lightweight copy of the Real DOM used by frameworks like React.\n    \n• It updates only the modified parts by comparing (diffing) the Virtual DOM with the Real DOM — making it faster and more efficient.\n\nIn Short:\n    • Real DOM: Updates the whole UI directly — slower.\n    • Virtual DOM: Updates only what’s changed — faster and smoother."},{"id":27,"category":"dom","question":"What are Web Selectors?","definition":"A web selector (also called as CSS selector) is a pattern used in web development to sleect and target specific HTML elements on a webpage,\nso you can apply style (using css) or manipulate them (using javascript). \nIn short- selectors tell the browser “which element(s) this rule applies to.\n\n1. The Universal Selector (*) selects all elements on a webpage.  \n   Example:\n   * {\n     margin: 0;\n     padding: 0;\n   }\n\n2. The Element Selector (div, p, h1, etc.) targets all elements of a specific type.  \n   Example:\n   p {\n     color: blue;\n   }\n\n3. The Class Selector (.classname) targets elements with a specific class attribute.  \n   Example:\n   .highlight {\n     background-color: yellow;\n   }\n\n4. The ID Selector (#idname) targets a unique element with a specific ID.  \n   Example:\n   #header {\n     font-size: 20px;\n   }\n\n5. The Attribute Selector ([attr=value]) selects elements with a particular attribute or value.  \n   Example:\n   input[type=\"text\"] {\n     border: 1px solid gray;\n   }\n\n6. The Descendant Selector (parent child) targets elements nested inside another element.  \n   Example:\n   div p {\n     color: green;\n   }\n\n7. The Pseudo-class Selector (:hover, :nth-child(), etc.) targets elements based on their state or position.  \n   Example:\n   a:hover {\n     color: red;\n   }\n\n8. The Pseudo-element Selector (::before, ::after) styles specific parts of an element.  \n   Example:\n   p::first-letter {\n     font-size: 24px;\n   }\n\n9. In JavaScript, selectors are also used to access elements.  \n   Example:\n   document.querySelector(\".btn\");      // Selects the first element with class \"btn\"\n   document.querySelectorAll(\"p\");      // Selects all <p> elements\n   document.getElementById(\"header\");   // Selects the element with ID \"header\""},{"id":28,"category":"dom","question":"Explain Web Storage, Cookies, Session Storage, Local Storage? what does mean Data Persistence ?","definition":"Data Persistence means keeping data available even after the page reloads or the app is closed.\n\n1. LocalStorage : backs up (saves) some data into localStorage, so the data remains even after:\n    \n• Stores data with no expiration,\n• Data stays even after closing the browser,\n• Example use: saving theme preference, login state (non-sensitive), cart items.\n\n2. SessionStorage\n    • Stores data only for the current browser tab/session\n    • Data disappears when the tab is closed\n    • Example use: form progress, one-session tokens\n\nWhy it’s useful\n    • Faster access to data (no server call)\n    • Simple key–value storage  \n    • Helpful for personalizing UI or maintaining state\n\n                                    localStorage.setItem(\"username\", \"Nisha\");\n                                    const name = localStorage.getItem(\"username\"); // \"Nisha\"\n\n3. Cookies\n   • Expire based on an expiration date (you set it)\n   • Sent to Server > Sent automatically with each HTTP request\n   • Accessible by JavaScript and the server\n   • Can be HttpOnly, Secure, SameSite → This makes them safer for authentication when used properly.\n\n\nWhat to Use When\n\n    Use localStorage when:\n    Saving theme (dark/light)\n    Saving user settings\n    Storing non-sensitive UI data\n    Saving cart items for a shopping website\n\n    Use sessionStorage when:\n    Temporary form data\n    Data that should clear after closing a tab\n    One-time session preferences\n\n    Use Cookies when:\n    Authentication (session ID, secure tokens)\n    Server-side validation\n    Managing logged-in states securely\n\n\n    | Feature         | localStorage       | sessionStorage    | Cookies                     |\n|-----------------|--------------------|--------------------|-----------------------------|\n| Capacity        | 5–10 MB            | 5–10 MB            | ~4 KB                       |\n| Lifetime        | Until removed      | Until tab closes   | Custom expiry               |\n| Sent to server? | No                 | No                 | Yes                         |\n| Secure options  | None               | None               | HttpOnly, Secure, SameSite  |\n| Best use        | UI data, prefs     | Temporary data     | Auth, server communication  |"},{"id":29,"category":"dom","question":"Client-side vs Server-side rendering?","definition":"one-sentence interview version:\n \n CSR renders the UI in the browser using JavaScript, while SSR renders the HTML on the server before sending it to the browser—CSR is better for rich interactions,\n and SSR is better for initial load speed and SEO.\n\nClient-Side Rendering (CSR)\n\n  • The browser downloads a minimal HTML file and JavaScript.\n  • JavaScript builds the UI in the browser.\n  • Pros: Rich interactions, fast after initial load.\n  • Cons: Slow first load, weaker SEO unless handled properly.\n\nServer-Side Rendering (SSR)\n\n  • The server generates the full HTML for each request.\n  • Browser gets a ready page.\n  • Pros: Faster first load, better SEO.\n  • Cons: More server load, slower page updates after interactions."},{"id":30,"category":"fundamentals","question":"JavaScript multithreaded or single-threaded?","definition":"Spoken : JavaScript runs on a single thread, meaning it executes one task at a time.\nHowever, it uses asynchronous mechanisms like callbacks, promises, and the event loop to stay non-blocking.\nFor CPU-intensive tasks, Node.js provides worker threads to achieve parallel execution.\n\nJavaScript is single-threaded\n\n  • It runs one task at a time using the main thread.but it uses an event loop to handle asynchronous tasks.\n  • JavaScript uses the event loop, callback queue, and microtask queue.\n  • Time-consuming tasks like API calls run outside the main thread, and their results are pushed back to the event loop when ready.”\n\nJavaScript is multi-threaded\n\n  • Multi-threaded means multiple tasks can run concurrently, improving performance for certain workloads.\n  • Where is multi-threading actually used?\n    Multi-threading is common in Java, C++, and Python for CPU-intensive tasks like image processing, gaming engines, and background services\n    \nQuestions :\n  When would you prefer single-threading over multi-threading?\n    Single-threading is easier to debug and avoids race conditions.\n    It works well for I/O-based applications like web servers.\n\n  Does multi-threading always improve performance?\n    No. It adds overhead and complexity. For small tasks or I/O-heavy work, it may not help.\n\n  What are the risks of multi-threading?\n    Race conditions, deadlocks, and data inconsistency.\n    Proper synchronization is required."},{"id":31,"category":"dom","question":"Difference between one-way and two-way binding?","definition":"One-Way Binding\n\n  • Data flows in a single direction (model → UI).\n  • UI updates when data changes, but UI doesn’t directly change the model.\n\n  Two-Way Binding\n\n  • Data flows both ways (model ↔ UI).\n  • Changing the UI updates the model, and changing the model updates the UI automatically."},{"id":32,"category":"fundamentals","question":"How to validate String, Object, and Array? & Definition","definition":"Validate String\n\n  • typeof value === \"string\" and value.trim().length > 0.\n\nValidate Object\n\n  • typeof value === \"object\" and value !== null and !Array.isArray(value).\n\nValidate Array\n\n  • Array.isArray(value) and value.length > 0 (if non-empty required).\n\nString: A sequence of characters used to represent text.\nObject: A collection of key–value pairs used to store structured data.\nArray: An ordered list of values stored by index."},{"id":33,"category":"arrays","question":"Explain Array methods?","definition":"Array methods let you add, remove, search, and transform items—for example: push/pop (add/remove), \n          map (transform), filter (select), reduce (summarize), and find (locate).\nCommon Array Methods\n  • push() – Adds an item to the end.\n\n  • pop() – Removes the last item.\n\n  • shift() – Removes the first item.\n\n  • unshift() – Adds an item to the start.\n\n  • map() – Creates a new array by transforming each element.\n\n  • filter() – Returns items that match a condition.\n\n  • reduce() – Reduces the array to a single value.\n\n  • forEach() – Runs a function on each element (no return).\n\n  • find() – Returns the first matching item."},{"id":34,"category":"arrays","question":"Explain map, filter, and reduce?","definition":"map(): Creates a new array by applying a function to each element.\n\nfilter(): Returns a new array with elements that match a condition.\n\nreduce(): Combines all elements into a single value (like sum or total)."},{"id":35,"category":"functions","question":"What are Higher-Order Functions?","definition":"Functions that take other functions as arguments or return a function. They make code more reusable and flexible."},{"id":36,"category":"arrays","question":"Difference between splice, slice, and reduce?","definition":"slice(): Returns a new array by copying a portion of the array without modifying the original.\n\nsplice(): Adds or removes elements from the array and modifies the original array.\n\nreduce(): Processes all elements and returns a single value, not an array.\n\nslice(start, end) → copy only\nsplice(index, deleteCount, item) → modify + insert/remove"},{"id":37,"category":"arrays","question":"Difference between includes() and find()?","definition":"includes(): Checks if a value exists in the array and returns true/false.\n\nfind(): Returns the first matching element based on a condition."},{"id":38,"category":"arrays","question":"What is the spread operator?","definition":"Spread Operator (...): Expands arrays or objects into individual elements, making it easy to copy, merge, or pass values."},{"id":39,"category":"objects","question":"Difference between deep and shallow copy?","definition":"Shallow Copy: Copies only the top-level values; nested objects still reference the same memory.\n\nDeep Copy: Copies all levels of data; nested objects get completely new independent copies."},{"id":40,"category":"objects","question":"What is a key in JS?","definition":"Key in JavaScript: A key is the name of a property in an object used to access its corresponding value."},{"id":41,"category":"fundamentals","question":"How many loops are used in JS?","definition":"JavaScript has several loops: for, while, do…while, for…of, for…in, and array loops like forEach()."},{"id":42,"category":"fundamentals","question":"Difference between for loop and forEach loop?","definition":"for loop: Gives full control over index, conditions, and breaking out of the loop.\n          A traditional loop that lets you control the counter, skip steps, and stop the loop whenever you want.\n\nforEach(): Executes a function on each array item but can’t break early and is used mainly for cleaner array iteration."},{"id":43,"category":"fundamentals","question":"Difference between vanilla JS and JS, frameworks?","definition":"Vanilla JS vs JavaScript\n\n  • JavaScript is the programming language itself.\n\n  • Vanilla JavaScript simply means using plain, pure JavaScript without any libraries or frameworks.\n\nOne-line summary:\n  Vanilla JS is just JavaScript in its raw form, without added tools.\n\n\nJavaScript Frameworks (React, Angular, Vue, etc.)\n\n  • Provide pre-built structure, patterns, and tools for building complex UIs faster.\n\n  • Handle things like state management, routing, and efficient DOM updates.\n\n  • Improve productivity and maintainability for larger applications."},{"id":44,"category":"functions","question":"What is an anonymous function?","definition":"Anonymous Function\n\n  • A function without a name.\n\n  • Used when the function is needed temporarily, such as in callbacks, event handlers, or array methods.\n\nExample:\n() => { console.log(\"Hello\"); }\n\nOne-line summary:\nAn anonymous function is a nameless function used mainly for short, inline operations."},{"id":45,"category":"fundamentals","question":"Explain isNaN() function?","definition":"isNaN() Function\n\n  • isNaN() checks whether a value is Not-a-Number.\n\n  • It returns true if the value cannot be converted into a valid number, otherwise false.\n\nExample:\nisNaN(\"abc\") // true\nisNaN(\"20\") // false\n\nOne-line summary:\nisNaN() tells you if a value is not a valid number."},{"id":46,"category":"fundamentals","question":"How to handle exceptions in JS?","definition":"Handling Exceptions in JavaScript\n\n • Use try–catch to catch and handle errors.\n\n • try contains the code that may fail, catch handles the error, and finally runs always (optional).\n                                                        try {\n                                                          riskyFunction();\n                                                        } catch (error) {\n                                                          console.error(error);\n                                                        } finally {\n                                                          cleanup();\n                                                        }\nOne-line summary:\nUse try–catch to safely catch and manage errors in JavaScript."},{"id":47,"category":"dom","question":"What is event propagation?","definition":"Event Propagation\nOne-line summary: Event propagation defines how events travel through the DOM in capturing and bubbling phases. OR\n\n • Event propagation is the flow of events through the DOM in two phases:\n\n    1. Capturing phase – event moves from parent to child.\n\n    2. Bubbling phase – event moves from child back up to parent."},{"id":48,"category":"dom","question":"What is event bubbling?","definition":"Event Bubbling\n\nOne-line summary: Event bubbling is when an event triggers on the child first and then propagates up to the parent elements.\n \n • Event bubbling means an event starts from the deepest (child) element and moves upward through its parent elements.\n\n • It helps handle events at a higher level without attaching many listeners."},{"id":49,"category":"network","question":"How to fix a 404 error?","definition":"Fixing a 404 Error\n\n • A 404 happens when a page or resource is not found.\n\n • Check and correct the URL, ensure the file or route exists, and verify the server or API path is correct.\n\nOne-line summary:\nFix a 404 by correcting the URL or making sure the requested resource actually exists on the server."},{"id":50,"category":"network","question":"What is a CORS issue and what is a proxy?","definition":"CORS Issue\n\n • CORS (Cross-Origin Resource Sharing) happens when a browser blocks requests to a different domain or port for security reasons.\n\n • It occurs when the server doesn’t allow your origin.\n\nProxy\n\n • A proxy is a middle layer that forwards your request to another server.\n\n • It helps bypass CORS by making the request from the server side instead of the browser.\n\nOne-line summary:\nA CORS issue is a blocked cross-domain request, and a proxy is a server that forwards requests to avoid such restrictions."},{"id":51,"category":"network","question":"Explain HTTP request methods?","definition":"• HTTP Request Methods\n\n • GET – Fetch data from the server.\n\n • POST – Send new data to the server.\n\n • PUT – Update or replace existing data.\n\n • PATCH – Partially update data.\n\n • DELETE – Remove data from the server.\n\nOne-line summary:\nHTTP methods define the type of action you want to perform on a server’s resource."},{"id":52,"category":"network","question":"Explain HTTP status codes (400, 401, 404, 500, 502)?","definition":"HTTP Status Codes\n\n • 400 – Bad Request: The server can’t process the request due to invalid input.\n\n • 401 – Unauthorized: Authentication is required or failed.\n\n • 404 – Not Found: The requested resource doesn’t exist.\n\n • 500 – Internal Server Error: Server encountered an unexpected error.\n\n • 502 – Bad Gateway: The server received an invalid response from another server.\n\nOne-line summary:\nThese codes indicate different client or server errors that help identify what went wrong in a request."},{"id":53,"category":"functions","question":"What is a recursive function?","definition":"Recursive Function\n\n • A function that calls itself to solve a problem.\n\n • Used for tasks that can be broken into smaller, similar subproblems (e.g., factorial, tree traversal).\n\nOne-line summary:\nA recursive function solves a problem by repeatedly calling itself with smaller inputs."},{"id":54,"category":"network","question":"Explain JWT?","definition":"One-line summary: JWT is a signed token used to verify user identity without repeated database lookups.\n\nJWT (JSON Web Token)\n\n • JWT is a secure token format used for authentication.\n\n • It contains encoded user data and is signed so it can’t be tampered with.\n\n • The server verifies the token instead of checking the database each time."},{"id":55,"category":"functions","question":"Currying, memoization?","definition":"Currying\n\n • Breaking a function with multiple arguments into a series of functions that take one argument at a time.\n\n • Helps reuse functions and improves code flexibility.\n\nMemoization\n\n • Caching a function’s previous results to avoid recalculating.\n\n • Improves performance for expensive operations.\n\nOne-line summary:\nCurrying transforms functions into smaller ones; memoization speeds them up by caching results."},{"id":56,"category":"fundamentals","question":"What is a Bundler & Compiler?","definition":"Bundler :\nA bundler takes multiple files from your project and packages them into fewer files (usually 1–3 optimized bundles) for the browser.\n\nKey responsibilities:\n\n • Combine JavaScript modules\n\n • Merge and process CSS\n\n • Pack images, fonts, assets\n\n • Optimize output (minify, tree-shake, compress)\n\n • Reduce number of HTTP requests\n\nExamples:\n\nWebpack, Rollup, Parcel, Esbuild (can bundle), Vite (uses Rollup in production)\nimport Button from './Button.js'\nimport { add } from './utils/math.js'\n\nbundle.js   // contains Button + math + everything else | Bundler outputs a single optimized file\n\nCompiler :\nA compiler transforms code from one language or syntax to another.\nIt does NOT bundle files.\n\nKey responsibilities:\n\n• Convert TypeScript → JavaScript\n\n• Convert JSX → JavaScript\n\n• Compile Sass/Less → CSS\n\n• Convert modern JS → older JS (via Babel)\n\nExamples:\n\nBabel, TypeScript compiler (tsc), Sass, esbuild (can compile and bundle)\nconst greet: string = \"Hello\"; Compiler (tsc) outputs: const greet = \"Hello\"; | Just transforms the code."},{"id":57,"category":"fundamentals","question":"What is the difference between synchronous and asynchronous code?","definition":"Synchronous code executes line by line, blocking the next operation until the current one finishes.\nAsynchronous code allows the program to continue execution without waiting for the current task to complete.\n\n    🔴 Synchronous\n    const data = fs.readFileSync(\"file.txt\");\n    console.log(data);\n    console.log(\"Done\");\n\n    👉 Execution waits until file is read\n\n    🟢 Asynchronous\n    fs.readFile(\"file.txt\", (err, data) => {\n      console.log(data);\n    });\n      👉 Output:\n\n      Done\n      (file content later)\n      console.log(\"Done\");\n\n      | Feature     | Synchronous  | Asynchronous   |\n      | ----------- | ------------ | -------------- |\n      | Execution   | Blocking     | Non-blocking   |\n      | Performance | Slower       | Faster         |\n      | Use Case    | Simple tasks | I/O operations |\n\n✔️ When to Use What\n  • Use sync → simple scripts, startup configs\n  • Use async → APIs, DB calls, file handling (most real apps)"},{"id":58,"category":"fundamentals","question":"2026 | Core Fundamentals - https://lifecodewithnisha.in/javascript-roadmap-2026.html","definition":"2026 JS | Data Foundation(Variables & Types)| How JS Runs (Execution Model) | Function Types (Functions Basics\n   \n    )"},{"id":59,"category":"fundamentals","question":"Primitive vs Reference types?","definition":"JavaScript has two main categories of data types: primitive and reference types.\n      \n    • Primitive types are immutable and stored directly in memory. Examples include number, string, boolean, null, \n      undefined, symbol, and bigint. When we assign or copy a primitive value, it creates a completely separate copy.\n\n    • Reference types, like objects, arrays, and functions, are stored as references in memory. So when we assign them, \n      we’re copying the reference, not the actual value. That’s why modifying one variable affects the other.\n\n\n| Feature          | Primitive Types           | Reference Types            |\n|------------------|---------------------------|----------------------------|  \n| Storage          | Stored directly in memory | Stored as reference        |\n| Mutability       | Immutable                 | Mutable                    |\n| Assignment       | Creates a new copy        | Copies the reference       |\n| Examples         | number, string, boolean   | object, array, function    |\n\nReal-Life Analogy (Interview Bonus) :\n    Primitive types are like writing a number on two separate papers. Changing one doesn’t affect the other.\n    Reference types are like sharing the same Google Doc link—if one person edits it, everyone sees the change.\n\nFluency :\n    JavaScript has two types of data: primitive and reference.\n    Primitive types store values directly, like numbers and strings.\n    Reference types store memory addresses, like objects and arrays.\n    When copying primitives, we get a new value.\n    When copying reference types, we get a shared reference.\n    That’s why changes in one variable affect the other.”"},{"id":60,"category":"fundamentals","question":"Type Coercion & == vs === ?","definition":"JavaScript uses type coercion to convert values between types when needed.\n\nThere are two types: \n    • implicit coercion, done automatically by JavaScript, and \n    • explicit coercion, done manually using functions like Number() or String()\n\nWhen comparing values, == allows type coercion, meaning it converts operands to the same type before comparing.\nOn the other hand, === checks both value and type strictly without conversion, which makes it safer and more predictable.”\n\nReal-Life Analogy :\n    Using == is like comparing values after converting units automatically, like converting meters to centimeters.\n    Using === is like checking both value and unit strictly without conversion.\n\nFluency :\n    == compares values after type conversion, while === compares both value and type without conversion.”\n    OR\n    “Type coercion is the conversion of one data type to another in JavaScript.\n    It can be implicit or explicit.\n    The == operator allows coercion before comparison, while === checks both type and value strictly.\n    That’s why === is preferred in most cases to avoid unexpected behavior.\n\nPro :\n    JavaScript follows specific coercion rules defined by the abstract equality comparison algorithm, \n    which can sometimes lead to unexpected results."},{"id":61,"category":"fundamentals","question":"Operators & Expressions?","definition":"Operators are symbols that perform operations on values, like +, -, or ===.\nAn expression is any valid combination of values, variables, and operators that produces a result.\noperators are used to perform operations on operands—for example arithmetic, comparison, or logical operations.\n\n| Operator Type     | Examples                 | Description                          |\n|-------------------|--------------------------|--------------------------------------|\n| Arithmetic        | +, -, *, /, %            | Perform mathematical calculations     |\n| Comparison        | ==, ===, !=, >, <        | Compare values and return boolean       |\n| Logical           | &&, ||, !                | Combine boolean values                 |\nExpressions can be simple (like 5 + 3) or complex (like (a > 10 && b < 5) || c === \"hello\"). \nThey are evaluated to produce a value, which can be used in further operations or assigned to variables.\n\nTypes of Operators: JavaScript has different types of operators:\n    1. Arithmetic Operators: +, -, *, /, % for mathematical operations.\n    2. Comparison Operators: ==, ===, !=, >, < for comparing values.\n    3. Logical Operators: &&, ||, ! for combining boolean values.\n    4. Assignment Operators: =, +=, -= for assigning values to variables.\n    5. Ternary Operator: condition ? exprIfTrue : exprIfFalse for inline conditional expressions.\n    6. Type Operators: typeof, instanceof for checking types.\n    7. Bitwise Operators: &, |, ^ for bit-level operations.\n    8. Spread and Rest Operators: ... for expanding or collecting values.\n\nEach is used depending on the requirement.\n\nReal-Life Analogy:\n  Operators are like actions, such as adding or comparing.\n  Expressions are complete sentences that give a result.\n\nFluency :\n  Operators are symbols used to perform operations on values.\n  Expressions are combinations of values, variables, and operators that produce a result.\n  For example, 5 + 3 is an expression that evaluates to 8.\n  Operators help form expressions, and expressions always return a value.\n\nOne-line summary: Operators perform operations, and expressions are combinations that evaluate to a value."},{"id":62,"category":"fundamentals","question":"Control flow: if/else, switch?","definition":"Control flow determines how a program executes based on conditions.\n      The if/else statement is used when we want to check conditions and execute code blocks accordingly.\n      The switch statement is useful when we have multiple possible values for a single variable and want cleaner code instead of multiple if-else conditions.\n\n    Key Difference :\n        if/else is better when we have complex conditions or ranges.\n        switch is better when we compare one variable against multiple exact values.\n\n    Real-Life Analogy :\n        if/else is like asking questions step by step—if this condition is true, do this.\n        switch is like selecting an option from a menu.\n\n    Fluency :\n        Control flow is used to decide how code executes based on conditions.\n        The if/else statement evaluates conditions and runs code accordingly.\n        The switch statement is used when we compare one value against multiple cases.\n        It helps make code cleaner when dealing with many conditions.\n\n    Pro Tip:\n        switch uses strict comparison (===) internally.\n\n    One-Line Summary:\n        Control flow allows us to execute different code paths based on conditions using if/else or switch"},{"id":63,"category":"fundamentals","question":"Loops: for, while, for...of, for...in ?","definition":"Loops help us avoid writing repetitive code by executing a block multiple times.\n  A for loop is commonly used when we know the number of iterations.\n  A while loop is used when the number of iterations depends on a condition.\n  for...of is used to iterate over iterable values like arrays or strings.\n  for...in is used to iterate over object keys.\n\nKey Difference :\n    for...of iterates over values, while for...in iterates over keys.\n    So we use for...of for arrays and for...in for objects.\n\nReal-Life Analogy :\n    A for loop is like counting from 1 to 10 when you know the limit.\n    A while loop is like waiting for a traffic light to turn green before crossing.\n    for...of is like going through each item in a shopping list.\n    for...in is like checking each key in a dictionary. \n\n\n  Fluency :\n      Loops are used to run code multiple times.\n      A for loop is used when we know the number of iterations.\n      A while loop runs based on a condition.\n      for...of is used to iterate over values in arrays or strings.\n      for...in is used to iterate over object keys\n\n  Pro Tip:\n      for...in can iterate over inherited properties as well, so we often use hasOwnProperty() check when needed.\n\n  One-Line Summary:\n      Loops allow repeated execution, and different loop types are used based on whether we need index, condition, values, or keys."},{"id":64,"category":"fundamentals","question":"Execution Model | Execution Context — Global & Function?","definition":"In JavaScript, execution context is the environment where code runs. There are mainly two types: global execution context and function execution context.\nThe global execution context is created when the JavaScript file starts running. It creates a global object and sets this to it.\nA function execution context is created every time a function is called. Each function gets its own scope, variables, and this value.\nJavaScript executes code using a call stack, where global context is pushed first, and then function contexts are added and removed as functions are executed\n\nSlightly more detailed:\nEach execution context has two phases:\n\nCreation phase — where variables and functions are stored in memory. Variables are initialized as undefined, and functions are fully hoisted.\nExecution phase — where code runs line by line and values are assigned.\n\nThe global execution context is created once, while function execution contexts are created whenever a function is invoked.\nThese contexts are managed using the call stack, which follows a last-in, first-out approach.\n\nCallstack :\n    JavaScript uses a call stack to manage execution contexts.\n    The global context is pushed first. When a function is called, its context is pushed onto the stack.\n    Once the function finishes execution, it is popped off the stack.\n\nFluency :\n    So, execution context in JavaScript defines how code is executed. There are two main types — global and function execution context.\n    The global one is created first and represents the overall environment.\n    Whenever a function is called, JavaScript creates a new execution context for that function.\n    Each context goes through a creation phase and an execution phase.\n    JavaScript manages all of this using a call stack, where contexts are pushed and popped as functions run.\n\nPro :\n    Execution context is closely related to lexical scope and closures,\n    which define how variables are accessed across different contexts."},{"id":65,"category":"fundamentals","question":"Call Stack — LIFO execution order ?","definition":"Short Answer: The call stack in JavaScript is a mechanism used to keep track of function execution. It follows the LIFO principle — Last In, First Out.\n      This means the most recently called function is executed first and removed first from the stack.\n\n      Slightly Detailed: When JavaScript runs, the global execution context is pushed onto the call stack first.\n      Every time a function is called, a new execution context is created and pushed onto the stack.\n      Once the function finishes execution, it is popped off the stack.\n      This continues until the stack becomes empty."},{"id":66,"category":"fundamentals","question":"Hoisting — var & function declarations ?","definition":"Hoisting in JavaScript means that variable and function declarations are moved to the top of their scope during the creation phase of execution context.\n    Variables declared with var are hoisted and initialized with undefined, while function declarations are fully hoisted with their complete definition.”\n\n  Detailed Explanation:\n    JavaScript executes code in two phases — creation and execution.\n    During the creation phase, memory is allocated for variables and functions.\n    var variables are hoisted and set to undefined, while function declarations are stored entirely in memory.\n    That’s why we can call a function before its declaration, but accessing a var variable before assignment gives undefined.\n\n  Fluency :\n    Hoisting is JavaScript’s behavior of moving declarations to the top of their scope during the creation phase.\n    Variables declared with var are hoisted but initialized as undefined.\n    Function declarations, however, are fully hoisted with their body.\n    That’s why we can call a function before it is defined, but accessing a variable before assignment gives undefined.\n    It’s important to note that function expressions are not fully hoisted.\n\n  One-Line Summary:\n        Hoisting means JavaScript moves declarations to the top — var becomes undefined, and functions are fully available.\n\n  Pro Tip:\n      let and const are also hoisted but remain in a temporal dead zone until initialized, \n      so accessing them before declaration throws a reference error."},{"id":67,"category":"fundamentals","question":"Scope: Global, Function, Block ?","definition":"Global scope variables are declared outside any function and can be accessed anywhere.\nFunction scope variables are declared inside a function and are only accessible within that function.\nBlock scope was introduced with let and const, where variables are limited to a block defined by curly braces.\nThis helps avoid unintended access and improves code safety.\n\nFluency :\n    Scope in JavaScript determines where variables can be accessed.\n    There are three types — global, function, and block scope.\n    Global variables are accessible everywhere.\n    Function-scoped variables are limited to the function they are declared in.\n    Block scope applies to let and const, where variables are restricted to a specific block.\n    This helps prevent bugs and improves code maintainability\nOne-Line Summary:\n   Scope defines variable accessibility — global is everywhere, function is inside functions, and block is limited to {} using let and const.\n   \nPro :\n   Scope is determined by lexical structure, meaning where \n   variables are written in code defines their accessibility, not where they are called."},{"id":68,"category":"fundamentals","question":"Temporal Dead Zone (let/const)?","definition":"The Temporal Dead Zone is the time between when a let or const variable is hoisted and when it is initialized.\nDuring this period, accessing the variable throws a ReferenceError.\n\nDetailed Explanation:\n    let and const are hoisted like var, but unlike var, they are not initialized immediately.\n    From the start of the block until the declaration line, the variable stays in a Temporal Dead Zone.\n    If we try to access it in this zone, JavaScript throws a ReferenceError instead of returning undefined.\n\nFluency :\n    Temporal Dead Zone refers to the phase where let and const variables are hoisted but not yet initialized.\n    This happens from the start of the block until the variable is declared.\n    If we try to access the variable during this time, JavaScript throws a ReferenceError.\n    This behavior helps prevent accidental usage of variables before initialization, making the code more predictable.\n\nOne-Line Summary:\n    TDZ is the time between hoisting and initialization of let and const, where accessing them throws a ReferenceError.\n\nPro Tip:\n    TDZ enforces better coding practices by preventing access to variables before initialization, which avoids subtle bugs common with var.\n   \nBonus:  DZ exists because JavaScript uses lexical scoping, and let/const bindings are created at the start of the block but remain uninitialized until execution reaches their declaration."},{"id":69,"category":"functions","question":"Function Declarations vs Function Expressions?","definition":"A function declaration defines a function with a name and is fully hoisted, so it can be called before it appears in the code.\nA function expression assigns a function to a variable, and it is not fully hoisted, so it can only be used after the assignment.\n\nSlightly Detailed:\n    Function Declaration:\n        function greet() {\n          console.log(\"Hello\");\n        }\n    This can be called before its declaration due to hoisting.\n\n    Function Expression:\n        const greet = function() {\n          console.log(\"Hello\");\n        }\n    This cannot be called before the assignment, as it is not fully hoisted.\n\n    function declarations are created during the creation phase of execution context, so the entire function is available before execution.\n    Function expressions, however, behave like variables. If declared with var, they are hoisted as undefined, and if declared with let or const, \n    they remain in the Temporal Dead Zone until initialization.\n\nFluency :\n    The main difference between function declaration and function expression is how they are defined and hoisted.\n    A function declaration is fully hoisted, so it can be called before it appears in the code.\n    A function expression is assigned to a variable and behaves like that variable.\n    So it can only be used after initialization.\n    This difference is important when deciding how to structure code and avoid runtime errors.\n\nOne-Line Summary:\n    Function declarations are fully hoisted, while function expressions are treated like variables and only available after assignment.\n\nPro Tip:\nFunction expressions are often used for callbacks and closures, while declarations are useful for defining reusable logic at the top level.\n\nBonus:\nNamed function expressions can also be used for better debugging, as they provide meaningful stack traces"},{"id":70,"category":"functions","question":"Arrow functions — lexical this?","definition":"Arrow functions don’t have their own this.\nThey use lexical this, meaning they inherit this from their surrounding scope.\nDetailed Explanation:\n   In regular functions, the value of this depends on how the function is called.\nBut in arrow functions, this is fixed at the time of definition and comes from the outer scope.\nThis behavior is called lexical this, and it helps avoid common issues with context binding.\n    const obj = {\n      name: \"Alice\",\n      regularFunc: function() {\n        console.log(this.name); // Alice\n      },\n      arrowFunc: () => {\n        console.log(this.name); // undefined (lexical this from global scope)\n      }\n    };\n\nFluency :\n    Arrow functions differ from regular functions mainly in how they handle this.\n    They don’t have their own this value.\n    Instead, they inherit this from the surrounding lexical scope.\n    This makes them very useful in callbacks and asynchronous code, where maintaining the correct context is important.\n    However, they should not be used as object methods when we need dynamic this binding.\n\nOne-Line Summary: Arrow functions use lexical this, meaning they inherit this from their surrounding scope instead of defining their own.\n\nPro Tip : Arrow functions also don’t have arguments, super, or new.target, which makes them unsuitable for constructors.”\n\nBonus : Because arrow functions capture this lexically, methods like call, apply, and bind cannot change their this value."},{"id":71,"category":"functions","question":"Parameters & default values?","definition":"Short : Parameters are variables defined in a function to accept input values.\nDefault parameters allow us to assign a default value if no argument or undefined is passed.\n\nIn JavaScript, parameters receive values from arguments when a function is called.\nWith ES6, we can define default values directly in the function signature.\nIf the argument is missing or undefined, the default value is used.\nThis helps avoid manual checks and makes the code cleaner.\n\nFluency :\n    Parameters are used to receive input values in a function.\n    JavaScript allows default parameter values, which are used when no argument or undefined is passed.\n    This feature helps simplify code by removing the need for manual checks.\n    It also supports expressions, making it flexible for dynamic defaults.\n\n One-Line Summary: Default parameters allow functions to use predefined values when arguments are missing or undefined."},{"id":72,"category":"dom","question":"DOM basics for refs, events, and debugging?","definition":"The DOM, or Document Object Model, is a tree-like representation of an HTML document. \n    JavaScript uses the DOM to read and modify elements dynamically.\n\n    Events allow us to respond to user actions like clicks, typing, or scrolling.\n\n    Refs are a way to directly access a DOM element when necessary, especially in React or Vue.\n\n    For debugging DOM-related issues, I usually use the browser DevTools, inspect elements, check event listeners, console.log values, \n    and use breakpoints to understand what is happening.\n\n    In Details :\n\n    The DOM stands for Document Object Model. When a browser loads an HTML page, it converts it into a tree of JavaScript objects called the DOM.\n\n    JavaScript can use this DOM to select elements, change their content, update styles, add or remove elements, and respond to user interactions.\n\n    Events are actions triggered by users or the browser, such as clicking a button, submitting a form, typing into an input, or hovering over an element.\n    We attach event listeners to handle these actions.\n\n    Refs are mainly used in frameworks like React and Vue when we need direct access to a DOM element instead of using state. For example, focusing an input field,\n    measuring an element's size, or integrating third-party libraries.\n\n    When debugging DOM issues, I inspect the HTML using Chrome DevTools, check whether elements exist, verify event handlers are firing, use console.log or debugger statements, \n    and examine the Elements and Console tabs."},{"id":73,"category":"dom","question":"Why would you use refs instead of state?","definition":"State is used for rendering UI changes, while refs are used to directly access DOM elements without causing a re-render. For example, focusing an input, \n    scrolling to an element, or integrating with third-party libraries."},{"id":74,"category":"dom","question":"What is event delegation??","definition":"Event delegation means attaching one event listener to a parent element and using event bubbling to handle events from child elements.\n     It's more efficient when there are many dynamically created elements."},{"id":75,"category":"dom","question":"How do you debug DOM issues?","definition":"I inspect the HTML using DevTools, verify the element exists, check whether the event listener is attached, use console.log or breakpoints, inspect the event object, \n    and confirm that the script executes after the DOM has loaded."},
+  {"id":76,"category":"arrays","question":"When would you use Map/Set over plain objects/arrays? What is WeakMap/WeakSet?","definition":"Map and Set are more suitable for scenarios where you need to store key-value pairs or unique values, respectively. \n    They provide better performance for large datasets and offer more built-in methods. WeakMap and WeakSet allow you to create mappings or sets that don't prevent their keys from being garbage collected,\n    which is useful for caching or storing metadata without causing memory leaks."},
+  {"id":77,"category":"revisit","question":"?","definition":""},{"id":78,"category":"revisit","question":"?","definition":""},{"id":79,"category":"revisit","question":"?","definition":""},{"id":80,"category":"revisit","question":"?","definition":""},{"id":81,"category":"revisit","question":"?","definition":""},
+  {"id":82,"category":"revisit","question":"?","definition":""}];
+
+  /* ============ Text -> HTML rendering for answers ============ */
+  function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  const strongCodeRe = /(^\s*(async\s+function|function\b|const\b|let\b|var\b|class\s|if\s*\(|else\b|for\s*\(|while\s*\(|return\b|import\s|export\s|console\.|catch\s*\(|try\s*\{?|switch\s*\(|new\s\w+\()|\/\/|=>|;\s*$|^\s*[\}\)][;,]?\s*$|^\s*[\{\[]|^\s*\|.*\|\s*$)/;
+  function isLabelLine(line) {
+    const t = line.trim();
+    return /^[A-Z][A-Za-z0-9 /&()\-]{1,38}:$/.test(t) && t.split(' ').length <= 6;
+  }
+  function isBulletLine(line) {
+    const t = line.trim();
+    return /^(•|\*|-|👉)\s+/.test(t) || /^\d+\.\s+/.test(t);
+  }
+  function leadingSpaces(line) {
+    const m = line.match(/^[ \t]*/);
+    return m ? m[0].replace(/\t/g,'    ').length : 0;
+  }
+  function renderProseLines(lines) {
+    let paraBuf = [], bulletBuf = [];
+    let html = '';
+    const flushPara = () => { if (paraBuf.length) { html += '<p class="answer-text">' + paraBuf.join('<br>') + '</p>'; paraBuf=[]; } };
+    const flushBullets = () => { if (bulletBuf.length) { html += '<ul class="answer-list">' + bulletBuf.map(b=>'<li>'+b+'</li>').join('') + '</ul>'; bulletBuf=[]; } };
+    lines.forEach(line => {
+      const t = line.trim();
+      if (!t) { flushPara(); flushBullets(); return; }
+      if (isLabelLine(line)) {
+        flushPara(); flushBullets();
+        html += '<div class="answer-label">' + escapeHtml(t) + '</div>';
+      } else if (isBulletLine(line)) {
+        flushPara();
+        bulletBuf.push(escapeHtml(t.replace(/^(•|\*|-|👉)\s+/,'').replace(/^\d+\.\s+/,'')));
+      } else {
+        flushBullets();
+        paraBuf.push(escapeHtml(t));
+      }
+    });
+    flushPara(); flushBullets();
+    return html;
+  }
+  function renderDefinition(raw) {
+    if (!raw || !raw.trim()) return '<p class="answer-empty">No answer added yet — edit the DATA array to fill this in.</p>';
+    const blocks = raw.replace(/\r\n/g,'\n').split(/\n\s*\n/)
+      .map(b => b.split('\n').filter(l => l.trim().length > 0))
+      .filter(b => b.length > 0);
+    let html = '';
+    blocks.forEach(lines => {
+      const runs = [];
+      lines.forEach(line => {
+        const deep = leadingSpaces(line) >= 4;
+        if (runs.length && runs[runs.length-1].deep === deep) {
+          runs[runs.length-1].lines.push(line);
+        } else {
+          runs.push({ deep, lines: [line] });
+        }
+      });
+      runs.forEach(run => {
+        const matches = run.lines.filter(l => strongCodeRe.test(l)).length;
+        const ratio = matches / run.lines.length;
+        const threshold = run.deep ? 0.4 : 0.6;
+        if (ratio >= threshold) {
+          html += '<pre class="code-block">' + escapeHtml(run.lines.map(l => l.replace(/^ {0,4}/, '')).join('\n').trimEnd()) + '</pre>';
+        } else {
+          html += renderProseLines(run.lines);
+        }
+      });
+    });
+    return html;
+  }
+
+  /* ============ State ============ */
+  const catByKey = {};
+  CATEGORIES.forEach(c => catByKey[c.key] = c);
+
+  const STORAGE_KEY = 'jsRevisionProgress_v1';
+  let revised = {};
+  try { revised = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { revised = {}; }
+
+  let activeCategory = 'all';
+  let searchTerm = '';
+  let hideRevised = false;
+
+  function saveProgress() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(revised)); } catch(e) {}
+  }
+
+  /* ============ Build DOM ============ */
+  const sectionsContainer = document.getElementById('sectionsContainer');
+  const categoryChips = document.getElementById('categoryChips');
+  const progressTrack = document.getElementById('progressTrack');
+  const progressLegend = document.getElementById('progressLegend');
+  const progressCount = document.getElementById('progressCount');
+  const resultsNote = document.getElementById('resultsNote');
+
+  const grouped = {};
+  CATEGORIES.forEach(c => grouped[c.key] = []);
+  DATA.forEach(item => { if (grouped[item.category]) grouped[item.category].push(item); });
+
+  // Category chips
+  function buildChips() {
+    const allChip = document.createElement('div');
+    allChip.className = 'chip active';
+    allChip.dataset.key = 'all';
+    allChip.innerHTML = '<span class="dot" style="background:var(--brand)"></span>All (' + DATA.length + ')';
+    allChip.addEventListener('click', () => setActiveCategory('all'));
+    categoryChips.appendChild(allChip);
+
+    CATEGORIES.forEach(cat => {
+      const count = grouped[cat.key].length;
+      if (!count) return;
+      const chip = document.createElement('div');
+      chip.className = 'chip';
+      chip.dataset.key = cat.key;
+      chip.style.setProperty('--chip-color', cat.color);
+      chip.innerHTML = '<span class="dot" style="background:' + cat.color + '"></span>' + cat.label + ' (' + count + ')';
+      chip.addEventListener('click', () => setActiveCategory(cat.key));
+      categoryChips.appendChild(chip);
+    });
+  }
+
+  function setActiveCategory(key) {
+    activeCategory = key;
+    [...categoryChips.children].forEach(chip => {
+      chip.classList.toggle('active', chip.dataset.key === key);
+    });
+    applyFilters();
+  }
+
+  // Sections + cards
+  function buildSections() {
+    CATEGORIES.forEach(cat => {
+      const items = grouped[cat.key];
+      if (!items.length) return;
+
+      const section = document.createElement('section');
+      section.className = 'category-section';
+      section.dataset.category = cat.key;
+
+      const heading = document.createElement('div');
+      heading.className = 'section-heading';
+      heading.style.setProperty('--sec-color', cat.color);
+      heading.innerHTML = '<span class="dot"></span><h2>' + cat.label + '</h2><span class="sec-count" data-role="sec-count"></span>';
+      section.appendChild(heading);
+
+      items.forEach(item => {
+        section.appendChild(buildCard(item, cat));
+      });
+
+      sectionsContainer.appendChild(section);
+    });
+
+    const emptyState = document.createElement('div');
+    emptyState.className = 'empty-state';
+    emptyState.id = 'emptyState';
+    emptyState.style.display = 'none';
+    emptyState.textContent = 'No questions match your search or filters.';
+    sectionsContainer.appendChild(emptyState);
+  }
+
+  function buildCard(item, cat) {
+    const card = document.createElement('div');
+    card.className = 'qcard';
+    card.id = 'q-' + item.id;
+    card.style.setProperty('--card-color', cat.color);
+    card.dataset.id = item.id;
+    card.dataset.category = item.category;
+    card.dataset.search = (item.question + ' ' + item.definition).toLowerCase();
+
+    const isRevised = !!revised[item.id];
+    if (isRevised) card.classList.add('is-revised');
+
+    const head = document.createElement('div');
+    head.className = 'qcard-head';
+
+    const check = document.createElement('input');
+    check.type = 'checkbox';
+    check.className = 'qcheck';
+    check.checked = isRevised;
+    check.title = 'Mark as revised';
+    check.addEventListener('click', (e) => e.stopPropagation());
+    check.addEventListener('change', () => {
+      revised[item.id] = check.checked;
+      card.classList.toggle('is-revised', check.checked);
+      saveProgress();
+      updateProgress();
+      applyFilters();
+    });
+
+    const main = document.createElement('div');
+    main.className = 'qcard-main';
+    main.innerHTML =
+      '<div class="qcard-top-row">' +
+        '<span class="qnum">Q' + item.id + '</span>' +
+        '<span class="qtext">' + escapeHtml(item.question) + '</span>' +
+        '<span class="qbadge">' + cat.label + '</span>' +
+      '</div>';
+
+    const chevron = document.createElement('span');
+    chevron.className = 'chevron';
+    chevron.innerHTML = '▾';
+
+    head.appendChild(check);
+    head.appendChild(main);
+    head.appendChild(chevron);
+    head.addEventListener('click', () => card.classList.toggle('open'));
+
+    const body = document.createElement('div');
+    body.className = 'qcard-body';
+    const bodyInner = document.createElement('div');
+    bodyInner.className = 'qcard-body-inner';
+    bodyInner.innerHTML = renderDefinition(item.definition);
+    body.appendChild(bodyInner);
+
+    card.appendChild(head);
+    card.appendChild(body);
+    return card;
+  }
+
+  /* ============ Progress bar ============ */
+  function updateProgress() {
+    const total = DATA.length;
+    const revisedCount = DATA.filter(d => revised[d.id]).length;
+    progressCount.textContent = revisedCount + ' / ' + total + ' revised';
+
+    progressTrack.innerHTML = '';
+    progressLegend.innerHTML = '';
+
+    CATEGORIES.forEach(cat => {
+      const items = grouped[cat.key];
+      if (!items.length) return;
+      const catRevised = items.filter(d => revised[d.id]).length;
+      const widthPct = (items.length / total) * 100;
+      const fillPct = (catRevised / items.length) * 100;
+
+      const seg = document.createElement('div');
+      seg.className = 'progress-seg';
+      seg.style.setProperty('--seg-color', cat.color);
+      seg.style.width = widthPct + '%';
+      seg.title = cat.label + ': ' + catRevised + '/' + items.length + ' revised';
+      seg.innerHTML = '<div class="rest"></div><div class="fill" style="--fill-pct:' + fillPct + '%"></div>';
+      progressTrack.appendChild(seg);
+
+      const legendItem = document.createElement('span');
+      legendItem.style.setProperty('--dot-color', cat.color);
+      legendItem.innerHTML = '<span class="legend-dot"></span>' + cat.label.split(' ')[0] + ' ' + catRevised + '/' + items.length;
+      progressLegend.appendChild(legendItem);
+    });
+  }
+
+  /* ============ Filters ============ */
+  function applyFilters() {
+    searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    CATEGORIES.forEach(cat => {
+      const section = sectionsContainer.querySelector('.category-section[data-category="' + cat.key + '"]');
+      if (!section) return;
+      const catMatches = activeCategory === 'all' || activeCategory === cat.key;
+
+      let sectionVisibleCount = 0;
+      section.querySelectorAll('.qcard').forEach(card => {
+        const id = Number(card.dataset.id);
+        const matchesSearch = !searchTerm || card.dataset.search.includes(searchTerm);
+        const matchesRevised = !hideRevised || !revised[id];
+        const show = catMatches && matchesSearch && matchesRevised;
+        card.classList.toggle('hidden-item', !show);
+        if (show) sectionVisibleCount++;
+      });
+
+      section.classList.toggle('is-empty', sectionVisibleCount === 0);
+      const countEl = section.querySelector('[data-role="sec-count"]');
+      if (countEl) countEl.textContent = sectionVisibleCount + ' shown';
+      visibleCount += sectionVisibleCount;
+    });
+
+    document.getElementById('emptyState').style.display = visibleCount === 0 ? 'block' : 'none';
+
+    if (searchTerm || activeCategory !== 'all' || hideRevised) {
+      resultsNote.textContent = visibleCount + ' of ' + DATA.length + ' questions shown';
+    } else {
+      resultsNote.textContent = '';
+    }
+  }
+
+  /* ============ Controls wiring ============ */
+  document.getElementById('searchInput').addEventListener('input', applyFilters);
+  document.getElementById('clearSearchBtn').addEventListener('click', () => {
+    document.getElementById('searchInput').value = '';
+    applyFilters();
+  });
+  document.getElementById('hideRevisedToggle').addEventListener('change', (e) => {
+    hideRevised = e.target.checked;
+    applyFilters();
+  });
+  document.getElementById('expandAllBtn').addEventListener('click', () => {
+    document.querySelectorAll('.qcard').forEach(c => c.classList.add('open'));
+  });
+  document.getElementById('collapseAllBtn').addEventListener('click', () => {
+    document.querySelectorAll('.qcard').forEach(c => c.classList.remove('open'));
+  });
+
+  /* ============ Back to top ============ */
+  const backToTopBtn = document.getElementById('backToTopBtn');
+  window.addEventListener('scroll', () => {
+    backToTopBtn.style.display = (window.scrollY > 300) ? 'block' : 'none';
+  });
+  backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* ============ Theme toggle ============ */
+  const themeToggle = document.getElementById('themeToggle');
+  const bodyEl = document.body;
+  function enableLightMode(save) {
+    bodyEl.classList.add('light-mode');
+    themeToggle.innerHTML = '🌙 Dark';
+    if (save) localStorage.setItem('theme', 'light');
+  }
+  function enableDarkMode(save) {
+    bodyEl.classList.remove('light-mode');
+    themeToggle.innerHTML = '☀️ Light';
+    if (save) localStorage.setItem('theme', 'dark');
+  }
+  if (localStorage.getItem('theme') === 'light') { enableLightMode(false); } else { enableDarkMode(false); }
+  themeToggle.addEventListener('click', () => {
+    if (bodyEl.classList.contains('light-mode')) { enableDarkMode(true); } else { enableLightMode(true); }
+  });
+
+  /* ============ Init ============ */
+  buildChips();
+  buildSections();
+  updateProgress();
+  applyFilters();
+</script>
+</body>
+</html>
