@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://img.icons8.com/?size=100&id=108784&format=png&color=000000">
   <title>JavaScript Q&A Plan</title>
-  <script src="../Code/47_promiseHistory.js"></script>
+  <script src="../Code/49_generators.js"></script>
 <style>
     body {
         background-color: #111;
@@ -1832,21 +1832,28 @@ Fluency :
   },
 
   {
-    question: "?",
-    definition: ``
+    question: "What is memoization? Implement a generic memoize function?",
+    definition: `Memoization caches the results of expensive function calls so repeated calls with the same arguments return the cached result without recomputation.`
   },
   {
-    question: "?",
-    definition: ``
+    question: "What are generators? How do they differ from regular functions?",
+    definition: `Generator function (function*) can be paused and resumed via yield. They return an iterator that produces
+    value lazily - useful for infinite sequences and cooperative multitasking.`
   },
   {
-    question: "?",
-    definition: ``
+    question: "When would you use Map/Set over plain objects/arrays, What is WeakMap?",
+    definition: `Map: any value as key (including objects), preserves insertion order, O(1) lookups. 
+    Set: unique values only — great for deduplication. 
+    WeakMap/WeakSet: keys must be objects and are held weakly — won't prevent garbage collection, 
+    non-iterable. Ideal for caching metadata without memory leaks.`
   },
 
   {
-    question: "?",
-    definition: ``
+    question: "What are Proxy and Reflect, Give a real-world use case?",
+    definition: `Proxy intercepts object operations (get, set, delete, etc.). 
+    Reflect provides default implementations for those operations. 
+    Used in reactive systems (Vue 3's reactivity), validation, logging.
+    `
   },
   {
     question: "?",

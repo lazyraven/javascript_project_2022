@@ -1,10 +1,9 @@
-console.log(
-  "------------------------- DEEP CLONE OBJECT ------------------------"
-);
+console.log("----------------------- DEEP CLONE OBJECT ---------------------");
 
 // const clone = structuredClone(obj);
-
 // ES6 VERSION > enhanced deep clone function that supports Object, Array, Date, RegExp, Map, and Set:
+
+
 const deepClone = (val, wm = new WeakMap()) => {
   // Handle primitives
   if (val === null || typeof val !== "object") return val;
@@ -88,6 +87,10 @@ console.log("Clone:", copy);
 // deep shaloow copy
 const original1 = { name: "Nisha", skills: ["JS", "React"] };
 
+
+// Deep clone options :
+
+// 1. structuredClone (modern, handles Date/Map/Set)
 const clone = structuredClone(original1);
 console.log("clone", clone);
 
@@ -96,3 +99,16 @@ clone.skills.push("NodeJS");
 
 console.log("clone", clone);
 console.log("original1", original1);
+
+
+// 2. JSON round-trip (simple, but loses functions/undefined/Date)
+const deep2 = JSON.parse(JSON.stringify(obj));
+
+// 3. Recursive implementation
+function deepClone(val) {
+  if (val === null || typeof val !== "object") return val;
+  if (Array.isArray(val)) return val.map(deepClone);
+  return Object.fromEntries(
+    Object.entries(val).map(([k, v]) => [k, deepClone(v)])
+  );
+}
