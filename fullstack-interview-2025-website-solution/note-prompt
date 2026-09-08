@@ -1,0 +1,23 @@
+ For revision-journal-js
+
+Prompt : Improve JavaScript Revision Q&A HTML Page 
+
+I created an HTML file containing JavaScript revision questions and answers. Please update the HTML file to make it clean, well-structured, and visually appealing so that I can easily read and revise the questions and answers.
+Please improve the UI/UX with the following goals:
+Organize questions and answers into clear sections or categories.
+Make the questions easy to scan and distinguish from the answers.
+Use collapsible/expandable sections for answers if appropriate.
+Add a clean, modern, developer-friendly design.
+Improve typography, spacing, colors, and overall readability.
+Make the page responsive for desktop, tablet, and mobile.
+Add useful revision features such as:
+Search questions.
+Filter questions by category or topic.
+Expand/collapse answers.
+Mark questions as completed/revised.
+Show revision progress.
+Keep the interface simple so I can focus on learning rather than decoration.
+Use only HTML, CSS, and JavaScript unless an external library is genuinely necessary.
+Preserve all existing questions and answers; do not remove or change their meaning.
+Keep the code clean, maintainable, and easy to extend when I add new questions later.
+Please update my existing HTML file accordingly and provide the complete updated code.
