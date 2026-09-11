@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Binary Search — 10 Day DSA Practice Checklist</title>
+
+<style>
+    :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --secondary: #0f172a;
+        --text: #1e293b;
+        --muted: #64748b;
+        --light: #f8fafc;
+        --border: #e2e8f0;
+        --green: #16a34a;
+        --yellow: #f59e0b;
+        --red: #dc2626;
+        --purple: #7c3aed;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Inter, Arial, Helvetica, sans-serif;
+        color: var(--text);
+        background: #e5e7eb;
+        line-height: 1.55;
+    }
+
+    .page {
+        max-width: 900px;
+        margin: 30px auto;
+        background: white;
+        padding: 45px;
+        box-shadow: 0 10px 35px rgba(15, 23, 42, .12);
+    }
+
+    /* COVER */
+    .cover {
+        text-align: center;
+        padding: 35px 0 25px;
+        border-bottom: 3px solid var(--primary);
+    }
+
+    .badge {
+        display: inline-block;
+        background: #dbeafe;
+        color: var(--primary-dark);
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        margin-bottom: 15px;
+    }
+
+    h1 {
+        margin: 0;
+        color: var(--secondary);
+        font-size: 36px;
+        line-height: 1.15;
+    }
+
+    .subtitle {
+        color: var(--muted);
+        font-size: 17px;
+        margin: 12px 0 22px;
+    }
+
+    .meta {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .meta span {
+        background: var(--light);
+        border: 1px solid var(--border);
+        padding: 7px 13px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    /* PROGRESS */
+    .progress-card {
+        margin: 25px 0;
+        padding: 20px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: linear-gradient(135deg, #eff6ff, #ffffff);
+    }
+
+    .progress-top {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .progress-bar {
+        height: 12px;
+        background: #dbeafe;
+        border-radius: 999px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary), #60a5fa);
+        border-radius: inherit;
+    }
+
+    /* HEADINGS */
+    h2 {
+        margin-top: 40px;
+        padding-bottom: 9px;
+        border-bottom: 2px solid var(--border);
+        color: var(--secondary);
+        font-size: 25px;
+    }
+
+    h3 {
+        color: var(--primary-dark);
+        margin-top: 28px;
+        font-size: 19px;
+    }
+
+    h4 {
+        margin-bottom: 5px;
+    }
+
+    /* ROADMAP */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0 25px;
+        font-size: 14px;
+    }
+
+    th {
+        background: var(--secondary);
+        color: white;
+        text-align: left;
+        padding: 11px;
+    }
+
+    td {
+        border: 1px solid var(--border);
+        padding: 10px;
+    }
+
+    tr:nth-child(even) td {
+        background: #f8fafc;
+    }
+
+    /* PROBLEM */
+    .problem {
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--primary);
+        border-radius: 10px;
+        margin: 14px 0;
+        padding: 15px 17px;
+        background: #fff;
+        break-inside: avoid;
+    }
+
+    .problem-title {
+        font-weight: 750;
+        color: var(--secondary);
+        font-size: 15px;
+    }
+
+    .problem p {
+        margin: 7px 0;
+    }
+
+    .input {
+        background: #f8fafc;
+        border: 1px solid var(--border);
+        padding: 9px 11px;
+        border-radius: 7px;
+        font-family: Consolas, monospace;
+        font-size: 13px;
+        white-space: pre-wrap;
+    }
+
+    .checkbox {
+        font-size: 16px;
+        color: var(--primary);
+        margin-right: 6px;
+    }
+
+    .focus {
+        display: inline-block;
+        background: #eff6ff;
+        color: #1d4ed8;
+        padding: 3px 8px;
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    /* CHECKLIST */
+    .checklist {
+        background: var(--light);
+        padding: 15px 18px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        margin: 15px 0 25px;
+    }
+
+    .checklist label {
+        display: block;
+        margin: 8px 0;
+    }
+
+    input[type="checkbox"] {
+        width: 17px;
+        height: 17px;
+        vertical-align: middle;
+        margin-right: 8px;
+        accent-color: var(--primary);
+    }
+
+    /* STEP */
+    .step {
+        background: linear-gradient(135deg, #eff6ff, #ffffff);
+        border: 1px solid #bfdbfe;
+        border-radius: 14px;
+        padding: 18px;
+        margin: 30px 0;
+        break-inside: avoid;
+    }
+
+    .step-title {
+        color: var(--primary-dark);
+        font-weight: 800;
+        font-size: 18px;
+    }
+
+    /* CALLOUTS */
+    .note {
+        background: #fffbeb;
+        border-left: 4px solid var(--yellow);
+        padding: 13px 16px;
+        margin: 15px 0;
+        border-radius: 7px;
+    }
+
+    .success {
+        background: #f0fdf4;
+        border-left: 4px solid var(--green);
+        padding: 13px 16px;
+        margin: 15px 0;
+        border-radius: 7px;
+    }
+
+    .danger {
+        background: #fef2f2;
+        border-left: 4px solid var(--red);
+        padding: 13px 16px;
+        margin: 15px 0;
+        border-radius: 7px;
+    }
+
+    /* CODE */
+    pre {
+        background: #0f172a;
+        color: #e2e8f0;
+        padding: 18px;
+        border-radius: 10px;
+        overflow-x: auto;
+        font-size: 13px;
+        line-height: 1.6;
+        break-inside: avoid;
+    }
+
+    code {
+        font-family: "Fira Code", Consolas, monospace;
+    }
+
+    /* PATTERNS */
+    .pattern-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin: 18px 0;
+    }
+
+    .pattern {
+        padding: 15px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: white;
+    }
+
+    .pattern strong {
+        display: block;
+        color: var(--primary-dark);
+        margin-bottom: 5px;
+    }
+
+    /* DIFFICULTY */
+    .difficulty {
+        margin: 15px 0 25px;
+    }
+
+    .level {
+        margin: 10px 0;
+    }
+
+    .blocks {
+        font-family: monospace;
+        letter-spacing: 2px;
+    }
+
+    .beginner { color: var(--green); }
+    .easy { color: #65a30d; }
+    .medium { color: var(--yellow); }
+    .hard { color: var(--red); }
+
+    /* FOOTER */
+    footer {
+        text-align: center;
+        margin-top: 45px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 12px;
+    }
+
+    .page-break {
+        break-before: page;
+    }
+
+    @media print {
+        body {
+            background: white;
+        }
+
+        .page {
+            margin: 0;
+            max-width: none;
+            box-shadow: none;
+            padding: 25px 35px;
+        }
+
+        .problem {
+            break-inside: avoid;
+        }
+
+        h2, h3 {
+            break-after: avoid;
+        }
+
+        .no-print {
+            display: none;
+        }
+    }
+
+    @media (max-width: 650px) {
+        .page {
+            padding: 22px;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 29px;
+        }
+
+        .pattern-grid {
+            grid-template-columns: 1fr;
+        }
+
+        table {
+            font-size: 12px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- COVER -->
+    <section class="cover">
+        <div class="badge">DSA PRACTICE ROADMAP</div>
+
+        <h1>Binary Search</h1>
+
+        <p class="subtitle">
+            10-Day • 50-Problem Practice Checklist
+        </p>
+
+        <div class="meta">
+            <span>💻 JavaScript</span>
+            <span>📅 10 Days</span>
+            <span>🎯 50 Problems</span>
+            <span>📝 5 / Day</span>
+            <span>🟢 Beginner → 🔴 Hard</span>
+        </div>
+    </section>
+
+
+    <!-- PROGRESS -->
+    <div class="progress-card">
+        <div class="progress-top">
+            <span>Overall Progress</span>
+            <span>0 / 50</span>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+
+    <!-- ROADMAP -->
+    <h2>Overall Roadmap</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Step</th>
+                <th>Days</th>
+                <th>Topic</th>
+                <th>Level</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Step 1</td>
+                <td>1–2</td>
+                <td>Binary Search Fundamentals</td>
+                <td>🟢 Beginner</td>
+            </tr>
+
+            <tr>
+                <td>Step 2</td>
+                <td>3–4</td>
+                <td>Binary Search Variations</td>
+                <td>🟢🟡 Easy–Medium</td>
+            </tr>
+
+            <tr>
+                <td>Step 3</td>
+                <td>5–6</td>
+                <td>Rotated Arrays & Boundaries</td>
+                <td>🟡 Medium</td>
+            </tr>
+
+            <tr>
+                <td>Step 4</td>
+                <td>7–8</td>
+                <td>Binary Search on Answer</td>
+                <td>🟡 Medium–Hard</td>
+            </tr>
+
+            <tr>
+                <td>Step 5</td>
+                <td>9–10</td>
+                <td>Advanced BS + DSA Patterns</td>
+                <td>🔴 Hard</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!-- STEP 1 -->
+    <div class="step">
+        <div class="step-title">
+            STEP 1 — FUNDAMENTALS
+        </div>
+        <p>
+            Build the basic binary search intuition before moving into
+            boundary and answer-space problems.
+        </p>
+    </div>
+
+    <h2>Day 1 — Binary Search Basics</h2>
+
+    <div class="note">
+        <strong>Goal:</strong>
+        Understand why binary search works and implement it from scratch.
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 1. Binary Search</div>
+        <p><strong>Input:</strong></p>
+        <div class="input">[1, 3, 5, 7, 9], target = 7</div>
+        <p><strong>Output:</strong> 3</p>
+        <span class="focus">Implement from scratch</span>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 2. Search an Element in a Sorted Array</div>
+        <div class="input">[2, 4, 6, 8, 10], target = 6
+Output: index 2</div>
+        <p>Focus on: <strong>left → mid → right</strong></p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 3. Binary Search — Target Not Present</div>
+        <div class="input">[1, 4, 7, 10, 13], target = 8
+Output: -1</div>
+        <p>Understand when the loop terminates.</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 4. Recursive Binary Search</div>
+        <pre><code>function binarySearch(arr, target, left, right) {
+    // your code
+}</code></pre>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 5. Iterative vs Recursive Binary Search</div>
+        <p>Implement both and compare:</p>
+        <ul>
+            <li>Time complexity</li>
+            <li>Space complexity</li>
+            <li>Ease of implementation</li>
+        </ul>
+        <p><strong>Target:</strong> Time O(log n), Space O(1) iterative</p>
+    </div>
+
+    <h3>Day 1 Checklist</h3>
+
+    <div class="checklist">
+        <label><input type="checkbox"> Understand sorted-array requirement</label>
+        <label><input type="checkbox"> Understand left, mid, right</label>
+        <label><input type="checkbox"> Write iterative BS</label>
+        <label><input type="checkbox"> Write recursive BS</label>
+        <label><input type="checkbox"> Explain O(log n)</label>
+    </div>
+
+
+    <h2>Day 2 — Binary Search Thinking</h2>
+
+    <div class="note">
+        <strong>Goal:</strong>
+        Stop memorizing code and learn the decision process.
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 6. Find First Occurrence</div>
+        <div class="input">[1, 2, 2, 2, 3, 4]
+Target: 2
+Output: 1</div>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 7. Find Last Occurrence</div>
+        <div class="input">[1, 2, 2, 2, 3, 4]
+Target: 2
+Output: 3</div>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 8. Count Occurrences</div>
+        <div class="input">[1, 2, 2, 2, 3, 4]
+Target: 2
+Output: 3</div>
+        <p><strong>Hint:</strong> count = lastIndex - firstIndex + 1</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 9. Find Insertion Position</div>
+        <div class="input">[1, 3, 5, 6]
+Target: 2
+Output: 1</div>
+        <p>This introduces <strong>lower bound</strong>.</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 10. Search Insert Position</div>
+        <p>
+            Solve the same pattern without JavaScript built-in search methods.
+        </p>
+        <p>
+            Ask yourself: <em>Where should the target be inserted while
+            keeping the array sorted?</em>
+        </p>
+    </div>
+
+    <div class="success">
+        <strong>STEP 1 COMPLETE — 10 / 50</strong><br>
+        Binary Search → First Occurrence → Last Occurrence →
+        Lower Bound → Insertion Position
+    </div>
+
+
+    <!-- STEP 2 -->
+    <div class="step page-break">
+        <div class="step-title">
+            STEP 2 — BINARY SEARCH VARIATIONS
+        </div>
+    </div>
+
+    <h2>Day 3 — Lower Bound / Upper Bound</h2>
+
+    <div class="note">
+        <strong>Goal:</strong> Master boundary-based binary search.
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 11. Implement Lower Bound</div>
+        <p>Find the first index where <code>arr[index] >= target</code>.</p>
+        <div class="input">arr = [1, 2, 4, 4, 4, 7]
+target = 4
+answer = 2</div>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 12. Implement Upper Bound</div>
+        <p>Find the first index where <code>arr[index] > target</code>.</p>
+        <div class="input">arr = [1, 2, 4, 4, 4, 7]
+target = 4
+answer = 5</div>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 13. First Position ≥ Target</div>
+        <div class="input">[2, 3, 3, 5, 7, 9]
+target = 4
+output = 3</div>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 14. First Position > Target</div>
+        <div class="input">[2, 3, 3, 5, 7, 9]
+target = 5
+output = 4</div>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 15. Number of Elements Smaller Than Target</div>
+        <div class="input">[1, 2, 2, 4, 6, 8]
+target = 6
+output = 4</div>
+    </div>
+
+
+    <h2>Day 4 — Search in Special Arrays</h2>
+
+    <div class="problem">
+        <div class="problem-title">□ 16. Find Square Root Using Binary Search</div>
+        <div class="input">x = 25
+output = 5</div>
+        <p>Do not use <code>Math.sqrt()</code>.</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 17. Integer Square Root</div>
+        <div class="input">x = 20
+output = 4</div>
+        <p>Because 4² ≤ 20 and 5² &gt; 20.</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 18. Find Peak Element</div>
+        <div class="input">[1, 3, 5, 4, 2]
+possible output: index 2</div>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 19. Find Local Maximum</div>
+        <p>
+            Find any index <code>i</code> such that:
+        </p>
+        <div class="input">arr[i] > arr[i - 1]
+arr[i] > arr[i + 1]</div>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 20. Find Missing Number in Sorted Array</div>
+        <div class="input">[1, 2, 3, 5, 6, 7]
+output = 4</div>
+    </div>
+
+    <div class="success">
+        <strong>STEP 2 COMPLETE — 20 / 50</strong><br>
+        Classic BS • Lower Bound • Upper Bound • Peak Finding • Search on Index
+    </div>
+
+
+    <!-- STEP 3 -->
+    <div class="step page-break">
+        <div class="step-title">
+            STEP 3 — ROTATED ARRAYS & BOUNDARIES
+        </div>
+    </div>
+
+    <h2>Day 5 — Rotated Sorted Array</h2>
+
+    <div class="note">
+        <strong>Important interview pattern:</strong>
+        Identify which half is sorted, then decide where the target can exist.
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 21. Search in Rotated Sorted Array</div>
+        <div class="input">[4, 5, 6, 7, 0, 1, 2]
+target = 0
+output = 4</div>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 22. Search in Rotated Array — Target Missing</div>
+        <div class="input">[4, 5, 6, 7, 0, 1, 2]
+target = 3
+output = -1</div>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 23. Find Minimum in Rotated Sorted Array</div>
+        <div class="input">[4, 5, 6, 7, 0, 1, 2]
+output = 0</div>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 24. Find Rotation Count</div>
+        <div class="input">[4, 5, 6, 7, 0, 1, 2]
+output = 4</div>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 25. Search in Rotated Array With Duplicates</div>
+        <div class="input">[2, 5, 6, 0, 0, 1, 2]
+target = 0
+return whether it exists</div>
+    </div>
+
+
+    <h2>Day 6 — More Array-Based BS</h2>
+
+    <div class="problem">
+        <div class="problem-title">□ 26. Find Minimum in Rotated Array II</div>
+        <div class="input">[2, 2, 2, 0, 1, 2]</div>
+        <p>Handle duplicates.</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 27. Find Peak in Mountain Array</div>
+        <div class="input">[1, 3, 5, 7, 6, 4, 2]
+output = 3</div>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 28. Find Target in Mountain Array</div>
+        <p>
+            First find the peak, then binary search the ascending and
+            descending portions.
+        </p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 29. Find Bitonic Peak</div>
+        <div class="input">[1, 4, 8, 12, 9, 5, 2]</div>
+        <p>Find the maximum.</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 30. Find First and Last Position of Element</div>
+        <div class="input">[5, 7, 7, 8, 8, 10]
+target = 8
+output = [3, 4]</div>
+    </div>
+
+    <div class="success">
+        <strong>STEP 3 COMPLETE — 30 / 50</strong><br>
+        Sorted Array → Rotated Sorted Array → Mountain Array → Peak → Boundary Search
+    </div>
+
+
+    <!-- STEP 4 -->
+    <div class="step page-break">
+        <div class="step-title">
+            STEP 4 — BINARY SEARCH ON ANSWER
+        </div>
+        <p>
+            Instead of searching an array, search the possible answer space.
+        </p>
+    </div>
+
+    <div class="success">
+        <strong>Mental Model</strong><br><br>
+        Can I solve this directly?<br>
+        ↓<br>
+        No?<br>
+        ↓<br>
+        Can I guess an answer X?<br>
+        ↓<br>
+        Can I check whether X is possible?<br>
+        ↓<br>
+        Is feasibility monotonic?<br>
+        ↓<br>
+        <strong>Binary Search!</strong>
+    </div>
+
+
+    <h2>Day 7 — Basic Binary Search on Answer</h2>
+
+    <div class="problem">
+        <div class="problem-title">□ 31. Find Minimum Capacity</div>
+        <p>Packages:</p>
+        <div class="input">[1, 2, 3, 4, 5]</div>
+        <p>Ship within 3 days. Find minimum capacity.</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 32. Koko Eating Bananas</div>
+        <div class="input">piles = [3, 6, 7, 11]
+hours = 8</div>
+        <p>Find the minimum eating speed.</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 33. Minimum Days to Make Bouquets</div>
+        <div class="input">bloom days = [1, 10, 3, 10, 2]</div>
+        <p>Find the minimum days needed for the required bouquets.</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 34. Smallest Divisor</div>
+        <div class="input">[1, 2, 5, 9]</div>
+        <p>
+            Find the smallest divisor such that the sum of rounded-up
+            divisions is within a given limit.
+        </p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 35. Split Array Largest Sum</div>
+        <div class="input">[7, 2, 5, 10, 8]
+split into 2 subarrays</div>
+        <p>Minimize the largest subarray sum.</p>
+    </div>
+
+
+    <h2>Day 8 — Allocation Problems</h2>
+
+    <div class="problem">
+        <div class="problem-title">□ 36. Allocate Books</div>
+        <div class="input">[12, 34, 67, 90]
+students = 2</div>
+        <p>Minimize the maximum pages assigned.</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 37. Painter's Partition</div>
+        <div class="input">[10, 20, 30, 40]</div>
+        <p>Allocate boards among painters while minimizing maximum workload.</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 38. Aggressive Cows</div>
+        <div class="input">stalls = [1, 2, 4, 8, 9]
+cows = 3</div>
+        <p>Maximize the minimum distance between cows.</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 39. Minimum Time to Complete Jobs</div>
+        <p>
+            Given worker speeds and required work, determine the minimum
+            possible completion time.
+        </p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 40. Maximum Minimum Distance</div>
+        <p>
+            Given sorted positions and k objects, maximize the minimum
+            distance between any two objects.
+        </p>
+    </div>
+
+    <div class="success">
+        <strong>STEP 4 COMPLETE — 40 / 50</strong><br>
+        You can now recognize Binary Search on an answer space.
+    </div>
+
+
+    <!-- STEP 5 -->
+    <div class="step page-break">
+        <div class="step-title">
+            STEP 5 — ADVANCED BINARY SEARCH
+        </div>
+    </div>
+
+    <h2>Day 9 — Advanced Patterns</h2>
+
+    <div class="problem">
+        <div class="problem-title">□ 41. Median of Two Sorted Arrays</div>
+        <div class="input">[1, 3]
+[2]
+
+output = 2</div>
+        <p><strong>Target:</strong> O(log(min(m, n)))</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 42. Kth Element of Two Sorted Arrays</div>
+        <p>Find the kth smallest element without merging the arrays.</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 43. Kth Smallest Pair Distance</div>
+        <div class="input">[1, 3, 1]</div>
+        <p>Find the kth smallest absolute difference among pairs.</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 44. Find Kth Missing Positive Number</div>
+        <div class="input">[2, 3, 4, 7, 11]
+k = 5
+answer = 9</div>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 45. Search in an Infinite Sorted Array</div>
+        <p>Imagine the array has no known length.</p>
+        <div class="input">expand range
+    ↓
+find possible region
+    ↓
+binary search</div>
+    </div>
+
+
+    <h2>Day 10 — Interview-Level Mixed Practice</h2>
+
+    <div class="problem">
+        <div class="problem-title">□ 46. Median of Two Sorted Arrays</div>
+        <p>
+            Solve again without looking at your previous solution.
+        </p>
+        <p><strong>Goal:</strong> O(log(min(m, n)))</p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 47. Minimize Maximum Distance to Gas Station</div>
+        <p>
+            Given sorted gas station positions, add k stations to minimize
+            the maximum distance between adjacent stations.
+        </p>
+        <span class="focus">Binary search on floating-point answers</span>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 48. Minimum Speed to Arrive on Time</div>
+        <p>
+            Given distances and a time limit, find the minimum integer
+            speed needed.
+        </p>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 49. Capacity to Ship Packages Within D Days</div>
+        <p>Build the solution from scratch using:</p>
+        <div class="input">minimum answer
+maximum answer
+feasibility function
+binary search</div>
+    </div>
+
+    <div class="problem">
+        <div class="problem-title">□ 50. Aggressive Cows — Interview Challenge</div>
+        <div class="input">stalls = [1, 2, 4, 8, 9]
+cows = 3</div>
+        <p>
+            Find the maximum possible minimum distance.
+        </p>
+        <p>
+            Then explain why Binary Search works even though you are not
+            searching an array for a value.
+        </p>
+    </div>
+
+
+    <!-- 10 DAY CHECKLIST -->
+    <h2 class="page-break">Your 10-Day Checklist</h2>
+
+    <div class="success">
+        <strong>BINARY SEARCH — 50 PROBLEMS</strong>
+    </div>
+
+    <div class="checklist">
+        <h4>STEP 1 — FUNDAMENTALS</h4>
+        <label><input type="checkbox"> Day 1 □ □ □ □ □</label>
+        <label><input type="checkbox"> Day 2 □ □ □ □ □</label>
+
+        <h4>STEP 2 — VARIATIONS</h4>
+        <label><input type="checkbox"> Day 3 □ □ □ □ □</label>
+        <label><input type="checkbox"> Day 4 □ □ □ □ □</label>
+
+        <h4>STEP 3 — ROTATED / PEAK</h4>
+        <label><input type="checkbox"> Day 5 □ □ □ □ □</label>
+        <label><input type="checkbox"> Day 6 □ □ □ □ □</label>
+
+        <h4>STEP 4 — BINARY SEARCH ON ANSWER</h4>
+        <label><input type="checkbox"> Day 7 □ □ □ □ □</label>
+        <label><input type="checkbox"> Day 8 □ □ □ □ □</label>
+
+        <h4>STEP 5 — ADVANCED</h4>
+        <label><input type="checkbox"> Day 9 □ □ □ □ □</label>
+        <label><input type="checkbox"> Day 10 □ □ □ □ □</label>
+    </div>
+
+    <h3>Total Progress</h3>
+
+    <div class="progress-card">
+        <div class="progress-top">
+            <span>Problems Completed</span>
+            <span>0 / 50</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+
+    <!-- DIFFICULTY -->
+    <h2>Difficulty Progression</h2>
+
+    <div class="difficulty">
+        <div class="level">
+            <strong>Day 1</strong><br>
+            <span class="blocks beginner">████░░░░░░</span>
+            Beginner
+        </div>
+
+        <div class="level">
+            <strong>Day 2</strong><br>
+            <span class="blocks beginner">█████░░░░░</span>
+            Beginner+
+        </div>
+
+        <div class="level">
+            <strong>Day 3–4</strong><br>
+            <span class="blocks easy">██████░░░░</span>
+            Easy / Medium
+        </div>
+
+        <div class="level">
+            <strong>Day 5–6</strong><br>
+            <span class="blocks medium">███████░░░</span>
+            Medium
+        </div>
+
+        <div class="level">
+            <strong>Day 7–8</strong><br>
+            <span class="blocks medium">████████░░</span>
+            Medium+
+        </div>
+
+        <div class="level">
+            <strong>Day 9</strong><br>
+            <span class="blocks hard">█████████░</span>
+            Hard
+        </div>
+
+        <div class="level">
+            <strong>Day 10</strong><br>
+            <span class="blocks hard">██████████</span>
+            Interview / Hard
+        </div>
+    </div>
+
+
+    <!-- JS TEMPLATE -->
+    <h2 class="page-break">JavaScript Template You Should Master</h2>
+
+    <p>
+        Before starting the harder problems, get comfortable with this
+        classic binary search template.
+    </p>
+
+    <pre><code>function binarySearch(arr, target) {
+    let left = 0;
+    let right = arr.length - 1;
+
+    while (left &lt;= right) {
+        const mid = left + Math.floor((right - left) / 2);
+
+        if (arr[mid] === target) {
+            return mid;
+        }
+
+        if (arr[mid] &lt; target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+
+    return -1;
+}</code></pre>
+
+
+    <h2>Boundary Template</h2>
+
+    <pre><code>function lowerBound(arr, target) {
+    let left = 0;
+    let right = arr.length;
+
+    while (left &lt; right) {
+        const mid = left + Math.floor((right - left) / 2);
+
+        if (arr[mid] &lt; target) {
+            left = mid + 1;
+        } else {
+            right = mid;
+        }
+    }
+
+    return left;
+}</code></pre>
+
+
+    <h2>Binary Search on Answer Template</h2>
+
+    <pre><code>let left = minimumPossibleAnswer;
+let right = maximumPossibleAnswer;
+
+while (left &lt;= right) {
+    const mid = left + Math.floor((right - left) / 2);
+
+    if (isPossible(mid)) {
+        // Try a better answer
+    } else {
+        // Increase/decrease answer range
+    }
+}</code></pre>
+
+
+    <!-- KEY PATTERNS -->
+<h2>The 5 Key Binary Search Patterns</h2>
+<p>Don't just memorize 50 solutions. Learn to identify these 5 Binary Search patterns:</p>
+
+    <div class="pattern-grid">
+
+        <div class="pattern">
+            <strong>1. Exact Search</strong>
+            "Does target exist?"
+        </div>
+
+        <div class="pattern">
+            <strong>2. Boundary Search</strong>
+            "First / last position?"
+        </div>
+
+        <div class="pattern">
+            <strong>3. Rotated / Peak Search</strong>
+            "Find the peak element?"
+        </div>
+
+          <div class="pattern">
+            <strong>4. Binary search on answer → </strong>
+            "Is answer X possible?"
+        </div>
+
+          <div class="pattern">
+            <strong>5. Partition Search</strong>
+            "Can I divide two/multiple sorted structures optimally?"
+        </div>
+        </div>

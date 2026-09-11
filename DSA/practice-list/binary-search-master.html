@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Binary Search — Practice Checklist</title>
+<style>
+:root{
+  --bg:#f4f7fb; --card:#fff; --text:#10213a; --muted:#58708f;
+  --border:#dbe5f2; --primary:#1769ff; --primary-soft:#eaf2ff;
+  --success:#17864b; --shadow:0 8px 28px rgba(20,45,80,.08);
+}
+[data-theme="dark"]{
+  --bg:#0d1420; --card:#151f2e; --text:#eef5ff; --muted:#9db0c9;
+  --border:#29384c; --primary:#69a0ff; --primary-soft:#1a2c48;
+  --success:#5bd394; --shadow:0 8px 30px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.5}
+.container{max-width:1100px;margin:auto;padding:26px 18px 60px}
+header{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:18px}
+h1{margin:0;font-size:25px;line-height:1.2}
+.subtitle{color:var(--muted);font-size:13px;margin-top:5px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+button,.btn{border:1px solid var(--border);background:var(--card);color:var(--primary);border-radius:8px;padding:8px 11px;cursor:pointer;font-size:13px}
+button:hover{filter:brightness(.97)}
+.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+.progress-card,.step-card,.day-card{background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:14px}
+.progress-card{padding:17px 16px;margin-bottom:12px}
+.progress-head{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px}
+.progress-head strong{font-size:15px}
+.bar{height:10px;background:var(--primary-soft);border-radius:99px;overflow:hidden;margin:10px 0 8px}
+.bar-fill{height:100%;width:0;background:var(--primary);transition:width .25s}
+.progress-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+.search{width:100%;padding:11px 13px;border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:10px;margin-bottom:16px;outline:none}
+.search:focus{border-color:var(--primary)}
+.step-card{margin-bottom:16px;overflow:hidden}
+.step-header{padding:16px;display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer;border-bottom:1px solid var(--border)}
+.step-title{font-weight:700}.step-title small{font-weight:400;color:var(--muted);margin-left:6px}
+.step-body{padding:10px 16px 16px}
+.day-card{box-shadow:none;margin:9px 0;overflow:hidden}
+.day-head{padding:12px 13px;display:flex;justify-content:space-between;gap:10px;cursor:pointer;background:var(--card)}
+.day-title{font-weight:650;font-size:14px}
+.goal{color:var(--muted);font-size:12px;margin-top:2px}
+.day-body{border-top:1px solid var(--border);padding:4px 13px 10px}
+.problem{padding:12px 0;border-bottom:1px solid var(--border)}
+.problem:last-child{border-bottom:0}
+.problem-row{display:grid;grid-template-columns:24px 1fr auto;gap:9px;align-items:start}
+.check{width:17px;height:17px;margin-top:3px;accent-color:var(--primary);cursor:pointer}
+.problem-title{font-size:14px;font-weight:600}
+.example{font-size:12px;color:var(--muted);margin-top:3px;white-space:pre-wrap}
+.tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.tag{font-size:10px;padding:2px 7px;border-radius:20px;background:var(--primary-soft);color:var(--primary)}
+.note{width:100%;margin-top:8px;border:1px solid var(--border);background:transparent;color:var(--text);border-radius:8px;padding:7px 9px;font-size:12px;resize:vertical;min-height:34px}
+.template{font-size:11px;padding:6px 8px;white-space:nowrap}
+.details{display:none;margin:8px 0 0 33px;padding:9px 10px;background:var(--primary-soft);border-radius:8px;font-size:12px}
+.details.show{display:block}
+.done .problem-title{text-decoration:line-through;opacity:.65}
+.roadmap{padding:15px 16px;margin-bottom:16px}
+.roadmap h2{font-size:16px;margin:0 0 10px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{text-align:left;padding:8px;border-bottom:1px solid var(--border)}
+.footer{margin-top:20px;color:var(--muted);font-size:12px;text-align:center}
+.hidden{display:none!important}
+@media(max-width:700px){
+ header{flex-direction:column}.actions{width:100%}
+ .progress-meta{flex-direction:column;gap:2px}
+ .problem-row{grid-template-columns:22px 1fr}.template{grid-column:2;justify-self:start}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <div>
+    <h1>Binary Search — Practice Checklist</h1>
+    <div class="subtitle">Stepwise checklist with examples, notes, templates, progress tracking and local save.</div>
+  </div>
+  <div class="actions">
+    <button class="primary" onclick="resetAll()">Reset</button>
+    <button onclick="exportJSON()">Export JSON</button>
+    <button onclick="importJSON()">Import JSON</button>
+    <button onclick="toggleTheme()" id="themeBtn">Dark mode</button>
+  </div>
+</header>
+
+<section class="progress-card">
+  <div class="progress-head"><strong>Progress</strong><span>Track your practice across 5 steps</span></div>
+  <div class="bar"><div class="bar-fill" id="progressFill"></div></div>
+  <div class="progress-meta"><span id="progressText">Completed: 0/50</span><span id="savedText">Not saved yet</span></div>
+</section>
+
+<input id="search" class="search" placeholder="Search problems (e.g. 'rotated', 'lower bound', 'Koko')" oninput="renderFilter()">
+
+<section class="roadmap progress-card">
+  <h2>Overall Roadmap</h2>
+  <table>
+    <tr><th>Step</th><th>Days</th><th>Topic</th><th>Level</th></tr>
+    <tr><td>Step 1</td><td>1–2</td><td>Binary Search Fundamentals</td><td>🟢 Beginner</td></tr>
+    <tr><td>Step 2</td><td>3–4</td><td>Binary Search Variations</td><td>🟢🟡 Easy–Medium</td></tr>
+    <tr><td>Step 3</td><td>5–6</td><td>Rotated Arrays & Boundaries</td><td>🟡 Medium</td></tr>
+    <tr><td>Step 4</td><td>7–8</td><td>Binary Search on Answer</td><td>🟡 Medium–Hard</td></tr>
+    <tr><td>Step 5</td><td>9–10</td><td>Advanced BS + DSA Patterns</td><td>🔴 Hard</td></tr>
+  </table>
+</section>
+
+<div id="roadmap"></div>
+
+<section class="progress-card">
+  <h2 style="font-size:16px">JavaScript Templates You Should Master</h2>
+  <details open><summary><b>Classic Binary Search</b></summary>
+<pre style="overflow:auto"><code>function binarySearch(arr, target) {
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left &lt;= right) {
+    const mid = left + Math.floor((right - left) / 2);
+
+    if (arr[mid] === target) return mid;
+
+    if (arr[mid] &lt; target) left = mid + 1;
+    else right = mid - 1;
+  }
+
+  return -1;
+}</code></pre></details>
+  <details><summary><b>Lower Bound</b></summary>
+<pre style="overflow:auto"><code>function lowerBound(arr, target) {
+  let left = 0;
+  let right = arr.length;
+
+  while (left &lt; right) {
+    const mid = left + Math.floor((right - left) / 2);
+
+    if (arr[mid] &lt; target) left = mid + 1;
+    else right = mid;
+  }
+
+  return left;
+}</code></pre></details>
+  <details><summary><b>Binary Search on Answer</b></summary>
+<pre style="overflow:auto"><code>let left = minimumPossibleAnswer;
+let right = maximumPossibleAnswer;
+
+while (left &lt;= right) {
+  const mid = left + Math.floor((right - left) / 2);
+
+  if (isPossible(mid)) {
+    // Try a better answer
+  } else {
+    // Increase/decrease answer range
+  }
+}</code></pre></details>
+</section>
+
+<div class="footer">Your progress and notes are saved automatically in this browser.</div>
+</div>
+
+<script>
+const data = [
+{step:"Step 1 — Fundamentals", days:[
+{day:"Day 1 — Binary Search Basics",goal:"Understand why binary search works and implement it from scratch.",items:[
+["Binary Search","[1, 3, 5, 7, 9], target 7 → Output: 3","Fundamentals"],
+["Search an Element in a Sorted Array","[2, 4, 6, 8, 10], target 6 → Output: index 2. Focus: left, mid, right.","Fundamentals"],
+["Binary Search — Target Not Present","[1, 4, 7, 10, 13], target 8 → Output: -1. Understand when the loop terminates.","Fundamentals"],
+["Recursive Binary Search","Implement binary search recursively using left and right boundaries.","Recursion"],
+["Iterative vs Recursive Binary Search","Compare time complexity, space complexity and ease of implementation. Target: O(log n), O(1) iterative space.","Complexity"]
+]},
+{day:"Day 2 — Binary Search Thinking",goal:"Stop memorizing code and learn the decision process.",items:[
+["Find First Occurrence","[1, 2, 2, 2, 3, 4], target 2 → Output: 1","Boundary"],
+["Find Last Occurrence","[1, 2, 2, 2, 3, 4], target 2 → Output: 3","Boundary"],
+["Count Occurrences","[1, 2, 2, 2, 3, 4], target 2 → Output: 3. Hint: lastIndex - firstIndex + 1","Boundary"],
+["Find Insertion Position","[1, 3, 5, 6], target 2 → Output: 1. This introduces lower bound.","Lower Bound"],
+["Search Insert Position","Solve the same pattern without JavaScript built-in search methods. Explain where the target should be inserted while keeping the array sorted.","Lower Bound"]
+]}]},
+{step:"Step 2 — Binary Search Variations",days:[
+{day:"Day 3 — Lower Bound / Upper Bound",goal:"Master boundary-based binary search.",items:[
+["Implement Lower Bound","Find the first index where arr[index] >= target. [1,2,4,4,4,7], target 4 → 2","Lower Bound"],
+["Implement Upper Bound","Find the first index where arr[index] > target. [1,2,4,4,4,7], target 4 → 5","Upper Bound"],
+["First Position ≥ Target","[2,3,3,5,7,9], target 4 → Output: 3","Boundary"],
+["First Position > Target","[2,3,3,5,7,9], target 5 → Output: 4","Boundary"],
+["Number of Elements Smaller Than Target","[1,2,2,4,6,8], target 6 → Output: 4","Boundary"]
+]},
+{day:"Day 4 — Search in Special Arrays",goal:"Apply binary search beyond direct target lookup.",items:[
+["Find Square Root Using Binary Search","x = 25 → Output: 5. Do not use Math.sqrt().","Search on Answer"],
+["Integer Square Root","x = 20 → Output: 4 because 4² <= 20 and 5² > 20.","Search on Answer"],
+["Find Peak Element","[1,3,5,4,2] → one valid output index is 2","Peak"],
+["Find Local Maximum","Given neighboring values differ, find any i where arr[i] > arr[i-1] and arr[i] > arr[i+1].","Peak"],
+["Find Missing Number in Sorted Array","[1,2,3,5,6,7] → Output: 4","Sorted Array"]
+]}]},
+{step:"Step 3 — Rotated Arrays & Boundaries",days:[
+{day:"Day 5 — Rotated Sorted Array",goal:"Practice one of the most important Binary Search interview patterns.",items:[
+["Search in Rotated Sorted Array","[4,5,6,7,0,1,2], target 0 → Output: 4","Rotated"],
+["Search in Rotated Array — Target Missing","[4,5,6,7,0,1,2], target 3 → Output: -1","Rotated"],
+["Find Minimum in Rotated Sorted Array","[4,5,6,7,0,1,2] → Output: 0","Rotated"],
+["Find Rotation Count","[4,5,6,7,0,1,2] → Output: 4","Rotated"],
+["Search in Rotated Array With Duplicates","[2,5,6,0,0,1,2], target 0 → return whether it exists.","Rotated + Duplicates"]
+]},
+{day:"Day 6 — More Array-Based BS",goal:"Combine peak, mountain and boundary patterns.",items:[
+["Find Minimum in Rotated Array II","Handle duplicates: [2,2,2,0,1,2]","Rotated + Duplicates"],
+["Find Peak in Mountain Array","[1,3,5,7,6,4,2] → Output: 3","Mountain"],
+["Find Target in Mountain Array","First find the peak, then search the ascending portion and descending portion.","Mountain"],
+["Find Bitonic Peak","[1,4,8,12,9,5,2] → find the maximum.","Peak"],
+["Find First and Last Position of Element","[5,7,7,8,8,10], target 8 → Output: [3,4]","Boundary"]
+]}]},
+{step:"Step 4 — Binary Search on Answer",days:[
+{day:"Day 7 — Basic Binary Search on Answer",goal:"Search the answer space instead of searching an array.",items:[
+["Find Minimum Capacity","Weights [1,2,3,4,5] must be shipped within 3 days. Find minimum ship capacity.","Answer Space"],
+["Koko Eating Bananas","piles=[3,6,7,11], hours=8. Find minimum eating speed.","Answer Space"],
+["Minimum Days to Make Bouquets","Blooming days [1,10,3,10,2]. Find minimum days needed for required bouquets.","Answer Space"],
+["Smallest Divisor","[1,2,5,9]. Find smallest divisor where sum of rounded-up divisions is within a given limit.","Answer Space"],
+["Split Array Largest Sum","[7,2,5,10,8], split into 2 subarrays and minimize the largest subarray sum.","Answer Space"]
+]},
+{day:"Day 8 — Allocation Problems",goal:"Recognize monotonic feasibility in allocation problems.",items:[
+["Allocate Books","[12,34,67,90], allocate to 2 students while minimizing maximum pages.","Allocation"],
+["Painter's Partition","Board lengths [10,20,30,40]. Allocate among painters while minimizing maximum workload.","Allocation"],
+["Aggressive Cows","Stalls [1,2,4,8,9], place 3 cows so minimum distance is maximized.","Allocation"],
+["Minimum Time to Complete Jobs","Given worker speeds and required work, determine minimum possible completion time.","Allocation"],
+["Maximum Minimum Distance","Sorted positions and k objects: maximize the minimum distance between any two objects.","Allocation"]
+]}]},
+{step:"Step 5 — Advanced Binary Search",days:[
+{day:"Day 9 — Advanced Patterns",goal:"Move into advanced partition and answer-space patterns.",items:[
+["Median of Two Sorted Arrays","[1,3] and [2] → Output: 2. Target complexity: O(log(min(m,n))).","Partition"],
+["Kth Element of Two Sorted Arrays","Find kth smallest element without merging the arrays.","Partition"],
+["Kth Smallest Pair Distance","[1,3,1]. Find kth smallest absolute difference among pairs.","Answer Space"],
+["Find Kth Missing Positive Number","[2,3,4,7,11], k=5 → answer 9","Boundary"],
+["Search in an Infinite Sorted Array","Unknown length: expand range → find possible region → binary search.","Unbounded Search"]
+]},
+{day:"Day 10 — Interview-Level Mixed Practice",goal:"Solve interview-level problems without relying on previous solutions.",items:[
+["Median of Two Sorted Arrays","Solve again without looking at your previous solution. Goal: O(log(min(m,n))).","Partition"],
+["Minimize Maximum Distance to Gas Station","Sorted positions; add k stations to minimize maximum adjacent distance. Binary search on floating-point answers.","Answer Space"],
+["Minimum Speed to Arrive on Time","Given distances and a time limit, find minimum integer speed needed.","Answer Space"],
+["Capacity to Ship Packages Within D Days","Solve from scratch using minimum answer, maximum answer, feasibility function and binary search.","Answer Space"],
+["Aggressive Cows — Interview Challenge","stalls=[1,2,4,8,9], cows=3. Find maximum possible minimum distance and explain why BS works without searching an array value.","Interview"]
+]}]}
+]
+];
+
+const STORAGE="binary-search-checklist-v1";
+let state=JSON.parse(localStorage.getItem(STORAGE)||'{"done":{},"notes":{},"theme":"light","openSteps":{},"openDays":{}}');
+
+function allItems(){
+  const out=[]; let n=1;
+  data.forEach((s,si)=>s.days.forEach((d,di)=>d.items.forEach((x,ii)=>out.push({id:"p"+n++,step:s,day:d,item:x})));
+  return out;
+}
+const items=allItems();
+
+function save(){
+  localStorage.setItem(STORAGE,JSON.stringify(state));
+  const now=new Date().toLocaleString();
+  document.getElementById("savedText").textContent="Last saved: "+now;
+}
+function toggleDone(id){
+  state.done[id]=!state.done[id]; save(); render();
+}
+function updateNote(id,val){state.notes[id]=val; save();}
+function toggleDetails(id){document.getElementById("det-"+id).classList.toggle("show")}
+function render(){
+  const root=document.getElementById("roadmap"), q=document.getElementById("search").value.toLowerCase().trim();
+  root.innerHTML="";
+  data.forEach((step,si)=>{
+    const stepItems=items.filter(x=>x.step===step);
+    const matches=stepItems.filter(x=>(x.item[0]+" "+x.item[1]+" "+x.item[2]).toLowerCase().includes(q));
+    if(q && !matches.length)return;
+    const sec=document.createElement("section"); sec.className="step-card";
+    sec.innerHTML=`<div class="step-header" onclick="this.nextElementSibling.classList.toggle('hidden')">
+      <div class="step-title">${step.step} <small>${stepItems.length} problems</small></div><span>⌄</span></div>`;
+    const body=document.createElement("div"); body.className="step-body";
+    step.days.forEach((day,di)=>{
+      const dayItems=stepItems.filter(x=>x.day===day);
+      const dm=dayItems.filter(x=>(x.item[0]+" "+x.item[1]+" "+x.item[2]).toLowerCase().includes(q));
+      if(q && !dm.length)return;
+      const dc=document.createElement("div"); dc.className="day-card";
+      dc.innerHTML=`<div class="day-head" onclick="this.nextElementSibling.classList.toggle('hidden')">
+        <div><div class="day-title">${day.day} <span style="color:var(--muted);font-weight:400">${dayItems.length} problems</span></div>
+        <div class="goal">${day.goal}</div></div><span>⌄</span></div>`;
+      const db=document.createElement("div"); db.className="day-body";
+      dayItems.forEach(x=>{
+        if(q && !dm.includes(x))return;
+        const id=x.id, done=!!state.done[id];
+        const p=document.createElement("div"); p.className="problem "+(done?"done":"");
+        p.innerHTML=`<div class="problem-row">
+          <input class="check" type="checkbox" ${done?"checked":""} onchange="toggleDone('${id}')">
+          <div>
+            <div class="problem-title">${id.replace("p","")}. ${x.item[0]}</div>
+            <div class="example">${x.item[1]}</div>
+            <div class="tags"><span class="tag">${x.item[2]}</span><span class="tag">${x.day.day.split(" — ")[0]}</span></div>
+            <textarea class="note" placeholder="Add short note / approach..." oninput="updateNote('${id}',this.value)">${state.notes[id]||""}</textarea>
+            <div class="details" id="det-${id}"><b>Practice prompt:</b> Write the solution in JavaScript, test edge cases, state time/space complexity, and explain why the binary-search decision is correct.</div>
+          </div>
+          <button class="template" onclick="toggleDetails('${id}')">Practice guide</button>
+        </div>`;
+        db.appendChild(p);
+      });
+      dc.appendChild(db); body.appendChild(dc);
+    });
+    sec.appendChild(body); root.appendChild(sec);
+  });
+  updateProgress();
+}
+function renderFilter(){render()}
+function updateProgress(){
+  const done=items.filter(x=>state.done[x.id]).length;
+  document.getElementById("progressText").textContent=`Completed: ${done}/${items.length}`;
+  document.getElementById("progressFill").style.width=(done/items.length*100)+"%";
+}
+function toggleTheme(){
+  state.theme=state.theme==="dark"?"light":"dark";
+  document.documentElement.dataset.theme=state.theme;
+  document.getElementById("themeBtn").textContent=state.theme==="dark"?"Light mode":"Dark mode";
+  save();
+}
+function resetAll(){
+  if(!confirm("Reset all completed problems and notes?"))return;
+  state.done={};state.notes={};save();render();
+}
+function exportJSON(){
+  const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="binary-search-progress.json";a.click();
+  URL.revokeObjectURL(a.href);
+}
+function importJSON(){
+  const input=document.createElement("input");input.type="file";input.accept=".json";
+  input.onchange=()=>{const f=input.files[0];if(!f)return;const r=new FileReader();
+    r.onload=()=>{try{state=JSON.parse(r.result);document.documentElement.dataset.theme=state.theme||"light";document.getElementById("themeBtn").textContent=state.theme==="dark"?"Light mode":"Dark mode";save();render()}catch(e){alert("Invalid JSON file.")}};
+    r.readAsText(f);
+  };input.click();
+}
+document.documentElement.dataset.theme=state.theme||"light";
+document.getElementById("themeBtn").textContent=state.theme==="dark"?"Light mode":"Dark mode";
+render();
+</script>
+</body>
+</html>
