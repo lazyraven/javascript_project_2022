@@ -16,6 +16,7 @@
     --accent-node: #68a063;
     --accent-mongo: #00ed64;
     --accent-ts: #3178c6;
+    --accent-dsa: #e879f9;
     --text: #e2e8f0;
     --text-muted: #8892a4;
     --text-dim: #505a6e;
@@ -116,6 +117,7 @@
   .node-dot { background: var(--accent-node); }
   .mongo-dot { background: var(--accent-mongo); }
   .ts-dot    { background: var(--accent-ts); }
+  .dsa-dot   { background: var(--accent-dsa); }
 
   .toc-item {
     display: block;
@@ -167,6 +169,7 @@
   .badge-node { background: rgba(104,160,99,0.12); color: var(--accent-node); border: 1px solid rgba(104,160,99,0.25); }
   .badge-mongo { background: rgba(0,237,100,0.10); color: var(--accent-mongo); border: 1px solid rgba(0,237,100,0.22); }
   .badge-ts    { background: rgba(49,120,198,0.12); color: var(--accent-ts);    border: 1px solid rgba(49,120,198,0.28); }
+  .badge-dsa   { background: rgba(232,121,249,0.10); color: var(--accent-dsa);  border: 1px solid rgba(232,121,249,0.25); }
 
   /* ── Section ── */
   .section { margin-bottom: 64px; }
@@ -196,6 +199,7 @@
   .stripe-node  { background: var(--accent-node); }
   .stripe-mongo { background: var(--accent-mongo); }
   .stripe-ts    { background: var(--accent-ts); }
+  .stripe-dsa   { background: var(--accent-dsa); }
 
   /* ── Q&A Card ── */
   .qa-card {
@@ -419,6 +423,35 @@
     .sidebar { position: static; height: auto; }
     .main { padding: 0 20px 60px; }
   }
+
+  /* ── Complexity Table ── */
+  .complexity-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    margin: 14px 0;
+  }
+  .complexity-table th {
+    background: var(--surface2);
+    color: var(--text-muted);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid var(--border);
+  }
+  .complexity-table td {
+    padding: 7px 12px;
+    border: 1px solid var(--border);
+    color: #b8c4d6;
+  }
+  .complexity-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .c-green  { color: #7ec87e !important; font-weight: 600; }
+  .c-yellow { color: #f7df1e !important; font-weight: 600; }
+  .c-red    { color: #dd8080 !important; font-weight: 600; }
+  .c-orange { color: #f78c6c !important; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -481,27 +514,40 @@
     <a class="toc-item" href="#ts-advanced">Advanced Types</a>
     <a class="toc-item" href="#ts-practical">Practical & React</a>
   </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label"><span class="dot dsa-dot"></span>DSA</div>
+    <a class="toc-item" href="#dsa-complexity">Big-O & Complexity</a>
+    <a class="toc-item" href="#dsa-arrays">Arrays & Strings</a>
+    <a class="toc-item" href="#dsa-linkedlist">Linked Lists</a>
+    <a class="toc-item" href="#dsa-stacks">Stacks & Queues</a>
+    <a class="toc-item" href="#dsa-trees">Trees & Graphs</a>
+    <a class="toc-item" href="#dsa-sorting">Sorting & Searching</a>
+    <a class="toc-item" href="#dsa-dp">Dynamic Programming</a>
+  </div>
 </nav>
 
 <!-- ══════════════ MAIN ══════════════ -->
 <main class="main" id="mainContent">
 
   <div class="page-hero">
-    <h1>JS · TS · React · Node<br>· MongoDB Prep</h1>
-    <p style="color:var(--text-muted);font-size:14px;max-width:560px;">Comprehensive question bank from basic to advanced — with code examples, mental models, and interviewer-ready answers.</p>
+    <h1>JS · TS · React · Node<br>· MongoDB · DSA Prep</h1>
+    <p style="color:var(--text-muted);font-size:14px;max-width:580px;">Comprehensive question bank from basic to advanced — with code examples, mental models, and interviewer-ready answers.</p>
     <div class="badge-row">
       <span class="badge badge-js">⬡ JavaScript</span>
       <span class="badge badge-ts">⬡ TypeScript</span>
       <span class="badge badge-react">⬡ React</span>
       <span class="badge badge-node">⬡ Node.js</span>
       <span class="badge badge-mongo">⬡ MongoDB</span>
+      <span class="badge badge-dsa">⬡ DSA</span>
     </div>
     <div class="stats-bar">
-      <div class="stat"><div class="stat-num" style="color:var(--accent-js)">20</div><div class="stat-lbl">JS Questions</div></div>
-      <div class="stat"><div class="stat-num" style="color:var(--accent-ts)">15</div><div class="stat-lbl">TS Questions</div></div>
-      <div class="stat"><div class="stat-num" style="color:var(--accent-react)">20</div><div class="stat-lbl">React Questions</div></div>
-      <div class="stat"><div class="stat-num" style="color:var(--accent-node)">15</div><div class="stat-lbl">Node Questions</div></div>
-      <div class="stat"><div class="stat-num" style="color:var(--accent-mongo)">15</div><div class="stat-lbl">MongoDB Questions</div></div>
+      <div class="stat"><div class="stat-num" style="color:var(--accent-js)">20</div><div class="stat-lbl">JS</div></div>
+      <div class="stat"><div class="stat-num" style="color:var(--accent-ts)">15</div><div class="stat-lbl">TS</div></div>
+      <div class="stat"><div class="stat-num" style="color:var(--accent-react)">20</div><div class="stat-lbl">React</div></div>
+      <div class="stat"><div class="stat-num" style="color:var(--accent-node)">15</div><div class="stat-lbl">Node</div></div>
+      <div class="stat"><div class="stat-num" style="color:var(--accent-mongo)">15</div><div class="stat-lbl">MongoDB</div></div>
+      <div class="stat"><div class="stat-num" style="color:var(--accent-dsa)">20</div><div class="stat-lbl">DSA</div></div>
     </div>
   </div>
 
@@ -3630,6 +3676,948 @@ palette.primary.<span class="fn">toUpperCase</span>(); <span class="cm">// ✅ �
 <span class="kw">const</span> val: <span class="kw">string</span> | <span class="kw">null</span> = <span class="fn">getValue</span>();
 <span class="fn">assert</span>(val !== <span class="kw">null</span>, <span class="str">"val must not be null"</span>);
 val.<span class="fn">toUpperCase</span>(); <span class="cm">// ✅ TypeScript knows val is string after assert</span></pre>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║            DSA               ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+
+  <!-- Big-O & Complexity -->
+  <div class="section" id="dsa-complexity">
+    <div class="section-heading">
+      <div class="section-stripe stripe-dsa"></div>
+      <h2>DSA — Big-O &amp; Complexity</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('dsa-complexity')">⊕ Expand all</button>
+
+    <!-- D1 -->
+    <div class="qa-card" data-q="What is Big-O notation? Explain time and space complexity.">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D1</span>
+        <span class="q-text">What is Big-O notation? Explain common complexities from best to worst.</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Big-O describes the <strong>upper-bound growth rate</strong> of an algorithm's time or space requirements as input size <em>n</em> grows. It ignores constants and lower-order terms — we care about how the algorithm <em>scales</em>.</p>
+          <table class="complexity-table">
+            <tr><th>Notation</th><th>Name</th><th>Example</th><th>n=1000</th></tr>
+            <tr><td class="c-green">O(1)</td><td>Constant</td><td>Hash map lookup, array index</td><td class="c-green">1 op</td></tr>
+            <tr><td class="c-green">O(log n)</td><td>Logarithmic</td><td>Binary search, balanced BST</td><td class="c-green">~10 ops</td></tr>
+            <tr><td class="c-yellow">O(n)</td><td>Linear</td><td>Array scan, linked list traversal</td><td class="c-yellow">1,000 ops</td></tr>
+            <tr><td class="c-yellow">O(n log n)</td><td>Linearithmic</td><td>Merge sort, heap sort</td><td class="c-yellow">~10,000 ops</td></tr>
+            <tr><td class="c-orange">O(n²)</td><td>Quadratic</td><td>Bubble sort, nested loops</td><td class="c-orange">1,000,000 ops</td></tr>
+            <tr><td class="c-red">O(2ⁿ)</td><td>Exponential</td><td>Recursive fibonacci, subsets</td><td class="c-red">2^1000 ops 🔥</td></tr>
+            <tr><td class="c-red">O(n!)</td><td>Factorial</td><td>Permutations, TSP brute force</td><td class="c-red">1000! ops ☠️</td></tr>
+          </table>
+<pre><span class="cm">// O(1) — no matter how big n is</span>
+<span class="kw">const</span> first = arr[<span class="num">0</span>];
+map.<span class="fn">get</span>(<span class="str">"key"</span>);
+
+<span class="cm">// O(log n) — halves the problem each step</span>
+<span class="kw">function</span> <span class="fn">binarySearch</span>(arr, target) {
+  <span class="kw">let</span> lo = <span class="num">0</span>, hi = arr.length - <span class="num">1</span>;
+  <span class="kw">while</span> (lo &lt;= hi) {
+    <span class="kw">const</span> mid = (lo + hi) &gt;&gt; <span class="num">1</span>;
+    <span class="kw">if</span> (arr[mid] === target) <span class="kw">return</span> mid;
+    arr[mid] &lt; target ? lo = mid + <span class="num">1</span> : hi = mid - <span class="num">1</span>;
+  }
+  <span class="kw">return</span> -<span class="num">1</span>;
+}
+
+<span class="cm">// O(n²) — nested loops over same data</span>
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; n; i++)
+  <span class="kw">for</span> (<span class="kw">let</span> j = <span class="num">0</span>; j &lt; n; j++) { <span class="cm">/* O(n²) */</span> }</pre>
+          <div class="tip" style="border-color:var(--accent-dsa);background:rgba(232,121,249,0.06);color:#e8c4f8;"><strong style="color:var(--accent-dsa)">Space complexity</strong> follows the same notation — measures extra memory used. In-place algorithms are O(1) space; recursion uses O(depth) stack space.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D2 -->
+    <div class="qa-card" data-q="How do you analyse time complexity of recursive functions?">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D2</span>
+        <span class="q-text">How do you analyse the time complexity of a recursive function? Explain with examples.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>For recursive functions, write a <strong>recurrence relation</strong> and solve it. The <strong>Master Theorem</strong> covers most divide-and-conquer cases: T(n) = aT(n/b) + O(n^d).</p>
+<pre><span class="cm">// Fibonacci — naive recursion</span>
+<span class="kw">function</span> <span class="fn">fib</span>(n) {
+  <span class="kw">if</span> (n &lt;= <span class="num">1</span>) <span class="kw">return</span> n;
+  <span class="kw">return</span> <span class="fn">fib</span>(n-<span class="num">1</span>) + <span class="fn">fib</span>(n-<span class="num">2</span>);
+}
+<span class="cm">// T(n) = T(n-1) + T(n-2) + O(1) → O(2ⁿ) time, O(n) space</span>
+
+<span class="cm">// Fibonacci — memoized</span>
+<span class="kw">function</span> <span class="fn">fib</span>(n, memo = <span class="kw">new</span> Map()) {
+  <span class="kw">if</span> (n &lt;= <span class="num">1</span>) <span class="kw">return</span> n;
+  <span class="kw">if</span> (memo.<span class="fn">has</span>(n)) <span class="kw">return</span> memo.<span class="fn">get</span>(n);
+  <span class="kw">const</span> result = <span class="fn">fib</span>(n-<span class="num">1</span>, memo) + <span class="fn">fib</span>(n-<span class="num">2</span>, memo);
+  memo.<span class="fn">set</span>(n, result);
+  <span class="kw">return</span> result;
+}
+<span class="cm">// O(n) time, O(n) space</span>
+
+<span class="cm">// Merge sort — T(n) = 2T(n/2) + O(n) → O(n log n)</span>
+<span class="cm">// Binary search — T(n) = T(n/2) + O(1)  → O(log n)</span>
+<span class="cm">// Tree traversal — T(n) = O(n) (visit each node once)</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrays & Strings -->
+  <div class="section" id="dsa-arrays">
+    <div class="section-heading">
+      <div class="section-stripe stripe-dsa"></div>
+      <h2>DSA — Arrays &amp; Strings</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('dsa-arrays')">⊕ Expand all</button>
+
+    <!-- D3 -->
+    <div class="qa-card" data-q="Two Sum problem hash map approach">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D3</span>
+        <span class="q-text"><strong>Two Sum</strong> — Find two numbers in an array that add up to a target. Return their indices.</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p><strong>Brute force:</strong> O(n²) — check every pair. <strong>Optimal:</strong> O(n) using a hash map — for each number, check if its complement (target - num) was seen before.</p>
+<pre><span class="cm">// O(n) time, O(n) space</span>
+<span class="kw">function</span> <span class="fn">twoSum</span>(nums, target) {
+  <span class="kw">const</span> seen = <span class="kw">new</span> Map(); <span class="cm">// value → index</span>
+  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; nums.length; i++) {
+    <span class="kw">const</span> complement = target - nums[i];
+    <span class="kw">if</span> (seen.<span class="fn">has</span>(complement)) {
+      <span class="kw">return</span> [seen.<span class="fn">get</span>(complement), i];
+    }
+    seen.<span class="fn">set</span>(nums[i], i);
+  }
+  <span class="kw">return</span> [];
+}
+
+<span class="fn">twoSum</span>([<span class="num">2</span>, <span class="num">7</span>, <span class="num">11</span>, <span class="num">15</span>], <span class="num">9</span>); <span class="cm">// [0, 1]  (2 + 7 = 9)</span>
+<span class="fn">twoSum</span>([<span class="num">3</span>, <span class="num">2</span>, <span class="num">4</span>], <span class="num">6</span>);      <span class="cm">// [1, 2]  (2 + 4 = 6)</span></pre>
+          <div class="tip" style="border-color:var(--accent-dsa);background:rgba(232,121,249,0.06);color:#e8c4f8;"><strong style="color:var(--accent-dsa)">Pattern:</strong> "Find pair with property X" → think hash map. Store what you've seen so you can check its complement in O(1).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D4 -->
+    <div class="qa-card" data-q="Sliding window maximum subarray sum">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D4</span>
+        <span class="q-text"><strong>Sliding Window</strong> — Maximum sum subarray of size k. Also explain the variable-size sliding window pattern.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Fixed window — max sum of k consecutive elements — O(n)</span>
+<span class="kw">function</span> <span class="fn">maxSumSubarray</span>(arr, k) {
+  <span class="kw">let</span> windowSum = arr.<span class="fn">slice</span>(<span class="num">0</span>, k).<span class="fn">reduce</span>((a, b) => a + b, <span class="num">0</span>);
+  <span class="kw">let</span> maxSum = windowSum;
+
+  <span class="kw">for</span> (<span class="kw">let</span> i = k; i &lt; arr.length; i++) {
+    windowSum += arr[i] - arr[i - k]; <span class="cm">// slide: add new, drop old</span>
+    maxSum = Math.<span class="fn">max</span>(maxSum, windowSum);
+  }
+  <span class="kw">return</span> maxSum;
+}
+<span class="fn">maxSumSubarray</span>([<span class="num">2</span>,<span class="num">1</span>,<span class="num">5</span>,<span class="num">1</span>,<span class="num">3</span>,<span class="num">2</span>], <span class="num">3</span>); <span class="cm">// 9  (5+1+3)</span>
+
+<span class="cm">// Variable window — longest substring without repeating chars — O(n)</span>
+<span class="kw">function</span> <span class="fn">lengthOfLongestSubstring</span>(s) {
+  <span class="kw">const</span> seen = <span class="kw">new</span> Map();
+  <span class="kw">let</span> left = <span class="num">0</span>, best = <span class="num">0</span>;
+
+  <span class="kw">for</span> (<span class="kw">let</span> right = <span class="num">0</span>; right &lt; s.length; right++) {
+    <span class="kw">if</span> (seen.<span class="fn">has</span>(s[right]) && seen.<span class="fn">get</span>(s[right]) &gt;= left) {
+      left = seen.<span class="fn">get</span>(s[right]) + <span class="num">1</span>; <span class="cm">// shrink window</span>
+    }
+    seen.<span class="fn">set</span>(s[right], right);
+    best = Math.<span class="fn">max</span>(best, right - left + <span class="num">1</span>);
+  }
+  <span class="kw">return</span> best;
+}
+<span class="fn">lengthOfLongestSubstring</span>(<span class="str">"abcabcbb"</span>); <span class="cm">// 3 ("abc")</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- D5 -->
+    <div class="qa-card" data-q="Two pointer technique sorted array pair sum">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D5</span>
+        <span class="q-text"><strong>Two Pointers</strong> — Container with most water &amp; 3Sum. Explain the two-pointer pattern.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Container with most water — O(n)</span>
+<span class="kw">function</span> <span class="fn">maxWater</span>(height) {
+  <span class="kw">let</span> left = <span class="num">0</span>, right = height.length - <span class="num">1</span>, best = <span class="num">0</span>;
+  <span class="kw">while</span> (left &lt; right) {
+    <span class="kw">const</span> water = Math.<span class="fn">min</span>(height[left], height[right]) * (right - left);
+    best = Math.<span class="fn">max</span>(best, water);
+    <span class="cm">// move the shorter wall inward — only way to potentially gain</span>
+    height[left] &lt; height[right] ? left++ : right--;
+  }
+  <span class="kw">return</span> best;
+}
+
+<span class="cm">// 3Sum — all unique triplets summing to 0 — O(n²)</span>
+<span class="kw">function</span> <span class="fn">threeSum</span>(nums) {
+  nums.<span class="fn">sort</span>((a, b) => a - b);
+  <span class="kw">const</span> result = [];
+
+  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; nums.length - <span class="num">2</span>; i++) {
+    <span class="kw">if</span> (i > <span class="num">0</span> && nums[i] === nums[i-<span class="num">1</span>]) <span class="kw">continue</span>; <span class="cm">// skip dups</span>
+    <span class="kw">let</span> lo = i + <span class="num">1</span>, hi = nums.length - <span class="num">1</span>;
+    <span class="kw">while</span> (lo &lt; hi) {
+      <span class="kw">const</span> sum = nums[i] + nums[lo] + nums[hi];
+      <span class="kw">if</span>      (sum === <span class="num">0</span>) { result.<span class="fn">push</span>([nums[i], nums[lo++], nums[hi--]]); }
+      <span class="kw">else if</span> (sum &lt; <span class="num">0</span>)  lo++;
+      <span class="kw">else</span>               hi--;
+    }
+  }
+  <span class="kw">return</span> result;
+}
+<span class="fn">threeSum</span>([-<span class="num">1</span>,<span class="num">0</span>,<span class="num">1</span>,<span class="num">2</span>,-<span class="num">1</span>,-<span class="num">4</span>]); <span class="cm">// [[-1,-1,2],[-1,0,1]]</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- D6 -->
+    <div class="qa-card" data-q="Valid anagram check frequency map">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D6</span>
+        <span class="q-text"><strong>String Problems</strong> — Valid anagram, palindrome check, and group anagrams.</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Valid anagram — O(n)</span>
+<span class="kw">function</span> <span class="fn">isAnagram</span>(s, t) {
+  <span class="kw">if</span> (s.length !== t.length) <span class="kw">return false</span>;
+  <span class="kw">const</span> freq = {};
+  <span class="kw">for</span> (<span class="kw">const</span> c <span class="kw">of</span> s) freq[c] = (freq[c] || <span class="num">0</span>) + <span class="num">1</span>;
+  <span class="kw">for</span> (<span class="kw">const</span> c <span class="kw">of</span> t) {
+    <span class="kw">if</span> (!freq[c]) <span class="kw">return false</span>;
+    freq[c]--;
+  }
+  <span class="kw">return true</span>;
+}
+
+<span class="cm">// Valid palindrome — O(n), O(1) space</span>
+<span class="kw">function</span> <span class="fn">isPalindrome</span>(s) {
+  s = s.<span class="fn">toLowerCase</span>().<span class="fn">replace</span>(/[^a-z0-9]/g, <span class="str">""</span>);
+  <span class="kw">let</span> l = <span class="num">0</span>, r = s.length - <span class="num">1</span>;
+  <span class="kw">while</span> (l &lt; r) <span class="kw">if</span> (s[l++] !== s[r--]) <span class="kw">return false</span>;
+  <span class="kw">return true</span>;
+}
+
+<span class="cm">// Group anagrams — O(n·k log k) where k = avg word length</span>
+<span class="kw">function</span> <span class="fn">groupAnagrams</span>(strs) {
+  <span class="kw">const</span> map = <span class="kw">new</span> Map();
+  <span class="kw">for</span> (<span class="kw">const</span> s <span class="kw">of</span> strs) {
+    <span class="kw">const</span> key = [...s].<span class="fn">sort</span>().<span class="fn">join</span>(<span class="str">""</span>);
+    <span class="kw">if</span> (!map.<span class="fn">has</span>(key)) map.<span class="fn">set</span>(key, []);
+    map.<span class="fn">get</span>(key).<span class="fn">push</span>(s);
+  }
+  <span class="kw">return</span> [...map.<span class="fn">values</span>()];
+}
+<span class="fn">groupAnagrams</span>([<span class="str">"eat"</span>,<span class="str">"tea"</span>,<span class="str">"tan"</span>,<span class="str">"ate"</span>,<span class="str">"nat"</span>,<span class="str">"bat"</span>]);
+<span class="cm">// [["eat","tea","ate"],["tan","nat"],["bat"]]</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Linked Lists -->
+  <div class="section" id="dsa-linkedlist">
+    <div class="section-heading">
+      <div class="section-stripe stripe-dsa"></div>
+      <h2>DSA — Linked Lists</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('dsa-linkedlist')">⊕ Expand all</button>
+
+    <!-- D7 -->
+    <div class="qa-card" data-q="Linked list reverse detect cycle fast slow pointer">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D7</span>
+        <span class="q-text"><strong>Linked List Classics</strong> — Reverse a linked list &amp; detect a cycle (Floyd's algorithm).</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="kw">class</span> <span class="klass">ListNode</span> {
+  <span class="kw">constructor</span>(val, next = <span class="kw">null</span>) { <span class="kw">this</span>.val = val; <span class="kw">this</span>.next = next; }
+}
+
+<span class="cm">// Reverse linked list — O(n) time, O(1) space</span>
+<span class="kw">function</span> <span class="fn">reverseList</span>(head) {
+  <span class="kw">let</span> prev = <span class="kw">null</span>, curr = head;
+  <span class="kw">while</span> (curr) {
+    <span class="kw">const</span> next = curr.next;  <span class="cm">// save next</span>
+    curr.next = prev;         <span class="cm">// reverse pointer</span>
+    prev = curr;              <span class="cm">// advance prev</span>
+    curr = next;              <span class="cm">// advance curr</span>
+  }
+  <span class="kw">return</span> prev; <span class="cm">// new head</span>
+}
+
+<span class="cm">// Floyd's cycle detection — O(n) time, O(1) space</span>
+<span class="kw">function</span> <span class="fn">hasCycle</span>(head) {
+  <span class="kw">let</span> slow = head, fast = head;
+  <span class="kw">while</span> (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    <span class="kw">if</span> (slow === fast) <span class="kw">return true</span>; <span class="cm">// they meet inside cycle</span>
+  }
+  <span class="kw">return false</span>;
+}
+
+<span class="cm">// Find middle node — slow/fast pointer</span>
+<span class="kw">function</span> <span class="fn">findMiddle</span>(head) {
+  <span class="kw">let</span> slow = head, fast = head;
+  <span class="kw">while</span> (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  <span class="kw">return</span> slow; <span class="cm">// at middle when fast reaches end</span>
+}</pre>
+          <div class="tip" style="border-color:var(--accent-dsa);background:rgba(232,121,249,0.06);color:#e8c4f8;"><strong style="color:var(--accent-dsa)">Fast/slow pointer</strong> is the go-to for linked list cycle detection, finding the middle, and detecting palindromes in a list.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D8 -->
+    <div class="qa-card" data-q="Merge two sorted linked lists">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D8</span>
+        <span class="q-text"><strong>Merge Sorted Lists</strong> — Merge two sorted linked lists &amp; merge K sorted lists.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Merge two sorted lists — O(m+n) time, O(1) space</span>
+<span class="kw">function</span> <span class="fn">mergeTwoLists</span>(l1, l2) {
+  <span class="kw">const</span> dummy = <span class="kw">new</span> <span class="klass">ListNode</span>(<span class="num">0</span>);
+  <span class="kw">let</span> curr = dummy;
+
+  <span class="kw">while</span> (l1 && l2) {
+    <span class="kw">if</span> (l1.val &lt;= l2.val) { curr.next = l1; l1 = l1.next; }
+    <span class="kw">else</span>                  { curr.next = l2; l2 = l2.next; }
+    curr = curr.next;
+  }
+  curr.next = l1 || l2; <span class="cm">// attach remaining</span>
+  <span class="kw">return</span> dummy.next;
+}
+
+<span class="cm">// Merge K sorted lists — O(n log k) using divide & conquer</span>
+<span class="kw">function</span> <span class="fn">mergeKLists</span>(lists) {
+  <span class="kw">if</span> (!lists.length) <span class="kw">return null</span>;
+  <span class="kw">if</span> (lists.length === <span class="num">1</span>) <span class="kw">return</span> lists[<span class="num">0</span>];
+  <span class="kw">const</span> mid = lists.length >> <span class="num">1</span>;
+  <span class="kw">const</span> left  = <span class="fn">mergeKLists</span>(lists.<span class="fn">slice</span>(<span class="num">0</span>, mid));
+  <span class="kw">const</span> right = <span class="fn">mergeKLists</span>(lists.<span class="fn">slice</span>(mid));
+  <span class="kw">return</span> <span class="fn">mergeTwoLists</span>(left, right);
+}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stacks & Queues -->
+  <div class="section" id="dsa-stacks">
+    <div class="section-heading">
+      <div class="section-stripe stripe-dsa"></div>
+      <h2>DSA — Stacks &amp; Queues</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('dsa-stacks')">⊕ Expand all</button>
+
+    <!-- D9 -->
+    <div class="qa-card" data-q="Valid parentheses stack balanced brackets">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D9</span>
+        <span class="q-text"><strong>Valid Parentheses</strong> — Check if brackets are balanced. Explain the monotonic stack pattern.</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Valid parentheses — O(n) time, O(n) space</span>
+<span class="kw">function</span> <span class="fn">isValid</span>(s) {
+  <span class="kw">const</span> stack = [];
+  <span class="kw">const</span> map = { <span class="str">")"</span>: <span class="str">"("</span>, <span class="str">"}"</span>: <span class="str">"{"</span>, <span class="str">"]"</span>: <span class="str">"["</span> };
+  <span class="kw">for</span> (<span class="kw">const</span> c <span class="kw">of</span> s) {
+    <span class="kw">if</span> (map[c]) {
+      <span class="kw">if</span> (stack.<span class="fn">pop</span>() !== map[c]) <span class="kw">return false</span>;
+    } <span class="kw">else</span> {
+      stack.<span class="fn">push</span>(c);
+    }
+  }
+  <span class="kw">return</span> stack.length === <span class="num">0</span>;
+}
+<span class="fn">isValid</span>(<span class="str">"({[]})"</span>); <span class="cm">// true</span>
+<span class="fn">isValid</span>(<span class="str">"([)]"</span>);   <span class="cm">// false</span>
+
+<span class="cm">// Monotonic stack — Next Greater Element — O(n)</span>
+<span class="kw">function</span> <span class="fn">nextGreaterElement</span>(nums) {
+  <span class="kw">const</span> result = <span class="kw">new</span> Array(nums.length).<span class="fn">fill</span>(-<span class="num">1</span>);
+  <span class="kw">const</span> stack = []; <span class="cm">// stores indices, decreasing values</span>
+
+  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; nums.length; i++) {
+    <span class="kw">while</span> (stack.length && nums[stack.<span class="fn">at</span>(-<span class="num">1</span>)] &lt; nums[i]) {
+      result[stack.<span class="fn">pop</span>()] = nums[i]; <span class="cm">// found next greater</span>
+    }
+    stack.<span class="fn">push</span>(i);
+  }
+  <span class="kw">return</span> result;
+}
+<span class="fn">nextGreaterElement</span>([<span class="num">2</span>,<span class="num">1</span>,<span class="num">2</span>,<span class="num">4</span>,<span class="num">3</span>]); <span class="cm">// [4,2,4,-1,-1]</span></pre>
+          <div class="tip" style="border-color:var(--accent-dsa);background:rgba(232,121,249,0.06);color:#e8c4f8;"><strong style="color:var(--accent-dsa)">Monotonic stack</strong> is used for: next/previous greater/smaller element, stock span problem, trapping rain water, largest rectangle in histogram.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D10 -->
+    <div class="qa-card" data-q="Implement queue using two stacks">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D10</span>
+        <span class="q-text"><strong>Queue with Stacks</strong> — Implement a queue using two stacks. Also explain a Min Stack.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Queue using two stacks — amortized O(1) per operation</span>
+<span class="kw">class</span> <span class="klass">MyQueue</span> {
+  <span class="kw">constructor</span>() {
+    <span class="kw">this</span>.inbox  = []; <span class="cm">// push here</span>
+    <span class="kw">this</span>.outbox = []; <span class="cm">// pop from here</span>
+  }
+  <span class="fn">push</span>(val)  { <span class="kw">this</span>.inbox.<span class="fn">push</span>(val); }
+  <span class="fn">pop</span>()      { <span class="kw">this</span>.<span class="fn">_transfer</span>(); <span class="kw">return this</span>.outbox.<span class="fn">pop</span>(); }
+  <span class="fn">peek</span>()     { <span class="kw">this</span>.<span class="fn">_transfer</span>(); <span class="kw">return this</span>.outbox.<span class="fn">at</span>(-<span class="num">1</span>); }
+  <span class="fn">empty</span>()    { <span class="kw">return</span> !<span class="kw">this</span>.inbox.length && !<span class="kw">this</span>.outbox.length; }
+  <span class="fn">_transfer</span>() {
+    <span class="kw">if</span> (!<span class="kw">this</span>.outbox.length)  <span class="cm">// only refill when empty</span>
+      <span class="kw">while</span> (<span class="kw">this</span>.inbox.length) <span class="kw">this</span>.outbox.<span class="fn">push</span>(<span class="kw">this</span>.inbox.<span class="fn">pop</span>());
+  }
+}
+
+<span class="cm">// Min Stack — O(1) getMin at all times</span>
+<span class="kw">class</span> <span class="klass">MinStack</span> {
+  <span class="kw">constructor</span>() { <span class="kw">this</span>.stack = []; <span class="kw">this</span>.minStack = []; }
+  <span class="fn">push</span>(val) {
+    <span class="kw">this</span>.stack.<span class="fn">push</span>(val);
+    <span class="kw">const</span> min = Math.<span class="fn">min</span>(val, <span class="kw">this</span>.minStack.<span class="fn">at</span>(-<span class="num">1</span>) ?? Infinity);
+    <span class="kw">this</span>.minStack.<span class="fn">push</span>(min);  <span class="cm">// track running minimum</span>
+  }
+  <span class="fn">pop</span>()    { <span class="kw">this</span>.stack.<span class="fn">pop</span>(); <span class="kw">this</span>.minStack.<span class="fn">pop</span>(); }
+  <span class="fn">top</span>()    { <span class="kw">return this</span>.stack.<span class="fn">at</span>(-<span class="num">1</span>); }
+  <span class="fn">getMin</span>() { <span class="kw">return this</span>.minStack.<span class="fn">at</span>(-<span class="num">1</span>); } <span class="cm">// O(1)!</span>
+}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trees & Graphs -->
+  <div class="section" id="dsa-trees">
+    <div class="section-heading">
+      <div class="section-stripe stripe-dsa"></div>
+      <h2>DSA — Trees &amp; Graphs</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('dsa-trees')">⊕ Expand all</button>
+
+    <!-- D11 -->
+    <div class="qa-card" data-q="Binary tree traversals BFS DFS inorder preorder postorder">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D11</span>
+        <span class="q-text"><strong>Tree Traversals</strong> — Implement DFS (inorder, preorder, postorder) and BFS level-order traversal.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="kw">class</span> <span class="klass">TreeNode</span> {
+  <span class="kw">constructor</span>(val, left = <span class="kw">null</span>, right = <span class="kw">null</span>) {
+    <span class="kw">this</span>.val = val; <span class="kw">this</span>.left = left; <span class="kw">this</span>.right = right;
+  }
+}
+
+<span class="cm">// DFS — recursive (all three orderings)</span>
+<span class="kw">const</span> <span class="fn">inorder</span>   = (n, res=[]) => n && (<span class="fn">inorder</span>(n.left,res),   res.<span class="fn">push</span>(n.val), <span class="fn">inorder</span>(n.right,res))  || res;
+<span class="kw">const</span> <span class="fn">preorder</span>  = (n, res=[]) => n && (res.<span class="fn">push</span>(n.val), <span class="fn">preorder</span>(n.left,res),  <span class="fn">preorder</span>(n.right,res)) || res;
+<span class="kw">const</span> <span class="fn">postorder</span> = (n, res=[]) => n && (<span class="fn">postorder</span>(n.left,res), <span class="fn">postorder</span>(n.right,res), res.<span class="fn">push</span>(n.val)) || res;
+
+<span class="cm">// DFS — iterative inorder (avoids call stack overflow)</span>
+<span class="kw">function</span> <span class="fn">inorderIter</span>(root) {
+  <span class="kw">const</span> result = [], stack = [];
+  <span class="kw">let</span> curr = root;
+  <span class="kw">while</span> (curr || stack.length) {
+    <span class="kw">while</span> (curr) { stack.<span class="fn">push</span>(curr); curr = curr.left; }
+    curr = stack.<span class="fn">pop</span>();
+    result.<span class="fn">push</span>(curr.val);
+    curr = curr.right;
+  }
+  <span class="kw">return</span> result;
+}
+
+<span class="cm">// BFS — level-order traversal with queue</span>
+<span class="kw">function</span> <span class="fn">levelOrder</span>(root) {
+  <span class="kw">if</span> (!root) <span class="kw">return</span> [];
+  <span class="kw">const</span> result = [], queue = [root];
+  <span class="kw">while</span> (queue.length) {
+    <span class="kw">const</span> level = [], size = queue.length;
+    <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; size; i++) {
+      <span class="kw">const</span> node = queue.<span class="fn">shift</span>();
+      level.<span class="fn">push</span>(node.val);
+      <span class="kw">if</span> (node.left)  queue.<span class="fn">push</span>(node.left);
+      <span class="kw">if</span> (node.right) queue.<span class="fn">push</span>(node.right);
+    }
+    result.<span class="fn">push</span>(level);
+  }
+  <span class="kw">return</span> result;
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- D12 -->
+    <div class="qa-card" data-q="Graph BFS DFS number of islands connected components">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D12</span>
+        <span class="q-text"><strong>Graph Traversal</strong> — Number of Islands (BFS/DFS on a grid). Explain graph representation.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Number of Islands — DFS flood-fill — O(m*n)</span>
+<span class="kw">function</span> <span class="fn">numIslands</span>(grid) {
+  <span class="kw">const</span> rows = grid.length, cols = grid[<span class="num">0</span>].length;
+  <span class="kw">let</span> islands = <span class="num">0</span>;
+
+  <span class="kw">function</span> <span class="fn">dfs</span>(r, c) {
+    <span class="kw">if</span> (r &lt; <span class="num">0</span> || r >= rows || c &lt; <span class="num">0</span> || c >= cols || grid[r][c] !== <span class="str">"1"</span>) <span class="kw">return</span>;
+    grid[r][c] = <span class="str">"0"</span>; <span class="cm">// mark visited by sinking</span>
+    <span class="fn">dfs</span>(r+<span class="num">1</span>,c); <span class="fn">dfs</span>(r-<span class="num">1</span>,c); <span class="fn">dfs</span>(r,c+<span class="num">1</span>); <span class="fn">dfs</span>(r,c-<span class="num">1</span>);
+  }
+
+  <span class="kw">for</span> (<span class="kw">let</span> r = <span class="num">0</span>; r &lt; rows; r++)
+    <span class="kw">for</span> (<span class="kw">let</span> c = <span class="num">0</span>; c &lt; cols; c++)
+      <span class="kw">if</span> (grid[r][c] === <span class="str">"1"</span>) { islands++; <span class="fn">dfs</span>(r, c); }
+
+  <span class="kw">return</span> islands;
+}
+
+<span class="cm">// Adjacency list representation</span>
+<span class="kw">const</span> graph = {
+  A: [<span class="str">"B"</span>, <span class="str">"C"</span>],
+  B: [<span class="str">"A"</span>, <span class="str">"D"</span>],
+  C: [<span class="str">"A"</span>],
+  D: [<span class="str">"B"</span>]
+};
+
+<span class="cm">// BFS shortest path in unweighted graph</span>
+<span class="kw">function</span> <span class="fn">bfsPath</span>(graph, start, end) {
+  <span class="kw">const</span> visited = <span class="kw">new</span> Set([start]);
+  <span class="kw">const</span> queue = [[start, [start]]]; <span class="cm">// [node, path]</span>
+  <span class="kw">while</span> (queue.length) {
+    <span class="kw">const</span> [node, path] = queue.<span class="fn">shift</span>();
+    <span class="kw">if</span> (node === end) <span class="kw">return</span> path;
+    <span class="kw">for</span> (<span class="kw">const</span> nb <span class="kw">of</span> graph[node] || []) {
+      <span class="kw">if</span> (!visited.<span class="fn">has</span>(nb)) {
+        visited.<span class="fn">add</span>(nb);
+        queue.<span class="fn">push</span>([nb, [...path, nb]]);
+      }
+    }
+  }
+  <span class="kw">return null</span>;
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- D13 -->
+    <div class="qa-card" data-q="Binary search tree validate inorder lowest common ancestor">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D13</span>
+        <span class="q-text"><strong>BST Problems</strong> — Validate a BST &amp; find Lowest Common Ancestor.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Validate BST — O(n) time</span>
+<span class="kw">function</span> <span class="fn">isValidBST</span>(root, min = -Infinity, max = Infinity) {
+  <span class="kw">if</span> (!root) <span class="kw">return true</span>;
+  <span class="kw">if</span> (root.val &lt;= min || root.val >= max) <span class="kw">return false</span>;
+  <span class="kw">return</span> <span class="fn">isValidBST</span>(root.left,  min,      root.val)
+      && <span class="fn">isValidBST</span>(root.right, root.val, max);
+}
+<span class="cm">// Pass valid range [min, max] down — narrows on each call</span>
+
+<span class="cm">// Lowest Common Ancestor of BST — O(log n) for balanced</span>
+<span class="kw">function</span> <span class="fn">lcaBST</span>(root, p, q) {
+  <span class="kw">while</span> (root) {
+    <span class="kw">if</span> (p.val &lt; root.val && q.val &lt; root.val)
+      root = root.left;         <span class="cm">// both in left subtree</span>
+    <span class="kw">else if</span> (p.val > root.val && q.val > root.val)
+      root = root.right;        <span class="cm">// both in right subtree</span>
+    <span class="kw">else</span> <span class="kw">return</span> root;           <span class="cm">// split point = LCA</span>
+  }
+}
+
+<span class="cm">// LCA of Binary Tree (no BST property) — O(n)</span>
+<span class="kw">function</span> <span class="fn">lcaTree</span>(root, p, q) {
+  <span class="kw">if</span> (!root || root === p || root === q) <span class="kw">return</span> root;
+  <span class="kw">const</span> left  = <span class="fn">lcaTree</span>(root.left,  p, q);
+  <span class="kw">const</span> right = <span class="fn">lcaTree</span>(root.right, p, q);
+  <span class="kw">return</span> left && right ? root : (left || right);
+}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sorting & Searching -->
+  <div class="section" id="dsa-sorting">
+    <div class="section-heading">
+      <div class="section-stripe stripe-dsa"></div>
+      <h2>DSA — Sorting &amp; Searching</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('dsa-sorting')">⊕ Expand all</button>
+
+    <!-- D14 -->
+    <div class="qa-card" data-q="Sorting algorithms comparison merge sort quick sort">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D14</span>
+        <span class="q-text"><strong>Sorting Algorithms</strong> — Implement merge sort and quick sort. Compare all major sorts.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <table class="complexity-table">
+            <tr><th>Algorithm</th><th>Best</th><th>Average</th><th>Worst</th><th>Space</th><th>Stable?</th></tr>
+            <tr><td>Bubble Sort</td><td class="c-yellow">O(n)</td><td class="c-red">O(n²)</td><td class="c-red">O(n²)</td><td class="c-green">O(1)</td><td>✅</td></tr>
+            <tr><td>Selection Sort</td><td class="c-red">O(n²)</td><td class="c-red">O(n²)</td><td class="c-red">O(n²)</td><td class="c-green">O(1)</td><td>❌</td></tr>
+            <tr><td>Insertion Sort</td><td class="c-green">O(n)</td><td class="c-red">O(n²)</td><td class="c-red">O(n²)</td><td class="c-green">O(1)</td><td>✅</td></tr>
+            <tr><td>Merge Sort</td><td class="c-yellow">O(n log n)</td><td class="c-yellow">O(n log n)</td><td class="c-yellow">O(n log n)</td><td class="c-orange">O(n)</td><td>✅</td></tr>
+            <tr><td>Quick Sort</td><td class="c-yellow">O(n log n)</td><td class="c-yellow">O(n log n)</td><td class="c-red">O(n²)</td><td class="c-green">O(log n)</td><td>❌</td></tr>
+            <tr><td>Heap Sort</td><td class="c-yellow">O(n log n)</td><td class="c-yellow">O(n log n)</td><td class="c-yellow">O(n log n)</td><td class="c-green">O(1)</td><td>❌</td></tr>
+          </table>
+<pre><span class="cm">// Merge Sort — O(n log n) stable, divide & conquer</span>
+<span class="kw">function</span> <span class="fn">mergeSort</span>(arr) {
+  <span class="kw">if</span> (arr.length &lt;= <span class="num">1</span>) <span class="kw">return</span> arr;
+  <span class="kw">const</span> mid   = arr.length >> <span class="num">1</span>;
+  <span class="kw">const</span> left  = <span class="fn">mergeSort</span>(arr.<span class="fn">slice</span>(<span class="num">0</span>, mid));
+  <span class="kw">const</span> right = <span class="fn">mergeSort</span>(arr.<span class="fn">slice</span>(mid));
+  <span class="kw">const</span> merged = [];
+  <span class="kw">let</span> i = <span class="num">0</span>, j = <span class="num">0</span>;
+  <span class="kw">while</span> (i &lt; left.length && j &lt; right.length)
+    merged.<span class="fn">push</span>(left[i] &lt;= right[j] ? left[i++] : right[j++]);
+  <span class="kw">return</span> [...merged, ...left.<span class="fn">slice</span>(i), ...right.<span class="fn">slice</span>(j)];
+}
+
+<span class="cm">// Quick Sort — O(n log n) avg, in-place</span>
+<span class="kw">function</span> <span class="fn">quickSort</span>(arr, lo = <span class="num">0</span>, hi = arr.length - <span class="num">1</span>) {
+  <span class="kw">if</span> (lo >= hi) <span class="kw">return</span>;
+  <span class="kw">const</span> p = <span class="fn">partition</span>(arr, lo, hi);
+  <span class="fn">quickSort</span>(arr, lo, p - <span class="num">1</span>);
+  <span class="fn">quickSort</span>(arr, p + <span class="num">1</span>, hi);
+  <span class="kw">return</span> arr;
+}
+<span class="kw">function</span> <span class="fn">partition</span>(arr, lo, hi) {
+  <span class="kw">const</span> pivot = arr[hi];
+  <span class="kw">let</span> i = lo - <span class="num">1</span>;
+  <span class="kw">for</span> (<span class="kw">let</span> j = lo; j &lt; hi; j++)
+    <span class="kw">if</span> (arr[j] &lt;= pivot) [arr[++i], arr[j]] = [arr[j], arr[i]];
+  [arr[i+<span class="num">1</span>], arr[hi]] = [arr[hi], arr[i+<span class="num">1</span>]];
+  <span class="kw">return</span> i + <span class="num">1</span>;
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- D15 -->
+    <div class="qa-card" data-q="Binary search rotated array search in 2D matrix">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D15</span>
+        <span class="q-text"><strong>Binary Search Variants</strong> — Search in rotated sorted array &amp; find first/last position.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Search in rotated sorted array — O(log n)</span>
+<span class="kw">function</span> <span class="fn">searchRotated</span>(nums, target) {
+  <span class="kw">let</span> lo = <span class="num">0</span>, hi = nums.length - <span class="num">1</span>;
+  <span class="kw">while</span> (lo &lt;= hi) {
+    <span class="kw">const</span> mid = (lo + hi) >> <span class="num">1</span>;
+    <span class="kw">if</span> (nums[mid] === target) <span class="kw">return</span> mid;
+    <span class="kw">if</span> (nums[lo] &lt;= nums[mid]) {  <span class="cm">// left half is sorted</span>
+      (target >= nums[lo] && target &lt; nums[mid]) ? hi = mid-<span class="num">1</span> : lo = mid+<span class="num">1</span>;
+    } <span class="kw">else</span> {                       <span class="cm">// right half is sorted</span>
+      (target > nums[mid] && target &lt;= nums[hi]) ? lo = mid+<span class="num">1</span> : hi = mid-<span class="num">1</span>;
+    }
+  }
+  <span class="kw">return</span> -<span class="num">1</span>;
+}
+
+<span class="cm">// Find first and last position — O(log n)</span>
+<span class="kw">function</span> <span class="fn">searchRange</span>(nums, target) {
+  <span class="kw">return</span> [<span class="fn">bound</span>(nums, target, <span class="kw">true</span>), <span class="fn">bound</span>(nums, target, <span class="kw">false</span>)];
+}
+<span class="kw">function</span> <span class="fn">bound</span>(nums, target, isFirst) {
+  <span class="kw">let</span> lo = <span class="num">0</span>, hi = nums.length - <span class="num">1</span>, ans = -<span class="num">1</span>;
+  <span class="kw">while</span> (lo &lt;= hi) {
+    <span class="kw">const</span> mid = (lo + hi) >> <span class="num">1</span>;
+    <span class="kw">if</span>      (nums[mid] === target) { ans = mid; isFirst ? hi = mid-<span class="num">1</span> : lo = mid+<span class="num">1</span>; }
+    <span class="kw">else if</span> (nums[mid] &lt;  target)  lo = mid+<span class="num">1</span>;
+    <span class="kw">else</span>                           hi = mid-<span class="num">1</span>;
+  }
+  <span class="kw">return</span> ans;
+}
+<span class="fn">searchRange</span>([<span class="num">5</span>,<span class="num">7</span>,<span class="num">7</span>,<span class="num">8</span>,<span class="num">8</span>,<span class="num">10</span>], <span class="num">8</span>); <span class="cm">// [3, 4]</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic Programming -->
+  <div class="section" id="dsa-dp">
+    <div class="section-heading">
+      <div class="section-stripe stripe-dsa"></div>
+      <h2>DSA — Dynamic Programming</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('dsa-dp')">⊕ Expand all</button>
+
+    <!-- D16 -->
+    <div class="qa-card" data-q="What is dynamic programming memoization tabulation">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D16</span>
+        <span class="q-text">What is dynamic programming? Explain memoization vs tabulation with coin change.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>DP solves problems by breaking them into overlapping subproblems and caching results. Two approaches: <strong>Memoization</strong> (top-down, recursive + cache) and <strong>Tabulation</strong> (bottom-up, iterative table).</p>
+<pre><span class="cm">// Coin Change — min coins to make amount</span>
+
+<span class="cm">// Memoization (top-down) — O(amount * coins.length)</span>
+<span class="kw">function</span> <span class="fn">coinChangeMemo</span>(coins, amount, memo = {}) {
+  <span class="kw">if</span> (amount === <span class="num">0</span>) <span class="kw">return</span> <span class="num">0</span>;
+  <span class="kw">if</span> (amount &lt; <span class="num">0</span>)   <span class="kw">return</span> -<span class="num">1</span>;
+  <span class="kw">if</span> (memo[amount] !== <span class="kw">undefined</span>) <span class="kw">return</span> memo[amount];
+  <span class="kw">let</span> best = Infinity;
+  <span class="kw">for</span> (<span class="kw">const</span> coin <span class="kw">of</span> coins) {
+    <span class="kw">const</span> sub = <span class="fn">coinChangeMemo</span>(coins, amount - coin, memo);
+    <span class="kw">if</span> (sub >= <span class="num">0</span>) best = Math.<span class="fn">min</span>(best, sub + <span class="num">1</span>);
+  }
+  <span class="kw">return</span> memo[amount] = best === Infinity ? -<span class="num">1</span> : best;
+}
+
+<span class="cm">// Tabulation (bottom-up) — cleaner, no recursion overhead</span>
+<span class="kw">function</span> <span class="fn">coinChange</span>(coins, amount) {
+  <span class="kw">const</span> dp = <span class="kw">new</span> Array(amount + <span class="num">1</span>).<span class="fn">fill</span>(Infinity);
+  dp[<span class="num">0</span>] = <span class="num">0</span>;
+  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">1</span>; i &lt;= amount; i++)
+    <span class="kw">for</span> (<span class="kw">const</span> coin <span class="kw">of</span> coins)
+      <span class="kw">if</span> (i >= coin) dp[i] = Math.<span class="fn">min</span>(dp[i], dp[i - coin] + <span class="num">1</span>);
+  <span class="kw">return</span> dp[amount] === Infinity ? -<span class="num">1</span> : dp[amount];
+}
+<span class="fn">coinChange</span>([<span class="num">1</span>,<span class="num">5</span>,<span class="num">6</span>,<span class="num">9</span>], <span class="num">11</span>); <span class="cm">// 2  (5+6 or 2+9)</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- D17 -->
+    <div class="qa-card" data-q="Longest common subsequence longest increasing subsequence DP">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D17</span>
+        <span class="q-text"><strong>Classic DP</strong> — Longest Common Subsequence (LCS) &amp; Longest Increasing Subsequence (LIS).</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Longest Common Subsequence — O(m*n) time & space</span>
+<span class="kw">function</span> <span class="fn">lcs</span>(s, t) {
+  <span class="kw">const</span> m = s.length, n = t.length;
+  <span class="kw">const</span> dp = Array.<span class="fn">from</span>({length: m+<span class="num">1</span>}, () => <span class="kw">new</span> Array(n+<span class="num">1</span>).<span class="fn">fill</span>(<span class="num">0</span>));
+  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">1</span>; i &lt;= m; i++)
+    <span class="kw">for</span> (<span class="kw">let</span> j = <span class="num">1</span>; j &lt;= n; j++)
+      dp[i][j] = s[i-<span class="num">1</span>] === t[j-<span class="num">1</span>]
+        ? dp[i-<span class="num">1</span>][j-<span class="num">1</span>] + <span class="num">1</span>
+        : Math.<span class="fn">max</span>(dp[i-<span class="num">1</span>][j], dp[i][j-<span class="num">1</span>]);
+  <span class="kw">return</span> dp[m][n];
+}
+<span class="fn">lcs</span>(<span class="str">"abcde"</span>, <span class="str">"ace"</span>); <span class="cm">// 3  ("ace")</span>
+
+<span class="cm">// Longest Increasing Subsequence — O(n log n) with patience sorting</span>
+<span class="kw">function</span> <span class="fn">lis</span>(nums) {
+  <span class="kw">const</span> tails = []; <span class="cm">// tails[i] = smallest tail of IS of length i+1</span>
+  <span class="kw">for</span> (<span class="kw">const</span> num <span class="kw">of</span> nums) {
+    <span class="kw">let</span> lo = <span class="num">0</span>, hi = tails.length;
+    <span class="kw">while</span> (lo &lt; hi) {
+      <span class="kw">const</span> mid = (lo + hi) >> <span class="num">1</span>;
+      tails[mid] &lt; num ? lo = mid+<span class="num">1</span> : hi = mid;
+    }
+    tails[lo] = num; <span class="cm">// replace or extend</span>
+  }
+  <span class="kw">return</span> tails.length;
+}
+<span class="fn">lis</span>([<span class="num">10</span>,<span class="num">9</span>,<span class="num">2</span>,<span class="num">5</span>,<span class="num">3</span>,<span class="num">7</span>,<span class="num">101</span>,<span class="num">18</span>]); <span class="cm">// 4  ([2,3,7,101])</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- D18 -->
+    <div class="qa-card" data-q="0/1 Knapsack problem dynamic programming">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D18</span>
+        <span class="q-text"><strong>Knapsack Problem</strong> — 0/1 Knapsack. Explain the DP table approach and space optimisation.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// 0/1 Knapsack — O(n*W) time, O(n*W) space</span>
+<span class="kw">function</span> <span class="fn">knapsack</span>(weights, values, W) {
+  <span class="kw">const</span> n = weights.length;
+  <span class="cm">// dp[i][w] = max value using first i items with capacity w</span>
+  <span class="kw">const</span> dp = Array.<span class="fn">from</span>({length: n+<span class="num">1</span>}, () => <span class="kw">new</span> Array(W+<span class="num">1</span>).<span class="fn">fill</span>(<span class="num">0</span>));
+  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">1</span>; i &lt;= n; i++)
+    <span class="kw">for</span> (<span class="kw">let</span> w = <span class="num">0</span>; w &lt;= W; w++)
+      dp[i][w] = weights[i-<span class="num">1</span>] &gt; w
+        ? dp[i-<span class="num">1</span>][w]   <span class="cm">// can't fit item i</span>
+        : Math.<span class="fn">max</span>(dp[i-<span class="num">1</span>][w], dp[i-<span class="num">1</span>][w - weights[i-<span class="num">1</span>]] + values[i-<span class="num">1</span>]);
+  <span class="kw">return</span> dp[n][W];
+}
+
+<span class="cm">// Space-optimised — O(W) space (single 1D array)</span>
+<span class="kw">function</span> <span class="fn">knapsack1D</span>(weights, values, W) {
+  <span class="kw">const</span> dp = <span class="kw">new</span> Array(W + <span class="num">1</span>).<span class="fn">fill</span>(<span class="num">0</span>);
+  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; weights.length; i++)
+    <span class="kw">for</span> (<span class="kw">let</span> w = W; w >= weights[i]; w--) <span class="cm">// iterate RIGHT to LEFT</span>
+      dp[w] = Math.<span class="fn">max</span>(dp[w], dp[w - weights[i]] + values[i]);
+  <span class="kw">return</span> dp[W];
+}
+
+<span class="fn">knapsack1D</span>([<span class="num">2</span>,<span class="num">3</span>,<span class="num">4</span>,<span class="num">5</span>], [<span class="num">3</span>,<span class="num">4</span>,<span class="num">5</span>,<span class="num">6</span>], <span class="num">8</span>); <span class="cm">// 10</span></pre>
+          <div class="tip" style="border-color:var(--accent-dsa);background:rgba(232,121,249,0.06);color:#e8c4f8;"><strong style="color:var(--accent-dsa)">Key insight:</strong> In 0/1 Knapsack, iterate capacity backwards when using 1D array — this ensures each item is only used once. Forward iteration = unbounded knapsack (item can repeat).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D19 -->
+    <div class="qa-card" data-q="House robber maximum subarray Kadane's algorithm DP">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D19</span>
+        <span class="q-text"><strong>Linear DP</strong> — Maximum Subarray (Kadane's) &amp; House Robber.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Maximum Subarray — Kadane's algorithm — O(n)</span>
+<span class="kw">function</span> <span class="fn">maxSubArray</span>(nums) {
+  <span class="kw">let</span> maxSum = nums[<span class="num">0</span>], curr = nums[<span class="num">0</span>];
+  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">1</span>; i &lt; nums.length; i++) {
+    curr = Math.<span class="fn">max</span>(nums[i], curr + nums[i]); <span class="cm">// extend or start fresh</span>
+    maxSum = Math.<span class="fn">max</span>(maxSum, curr);
+  }
+  <span class="kw">return</span> maxSum;
+}
+<span class="fn">maxSubArray</span>([-<span class="num">2</span>,<span class="num">1</span>,-<span class="num">3</span>,<span class="num">4</span>,-<span class="num">1</span>,<span class="num">2</span>,<span class="num">1</span>,-<span class="num">5</span>,<span class="num">4</span>]); <span class="cm">// 6 ([4,-1,2,1])</span>
+
+<span class="cm">// House Robber — O(n) time, O(1) space</span>
+<span class="kw">function</span> <span class="fn">rob</span>(nums) {
+  <span class="kw">let</span> prev2 = <span class="num">0</span>, prev1 = <span class="num">0</span>;
+  <span class="kw">for</span> (<span class="kw">const</span> n <span class="kw">of</span> nums) {
+    <span class="kw">const</span> curr = Math.<span class="fn">max</span>(prev1, prev2 + n); <span class="cm">// rob this or skip</span>
+    prev2 = prev1;
+    prev1 = curr;
+  }
+  <span class="kw">return</span> prev1;
+}
+<span class="fn">rob</span>([<span class="num">2</span>,<span class="num">7</span>,<span class="num">9</span>,<span class="num">3</span>,<span class="num">1</span>]); <span class="cm">// 12  (2+9+1)</span>
+
+<span class="cm">// House Robber II (circular) — run rob() twice, skip first or last</span>
+<span class="kw">function</span> <span class="fn">robCircular</span>(nums) {
+  <span class="kw">if</span> (nums.length === <span class="num">1</span>) <span class="kw">return</span> nums[<span class="num">0</span>];
+  <span class="kw">return</span> Math.<span class="fn">max</span>(
+    <span class="fn">rob</span>(nums.<span class="fn">slice</span>(<span class="num">0</span>, -<span class="num">1</span>)),  <span class="cm">// exclude last house</span>
+    <span class="fn">rob</span>(nums.<span class="fn">slice</span>(<span class="num">1</span>))        <span class="cm">// exclude first house</span>
+  );
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- D20 -->
+    <div class="qa-card" data-q="Top K frequent elements heap priority queue">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">D20</span>
+        <span class="q-text"><strong>Heap / Priority Queue</strong> — Top K frequent elements &amp; K-th largest element.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// Top K frequent elements — O(n log k)</span>
+<span class="kw">function</span> <span class="fn">topKFrequent</span>(nums, k) {
+  <span class="cm">// Step 1: count frequencies</span>
+  <span class="kw">const</span> freq = <span class="kw">new</span> Map();
+  <span class="kw">for</span> (<span class="kw">const</span> n <span class="kw">of</span> nums) freq.<span class="fn">set</span>(n, (freq.<span class="fn">get</span>(n) || <span class="num">0</span>) + <span class="num">1</span>);
+
+  <span class="cm">// Step 2: bucket sort by frequency — O(n)</span>
+  <span class="kw">const</span> buckets = Array.<span class="fn">from</span>({length: nums.length + <span class="num">1</span>}, () => []);
+  <span class="kw">for</span> (<span class="kw">const</span> [num, cnt] <span class="kw">of</span> freq) buckets[cnt].<span class="fn">push</span>(num);
+
+  <span class="cm">// Step 3: collect top k from highest-frequency buckets</span>
+  <span class="kw">const</span> result = [];
+  <span class="kw">for</span> (<span class="kw">let</span> i = buckets.length - <span class="num">1</span>; i >= <span class="num">0</span> && result.length &lt; k; i--)
+    result.<span class="fn">push</span>(...buckets[i]);
+  <span class="kw">return</span> result.<span class="fn">slice</span>(<span class="num">0</span>, k);
+}
+<span class="fn">topKFrequent</span>([<span class="num">1</span>,<span class="num">1</span>,<span class="num">1</span>,<span class="num">2</span>,<span class="num">2</span>,<span class="num">3</span>], <span class="num">2</span>); <span class="cm">// [1, 2]</span>
+
+<span class="cm">// Kth Largest — QuickSelect — O(n) avg</span>
+<span class="kw">function</span> <span class="fn">findKthLargest</span>(nums, k) {
+  <span class="kw">const</span> target = nums.length - k;
+  <span class="kw">function</span> <span class="fn">select</span>(lo, hi) {
+    <span class="kw">const</span> pivot = nums[hi], p = <span class="fn">partition</span>(nums, lo, hi);
+    <span class="kw">if</span>      (p === target) <span class="kw">return</span> nums[p];
+    <span class="kw">else if</span> (p &lt; target)  <span class="kw">return</span> <span class="fn">select</span>(p+<span class="num">1</span>, hi);
+    <span class="kw">else</span>                  <span class="kw">return</span> <span class="fn">select</span>(lo,  p-<span class="num">1</span>);
+  }
+  <span class="kw">return</span> <span class="fn">select</span>(<span class="num">0</span>, nums.length - <span class="num">1</span>);
+}
+<span class="fn">findKthLargest</span>([<span class="num">3</span>,<span class="num">2</span>,<span class="num">1</span>,<span class="num">5</span>,<span class="num">6</span>,<span class="num">4</span>], <span class="num">2</span>); <span class="cm">// 5</span></pre>
+          <div class="tip" style="border-color:var(--accent-dsa);background:rgba(232,121,249,0.06);color:#e8c4f8;"><strong style="color:var(--accent-dsa)">Interview tip:</strong> When asked about "Top K", think: <strong>Sort</strong> O(n log n) → <strong>Min-Heap of size k</strong> O(n log k) → <strong>QuickSelect</strong> O(n) avg. Mention the trade-offs.</div>
         </div>
       </div>
     </div>
