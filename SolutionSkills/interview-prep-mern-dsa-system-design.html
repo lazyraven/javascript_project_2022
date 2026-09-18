@@ -17,6 +17,7 @@
     --accent-mongo: #00ed64;
     --accent-ts: #3178c6;
     --accent-dsa: #e879f9;
+    --accent-sd: #fb923c;
     --text: #e2e8f0;
     --text-muted: #8892a4;
     --text-dim: #505a6e;
@@ -118,6 +119,7 @@
   .mongo-dot { background: var(--accent-mongo); }
   .ts-dot    { background: var(--accent-ts); }
   .dsa-dot   { background: var(--accent-dsa); }
+  .sd-dot    { background: var(--accent-sd); }
 
   .toc-item {
     display: block;
@@ -170,6 +172,7 @@
   .badge-mongo { background: rgba(0,237,100,0.10); color: var(--accent-mongo); border: 1px solid rgba(0,237,100,0.22); }
   .badge-ts    { background: rgba(49,120,198,0.12); color: var(--accent-ts);    border: 1px solid rgba(49,120,198,0.28); }
   .badge-dsa   { background: rgba(232,121,249,0.10); color: var(--accent-dsa);  border: 1px solid rgba(232,121,249,0.25); }
+  .badge-sd    { background: rgba(251,146,60,0.10);  color: var(--accent-sd);   border: 1px solid rgba(251,146,60,0.25); }
 
   /* ── Section ── */
   .section { margin-bottom: 64px; }
@@ -200,6 +203,7 @@
   .stripe-mongo { background: var(--accent-mongo); }
   .stripe-ts    { background: var(--accent-ts); }
   .stripe-dsa   { background: var(--accent-dsa); }
+  .stripe-sd    { background: var(--accent-sd); }
 
   /* ── Q&A Card ── */
   .qa-card {
@@ -525,14 +529,23 @@
     <a class="toc-item" href="#dsa-sorting">Sorting & Searching</a>
     <a class="toc-item" href="#dsa-dp">Dynamic Programming</a>
   </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label"><span class="dot sd-dot"></span>System Design</div>
+    <a class="toc-item" href="#sd-fundamentals">Fundamentals</a>
+    <a class="toc-item" href="#sd-components">Core Components</a>
+    <a class="toc-item" href="#sd-databases">Databases & Storage</a>
+    <a class="toc-item" href="#sd-patterns">Scalability Patterns</a>
+    <a class="toc-item" href="#sd-realworld">Real-World Systems</a>
+  </div>
 </nav>
 
 <!-- ══════════════ MAIN ══════════════ -->
 <main class="main" id="mainContent">
 
   <div class="page-hero">
-    <h1>JS · TS · React · Node<br>· MongoDB · DSA Prep</h1>
-    <p style="color:var(--text-muted);font-size:14px;max-width:580px;">Comprehensive question bank from basic to advanced — with code examples, mental models, and interviewer-ready answers.</p>
+    <h1>JS · TS · React · Node<br>· MongoDB · DSA · System Design</h1>
+    <p style="color:var(--text-muted);font-size:14px;max-width:600px;">Comprehensive question bank from basic to advanced — with code examples, mental models, diagrams, and interviewer-ready answers.</p>
     <div class="badge-row">
       <span class="badge badge-js">⬡ JavaScript</span>
       <span class="badge badge-ts">⬡ TypeScript</span>
@@ -540,6 +553,7 @@
       <span class="badge badge-node">⬡ Node.js</span>
       <span class="badge badge-mongo">⬡ MongoDB</span>
       <span class="badge badge-dsa">⬡ DSA</span>
+      <span class="badge badge-sd">⬡ System Design</span>
     </div>
     <div class="stats-bar">
       <div class="stat"><div class="stat-num" style="color:var(--accent-js)">20</div><div class="stat-lbl">JS</div></div>
@@ -548,6 +562,7 @@
       <div class="stat"><div class="stat-num" style="color:var(--accent-node)">15</div><div class="stat-lbl">Node</div></div>
       <div class="stat"><div class="stat-num" style="color:var(--accent-mongo)">15</div><div class="stat-lbl">MongoDB</div></div>
       <div class="stat"><div class="stat-num" style="color:var(--accent-dsa)">20</div><div class="stat-lbl">DSA</div></div>
+      <div class="stat"><div class="stat-num" style="color:var(--accent-sd)">20</div><div class="stat-lbl">Sys Design</div></div>
     </div>
   </div>
 
@@ -4618,6 +4633,889 @@ map.<span class="fn">get</span>(<span class="str">"key"</span>);
 }
 <span class="fn">findKthLargest</span>([<span class="num">3</span>,<span class="num">2</span>,<span class="num">1</span>,<span class="num">5</span>,<span class="num">6</span>,<span class="num">4</span>], <span class="num">2</span>); <span class="cm">// 5</span></pre>
           <div class="tip" style="border-color:var(--accent-dsa);background:rgba(232,121,249,0.06);color:#e8c4f8;"><strong style="color:var(--accent-dsa)">Interview tip:</strong> When asked about "Top K", think: <strong>Sort</strong> O(n log n) → <strong>Min-Heap of size k</strong> O(n log k) → <strong>QuickSelect</strong> O(n) avg. Mention the trade-offs.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║       SYSTEM DESIGN          ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+
+  <!-- Fundamentals -->
+  <div class="section" id="sd-fundamentals">
+    <div class="section-heading">
+      <div class="section-stripe stripe-sd"></div>
+      <h2>System Design — Fundamentals</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('sd-fundamentals')">⊕ Expand all</button>
+
+    <!-- SD1 -->
+    <div class="qa-card" data-q="How do you approach a system design interview question?">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD1</span>
+        <span class="q-text">How do you approach a system design interview? What is the step-by-step framework?</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>System design interviews test your ability to translate vague requirements into a concrete, scalable architecture. Use this structured framework:</p>
+          <ol>
+            <li><strong>Clarify Requirements (5 min)</strong> — functional (what it does) and non-functional (scale, latency, availability, consistency). Ask: DAU, read/write ratio, data size, SLA.</li>
+            <li><strong>Capacity Estimation (3 min)</strong> — QPS, storage, bandwidth. Back-of-envelope math signals engineering maturity.</li>
+            <li><strong>High-Level Design (10 min)</strong> — draw core components: client, load balancer, API servers, DB, cache, CDN. No detail yet.</li>
+            <li><strong>Deep Dive (15 min)</strong> — focus on 2–3 hard parts. Trade-offs, bottlenecks, data models, API design.</li>
+            <li><strong>Wrap Up (5 min)</strong> — failure scenarios, monitoring, future scale, what you'd do differently.</li>
+          </ol>
+<pre><span class="cm">// Capacity estimation cheat sheet</span>
+<span class="cm">// 1M DAU × 10 requests/day  = ~115 RPS</span>
+<span class="cm">// 1M DAU × 1 KB avg payload  = ~1 GB/day data</span>
+<span class="cm">// Read:Write ratio drives DB choice (10:1 = read-heavy → cache aggressively)</span>
+<span class="cm">// 99.9% availability = ~8.7 hrs downtime/year</span>
+<span class="cm">// 99.99%            = ~52 min downtime/year</span>
+<span class="cm">// 99.999%           = ~5 min downtime/year</span>
+
+<span class="cm">// Common question types</span>
+<span class="cm">// URL Shortener, Twitter Feed, Instagram, YouTube, Uber, WhatsApp</span>
+<span class="cm">// Rate Limiter, Notification System, Search Autocomplete, Dropbox</span></pre>
+          <div class="tip" style="border-color:var(--accent-sd);background:rgba(251,146,60,0.07);color:#fbd5b0;"><strong style="color:var(--accent-sd)">Interview tip:</strong> Never jump to a solution. Spend the first 5 minutes asking questions. Interviewers give credit for knowing <em>what</em> to ask, not just what to build.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SD2 -->
+    <div class="qa-card" data-q="Horizontal vs vertical scaling scale up scale out">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD2</span>
+        <span class="q-text">What is the difference between horizontal and vertical scaling? When would you choose each?</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <table class="complexity-table">
+            <tr><th>Dimension</th><th>Vertical Scaling (Scale Up)</th><th>Horizontal Scaling (Scale Out)</th></tr>
+            <tr><td>What</td><td>Bigger machine (more RAM/CPU)</td><td>More machines</td></tr>
+            <tr><td>Limit</td><td class="c-red">Hard ceiling (biggest server)</td><td class="c-green">Theoretically unlimited</td></tr>
+            <tr><td>Downtime</td><td class="c-red">Requires restart</td><td class="c-green">Rolling updates, no downtime</td></tr>
+            <tr><td>Cost</td><td class="c-red">Exponential cost curve</td><td class="c-green">Linear, commodity hardware</td></tr>
+            <tr><td>Complexity</td><td class="c-green">Simple — no distributed concerns</td><td class="c-red">Needs load balancing, distributed state</td></tr>
+            <tr><td>Best for</td><td>Databases, legacy monoliths</td><td>Stateless services, web tier</td></tr>
+          </table>
+<pre><span class="cm">// Typical scaling journey</span>
+<span class="cm">// 1. Single server (monolith + DB on same box)</span>
+<span class="cm">// 2. Separate DB server (vertical scale DB)</span>
+<span class="cm">// 3. Add load balancer + multiple app servers (horizontal scale app tier)</span>
+<span class="cm">// 4. DB read replicas (horizontal scale reads)</span>
+<span class="cm">// 5. Add cache layer (Redis) to offload DB</span>
+<span class="cm">// 6. DB sharding (horizontal scale writes)</span>
+<span class="cm">// 7. Microservices (horizontal scale per domain)</span></pre>
+          <div class="tip" style="border-color:var(--accent-sd);background:rgba(251,146,60,0.07);color:#fbd5b0;"><strong style="color:var(--accent-sd)">Key insight:</strong> Most modern large-scale systems scale <em>horizontally</em> at the application tier and use a mix of vertical + replication + sharding at the data tier.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SD3 -->
+    <div class="qa-card" data-q="CAP theorem consistency availability partition tolerance">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD3</span>
+        <span class="q-text">Explain the CAP theorem. How does it guide database and architecture choices?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>The CAP theorem states that a distributed system can only guarantee <strong>two of three</strong> properties simultaneously during a network partition:</p>
+          <ul>
+            <li><strong>C — Consistency:</strong> Every read gets the most recent write (or an error). All nodes see the same data at the same time.</li>
+            <li><strong>A — Availability:</strong> Every request receives a response (not necessarily the latest data). System stays operational.</li>
+            <li><strong>P — Partition Tolerance:</strong> System continues operating even if network messages are dropped between nodes.</li>
+          </ul>
+          <p>Since <strong>P is mandatory</strong> in real distributed systems (networks fail), the real trade-off is <strong>C vs A</strong> during a partition.</p>
+<pre><span class="cm">// CP systems — choose consistency over availability</span>
+<span class="cm">// HBase, MongoDB (default), Redis (single), Zookeeper</span>
+<span class="cm">// Use when: banking, inventory, any system where stale data = wrong decisions</span>
+
+<span class="cm">// AP systems — choose availability over consistency</span>
+<span class="cm">// Cassandra, DynamoDB, CouchDB, DNS</span>
+<span class="cm">// Use when: social feeds, shopping carts, metrics — eventual consistency is fine</span>
+
+<span class="cm">// Real world: most systems offer tunable consistency</span>
+<span class="cm">// Cassandra: ConsistencyLevel.ONE (AP) → ConsistencyLevel.ALL (CP)</span>
+<span class="cm">// MongoDB: readConcern "local" (AP) vs "majority" (CP)</span></pre>
+          <div class="tip" style="border-color:var(--accent-sd);background:rgba(251,146,60,0.07);color:#fbd5b0;"><strong style="color:var(--accent-sd)">Extended: PACELC</strong> — Even without partitions, systems trade off latency (L) vs consistency (C). Low latency often means eventual consistency. High consistency means waiting for quorum agreement.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SD4 -->
+    <div class="qa-card" data-q="Latency vs throughput availability reliability">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD4</span>
+        <span class="q-text">Define and differentiate: Latency, Throughput, Availability, Reliability, and Consistency.</span>
+        <div class="q-meta"><span class="level-tag level-basic">Basic</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <table class="complexity-table">
+            <tr><th>Term</th><th>Definition</th><th>Goal / Metric</th></tr>
+            <tr><td><strong>Latency</strong></td><td>Time for one request to complete (end-to-end)</td><td>p99 &lt; 100ms; minimise tail latency</td></tr>
+            <tr><td><strong>Throughput</strong></td><td>Requests/data processed per unit time</td><td>Maximise RPS / MB/s for given resources</td></tr>
+            <tr><td><strong>Availability</strong></td><td>% of time system is operational</td><td>99.99% = "four nines"</td></tr>
+            <tr><td><strong>Reliability</strong></td><td>Probability of correct operation without failure</td><td>MTBF (Mean Time Between Failures)</td></tr>
+            <tr><td><strong>Consistency</strong></td><td>All users see the same data at the same time</td><td>Strong / eventual / causal</td></tr>
+            <tr><td><strong>Durability</strong></td><td>Data persists even after crashes</td><td>WAL, replication factor ≥ 3</td></tr>
+          </table>
+<pre><span class="cm">// Latency numbers every engineer should know (approximate)</span>
+<span class="cm">// L1 cache reference:         0.5 ns</span>
+<span class="cm">// Main memory access:         100 ns</span>
+<span class="cm">// SSD random read:            150 µs</span>
+<span class="cm">// HDD seek:                   10 ms</span>
+<span class="cm">// Network: same datacenter:   0.5 ms</span>
+<span class="cm">// Network: cross-continent:   150 ms</span>
+<span class="cm">// → Cache is 10,000× faster than HDD</span>
+<span class="cm">// → Memory is 200× faster than SSD</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Components -->
+  <div class="section" id="sd-components">
+    <div class="section-heading">
+      <div class="section-stripe stripe-sd"></div>
+      <h2>System Design — Core Components</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('sd-components')">⊕ Expand all</button>
+
+    <!-- SD5 -->
+    <div class="qa-card" data-q="Load balancer types algorithms L4 L7">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD5</span>
+        <span class="q-text">What is a load balancer? Explain types, algorithms, and L4 vs L7 load balancing.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>A load balancer distributes incoming traffic across multiple servers to prevent any single server from becoming a bottleneck, enabling horizontal scaling and high availability.</p>
+          <table class="complexity-table">
+            <tr><th>Algorithm</th><th>How it works</th><th>Best for</th></tr>
+            <tr><td>Round Robin</td><td>Each server in turn</td><td>Homogeneous servers, stateless APIs</td></tr>
+            <tr><td>Weighted Round Robin</td><td>Proportional to server capacity</td><td>Mixed server specs</td></tr>
+            <tr><td>Least Connections</td><td>Server with fewest active connections</td><td>Long-lived connections (WebSocket)</td></tr>
+            <tr><td>IP Hash</td><td>Hash of client IP → fixed server</td><td>Sticky sessions without cookies</td></tr>
+            <tr><td>Random</td><td>Random server selection</td><td>Truly stateless, simple</td></tr>
+          </table>
+<pre><span class="cm">// L4 (Transport Layer) — fast, routing by IP:port</span>
+<span class="cm">// Doesn't inspect content, TCP/UDP level</span>
+<span class="cm">// Examples: AWS NLB, HAProxy (TCP mode)</span>
+<span class="cm">// Use for: raw TCP throughput, game servers, streaming</span>
+
+<span class="cm">// L7 (Application Layer) — smart, routing by content</span>
+<span class="cm">// Reads HTTP headers, URLs, cookies</span>
+<span class="cm">// Can route /api → API servers, /static → CDN</span>
+<span class="cm">// Can terminate TLS, add headers, rate limit</span>
+<span class="cm">// Examples: AWS ALB, Nginx, Traefik, Envoy</span>
+<span class="cm">// Use for: microservices, A/B testing, auth middleware</span>
+
+<span class="cm">// Health checks — LB removes unhealthy nodes</span>
+<span class="cm">// Active: LB pings /health every N seconds</span>
+<span class="cm">// Passive: LB monitors error rates, removes on threshold</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- SD6 -->
+    <div class="qa-card" data-q="Caching strategies CDN Redis cache invalidation">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD6</span>
+        <span class="q-text">Explain caching strategies: Cache-Aside, Write-Through, Write-Back, and Write-Around. When would you use each?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// 1. CACHE-ASIDE (Lazy Loading) — most common</span>
+<span class="cm">// App checks cache → miss → load from DB → write to cache</span>
+<span class="kw">async function</span> <span class="fn">getUser</span>(id) {
+  <span class="kw">let</span> user = <span class="kw">await</span> redis.<span class="fn">get</span>(<span class="str">`user:${id}`</span>);
+  <span class="kw">if</span> (!user) {
+    user = <span class="kw">await</span> db.<span class="fn">findUser</span>(id);
+    <span class="kw">await</span> redis.<span class="fn">setEx</span>(<span class="str">`user:${id}`</span>, <span class="num">3600</span>, JSON.<span class="fn">stringify</span>(user));
+  }
+  <span class="kw">return</span> user;
+}
+<span class="cm">// ✅ Only caches what's needed  ❌ First request always slow (cold start)</span>
+
+<span class="cm">// 2. WRITE-THROUGH — write to cache AND DB together</span>
+<span class="cm">// ✅ Cache always fresh  ❌ Extra write latency, caches unused data</span>
+
+<span class="cm">// 3. WRITE-BACK (Write-Behind) — write to cache, async flush to DB</span>
+<span class="cm">// ✅ Very fast writes    ❌ Data loss risk if cache crashes before flush</span>
+<span class="cm">// Use for: high write throughput, analytics counters, session data</span>
+
+<span class="cm">// 4. WRITE-AROUND — write straight to DB, skip cache</span>
+<span class="cm">// ✅ Cache not polluted  ❌ Cache miss on first read</span>
+<span class="cm">// Use for: one-time-written large data (file uploads, logs)</span>
+
+<span class="cm">// Cache eviction policies</span>
+<span class="cm">// LRU  (Least Recently Used)  — most common</span>
+<span class="cm">// LFU  (Least Frequently Used) — better for skewed access patterns</span>
+<span class="cm">// TTL  (Time To Live)          — always set to avoid stale data</span>
+<span class="cm">// FIFO (First In, First Out)   — simple queues</span></pre>
+          <div class="tip" style="border-color:var(--accent-sd);background:rgba(251,146,60,0.07);color:#fbd5b0;"><strong style="color:var(--accent-sd)">Cache invalidation</strong> is one of the hardest problems. Strategies: TTL expiry (simple), event-driven invalidation (pub/sub on DB change), versioned cache keys (<code>user:v2:123</code>).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SD7 -->
+    <div class="qa-card" data-q="CDN content delivery network how it works">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD7</span>
+        <span class="q-text">How does a CDN work? When should you use one and what are its limitations?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>A CDN (Content Delivery Network) is a geographically distributed network of edge servers that cache content close to end users, reducing latency and origin server load.</p>
+<pre><span class="cm">// Request flow without CDN</span>
+<span class="cm">// User (Mumbai) ──────────────────→ Origin (US East) = ~200ms</span>
+
+<span class="cm">// Request flow with CDN</span>
+<span class="cm">// User (Mumbai) → CDN Edge (Mumbai) → Cache HIT  = ~5ms ✅</span>
+<span class="cm">// User (Mumbai) → CDN Edge (Mumbai) → Cache MISS → Origin = ~205ms (first time only)</span>
+
+<span class="cm">// Pull CDN — edge fetches from origin on first miss (auto-populated)</span>
+<span class="cm">// Push CDN — you upload assets to CDN explicitly (large files, videos)</span>
+
+<span class="cm">// What to cache on CDN</span>
+<span class="cm">// ✅ Static: JS bundles, CSS, images, fonts, videos</span>
+<span class="cm">// ✅ Semi-static: product pages, blog posts (short TTL)</span>
+<span class="cm">// ❌ Dynamic: user dashboards, real-time data, authenticated content</span>
+
+<span class="cm">// Cache-Control headers guide CDN behaviour</span>
+<span class="cm">// Cache-Control: public, max-age=31536000, immutable  → JS/CSS with hashed names</span>
+<span class="cm">// Cache-Control: public, max-age=60, stale-while-revalidate=300  → product pages</span>
+<span class="cm">// Cache-Control: no-store                             → user-specific pages</span>
+
+<span class="cm">// Providers: Cloudflare, AWS CloudFront, Akamai, Fastly</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- SD8 -->
+    <div class="qa-card" data-q="Message queues Kafka RabbitMQ pub/sub async communication">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD8</span>
+        <span class="q-text">What are message queues? Compare Kafka vs RabbitMQ. When do you use async messaging?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Message queues decouple producers and consumers, enabling async communication, load levelling, and resilience. If a consumer is slow or down, messages wait in the queue.</p>
+          <table class="complexity-table">
+            <tr><th>Feature</th><th>Kafka</th><th>RabbitMQ</th></tr>
+            <tr><td>Model</td><td>Log-based (consumers pull, retain messages)</td><td>Queue-based (broker pushes, deletes on ack)</td></tr>
+            <tr><td>Throughput</td><td class="c-green">Millions msg/sec</td><td class="c-yellow">Tens of thousands/sec</td></tr>
+            <tr><td>Message Retention</td><td class="c-green">Days/weeks (configurable)</td><td class="c-red">Gone after consumed</td></tr>
+            <tr><td>Replay</td><td class="c-green">Yes — any consumer can replay</td><td class="c-red">No</td></tr>
+            <tr><td>Ordering</td><td class="c-green">Per partition</td><td class="c-yellow">Per queue</td></tr>
+            <tr><td>Best for</td><td>Event streaming, analytics, audit log</td><td>Task queues, RPC, routing</td></tr>
+          </table>
+<pre><span class="cm">// Use message queues when:</span>
+<span class="cm">// - Processing is slow (image resize, email send, ML inference)</span>
+<span class="cm">// - Traffic spikes need smoothing (order bursts on flash sale)</span>
+<span class="cm">// - Multiple services need same event (fan-out: order placed → inventory, billing, email)</span>
+<span class="cm">// - Decoupling services that evolve independently</span>
+
+<span class="cm">// Kafka concepts</span>
+<span class="cm">// Topic     → logical channel (like a table)</span>
+<span class="cm">// Partition → ordered, immutable log within a topic</span>
+<span class="cm">// Offset    → position of consumer in partition</span>
+<span class="cm">// Consumer Group → each partition consumed by one member only</span>
+
+<span class="cm">// Node.js producer example (kafkajs)</span>
+<span class="kw">await</span> producer.<span class="fn">send</span>({
+  topic: <span class="str">"order-placed"</span>,
+  messages: [{ key: orderId, value: JSON.<span class="fn">stringify</span>(order) }]
+});</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Databases & Storage -->
+  <div class="section" id="sd-databases">
+    <div class="section-heading">
+      <div class="section-stripe stripe-sd"></div>
+      <h2>System Design — Databases &amp; Storage</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('sd-databases')">⊕ Expand all</button>
+
+    <!-- SD9 -->
+    <div class="qa-card" data-q="SQL vs NoSQL when to use which database">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD9</span>
+        <span class="q-text">SQL vs NoSQL — how do you decide which to use in a system design?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <table class="complexity-table">
+            <tr><th>Dimension</th><th>SQL (Relational)</th><th>NoSQL</th></tr>
+            <tr><td>Schema</td><td>Rigid, predefined</td><td>Flexible, dynamic</td></tr>
+            <tr><td>Transactions</td><td class="c-green">Strong ACID</td><td class="c-yellow">Varies (eventual → strong)</td></tr>
+            <tr><td>Joins</td><td class="c-green">Native, powerful</td><td class="c-red">Avoid — embed or denormalise</td></tr>
+            <tr><td>Scale</td><td>Vertical + read replicas</td><td class="c-green">Horizontal sharding natively</td></tr>
+            <tr><td>Query flexibility</td><td class="c-green">Ad-hoc SQL</td><td>Designed for access patterns</td></tr>
+          </table>
+<pre><span class="cm">// Choose SQL when:</span>
+<span class="cm">// - Complex relationships, multi-table transactions (banking, ERP)</span>
+<span class="cm">// - Reporting, analytics, ad-hoc queries</span>
+<span class="cm">// - Data integrity is paramount</span>
+<span class="cm">// Examples: PostgreSQL, MySQL, Aurora</span>
+
+<span class="cm">// Choose NoSQL when:</span>
+<span class="cm">// Document (MongoDB)   → product catalogues, user profiles, CMS</span>
+<span class="cm">// Key-Value  (Redis)   → sessions, caching, leaderboards, rate limiting</span>
+<span class="cm">// Wide-Column (Cassandra) → time-series, IoT, write-heavy at huge scale</span>
+<span class="cm">// Graph  (Neo4j)       → social graphs, recommendation engines, fraud</span>
+<span class="cm">// Search (Elasticsearch) → full-text search, log analytics</span>
+
+<span class="cm">// In practice — polyglot persistence</span>
+<span class="cm">// PostgreSQL (core data) + Redis (cache) + Elasticsearch (search)</span>
+<span class="cm">// + S3 (blob storage) + Kafka (events) — all in one system</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- SD10 -->
+    <div class="qa-card" data-q="Database replication master slave read replicas">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD10</span>
+        <span class="q-text">Explain database replication. What are the differences between synchronous and asynchronous replication?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Replication copies data from a <strong>primary</strong> (leader) node to one or more <strong>replicas</strong> (followers), enabling read scaling and high availability.</p>
+<pre><span class="cm">// Synchronous replication</span>
+<span class="cm">// Primary waits for replica ACK before confirming write</span>
+<span class="cm">// ✅ Zero data loss (strong consistency)</span>
+<span class="cm">// ❌ Higher write latency (waits for slowest replica)</span>
+<span class="cm">// Use for: financial data, primary-secondary failover</span>
+
+<span class="cm">// Asynchronous replication (default in most systems)</span>
+<span class="cm">// Primary confirms write immediately, replicates in background</span>
+<span class="cm">// ✅ Low write latency</span>
+<span class="cm">// ❌ Replica lag — reads from replica may be stale (seconds behind)</span>
+<span class="cm">// ❌ Data loss possible if primary crashes before replica catches up</span>
+<span class="cm">// Use for: read replicas, analytics replicas, DR</span>
+
+<span class="cm">// Read/Write split — common pattern</span>
+<span class="cm">// All writes   → Primary</span>
+<span class="cm">// Heavy reads  → Replicas (tolerate slight stale data)</span>
+<span class="cm">// After write  → Read own write from primary (avoid stale read)</span>
+
+<span class="cm">// Multi-leader replication</span>
+<span class="cm">// Multiple nodes accept writes (geo-distributed)</span>
+<span class="cm">// ❌ Write conflicts must be resolved (Last Write Wins, CRDTs)</span>
+<span class="cm">// Use for: Google Docs, cross-region active-active</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- SD11 -->
+    <div class="qa-card" data-q="Database sharding partitioning strategies consistent hashing">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD11</span>
+        <span class="q-text">What is database sharding? Explain sharding strategies and consistent hashing.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>Sharding partitions data horizontally across multiple database nodes, each holding a subset of rows. Enables write scaling beyond a single node's capacity.</p>
+<pre><span class="cm">// Sharding strategies</span>
+
+<span class="cm">// 1. Range-based — shard by value range</span>
+<span class="cm">// Shard 0: userId 1–1M | Shard 1: userId 1M–2M</span>
+<span class="cm">// ✅ Simple, range queries within one shard</span>
+<span class="cm">// ❌ Hotspots (new users all go to latest shard)</span>
+
+<span class="cm">// 2. Hash-based — shard = hash(key) % N</span>
+<span class="cm">// ✅ Even distribution</span>
+<span class="cm">// ❌ Resharding nightmare when adding nodes (all keys remap)</span>
+
+<span class="cm">// 3. Consistent Hashing — solves resharding problem</span>
+<span class="cm">// Nodes arranged on a "ring" (0 to 2^32)</span>
+<span class="cm">// Key mapped to ring → assigned to next clockwise node</span>
+<span class="cm">// Adding/removing a node only remaps ~1/N keys (not all)</span>
+<span class="cm">// Used by: Cassandra, DynamoDB, Redis Cluster, Memcached</span>
+
+<span class="cm">// Virtual nodes (vnodes) improve balance</span>
+<span class="cm">// Each physical node = 100-200 virtual nodes on the ring</span>
+<span class="cm">// Handles heterogeneous server capacities</span>
+
+<span class="cm">// Hotspot mitigation</span>
+<span class="cm">// Celebrity problem: hash("justinbieber") always hits same shard</span>
+<span class="cm">// Fix: add random suffix → "justinbieber_42" spreads writes</span>
+<span class="cm">// Then aggregate at read time</span></pre>
+          <div class="tip" style="border-color:var(--accent-sd);background:rgba(251,146,60,0.07);color:#fbd5b0;"><strong style="color:var(--accent-sd)">Avoid sharding until necessary.</strong> It dramatically increases operational complexity. Exhaust vertical scaling, read replicas, and caching first.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scalability Patterns -->
+  <div class="section" id="sd-patterns">
+    <div class="section-heading">
+      <div class="section-stripe stripe-sd"></div>
+      <h2>System Design — Scalability Patterns</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('sd-patterns')">⊕ Expand all</button>
+
+    <!-- SD12 -->
+    <div class="qa-card" data-q="Rate limiting algorithms token bucket leaky bucket">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD12</span>
+        <span class="q-text">Design a rate limiter. Explain the algorithms: Token Bucket, Leaky Bucket, Sliding Window.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// TOKEN BUCKET — most common (AWS, Stripe use this)</span>
+<span class="cm">// Bucket capacity: 100 tokens. Refill: 10 tokens/sec</span>
+<span class="cm">// Each request consumes 1 token. If empty → 429</span>
+<span class="cm">// ✅ Allows bursts up to bucket capacity</span>
+<span class="cm">// ✅ Smooth average rate</span>
+
+<span class="cm">// LEAKY BUCKET — output is always constant rate</span>
+<span class="cm">// Requests enter queue (bucket). Processed at fixed rate.</span>
+<span class="cm">// Overflow → dropped/rejected</span>
+<span class="cm">// ✅ Smooth output, no bursts</span>
+<span class="cm">// ❌ Queue delay even when server is idle</span>
+
+<span class="cm">// FIXED WINDOW COUNTER</span>
+<span class="cm">// Count resets at fixed boundary (e.g. every minute)</span>
+<span class="cm">// ❌ 2× traffic possible at window boundary</span>
+
+<span class="cm">// SLIDING WINDOW LOG — most accurate, high memory</span>
+<span class="cm">// Store timestamp of each request, check last N seconds</span>
+
+<span class="cm">// SLIDING WINDOW COUNTER — best accuracy/efficiency balance</span>
+<span class="kw">async function</span> <span class="fn">isRateLimited</span>(userId, limit = <span class="num">100</span>, windowSec = <span class="num">60</span>) {
+  <span class="kw">const</span> key = <span class="str">`rl:${userId}:${Math.floor(Date.now() / (windowSec * 1000))}`</span>;
+  <span class="kw">const</span> count = <span class="kw">await</span> redis.<span class="fn">incr</span>(key);
+  <span class="kw">if</span> (count === <span class="num">1</span>) <span class="kw">await</span> redis.<span class="fn">expire</span>(key, windowSec);
+  <span class="kw">return</span> count > limit;
+}
+
+<span class="cm">// Distributed rate limiting — use Redis (shared state across nodes)</span>
+<span class="cm">// Rate limit by: IP, userId, API key, endpoint</span>
+<span class="cm">// Return headers: X-RateLimit-Limit, X-RateLimit-Remaining, Retry-After</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- SD13 -->
+    <div class="qa-card" data-q="API gateway microservices service mesh">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD13</span>
+        <span class="q-text">What is an API Gateway? How does it differ from a load balancer? When do you use a service mesh?</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <table class="complexity-table">
+            <tr><th>Feature</th><th>Load Balancer</th><th>API Gateway</th><th>Service Mesh</th></tr>
+            <tr><td>Purpose</td><td>Distribute traffic</td><td>Entry point for APIs</td><td>Service-to-service comms</td></tr>
+            <tr><td>Auth</td><td>❌</td><td class="c-green">✅ JWT, OAuth, API keys</td><td>mTLS between services</td></tr>
+            <tr><td>Rate Limiting</td><td>❌</td><td class="c-green">✅</td><td>✅</td></tr>
+            <tr><td>Routing</td><td>Server-level</td><td class="c-green">URL/header-based</td><td>Sidecar proxy</td></tr>
+            <tr><td>Examples</td><td>Nginx, AWS NLB</td><td>AWS API GW, Kong</td><td>Istio, Linkerd, Envoy</td></tr>
+          </table>
+<pre><span class="cm">// API Gateway responsibilities</span>
+<span class="cm">// 1. Authentication & Authorization (JWT validation)</span>
+<span class="cm">// 2. Rate limiting & throttling</span>
+<span class="cm">// 3. Request routing (POST /orders → order-service)</span>
+<span class="cm">// 4. Protocol translation (REST → gRPC)</span>
+<span class="cm">// 5. Request/response transformation</span>
+<span class="cm">// 6. SSL termination</span>
+<span class="cm">// 7. Request logging & analytics</span>
+<span class="cm">// 8. Circuit breaking</span>
+
+<span class="cm">// Service mesh — sidecar proxy pattern</span>
+<span class="cm">// Every service pod gets a proxy (Envoy) injected</span>
+<span class="cm">// Proxy handles: mTLS, retries, circuit break, tracing</span>
+<span class="cm">// App code has zero networking knowledge</span>
+<span class="cm">// Use when: 10+ microservices, need observability at scale</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- SD14 -->
+    <div class="qa-card" data-q="Circuit breaker pattern retry backoff fallback resilience">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD14</span>
+        <span class="q-text">What is the Circuit Breaker pattern? Explain retry with exponential backoff and fallback strategies.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+          <p>These patterns make distributed systems resilient against downstream failures and prevent cascading failures.</p>
+<pre><span class="cm">// CIRCUIT BREAKER — 3 states</span>
+<span class="cm">// CLOSED  → normal operation, requests pass through</span>
+<span class="cm">// OPEN    → fast-fail, requests rejected immediately (no calls to downstream)</span>
+<span class="cm">// HALF-OPEN → probe: allow 1 request; if success → CLOSED, if fail → OPEN</span>
+
+<span class="kw">class</span> <span class="klass">CircuitBreaker</span> {
+  <span class="kw">constructor</span>(threshold = <span class="num">5</span>, timeout = <span class="num">60000</span>) {
+    <span class="kw">this</span>.failures = <span class="num">0</span>;
+    <span class="kw">this</span>.state = <span class="str">"CLOSED"</span>;
+    <span class="kw">this</span>.threshold = threshold;
+    <span class="kw">this</span>.timeout = timeout;
+  }
+  <span class="kw">async</span> <span class="fn">call</span>(fn) {
+    <span class="kw">if</span> (<span class="kw">this</span>.state === <span class="str">"OPEN"</span>) <span class="kw">throw new</span> Error(<span class="str">"Circuit OPEN"</span>);
+    <span class="kw">try</span> {
+      <span class="kw">const</span> result = <span class="kw">await</span> <span class="fn">fn</span>();
+      <span class="kw">this</span>.failures = <span class="num">0</span>;
+      <span class="kw">this</span>.state = <span class="str">"CLOSED"</span>;
+      <span class="kw">return</span> result;
+    } <span class="kw">catch</span> (err) {
+      <span class="kw">if</span> (++<span class="kw">this</span>.failures >= <span class="kw">this</span>.threshold) {
+        <span class="kw">this</span>.state = <span class="str">"OPEN"</span>;
+        <span class="fn">setTimeout</span>(() => <span class="kw">this</span>.state = <span class="str">"HALF-OPEN"</span>, <span class="kw">this</span>.timeout);
+      }
+      <span class="kw">throw</span> err;
+    }
+  }
+}
+
+<span class="cm">// RETRY with exponential backoff + jitter</span>
+<span class="kw">async function</span> <span class="fn">retryWithBackoff</span>(fn, maxRetries = <span class="num">3</span>) {
+  <span class="kw">for</span> (<span class="kw">let</span> attempt = <span class="num">0</span>; attempt &lt; maxRetries; attempt++) {
+    <span class="kw">try</span> { <span class="kw">return await</span> <span class="fn">fn</span>(); } <span class="kw">catch</span> (err) {
+      <span class="kw">if</span> (attempt === maxRetries - <span class="num">1</span>) <span class="kw">throw</span> err;
+      <span class="kw">const</span> delay = Math.<span class="fn">min</span>(<span class="num">1000</span> * <span class="num">2</span> ** attempt + Math.<span class="fn">random</span>() * <span class="num">1000</span>, <span class="num">30000</span>);
+      <span class="kw">await new</span> Promise(r => <span class="fn">setTimeout</span>(r, delay));
+      <span class="cm">// delay: ~1s, ~2s, ~4s (+jitter to avoid thundering herd)</span>
+    }
+  }
+}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real-World Systems -->
+  <div class="section" id="sd-realworld">
+    <div class="section-heading">
+      <div class="section-stripe stripe-sd"></div>
+      <h2>System Design — Real-World Systems</h2>
+    </div>
+    <button class="expand-btn" onclick="toggleSection('sd-realworld')">⊕ Expand all</button>
+
+    <!-- SD15 -->
+    <div class="qa-card" data-q="Design a URL shortener like Bitly system design">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD15</span>
+        <span class="q-text">Design a URL Shortener (like bit.ly). Walk through requirements, estimation, and architecture.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// REQUIREMENTS</span>
+<span class="cm">// Functional: shorten URL, redirect short → long, analytics</span>
+<span class="cm">// Non-functional: 100M URLs created/day, 10B redirects/day</span>
+<span class="cm">// Availability: 99.99%, p99 redirect latency &lt; 10ms</span>
+
+<span class="cm">// ESTIMATION</span>
+<span class="cm">// Write: 100M/day = ~1200 writes/sec</span>
+<span class="cm">// Read:  10B/day  = ~115,000 reads/sec  ← 100:1 read:write ratio</span>
+<span class="cm">// Storage: 100M × 500B = 50GB/day → 18TB/year</span>
+
+<span class="cm">// SHORT URL GENERATION</span>
+<span class="cm">// Approach 1: hash(longUrl) → take first 7 chars of MD5/SHA256</span>
+<span class="cm">// Risk: collisions → append counter or user ID before hashing</span>
+<span class="cm">// Approach 2: base62 encode an auto-increment ID</span>
+<span class="cm">// 7 chars × base62 = 62^7 = 3.5 trillion URLs</span>
+<span class="kw">function</span> <span class="fn">toBase62</span>(num) {
+  <span class="kw">const</span> chars = <span class="str">"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"</span>;
+  <span class="kw">let</span> result = <span class="str">""</span>;
+  <span class="kw">while</span> (num > <span class="num">0</span>) { result = chars[num % <span class="num">62</span>] + result; num = Math.<span class="fn">floor</span>(num / <span class="num">62</span>); }
+  <span class="kw">return</span> result;
+}
+
+<span class="cm">// ARCHITECTURE</span>
+<span class="cm">// Client → LB → API Servers → Redis Cache → SQL DB (PostgreSQL)</span>
+<span class="cm">// Redirect flow: GET /abc123</span>
+<span class="cm">//   1. Check Redis: hit → 301/302 redirect (1ms)</span>
+<span class="cm">//   2. Cache miss → DB lookup → cache it → redirect</span>
+<span class="cm">// DB schema: { id, shortCode, longUrl, userId, createdAt, expiresAt, clicks }</span>
+<span class="cm">// Index on: shortCode (lookup), userId (list user's URLs)</span>
+
+<span class="cm">// 301 vs 302 redirect</span>
+<span class="cm">// 301 Permanent → browser caches, no future requests to our server (cheap but loses analytics)</span>
+<span class="cm">// 302 Temporary → browser always hits our server (accurate click tracking)</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- SD16 -->
+    <div class="qa-card" data-q="Design Twitter news feed social media system design">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD16</span>
+        <span class="q-text">Design a Social Media News Feed (like Twitter/Instagram). Explain fan-out strategies.</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// CORE CHALLENGES</span>
+<span class="cm">// 1. Post creation  → write  (low volume)</span>
+<span class="cm">// 2. Feed read      → read   (very high volume, must be fast)</span>
+<span class="cm">// 3. Follow graph   → can have 100M followers (celebrities)</span>
+
+<span class="cm">// TWO FAN-OUT APPROACHES</span>
+
+<span class="cm">// Fan-out on WRITE (push model)</span>
+<span class="cm">// When Alice posts: push postId to each follower's feed cache</span>
+<span class="cm">// ✅ Feed reads are instant (pre-computed)</span>
+<span class="cm">// ❌ Write amplification: Cristiano Ronaldo posts → 500M cache writes</span>
+
+<span class="cm">// Fan-out on READ (pull model)</span>
+<span class="cm">// When Bob reads: fetch posts from all followed users, merge, sort</span>
+<span class="cm">// ✅ No write amplification</span>
+<span class="cm">// ❌ Slow feed reads (aggregate N users on request)</span>
+
+<span class="cm">// HYBRID APPROACH (Twitter/Instagram use this)</span>
+<span class="cm">// Regular users (&lt;10K followers) → fan-out on write</span>
+<span class="cm">// Celebrity accounts (>10K followers)  → fan-out on read</span>
+<span class="cm">// When reading feed: precomputed feed + fetch celebrity posts + merge</span>
+
+<span class="cm">// ARCHITECTURE</span>
+<span class="cm">// Post Service → Kafka → Feed Fanout Worker → Redis (sorted set per user)</span>
+<span class="cm">// Feed stored as sorted set: ZADD feed:userId timestamp postId</span>
+<span class="cm">// Read feed:  ZREVRANGE feed:userId 0 19 (top 20 posts)</span>
+<span class="cm">// Each post fetched from post cache by ID</span>
+
+<span class="cm">// DATA MODELS</span>
+<span class="cm">// users:   { id, username, followerCount }</span>
+<span class="cm">// posts:   { id, userId, content, mediaUrls, createdAt }</span>
+<span class="cm">// follows: { followerId, followeeId }  → graph DB or wide-column</span>
+<span class="cm">// feed:    Redis sorted set per userId</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- SD17 -->
+    <div class="qa-card" data-q="Design a notification system push email SMS">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD17</span>
+        <span class="q-text">Design a Notification System that handles push, email, and SMS at scale.</span>
+        <div class="q-meta"><span class="level-tag level-intermediate">Intermediate</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// HIGH-LEVEL FLOW</span>
+<span class="cm">// Event Sources (order service, payment, social) </span>
+<span class="cm">//    → Notification Service </span>
+<span class="cm">//    → Message Queue (Kafka topic per channel)</span>
+<span class="cm">//    → Channel Workers (push/email/SMS)</span>
+<span class="cm">//    → Third-party providers</span>
+
+<span class="cm">// COMPONENTS</span>
+<span class="cm">// Notification Service:</span>
+<span class="cm">// - Receives events via REST or Kafka</span>
+<span class="cm">// - Fetches user preferences (opted out? preferred channel?)</span>
+<span class="cm">// - Template rendering (Handlebars / MJML for email)</span>
+<span class="cm">// - Deduplication (Redis set — prevents double send)</span>
+<span class="cm">// - Rate limiting per user (max 3 push/hour)</span>
+<span class="cm">// - Priority queue (OTP &gt; marketing)</span>
+
+<span class="cm">// CHANNEL WORKERS</span>
+<span class="cm">// Push → APNs (iOS), FCM (Android, Web)</span>
+<span class="cm">// Email → SendGrid, AWS SES</span>
+<span class="cm">// SMS  → Twilio, SNS</span>
+
+<span class="cm">// RELIABILITY</span>
+<span class="cm">// Retry with exponential backoff on provider failure</span>
+<span class="cm">// Dead letter queue for failed notifications (investigate later)</span>
+<span class="cm">// Delivery receipt tracking: sent/delivered/opened</span>
+<span class="cm">// Idempotency key prevents duplicate sends on retry</span>
+
+<span class="cm">// Node.js worker example</span>
+<span class="kw">const</span> consumer = kafka.<span class="fn">consumer</span>({ groupId: <span class="str">"push-worker"</span> });
+<span class="kw">await</span> consumer.<span class="fn">subscribe</span>({ topic: <span class="str">"notifications.push"</span> });
+<span class="kw">await</span> consumer.<span class="fn">run</span>({
+  <span class="kw">async</span> eachMessage({ message }) {
+    <span class="kw">const</span> { userId, title, body } = JSON.<span class="fn">parse</span>(message.value);
+    <span class="kw">const</span> token = <span class="kw">await</span> <span class="fn">getDeviceToken</span>(userId);
+    <span class="kw">await</span> fcm.<span class="fn">send</span>({ token, notification: { title, body } });
+  }
+});</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- SD18 -->
+    <div class="qa-card" data-q="Design a chat application WhatsApp real-time messaging WebSocket">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD18</span>
+        <span class="q-text">Design a real-time chat application (like WhatsApp). How do you handle WebSockets at scale?</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// CORE CHALLENGES</span>
+<span class="cm">// 1. Real-time delivery (WebSocket persistent connection)</span>
+<span class="cm">// 2. User may be on different Chat Server than recipient</span>
+<span class="cm">// 3. Offline users (store-and-forward)</span>
+<span class="cm">// 4. Message ordering, deduplication</span>
+<span class="cm">// 5. Read receipts (sent ✓, delivered ✓✓, read ✓✓ blue)</span>
+
+<span class="cm">// ARCHITECTURE</span>
+<span class="cm">// Client ←→ WebSocket Server (stateful) ←→ Redis Pub/Sub ←→ Other WS Server</span>
+<span class="cm">// WebSocket Server → Kafka → Message Storage (Cassandra)</span>
+
+<span class="cm">// FLOW: Alice (WS Server 1) sends to Bob (WS Server 2)</span>
+<span class="cm">// 1. Alice sends msg to WS Server 1</span>
+<span class="cm">// 2. Server 1 persists msg to Cassandra (with unique msgId)</span>
+<span class="cm">// 3. Server 1 publishes to Redis channel "user:Bob"</span>
+<span class="cm">// 4. WS Server 2 subscribed to "user:Bob" → receives event</span>
+<span class="cm">// 5. Server 2 pushes msg to Bob's WebSocket</span>
+<span class="cm">// 6. Bob ACKs → Server updates delivery status</span>
+
+<span class="cm">// OFFLINE HANDLING</span>
+<span class="cm">// If Bob is offline: message stored in Cassandra</span>
+<span class="cm">// On reconnect: client sends last_received_msgId</span>
+<span class="cm">// Server sends all messages after that ID</span>
+
+<span class="cm">// MESSAGE SCHEMA (Cassandra — optimised for time-range reads)</span>
+<span class="cm">// PRIMARY KEY ((chat_id), created_at, msg_id)</span>
+<span class="cm">// → fetch last N messages: SELECT ... WHERE chat_id=? ORDER BY created_at DESC LIMIT 50</span>
+
+<span class="cm">// WebSocket at scale</span>
+<span class="cm">// Each WS server holds ~50K connections (Node.js)</span>
+<span class="cm">// User ↔ WS server mapping stored in Redis: userId → serverId</span>
+<span class="cm">// LB uses consistent hashing on userId to sticky-route WebSocket upgrades</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- SD19 -->
+    <div class="qa-card" data-q="Design search autocomplete typeahead system">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD19</span>
+        <span class="q-text">Design a Search Autocomplete / Typeahead system (like Google search suggestions).</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// REQUIREMENTS</span>
+<span class="cm">// - Return top 5 suggestions as user types, p99 &lt; 100ms</span>
+<span class="cm">// - Suggestions ranked by frequency/relevance</span>
+<span class="cm">// - 10M DAU, 10 keystrokes per search average = 100M queries/day</span>
+
+<span class="cm">// DATA COLLECTION (offline pipeline)</span>
+<span class="cm">// 1. Log all search queries to Kafka</span>
+<span class="cm">// 2. Spark job aggregates frequency of each prefix daily</span>
+<span class="cm">// 3. Build Trie or inverted index of {prefix → top K terms}</span>
+<span class="cm">// 4. Publish to Redis and CDN</span>
+
+<span class="cm">// TRIE DATA STRUCTURE</span>
+<span class="cm">// "ap" → ["apple", "app", "application", "api", "apex"]</span>
+<span class="cm">// Each node stores: children Map + list of top-K suggestions</span>
+<span class="cm">// Top-K pre-computed at each node (avoid traversal on read)</span>
+
+<span class="kw">class</span> <span class="klass">TrieNode</span> {
+  <span class="kw">constructor</span>() {
+    <span class="kw">this</span>.children = <span class="kw">new</span> Map();
+    <span class="kw">this</span>.topK = [];  <span class="cm">// pre-sorted top suggestions at this prefix</span>
+  }
+}
+
+<span class="cm">// ARCHITECTURE</span>
+<span class="cm">// Browser → CDN cache (prefix ≤ 3 chars — highest traffic)</span>
+<span class="cm">// Browser → API Gateway → Trie Service → Redis (prefix → suggestions JSON)</span>
+
+<span class="cm">// OPTIMISATIONS</span>
+<span class="cm">// 1. Debounce: send request after 300ms pause in typing</span>
+<span class="cm">// 2. Cancel previous request (AbortController) on new keystroke</span>
+<span class="cm">// 3. Cache in browser: Map { prefix → suggestions } per session</span>
+<span class="cm">// 4. Short prefix (&lt;3 chars) served from CDN edge (static JSON)</span>
+<span class="cm">// 5. Personalise: blend global trends + user's past searches</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- SD20 -->
+    <div class="qa-card" data-q="Design file storage system like Dropbox Google Drive S3">
+      <div class="qa-question" onclick="toggleCard(this)">
+        <span class="q-num">SD20</span>
+        <span class="q-text">Design a File Storage System (like Dropbox / Google Drive). How do you handle large file uploads and sync?</span>
+        <div class="q-meta"><span class="level-tag level-advanced">Advanced</span><span class="chevron">▾</span></div>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-label">Answer</div>
+        <div class="answer-body">
+<pre><span class="cm">// REQUIREMENTS</span>
+<span class="cm">// Upload/download files up to 5GB, sync across devices</span>
+<span class="cm">// 50M users, 10M DAU, avg 10GB storage per user</span>
+<span class="cm">// Strong consistency within a user's own files</span>
+
+<span class="cm">// KEY DESIGN DECISIONS</span>
+
+<span class="cm">// 1. CHUNKED UPLOADS (handle large files & resumability)</span>
+<span class="cm">// Split file into 4MB chunks on client</span>
+<span class="cm">// Upload each chunk independently (parallel)</span>
+<span class="cm">// Server reassembles → saves to S3</span>
+<span class="cm">// Benefits: resume on failure, dedup identical chunks, progress bar</span>
+
+<span class="cm">// 2. DEDUPLICATION (save storage)</span>
+<span class="cm">// Hash each chunk (SHA-256)</span>
+<span class="cm">// If hash exists in storage → reference existing chunk (no re-upload)</span>
+<span class="cm">// Same 1GB file uploaded by 1M users → stored only once</span>
+
+<span class="cm">// 3. DELTA SYNC (bandwidth efficiency)</span>
+<span class="cm">// On edit: only upload changed chunks, not entire file</span>
+<span class="cm">// Client diffs local vs server state using chunk hashes</span>
+
+<span class="cm">// ARCHITECTURE</span>
+<span class="cm">// Upload: Client → Block Server (chunking, dedup) → S3/GCS</span>
+<span class="cm">// Metadata: { fileId, userId, name, size, chunks[], version, updatedAt }</span>
+<span class="cm">// Metadata DB: PostgreSQL (ACID for file operations)</span>
+<span class="cm">// Blob storage: S3 (cheap, durable, globally replicated)</span>
+<span class="cm">// CDN: CloudFront in front of S3 for fast downloads</span>
+
+<span class="cm">// SYNC ACROSS DEVICES</span>
+<span class="cm">// Long-polling or WebSocket: server pushes change events</span>
+<span class="cm">// Device receives: { fileId, version, delta } → downloads changed chunks</span>
+<span class="cm">// Conflict resolution: last-writer-wins OR create conflict copy (Dropbox)</span>
+
+<span class="cm">// PRESIGNED URLs for direct S3 upload (don't proxy through server)</span>
+<span class="kw">const</span> url = <span class="kw">await</span> s3.<span class="fn">getSignedUrl</span>(<span class="str">"putObject"</span>, {
+  Bucket: <span class="str">"user-files"</span>, Key: <span class="str">`${userId}/${chunkHash}`</span>, Expires: <span class="num">300</span>
+});</pre>
+          <div class="tip" style="border-color:var(--accent-sd);background:rgba(251,146,60,0.07);color:#fbd5b0;"><strong style="color:var(--accent-sd)">Key insight:</strong> Separate <em>metadata</em> (SQL — ACID, structured) from <em>blob storage</em> (S3/GCS — cheap, scalable). Never store binary data in a relational database.</div>
         </div>
       </div>
     </div>
